@@ -1,0 +1,12 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="top.jplayer.baseprolibrary">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <application>
+        <activity
+            android:name=".ui.SampleActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait">
+        </activity>
+    </application>
+</manifest>

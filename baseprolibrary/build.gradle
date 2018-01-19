@@ -1,0 +1,88 @@
+apply plugin: 'com.android.library'
+android {
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    defaultConfig {
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        javaCompileOptions {
+            annotationProcessorOptions {
+                includeCompileClasspath true
+            }
+        }
+        ndk {
+            //APP的build.gradle设置支持的SO库架构
+            abiFilters 'armeabi', 'armeabi-v7a', 'x86'
+        }
+    }
+    signingConfigs {
+        config {
+            keyAlias "obl"
+            keyPassword "oblivion011200"
+            storeFile file("../obl.jks")
+            storePassword "oblivion011200"
+        }
+
+        debug {
+            keyAlias "obl"
+            keyPassword "oblivion011200"
+            storeFile file("../obl.jks")
+            storePassword "oblivion011200"
+        }
+        release {
+            keyAlias "obl"
+            keyPassword "oblivion011200"
+            storeFile file("../obl.jks")
+            storePassword "oblivion011200"
+        }
+    }
+    buildTypes {
+        def url = rootProject.ext.url
+        release {
+            buildConfigField "String", "HOST", "\"${url["release"]}\""
+            minifyEnabled false // 开启混淆
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            manifestPlaceholders = [RONG_KEY: "sfci50a7sfr2i", CHANNEL_NAME: "dev", UMENG_APPKEY_VALUE: "58d336e92ae85b376300093e", UMENG_APPKEY_SERVER_VALUE: "be88895feef7fba6f36dc0c47d741010"]
+            signingConfig signingConfigs.config
+        }
+        debug {
+            buildConfigField "String", "HOST", "\"${url["debug"]}\""
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            manifestPlaceholders = [RONG_KEY: "qf3d5gbjqfauh", CHANNEL_NAME: "dev", UMENG_APPKEY_VALUE: "58eed55ef43e48045d001e7e", UMENG_APPKEY_SERVER_VALUE: "957ecef7056612e73699ba147d70ec2b"]
+            signingConfig signingConfigs.config
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:0.5'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:2.2.2'
+
+    implementation rootProject.ext.supportLibs
+    //网络请求
+    api rootProject.ext.networkLibs
+    //RX
+    api rootProject.ext.rxJavaLibs
+    //RecyclerView Help
+    api rootProject.ext.baserecyclerviewadapterhelper
+    //辅助库
+    api rootProject.ext.otherLibs
+    //support 冲突解决
+    api(rootProject.ext.navigationbar) {
+        exclude group: 'com.android.support'
+    }
+    api(rootProject.ext.bga_banner) {
+        exclude group: 'com.android.support'
+    }
+    //GlideOkHttp
+    api(rootProject.ext.glideOkhttp) {
+        exclude group: 'glide-parent'
+    }
+
+}
