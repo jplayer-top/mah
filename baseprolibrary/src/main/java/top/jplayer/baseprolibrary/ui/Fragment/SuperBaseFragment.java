@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import top.jplayer.baseprolibrary.utils.LogUtil;
+
 /**
  * Created by Obl on 2018/1/19.
  * top.jplayer.baseprolibrary.ui.Fragment
@@ -20,13 +22,16 @@ public abstract class SuperBaseFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(initLayout(), container, false);
         rootView = view;
+        initData(rootView);
+        LogUtil.e("1");
         return view;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        initData(rootView);
+        LogUtil.e("2");
+
     }
 
     @Override
