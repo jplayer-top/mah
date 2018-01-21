@@ -54,7 +54,7 @@
             android:foreground="?attr/controlBackground"
             android:scaleType="center"
             android:src="@drawable/bar_search"
-            android:visibility="visible"
+            android:visibility="gone"
             tools:ignore="PrivateResource,RtlHardcoded"/>
     </RelativeLayout>
 

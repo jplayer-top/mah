@@ -39,5 +39,7 @@ public class SchemeFragment extends BaseFragment {
         list.add(R.drawable.pic_04);
         list.add(R.drawable.pic_05);
         mRecyclerView.setAdapter(new SchemeAdapter(list));
+        tvBarTitle.setText("方案");
+        ivBarSearch.setVisibility(View.VISIBLE);
     }
 }
