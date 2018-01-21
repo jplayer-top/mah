@@ -2,4 +2,6 @@
 <resources>
     <dimen name="mainNavigationBarHeight">55dp</dimen>
     <dimen name="generalHeight">46dp</dimen>
+    <dimen name="lineSpacingExtra_3">3dp</dimen>
+    <dimen name="dp_10">10dp</dimen>
 </resources>
