@@ -1,5 +1,7 @@
 package com.modiwu.mah.ui.Fragment;
 
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
@@ -14,15 +16,18 @@ import top.jplayer.baseprolibrary.utils.LogUtil;
  */
 
 public class SchemeFragment extends BaseFragment {
+
+    protected RecyclerView mRecyclerView;
+
     @Override
     public int initLayout() {
-        return R.layout.fragment_base;
+        return R.layout.fragment_scheme;
     }
 
     @Override
     protected void initData(View rootView) {
-        TextView text = rootView.findViewById(R.id.base_text);
-        text.setText(getClass().getSimpleName());
-        LogUtil.e(getClass().getSimpleName());
+        mMultipleStatusView = rootView.findViewById(R.id.multiplestatusview);
+        mRecyclerView = rootView.findViewById(R.id.recyclerView);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
     }
 }
