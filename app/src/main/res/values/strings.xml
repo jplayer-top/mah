@@ -6,4 +6,5 @@
     <string name="carpenter_body">“始终保持一份为人们创造全新设计与体验的初心与激情。”</string>
     <string name="app_carpenter">匠</string>
     <string name="app_device">器</string>
+    <string name="me_click_login">点击登录</string>
 </resources>

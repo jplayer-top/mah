@@ -4,4 +4,7 @@
     <dimen name="generalHeight">46dp</dimen>
     <dimen name="lineSpacingExtra_3">3dp</dimen>
     <dimen name="dp_10">10dp</dimen>
+    <dimen name="sp_18">18sp</dimen>
+    <dimen name="me_pic_avator">60dp</dimen>
+    <dimen name="divider_padding">15dp</dimen>
 </resources>

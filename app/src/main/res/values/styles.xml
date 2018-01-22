@@ -17,4 +17,15 @@
         <item name="android:textColor">@color/colorBlackGold</item>
     </style>
 
+    <style name="me_linearlayout_style">
+        <item name="android:layout_marginTop">@dimen/dp_10</item>
+        <item name="android:background">@color/white</item>
+        <item name="android:divider">@drawable/shape_divider</item>
+        <item name="android:dividerPadding">@dimen/divider_padding</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:padding">@dimen/dp_10</item>
+        <item name="android:showDividers">middle</item>
+    </style>
+
 </resources>

@@ -1,12 +1,9 @@
 package com.modiwu.mah.ui.Fragment;
 
 import android.view.View;
-import android.widget.TextView;
 
 import com.modiwu.mah.R;
 import com.modiwu.mah.base.BaseFragment;
-
-import top.jplayer.baseprolibrary.utils.LogUtil;
 
 /**
  * Created by Obl on 2018/1/19.
@@ -16,14 +13,12 @@ import top.jplayer.baseprolibrary.utils.LogUtil;
 public class MeFragment extends BaseFragment {
     @Override
     public int initLayout() {
-        return R.layout.fragment_base;
+        return R.layout.fragment_me;
     }
 
     @Override
     protected void initData(View rootView) {
-        TextView text = rootView.findViewById(R.id.base_text);
-        text.setText(getClass().getSimpleName());
-        LogUtil.e(getClass().getSimpleName());
-
+        super.initData(rootView);
+        tvBarTitle.setText("我的");
     }
 }
