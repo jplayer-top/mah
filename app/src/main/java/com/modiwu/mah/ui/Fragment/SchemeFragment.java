@@ -3,15 +3,12 @@ package com.modiwu.mah.ui.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.TextView;
 
 import com.modiwu.mah.R;
 import com.modiwu.mah.base.BaseFragment;
 import com.modiwu.mah.ui.adapter.SchemeAdapter;
 
 import java.util.ArrayList;
-
-import top.jplayer.baseprolibrary.utils.LogUtil;
 
 /**
  * Created by Obl on 2018/1/19.
@@ -29,6 +26,7 @@ public class SchemeFragment extends BaseFragment {
 
     @Override
     protected void initData(View rootView) {
+        super.initData(rootView);
         mMultipleStatusView = rootView.findViewById(R.id.multiplestatusview);
         mRecyclerView = rootView.findViewById(R.id.recyclerView);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
@@ -40,6 +38,5 @@ public class SchemeFragment extends BaseFragment {
         list.add(R.drawable.pic_05);
         mRecyclerView.setAdapter(new SchemeAdapter(list));
         tvBarTitle.setText("方案");
-        ivBarSearch.setVisibility(View.VISIBLE);
     }
 }

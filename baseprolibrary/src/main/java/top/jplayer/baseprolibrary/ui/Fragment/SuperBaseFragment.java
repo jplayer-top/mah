@@ -22,7 +22,6 @@ public abstract class SuperBaseFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(initLayout(), container, false);
         rootView = view;
-        initData(rootView);
         LogUtil.e("1");
         return view;
     }
@@ -30,6 +29,7 @@ public abstract class SuperBaseFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        initData(rootView);
         LogUtil.e("2");
 
     }

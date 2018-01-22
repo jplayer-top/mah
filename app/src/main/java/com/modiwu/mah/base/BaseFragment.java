@@ -22,7 +22,6 @@ public abstract class BaseFragment extends SuperBaseFragment {
     @Override
     protected void initData(View rootView) {
         tvBarTitle = rootView.findViewById(R.id.tvBarTitle);
-        ivBarSearch = rootView.findViewById(R.id.ivBarSearch);
     }
 
     @Override

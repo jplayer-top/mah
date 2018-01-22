@@ -3,8 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingBottom="@dimen/dp_10"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/dp_10">
 
     <ImageView
         android:id="@+id/ivBodyPic"
@@ -14,6 +14,7 @@
         android:src="@drawable/pic_05"/>
 
     <TextView
+        android:id="@+id/tvItemTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/dp_10"
@@ -23,8 +24,9 @@
         android:textStyle="bold"/>
 
     <TextView
+        android:id="@+id/tvItemBody"
+        style="@style/textview_body_magin_10"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/text_body"
-        style="@style/textview_body_magin_10"/>
+        android:text="@string/text_body"/>
 </LinearLayout>
