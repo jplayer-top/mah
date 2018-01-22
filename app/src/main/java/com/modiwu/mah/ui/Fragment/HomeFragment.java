@@ -30,11 +30,14 @@ public class HomeFragment extends BaseFragment {
     protected void initData(View rootView) {
         mMultipleStatusView = rootView.findViewById(R.id.multiplestatusview);
         mRecyclerView = rootView.findViewById(R.id.recyclerView);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+        LinearLayoutManager manager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         ArrayList<HomeBean> homeBeans = new ArrayList<>();
+        homeBeans.add(new HomeBean("BODY_RECOMMEND"));
+        homeBeans.add(new HomeBean("BODY_SINGLE"));
         homeBeans.add(new HomeBean("BODY_RECOMMEND"));
         homeBeans.add(new HomeBean("BODY_ADV"));
         homeBeans.add(new HomeBean("BODY_TOSHOP"));
-        mRecyclerView.setAdapter(new HomeAdapter(homeBeans));
+        mRecyclerView.setLayoutManager(manager);
+        mRecyclerView.setAdapter(new HomeAdapter(this, homeBeans));
     }
 }

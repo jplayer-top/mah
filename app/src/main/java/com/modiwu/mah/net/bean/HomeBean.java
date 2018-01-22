@@ -24,8 +24,10 @@ public class HomeBean implements MultiItemEntity {
             return BODY_RECOMMEND;
         } else if (type.equals("BODY_SINGLE")) {
             return BODY_SINGLE;
-        } else {
+        } else if (type.equals("BODY_ADV")) {
             return BODY_ADV;
+        } else {
+            return BODY_TOSHOP;
         }
 
     }

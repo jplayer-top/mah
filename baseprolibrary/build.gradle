@@ -80,6 +80,9 @@ dependencies {
     api(rootProject.ext.bga_banner) {
         exclude group: 'com.android.support'
     }
+    api(rootProject.ext.v_layout) {
+        transitive = true
+    }
     //GlideOkHttp
     api(rootProject.ext.glideOkhttp) {
         exclude group: 'glide-parent'
