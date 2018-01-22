@@ -16,7 +16,7 @@ import top.jplayer.baseprolibrary.ui.SuperBaseActivity;
  * com.modiwu.mah.ui.adapter
  */
 
-public class CarpenterAdapter extends BaseQuickAdapter<Integer> {
+public class CarpenterAdapter extends BaseQuickAdapter<Integer, BaseViewHolder> {
     private SuperBaseActivity activity;
 
     public CarpenterAdapter(List<Integer> data) {

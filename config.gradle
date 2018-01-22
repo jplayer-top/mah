@@ -43,7 +43,7 @@ ext {
             rxAndroid: "io.reactivex.rxjava2:rxandroid:$dependVersion.rxAndroid"
     ]
     //RecyclerView 适配器
-    baserecyclerviewadapterhelper = 'com.github.CymChad:BaseRecyclerViewAdapterHelper:v1.9.7'
+    baserecyclerviewadapterhelper = 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.3'
     //ViewPager
     bga_banner = 'cn.bingoogolapple:bga-banner:2.2.3@aar'
     //底部栏

@@ -7,4 +7,10 @@
     <string name="app_carpenter">匠</string>
     <string name="app_device">器</string>
     <string name="me_click_login">点击登录</string>
+    <string name="more">更多</string>
+    <string name="scheme">方案</string>
+    <string name="home_server">服务保障</string>
+    <string name="home_price">价格保障</string>
+    <string name="home_7day">7天退换</string>
+    <string name="home_time">准时交付</string>
 </resources>
