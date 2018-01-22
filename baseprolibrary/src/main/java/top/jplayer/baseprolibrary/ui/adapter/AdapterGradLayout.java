@@ -9,9 +9,8 @@ import android.widget.TextView;
 
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.LayoutHelper;
+import com.alibaba.android.vlayout.layout.GridLayoutHelper;
 import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
-
-import java.util.zip.Inflater;
 
 import top.jplayer.baseprolibrary.R;
 
@@ -20,13 +19,13 @@ import top.jplayer.baseprolibrary.R;
  * top.jplayer.baseprolibrary.ui.adapter
  */
 
-public class AdapterLinearLayout extends DelegateAdapter.Adapter {
-    private LinearLayoutHelper helper;
+public class AdapterGradLayout extends DelegateAdapter.Adapter {
+    private GridLayoutHelper helper;
     private Context context;
 
-    public AdapterLinearLayout(Context context, LinearLayoutHelper helper) {
+    public AdapterGradLayout(Context context, GridLayoutHelper helper) {
         this.helper = helper;
-        helper.setBgColor(R.color.cornflowerblue);
+        helper.setBgColor(R.color.azure);
         this.context = context;
     }
 
@@ -47,7 +46,7 @@ public class AdapterLinearLayout extends DelegateAdapter.Adapter {
 
     @Override
     public int getItemCount() {
-        return 3;
+        return 6;
     }
 
     public class MyViewholder extends RecyclerView.ViewHolder {

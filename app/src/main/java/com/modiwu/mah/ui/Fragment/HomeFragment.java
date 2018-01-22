@@ -5,10 +5,12 @@ import android.view.View;
 
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.VirtualLayoutManager;
+import com.alibaba.android.vlayout.layout.GridLayoutHelper;
 import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
 import com.modiwu.mah.R;
 import com.modiwu.mah.base.BaseFragment;
 
+import top.jplayer.baseprolibrary.ui.adapter.AdapterGradLayout;
 import top.jplayer.baseprolibrary.ui.adapter.AdapterLinearLayout;
 
 /**
@@ -45,7 +47,17 @@ public class HomeFragment extends BaseFragment {
         VirtualLayoutManager manager = new VirtualLayoutManager(getContext());
         mRecyclerView.setLayoutManager(manager);
         DelegateAdapter adapter = new DelegateAdapter(manager, true);
-        adapter.addAdapter(new AdapterLinearLayout(getContext(),new LinearLayoutHelper()));
+        RecyclerView.RecycledViewPool pool = new RecyclerView.RecycledViewPool();
+        pool.setMaxRecycledViews(0, 10);
+        mRecyclerView.setRecycledViewPool(pool);
+        adapter.addAdapter(new AdapterLinearLayout(getContext(), new LinearLayoutHelper()));
+        adapter.addAdapter(new AdapterGradLayout(getContext(), new GridLayoutHelper(2)));  adapter.addAdapter(new AdapterLinearLayout(getContext(), new LinearLayoutHelper()));
+        adapter.addAdapter(new AdapterGradLayout(getContext(), new GridLayoutHelper(2)));  adapter.addAdapter(new AdapterLinearLayout(getContext(), new LinearLayoutHelper()));
+        adapter.addAdapter(new AdapterGradLayout(getContext(), new GridLayoutHelper(2)));  adapter.addAdapter(new AdapterLinearLayout(getContext(), new LinearLayoutHelper()));
+        adapter.addAdapter(new AdapterGradLayout(getContext(), new GridLayoutHelper(2)));  adapter.addAdapter(new AdapterLinearLayout(getContext(), new LinearLayoutHelper()));
+        adapter.addAdapter(new AdapterGradLayout(getContext(), new GridLayoutHelper(2)));
+        adapter.addAdapter(new AdapterLinearLayout(getContext(), new LinearLayoutHelper()));
+        adapter.addAdapter(new AdapterGradLayout(getContext(), new GridLayoutHelper(2)));
         mRecyclerView.setAdapter(adapter);
 
     }
