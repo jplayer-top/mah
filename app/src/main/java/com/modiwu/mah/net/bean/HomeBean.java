@@ -12,6 +12,9 @@ public class HomeBean implements MultiItemEntity {
     public static final int BODY_SINGLE = 1;
     public static final int BODY_ADV = 2;
     public static final int BODY_TOSHOP = 3;
+    public static final int BODY_SECTION = 4;
+    public static final int BODY_HEARD = 5;
+    public static final int BODY_NULL = 6;
     public String type;
 
     public HomeBean(String type) {
@@ -26,9 +29,14 @@ public class HomeBean implements MultiItemEntity {
             return BODY_SINGLE;
         } else if (type.equals("BODY_ADV")) {
             return BODY_ADV;
-        } else {
+        } else if (type.equals("BODY_TOSHOP")) {
             return BODY_TOSHOP;
-        }
+        } else if (type.equals("BODY_SECTION")) {
+            return BODY_SECTION;
+        } else if (type.equals("BODY_HEARD")) {
+            return BODY_HEARD;
+        } else
+            return BODY_NULL;
 
     }
 }

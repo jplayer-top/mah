@@ -9,8 +9,6 @@ import android.widget.TextView;
 
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.LayoutHelper;
-import com.alibaba.android.vlayout.layout.GridLayoutHelper;
-import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
 
 import top.jplayer.baseprolibrary.R;
 
@@ -19,13 +17,12 @@ import top.jplayer.baseprolibrary.R;
  * top.jplayer.baseprolibrary.ui.adapter
  */
 
-public class AdapterGradLayout extends DelegateAdapter.Adapter {
-    private GridLayoutHelper helper;
+public class AdapterGradLayout extends DelegateAdapter.Adapter<AdapterGradLayout.MyViewholder> {
+    private LayoutHelper helper;
     private Context context;
 
-    public AdapterGradLayout(Context context, GridLayoutHelper helper) {
+    public AdapterGradLayout(Context context, LayoutHelper helper) {
         this.helper = helper;
-        helper.setBgColor(R.color.azure);
         this.context = context;
     }
 
@@ -34,28 +31,45 @@ public class AdapterGradLayout extends DelegateAdapter.Adapter {
         return helper;
     }
 
+
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new MyViewholder(LayoutInflater.from(context).inflate(R.layout.layout_test, parent, false));
+    public AdapterGradLayout.MyViewholder onCreateViewHolder(ViewGroup parent, int viewType) {
+        return new AdapterGradLayout.MyViewholder(LayoutInflater.from(context).inflate(R.layout.layout_test, parent, false));
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        ((MyViewholder) holder).text.setText(position + 1 + "");
+    public void onBindViewHolder(AdapterGradLayout.MyViewholder holder, int position) {
+
     }
 
     @Override
     public int getItemCount() {
-        return 6;
+        return 2;
     }
 
-    public class MyViewholder extends RecyclerView.ViewHolder {
+    @Override
+    protected void onBindViewHolderWithOffset(AdapterGradLayout.MyViewholder holder, int position, int offsetTotal) {
+        holder.text.setText(Integer.toString(offsetTotal));
+    }
+
+    public static class MyViewholder extends RecyclerView.ViewHolder {
 
         private TextView text;
 
-        public MyViewholder(View view) {
-            super(view);
-            text = view.findViewById(R.id.tvNum);
+        public static volatile int existing = 0;
+        public static int createdTimes = 0;
+
+        public MyViewholder(View itemView) {
+            super(itemView);
+            createdTimes++;
+            text = itemView.findViewById(R.id.tvNum);
+            existing++;
+        }
+
+        @Override
+        protected void finalize() throws Throwable {
+            existing--;
+            super.finalize();
         }
     }
 }

@@ -20,7 +20,7 @@ public class HomeAdapter extends BaseMultiItemQuickAdapter<HomeBean, BaseViewHol
     public HomeAdapter(HomeFragment homeFragment, List<HomeBean> data) {
         super(data);
         addItemType(HomeBean.BODY_RECOMMEND, R.layout.adapter_home_body_recommend);
-        addItemType(HomeBean.BODY_SINGLE, R.layout.adapter_home_body_single);
+        addItemType(HomeBean.BODY_SINGLE, R.layout.adapter_home_body_section);
         addItemType(HomeBean.BODY_ADV, R.layout.adapter_home_body_adv);
         addItemType(HomeBean.BODY_TOSHOP, R.layout.adapter_home_body_toshop);
         this.homeFragment = homeFragment;

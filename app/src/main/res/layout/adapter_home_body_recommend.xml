@@ -4,29 +4,10 @@
               android:layout_height="wrap_content"
               android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/dp_10">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/scheme"
-            android:textColor="@color/black"
-            android:textSize="@dimen/sp_18"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/more"/>
-    </LinearLayout>
-
     <ImageView
         android:id="@+id/ivBodyPic"
-        android:src="@drawable/pic_05"
-        style="@style/img_adjust_bounds"/>
+        style="@style/img_adjust_bounds"
+        android:src="@drawable/pic_05"/>
 
     <TextView
         android:id="@+id/tvItemTitle"
@@ -43,5 +24,6 @@
         style="@style/textview_body_magin_10"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dp_10"
         android:text="@string/text_body"/>
 </LinearLayout>

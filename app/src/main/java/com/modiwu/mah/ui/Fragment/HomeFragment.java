@@ -9,9 +9,17 @@ import com.alibaba.android.vlayout.layout.GridLayoutHelper;
 import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
 import com.modiwu.mah.R;
 import com.modiwu.mah.base.BaseFragment;
+import com.modiwu.mah.net.bean.HomeBean;
+import com.modiwu.mah.ui.adapter.HomeAdvLayoutAdapter;
+import com.modiwu.mah.ui.adapter.HomeHeardLayoutAdapter;
+import com.modiwu.mah.ui.adapter.HomeRecommendLayoutAdapter;
+import com.modiwu.mah.ui.adapter.HomeSectionLayoutAdapter;
+import com.modiwu.mah.ui.adapter.HomeSingleVLayoutAdapter;
+import com.modiwu.mah.ui.adapter.HomeToShopLayoutAdapter;
 
-import top.jplayer.baseprolibrary.ui.adapter.AdapterGradLayout;
-import top.jplayer.baseprolibrary.ui.adapter.AdapterLinearLayout;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created by Obl on 2018/1/19.
@@ -32,33 +40,30 @@ public class HomeFragment extends BaseFragment {
     protected void initData(View rootView) {
         mMultipleStatusView = rootView.findViewById(R.id.multiplestatusview);
         mRecyclerView = rootView.findViewById(R.id.recyclerView);
-//        LinearLayoutManager manager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-//        ArrayList<HomeBean> homeBeans = new ArrayList<>();
-//        homeBeans.add(new HomeBean("BODY_RECOMMEND"));
-//        homeBeans.add(new HomeBean("BODY_SINGLE"));
-//        homeBeans.add(new HomeBean("BODY_RECOMMEND"));
-//        homeBeans.add(new HomeBean("BODY_ADV"));
-//        homeBeans.add(new HomeBean("BODY_TOSHOP"));
-//        mRecyclerView.setLayoutManager(manager);
-//        mRecyclerView.setAdapter(new HomeAdapter(this, homeBeans));
-        //取消嵌套自动滑动问题
-//        recyclerview.setFocusableInTouchMode(false);
-//        recyclerview.requestFocus();
+        ArrayList<HomeBean> homeBeans = new ArrayList<>();
+        homeBeans.add(new HomeBean("BODY_RECOMMEND"));
+        homeBeans.add(new HomeBean("BODY_SINGLE"));
+        homeBeans.add(new HomeBean("BODY_RECOMMEND"));
+        homeBeans.add(new HomeBean("BODY_ADV"));
+        homeBeans.add(new HomeBean("BODY_TOSHOP"));
         VirtualLayoutManager manager = new VirtualLayoutManager(getContext());
         mRecyclerView.setLayoutManager(manager);
-        DelegateAdapter adapter = new DelegateAdapter(manager, true);
         RecyclerView.RecycledViewPool pool = new RecyclerView.RecycledViewPool();
         pool.setMaxRecycledViews(0, 10);
         mRecyclerView.setRecycledViewPool(pool);
-        adapter.addAdapter(new AdapterLinearLayout(getContext(), new LinearLayoutHelper()));
-        adapter.addAdapter(new AdapterGradLayout(getContext(), new GridLayoutHelper(2)));  adapter.addAdapter(new AdapterLinearLayout(getContext(), new LinearLayoutHelper()));
-        adapter.addAdapter(new AdapterGradLayout(getContext(), new GridLayoutHelper(2)));  adapter.addAdapter(new AdapterLinearLayout(getContext(), new LinearLayoutHelper()));
-        adapter.addAdapter(new AdapterGradLayout(getContext(), new GridLayoutHelper(2)));  adapter.addAdapter(new AdapterLinearLayout(getContext(), new LinearLayoutHelper()));
-        adapter.addAdapter(new AdapterGradLayout(getContext(), new GridLayoutHelper(2)));  adapter.addAdapter(new AdapterLinearLayout(getContext(), new LinearLayoutHelper()));
-        adapter.addAdapter(new AdapterGradLayout(getContext(), new GridLayoutHelper(2)));
-        adapter.addAdapter(new AdapterLinearLayout(getContext(), new LinearLayoutHelper()));
-        adapter.addAdapter(new AdapterGradLayout(getContext(), new GridLayoutHelper(2)));
-        mRecyclerView.setAdapter(adapter);
-
+        DelegateAdapter delegateAdapter = new DelegateAdapter(manager, true);
+        mRecyclerView.setAdapter(delegateAdapter);
+        List<DelegateAdapter.Adapter> adapters = new LinkedList<>();
+        adapters.add(new HomeHeardLayoutAdapter(getContext(), new LinearLayoutHelper(), 1, HomeBean.BODY_HEARD));
+        adapters.add(new HomeSectionLayoutAdapter(getContext(), new LinearLayoutHelper(), 1, HomeBean.BODY_SECTION));
+        adapters.add(new HomeRecommendLayoutAdapter(getContext(), new LinearLayoutHelper(), 3, HomeBean.BODY_RECOMMEND));
+        adapters.add(new HomeAdvLayoutAdapter(getContext(), new LinearLayoutHelper(), 1, HomeBean.BODY_ADV));
+        adapters.add(new HomeSectionLayoutAdapter(getContext(), new LinearLayoutHelper(), 1, HomeBean.BODY_SECTION));
+        adapters.add(new HomeSingleVLayoutAdapter(getContext(), new GridLayoutHelper(2), 6, HomeBean.BODY_SINGLE));
+        adapters.add(new HomeSectionLayoutAdapter(getContext(), new LinearLayoutHelper(), 1, HomeBean.BODY_SECTION));
+        adapters.add(new HomeRecommendLayoutAdapter(getContext(), new LinearLayoutHelper(), 1, HomeBean.BODY_RECOMMEND));
+        adapters.add(new HomeAdvLayoutAdapter(getContext(), new LinearLayoutHelper(), 1, HomeBean.BODY_ADV));
+        adapters.add(new HomeToShopLayoutAdapter(getContext(), new LinearLayoutHelper(), 1, HomeBean.BODY_TOSHOP));
+        delegateAdapter.setAdapters(adapters);
     }
 }
