@@ -25,6 +25,7 @@ import top.jplayer.baseprolibrary.ui.adapter.VLayoutAdapter;
 public class HomeHeardLayoutAdapter extends VLayoutAdapter<RecyclerView.ViewHolder> {
 
     private final List<Integer> mIntegers;
+    private BGABanner mBgaBanner;
 
     public HomeHeardLayoutAdapter(Context context, LayoutHelper helper, int count, int itemType) {
         super(context, helper, count, itemType);
@@ -42,15 +43,24 @@ public class HomeHeardLayoutAdapter extends VLayoutAdapter<RecyclerView.ViewHold
     }
 
     @Override
+    public void onViewRecycled(RecyclerView.ViewHolder holder) {
+        super.onViewRecycled(holder);
+        if (mBgaBanner != null) {
+            mBgaBanner.setAdapter(null);
+            mBgaBanner.setData(null);
+        }
+    }
+
+    @Override
     protected void onBindViewHolderWithOffset(RecyclerView.ViewHolder holder, int position, int offsetTotal) {
-        BGABanner bgaBanner = holder.itemView.findViewById(R.id.bgaBanner);
-        bgaBanner.setAdapter(new BGABanner.Adapter<ImageView, Integer>() {
+        mBgaBanner = holder.itemView.findViewById(R.id.bgaBanner);
+        mBgaBanner.setAdapter(new BGABanner.Adapter<ImageView, Integer>() {
             @Override
             public void fillBannerItem(BGABanner banner, ImageView itemView, @Nullable Integer model, int position) {
                 Glide.with(context).load(model).into(itemView);
             }
 
         });
-        bgaBanner.setData(mIntegers, Arrays.asList("", "", "", "", ""));
+        mBgaBanner.setData(mIntegers, Arrays.asList("", "", "", "", ""));
     }
 }
