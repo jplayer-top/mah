@@ -3,6 +3,8 @@ package com.modiwu.mah.ui.adapter;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
+import com.modiwu.mah.ui.Fragment.SchemeHardFragment;
+
 import java.util.List;
 
 import top.jplayer.baseprolibrary.ui.Fragment.TestFragment;
@@ -20,7 +22,7 @@ public class AdapterPagerShcemDetail extends BaseViewPagerFragmentAdapter<String
 
     @Override
     public Fragment getItem(int position) {
-        return new TestFragment();
+        return position == 0 || position == 1 ? new SchemeHardFragment() : new TestFragment();
     }
 
     @Override
