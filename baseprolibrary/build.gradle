@@ -87,5 +87,6 @@ dependencies {
     api(rootProject.ext.glideOkhttp) {
         exclude group: 'glide-parent'
     }
+    annotationProcessor rootProject.ext.annotationProcessorLibs
 
 }

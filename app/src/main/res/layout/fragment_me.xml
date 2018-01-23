@@ -25,6 +25,7 @@
                 android:padding="15dp">
 
                 <ImageView
+                    android:id="@+id/ivMeAvatar"
                     android:layout_width="@dimen/me_pic_avator"
                     android:layout_height="@dimen/me_pic_avator"
                     android:src="@mipmap/ic_launcher_round"/>
