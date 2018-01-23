@@ -4,6 +4,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import top.jplayer.baseprolibrary.R;
+import top.jplayer.baseprolibrary.utils.LogUtil;
 
 /**
  * Created by Obl on 2018/1/23.
@@ -20,5 +21,11 @@ public class TestFragment extends SuperBaseFragment {
     @Override
     public int initLayout() {
         return R.layout.fragment_base;
+    }
+
+    @Override
+    protected void onShowFragment() {
+        super.onShowFragment();
+        LogUtil.e("isShow---");
     }
 }

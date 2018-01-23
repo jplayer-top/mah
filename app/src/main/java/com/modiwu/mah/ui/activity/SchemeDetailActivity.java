@@ -9,6 +9,8 @@ import com.modiwu.mah.ui.adapter.AdapterPagerShcemDetail;
 
 import java.util.ArrayList;
 
+import top.jplayer.baseprolibrary.utils.LogUtil;
+
 /**
  * Created by Obl on 2018/1/23.
  * com.modiwu.mah.ui.activity
@@ -33,5 +35,22 @@ public class SchemeDetailActivity extends BaseCommonActivity {
         strings.add("楼盘");
         strings.add("单品");
         viewPager.setAdapter(new AdapterPagerShcemDetail(getSupportFragmentManager(), strings));
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                LogUtil.e("onTabSelected" + tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+                LogUtil.e("onTabUnselected" + tab.getPosition());
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+                LogUtil.e("onTabReselected" + tab.getPosition());
+            }
+        });
     }
 }
