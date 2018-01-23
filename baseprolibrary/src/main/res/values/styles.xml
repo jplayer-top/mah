@@ -37,7 +37,7 @@
         <item name="android:textColor">@color/colorBlackGold</item>
         <!--字母 true 全大写-->
         <item name="android:textAllCaps">false</item>
-        <item name="android:foreground" tools:ignore="PrivateResource">?attr/controlBackground</item>
+        <!--<item name="android:foreground" tools:ignore="PrivateResource">?attr/controlBackground</item>-->
         <item name="android:textSize">@dimen/generalTextViewSize</item>
     </style>
 

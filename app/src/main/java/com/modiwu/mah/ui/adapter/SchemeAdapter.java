@@ -26,5 +26,6 @@ public class SchemeAdapter extends BaseQuickAdapter<Integer, BaseViewHolder> {
     protected void convert(BaseViewHolder baseViewHolder, Integer integer) {
         ImageView ivBodyPic = baseViewHolder.convertView.findViewById(R.id.ivBodyPic);
         ivBodyPic.setImageResource(integer);
+        baseViewHolder.addOnClickListener(R.id.llScheme_body);
     }
 }

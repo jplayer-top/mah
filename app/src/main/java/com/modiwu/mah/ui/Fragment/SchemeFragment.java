@@ -1,11 +1,14 @@
 package com.modiwu.mah.ui.Fragment;
 
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.modiwu.mah.R;
 import com.modiwu.mah.base.BaseFragment;
+import com.modiwu.mah.ui.activity.SchemeDetailActivity;
 import com.modiwu.mah.ui.adapter.SchemeAdapter;
 
 import java.util.ArrayList;
@@ -36,7 +39,15 @@ public class SchemeFragment extends BaseFragment {
         list.add(R.drawable.pic_03);
         list.add(R.drawable.pic_04);
         list.add(R.drawable.pic_05);
-        mRecyclerView.setAdapter(new SchemeAdapter(list));
+        SchemeAdapter adapter = new SchemeAdapter(list);
+        mRecyclerView.setAdapter(adapter);
         tvBarTitle.setText("方案");
+        adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+            @Override
+            public boolean onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                startActivity(new Intent(getContext(), SchemeDetailActivity.class));
+                return false;
+            }
+        });
     }
 }
