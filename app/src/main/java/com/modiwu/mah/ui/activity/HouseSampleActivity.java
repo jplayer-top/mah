@@ -5,7 +5,7 @@ import android.view.View;
 import com.modiwu.mah.R;
 import com.modiwu.mah.base.BaseCommonActivity;
 
-import top.jplayer.baseprolibrary.widgets.DialogFlowSure;
+import top.jplayer.baseprolibrary.widgets.dialog.DialogFlowSure;
 
 /**
  * Created by Obl on 2018/1/24.

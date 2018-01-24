@@ -1,4 +1,4 @@
-package top.jplayer.baseprolibrary.widgets;
+package top.jplayer.baseprolibrary.widgets.dialog;
 
 import android.app.Dialog;
 import android.content.Context;
