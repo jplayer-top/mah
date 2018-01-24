@@ -23,9 +23,9 @@ public class AdapterPagerShcemDetail extends BaseViewPagerFragmentAdapter<String
 
     @Override
     public Fragment getItem(int position) {
-        return position == 0 || position == 1 ?
-                new SchemeHardFragment() : position ==3 ?
-                new SchemeFloorFragment():new TestFragment();
+        return position == 0 || position == 1 || position == 2 ?
+                new SchemeHardFragment() : position == 4 ?
+                new SchemeFloorFragment() : new TestFragment();
     }
 
     @Override

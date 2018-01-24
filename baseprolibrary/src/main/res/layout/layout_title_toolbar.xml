@@ -8,6 +8,7 @@
     android:layout_height="?attr/actionBarSize"
     android:background="@color/white"
     android:minHeight="?attr/actionBarSize"
+    app:layout_scrollFlags="scroll|enterAlways"
     app:popupTheme="@style/AppTheme.PopupOverlay">
 
     <RelativeLayout
@@ -43,12 +44,13 @@
             android:contentDescription="@string/app_name"
             android:scaleType="fitXY"
             android:src="@drawable/toolbar_shadow"/>
+
         <ImageView
             android:id="@+id/ivBarSearch"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
             android:layout_width="?attr/actionBarSize"
             android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:contentDescription="@string/app_name"
             android:foreground="?attr/controlBackground"

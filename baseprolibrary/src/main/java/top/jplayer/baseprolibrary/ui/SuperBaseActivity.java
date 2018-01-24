@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import top.jplayer.baseprolibrary.R;
 
@@ -21,8 +22,11 @@ public abstract class SuperBaseActivity extends AppCompatActivity {
     protected View mBaseView;
     protected Toolbar mToolBar;
     protected ImageView mIvGoBack;
+    protected TextView tvBarTitle;
+    protected ImageView ivBarSearch;
     protected FrameLayout mFlRootView;
     public SuperBaseActivity mBaseActivity;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,11 +53,17 @@ public abstract class SuperBaseActivity extends AppCompatActivity {
      * @param rootView 根布局
      */
     private void initDefSuperView(View rootView) {
-        mToolBar = rootView.findViewById(R.id.toolbar);
         mFlRootView = rootView.findViewById(R.id.flRootView);
-        mIvGoBack = mBaseView.findViewById(R.id.ivGoBack);
+        mToolBar = rootView.findViewById(R.id.toolbar);
+        findToolBarView(rootView);
         initSuperData(mFlRootView);
         customBarLeft();
+    }
+
+    public void findToolBarView(View rootView) {
+        mIvGoBack = mBaseView.findViewById(R.id.ivGoBack);
+        tvBarTitle = mBaseView.findViewById(R.id.tvBarTitle);
+        ivBarSearch = mBaseView.findViewById(R.id.ivBarSearch);
     }
 
 
