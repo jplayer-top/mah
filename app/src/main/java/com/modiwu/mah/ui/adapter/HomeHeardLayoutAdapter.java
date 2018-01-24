@@ -1,14 +1,17 @@
 package com.modiwu.mah.ui.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.alibaba.android.vlayout.LayoutHelper;
 import com.bumptech.glide.Glide;
 import com.modiwu.mah.R;
+import com.modiwu.mah.ui.activity.HouseSampleActivity;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -56,8 +59,16 @@ public class HomeHeardLayoutAdapter extends VLayoutAdapter<RecyclerView.ViewHold
         mBgaBanner = holder.itemView.findViewById(R.id.bgaBanner);
         mBgaBanner.setAdapter(new BGABanner.Adapter<ImageView, Integer>() {
             @Override
-            public void fillBannerItem(BGABanner banner, ImageView itemView, @Nullable Integer model, int position) {
+            public void fillBannerItem(BGABanner banner, ImageView itemView, @Nullable Integer model, final int position) {
                 Glide.with(context).load(model).into(itemView);
+                itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (position == 0) {
+                            context.startActivity(new Intent(context, HouseSampleActivity.class));
+                        }
+                    }
+                });
             }
 
         });

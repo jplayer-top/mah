@@ -16,7 +16,6 @@ public class HomeBean implements MultiItemEntity {
     public static final int BODY_HEARD = 5;
     public static final int BODY_NULL = 6;
     public String type;
-
     public HomeBean(String type) {
         this.type = type;
     }

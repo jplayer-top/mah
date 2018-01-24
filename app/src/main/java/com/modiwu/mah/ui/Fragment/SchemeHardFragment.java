@@ -5,7 +5,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.modiwu.mah.R;
-import com.modiwu.mah.base.BaseFragment;
 import com.modiwu.mah.ui.adapter.SchemeHardAdapter;
 
 import java.util.ArrayList;
@@ -18,6 +17,8 @@ import top.jplayer.baseprolibrary.ui.Fragment.SuperBaseFragment;
  */
 
 public class SchemeHardFragment extends SuperBaseFragment {
+
+
     @Override
     protected void initData(View rootView) {
         ArrayList<Integer> list = new ArrayList<>();
@@ -35,4 +36,5 @@ public class SchemeHardFragment extends SuperBaseFragment {
     public int initLayout() {
         return R.layout.fragment_scheme_hard;
     }
+
 }

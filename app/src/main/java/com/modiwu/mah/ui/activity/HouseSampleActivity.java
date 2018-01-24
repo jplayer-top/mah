@@ -8,14 +8,14 @@ import com.modiwu.mah.base.BaseCommonActivity;
  * com.modiwu.mah.ui.activity
  */
 
-public class SchemeSearchActivity extends BaseCommonActivity {
+public class HouseSampleActivity extends BaseCommonActivity {
     @Override
     public int setBaseLayout() {
-        return R.layout.activity_scheme_search;
+        return R.layout.activity_house_sample;
     }
 
     @Override
     public void initBaseData() {
-        tvBarTitle.setText("选择条件");
+        tvBarTitle.setText("样板间征集");
     }
 }

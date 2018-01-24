@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.view.View;
+import android.widget.RelativeLayout;
 
 import com.modiwu.mah.R;
 import com.modiwu.mah.base.BaseSpecialActivity;
@@ -24,12 +25,15 @@ public class SchemeDetailActivity extends BaseSpecialActivity {
         return R.layout.activity_scheme_detail;
     }
 
+    private RelativeLayout rlSchemeDetailBottom;
+
     @Override
     public void initBaseData() {
         findToolBarView(mBaseView);
         customBarLeft();
         TabLayout tabLayout = mBaseView.findViewById(R.id.tabLayout);
         ViewPager viewPager = mBaseView.findViewById(R.id.viewPager);
+        rlSchemeDetailBottom = mBaseView.findViewById(R.id.rlSchemeDetailBottom);
         tabLayout.setTabMode(TabLayout.MODE_FIXED);
         tabLayout.setupWithViewPager(viewPager);
         ArrayList<String> strings = new ArrayList<>();
@@ -38,11 +42,16 @@ public class SchemeDetailActivity extends BaseSpecialActivity {
         strings.add("软装");
         strings.add("楼盘");
         strings.add("单品");
-        viewPager.setAdapter(new AdapterPagerShcemDetail(getSupportFragmentManager(), strings));
+        AdapterPagerShcemDetail adapter = new AdapterPagerShcemDetail(getSupportFragmentManager(), strings);
+        viewPager.setAdapter(adapter);
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 LogUtil.e("onTabSelected" + tab.getPosition());
+                if (tab.getPosition() == 3 || tab.getPosition() == 4) {
+                    rlSchemeDetailBottom.setVisibility(View.GONE);
+                } else
+                    rlSchemeDetailBottom.setVisibility(View.VISIBLE);
             }
 
             @Override

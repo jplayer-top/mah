@@ -9,7 +9,6 @@
         android:id="@+id/bgaBanner"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:paddingTop="@dimen/dp_10"
         bga:banner_contentBottomMargin="30dp"
         bga:banner_pointAutoPlayAble="true"
         bga:banner_pointContainerBackground="@color/colorWhite"

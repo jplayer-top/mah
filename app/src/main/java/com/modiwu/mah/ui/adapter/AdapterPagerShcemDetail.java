@@ -6,8 +6,10 @@ import android.support.v4.app.FragmentManager;
 import com.modiwu.mah.ui.Fragment.SchemeFloorFragment;
 import com.modiwu.mah.ui.Fragment.SchemeHardFragment;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import top.jplayer.baseprolibrary.ui.Fragment.SuperBaseFragment;
 import top.jplayer.baseprolibrary.ui.Fragment.TestFragment;
 import top.jplayer.baseprolibrary.ui.adapter.BaseViewPagerFragmentAdapter;
 
@@ -17,15 +19,26 @@ import top.jplayer.baseprolibrary.ui.adapter.BaseViewPagerFragmentAdapter;
  */
 
 public class AdapterPagerShcemDetail extends BaseViewPagerFragmentAdapter<String> {
+
+    private final SchemeHardFragment mHardFragment;
+
     public AdapterPagerShcemDetail(FragmentManager fm, List<String> data) {
         super(fm, data);
+        mFragmentList = new ArrayList<>();
+        mHardFragment = new SchemeHardFragment();
+        mFragmentList.add(mHardFragment);
+        mFragmentList.add(new SchemeHardFragment());
+        mFragmentList.add(new SchemeHardFragment());
+        mFragmentList.add(new TestFragment());
+        mFragmentList.add(new SchemeFloorFragment());
     }
 
+    private List<SuperBaseFragment> mFragmentList = null;
+
     @Override
+
     public Fragment getItem(int position) {
-        return position == 0 || position == 1 || position == 2 ?
-                new SchemeHardFragment() : position == 4 ?
-                new SchemeFloorFragment() : new TestFragment();
+        return mFragmentList.get(position);
     }
 
     @Override

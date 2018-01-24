@@ -45,6 +45,14 @@
         <item name="android:foreground">?android:selectableItemBackground</item>
     </style>
 
+    <style name="OblAppTheme.EditText">
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textSize">@dimen/generalTextViewSize</item>
+        <item name="android:textColorHint">@color/grey</item>
+        <item name="android:textColor">@color/grey</item>
+        <item name="android:inputType">text</item>
+    </style>
+
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
 
