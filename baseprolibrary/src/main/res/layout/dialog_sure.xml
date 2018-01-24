@@ -62,10 +62,11 @@
         <View
             android:layout_width="1px"
             android:layout_height="20dp"
-            android:background="@color/colorBlackGold"/>
+            android:background="@color/red"/>
 
         <ImageView
-            android:id="@+id/tv_sure"
+            android:tint="@color/red"
+            android:id="@+id/iv_sure"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:gravity="center"

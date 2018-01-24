@@ -20,7 +20,7 @@ public class DialogFlowSure extends BaseCommonDialog {
     private ImageView mIvLogo;
     private TextView mTvTitle;
     private TextView mTvContent;
-    private TextView mTvSure;
+    private ImageView iv_sure;
 
     public DialogFlowSure(Context context, int themeResId) {
         super(context, themeResId);
@@ -50,12 +50,12 @@ public class DialogFlowSure extends BaseCommonDialog {
         return mTvTitle;
     }
 
-    public TextView getSureView() {
-        return mTvSure;
+    public ImageView getSureView() {
+        return iv_sure;
     }
 
     public void setSureListener(View.OnClickListener listener) {
-        mTvSure.setOnClickListener(listener);
+        iv_sure.setOnClickListener(listener);
     }
 
     public TextView getContentView() {
@@ -70,9 +70,6 @@ public class DialogFlowSure extends BaseCommonDialog {
         mTvTitle.setText(title);
     }
 
-    public void setSure(String content) {
-        mTvSure.setText(content);
-    }
 
     public void setContent(String str) {
         mTvContent.setText(str);
@@ -80,7 +77,7 @@ public class DialogFlowSure extends BaseCommonDialog {
 
     private void initView() {
         View dialogView = LayoutInflater.from(getContext()).inflate(R.layout.dialog_sure, null);
-        mTvSure = (TextView) dialogView.findViewById(R.id.tv_sure);
+        iv_sure = dialogView.findViewById(R.id.iv_sure);
         mTvTitle = (TextView) dialogView.findViewById(R.id.tv_title);
         mTvTitle.setTextIsSelectable(true);
         mTvContent = (TextView) dialogView.findViewById(R.id.tv_content);
