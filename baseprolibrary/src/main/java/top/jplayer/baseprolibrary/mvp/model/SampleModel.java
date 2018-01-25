@@ -7,5 +7,4 @@ package top.jplayer.baseprolibrary.mvp.model;
 
 public class SampleModel {
 
-
 }

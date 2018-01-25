@@ -3,7 +3,7 @@ package com.modiwu.mah.ui.adapter;
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.modiwu.mah.R;
-import com.modiwu.mah.net.bean.HomeBean;
+import com.modiwu.mah.mvp.model.bean.HomeBean;
 import com.modiwu.mah.ui.Fragment.HomeFragment;
 
 import java.util.List;

@@ -61,8 +61,8 @@ public class RetrofitManager {
     /**
      * 默认create ApiServer
      */
-    public ApiService create() {
-        return build().createReq(ApiService.class);
+    public <T> T create(Class<T> reqServer) {
+        return build().createReq(reqServer);
     }
 
     /**

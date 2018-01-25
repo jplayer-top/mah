@@ -15,6 +15,7 @@ import com.google.gson.Gson;
 import io.reactivex.functions.Function;
 import top.jplayer.baseprolibrary.mvp.model.bean.LoginBean;
 import top.jplayer.baseprolibrary.mvp.model.bean.SampleBean;
+import top.jplayer.baseprolibrary.net.ApiService;
 import top.jplayer.baseprolibrary.net.IoMainSchedule;
 import top.jplayer.baseprolibrary.net.RetrofitManager;
 import top.jplayer.baseprolibrary.net.SampleObserver;
@@ -81,7 +82,7 @@ public class TestActivity extends SuperBaseActivity {
 
     @Override
     public void initSuperData(FrameLayout mFlRootView) {
-        RetrofitManager.init().url("https://m.leader001.cn/").create()
+        RetrofitManager.init().url("https://m.leader001.cn/").create(ApiService.class)
                 .getSampleBean("{\"information\":\"bd_web_api\",\"command\":\"redhallwill\",\"platform\":\"html\"," +
                         "\"version\":\"5.2.30\",\"productName\":\"lzcp\"}", "1514383490705", "Zepto1514383490533")
                 .compose(new IoMainSchedule<String>())
@@ -104,7 +105,7 @@ public class TestActivity extends SuperBaseActivity {
                         LogUtil.e(e.getMessage() + "1---");
                     }
                 });
-        RetrofitManager.init().url("https://dev.xiaoyi99.com/").create()
+        RetrofitManager.init().url("https://dev.xiaoyi99.com/").create(ApiService.class)
                 .getLoginBean("18366108542", "123456")
                 .compose(new IoMainSchedule<LoginBean>())
                 .subscribe(new SampleObserver<LoginBean>() {

@@ -17,8 +17,8 @@ ext {
             rxAndroid               : "2.0.1"
     ]
     url = [
-            "debug"  : "https://m.youbaseurl.com/debug",
-            "release": "https://m.youbaseurl.com/release",
+            "debug"  : "http://modiwu.com/app/",
+            "release": "http://modiwu.com/app/",
     ]
     supportDeps = [
             //--------  support  -------
