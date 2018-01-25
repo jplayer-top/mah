@@ -18,6 +18,10 @@ import com.modiwu.mah.ui.adapter.HomeRecommendLayoutAdapter;
 import com.modiwu.mah.ui.adapter.HomeSectionLayoutAdapter;
 import com.modiwu.mah.ui.adapter.HomeSingleVLayoutAdapter;
 import com.modiwu.mah.ui.adapter.HomeToShopLayoutAdapter;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnMultiPurposeListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -33,6 +37,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.HomeView 
     protected RecyclerView mRecyclerView;
     private HomePresenter mPresenter;
     private DelegateAdapter mDelegateAdapter;
+    private SmartRefreshLayout smartRefreshLayout;
 
     @Override
     public int initLayout() {
@@ -42,6 +47,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.HomeView 
     @Override
     protected void initData(View rootView) {
         mMultipleStatusView = rootView.findViewById(R.id.multiplestatusview);
+        smartRefreshLayout = rootView.findViewById(R.id.smartRefreshLayout);
         mRecyclerView = rootView.findViewById(R.id.recyclerView);
         VirtualLayoutManager manager = new VirtualLayoutManager(getContext());
         mRecyclerView.setLayoutManager(manager);
@@ -51,7 +57,12 @@ public class HomeFragment extends BaseFragment implements HomeContract.HomeView 
         mDelegateAdapter = new DelegateAdapter(manager, true);
         mRecyclerView.setAdapter(mDelegateAdapter);
 
-
+        smartRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
+                mPresenter.requestHomeBean();
+            }
+        });
         mPresenter = new HomePresenter(this);
         mPresenter.requestHomeBean();
     }
