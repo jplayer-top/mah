@@ -52,7 +52,10 @@ ext {
     navigationbar = "devlight.io:navigationtabbar:1.2.5"
     //沉浸式
     barlibrary = 'com.gyf.barlibrary:barlibrary:2.3.0'
-    // APT
+    // 下拉刷新
+    smartrefresh = 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.4-7'
+    //特殊头部，看情况添加
+    smartrefresh_heard = 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.4-7'
 
     glide = "com.github.bumptech.glide:glide:$dependVersion.glideSdkVersion"
     glideCompiler = "com.github.bumptech.glide:compiler:$dependVersion.glideSdkVersion"
@@ -62,7 +65,7 @@ ext {
     supportLibs = supportDeps.values()
     networkLibs = retrofit.values()
     rxJavaLibs = rxJava.values()
-    otherLibs = [barlibrary, glide]
+    otherLibs = [barlibrary, glide, smartrefresh, smartrefresh_heard]
     annotationProcessorLibs = [glideCompiler]
 
 }
