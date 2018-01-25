@@ -1,7 +1,6 @@
 package top.jplayer.baseprolibrary.widgets.dialog;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,25 +21,12 @@ public class DialogFlowSure extends BaseCommonDialog {
     private TextView mTvContent;
     private ImageView iv_sure;
 
-    public DialogFlowSure(Context context, int themeResId) {
-        super(context, themeResId);
-        initView();
-    }
-
-    public DialogFlowSure(Context context, boolean cancelable, DialogInterface.OnCancelListener cancelListener) {
-        super(context, cancelable, cancelListener);
-        initView();
-    }
-
     public DialogFlowSure(Context context) {
         super(context);
         initView();
     }
 
-    public DialogFlowSure(Context context, float alpha, int gravity) {
-        super(context, alpha, gravity);
-        initView();
-    }
+
 
     public ImageView getLogoView() {
         return mIvLogo;

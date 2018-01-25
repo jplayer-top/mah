@@ -21,14 +21,19 @@ public class HouseSampleActivity extends BaseCommonActivity {
     @Override
     public void initBaseData() {
         tvBarTitle.setText("样板间征集");
-        final DialogFlowSure rxDialogSure = new DialogFlowSure(mBaseActivity);//提示弹窗
-        rxDialogSure.getLogoView().setImageResource(R.mipmap.ic_launcher);
-        rxDialogSure.getSureView().setOnClickListener(new View.OnClickListener() {
+        mBaseView.findViewById(R.id.btnSublime).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                rxDialogSure.cancel();
+                final DialogFlowSure rxDialogSure = new DialogFlowSure(mBaseActivity);//提示弹窗
+                rxDialogSure.getLogoView().setImageResource(R.mipmap.ic_launcher);
+                rxDialogSure.getSureView().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        rxDialogSure.cancel();
+                    }
+                });
+                rxDialogSure.show();
             }
         });
-        rxDialogSure.show();
     }
 }
