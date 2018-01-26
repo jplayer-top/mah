@@ -18,9 +18,7 @@ import com.modiwu.mah.ui.adapter.HomeRecommendLayoutAdapter;
 import com.modiwu.mah.ui.adapter.HomeSectionLayoutAdapter;
 import com.modiwu.mah.ui.adapter.HomeSingleVLayoutAdapter;
 import com.modiwu.mah.ui.adapter.HomeToShopLayoutAdapter;
-import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.listener.OnMultiPurposeListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import java.util.LinkedList;
@@ -37,7 +35,6 @@ public class HomeFragment extends BaseFragment implements HomeContract.HomeView 
     protected RecyclerView mRecyclerView;
     private HomePresenter mPresenter;
     private DelegateAdapter mDelegateAdapter;
-    private SmartRefreshLayout smartRefreshLayout;
 
     @Override
     public int initLayout() {
@@ -56,7 +53,6 @@ public class HomeFragment extends BaseFragment implements HomeContract.HomeView 
         mRecyclerView.setRecycledViewPool(pool);
         mDelegateAdapter = new DelegateAdapter(manager, true);
         mRecyclerView.setAdapter(mDelegateAdapter);
-
         smartRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {

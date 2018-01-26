@@ -15,6 +15,7 @@ public class BasePresenter<T extends IContract.IView> implements IContract.IPres
     public BasePresenter(T iView) {
         mCompositeDisposable = new CompositeDisposable();
         this.mIView = iView;
+        mIView.showLoading();
     }
 
     @Override

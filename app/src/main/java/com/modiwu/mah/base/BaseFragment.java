@@ -5,6 +5,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.modiwu.mah.R;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
 import top.jplayer.baseprolibrary.mvp.contract.IContract;
 import top.jplayer.baseprolibrary.ui.Fragment.SuperBaseFragment;
@@ -17,6 +18,7 @@ import top.jplayer.baseprolibrary.widgets.MultipleStatusView;
 
 public abstract class BaseFragment extends SuperBaseFragment implements IContract.IView {
     public MultipleStatusView mMultipleStatusView;
+    public SmartRefreshLayout smartRefreshLayout;
     public TextView tvBarTitle;
     public ImageView ivBarSearch;
 
@@ -35,6 +37,9 @@ public abstract class BaseFragment extends SuperBaseFragment implements IContrac
         if (mMultipleStatusView != null) {
             mMultipleStatusView.showError();
         }
+        if (smartRefreshLayout != null && smartRefreshLayout.isRefreshing()) {
+            smartRefreshLayout.finishRefresh();
+        }
     }
 
     @Override
@@ -48,6 +53,9 @@ public abstract class BaseFragment extends SuperBaseFragment implements IContrac
     public void showEmpty() {
         if (mMultipleStatusView != null) {
             mMultipleStatusView.showEmpty();
+        }
+        if (smartRefreshLayout != null && smartRefreshLayout.isRefreshing()) {
+            smartRefreshLayout.finishRefresh();
         }
     }
 }
