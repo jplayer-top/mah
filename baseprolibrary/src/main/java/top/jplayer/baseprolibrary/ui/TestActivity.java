@@ -85,15 +85,7 @@ public class TestActivity extends SuperBaseActivity {
         RetrofitManager.init().url("https://m.leader001.cn/").create(ApiService.class)
                 .getSampleBean("{\"information\":\"bd_web_api\",\"command\":\"redhallwill\",\"platform\":\"html\"," +
                         "\"version\":\"5.2.30\",\"productName\":\"lzcp\"}", "1514383490705", "Zepto1514383490533")
-                .compose(new IoMainSchedule<String>())
-                .map(new Function<String, SampleBean>() {
-                    @Override
-                    public SampleBean apply(String str) throws Exception {
-                        String json = str.substring(str.indexOf("("), str.lastIndexOf(")"));
-                        LogUtil.e(json);
-                        return new Gson().fromJson(json, SampleBean.class);
-                    }
-                })
+                .compose(new IoMainSchedule<SampleBean>())
                 .subscribe(new SampleObserver<SampleBean>() {
                     @Override
                     public void onNext(SampleBean o) {

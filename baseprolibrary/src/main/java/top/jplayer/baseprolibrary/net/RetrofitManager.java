@@ -42,6 +42,12 @@ public class RetrofitManager {
         return this;
     }
 
+    public RetrofitManager url(String url, boolean customInterceptor) {
+        this.url = url;
+        this.customInterceptor = customInterceptor;
+        return this;
+    }
+
     public static synchronized RetrofitManager init() {
 
         if (mRetrofitManager == null) {
@@ -124,6 +130,7 @@ public class RetrofitManager {
         return LoginInterceptor;
     }
 
+    private boolean customInterceptor = false;
     private OkHttpClient defClient;
 
     public RetrofitManager client() {
@@ -135,12 +142,22 @@ public class RetrofitManager {
         if (BuildConfig.DEBUG) {
             builder.addInterceptor(LoginInterceptor);
         }
+        if (customInterceptor) {
+            addCustomInterceptor(builder);
+        }
         defClient = builder.connectTimeout(30L, TimeUnit.SECONDS)
                 .readTimeout(30L, TimeUnit.SECONDS)
                 .writeTimeout(30L, TimeUnit.SECONDS)
                 .retryOnConnectionFailure(true)
                 .build();
         return this;
+    }
+
+    /**
+     * 再这里添加你需要添加的拦截器
+     */
+    private void addCustomInterceptor(OkHttpClient.Builder builder) {
+        builder.addInterceptor(new JsonRefixInterceptor());
     }
 
 
