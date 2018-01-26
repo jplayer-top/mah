@@ -11,7 +11,7 @@
         <item name="colorAccent">@color/colorBlackGold</item>
         <item name="android:windowContentTransitions">true</item>
         <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowAnimationStyle">@style/Animation.Activity.Translucent.Style</item>
+        <!--<item name="android:windowAnimationStyle">@style/Animation.Activity.Translucent.Style</item>-->
         <!--Button 去阴影-->
         <item name="android:textViewStyle">@style/OblAppTheme.TextView</item>
         <item name="android:button">@style/OblAppTheme.Button</item>

@@ -1,5 +1,6 @@
 package com.modiwu.mah;
 
+import android.os.SystemClock;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.widget.FrameLayout;
@@ -10,7 +11,13 @@ import com.modiwu.mah.base.FragmentFactory;
 import java.util.ArrayList;
 
 import devlight.io.library.ntb.NavigationTabBar;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
+import io.reactivex.schedulers.Schedulers;
 import top.jplayer.baseprolibrary.listener.NetNavigationBarListener;
+import top.jplayer.baseprolibrary.utils.LogUtil;
 
 public class MainActivity extends BaseSpecialActivity {
 
@@ -73,5 +80,37 @@ public class MainActivity extends BaseSpecialActivity {
     // 首页自定义左上角
     @Override
     public void customBarLeft() {
+    }
+
+    private int back = 0;
+
+    public void fff() {
+        super.onBackPressed();
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        Observable.just(back)
+                .subscribeOn(Schedulers.io())
+                .map(new Function<Integer, Integer>() {
+                    @Override
+                    public Integer apply(Integer integer) throws Exception {
+                        SystemClock.sleep(400);
+                        return back++;
+                    }
+                })
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<Integer>() {
+                    @Override
+                    public void accept(Integer integer) throws Exception {
+                        if (integer > 1) {
+                            fff();
+                        } else {
+                            LogUtil.e(integer);
+                        }
+                    }
+                });
+
     }
 }
