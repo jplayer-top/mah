@@ -11,14 +11,21 @@
         android:supportsRtl="true"
         android:theme="@style/OblAppTheme">
         <activity
-            android:name=".MainActivity"
-            android:launchMode="singleInstance"
+            android:name=".ui.activity.SplashActivity"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action
                     android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.DEFAULT"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize">
         </activity>
         <activity
             android:name=".ui.activity.SchemeDetailActivity"

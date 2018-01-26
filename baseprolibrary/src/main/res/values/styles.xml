@@ -25,6 +25,18 @@
         <item name="elevation">5dp</item>
         <item name="contentInsetStart">0dp</item>
     </style>
+
+
+    <style name="SpecActivityTheme" parent="OblAppTheme">
+        <item name="android:windowAnimationStyle">@style/FadeAnimationStyle</item>
+
+    </style>
+
+    <style name="FadeAnimationStyle" parent="@android:style/Animation.Translucent">
+        <item name="android:activityOpenEnterAnimation">@anim/fade_in</item>
+        <item name="android:activityCloseExitAnimation">@anim/fade_out</item>
+    </style>
+
     <!--Activity 转场动画预设-->
     <style name="noAnimTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowAnimationStyle">@null</item>

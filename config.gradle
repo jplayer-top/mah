@@ -52,6 +52,8 @@ ext {
     navigationbar = "devlight.io:navigationtabbar:1.2.5"
     //沉浸式
     barlibrary = 'com.gyf.barlibrary:barlibrary:2.3.0'
+    //动画封装库
+    viewanimator = 'com.github.florent37:viewanimator:1.0.5'
     // 下拉刷新
     smartrefresh = 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.4-7'
     //特殊头部，看情况添加
@@ -65,7 +67,7 @@ ext {
     supportLibs = supportDeps.values()
     networkLibs = retrofit.values()
     rxJavaLibs = rxJava.values()
-    otherLibs = [barlibrary, glide, smartrefresh, smartrefresh_heard]
+    otherLibs = [barlibrary, glide, smartrefresh, smartrefresh_heard,viewanimator]
     annotationProcessorLibs = [glideCompiler]
 
 }
