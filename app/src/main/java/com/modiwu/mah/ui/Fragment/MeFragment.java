@@ -35,7 +35,7 @@ public class MeFragment extends BaseFragment {
         ImageView ivMeAvatar = rootView.findViewById(R.id.ivMeAvatar);
         Glide.with(getContext()).load(R.drawable.home_toshop).apply(RequestOptions.circleCropTransform()).into
                 (ivMeAvatar);
-        RetrofitManager.init().url("https://m.leader001.cn/", true).create(ApiService.class)
+        RetrofitManager.init().url("https://m.leader001.cn/").create(ApiService.class)
                 .getSampleBean("{\"information\":\"bd_web_api\",\"command\":\"redhallwill\",\"platform\":\"html\"," +
                         "\"version\":\"5.2.30\",\"productName\":\"lzcp\"}", "1514383490705", "Zepto1514383490533")
                 .compose(new IoMainSchedule<SampleBean>())

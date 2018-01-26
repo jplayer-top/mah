@@ -3,8 +3,14 @@ package top.jplayer.baseprolibrary.net;
 import android.support.annotation.NonNull;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import io.reactivex.Observable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.internal.util.ArrayListSupplier;
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -33,20 +39,32 @@ public class RetrofitManager {
 
     private String url;
 
-    public String getUrl() {
-        return url;
-    }
 
     public RetrofitManager url(String url) {
         this.url = url;
         return this;
     }
 
-    public RetrofitManager url(String url, boolean customInterceptor) {
-        this.url = url;
-        this.customInterceptor = customInterceptor;
+    public RetrofitManager url() {
+        this.url = BuildConfig.HOST;
         return this;
     }
+
+
+    public RetrofitManager customIntercepor(Interceptor... interceptors) {
+        this.customInterceptor = true;
+        Observable.fromArray(interceptors)
+                .subscribe(new Consumer<Interceptor>() {
+                    @Override
+                    public void accept(Interceptor interceptor) throws Exception {
+                        if (customInterceptor && interceptor != null) {
+                            getokHttpBuilder().addInterceptor(interceptor);
+                        }
+                    }
+                });
+        return this;
+    }
+
 
     public static synchronized RetrofitManager init() {
 
@@ -77,6 +95,13 @@ public class RetrofitManager {
     public RetrofitManager urlBuild(String url) {
         mRetrofitManager.url(url).client().newBuild();
         return this;
+    }
+
+    /**
+     * 再这里添加你需要添加的拦截器
+     */
+    private void addCustomInterceptor(OkHttpClient.Builder builder) {
+        builder.addInterceptor(new JsonRefixInterceptor());
     }
 
     /**
@@ -134,17 +159,7 @@ public class RetrofitManager {
     private OkHttpClient defClient;
 
     public RetrofitManager client() {
-        HttpLoggingInterceptor LoginInterceptor = addHttpLoggingInterceptor();
-        OkHttpClient.Builder builder = new OkHttpClient.Builder();
-        builder.addInterceptor(addQueryParameterInterceptor())
-                .addInterceptor(addHeaderInterceptor());
-
-        if (BuildConfig.DEBUG) {
-            builder.addInterceptor(LoginInterceptor);
-        }
-        if (customInterceptor) {
-            addCustomInterceptor(builder);
-        }
+        OkHttpClient.Builder builder = getokHttpBuilder();
         defClient = builder.connectTimeout(30L, TimeUnit.SECONDS)
                 .readTimeout(30L, TimeUnit.SECONDS)
                 .writeTimeout(30L, TimeUnit.SECONDS)
@@ -153,11 +168,18 @@ public class RetrofitManager {
         return this;
     }
 
-    /**
-     * 再这里添加你需要添加的拦截器
-     */
-    private void addCustomInterceptor(OkHttpClient.Builder builder) {
-        builder.addInterceptor(new JsonRefixInterceptor());
+    @NonNull
+    private OkHttpClient.Builder getokHttpBuilder() {
+        HttpLoggingInterceptor LoginInterceptor = addHttpLoggingInterceptor();
+        OkHttpClient.Builder builder = new OkHttpClient.Builder();
+        builder.addInterceptor(addQueryParameterInterceptor())
+                .addInterceptor(addHeaderInterceptor());
+
+        if (BuildConfig.DEBUG) {
+            builder.addInterceptor(LoginInterceptor);
+        }
+
+        return builder;
     }
 
 
