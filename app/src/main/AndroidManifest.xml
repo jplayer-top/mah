@@ -23,6 +23,7 @@
             </intent-filter>
         </activity>
         <activity
+            android:theme="@style/OblAppTheme.Main"
             android:name=".MainActivity"
             android:launchMode="singleInstance"
             android:screenOrientation="portrait"

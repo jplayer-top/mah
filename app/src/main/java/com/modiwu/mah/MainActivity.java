@@ -95,7 +95,7 @@ public class MainActivity extends BaseSpecialActivity {
         } else {
             ToastUtils.init().showQuickToast(mBaseActivity, "再按一次退出应用");
         }
-        Observable.timer(500, TimeUnit.MILLISECONDS, AndroidSchedulers.mainThread())
+        Observable.timer(1, TimeUnit.SECONDS, AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<Long>() {
                     @Override
                     public void accept(Long aLong) throws Exception {
