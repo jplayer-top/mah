@@ -31,6 +31,9 @@
         <item name="android:windowAnimationStyle">@style/FadeAnimationStyle</item>
 
     </style>
+    <style name="OblAppTheme.Main" parent="OblAppTheme">
+        <item name="android:windowIsTranslucent">false</item>
+    </style>
 
     <style name="FadeAnimationStyle" parent="@android:style/Animation.Translucent">
         <item name="android:activityOpenEnterAnimation">@anim/fade_in</item>

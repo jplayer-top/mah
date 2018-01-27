@@ -9,6 +9,7 @@ import com.modiwu.mah.base.BaseSpecialActivity;
 import com.modiwu.mah.base.FragmentFactory;
 
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 import devlight.io.library.ntb.NavigationTabBar;
 import io.reactivex.Observable;
@@ -16,8 +17,10 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
+import io.reactivex.schedulers.TestScheduler;
 import top.jplayer.baseprolibrary.listener.NetNavigationBarListener;
 import top.jplayer.baseprolibrary.utils.LogUtil;
+import top.jplayer.baseprolibrary.utils.ToastUtils;
 
 public class MainActivity extends BaseSpecialActivity {
 
@@ -84,31 +87,19 @@ public class MainActivity extends BaseSpecialActivity {
 
     private int back = 0;
 
-    public void fff() {
-        super.onBackPressed();
-    }
-
     @Override
     public void onBackPressed() {
-
-        Observable.just(back)
-                .subscribeOn(Schedulers.io())
-                .map(new Function<Integer, Integer>() {
+        back++;
+        if (back > 1) {
+            super.onBackPressed();
+        } else {
+            ToastUtils.init().showQuickToast(mBaseActivity, "再按一次退出应用");
+        }
+        Observable.timer(500, TimeUnit.MILLISECONDS, AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<Long>() {
                     @Override
-                    public Integer apply(Integer integer) throws Exception {
-                        SystemClock.sleep(400);
-                        return back++;
-                    }
-                })
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<Integer>() {
-                    @Override
-                    public void accept(Integer integer) throws Exception {
-                        if (integer > 1) {
-                            fff();
-                        } else {
-                            LogUtil.e(integer);
-                        }
+                    public void accept(Long aLong) throws Exception {
+                        back = 0;
                     }
                 });
 
