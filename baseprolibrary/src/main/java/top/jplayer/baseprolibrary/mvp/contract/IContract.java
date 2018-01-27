@@ -15,7 +15,7 @@ public interface IContract {
         void showEmpty();
     }
 
-    interface IPresenter<T extends IView> {
+    interface IPresenter {
 
         void detachView();
     }

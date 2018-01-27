@@ -1,5 +1,6 @@
 package com.modiwu.mah.ui.Fragment;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -16,6 +17,7 @@ import top.jplayer.baseprolibrary.net.IoMainSchedule;
 import top.jplayer.baseprolibrary.net.JsonRefixInterceptor;
 import top.jplayer.baseprolibrary.net.RetrofitManager;
 import top.jplayer.baseprolibrary.net.SampleObserver;
+import top.jplayer.baseprolibrary.ui.SampleActivity;
 import top.jplayer.baseprolibrary.utils.LogUtil;
 
 /**
@@ -36,20 +38,15 @@ public class MeFragment extends BaseFragment {
         ImageView ivMeAvatar = rootView.findViewById(R.id.ivMeAvatar);
         Glide.with(getContext()).load(R.drawable.home_toshop).apply(RequestOptions.circleCropTransform()).into
                 (ivMeAvatar);
-        RetrofitManager.init().reset("https://m.leader001.cn/", new JsonRefixInterceptor()).reCreate(ApiService.class)
-                .getSampleBean("{\"information\":\"bd_web_api\",\"command\":\"redhallwill\",\"platform\":\"html\"," +
-                        "\"version\":\"5.2.30\",\"productName\":\"lzcp\"}", "1514383490705", "Zepto1514383490533")
-                .compose(new IoMainSchedule<SampleBean>())
-                .subscribe(new SampleObserver<SampleBean>() {
-                    @Override
-                    public void onNext(SampleBean o) {
-                        LogUtil.e(o.errorCode);
-                    }
+    }
 
-                    @Override
-                    public void onError(Throwable e) {
-                        LogUtil.e(e.getMessage() + "1---");
-                    }
-                });
+    @Override
+    protected void onShowFragment() {
+        rootView.findViewById(R.id.tvSet).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), SampleActivity.class));
+            }
+        });
     }
 }

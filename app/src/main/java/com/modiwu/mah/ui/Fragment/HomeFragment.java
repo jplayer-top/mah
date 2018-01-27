@@ -56,11 +56,11 @@ public class HomeFragment extends BaseFragment implements HomeContract.HomeView 
         smartRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
-                mPresenter.requestHomeBean();
+                mPresenter.requestHomeData();
             }
         });
         mPresenter = new HomePresenter(this);
-        mPresenter.requestHomeBean();
+        mPresenter.requestHomeData();
     }
 
     @Override

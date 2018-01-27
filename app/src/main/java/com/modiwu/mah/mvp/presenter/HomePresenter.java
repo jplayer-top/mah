@@ -1,5 +1,6 @@
 package com.modiwu.mah.mvp.presenter;
 
+import com.modiwu.mah.mvp.constract.HomeContract;
 import com.modiwu.mah.mvp.model.HomeModel;
 import com.modiwu.mah.mvp.model.bean.HomeBean;
 import com.modiwu.mah.ui.Fragment.HomeFragment;
@@ -14,7 +15,7 @@ import top.jplayer.baseprolibrary.mvp.contract.IContract;
  * com.modiwu.mah.mvp.presenter
  */
 
-public class HomePresenter extends BasePresenter<HomeFragment> implements IContract.IPresenter<HomeFragment> {
+public class HomePresenter extends BasePresenter<HomeFragment> implements HomeContract.IHomePresenter {
 
     private final HomeModel mHomeModel;
 
@@ -23,8 +24,8 @@ public class HomePresenter extends BasePresenter<HomeFragment> implements IContr
         mHomeModel = new HomeModel();
     }
 
-
-    public void requestHomeBean() {
+    @Override
+    public void requestHomeData() {
         Disposable disposable = mHomeModel.requestHomeBean().subscribe(new Consumer<HomeBean>() {
             @Override
             public void accept(final HomeBean homeBean) throws Exception {
@@ -44,4 +45,5 @@ public class HomePresenter extends BasePresenter<HomeFragment> implements IContr
         });
         addSubscription(disposable);
     }
+
 }

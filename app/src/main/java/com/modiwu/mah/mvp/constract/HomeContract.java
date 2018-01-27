@@ -10,7 +10,7 @@ import top.jplayer.baseprolibrary.mvp.contract.IContract;
  */
 
 public interface HomeContract {
-    interface HomePresneterextends extends IContract.IPresenter<HomeView> {
+    interface IHomePresenter extends IContract.IPresenter {
         void requestHomeData();
     }
 

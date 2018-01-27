@@ -8,7 +8,7 @@ import io.reactivex.disposables.Disposable;
  * com.modiwu.mah.mvp.constract
  */
 
-public class BasePresenter<T extends IContract.IView> implements IContract.IPresenter<T> {
+public class BasePresenter<T extends IContract.IView> implements IContract.IPresenter {
     public T mIView;
     private CompositeDisposable mCompositeDisposable;
 
