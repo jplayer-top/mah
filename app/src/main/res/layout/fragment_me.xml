@@ -101,6 +101,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:animateLayoutChanges="true"
                 style="@style/me_linearlayout_style"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -139,7 +140,7 @@
                     android:layout_height="?attr/actionBarSize"
                     android:drawableLeft="@drawable/icon_set"
                     android:drawablePadding="@dimen/dp_10"
-                    android:foreground="?selectableItemBackground"
+                    android:background="?selectableItemBackground"
                     android:gravity="center_vertical"
                     android:text="@string/me_set"
                     tools:ignore="RtlHardcoded"/>

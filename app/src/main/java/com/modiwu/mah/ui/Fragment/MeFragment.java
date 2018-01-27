@@ -45,7 +45,8 @@ public class MeFragment extends BaseFragment {
         rootView.findViewById(R.id.tvSet).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getContext(), SampleActivity.class));
+                view.setVisibility(View.GONE);
+//                startActivity(new Intent(getContext(), SampleActivity.class));
             }
         });
     }
