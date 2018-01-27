@@ -1,16 +1,13 @@
 package top.jplayer.baseprolibrary.net;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
 import io.reactivex.functions.Consumer;
-import io.reactivex.internal.util.ArrayListSupplier;
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -31,40 +28,12 @@ import top.jplayer.baseprolibrary.utils.LogUtil;
 
 public class RetrofitManager {
     private static RetrofitManager mRetrofitManager;
-    private Retrofit mRetrofit;
+    private Retrofit defRetrofit;
+    private Retrofit reRetrofit;
 
     private RetrofitManager() {
-        url = BuildConfig.HOST;
+        defRetrofit = client(defBuilder(), BuildConfig.HOST);
     }
-
-    private String url;
-
-
-    public RetrofitManager url(String url) {
-        this.url = url;
-        return this;
-    }
-
-    public RetrofitManager url() {
-        this.url = BuildConfig.HOST;
-        return this;
-    }
-
-
-    public RetrofitManager customIntercepor(Interceptor... interceptors) {
-        this.customInterceptor = true;
-        Observable.fromArray(interceptors)
-                .subscribe(new Consumer<Interceptor>() {
-                    @Override
-                    public void accept(Interceptor interceptor) throws Exception {
-                        if (customInterceptor && interceptor != null) {
-                            getokHttpBuilder().addInterceptor(interceptor);
-                        }
-                    }
-                });
-        return this;
-    }
-
 
     public static synchronized RetrofitManager init() {
 
@@ -74,34 +43,40 @@ public class RetrofitManager {
         return mRetrofitManager;
     }
 
+    public OkHttpClient.Builder reBuilder(Interceptor... interceptors) {
+        final OkHttpClient.Builder builder = defBuilder();
+        Observable.fromArray(interceptors)
+                .subscribe(new Consumer<Interceptor>() {
+                    @Override
+                    public void accept(Interceptor interceptor) throws Exception {
+                        if (interceptor != null) {
+                            builder.addInterceptor(interceptor);
+                        }
+                    }
+                });
+        return builder;
+    }
+
     /**
-     * 默认调用方式
+     * 重置Url,添加拦截器
      */
-    public RetrofitManager build() {
-        mRetrofitManager.client().newBuild();
+    public RetrofitManager reset(String url, Interceptor... interceptors) {
+        reRetrofit = mRetrofitManager.client(reBuilder(interceptors), url);
         return this;
     }
 
-    /**
-     * 默认create ApiServer
-     */
-    public <T> T create(Class<T> reqServer) {
-        return build().createReq(reqServer);
-    }
-
-    /**
-     * 重置Url
-     */
-    public RetrofitManager urlBuild(String url) {
-        mRetrofitManager.url(url).client().newBuild();
-        return this;
-    }
-
-    /**
-     * 再这里添加你需要添加的拦截器
-     */
-    private void addCustomInterceptor(OkHttpClient.Builder builder) {
-        builder.addInterceptor(new JsonRefixInterceptor());
+    private Retrofit client(OkHttpClient.Builder builder, String url) {
+        OkHttpClient reClient = builder.connectTimeout(30L, TimeUnit.SECONDS)
+                .readTimeout(30L, TimeUnit.SECONDS)
+                .writeTimeout(30L, TimeUnit.SECONDS)
+                .retryOnConnectionFailure(true)
+                .build();
+        return new Retrofit.Builder()
+                .baseUrl(url)
+                .addConverterFactory(GsonConverterFactory.create(GsonUtils.setGsonFilter()))
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .client(reClient)
+                .build();
     }
 
     /**
@@ -155,23 +130,10 @@ public class RetrofitManager {
         return LoginInterceptor;
     }
 
-    private boolean customInterceptor = false;
-    private OkHttpClient defClient;
-
-    public RetrofitManager client() {
-        OkHttpClient.Builder builder = getokHttpBuilder();
-        defClient = builder.connectTimeout(30L, TimeUnit.SECONDS)
-                .readTimeout(30L, TimeUnit.SECONDS)
-                .writeTimeout(30L, TimeUnit.SECONDS)
-                .retryOnConnectionFailure(true)
-                .build();
-        return this;
-    }
-
     @NonNull
-    private OkHttpClient.Builder getokHttpBuilder() {
-        HttpLoggingInterceptor LoginInterceptor = addHttpLoggingInterceptor();
+    private OkHttpClient.Builder defBuilder() {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
+        HttpLoggingInterceptor LoginInterceptor = addHttpLoggingInterceptor();
         builder.addInterceptor(addQueryParameterInterceptor())
                 .addInterceptor(addHeaderInterceptor());
 
@@ -182,20 +144,12 @@ public class RetrofitManager {
         return builder;
     }
 
-
-    public RetrofitManager newBuild() {
-        mRetrofit = new Retrofit.Builder()
-                .baseUrl(url)
-                .addConverterFactory(GsonConverterFactory.create(GsonUtils.setGsonFilter()))
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .client(defClient)
-                .build();
-        return this;
+    public <T> T create(Class<T> reqServer) throws NullPointerException {
+        return defRetrofit.create(reqServer);
     }
 
-
-    public <T> T createReq(Class<T> reqServer) throws NullPointerException {
-        return mRetrofit.create(reqServer);
+    public <T> T reCreate(Class<T> reqServer) throws NullPointerException {
+        return reRetrofit.create(reqServer);
     }
 
 }

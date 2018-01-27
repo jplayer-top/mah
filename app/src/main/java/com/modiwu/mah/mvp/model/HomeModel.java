@@ -19,7 +19,6 @@ import top.jplayer.baseprolibrary.net.RetrofitManager;
 public class HomeModel {
     public Observable<HomeBean> requestHomeBean() {
         return RetrofitManager.init()
-                .build()
                 .create(MahServer.class)
                 .getHomeBean()
 //                .compose(new IoMainSchedule<HomeBean>())

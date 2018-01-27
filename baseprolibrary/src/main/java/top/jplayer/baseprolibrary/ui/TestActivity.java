@@ -82,36 +82,6 @@ public class TestActivity extends SuperBaseActivity {
 
     @Override
     public void initSuperData(FrameLayout mFlRootView) {
-        RetrofitManager.init().url("https://m.leader001.cn/").create(ApiService.class)
-                .getSampleBean("{\"information\":\"bd_web_api\",\"command\":\"redhallwill\",\"platform\":\"html\"," +
-                        "\"version\":\"5.2.30\",\"productName\":\"lzcp\"}", "1514383490705", "Zepto1514383490533")
-                .compose(new IoMainSchedule<SampleBean>())
-                .subscribe(new SampleObserver<SampleBean>() {
-                    @Override
-                    public void onNext(SampleBean o) {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        LogUtil.e(e.getMessage() + "1---");
-                    }
-                });
-        RetrofitManager.init().url("https://dev.xiaoyi99.com/").create(ApiService.class)
-                .getLoginBean("18366108542", "123456")
-                .compose(new IoMainSchedule<LoginBean>())
-                .subscribe(new SampleObserver<LoginBean>() {
-                    @Override
-                    public void onNext(LoginBean o) {
-                        LogUtil.e(o.imtoken);
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        LogUtil.e(e.getMessage());
-                    }
-                });
-        //        content = findViewById(R.id.iv);
         // 让根布局进行动画
         content.post(new Runnable() {
             @Override
