@@ -1,29 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/splashBg"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorBlackGold">
+    android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/iv_logo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="80dp"
-        android:src="@mipmap/ic_launcher_round"/>
+    <RelativeLayout
+        android:id="@+id/splashBg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorBlackGold">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/iv_logo"
-        android:layout_centerHorizontal="true"
-        android:layout_gravity="center"
-        android:layout_marginTop="@dimen/dp_40"
-        android:text="@string/solagon"
-        android:textColor="@color/solagon"
-        android:textSize="24sp"/>
+        <ImageView
+            android:id="@+id/iv_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="80dp"
+            android:src="@mipmap/ic_launcher_round"/>
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/iv_logo"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/dp_40"
+            android:text="@string/solagon"
+            android:textColor="@color/solagon"
+            android:textSize="24sp"/>
+    </RelativeLayout>
 
 
-</RelativeLayout>
+</LinearLayout>

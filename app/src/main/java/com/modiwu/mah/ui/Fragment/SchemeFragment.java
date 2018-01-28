@@ -9,6 +9,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.modiwu.mah.R;
 import com.modiwu.mah.base.BaseFragment;
 import com.modiwu.mah.ui.activity.SchemeDetailActivity;
+import com.modiwu.mah.ui.activity.SchemeSearchActivity;
 import com.modiwu.mah.ui.adapter.SchemeAdapter;
 
 import java.util.ArrayList;
@@ -47,6 +48,14 @@ public class SchemeFragment extends BaseFragment {
             public boolean onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
                 startActivity(new Intent(getContext(), SchemeDetailActivity.class));
                 return false;
+            }
+        });
+        ivBarSearch = rootView.findViewById(R.id.ivBarSearch);
+        ivBarSearch.setVisibility(View.VISIBLE);
+        ivBarSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), SchemeSearchActivity.class));
             }
         });
     }

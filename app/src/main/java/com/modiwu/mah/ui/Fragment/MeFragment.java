@@ -3,6 +3,7 @@ package com.modiwu.mah.ui.Fragment;
 import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -26,6 +27,10 @@ import top.jplayer.baseprolibrary.utils.LogUtil;
  */
 
 public class MeFragment extends BaseFragment {
+
+    private TextView tvSet;
+    private ImageView ivMeAvatar;
+
     @Override
     public int initLayout() {
         return R.layout.fragment_me;
@@ -35,18 +40,22 @@ public class MeFragment extends BaseFragment {
     protected void initData(View rootView) {
         super.initData(rootView);
         tvBarTitle.setText("我的");
-        ImageView ivMeAvatar = rootView.findViewById(R.id.ivMeAvatar);
+        findView(rootView);
         Glide.with(getContext()).load(R.drawable.home_toshop).apply(RequestOptions.circleCropTransform()).into
                 (ivMeAvatar);
     }
 
+    private void findView(View rootView) {
+        ivMeAvatar = rootView.findViewById(R.id.ivMeAvatar);
+        tvSet = rootView.findViewById(R.id.tvSet);
+    }
+
     @Override
     protected void onShowFragment() {
-        rootView.findViewById(R.id.tvSet).setOnClickListener(new View.OnClickListener() {
+        tvSet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 view.setVisibility(View.GONE);
-//                startActivity(new Intent(getContext(), SampleActivity.class));
             }
         });
     }

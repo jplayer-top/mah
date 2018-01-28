@@ -4,7 +4,8 @@ import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.view.View;
-import android.widget.RelativeLayout;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.modiwu.mah.R;
 import com.modiwu.mah.base.BaseSpecialActivity;
@@ -25,15 +26,18 @@ public class SchemeDetailActivity extends BaseSpecialActivity {
         return R.layout.activity_scheme_detail;
     }
 
-    private RelativeLayout rlSchemeDetailBottom;
+    private LinearLayout llSchemeDetailBottom;
 
     @Override
     public void initBaseData() {
         findToolBarView(mBaseView);
+        tvBarTitle.setText("方案详情");
         customBarLeft();
         TabLayout tabLayout = mBaseView.findViewById(R.id.tabLayout);
         ViewPager viewPager = mBaseView.findViewById(R.id.viewPager);
-        rlSchemeDetailBottom = mBaseView.findViewById(R.id.rlSchemeDetailBottom);
+        llSchemeDetailBottom = mBaseView.findViewById(R.id.rlSchemeDetailBottom);
+        TextView tvToBuy = mBaseView.findViewById(R.id.tvToBuy);
+        TextView tvToCard = mBaseView.findViewById(R.id.tvToCard);
         tabLayout.setTabMode(TabLayout.MODE_FIXED);
         tabLayout.setupWithViewPager(viewPager);
         ArrayList<String> strings = new ArrayList<>();
@@ -49,9 +53,9 @@ public class SchemeDetailActivity extends BaseSpecialActivity {
             public void onTabSelected(TabLayout.Tab tab) {
                 LogUtil.e("onTabSelected" + tab.getPosition());
                 if (tab.getPosition() == 3 || tab.getPosition() == 4) {
-                    rlSchemeDetailBottom.setVisibility(View.GONE);
+                    llSchemeDetailBottom.setVisibility(View.GONE);
                 } else
-                    rlSchemeDetailBottom.setVisibility(View.VISIBLE);
+                    llSchemeDetailBottom.setVisibility(View.VISIBLE);
             }
 
             @Override
@@ -65,12 +69,10 @@ public class SchemeDetailActivity extends BaseSpecialActivity {
                 LogUtil.e("onTabReselected" + tab.getPosition());
             }
         });
-        tvBarTitle.setText("方案详情");
-        ivBarSearch.setVisibility(View.VISIBLE);
-        ivBarSearch.setOnClickListener(new View.OnClickListener() {
+        tvToCard.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                startActivity(new Intent(mBaseActivity, SchemeSearchActivity.class));
+            public void onClick(View view) {
+                startActivity(new Intent(mBaseActivity, ShopCartActivity.class));
             }
         });
     }

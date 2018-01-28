@@ -4,8 +4,5 @@
               android:layout_height="match_parent"
               android:orientation="vertical">
 
-    <include layout="@layout/layout_title_toolbar"/>
-
-
     <include layout="@layout/layout_refresh_muti_recyclerview"/>
 </LinearLayout>

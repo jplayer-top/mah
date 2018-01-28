@@ -18,19 +18,25 @@
             <intent-filter>
                 <action
                     android:name="android.intent.action.MAIN"/>
+
                 <category android:name="android.intent.category.DEFAULT"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
         <activity
-            android:theme="@style/OblAppTheme.Main"
             android:name=".MainActivity"
             android:launchMode="singleInstance"
             android:screenOrientation="portrait"
+            android:theme="@style/OblAppTheme.Main"
             android:windowSoftInputMode="stateHidden|adjustResize">
         </activity>
         <activity
             android:name=".ui.activity.SchemeDetailActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".ui.activity.ShopCartActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait">
         </activity>

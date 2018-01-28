@@ -45,4 +45,5 @@
     <string name="me_card_shop">购物车</string>
     <string name="me_local">收货地址</string>
     <string name="me_set">设置</string>
+    <string name="add_shop">加入购物车</string>
 </resources>
