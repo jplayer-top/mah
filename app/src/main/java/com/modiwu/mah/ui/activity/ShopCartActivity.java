@@ -13,6 +13,7 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import java.util.ArrayList;
 import java.util.List;
 
+import top.jplayer.baseprolibrary.utils.LogUtil;
 import top.jplayer.baseprolibrary.widgets.MultipleStatusView;
 
 /**
@@ -44,5 +45,6 @@ public class ShopCartActivity extends BaseCommonActivity {
         mRecyclerView.setAdapter(new ShopCartAdapter(list));
         ShopCartDaoUtil daoUtil = new ShopCartDaoUtil(this);
         daoUtil.insertShopCart(new ShopCartBean(null, "sss", "ss2", "12", "1", "sadsd"));
+        LogUtil.e(daoUtil.queryAllbean());
     }
 }
