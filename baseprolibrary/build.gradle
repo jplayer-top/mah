@@ -70,6 +70,7 @@ dependencies {
     api rootProject.ext.networkLibs
     //RX
     api rootProject.ext.rxJavaLibs
+
     //RecyclerView Help
     api rootProject.ext.baserecyclerviewadapterhelper
     //辅助库(包含：刷新，glide,沉浸式bar,动画库)

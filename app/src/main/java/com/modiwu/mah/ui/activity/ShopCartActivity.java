@@ -5,6 +5,8 @@ import android.support.v7.widget.RecyclerView;
 
 import com.modiwu.mah.R;
 import com.modiwu.mah.base.BaseCommonActivity;
+import com.modiwu.mah.greendao.ShopCartDaoUtil;
+import com.modiwu.mah.mvp.model.bean.ShopCartBean;
 import com.modiwu.mah.ui.adapter.ShopCartAdapter;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
@@ -40,5 +42,7 @@ public class ShopCartActivity extends BaseCommonActivity {
         list.add("1");
         list.add("1");
         mRecyclerView.setAdapter(new ShopCartAdapter(list));
+        ShopCartDaoUtil daoUtil = new ShopCartDaoUtil(this);
+        daoUtil.insertShopCart(new ShopCartBean(null, "sss", "ss2", "12", "1", "sadsd"));
     }
 }

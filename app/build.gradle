@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-
+apply plugin: 'org.greenrobot.greendao'
 android {
     compileSdkVersion 26
     defaultConfig {
@@ -18,6 +18,12 @@ android {
     }
 }
 
+greendao {
+    schemaVersion 1
+    daoPackage 'com.modiwu.mah.gen'
+    targetGenDir 'src/main/java'
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
@@ -26,4 +32,6 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:2.2.2'
     implementation rootProject.ext.supportLibs
     implementation project(':baseprolibrary')
+    //greenDao
+    implementation rootProject.ext.greendao
 }

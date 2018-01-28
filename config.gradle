@@ -58,6 +58,7 @@ ext {
     smartrefresh = 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.4-7'
     //特殊头部，看情况添加
     smartrefresh_heard = 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.4-7'
+    greendao =  'org.greenrobot:greendao:3.2.2'
 
     glide = "com.github.bumptech.glide:glide:$dependVersion.glideSdkVersion"
     glideCompiler = "com.github.bumptech.glide:compiler:$dependVersion.glideSdkVersion"
