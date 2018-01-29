@@ -29,7 +29,7 @@ public class SamplePresenter extends BasePresenter<SampleActivity> implements Sa
         Disposable disposable = sampleModel.requestHBList()
                 .map(sampleBean -> {
                     if (TextUtils.equals("0000", sampleBean.errorCode)) {
-                        if (sampleBean.data != null) {
+                        if (sampleBean.data != null && sampleBean.data.list != null && sampleBean.data.list.size() > 0) {
                             return sampleBean;
                         } else return null;
                     }
