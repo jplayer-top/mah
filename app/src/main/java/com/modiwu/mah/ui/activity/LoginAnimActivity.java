@@ -12,17 +12,20 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.github.florent37.viewanimator.AnimationListener;
 import com.github.florent37.viewanimator.ViewAnimator;
 import com.modiwu.mah.R;
+import com.modiwu.mah.base.BaseApplication;
 import com.modiwu.mah.base.BaseSpecialActivity;
 import com.modiwu.mah.mvp.constract.LoginAnimContract;
+import com.modiwu.mah.mvp.model.event.TokenEvent;
 import com.modiwu.mah.mvp.presenter.LoginPresenter;
 import com.modiwu.mah.utils.EditTextUtils;
 import com.modiwu.mah.utils.StringUtils;
 import com.tencent.mm.opensdk.modelmsg.SendAuth;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
+
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.Calendar;
 import java.util.HashMap;
@@ -425,20 +428,20 @@ public class LoginAnimActivity extends BaseSpecialActivity implements TextWatche
 
     private String token;
 
-//    @Subscribe
-//    public void checkWxLogin(TokenEvent event) {
-//        token = event.token;
-//        mBtLogin.setEnabled(false);
-//        llAgreement.setVisibility(View.VISIBLE);
-//        mTvSetType.setText("绑定微信");
-//        mBtRegister1.setText("完成绑定");
-//        mBtFinishRegister.setText("完成注册");
-//        mLlWxBindIssue.setVisibility(View.VISIBLE);
-//        mLlSetNick.setVisibility(View.VISIBLE);
-//        mViewGone.setVisibility(View.VISIBLE);
-//        disLogin(0);
-//        showRegister(0);
-//    }
+    @Subscribe
+    public void checkWxLogin(TokenEvent event) {
+        token = event.token;
+        mBtLogin.setEnabled(false);
+        llAgreement.setVisibility(View.VISIBLE);
+        mTvSetType.setText("绑定微信");
+        mBtRegister1.setText("完成绑定");
+        mBtFinishRegister.setText("完成注册");
+        mLlWxBindIssue.setVisibility(View.VISIBLE);
+        mLlSetNick.setVisibility(View.VISIBLE);
+        mViewGone.setVisibility(View.VISIBLE);
+        disLogin(0);
+        showRegister(0);
+    }
 
     private void backClickAnim() {
         if ("重置密码".equals(mBtFinishRegister.getText()) && mLlShowRegister.getVisibility() == View.VISIBLE) {
@@ -457,6 +460,39 @@ public class LoginAnimActivity extends BaseSpecialActivity implements TextWatche
         disRegister();
     }
 
+    /**
+     * 提示两次退出程序
+     */
+    private int curClick = 0;
+    protected boolean isDoubleBack = false;
+
+    /**
+     * 系统返回按键
+     */
+    @Override
+    public void onBackPressed() {
+        if (mDisMain.getVisibility() != View.VISIBLE) {
+            backClickAnim();
+        } else {
+            isDoubleBack = true;
+            checkBack();
+        }
+    }
+
+    private void checkBack() {
+        curClick++;
+        BaseApplication.getMainThreadHandler().postDelayed(() -> curClick = 0, 1000);
+        if (curClick == 1) {
+            if (!isDoubleBack) {
+                curClick = 0;
+                finish();
+            } else
+                ToastUtils.init().showQuickToast(this, "再按一次退出应用");
+        }
+        if (curClick == 2) {
+            finish();
+        }
+    }
 
     /**
      * 下一步
@@ -464,18 +500,8 @@ public class LoginAnimActivity extends BaseSpecialActivity implements TextWatche
     public void goNext() {
         ViewAnimator.animate(llNextBtn).translationX(0, -llNextBtn.getWidth()).duration(500)
                 .andAnimate(llFinishRegister).translationX(llNextBtn.getWidth(), 0).duration(500)
-                .onStart(new AnimationListener.Start() {
-                    @Override
-                    public void onStart() {
-                        llFinishRegister.setVisibility(View.VISIBLE);
-                    }
-                })
-                .onStop(new AnimationListener.Stop() {
-                    @Override
-                    public void onStop() {
-                        llNextBtn.setVisibility(View.INVISIBLE);
-                    }
-                }).start();
+                .onStart(() -> llFinishRegister.setVisibility(View.VISIBLE))
+                .onStop(() -> llNextBtn.setVisibility(View.INVISIBLE)).start();
     }
 
 
@@ -484,20 +510,12 @@ public class LoginAnimActivity extends BaseSpecialActivity implements TextWatche
      */
     private void disRegister() {
         ViewAnimator.animate(mLlShowRegister).dp().translationY(0, 100).duration(250).alpha(1f, 0f)
-                .onStop(new AnimationListener.Stop() {
-                    @Override
-                    public void onStop() {
-                        mLlShowRegister.setVisibility(View.INVISIBLE);
-                    }
-                })
+                .onStop(() -> mLlShowRegister.setVisibility(View.INVISIBLE))
                 .thenAnimate(llNextBtn).translationX(-llNextBtn.getWidth(), 0).duration(0)
                 .thenAnimate(llFinishRegister).translationX(llNextBtn.getWidth(), 0).duration(500)
-                .onStop(new AnimationListener.Stop() {
-                    @Override
-                    public void onStop() {
-                        llNextBtn.setVisibility(View.VISIBLE);
-                        llFinishRegister.setVisibility(View.INVISIBLE);
-                    }
+                .onStop(() -> {
+                    llNextBtn.setVisibility(View.VISIBLE);
+                    llFinishRegister.setVisibility(View.INVISIBLE);
                 }).start();
     }
 
@@ -505,24 +523,17 @@ public class LoginAnimActivity extends BaseSpecialActivity implements TextWatche
      * 隐藏登录页
      */
     private void disLogin(int dur) {
-        ViewAnimator.animate(mLlShowLogin).translationY(0, 50).alpha(1.0f, 0f).duration(dur).onStop(new AnimationListener.Stop() {
-            @Override
-            public void onStop() {
-                mLlShowLogin.setVisibility(View.INVISIBLE);
-            }
-        }).start();
+        ViewAnimator.animate(mLlShowLogin).translationY(0, 50).alpha(1.0f, 0f).duration(dur)
+                .onStop(() -> mLlShowLogin.setVisibility(View.INVISIBLE)).start();
     }
 
     /**
      * 隐藏登录页
      */
     private void disLoginShowRes() {
-        ViewAnimator.animate(mLlShowLogin).translationY(0, 50).alpha(1.0f, 0f).duration(250).onStop(new AnimationListener.Stop() {
-            @Override
-            public void onStop() {
-                if (clickView == 1) {
-                    mLlShowLogin.setVisibility(View.INVISIBLE);
-                }
+        ViewAnimator.animate(mLlShowLogin).translationY(0, 50).alpha(1.0f, 0f).duration(250).onStop(() -> {
+            if (clickView == 1) {
+                mLlShowLogin.setVisibility(View.INVISIBLE);
             }
         }).start();
     }
@@ -532,36 +543,23 @@ public class LoginAnimActivity extends BaseSpecialActivity implements TextWatche
      */
     private void showRegister(int dur) {
         ViewAnimator.animate(mLlShowRegister).dp().translationY(100, 0).duration(dur).alpha(0f, 1f)
-                .onStart(new AnimationListener.Start() {
-                    @Override
-                    public void onStart() {
-                        mLlShowRegister.setVisibility(View.VISIBLE);
-                    }
-                }).start();
+                .onStart(() -> mLlShowRegister.setVisibility(View.VISIBLE)).start();
     }
 
     /**
      * 显示主页
      */
     private void showMain() {
-        ViewAnimator.animate(mDisMain).dp().translationY(100, 0).alpha(0f, 1f).duration(500).onStart(new AnimationListener.Start() {
-            @Override
-            public void onStart() {
-                mDisMain.setVisibility(View.VISIBLE);
-            }
-        }).start();
+        ViewAnimator.animate(mDisMain).dp().translationY(100, 0).alpha(0f, 1f).duration(500)
+                .onStart(() -> mDisMain.setVisibility(View.VISIBLE)).start();
     }
 
     /**
      * 隐藏初始界面
      */
     private void disMain() {
-        ViewAnimator.animate(mDisMain).dp().translationY(0, 50).alpha(1f, 0f).duration(150).onStop(new AnimationListener.Stop() {
-            @Override
-            public void onStop() {
-                mDisMain.setVisibility(View.INVISIBLE);
-            }
-        }).start();
+        ViewAnimator.animate(mDisMain).dp().translationY(0, 50).alpha(1f, 0f).duration(150)
+                .onStop(() -> mDisMain.setVisibility(View.INVISIBLE)).start();
     }
 
     /**
@@ -590,23 +588,13 @@ public class LoginAnimActivity extends BaseSpecialActivity implements TextWatche
      */
     private void showLogin() {
         ViewAnimator.animate(mLlShowLogin).dp().translationY(50, 0).duration(500).alpha(0f, 1f)
-                .onStart(new AnimationListener.Start() {
-                    @Override
-                    public void onStart() {
-                        mLlShowLogin.setVisibility(View.VISIBLE);
-                    }
-                })
+                .onStart(() -> mLlShowLogin.setVisibility(View.VISIBLE))
                 .start();
     }
 
     private void showBack() {
         ViewAnimator.animate(mLlShowBack).translationX(-100, 0).alpha(0f, 1f).duration(500)
-                .onStart(new AnimationListener.Start() {
-                    @Override
-                    public void onStart() {
-                        mLlShowBack.setVisibility(View.VISIBLE);
-                    }
-                })
+                .onStart(() -> mLlShowBack.setVisibility(View.VISIBLE))
                 .start();
     }
 
