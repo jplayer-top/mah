@@ -1,5 +1,7 @@
 package top.jplayer.baseprolibrary.mvp.presenter;
 
+import android.text.TextUtils;
+
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import top.jplayer.baseprolibrary.mvp.contract.BasePresenter;
@@ -24,17 +26,36 @@ public class SamplePresenter extends BasePresenter<SampleActivity> implements Sa
 
     @Override
     public void requestHBList() {
-        Disposable disposable = sampleModel.requestHBList().subscribe(new Consumer<SampleBean>() {
-            @Override
-            public void accept(SampleBean sampleBean) throws Exception {
-                LogUtil.e(sampleBean.errorCode);
-            }
-        }, new Consumer<Throwable>() {
-            @Override
-            public void accept(Throwable throwable) throws Exception {
+        Disposable disposable = sampleModel.requestHBList()
+                .map(sampleBean -> {
+                    if (TextUtils.equals("000", sampleBean.errorCode)) {
+                        if (sampleBean.data != null) {
+                            return sampleBean;
+                        } else return null;
+                    }
+                    return null;
+                })
+                .subscribe(sampleBean ->
+                        mIView.setHBList(sampleBean), throwable -> {
 
+                });
+        addSubscription(disposable);
+    }
+
+    @Override
+    public void requestGrad(String id, String userNo) {
+        sampleModel.requestGrad(id, userNo).subscribe(gradBean ->
+        {
+            if (TextUtils.equals("000", gradBean.errorCode)) {
+                requestGet(id, userNo);
+                requestGet(id, userNo);
             }
         });
-        addSubscription(disposable);
+    }
+
+    @Override
+    public void requestGet(String id, String userNo) {
+        sampleModel.requestGet(id, userNo);
+        sampleModel.requestGet(id, userNo);
     }
 }
