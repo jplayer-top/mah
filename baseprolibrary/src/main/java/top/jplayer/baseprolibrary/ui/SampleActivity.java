@@ -15,6 +15,7 @@ import top.jplayer.baseprolibrary.mvp.contract.SampleContract;
 import top.jplayer.baseprolibrary.mvp.model.bean.SampleBean;
 import top.jplayer.baseprolibrary.mvp.presenter.SamplePresenter;
 import top.jplayer.baseprolibrary.ui.adapter.SampleAdapter;
+import top.jplayer.baseprolibrary.widgets.MultipleStatusView;
 
 /**
  * Created by Administrator on 2018/1/27.
@@ -26,13 +27,16 @@ public class SampleActivity extends SuperBaseActivity implements SampleContract.
     private SamplePresenter presenter;
     private SampleAdapter adapter;
     private SmartRefreshLayout refreshLayout;
+    private MultipleStatusView multipleStatusView;
 
     @Override
     public void initSuperData(FrameLayout mFlRootView) {
         mFlRootView.addView(View.inflate(this, R.layout.activity_sample, null));
         presenter = new SamplePresenter(this);
-        presenter.requestHBList();
         refreshLayout = mFlRootView.findViewById(R.id.smartRefreshLayout);
+        multipleStatusView = mFlRootView.findViewById(R.id.multiplestatusview);
+        showLoading();
+        presenter.requestHBList();
         RecyclerView recyclerView = mFlRootView.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         ArrayList<SampleBean.DataBean.ListBean> sampleBeans = new ArrayList<>();
@@ -52,6 +56,7 @@ public class SampleActivity extends SuperBaseActivity implements SampleContract.
 
     @Override
     public void setHBList(SampleBean sampleBean) {
+        multipleStatusView.showContent();
         SampleBean.DataBean data = sampleBean.data;
         refreshLayout.finishRefresh();
         adapter.setNewData(data.list);
@@ -67,17 +72,17 @@ public class SampleActivity extends SuperBaseActivity implements SampleContract.
 
     @Override
     public void showError() {
-
+        multipleStatusView.showError();
     }
 
     @Override
     public void showLoading() {
-
+        multipleStatusView.showLoading();
     }
 
     @Override
     public void showEmpty() {
-
+        multipleStatusView.showEmpty();
     }
 
 

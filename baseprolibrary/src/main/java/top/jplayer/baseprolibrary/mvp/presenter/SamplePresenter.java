@@ -36,9 +36,12 @@ public class SamplePresenter extends BasePresenter<SampleActivity> implements Sa
                     return null;
                 })
                 .subscribe(sampleBean ->
-                        mIView.setHBList(sampleBean), throwable -> {
-
-                });
+                {
+                    mIView.setHBList(sampleBean);
+                    if (sampleBean == null) {
+                        mIView.showEmpty();
+                    }
+                }, throwable -> mIView.showError());
         addSubscription(disposable);
     }
 
