@@ -1,25 +1,13 @@
 package com.modiwu.mah.ui.Fragment;
 
-import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.google.gson.Gson;
 import com.modiwu.mah.R;
 import com.modiwu.mah.base.BaseFragment;
-
-import io.reactivex.functions.Function;
-import top.jplayer.baseprolibrary.mvp.model.bean.SampleBean;
-import top.jplayer.baseprolibrary.net.ApiService;
-import top.jplayer.baseprolibrary.net.IoMainSchedule;
-import top.jplayer.baseprolibrary.net.JsonRefixInterceptor;
-import top.jplayer.baseprolibrary.net.RetrofitManager;
-import top.jplayer.baseprolibrary.net.SampleObserver;
-import top.jplayer.baseprolibrary.ui.SampleActivity;
-import top.jplayer.baseprolibrary.utils.LogUtil;
 
 /**
  * Created by Obl on 2018/1/19.
@@ -50,13 +38,9 @@ public class MeFragment extends BaseFragment {
         tvSet = rootView.findViewById(R.id.tvSet);
     }
 
+
     @Override
     protected void onShowFragment() {
-        tvSet.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                view.setVisibility(View.GONE);
-            }
-        });
+        tvSet.setOnClickListener(view -> view.setVisibility(View.GONE));
     }
 }

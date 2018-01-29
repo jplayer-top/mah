@@ -2,13 +2,10 @@ package com.modiwu.mah.mvp.presenter;
 
 import com.modiwu.mah.mvp.constract.HomeContract;
 import com.modiwu.mah.mvp.model.HomeModel;
-import com.modiwu.mah.mvp.model.bean.HomeBean;
 import com.modiwu.mah.ui.Fragment.HomeFragment;
 
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
 import top.jplayer.baseprolibrary.mvp.contract.BasePresenter;
-import top.jplayer.baseprolibrary.mvp.contract.IContract;
 
 /**
  * Created by Obl on 2018/1/25.
@@ -26,23 +23,15 @@ public class HomePresenter extends BasePresenter<HomeFragment> implements HomeCo
 
     @Override
     public void requestHomeData() {
-        Disposable disposable = mHomeModel.requestHomeBean().subscribe(new Consumer<HomeBean>() {
-            @Override
-            public void accept(final HomeBean homeBean) throws Exception {
-                if (homeBean == null) {
-                    mIView.showEmpty();
-                } else {
-                    mIView.smartRefreshLayout.finishRefresh(true);
-                    mIView.mMultipleStatusView.showContent();
-                    mIView.setHomeData(homeBean);
-                }
+        Disposable disposable = mHomeModel.requestHomeBean().subscribe(homeBean -> {
+            if (homeBean == null) {
+                mIView.showEmpty();
+            } else {
+                mIView.smartRefreshLayout.finishRefresh(true);
+                mIView.mMultipleStatusView.showContent();
+                mIView.setHomeData(homeBean);
             }
-        }, new Consumer<Throwable>() {
-            @Override
-            public void accept(Throwable throwable) throws Exception {
-                mIView.showError();
-            }
-        });
+        }, throwable -> mIView.showError());
         addSubscription(disposable);
     }
 

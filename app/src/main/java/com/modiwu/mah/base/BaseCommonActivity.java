@@ -5,7 +5,11 @@ import android.support.annotation.LayoutRes;
 import android.view.View;
 import android.widget.FrameLayout;
 
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+
+import top.jplayer.baseprolibrary.mvp.contract.IContract;
 import top.jplayer.baseprolibrary.ui.SuperBaseActivity;
+import top.jplayer.baseprolibrary.widgets.MultipleStatusView;
 
 
 /**
@@ -14,8 +18,11 @@ import top.jplayer.baseprolibrary.ui.SuperBaseActivity;
  */
 
 @SuppressLint("Registered")
-public abstract class BaseCommonActivity extends SuperBaseActivity {
+public abstract class BaseCommonActivity extends SuperBaseActivity implements IContract.IView {
     public View mBaseView;
+    public MultipleStatusView mMultipleStatusView;
+    public SmartRefreshLayout smartRefreshLayout;
+
     @Override
     public void initSuperData(FrameLayout mFlRootView) {
         mBaseActivity = this;
@@ -33,4 +40,31 @@ public abstract class BaseCommonActivity extends SuperBaseActivity {
     int setBaseLayout();
 
     public abstract void initBaseData();
+
+    @Override
+    public void showError() {
+        if (mMultipleStatusView != null) {
+            mMultipleStatusView.showError();
+        }
+        if (smartRefreshLayout != null && smartRefreshLayout.isRefreshing()) {
+            smartRefreshLayout.finishRefresh();
+        }
+    }
+
+    @Override
+    public void showLoading() {
+        if (mMultipleStatusView != null) {
+            mMultipleStatusView.showLoading();
+        }
+    }
+
+    @Override
+    public void showEmpty() {
+        if (mMultipleStatusView != null) {
+            mMultipleStatusView.showEmpty();
+        }
+        if (smartRefreshLayout != null && smartRefreshLayout.isRefreshing()) {
+            smartRefreshLayout.finishRefresh();
+        }
+    }
 }

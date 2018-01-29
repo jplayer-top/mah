@@ -1,6 +1,5 @@
 package com.modiwu.mah;
 
-import android.os.SystemClock;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.widget.FrameLayout;
@@ -15,11 +14,7 @@ import devlight.io.library.ntb.NavigationTabBar;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
-import io.reactivex.functions.Function;
-import io.reactivex.schedulers.Schedulers;
-import io.reactivex.schedulers.TestScheduler;
 import top.jplayer.baseprolibrary.listener.NetNavigationBarListener;
-import top.jplayer.baseprolibrary.utils.LogUtil;
 import top.jplayer.baseprolibrary.utils.ToastUtils;
 
 public class MainActivity extends BaseSpecialActivity {

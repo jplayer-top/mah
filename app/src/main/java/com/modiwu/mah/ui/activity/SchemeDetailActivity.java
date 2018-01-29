@@ -19,7 +19,6 @@ import top.jplayer.baseprolibrary.utils.LogUtil;
  * Created by Obl on 2018/1/23.
  * com.modiwu.mah.ui.activity
  */
-
 public class SchemeDetailActivity extends BaseSpecialActivity {
     @Override
     public int setBaseLayout() {
@@ -69,11 +68,9 @@ public class SchemeDetailActivity extends BaseSpecialActivity {
                 LogUtil.e("onTabReselected" + tab.getPosition());
             }
         });
-        tvToCard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(mBaseActivity, ShopCartActivity.class));
-            }
+        tvToCard.setOnClickListener(view -> {
+            startActivity(new Intent(mBaseActivity, ShopCartActivity.class));
         });
     }
+
 }

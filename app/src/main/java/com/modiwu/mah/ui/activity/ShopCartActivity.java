@@ -5,25 +5,23 @@ import android.support.v7.widget.RecyclerView;
 
 import com.modiwu.mah.R;
 import com.modiwu.mah.base.BaseCommonActivity;
-import com.modiwu.mah.greendao.ShopCartDaoUtil;
+import com.modiwu.mah.mvp.constract.ShopCartContract;
 import com.modiwu.mah.mvp.model.bean.ShopCartBean;
+import com.modiwu.mah.mvp.presenter.ShopCartPresenter;
 import com.modiwu.mah.ui.adapter.ShopCartAdapter;
-import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import top.jplayer.baseprolibrary.utils.LogUtil;
-import top.jplayer.baseprolibrary.widgets.MultipleStatusView;
 
 /**
  * Created by Administrator on 2018/1/28.
+ * 购物车
  */
 
-public class ShopCartActivity extends BaseCommonActivity {
+public class ShopCartActivity extends BaseCommonActivity implements ShopCartContract.IShopCartView {
     protected RecyclerView mRecyclerView;
-    protected MultipleStatusView multipleStatusView;
-    protected SmartRefreshLayout smartRefreshLayout;
+
+    private ShopCartAdapter mAdapter;
+    private ShopCartPresenter mPresenter;
 
     @Override
     public int setBaseLayout() {
@@ -33,18 +31,30 @@ public class ShopCartActivity extends BaseCommonActivity {
     @Override
     public void initBaseData() {
         findToolBarView(mBaseView);
-        multipleStatusView = mBaseView.findViewById(R.id.multiplestatusview);
+        mMultipleStatusView = mBaseView.findViewById(R.id.multiplestatusview);
         smartRefreshLayout = mBaseView.findViewById(R.id.smartRefreshLayout);
         mRecyclerView = mBaseView.findViewById(R.id.recyclerView);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        List<String> list = new ArrayList<>();
-        list.add("1");
-        list.add("1");
-        list.add("1");
-        list.add("1");
-        mRecyclerView.setAdapter(new ShopCartAdapter(list));
-        ShopCartDaoUtil daoUtil = new ShopCartDaoUtil(this);
-        daoUtil.insertShopCart(new ShopCartBean(null, "sss", "ss2", "12", "1", "sadsd"));
-        LogUtil.e(daoUtil.queryAllbean());
+        mPresenter = new ShopCartPresenter(this);
+        showLoading();
+        mPresenter.requestShopCartData();
+        smartRefreshLayout.setOnRefreshListener(refresh -> mPresenter.requestShopCartData());
+        mAdapter = new ShopCartAdapter(null);
+        mRecyclerView.setAdapter(mAdapter);
+    }
+
+    @Override
+    public void setShopCartData(List<ShopCartBean> shopCartBeans) {
+        mAdapter.setNewData(shopCartBeans);
+    }
+
+    @Override
+    public void delOneData() {
+
+    }
+
+    @Override
+    public void upDataBean() {
+
     }
 }

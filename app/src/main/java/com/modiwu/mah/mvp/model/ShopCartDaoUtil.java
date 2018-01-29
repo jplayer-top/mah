@@ -1,16 +1,15 @@
-package com.modiwu.mah.greendao;
+package com.modiwu.mah.mvp.model;
 
 import android.content.Context;
 import android.util.Log;
 
 import com.modiwu.mah.gen.ShopCartBeanDao;
+import com.modiwu.mah.greendao.DaoManager;
 import com.modiwu.mah.mvp.model.bean.ShopCartBean;
 
 import org.greenrobot.greendao.query.QueryBuilder;
 
 import java.util.List;
-
-import io.reactivex.Observable;
 
 /**
  * Created by Administrator on 2018/1/28.
@@ -61,6 +60,7 @@ public class ShopCartDaoUtil {
 
     /**
      * 修改一条数据
+     *
      * @return
      */
     public boolean updatebean(ShopCartBean bean) {
