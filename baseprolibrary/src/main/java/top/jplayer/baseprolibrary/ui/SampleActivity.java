@@ -72,17 +72,28 @@ public class SampleActivity extends SuperBaseActivity implements SampleContract.
 
     @Override
     public void showError() {
-        multipleStatusView.showError();
+
+        if (multipleStatusView != null) {
+            multipleStatusView.showError();
+        }
+        refreshLayout.finishRefresh();
     }
 
     @Override
     public void showLoading() {
-        multipleStatusView.showLoading();
+        if (multipleStatusView != null) {
+            multipleStatusView.showLoading();
+        }
     }
 
     @Override
     public void showEmpty() {
-        multipleStatusView.showEmpty();
+
+        if (multipleStatusView != null) {
+            multipleStatusView.showEmpty();
+        }
+        refreshLayout.finishRefresh();
+
     }
 
 

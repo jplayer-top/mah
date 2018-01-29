@@ -28,7 +28,7 @@ public class SamplePresenter extends BasePresenter<SampleActivity> implements Sa
     public void requestHBList() {
         Disposable disposable = sampleModel.requestHBList()
                 .map(sampleBean -> {
-                    if (TextUtils.equals("000", sampleBean.errorCode)) {
+                    if (TextUtils.equals("0000", sampleBean.errorCode)) {
                         if (sampleBean.data != null) {
                             return sampleBean;
                         } else return null;
@@ -37,10 +37,10 @@ public class SamplePresenter extends BasePresenter<SampleActivity> implements Sa
                 })
                 .subscribe(sampleBean ->
                 {
-                    mIView.setHBList(sampleBean);
                     if (sampleBean == null) {
                         mIView.showEmpty();
-                    }
+                    } else
+                        mIView.setHBList(sampleBean);
                 }, throwable -> mIView.showError());
         addSubscription(disposable);
     }
@@ -49,7 +49,7 @@ public class SamplePresenter extends BasePresenter<SampleActivity> implements Sa
     public void requestGrad(String id, String userNo) {
         sampleModel.requestGrad(id, userNo).subscribe(gradBean ->
         {
-            if (TextUtils.equals("000", gradBean.errorCode)) {
+            if (TextUtils.equals("0000", gradBean.errorCode)) {
                 requestGet(id, userNo);
                 requestGet(id, userNo);
             }
