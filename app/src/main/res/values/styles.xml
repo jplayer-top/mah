@@ -34,5 +34,9 @@
         <item name="android:adjustViewBounds">true</item>
         <item name="android:contentDescription">@string/app_name</item>
     </style>
-
+    <style name="margin_30dp_1px_h_view">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1px</item>
+        <item name="android:background">#cecece</item>
+    </style>
 </resources>

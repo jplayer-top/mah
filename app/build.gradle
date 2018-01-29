@@ -39,6 +39,10 @@ dependencies {
     implementation project(':baseprolibrary')
     //greenDao
     implementation rootProject.ext.greendao
-    api 'com.jakewharton:butterknife:8.4.0'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
+    api 'com.jakewharton:butterknife:8.5.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
+    //事件总线
+    implementation 'org.greenrobot:eventbus:3.0.0'
+    //微信登录
+    implementation 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:1.1.6'
 }

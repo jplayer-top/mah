@@ -70,17 +70,20 @@
         android:divider="@drawable/shape_divider"
         android:orientation="vertical"
         android:showDividers="middle"
-        android:visibility="gone">
+        android:visibility="invisible">
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="@dimen/generalHeight"
             android:background="@null"
             android:hint="@string/input_phone"
+            android:inputType="phone"
             android:textColor="@color/white"
             android:textColorHint="@color/grey"/>
 
         <EditText
+            android:inputType="textPassword"
+            android:digits="@string/digits"
             android:layout_width="match_parent"
             android:layout_height="@dimen/generalHeight"
             android:background="@null"
@@ -164,7 +167,7 @@
         android:divider="@drawable/shape_divider"
         android:orientation="vertical"
         android:showDividers="middle"
-        android:visibility="gone">
+        android:visibility="invisible">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -177,6 +180,7 @@
                 android:layout_weight="1"
                 android:background="@null"
                 android:hint="@string/input_phone"
+                android:inputType="phone"
                 android:textColor="@color/white"
                 android:textColorHint="@color/grey"/>
 
@@ -192,6 +196,8 @@
         </LinearLayout>
 
         <EditText
+            android:inputType="text"
+            android:digits="@string/digits"
             android:layout_width="match_parent"
             android:layout_height="@dimen/generalHeight"
             android:background="@null"
@@ -219,9 +225,11 @@
         android:divider="@drawable/shape_divider"
         android:orientation="vertical"
         android:showDividers="middle"
-        android:visibility="gone">
+        android:visibility="invisible">
 
         <EditText
+            android:inputType="textPassword"
+            android:digits="@string/digits"
             android:layout_width="match_parent"
             android:layout_height="@dimen/generalHeight"
             android:background="@null"
@@ -230,6 +238,8 @@
             android:textColorHint="@color/grey"/>
 
         <EditText
+            android:inputType="textPassword"
+            android:digits="@string/digits"
             android:layout_width="match_parent"
             android:layout_height="@dimen/generalHeight"
             android:background="@null"

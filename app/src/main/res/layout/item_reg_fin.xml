@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/llBeforeBtn"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:visibility="invisible"
+    tools:showIn="@layout/item_show_register">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dimen_20dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <View
+            android:layout_width="@dimen/dimen_75dp"
+            android:layout_height="1px"
+            android:layout_gravity="center_vertical"
+            android:background="@color/grey"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dimen_15dp"
+            android:layout_marginRight="@dimen/dimen_15dp"
+            android:text="设置密码"
+            android:textColor="@color/grey"
+            android:textSize="@dimen/dimen_15sp"/>
+
+        <View
+            android:layout_width="@dimen/dimen_75dp"
+            android:layout_height="1px"
+            android:layout_gravity="center_vertical"
+            android:background="@color/grey"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llSetNick"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_46dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/et_nick"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:hint="@string/input_nick"
+            android:textColor="#b3ffffff"
+            android:textColorHint="#b3ffffff"
+            android:textSize="@dimen/dimen_15sp"/>
+    </LinearLayout>
+
+    <View
+        android:id="@+id/viewGone"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_1px"
+        android:background="@color/grey"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_46dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/register_pwd"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:digits="@string/digits"
+            android:hint="输入密码"
+            android:inputType="textPassword"
+            android:textColor="#b3ffffff"
+            android:textColorHint="#b3ffffff"
+            android:textSize="@dimen/dimen_15sp"/>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_1px"
+        android:background="@color/grey"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_46dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/et_2code"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:digits="@string/digits"
+            android:hint="请再次输入密码"
+            android:inputType="textPassword"
+            android:textColor="#b3ffffff"
+            android:textColorHint="#b3ffffff"
+            android:textSize="@dimen/dimen_15sp"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_1px"
+        android:background="@color/grey"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom">
+
+        <Button
+            android:id="@+id/bt_finish_register"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_46dp"
+            android:layout_marginBottom="@dimen/dimen_26dp"
+            android:width="0dp"
+            android:background="@color/grey"
+            android:text="@string/register"
+            android:textColor="@color/white"/>
+    </LinearLayout>
+
+</LinearLayout>

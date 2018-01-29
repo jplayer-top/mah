@@ -12,6 +12,7 @@ import top.jplayer.baseprolibrary.utils.Utils;
 
 public class BaseApplication extends Application {
     public static Context AppContext;
+    public final static String APP_ID = "wx406a4ce41fd6f37d";
 
     @Override
     public void onCreate() {

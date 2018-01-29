@@ -27,7 +27,7 @@ public class SplashActivity extends BaseSpecialActivity {
                 .scale(1f, 1.1f)
                 .duration(2000)
                 .onStop(() -> {
-                    startActivity(new Intent(mBaseActivity, LoginActivity.class));
+                    startActivity(new Intent(mBaseActivity, LoginAnimActivity.class));
                     finish();
                 }).start();
     }

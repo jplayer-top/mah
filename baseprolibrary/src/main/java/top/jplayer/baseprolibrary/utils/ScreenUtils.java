@@ -16,6 +16,9 @@ import android.view.Surface;
 import android.view.View;
 import android.view.WindowManager;
 
+import java.lang.ref.WeakReference;
+import java.lang.reflect.Field;
+
 /**
  * <pre>
  *     author: Blankj
@@ -25,6 +28,27 @@ import android.view.WindowManager;
  * </pre>
  */
 public final class ScreenUtils {
+
+
+    public static int getStatusBar(Context context) {
+        WeakReference<Context> contextWeakReference = new WeakReference<Context>(context);
+        context = contextWeakReference.get();
+        Class<?> c = null;
+        Object obj = null;
+        Field field = null;
+        int x = 0, sbar = 0;
+        try {
+            c = Class.forName("com.android.internal.R$dimen");
+            obj = c.newInstance();
+            field = c.getField("status_bar_height");
+            x = Integer.parseInt(field.get(obj).toString());
+            sbar = context.getResources().getDimensionPixelSize(x);
+        } catch (Exception e1) {
+            e1.printStackTrace();
+            return 0;
+        }
+        return sbar;
+    }
 
     private ScreenUtils() {
         throw new UnsupportedOperationException("u can't instantiate me...");

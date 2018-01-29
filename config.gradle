@@ -58,7 +58,9 @@ ext {
     smartrefresh = 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.4-7'
     //特殊头部，看情况添加
     smartrefresh_heard = 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.4-7'
-    greendao =  'org.greenrobot:greendao:3.2.2'
+    greendao = 'org.greenrobot:greendao:3.2.2'
+    //自定义Toast
+    toasty = 'com.github.GrenderG:Toasty:1.1.4'
 
     glide = "com.github.bumptech.glide:glide:$dependVersion.glideSdkVersion"
     glideCompiler = "com.github.bumptech.glide:compiler:$dependVersion.glideSdkVersion"
@@ -68,7 +70,7 @@ ext {
     supportLibs = supportDeps.values()
     networkLibs = retrofit.values()
     rxJavaLibs = rxJava.values()
-    otherLibs = [barlibrary, glide, smartrefresh, smartrefresh_heard,viewanimator]
+    otherLibs = [barlibrary, glide, smartrefresh, smartrefresh_heard, viewanimator, toasty]
     annotationProcessorLibs = [glideCompiler]
 
 }

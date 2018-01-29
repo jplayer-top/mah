@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/llShowRegister"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center|bottom"
+    android:orientation="vertical"
+    android:visibility="invisible"
+    android:weightSum="2"
+    tools:showIn="@layout/activity_login_anim">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_weight="1">
+
+
+        <include layout="@layout/item_reg_next"/>
+
+        <include layout="@layout/item_reg_fin"/>
+    </FrameLayout>
+
+</LinearLayout>

@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/llShowInput"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center|bottom"
+    android:orientation="vertical"
+    android:visibility="invisible"
+    android:weightSum="2"
+    tools:showIn="@layout/activity_login_anim">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/dimen_16dp"
+        android:layout_marginLeft="@dimen/dimen_40dp"
+        android:layout_marginRight="@dimen/dimen_40dp"
+        android:layout_weight="1.1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_40dp"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/phone_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:hint="@string/input_phone"
+                    android:inputType="number"
+                    android:maxLength="11"
+                    android:textColor="#b3ffffff"
+                    android:textColorHint="#b3ffffff"
+                    android:textSize="@dimen/dimen_15sp"/>
+
+            </LinearLayout>
+
+            <View style="@style/margin_30dp_1px_h_view"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_40dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/et_pwd"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                    android:hint="@string/input_password"
+                    android:inputType="textPassword"
+                    android:textColor="#b3ffffff"
+                    android:textColorHint="#b3ffffff"
+                    android:textSize="@dimen/dimen_15sp"/>
+
+            </LinearLayout>
+
+            <View style="@style/margin_30dp_1px_h_view"/>
+
+        </LinearLayout>
+
+        <Button
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="@dimen/dimen_110dp"
+            android:id="@+id/bt_login1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_46dp"
+            android:layout_marginTop="@dimen/dimen_40dp"
+            android:background="@color/grey"
+            android:foreground="?android:selectableItemBackground"
+            android:text="@string/login"
+            android:textColor="@drawable/selector_text_press"/>
+
+
+        <LinearLayout
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="@dimen/dimen_80dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_10dp"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/login_register"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/now_login"
+                android:textColor="@drawable/selector_text_33fff_press"
+                android:textSize="@dimen/dimen_14sp"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1px"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:id="@+id/forget"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/forget_password"
+                android:textColor="@drawable/selector_text_33fff_press"
+                android:textSize="@dimen/dimen_14sp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="@dimen/dimen_55dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1px"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:background="@color/grey"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_10dp"
+                android:layout_marginRight="@dimen/dimen_10dp"
+                android:text="@string/quick_login"
+                android:textColor="@color/grey"
+                android:textSize="@dimen/dimen_12sp"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1px"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:background="@color/grey"/>
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/wechat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|bottom"
+            android:src="@drawable/wechat"/>
+    </FrameLayout>
+</LinearLayout>

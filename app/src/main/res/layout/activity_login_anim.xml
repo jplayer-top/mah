@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipChildren="true">
+
+        <ImageView
+            android:id="@+id/ivBG"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@color/colorBlackGold"/>
+
+
+        <LinearLayout
+            android:id="@+id/iv_head_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="108dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center|top"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/ic_launcher_round"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:text="@string/solagon"
+                android:textColor="@color/colorWhite"
+                android:textSize="18sp"/>
+        </LinearLayout>
+
+        <include
+            layout="@layout/item_show_main"
+            android:visibility="visible"/>
+
+        <include
+            layout="@layout/item_show_login"
+            android:visibility="invisible"/>
+
+        <include
+            layout="@layout/item_show_register"
+            android:visibility="invisible"/>
+
+        <LinearLayout
+            android:id="@+id/llBackAnim"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:alpha="0"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/white_arrow"
+                android:text="@string/go_back"
+                android:textColor="@color/white"
+                android:textSize="16sp"/>
+        </LinearLayout>
+    </FrameLayout>
+</LinearLayout>

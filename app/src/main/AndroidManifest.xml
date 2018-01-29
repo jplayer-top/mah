@@ -41,6 +41,11 @@
             android:screenOrientation="portrait">
         </activity>
         <activity
+            android:name=".ui.activity.LoginAnimActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
             android:name=".ui.activity.ShopCartActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait">
