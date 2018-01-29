@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorBlackGold">#313335</color>
+    <color name="colorTran55BlackGold">#55313335</color> <!--透明黑金-->
     <color name="colorBlackGrey">#2B2B2B</color>
     <color name="foreground_material_light">#f2e9e9</color>
 

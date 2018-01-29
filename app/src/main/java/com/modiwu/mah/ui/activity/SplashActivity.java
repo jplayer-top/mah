@@ -3,9 +3,7 @@ package com.modiwu.mah.ui.activity;
 import android.content.Intent;
 import android.view.View;
 
-import com.github.florent37.viewanimator.AnimationListener;
 import com.github.florent37.viewanimator.ViewAnimator;
-import com.modiwu.mah.MainActivity;
 import com.modiwu.mah.R;
 import com.modiwu.mah.base.BaseSpecialActivity;
 
@@ -28,12 +26,9 @@ public class SplashActivity extends BaseSpecialActivity {
                 .alpha(1, 0.8f)
                 .scale(1f, 1.1f)
                 .duration(2000)
-                .onStop(new AnimationListener.Stop() {
-                    @Override
-                    public void onStop() {
-                        startActivity(new Intent(mBaseActivity, MainActivity.class));
-                        finish();
-                    }
+                .onStop(() -> {
+                    startActivity(new Intent(mBaseActivity, LoginActivity.class));
+                    finish();
                 }).start();
     }
 }

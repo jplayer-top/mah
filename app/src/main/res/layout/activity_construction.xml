@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <ImageView
+        style="@style/img_adjust_bounds"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/pic_04"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="免邮配送 上门安装"
+        android:textSize="@dimen/sp_18"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp_10"
+        android:lineSpacingExtra="@dimen/dp_4"
+        android:text="造作的小件产品将通过快递公司为您送达，除新疆、西藏、青海三省外，全国包邮；对于大件家具，造作可在全国166个城市（含北上广深）共528个区县区域内支持免费“送货上门及组装”服务（具体商品请见商品详情页或洽造作服务热线），528个区县以外的区域，我们支持免费送货，您可根据我们的组装说明书自行组装。
+注：造作快递包邮服务范围以快递公司服务网点正常配送区域为主，物流包邮服务范围以物流公司服务网点正常配送区域为准，超出配送区域的，造作将为您免费发至最近的服务网点，由您自行提货"/>
+</LinearLayout>

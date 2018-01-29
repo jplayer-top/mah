@@ -36,6 +36,11 @@
             android:screenOrientation="portrait">
         </activity>
         <activity
+            android:name=".ui.activity.LoginActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
             android:name=".ui.activity.ShopCartActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait">
@@ -47,6 +52,11 @@
         </activity>
         <activity
             android:name=".ui.activity.HouseSampleActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".ui.activity.ConstructionActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait">
         </activity>

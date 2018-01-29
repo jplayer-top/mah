@@ -7,4 +7,7 @@
     <dimen name="sp_18">18sp</dimen>
     <dimen name="me_pic_avator">60dp</dimen>
     <dimen name="divider_padding">15dp</dimen>
+    <dimen name="magin_30">30dp</dimen>
+    <dimen name="dp_20">20dp</dimen>
+
 </resources>

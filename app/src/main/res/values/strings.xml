@@ -46,4 +46,14 @@
     <string name="me_local">收货地址</string>
     <string name="me_set">设置</string>
     <string name="add_shop">加入购物车</string>
+    <string name="login">登录</string>
+    <string name="register">注册</string>
+    <string name="input_password">请输入您的密码</string>
+    <string name="quick_login">快速登录</string>
+    <string name="forget_password">忘记密码</string>
+    <string name="now_login">立即注册</string>
+    <string name="input_code">请输入您的验证码</string>
+    <string name="get_code">获取验证码</string>
+    <string name="input_password_next">请再次输入您的密码</string>
+    <string name="next">下一步</string>
 </resources>
