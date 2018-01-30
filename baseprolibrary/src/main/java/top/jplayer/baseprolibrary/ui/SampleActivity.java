@@ -81,7 +81,9 @@ public class SampleActivity extends SuperBaseActivity implements SampleContract.
 
     private void getNames() {
         String names = (String) SharePreUtil.getData(this, "name", "");
+        String userNos = (String) SharePreUtil.getData(this, "userNo", "");
         LogUtil.e(names);
+        LogUtil.e(userNos);
         if (!TextUtils.equals("", names)) {
             assert names != null;
             Observable.fromIterable(Arrays.asList(names.split(",")))
