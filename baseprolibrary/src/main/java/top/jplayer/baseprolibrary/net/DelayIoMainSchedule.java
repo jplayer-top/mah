@@ -1,22 +1,20 @@
 package top.jplayer.baseprolibrary.net;
 
+import java.util.Date;
+
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
-import io.reactivex.ObservableTransformer;
-import io.reactivex.Scheduler;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by Obl on 2018/1/17.
  * top.jplayer.baseprolibrary.net
  */
 
-public class BaseSchedule<T> implements ObservableTransformer<T, T> {
-    Scheduler upSchedule;
-    Scheduler downSchedule;
-
-    BaseSchedule(Scheduler upSchedule, Scheduler downSchedule) {
-        this.upSchedule = upSchedule;
-        this.downSchedule = downSchedule;
+public class DelayIoMainSchedule<T> extends BaseSchedule<T> {
+    public DelayIoMainSchedule() {
+        super(Schedulers.io(), AndroidSchedulers.mainThread());
     }
 
     @Override

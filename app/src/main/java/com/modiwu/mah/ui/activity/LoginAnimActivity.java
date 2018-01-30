@@ -236,8 +236,8 @@ public class LoginAnimActivity extends BaseSpecialActivity implements TextWatche
             .llBackAnim, R.id.forget, R.id.bt_login1, R.id.wechat, R.id.rtn_code, R.id.bt_register1})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.tvDoNotLogin:
-                mPresenter.login();
+            case R.id.tvDoNotLogin://先逛逛看
+                dotoLogin();
                 break;
             case R.id.bt_login://主页登录
                 mBtRegister.setEnabled(false);
@@ -319,6 +319,7 @@ public class LoginAnimActivity extends BaseSpecialActivity implements TextWatche
                     ToastUtils.init().showInfoToast(this, "请输入您的密码");
                     return;
                 }
+                showLoading();
                 mPresenter.login(mPhone, mPassword);
                 break;
             case R.id.wechat://微信登录
@@ -390,6 +391,10 @@ public class LoginAnimActivity extends BaseSpecialActivity implements TextWatche
 
                 break;
         }
+    }
+
+    private void dotoLogin() {
+        super.onBackPressed();
     }
 
     // 检查微信是否安装
@@ -602,16 +607,25 @@ public class LoginAnimActivity extends BaseSpecialActivity implements TextWatche
 
     @Override
     public void showError() {
-
+        dialogDismiss("网络错误");
     }
+
 
     @Override
     public void showLoading() {
-
+        dialogShow(this);
     }
 
     @Override
     public void showEmpty() {
 
     }
+
+    public void showSpecError(String msg) {
+        dialogDismiss(msg);
+    }
+
+
+
+
 }

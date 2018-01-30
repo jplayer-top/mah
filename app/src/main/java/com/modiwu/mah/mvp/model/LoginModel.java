@@ -15,6 +15,8 @@ import top.jplayer.baseprolibrary.net.RetrofitManager;
 public class LoginModel {
 
     public Observable<LoginBean> requestLogin(String phone, String password) {
-        return RetrofitManager.init().create(MahServer.class).getLoginBean(phone, password).compose(new IoMainSchedule<>());
+        return RetrofitManager.init().create(MahServer.class)
+                .getLoginBean(phone, password)
+                .compose(new IoMainSchedule<>());
     }
 }

@@ -1,5 +1,6 @@
 package top.jplayer.baseprolibrary.ui;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
@@ -10,7 +11,14 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
+
+import io.reactivex.Observable;
 import top.jplayer.baseprolibrary.R;
+import top.jplayer.baseprolibrary.net.IoMainSchedule;
+import top.jplayer.baseprolibrary.utils.ToastUtils;
+import top.jplayer.baseprolibrary.widgets.dialog.DialogLoading;
 
 /**
  * Created by Obl on 2018/1/9.
@@ -94,6 +102,32 @@ public abstract class SuperBaseActivity extends AppCompatActivity {
      */
     public void initBundle(Bundle savedInstanceState) {
 
+    }
+
+    public DialogLoading mLoading;
+    private Date mDate;
+    private long mPreTime;
+
+    public void dialogDismiss(String msg) {
+        if (mLoading != null && mLoading.isShowing()) {
+            long aftTime = mDate.getTime();
+            long l = aftTime - mPreTime;
+            Observable.timer(l < 1000 ? 1000 - l : 0, TimeUnit.MILLISECONDS)
+                    .compose(new IoMainSchedule<>())
+                    .subscribe(aLong -> {
+                        mLoading.dismiss();
+                        ToastUtils.init().showErrorToast(this, msg);
+                    });
+        }
+    }
+
+    public void dialogShow(Context context) {
+        mLoading = new DialogLoading(context);
+        if (!mLoading.isShowing()) {
+            mDate = new Date();
+            mLoading.show();
+            mPreTime = mDate.getTime();
+        }
     }
 
     @Override

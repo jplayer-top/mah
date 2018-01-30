@@ -15,7 +15,7 @@ public interface LoginAnimContract {
     interface ILoginAnimPresenter extends IContract.IPresenter {
         void login(String phone, String password);
 
-        void login();
+        void dotoLogin();
 
         void register(Map<String, String> map);
 

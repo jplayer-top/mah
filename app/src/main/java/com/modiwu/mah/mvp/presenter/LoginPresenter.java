@@ -1,6 +1,7 @@
 package com.modiwu.mah.mvp.presenter;
 
 
+import android.text.TextUtils;
 import android.widget.TextView;
 
 import com.modiwu.mah.mvp.constract.LoginAnimContract;
@@ -9,6 +10,7 @@ import com.modiwu.mah.ui.activity.LoginAnimActivity;
 
 import java.util.Map;
 
+import io.reactivex.disposables.Disposable;
 import top.jplayer.baseprolibrary.mvp.contract.BasePresenter;
 
 /**
@@ -27,11 +29,21 @@ public class LoginPresenter extends BasePresenter<LoginAnimActivity> implements 
 
     @Override
     public void login(String phone, String password) {
-        mModel.requestLogin(phone, password).subscribe(loginBean -> mIView.login());
+        Disposable disposable = mModel.requestLogin(phone, password)
+                .subscribe(loginBean -> {
+                            if (TextUtils.equals("000", loginBean.code)) {
+                                mIView.login();
+                            } else {
+                                mIView.showSpecError(loginBean.msg);
+                            }
+                        },
+                        throwable -> mIView.showError());
+        addSubscription(disposable);
+
     }
 
     @Override
-    public void login() {
+    public void dotoLogin() {
 
     }
 

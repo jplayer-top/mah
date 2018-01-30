@@ -3,14 +3,10 @@ package top.jplayer.baseprolibrary.mvp.presenter;
 import android.text.TextUtils;
 
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
 import top.jplayer.baseprolibrary.mvp.contract.BasePresenter;
-import top.jplayer.baseprolibrary.mvp.contract.IContract;
 import top.jplayer.baseprolibrary.mvp.contract.SampleContract;
 import top.jplayer.baseprolibrary.mvp.model.SampleModel;
-import top.jplayer.baseprolibrary.mvp.model.bean.SampleBean;
 import top.jplayer.baseprolibrary.ui.SampleActivity;
-import top.jplayer.baseprolibrary.utils.LogUtil;
 
 /**
  * Created by Administrator on 2018/1/27.
@@ -29,7 +25,7 @@ public class SamplePresenter extends BasePresenter<SampleActivity> implements Sa
         Disposable disposable = sampleModel.requestHBList()
                 .map(sampleBean -> {
                     if (TextUtils.equals("0000", sampleBean.errorCode)) {
-                        if (sampleBean.data != null && sampleBean.data.list != null && sampleBean.data.list.size() > 0) {
+                        if (sampleBean.data != null && sampleBean.data.list != null) {
                             return sampleBean;
                         } else return null;
                     }
@@ -37,7 +33,7 @@ public class SamplePresenter extends BasePresenter<SampleActivity> implements Sa
                 })
                 .subscribe(sampleBean ->
                 {
-                    if (sampleBean == null) {
+                    if (sampleBean.data.list.size() < 1) {
                         mIView.showEmpty();
                     } else
                         mIView.setHBList(sampleBean);

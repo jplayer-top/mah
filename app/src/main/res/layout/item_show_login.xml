@@ -73,23 +73,22 @@
         </LinearLayout>
 
         <Button
-            android:layout_gravity="bottom"
-            android:layout_marginBottom="@dimen/dimen_110dp"
             android:id="@+id/bt_login1"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimen_46dp"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="@dimen/dimen_110dp"
             android:layout_marginTop="@dimen/dimen_40dp"
-            android:background="@color/grey"
-            android:foreground="?android:selectableItemBackground"
+            android:background="@drawable/selector_grey_muti_press"
             android:text="@string/login"
             android:textColor="@drawable/selector_text_press"/>
 
 
         <LinearLayout
-            android:layout_gravity="bottom"
-            android:layout_marginBottom="@dimen/dimen_80dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="@dimen/dimen_80dp"
             android:layout_marginTop="@dimen/dimen_10dp"
             android:gravity="center">
 

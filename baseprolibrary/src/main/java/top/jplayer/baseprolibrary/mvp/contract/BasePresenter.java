@@ -12,11 +12,13 @@ public class BasePresenter<T extends IContract.IView> implements IContract.IPres
     public T mIView;
     private CompositeDisposable mCompositeDisposable;
 
+
     public BasePresenter(T iView) {
         mCompositeDisposable = new CompositeDisposable();
         this.mIView = iView;
-        mIView.showLoading();
     }
+
+
 
     @Override
     public void detachView() {
