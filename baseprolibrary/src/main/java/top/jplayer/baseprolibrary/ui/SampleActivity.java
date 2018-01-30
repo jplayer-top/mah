@@ -18,16 +18,20 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
+import io.reactivex.disposables.Disposable;
 import top.jplayer.baseprolibrary.R;
 import top.jplayer.baseprolibrary.mvp.contract.SampleContract;
 import top.jplayer.baseprolibrary.mvp.model.bean.SampleBean;
 import top.jplayer.baseprolibrary.mvp.presenter.SamplePresenter;
 import top.jplayer.baseprolibrary.net.IoMainSchedule;
 import top.jplayer.baseprolibrary.ui.adapter.SampleAdapter;
+import top.jplayer.baseprolibrary.utils.DateUtils;
 import top.jplayer.baseprolibrary.utils.LogUtil;
 import top.jplayer.baseprolibrary.utils.SharePreUtil;
 import top.jplayer.baseprolibrary.widgets.MultipleStatusView;
@@ -77,6 +81,11 @@ public class SampleActivity extends SuperBaseActivity implements SampleContract.
                         etPassword.getText().toString().trim()));
         llNames = mFlRootView.findViewById(R.id.llShowName);
         getNames();
+        long stamp = DateUtils.dateToStamp("2018-01-30 22:43:00");
+        if (new Date().getTime() - stamp > 0) {
+            Disposable disposable = Observable.interval(10, TimeUnit.MILLISECONDS)
+                    .subscribe(LogUtil::e);
+        }
     }
 
     private void getNames() {

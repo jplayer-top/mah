@@ -13,10 +13,16 @@ public class DateUtils {
     /*
     * 将时间转换为时间戳
     */
-    public static long dateToStamp(String s) throws ParseException {
-        String res;
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
-        Date date = simpleDateFormat.parse(s);
-        return date.getTime();
+    public static long dateToStamp(String s) {
+        try {
+            String res;
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
+            Date date = null;
+            date = simpleDateFormat.parse(s);
+            return date.getTime();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 }
