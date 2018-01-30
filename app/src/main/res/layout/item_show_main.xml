@@ -25,7 +25,7 @@
             android:layout_height="46dp"
             android:layout_marginLeft="40dp"
             android:layout_marginRight="40dp"
-            android:background="@color/grey"
+            android:background="@drawable/selector_grey_muti_press"
             android:text="@string/login"
             android:textColor="@color/white"
             android:textSize="15sp"/>
@@ -38,7 +38,7 @@
             android:layout_marginLeft="40dp"
             android:layout_marginRight="40dp"
             android:layout_marginTop="20dp"
-            android:background="@color/cardview_dark_background"
+            android:background="@drawable/selector_55grey_muti_press"
             android:text="@string/register"
             android:textColor="@color/white"
             android:textSize="15sp"/>

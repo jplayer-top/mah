@@ -1,10 +1,7 @@
 package com.modiwu.mah.ui.Fragment;
 
 import android.content.Intent;
-import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -19,7 +16,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import top.jplayer.baseprolibrary.ui.SampleActivity;
-import top.jplayer.baseprolibrary.ui.TestActivity;
 
 /**
  * Created by Obl on 2018/1/19.
@@ -44,22 +40,16 @@ public class MeFragment extends BaseFragment {
         super.initData(rootView);
         tvBarTitle.setText("我的");
         findView(rootView);
-        Glide.with(getContext()).load(R.drawable.home_toshop).apply(RequestOptions.circleCropTransform()).into
-                (ivMeAvatar);
+        Glide.with(getContext()).load(R.drawable.home_toshop).apply(RequestOptions.circleCropTransform()).into(ivMeAvatar);
     }
 
     private void findView(View rootView) {
         unbinder = ButterKnife.bind(this, rootView);
         ivMeAvatar = rootView.findViewById(R.id.ivMeAvatar);
         tvSet = rootView.findViewById(R.id.tvSet);
+        tvSet.setOnClickListener(view -> startActivity(new Intent(getContext(), SampleActivity.class)));
         llToLogin.setOnClickListener(view -> startActivity(new Intent(getContext(), LoginAnimActivity.class)));
 
-    }
-
-
-    @Override
-    protected void onShowFragment() {
-        tvSet.setOnClickListener(view -> startActivity(new Intent(getContext(), SampleActivity.class)));
     }
 
     @Override

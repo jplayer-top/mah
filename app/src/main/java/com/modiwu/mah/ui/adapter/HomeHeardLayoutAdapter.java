@@ -2,15 +2,16 @@ package com.modiwu.mah.ui.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
+import android.text.TextUtils;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.alibaba.android.vlayout.LayoutHelper;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.modiwu.mah.R;
+import com.modiwu.mah.mvp.model.bean.HomeBean;
 import com.modiwu.mah.ui.activity.HouseSampleActivity;
 
 import java.util.ArrayList;
@@ -18,6 +19,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import cn.bingoogolapple.bgabanner.BGABanner;
+import io.reactivex.Observable;
+import top.jplayer.baseprolibrary.glide.GlideUtils;
 import top.jplayer.baseprolibrary.ui.adapter.VLayoutAdapter;
 
 /**
@@ -27,17 +30,13 @@ import top.jplayer.baseprolibrary.ui.adapter.VLayoutAdapter;
 
 public class HomeHeardLayoutAdapter extends VLayoutAdapter<RecyclerView.ViewHolder> {
 
-    private final List<Integer> mIntegers;
+    private final List<String> mImgUrls;
     private BGABanner mBgaBanner;
+    private List<HomeBean.BannerBean> mBanner;
 
     public HomeHeardLayoutAdapter(Context context, LayoutHelper helper, int count, int itemType) {
         super(context, helper, count, itemType);
-        mIntegers = new ArrayList<>();
-        mIntegers.add(R.drawable.pic_01);
-        mIntegers.add(R.drawable.pic_02);
-        mIntegers.add(R.drawable.pic_03);
-        mIntegers.add(R.drawable.pic_04);
-        mIntegers.add(R.drawable.pic_05);
+        mImgUrls = new ArrayList<>();
     }
 
     @Override
@@ -57,21 +56,24 @@ public class HomeHeardLayoutAdapter extends VLayoutAdapter<RecyclerView.ViewHold
     @Override
     protected void onBindViewHolderWithOffset(RecyclerView.ViewHolder holder, int position, int offsetTotal) {
         mBgaBanner = holder.itemView.findViewById(R.id.bgaBanner);
-        mBgaBanner.setAdapter(new BGABanner.Adapter<ImageView, Integer>() {
-            @Override
-            public void fillBannerItem(BGABanner banner, ImageView itemView, @Nullable Integer model, final int position) {
-                Glide.with(context).load(model).into(itemView);
-                itemView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (position == 0) {
-                            context.startActivity(new Intent(context, HouseSampleActivity.class));
-                        }
-                    }
-                });
-            }
-
+        mBgaBanner.setAdapter((banner, itemView, model, urlPosition) -> {
+            Glide.with(context).load(model)
+                    .apply(GlideUtils.init().options())
+                    .transition(DrawableTransitionOptions.withCrossFade())
+                    .into((ImageView) itemView);
+            itemView.setOnClickListener(v -> {
+                if (TextUtils.equals(mBanner.get(urlPosition).navType, "1")) {
+                    context.startActivity(new Intent(context, HouseSampleActivity.class));
+                }
+            });
         });
-        mBgaBanner.setData(mIntegers, Arrays.asList("", "", "", "", ""));
+        mBgaBanner.setData(mImgUrls, Arrays.asList("", "", "", "", ""));
+    }
+
+    public void setBanner(List<HomeBean.BannerBean> banner) {
+        {
+            mBanner = banner;
+            Observable.fromIterable(mBanner).subscribe(bannerBean -> mImgUrls.add(bannerBean.imgUrl));
+        }
     }
 }

@@ -132,7 +132,7 @@ public class LoginAnimActivity extends BaseSpecialActivity implements TextWatche
         ButterKnife.bind(this, mBaseView);
         mPresenter = new LoginPresenter(this);
         FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) mLlShowBack.getLayoutParams();
-        params.topMargin = ScreenUtils.getStatusBar(this) + SizeUtils.dp2px(5);
+        params.topMargin = ScreenUtils.getStatusBar(this) + SizeUtils.dp2px(2);
 
         mMap = new HashMap<>();
         mLlWxBindIssue.setVisibility(View.INVISIBLE);
@@ -460,11 +460,6 @@ public class LoginAnimActivity extends BaseSpecialActivity implements TextWatche
         disRegister();
     }
 
-    /**
-     * 提示两次退出程序
-     */
-    private int curClick = 0;
-    protected boolean isDoubleBack = false;
 
     /**
      * 系统返回按键
@@ -475,10 +470,16 @@ public class LoginAnimActivity extends BaseSpecialActivity implements TextWatche
             backClickAnim();
         } else {
             isDoubleBack = true;
-            checkBack();
+            super.onBackPressed();
         }
     }
 
+    private int curClick = 0;
+    protected boolean isDoubleBack = false;
+
+    /**
+     * 提示两次退出程序
+     */
     private void checkBack() {
         curClick++;
         BaseApplication.getMainThreadHandler().postDelayed(() -> curClick = 0, 1000);
