@@ -27,4 +27,8 @@ public interface ApiService {
     Observable<GradBean> getGradBean(@Query("parameter") String parameter,
                                      @Query("_") String cur_,
                                      @Query("callback") String callback);
+    @GET("qmch/generalRequest?")
+    Observable<LoginBean> getLoginBean(@Query("parameter") String parameter,
+                                     @Query("_") String cur_,
+                                     @Query("callBackMethod") String callback);
 }

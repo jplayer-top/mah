@@ -18,5 +18,7 @@ public interface SampleContract {
         void requestGrad(String id, String userNo);
 
         void requestGet(String id, String userNo);
+
+        void addAccount(String phone, String password);
     }
 }

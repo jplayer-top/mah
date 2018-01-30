@@ -57,6 +57,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.HomeView 
         mDelegateAdapter = new DelegateAdapter(manager, true);
         smartRefreshLayout.setOnRefreshListener(refresh -> mPresenter.requestHomeData());
         mPresenter = new HomePresenter(this);
+        showLoading();
         mPresenter.requestHomeData();
     }
 

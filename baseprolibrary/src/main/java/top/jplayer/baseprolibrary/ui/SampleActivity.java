@@ -1,20 +1,35 @@
 package top.jplayer.baseprolibrary.ui;
 
+import android.graphics.Color;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
+import io.reactivex.Observable;
 import top.jplayer.baseprolibrary.R;
 import top.jplayer.baseprolibrary.mvp.contract.SampleContract;
 import top.jplayer.baseprolibrary.mvp.model.bean.SampleBean;
 import top.jplayer.baseprolibrary.mvp.presenter.SamplePresenter;
+import top.jplayer.baseprolibrary.net.IoMainSchedule;
 import top.jplayer.baseprolibrary.ui.adapter.SampleAdapter;
+import top.jplayer.baseprolibrary.utils.LogUtil;
+import top.jplayer.baseprolibrary.utils.SharePreUtil;
 import top.jplayer.baseprolibrary.widgets.MultipleStatusView;
 
 /**
@@ -28,6 +43,9 @@ public class SampleActivity extends SuperBaseActivity implements SampleContract.
     private SampleAdapter adapter;
     private SmartRefreshLayout refreshLayout;
     private MultipleStatusView multipleStatusView;
+    private EditText etPhone;
+    private EditText etPassword;
+    private LinearLayout llNames;
 
     @Override
     public void initSuperData(FrameLayout mFlRootView) {
@@ -35,23 +53,61 @@ public class SampleActivity extends SuperBaseActivity implements SampleContract.
         presenter = new SamplePresenter(this);
         refreshLayout = mFlRootView.findViewById(R.id.smartRefreshLayout);
         multipleStatusView = mFlRootView.findViewById(R.id.multiplestatusview);
+        etPhone = mFlRootView.findViewById(R.id.etPhone);
+        etPassword = mFlRootView.findViewById(R.id.etPassword);
+        Button btnAdd = mFlRootView.findViewById(R.id.btnAdd);
         showLoading();
         presenter.requestHBList();
         RecyclerView recyclerView = mFlRootView.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         ArrayList<SampleBean.DataBean.ListBean> sampleBeans = new ArrayList<>();
         adapter = new SampleAdapter(sampleBeans);
         recyclerView.setAdapter(adapter);
-        adapter.setOnItemChildClickListener((adapter1, view, position) ->
+        adapter.setOnItemChildClickListener((thisAdapter, view, position) ->
         {
-            List<SampleBean.DataBean.ListBean> datas = adapter1.getData();
-            for (SampleBean.DataBean.ListBean listBean : datas) {
-                presenter.requestGrad(listBean.id, "2017082407616512");
-                presenter.requestGrad(listBean.id, "2017091307758112");
-            }
+            List<SampleBean.DataBean.ListBean> datas = thisAdapter.getData();
+            SampleBean.DataBean.ListBean listBean = datas.get(position);
+            getUserNo(listBean.id);
             return false;
         });
         refreshLayout.setOnRefreshListener(refresh -> presenter.requestHBList());
+        btnAdd.setOnClickListener(view ->
+                presenter.addAccount(etPhone.getText().toString().trim(),
+                        etPassword.getText().toString().trim()));
+        llNames = mFlRootView.findViewById(R.id.llShowName);
+        getNames();
+    }
+
+    private void getNames() {
+        String names = (String) SharePreUtil.getData(this, "name", "");
+        LogUtil.e(names);
+        if (!TextUtils.equals("", names)) {
+            assert names != null;
+            Observable.fromIterable(Arrays.asList(names.split(",")))
+                    .compose(new IoMainSchedule<>())
+                    .subscribe(s -> {
+                        TextView textView = new TextView(this);
+                        textView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+                        textView.setGravity(Gravity.CENTER);
+                        textView.setText(String.format(Locale.CHINA, "%s-已登录", s));
+                        textView.setTextColor(getResources().getColor(R.color.grey));
+                        llNames.addView(textView);
+                    });
+        }
+    }
+
+    private void getUserNo(String id) {
+        String userNos = (String) SharePreUtil.getData(this, "userNo", "");
+        LogUtil.e(userNos);
+        if (!TextUtils.equals("", userNos)) {
+            assert userNos != null;
+            Observable.fromIterable(Arrays.asList(userNos.split(",")))
+                    .compose(new IoMainSchedule<>())
+                    .subscribe(s ->
+                            presenter.requestGrad(id, s)
+                    );
+        }
     }
 
     @Override
@@ -97,4 +153,8 @@ public class SampleActivity extends SuperBaseActivity implements SampleContract.
     }
 
 
+    public void loginSuccess() {
+        llNames.removeAllViews();
+        getNames();
+    }
 }

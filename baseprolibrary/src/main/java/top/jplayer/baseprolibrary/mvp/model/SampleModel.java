@@ -4,9 +4,11 @@ import android.os.SystemClock;
 
 import java.util.Date;
 import java.util.Locale;
+import java.util.Random;
 
 import io.reactivex.Observable;
 import top.jplayer.baseprolibrary.mvp.model.bean.GradBean;
+import top.jplayer.baseprolibrary.mvp.model.bean.LoginBean;
 import top.jplayer.baseprolibrary.mvp.model.bean.SampleBean;
 import top.jplayer.baseprolibrary.net.ApiService;
 import top.jplayer.baseprolibrary.net.IoMainSchedule;
@@ -40,12 +42,25 @@ public class SampleModel {
     }
 
     public Observable<GradBean> requestGet(String id, String userNo) {
-        LogUtil.e(SystemClock.currentThreadTimeMillis());
+        String time = String.valueOf(new Date().getTime());
         String parameter = String.format(Locale.CHINA,
                 "{\"information\":\"bd_web_api\",\"command\":\"reddetail\",\"userno\":\"%s\",\"id\":\"%s\",\"start\":0,\"size\":50,\"platform\":\"html\",\"version\":\"5.2.30\",\"productName\":\"lzcp\"}", userNo, id);
         return RetrofitManager.init().reset("https://m.leader001.cn/", new JsonRefixInterceptor())
                 .reCreate(ApiService.class)
-                .getGradBean(parameter, "1514383490705", "Zepto1514383490533")
+                .getGradBean(parameter, time, String.format(Locale.CHINA, "Zepto%s", time))
+                .compose(new IoMainSchedule<>());
+    }
+
+    public Observable<LoginBean> login(String phone, String password) {
+        String time = String.valueOf(new Date().getTime());
+
+        int i = new Random().nextInt(900) + 100;
+        String imei = String.valueOf(i);
+        String parameter = String.format(Locale.CHINA,
+                "{\"command\":\"login\",\"requestType\":\"login\",\"userName\":\"%s\",\"password\":\"%s\",\"productName\":\"lzcp\",\"channel\":\"1020025\",\"platform\":\"android\",\"imei\":\"869271010208%s\",\"version\":\"5.2.30\"}", phone, password, imei);
+        return RetrofitManager.init().reset("https://m.leader001.cn/", new JsonRefixInterceptor())
+                .reCreate(ApiService.class)
+                .getLoginBean(parameter, time, String.format(Locale.CHINA, "jQuery111107794920853339136_%s", time))
                 .compose(new IoMainSchedule<>());
     }
 

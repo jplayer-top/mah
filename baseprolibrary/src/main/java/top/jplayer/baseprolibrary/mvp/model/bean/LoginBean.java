@@ -7,21 +7,48 @@ package top.jplayer.baseprolibrary.mvp.model.bean;
 
 public class LoginBean {
 
+
     /**
-     * code : 000
-     * msg : 操作成功
-     * guest : 0
-     * uid : 10466
-     * imtoken : 3VqagKlpCmw+xGaR/kfWeeQHMtZZ/SCBBOqG7u2QqDX5EVwI7HUBTbQ7Ch2sMR7eE1tIvndWHqa1F6W0j4nI4w==
-     * fid : 10002
-     * fname : 小椅太阳系
+     * errorCode : 0000
+     * message : 登录成功
+     * result : {"userName":"17667936541","userNo":"2017082407616512","name":"刘福龙","certId":"370923196408041995","nickName":"红染坊","mobileId":"17667936541","hasPayPwd":"1","accessToken":"da07391e62c194bc673158dc3be534ae","userAccountBean":{"mobileId":"17667936541","hasPayPwd":"1"}}
      */
 
-    public String code;
-    public String msg;
-    public String guest;
-    public int uid;
-    public String imtoken;
-    public int fid;
-    public String fname;
+    public String errorCode;
+    public String message;
+    public ResultBean result;
+
+    public static class ResultBean {
+        /**
+         * userName : 17667936541
+         * userNo : 2017082407616512
+         * name : 刘福龙
+         * certId : 370923196408041995
+         * nickName : 红染坊
+         * mobileId : 17667936541
+         * hasPayPwd : 1
+         * accessToken : da07391e62c194bc673158dc3be534ae
+         * userAccountBean : {"mobileId":"17667936541","hasPayPwd":"1"}
+         */
+
+        public String userName;
+        public String userNo = "";
+        public String name = "";
+        public String certId;
+        public String nickName;
+        public String mobileId;
+        public String hasPayPwd;
+        public String accessToken;
+        public UserAccountBeanBean userAccountBean;
+
+        public static class UserAccountBeanBean {
+            /**
+             * mobileId : 17667936541
+             * hasPayPwd : 1
+             */
+
+            public String mobileId;
+            public String hasPayPwd;
+        }
+    }
 }
