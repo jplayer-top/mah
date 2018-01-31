@@ -15,6 +15,7 @@ import com.modiwu.mah.ui.activity.LoginAnimActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import top.jplayer.baseprolibrary.ui.ContactActivity;
 import top.jplayer.baseprolibrary.ui.SampleActivity;
 
 /**
@@ -28,6 +29,7 @@ public class MeFragment extends BaseFragment {
     LinearLayout llToLogin;
     Unbinder unbinder;
     private TextView tvSet;
+    private TextView tvAbout;
     private ImageView ivMeAvatar;
 
     @Override
@@ -47,7 +49,9 @@ public class MeFragment extends BaseFragment {
         unbinder = ButterKnife.bind(this, rootView);
         ivMeAvatar = rootView.findViewById(R.id.ivMeAvatar);
         tvSet = rootView.findViewById(R.id.tvSet);
+        tvAbout = rootView.findViewById(R.id.tvAbout);
         tvSet.setOnClickListener(view -> startActivity(new Intent(getContext(), SampleActivity.class)));
+        tvAbout.setOnClickListener(view -> startActivity(new Intent(getContext(), ContactActivity.class)));
         llToLogin.setOnClickListener(view -> startActivity(new Intent(getContext(), LoginAnimActivity.class)));
 
     }
