@@ -35,8 +35,8 @@ public class ContactActivity extends SuperBaseActivity {
     }
 
     private void initView() {
-        mSideBarView = findViewById(R.id.side_view);
-        mRecyclerView = findViewById(R.id.recycler_view);
+        mSideBarView = contentView.findViewById(R.id.side_view);
+        mRecyclerView = contentView.findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         final PinnedHeaderDecoration decoration = new PinnedHeaderDecoration();
