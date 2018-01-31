@@ -27,7 +27,7 @@ import top.jplayer.baseprolibrary.widgets.dialog.DialogLoading;
 
 public abstract class SuperBaseActivity extends AppCompatActivity {
 
-    protected View mBaseView;
+    protected View contentView;
     protected Toolbar mToolBar;
     protected ImageView mIvGoBack;
     protected TextView tvBarTitle;
@@ -49,9 +49,9 @@ public abstract class SuperBaseActivity extends AppCompatActivity {
      * @return 根布局
      */
     public View setDefView() {
-        mBaseView = View.inflate(this, R.layout.activity_super_base, null);
-        initDefSuperView(mBaseView);
-        return mBaseView;
+        contentView = View.inflate(this, R.layout.activity_super_base, null);
+        initDefSuperView(contentView);
+        return contentView;
     }
 
 
@@ -69,9 +69,9 @@ public abstract class SuperBaseActivity extends AppCompatActivity {
     }
 
     public void findToolBarView(View rootView) {
-        mIvGoBack = mBaseView.findViewById(R.id.ivGoBack);
-        tvBarTitle = mBaseView.findViewById(R.id.tvBarTitle);
-        ivBarSearch = mBaseView.findViewById(R.id.ivBarSearch);
+        mIvGoBack = contentView.findViewById(R.id.ivGoBack);
+        tvBarTitle = contentView.findViewById(R.id.tvBarTitle);
+        ivBarSearch = contentView.findViewById(R.id.ivBarSearch);
     }
 
 

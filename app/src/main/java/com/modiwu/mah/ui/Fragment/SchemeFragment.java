@@ -5,7 +5,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.modiwu.mah.R;
 import com.modiwu.mah.base.BaseFragment;
 import com.modiwu.mah.ui.activity.SchemeDetailActivity;
@@ -43,20 +42,12 @@ public class SchemeFragment extends BaseFragment {
         SchemeAdapter adapter = new SchemeAdapter(list);
         mRecyclerView.setAdapter(adapter);
         tvBarTitle.setText("方案");
-        adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
-            @Override
-            public boolean onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-                startActivity(new Intent(getContext(), SchemeDetailActivity.class));
-                return false;
-            }
+        adapter.setOnItemChildClickListener((adapter1, view, position) -> {
+            startActivity(new Intent(getContext(), SchemeDetailActivity.class));
+            return false;
         });
         ivBarSearch = rootView.findViewById(R.id.ivBarSearch);
         ivBarSearch.setVisibility(View.VISIBLE);
-        ivBarSearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getContext(), SchemeSearchActivity.class));
-            }
-        });
+        ivBarSearch.setOnClickListener(v -> startActivity(new Intent(getContext(), SchemeSearchActivity.class)));
     }
 }

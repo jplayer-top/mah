@@ -18,9 +18,9 @@ public abstract class BaseSpecialActivity extends SuperBaseActivity {
     @Override
     public View setDefView() {
         mBaseActivity = this;
-        mBaseView = View.inflate(this, setBaseLayout(), null);
+        contentView = View.inflate(this, setBaseLayout(), null);
         initBaseData();
-        return mBaseView;
+        return contentView;
     }
 
     public abstract @LayoutRes

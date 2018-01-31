@@ -28,8 +28,8 @@ public class MainActivity extends BaseSpecialActivity {
 
     @Override
     public void initBaseData() {
-        final NavigationTabBar navigationTabBar = mBaseView.findViewById(R.id.ntb);
-        mFlFragment = mBaseView.findViewById(R.id.flFragment);
+        final NavigationTabBar navigationTabBar = contentView.findViewById(R.id.ntb);
+        mFlFragment = contentView.findViewById(R.id.flFragment);
         bottomBar(navigationTabBar);
     }
 

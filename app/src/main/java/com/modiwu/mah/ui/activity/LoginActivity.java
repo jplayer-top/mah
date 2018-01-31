@@ -55,7 +55,7 @@ public class LoginActivity extends BaseSpecialActivity {
 
     @Override
     public void initBaseData() {
-        ButterKnife.bind(this, mBaseView);
+        ButterKnife.bind(this, contentView);
         mBtnToLogin.setOnClickListener(v -> animNextSelect(mLlToLogin, mLlToSelect));
         mBtnToRegister.setOnClickListener(v -> animNextSelect(mLlToNext, mLlToSelect));
         mBtnNext.setOnClickListener(v -> animNextSelect(mLlFinishRegister, mLlToNext));

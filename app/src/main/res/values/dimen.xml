@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="mainNavigationBarHeight">55dp</dimen>
-    <dimen name="generalHeight">46dp</dimen>
+    <dimen name="generalHeight">50dp</dimen>
     <dimen name="lineSpacingExtra_3">3dp</dimen>
     <dimen name="dp_10">10dp</dimen>
     <dimen name="sp_18">18sp</dimen>

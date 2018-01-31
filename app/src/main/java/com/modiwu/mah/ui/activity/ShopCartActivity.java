@@ -30,10 +30,10 @@ public class ShopCartActivity extends BaseCommonActivity implements ShopCartCont
 
     @Override
     public void initBaseData() {
-        findToolBarView(mBaseView);
-        mMultipleStatusView = mBaseView.findViewById(R.id.multiplestatusview);
-        smartRefreshLayout = mBaseView.findViewById(R.id.smartRefreshLayout);
-        mRecyclerView = mBaseView.findViewById(R.id.recyclerView);
+        findToolBarView(addRootView);
+        mMultipleStatusView = addRootView.findViewById(R.id.multiplestatusview);
+        smartRefreshLayout = addRootView.findViewById(R.id.smartRefreshLayout);
+        mRecyclerView = addRootView.findViewById(R.id.recyclerView);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         mPresenter = new ShopCartPresenter(this);
         showLoading();

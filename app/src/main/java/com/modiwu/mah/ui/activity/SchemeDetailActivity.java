@@ -29,14 +29,14 @@ public class SchemeDetailActivity extends BaseSpecialActivity {
 
     @Override
     public void initBaseData() {
-        findToolBarView(mBaseView);
+        findToolBarView(contentView);
         tvBarTitle.setText("方案详情");
         customBarLeft();
-        TabLayout tabLayout = mBaseView.findViewById(R.id.tabLayout);
-        ViewPager viewPager = mBaseView.findViewById(R.id.viewPager);
-        llSchemeDetailBottom = mBaseView.findViewById(R.id.rlSchemeDetailBottom);
-        TextView tvToBuy = mBaseView.findViewById(R.id.tvToBuy);
-        TextView tvToCard = mBaseView.findViewById(R.id.tvToCard);
+        TabLayout tabLayout = contentView.findViewById(R.id.tabLayout);
+        ViewPager viewPager = contentView.findViewById(R.id.viewPager);
+        llSchemeDetailBottom = contentView.findViewById(R.id.rlSchemeDetailBottom);
+        TextView tvToBuy = contentView.findViewById(R.id.tvToBuy);
+        TextView tvToCard = contentView.findViewById(R.id.tvToCard);
         tabLayout.setTabMode(TabLayout.MODE_FIXED);
         tabLayout.setupWithViewPager(viewPager);
         ArrayList<String> strings = new ArrayList<>();

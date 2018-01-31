@@ -134,7 +134,7 @@ public class LoginAnimActivity extends BaseSpecialActivity implements TextWatche
 
     @Override
     public void initBaseData() {
-        ButterKnife.bind(this, mBaseView);
+        ButterKnife.bind(this, contentView);
         mPresenter = new LoginPresenter(this);
         FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) mLlShowBack.getLayoutParams();
         params.topMargin = ScreenUtils.getStatusBar(this) + SizeUtils.dp2px(2);

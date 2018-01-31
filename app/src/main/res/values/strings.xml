@@ -61,4 +61,8 @@
     <string name="input_nick">请输入昵称</string>
     <string name="anl_phone">验证手机号码</string>
     <string name="donologin"><![CDATA[<<先逛逛看]]></string>
+    <string name="select_local">地区选择</string>
+    <string name="select_floor">楼盘选择</string>
+    <string name="select_type">户型选择</string>
+    <string name="select_style">风格选择</string>
 </resources>

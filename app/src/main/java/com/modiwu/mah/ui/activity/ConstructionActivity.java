@@ -20,7 +20,7 @@ public class ConstructionActivity extends BaseCommonActivity {
 
     @Override
     public void initBaseData() {
-        findToolBarView(mBaseView);
+        findToolBarView(addRootView);
         tvBarTitle.setText("施工标准");
         ivBarSearch.setVisibility(View.VISIBLE);
         ivBarSearch.setImageResource(R.drawable.main_me);

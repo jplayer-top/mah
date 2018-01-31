@@ -1,8 +1,10 @@
 package com.modiwu.mah.mvp;
 
 
+import com.modiwu.mah.mvp.model.bean.FloorBean;
 import com.modiwu.mah.mvp.model.bean.HomeBean;
 import com.modiwu.mah.mvp.model.bean.LoginBean;
+import com.modiwu.mah.mvp.model.bean.SelectBean;
 
 import java.util.Map;
 
@@ -26,6 +28,16 @@ public interface MahServer {
 
     @POST("user/smcode?")
     Observable<LoginBean> getSmsBean(@QueryMap() Map<String, String> map);
+
     @POST("user/verfiysmcode?")
     Observable<LoginBean> verfiyCode(@Query("phone") String phone, @Query("smCode") String password);
+
+    @GET("select/style")
+    Observable<SelectBean> getStyleSelectBean();
+
+    @GET("select/hxtype")
+    Observable<SelectBean> getTypeSelectBean();
+
+    @GET("select/building/select")
+    Observable<FloorBean> getFloorSelectBean();
 }

@@ -30,7 +30,7 @@ public class WXEntryActivity extends BaseSpecialActivity implements IWXAPIEventH
     public void initBaseData() {
         IWXAPI wxapi = WXAPIFactory.createWXAPI(this, APP_ID, false);
         wxapi.handleIntent(getIntent(), this);
-        mBaseView.setAlpha(0);
+        contentView.setAlpha(0);
 
     }
 

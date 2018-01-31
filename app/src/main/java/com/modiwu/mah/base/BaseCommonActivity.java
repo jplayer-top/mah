@@ -2,6 +2,7 @@ package com.modiwu.mah.base;
 
 import android.annotation.SuppressLint;
 import android.support.annotation.LayoutRes;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 
@@ -19,7 +20,7 @@ import top.jplayer.baseprolibrary.widgets.MultipleStatusView;
 
 @SuppressLint("Registered")
 public abstract class BaseCommonActivity extends SuperBaseActivity implements IContract.IView {
-    public View mBaseView;
+    public View addRootView;
     public MultipleStatusView mMultipleStatusView;
     public SmartRefreshLayout smartRefreshLayout;
 
@@ -27,13 +28,13 @@ public abstract class BaseCommonActivity extends SuperBaseActivity implements IC
     public void initSuperData(FrameLayout mFlRootView) {
         mBaseActivity = this;
         mFlRootView.removeAllViews();
-        mFlRootView.addView(setBaseInflate());
+        mFlRootView.addView(setBaseInflate(mFlRootView));
         initBaseData();
     }
 
-    private View setBaseInflate() {
-        mBaseView = View.inflate(this, setBaseLayout(), null);
-        return mBaseView;
+    private View setBaseInflate(FrameLayout mFlRootView) {
+        addRootView = LayoutInflater.from(this).inflate(setBaseLayout(), mFlRootView, false);
+        return addRootView;
     }
 
     public abstract @LayoutRes
