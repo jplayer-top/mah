@@ -59,12 +59,31 @@ public class LoginPresenter extends BasePresenter<LoginAnimActivity> implements 
 
     @Override
     public void smsCode(Map<String, String> map, TextView mRtnCode) {
-
+        Disposable disposable = mModel.requestSms(map)
+                .subscribe(baseBean -> {
+                            if (TextUtils.equals("000", baseBean.code)) {
+                                mIView.smsSend(mRtnCode);
+                            } else {
+                                mIView.showSpecError(baseBean.msg);
+                            }
+                        },
+                        throwable -> mIView.showError());
+        addSubscription(disposable);
     }
 
     @Override
     public void verfiyCode(String phone, String smCode) {
-
+        Disposable disposable = mModel.requestVerfiyCode(phone, smCode)
+                .subscribe(baseBean -> {
+                            if (TextUtils.equals("000", baseBean.code)) {
+                                mIView.goNext();
+                                mIView.showSpecError("");
+                            } else {
+                                mIView.showSpecError(baseBean.msg);
+                            }
+                        },
+                        throwable -> mIView.showError());
+        addSubscription(disposable);
     }
 
     @Override

@@ -1,7 +1,6 @@
 package top.jplayer.baseprolibrary.net;
 
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
@@ -101,17 +100,15 @@ public class RetrofitManager {
      * 设置公共参数
      */
     private Interceptor addQueryParameterInterceptor() {
-        return new Interceptor() {
-            @Override
-            public Response intercept(@NonNull Chain chain) throws IOException {
-                Request request = chain.request();
-                HttpUrl.Builder builder = request.url().newBuilder();
-                HttpUrl httpUrl = builder
-                        .addQueryParameter("version", "5.2.3")
-                        .build();
-                Request build = request.newBuilder().url(httpUrl).build();
-                return chain.proceed(build);
-            }
+        return chain -> {
+            Request request = chain.request();
+            HttpUrl.Builder builder = request.url().newBuilder();
+            HttpUrl httpUrl = builder
+                    .addQueryParameter("version", "5.2.3")
+                    .addQueryParameter("source", "app_android")
+                    .build();
+            Request build = request.newBuilder().url(httpUrl).build();
+            return chain.proceed(build);
         };
     }
 

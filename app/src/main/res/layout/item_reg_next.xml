@@ -87,9 +87,9 @@
             android:layout_width="wrap_content"
             android:layout_height="@dimen/dimen_40dp"
             android:layout_gravity="bottom"
-            android:background="@color/colorTran55BlackGold"
+            android:background="@drawable/shape_black_glod"
             android:text="@string/get_code"
-            android:textColor="#22ffffff"
+            android:textColor="@drawable/selector_text_33fff_press"
             android:textSize="@dimen/dimen_10sp"/>
     </LinearLayout>
 

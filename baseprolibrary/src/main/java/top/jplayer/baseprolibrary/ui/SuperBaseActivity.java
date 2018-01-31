@@ -116,7 +116,9 @@ public abstract class SuperBaseActivity extends AppCompatActivity {
                     .compose(new IoMainSchedule<>())
                     .subscribe(aLong -> {
                         mLoading.dismiss();
-                        ToastUtils.init().showErrorToast(this, msg);
+                        if (!msg.equals("")) {
+                            ToastUtils.init().showInfoToast(this, msg);
+                        }
                     });
         }
     }

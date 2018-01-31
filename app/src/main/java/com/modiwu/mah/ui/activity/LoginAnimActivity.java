@@ -29,12 +29,17 @@ import org.greenrobot.eventbus.Subscribe;
 
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.reactivex.Observable;
+import io.reactivex.disposables.Disposable;
+import top.jplayer.baseprolibrary.net.IoMainSchedule;
 import top.jplayer.baseprolibrary.utils.ScreenUtils;
 import top.jplayer.baseprolibrary.utils.SizeUtils;
 import top.jplayer.baseprolibrary.utils.ToastUtils;
@@ -301,6 +306,7 @@ public class LoginAnimActivity extends BaseSpecialActivity implements TextWatche
                     mPresenter.wxLogin(token, mRNum, mRCode);
                     break;
                 }
+                showLoading();
                 mPresenter.verfiyCode(mRNum, mRCode);
                 break;
             case R.id.bt_login1://正式登陆
@@ -347,6 +353,7 @@ public class LoginAnimActivity extends BaseSpecialActivity implements TextWatche
                     } else {
                         mMap.put("check", "2");
                     }
+                    showLoading();
                     mPresenter.smsCode(mMap, mRtnCode);
                 }
                 break;
@@ -626,6 +633,18 @@ public class LoginAnimActivity extends BaseSpecialActivity implements TextWatche
     }
 
 
-
-
+    public void smsSend(TextView mRtnCode) {
+        Disposable disposable = Observable.interval(0, 1, TimeUnit.SECONDS)
+                .take(60)
+                .compose(new IoMainSchedule<>())
+                .subscribe(aLong -> {
+                    if (aLong >= 59) {
+                        mRtnCode.setText("获取验证码");
+                    } else {
+                        mRtnCode.setText(String.format(Locale.CHINA, "%d秒后获取", 60 - aLong));
+                    }
+                });
+        mPresenter.addSubscription(disposable);
+        dialogDismiss("");
+    }
 }
