@@ -10,6 +10,7 @@ import top.jplayer.baseprolibrary.mvp.contract.BasePresenter;
 import top.jplayer.baseprolibrary.mvp.contract.SampleContract;
 import top.jplayer.baseprolibrary.mvp.model.SampleModel;
 import top.jplayer.baseprolibrary.mvp.model.bean.LoginBean;
+import top.jplayer.baseprolibrary.mvp.model.bean.SampleBean;
 import top.jplayer.baseprolibrary.ui.SampleActivity;
 import top.jplayer.baseprolibrary.utils.SharePreUtil;
 import top.jplayer.baseprolibrary.utils.ToastUtils;
@@ -40,10 +41,18 @@ public class SamplePresenter extends BasePresenter<SampleActivity> implements Sa
                 })
                 .subscribe(sampleBean ->
                 {
+                    SampleBean.DataBean.ListBean dataBean = new SampleBean.DataBean.ListBean();
+                    dataBean.id = "111";
+                    dataBean.sendTime = "2018-01-22 22:10:10";
+
+                    sampleBean.data.list.add(dataBean);
+
                     if (sampleBean.data.list.size() < 1) {
                         mIView.showEmpty();
-                    } else
+                    } else {
+
                         mIView.setHBList(sampleBean);
+                    }
                 }, throwable -> mIView.showError());
         addSubscription(disposable);
     }
@@ -65,6 +74,7 @@ public class SamplePresenter extends BasePresenter<SampleActivity> implements Sa
     public void requestGet(String id, String userNo) {
         Disposable disposable = sampleModel.requestGet(id, userNo).subscribe(gradBean -> {
             if (TextUtils.equals("0000", gradBean.errorCode)) {
+                ToastUtils.init().showSuccessToast(mIView, "抢到了，关闭该界面吧");
             } else if (!TextUtils.equals("0009", gradBean.errorCode)) {
                 requestGet(id, userNo);
             }

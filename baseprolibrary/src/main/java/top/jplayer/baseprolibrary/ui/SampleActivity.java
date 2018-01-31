@@ -5,6 +5,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +25,7 @@ import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
+import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import top.jplayer.baseprolibrary.R;
 import top.jplayer.baseprolibrary.mvp.contract.SampleContract;
@@ -81,11 +83,7 @@ public class SampleActivity extends SuperBaseActivity implements SampleContract.
                         etPassword.getText().toString().trim()));
         llNames = mFlRootView.findViewById(R.id.llShowName);
         getNames();
-        long stamp = DateUtils.dateToStamp("2018-01-30 22:43:00");
-        if (new Date().getTime() - stamp > 0) {
-            Disposable disposable = Observable.interval(10, TimeUnit.MILLISECONDS)
-                    .subscribe(LogUtil::e);
-        }
+
     }
 
     private void getNames() {
@@ -127,7 +125,30 @@ public class SampleActivity extends SuperBaseActivity implements SampleContract.
         SampleBean.DataBean data = sampleBean.data;
         refreshLayout.finishRefresh();
         adapter.setNewData(data.list);
+
+        autoGrad(data);
     }
+
+    /**
+     * 自动抢
+     *
+     * @param data
+     */
+    private void autoGrad(SampleBean.DataBean data) {
+        if (!compositeDisposable.isDisposed()) {
+            compositeDisposable.clear();
+        }
+        String sendTime = data.list.get(0).sendTime;
+        long stamp = DateUtils.dateToStamp(sendTime);
+        long time = new Date().getTime();
+        long delay = (stamp - time) - 7000;
+        String id = data.list.get(0).id;
+        Disposable disposable = Observable.timer(delay, TimeUnit.MILLISECONDS)
+                .subscribe(aLong -> getUserNo(id));
+        compositeDisposable.add(disposable);
+    }
+
+    CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     @Override
     protected void onDestroy() {
