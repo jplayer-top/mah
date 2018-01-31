@@ -41,11 +41,6 @@ public class SamplePresenter extends BasePresenter<SampleActivity> implements Sa
                 })
                 .subscribe(sampleBean ->
                 {
-                    SampleBean.DataBean.ListBean dataBean = new SampleBean.DataBean.ListBean();
-                    dataBean.id = "111";
-                    dataBean.sendTime = "2018-01-22 22:10:10";
-
-                    sampleBean.data.list.add(dataBean);
 
                     if (sampleBean.data.list.size() < 1) {
                         mIView.showEmpty();
