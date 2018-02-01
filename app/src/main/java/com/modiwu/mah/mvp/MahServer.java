@@ -1,6 +1,7 @@
 package com.modiwu.mah.mvp;
 
 
+import com.modiwu.mah.mvp.model.bean.CarpenterBean;
 import com.modiwu.mah.mvp.model.bean.FloorBean;
 import com.modiwu.mah.mvp.model.bean.HomeBean;
 import com.modiwu.mah.mvp.model.bean.LoginBean;
@@ -44,4 +45,7 @@ public interface MahServer {
 
     @GET("fangan/list")
     Observable<SchemeBean> getSchemeBean();
+
+    @GET("designer/list")
+    Observable<CarpenterBean> getCarpenterBean();
 }
