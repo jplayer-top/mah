@@ -6,6 +6,10 @@ import android.widget.FrameLayout;
 
 import com.modiwu.mah.base.BaseSpecialActivity;
 import com.modiwu.mah.base.FragmentFactory;
+import com.modiwu.mah.mvp.model.event.HomeTypeModeEvent;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
@@ -13,13 +17,13 @@ import java.util.concurrent.TimeUnit;
 import devlight.io.library.ntb.NavigationTabBar;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Consumer;
 import top.jplayer.baseprolibrary.listener.NetNavigationBarListener;
 import top.jplayer.baseprolibrary.utils.ToastUtils;
 
 public class MainActivity extends BaseSpecialActivity {
 
     public FrameLayout mFlFragment;
+    public NavigationTabBar mNavigationTabBar;
 
     @Override
     public int setBaseLayout() {
@@ -28,9 +32,10 @@ public class MainActivity extends BaseSpecialActivity {
 
     @Override
     public void initBaseData() {
-        final NavigationTabBar navigationTabBar = contentView.findViewById(R.id.ntb);
+        mNavigationTabBar = contentView.findViewById(R.id.ntb);
         mFlFragment = contentView.findViewById(R.id.flFragment);
-        bottomBar(navigationTabBar);
+        bottomBar(mNavigationTabBar);
+        EventBus.getDefault().register(this);
     }
 
 
@@ -61,7 +66,6 @@ public class MainActivity extends BaseSpecialActivity {
                 for (Fragment fragmentItem : getSupportFragmentManager().getFragments()) {
                     if (!fragmentItem.isHidden()) {
 
-
                         transaction.hide(fragmentItem);
                     }
                 }
@@ -80,6 +84,32 @@ public class MainActivity extends BaseSpecialActivity {
     public void customBarLeft() {
     }
 
+    public int carFragmentType = 0;
+
+    /**
+     * 首页点击更多去处
+     *
+     * @param event 1.方案 2. 匠 3.器
+     */
+    @Subscribe
+
+    public void moreClick(HomeTypeModeEvent event) {
+        switch (event.clickMore) {
+            case 1://方案
+                mNavigationTabBar.setModelIndex(1);
+                break;
+            case 2://匠
+                mNavigationTabBar.setModelIndex(2);
+                carFragmentType = event.type;
+                break;
+            case 3://器
+                mNavigationTabBar.setModelIndex(2);
+                carFragmentType = event.type;
+                break;
+        }
+    }
+
+
     private int back = 0;
 
     @Override
@@ -92,12 +122,14 @@ public class MainActivity extends BaseSpecialActivity {
         }
 
         Observable.timer(1, TimeUnit.SECONDS, AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<Long>() {
-                    @Override
-                    public void accept(Long aLong) throws Exception {
-                        back = 0;
-                    }
-                });
+                .subscribe(aLong -> back = 0);
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
 
     }
 }

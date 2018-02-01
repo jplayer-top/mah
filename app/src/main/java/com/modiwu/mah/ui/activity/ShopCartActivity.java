@@ -123,6 +123,12 @@ public class ShopCartActivity extends BaseCommonActivity implements ShopCartCont
         );
     }
 
+    @Override
+    public void showEmpty() {
+        super.showEmpty();
+        mLlEditToDel.setVisibility(View.GONE);
+    }
+
     private void countChange(int i, int position, int mov) {
         i = i + mov;
         ShopCartBean shopCartBean = shopCartBeans.get(position);

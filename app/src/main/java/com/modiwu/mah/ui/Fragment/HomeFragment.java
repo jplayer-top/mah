@@ -125,7 +125,6 @@ public class HomeFragment extends BaseFragment implements HomeContract.HomeView 
         adapters.add(new HomeToShopLayoutAdapter(getContext(), new LinearLayoutHelper(), 1, HomeBean.BODY_TOSHOP));
 
 
-
         mDelegateAdapter.clear();
         mDelegateAdapter.setAdapters(adapters);
         mRecyclerView.setAdapter(mDelegateAdapter);

@@ -5,6 +5,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.modiwu.mah.MainActivity;
 import com.modiwu.mah.R;
 import com.modiwu.mah.base.BaseFragment;
 import com.modiwu.mah.ui.adapter.CarpenterAdapter;
@@ -23,6 +24,7 @@ import top.jplayer.baseprolibrary.listener.NetNavigationBarListener;
 public class CarpenterFragment extends BaseFragment {
     protected RecyclerView mRecyclerView1;
     protected RecyclerView mRecyclerView2;
+    private NavigationTabBar mNavigationTabBar;
 
     @Override
     public int initLayout() {
@@ -32,7 +34,7 @@ public class CarpenterFragment extends BaseFragment {
     @Override
     protected void initData(View rootView) {
         mMultipleStatusView = rootView.findViewById(R.id.multiplestatusview);
-        final NavigationTabBar navigationTabBar = rootView.findViewById(R.id.ntb);
+        mNavigationTabBar = rootView.findViewById(R.id.ntb);
         mRecyclerView1 = rootView.findViewById(R.id.recyclerView1);
         mRecyclerView2 = rootView.findViewById(R.id.recyclerView2);
         ArrayList<Integer> list = new ArrayList<>();
@@ -43,7 +45,20 @@ public class CarpenterFragment extends BaseFragment {
         list.add(R.drawable.pic_06);
         initRecyclerView1(list);
         initRecyclerView2(list);
-        bottomBar(navigationTabBar);
+        bottomBar(mNavigationTabBar);
+        setShowTypeByClickMore();
+    }
+
+    /**
+     * 根据首页点击更多，实现进入不同界面
+     */
+    private void setShowTypeByClickMore() {
+        mNavigationTabBar.setModelIndex(((MainActivity) getActivity()).carFragmentType);
+    }
+
+    @Override
+    protected void onShowFragment() {
+        setShowTypeByClickMore();
     }
 
     private void initRecyclerView2(ArrayList<Integer> list) {
@@ -76,8 +91,8 @@ public class CarpenterFragment extends BaseFragment {
         navigationTabBar.setOnTabBarSelectedIndexListener(new NetNavigationBarListener() {
             @Override
             public void onceSelected(NavigationTabBar.Model model, int index) {
-                mRecyclerView1.setVisibility(index == 1 ? View.GONE : View.VISIBLE);
                 mRecyclerView2.setVisibility(index == 0 ? View.GONE : View.VISIBLE);
+                mRecyclerView1.setVisibility(index == 1 ? View.GONE : View.VISIBLE);
             }
         });
         navigationTabBar.setModelIndex(0, true);
