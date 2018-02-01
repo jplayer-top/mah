@@ -19,6 +19,7 @@ import java.util.List;
 
 import devlight.io.library.ntb.NavigationTabBar;
 import top.jplayer.baseprolibrary.listener.NetNavigationBarListener;
+import top.jplayer.baseprolibrary.utils.LogUtil;
 
 /**
  * Created by Obl on 2018/1/19.
@@ -49,15 +50,20 @@ public class CarpenterFragment extends BaseFragment implements CarpenterContract
         mPresenter = new CarpenterPresenter(this);
         showLoading();
         mPresenter.requestCarpenterData();
+        bottomBar(mNavigationTabBar);
+        setShowTypeByClickMore();
 
         List<CarpenterBean.RecordsBean> list1 = new ArrayList<>();
         initRecyclerView1(list1);
 
-
         initRecyclerView2(new ArrayList<>());
-
-        bottomBar(mNavigationTabBar);
-        setShowTypeByClickMore();
+        ArrayList<Integer> list = new ArrayList<>();
+        list.add(R.drawable.pic_06);
+        list.add(R.drawable.pic_06);
+        list.add(R.drawable.pic_06);
+        list.add(R.drawable.pic_06);
+        list.add(R.drawable.pic_06);
+        mAdapter2.setNewData(list);
     }
 
 
@@ -92,8 +98,14 @@ public class CarpenterFragment extends BaseFragment implements CarpenterContract
         navigationTabBar.setOnTabBarSelectedIndexListener(new NetNavigationBarListener() {
             @Override
             public void onceSelected(NavigationTabBar.Model model, int index) {
-                mRecyclerView2.setVisibility(index == 0 ? View.GONE : View.VISIBLE);
-                mRecyclerView1.setVisibility(index == 1 ? View.GONE : View.VISIBLE);
+                if (index == 0) {
+                    mRecyclerView1.setVisibility(View.VISIBLE);
+                    mRecyclerView2.setVisibility(View.GONE);
+                } else {
+                    mRecyclerView1.setVisibility(View.GONE);
+                    mRecyclerView2.setVisibility(View.VISIBLE);
+                }
+                LogUtil.e(index + "----");
             }
         });
         navigationTabBar.setModelIndex(0, true);
@@ -114,13 +126,6 @@ public class CarpenterFragment extends BaseFragment implements CarpenterContract
     @Override
     public void setCarpenterData(CarpenterBean bean) {
         mAdapter1.setNewData(bean.records);
-        ArrayList<Integer> list = new ArrayList<>();
-
-        list.add(R.drawable.pic_06);
-        list.add(R.drawable.pic_06);
-        list.add(R.drawable.pic_06);
-        list.add(R.drawable.pic_06);
-        list.add(R.drawable.pic_06);
-        mAdapter2.setNewData(list);
+       setShowTypeByClickMore();
     }
 }
