@@ -4,3 +4,5 @@ mah
       <source id="mp4" src="http://file.jplayer.top/screencapture-1517453739627.mp4" type="video/mp4">
       <p>功能录制</p>
     </video>
+
+[功能演示视频](http://file.jplayer.top/screencapture-1517453739627.mp4)
