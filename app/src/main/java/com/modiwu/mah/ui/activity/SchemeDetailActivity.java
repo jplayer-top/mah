@@ -4,11 +4,14 @@ import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.modiwu.mah.R;
 import com.modiwu.mah.base.BaseSpecialActivity;
+import com.modiwu.mah.mvp.model.ShopCartDaoUtil;
+import com.modiwu.mah.mvp.model.bean.ShopCartBean;
 import com.modiwu.mah.ui.adapter.AdapterPagerShcemDetail;
 
 import java.util.ArrayList;
@@ -20,6 +23,9 @@ import top.jplayer.baseprolibrary.utils.LogUtil;
  * com.modiwu.mah.ui.activity
  */
 public class SchemeDetailActivity extends BaseSpecialActivity {
+
+    private ImageView mIvCirRed;
+
     @Override
     public int setBaseLayout() {
         return R.layout.activity_scheme_detail;
@@ -33,9 +39,11 @@ public class SchemeDetailActivity extends BaseSpecialActivity {
         tvBarTitle.setText("方案详情");
         customBarLeft();
         TabLayout tabLayout = contentView.findViewById(R.id.tabLayout);
+        mIvCirRed = contentView.findViewById(R.id.ivCirRed);
         ViewPager viewPager = contentView.findViewById(R.id.viewPager);
         llSchemeDetailBottom = contentView.findViewById(R.id.rlSchemeDetailBottom);
         TextView tvToBuy = contentView.findViewById(R.id.tvToBuy);
+        TextView tvToAdd = contentView.findViewById(R.id.tvToAdd);
         TextView tvToCard = contentView.findViewById(R.id.tvToCard);
         tabLayout.setTabMode(TabLayout.MODE_FIXED);
         tabLayout.setupWithViewPager(viewPager);
@@ -69,7 +77,14 @@ public class SchemeDetailActivity extends BaseSpecialActivity {
             }
         });
         tvToCard.setOnClickListener(view -> {
+            mIvCirRed.setVisibility(View.GONE);
             startActivity(new Intent(mBaseActivity, ShopCartActivity.class));
+        });
+        ShopCartDaoUtil daoUtil = new ShopCartDaoUtil(this);
+        tvToAdd.setOnClickListener(v -> {
+            ShopCartBean bean = new ShopCartBean(null, "造作远山沙发", "成都酣然设计", "1894.00", "1", "sdasd");
+            boolean b = daoUtil.insertShopCart(bean);
+            mIvCirRed.setVisibility(b ? View.VISIBLE : View.GONE);
         });
     }
 

@@ -1,8 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
+              android:animateLayoutChanges="true"
               android:orientation="vertical">
 
-    <include layout="@layout/layout_refresh_muti_recyclerview"/>
+    <LinearLayout
+        android:id="@+id/llEditToDel"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        android:gravity="center|right"
+        android:visibility="gone"
+        tools:ignore="RtlHardcoded">
+
+        <TextView
+            android:id="@+id/tv2Collection"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_red"
+            android:paddingEnd="@dimen/dp_10"
+            android:paddingLeft="@dimen/dp_10"
+            android:paddingRight="@dimen/dp_10"
+            android:paddingStart="@dimen/dp_10"
+            android:text="移入收藏夹"
+            android:textColor="@color/chocolate"
+            android:textSize="@dimen/dimen_15sp"/>
+
+        <TextView
+            android:id="@+id/tv2Del"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dp_10"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_marginStart="@dimen/dp_10"
+            android:background="@drawable/shape_red"
+            android:paddingEnd="@dimen/dp_10"
+            android:paddingLeft="@dimen/dp_10"
+            android:paddingRight="@dimen/dp_10"
+            android:paddingStart="@dimen/dp_10"
+            android:text="删除"
+            android:textColor="@color/chocolate"
+            android:textSize="@dimen/dimen_15sp"/>
+    </LinearLayout>
+
+    <include
+        layout="@layout/layout_refresh_muti_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/app_name"
+        android:scaleType="fitXY"
+        android:src="@drawable/toolbar_shadow"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/generalHeight"
+        android:orientation="horizontal"
+        android:weightSum="5"
+        tools:ignore="RtlHardcoded,RtlSymmetry">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="4"
+            android:background="@color/grey"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/magin_30"
+            android:paddingStart="@dimen/magin_30"
+            android:text="￥ 00.00"
+            android:textSize="@dimen/sp_18"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/dp_4"
+            android:layout_weight="1"
+            android:background="@color/colorBlackGold"
+            android:gravity="center"
+            android:text="下单"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_18"/>
+    </LinearLayout>
 </LinearLayout>

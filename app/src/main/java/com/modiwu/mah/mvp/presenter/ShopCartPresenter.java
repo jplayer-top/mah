@@ -42,4 +42,17 @@ public class ShopCartPresenter extends BasePresenter<ShopCartActivity> implement
                     }
                 }, throwable -> mIView.showError());
     }
+
+    public void delData(List<ShopCartBean> delList) {
+        Observable.fromIterable(delList).subscribe(mDaoUtil::deleteShopCartBean, throwable -> {
+        }, () -> {
+            requestShopCartData();
+            mIView.delOneData();
+        });
+    }
+
+    public void updataBean(int position, ShopCartBean shopCartBean) {
+        mDaoUtil.updatebean(shopCartBean);
+
+    }
 }
