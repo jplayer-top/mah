@@ -9,6 +9,13 @@ public class ModelContactCity implements MultiItemEntity {
     public int type;
     public static final int BODY = 0;
     public static final int HEARD = 1;
+    public static final int LOCAL = 2;
+
+    public ModelContactCity(String name, String pys, int type) {
+        this.name = name;
+        this.pys = pys;
+        this.type = type;
+    }
 
     @Override
     public String toString() {
@@ -21,6 +28,6 @@ public class ModelContactCity implements MultiItemEntity {
 
     @Override
     public int getItemType() {
-        return type == BODY ? BODY : HEARD;
+        return type == BODY ? BODY : type == HEARD ? HEARD : LOCAL;
     }
 }

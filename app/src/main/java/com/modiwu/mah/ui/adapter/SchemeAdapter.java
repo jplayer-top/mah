@@ -2,12 +2,15 @@ package com.modiwu.mah.ui.adapter;
 
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.modiwu.mah.R;
+import com.modiwu.mah.mvp.model.bean.SchemeBean;
 
 import java.util.List;
 
+import top.jplayer.baseprolibrary.glide.GlideUtils;
 import top.jplayer.baseprolibrary.ui.SuperBaseActivity;
 
 /**
@@ -15,17 +18,17 @@ import top.jplayer.baseprolibrary.ui.SuperBaseActivity;
  * SchemeAdapter 方案页面适配器
  */
 
-public class SchemeAdapter extends BaseQuickAdapter<Integer, BaseViewHolder> {
+public class SchemeAdapter extends BaseQuickAdapter<SchemeBean.RecordsBean, BaseViewHolder> {
     private SuperBaseActivity activity;
 
-    public SchemeAdapter(List<Integer> data) {
+    public SchemeAdapter(List<SchemeBean.RecordsBean> data) {
         super(R.layout.adapter_scheme_body, data);
     }
 
     @Override
-    protected void convert(BaseViewHolder baseViewHolder, Integer integer) {
+    protected void convert(BaseViewHolder baseViewHolder, SchemeBean.RecordsBean bean) {
         ImageView ivBodyPic = baseViewHolder.convertView.findViewById(R.id.ivBodyPic);
-        ivBodyPic.setImageResource(integer);
+        Glide.with(mContext).load(bean.fangan_avatar).apply(GlideUtils.init().options()).into(ivBodyPic);
         baseViewHolder.addOnClickListener(R.id.llScheme_body);
     }
 }

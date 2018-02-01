@@ -7,6 +7,9 @@ import android.view.View;
 
 import com.modiwu.mah.R;
 import com.modiwu.mah.base.BaseFragment;
+import com.modiwu.mah.mvp.constract.SchemeContract;
+import com.modiwu.mah.mvp.model.bean.SchemeBean;
+import com.modiwu.mah.mvp.presenter.SchemePresenter;
 import com.modiwu.mah.ui.activity.SchemeDetailActivity;
 import com.modiwu.mah.ui.activity.SchemeSearchActivity;
 import com.modiwu.mah.ui.adapter.SchemeAdapter;
@@ -18,9 +21,11 @@ import java.util.ArrayList;
  * com.modiwu.mah.ui.Fragment
  */
 
-public class SchemeFragment extends BaseFragment {
+public class SchemeFragment extends BaseFragment implements SchemeContract.ISchemeView {
 
     protected RecyclerView mRecyclerView;
+    private SchemePresenter mPresenter;
+    private SchemeAdapter mAdapter;
 
     @Override
     public int initLayout() {
@@ -31,23 +36,30 @@ public class SchemeFragment extends BaseFragment {
     protected void initData(View rootView) {
         super.initData(rootView);
         mMultipleStatusView = rootView.findViewById(R.id.multiplestatusview);
+        smartRefreshLayout = rootView.findViewById(R.id.smartRefreshLayout);
         mRecyclerView = rootView.findViewById(R.id.recyclerView);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
-        ArrayList<Integer> list = new ArrayList<>();
-        list.add(R.drawable.pic_01);
-        list.add(R.drawable.pic_02);
-        list.add(R.drawable.pic_03);
-        list.add(R.drawable.pic_04);
-        list.add(R.drawable.pic_05);
-        SchemeAdapter adapter = new SchemeAdapter(list);
-        mRecyclerView.setAdapter(adapter);
-        tvBarTitle.setText("方案");
-        adapter.setOnItemChildClickListener((adapter1, view, position) -> {
+        mPresenter = new SchemePresenter(this);
+        showLoading();
+        mPresenter.requestSchemeData();
+        smartRefreshLayout.setOnRefreshListener(refresh -> mPresenter.requestSchemeData());
+
+        ArrayList<SchemeBean.RecordsBean> recordsBeans = new ArrayList<>();
+        mAdapter = new SchemeAdapter(recordsBeans);
+        mRecyclerView.setAdapter(mAdapter);
+        mAdapter.setOnItemChildClickListener((adapter1, view, position) -> {
             startActivity(new Intent(getContext(), SchemeDetailActivity.class));
             return false;
         });
+
+        tvBarTitle.setText("方案");
         ivBarSearch = rootView.findViewById(R.id.ivBarSearch);
         ivBarSearch.setVisibility(View.VISIBLE);
         ivBarSearch.setOnClickListener(v -> startActivity(new Intent(getContext(), SchemeSearchActivity.class)));
+    }
+
+    @Override
+    public void setSchemeData(SchemeBean schemeData) {
+        mAdapter.setNewData(schemeData.records);
     }
 }

@@ -4,6 +4,7 @@ package com.modiwu.mah.mvp;
 import com.modiwu.mah.mvp.model.bean.FloorBean;
 import com.modiwu.mah.mvp.model.bean.HomeBean;
 import com.modiwu.mah.mvp.model.bean.LoginBean;
+import com.modiwu.mah.mvp.model.bean.SchemeBean;
 import com.modiwu.mah.mvp.model.bean.SelectBean;
 
 import java.util.Map;
@@ -40,4 +41,7 @@ public interface MahServer {
 
     @GET("select/building/select")
     Observable<FloorBean> getFloorSelectBean();
+
+    @GET("fangan/list")
+    Observable<SchemeBean> getSchemeBean();
 }

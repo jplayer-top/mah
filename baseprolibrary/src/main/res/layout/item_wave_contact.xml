@@ -7,13 +7,16 @@
     android:layout_height="wrap_content"
     android:background="@color/white"
     android:gravity="center_vertical"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    tools:ignore="RtlHardcoded,RtlSymmetry">
 
     <ImageView
         android:id="@+id/iv_avatar"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:src="@drawable/ic_launcher_round"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginStart="15dp"
+        android:src="@drawable/pic_local"
         android:visibility="gone"/>
 
     <TextView
@@ -25,7 +28,7 @@
         android:paddingStart="15dp"
         android:text="北京"
         android:textColor="@color/black"
-        tools:ignore="RtlHardcoded,RtlSymmetry"/>
+        />
 
 
 </LinearLayout>

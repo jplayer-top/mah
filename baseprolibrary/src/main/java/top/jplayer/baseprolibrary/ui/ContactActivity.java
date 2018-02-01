@@ -56,6 +56,10 @@ public class ContactActivity extends SuperBaseActivity {
                     Gson gson = new Gson();
                     final List<ModelContactCity> list = gson.fromJson(ModelContactCity.DATA, listType);
                     Collections.sort(list, new ComparatorLetter());
+                    ModelContactCity cityHeard = new ModelContactCity("定位", "#", 1);
+                    ModelContactCity cityItem = new ModelContactCity("烟台", "#", 2);
+                    list.add(0, cityHeard);
+                    list.add(1, cityItem);
                     return list;
                 }).observeOn(AndroidSchedulers.mainThread())
                 .subscribe(modelContactCities -> {

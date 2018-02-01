@@ -49,6 +49,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.HomeView 
         mMultipleStatusView = rootView.findViewById(R.id.multiplestatusview);
         smartRefreshLayout = rootView.findViewById(R.id.smartRefreshLayout);
         mRecyclerView = rootView.findViewById(R.id.recyclerView);
+
         VirtualLayoutManager manager = new VirtualLayoutManager(getContext());
         mRecyclerView.setLayoutManager(manager);
         RecyclerView.RecycledViewPool pool = new RecyclerView.RecycledViewPool();
@@ -122,6 +123,9 @@ public class HomeFragment extends BaseFragment implements HomeContract.HomeView 
          * 实体店
          */
         adapters.add(new HomeToShopLayoutAdapter(getContext(), new LinearLayoutHelper(), 1, HomeBean.BODY_TOSHOP));
+
+
+
         mDelegateAdapter.clear();
         mDelegateAdapter.setAdapters(adapters);
         mRecyclerView.setAdapter(mDelegateAdapter);
