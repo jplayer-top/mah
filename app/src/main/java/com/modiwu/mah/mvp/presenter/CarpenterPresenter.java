@@ -29,8 +29,20 @@ public class CarpenterPresenter extends BasePresenter<CarpenterFragment> impleme
                 mIView.showEmpty();
             } else {
                 mIView.smartRefreshLayout.finishRefresh(true);
-                mIView.mMultipleStatusView.showContent();
                 mIView.setCarpenterData(bean);
+            }
+        }, throwable -> mIView.showError());
+        addSubscription(disposable);
+    }
+
+    @Override
+    public void requestDockerData() {
+        Disposable disposable = mModel.requestDockerBean().subscribe(bean -> {
+            if (bean == null || bean.records == null || bean.records.size() < 1) {
+                mIView.showEmpty();
+            } else {
+                mIView.smartRefreshLayout.finishRefresh(true);
+                mIView.setDockerData(bean);
             }
         }, throwable -> mIView.showError());
         addSubscription(disposable);

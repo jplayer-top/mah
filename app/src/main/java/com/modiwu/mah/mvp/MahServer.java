@@ -2,6 +2,7 @@ package com.modiwu.mah.mvp;
 
 
 import com.modiwu.mah.mvp.model.bean.CarpenterBean;
+import com.modiwu.mah.mvp.model.bean.DockerBean;
 import com.modiwu.mah.mvp.model.bean.FloorBean;
 import com.modiwu.mah.mvp.model.bean.HomeBean;
 import com.modiwu.mah.mvp.model.bean.LoginBean;
@@ -48,4 +49,8 @@ public interface MahServer {
 
     @GET("designer/list")
     Observable<CarpenterBean> getCarpenterBean();
+
+    @GET("mall/goods/home")
+    Observable<DockerBean> getDockerBean();
+
 }

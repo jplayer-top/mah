@@ -1,13 +1,11 @@
 package com.modiwu.mah.ui.Fragment;
 
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.modiwu.mah.R;
-import com.modiwu.mah.ui.adapter.DockerAdapter;
-import com.modiwu.mah.ui.adapter.SchemeHardAdapter;
+import com.modiwu.mah.ui.adapter.SchemeFloorAdapter;
 
 import java.util.ArrayList;
 
@@ -29,7 +27,7 @@ public class SchemeFloorFragment extends SuperBaseFragment {
         list.add(R.drawable.pic_05);
         RecyclerView recyclerView = rootView.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
-        recyclerView.setAdapter(new DockerAdapter(list));
+        recyclerView.setAdapter(new SchemeFloorAdapter(list));
     }
 
     @Override

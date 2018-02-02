@@ -31,7 +31,7 @@ public class CarpenterAdapter extends BaseQuickAdapter<CarpenterBean.RecordsBean
         ImageView ivBodyPic = baseViewHolder.convertView.findViewById(R.id.ivBodyPic);
         TextView tvItemTitle = baseViewHolder.convertView.findViewById(R.id.tvItemTitle);
         TextView tvItemBody = baseViewHolder.convertView.findViewById(R.id.tvItemBody);
-        Glide.with(mContext).load(bean.designer_url).apply(GlideUtils.init().options()).into(ivBodyPic);
+        Glide.with(mContext).load(bean.designer_url).apply(GlideUtils.init().options(R.drawable.pic_06)).into(ivBodyPic);
         tvItemTitle.setText(R.string.carpenter_title);
         tvItemBody.setText(R.string.carpenter_body);
     }

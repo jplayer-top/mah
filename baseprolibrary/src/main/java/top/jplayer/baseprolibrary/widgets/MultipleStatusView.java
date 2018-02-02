@@ -2,6 +2,7 @@ package top.jplayer.baseprolibrary.widgets;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.support.annotation.IdRes;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -270,6 +271,30 @@ public class MultipleStatusView extends RelativeLayout {
         for (int i = 0; i < childCount; i++) {
             View view = getChildAt(i);
             view.setVisibility(mOtherIds.contains(view.getId()) ? View.GONE : View.VISIBLE);
+        }
+    }
+
+    /**
+     * 显示内容视图
+     */
+    public final void showContent(@IdRes int contentId) {
+        mViewStatus = STATUS_CONTENT;
+        if (null == mContentView && mContentViewResId != NULL_RESOURCE_ID) {
+            mContentView = mInflater.inflate(mContentViewResId, null);
+            addView(mContentView, 0, DEFAULT_LAYOUT_PARAMS);
+        }
+        showContentView(contentId);
+    }
+
+    private void showContentView(@IdRes int contentId) {
+        final int childCount = getChildCount();
+        for (int i = 0; i < childCount; i++) {
+            View view = getChildAt(i);
+            if (view.getId() == contentId) {
+                view.setVisibility(View.VISIBLE);
+            } else {
+                view.setVisibility(GONE);
+            }
         }
     }
 

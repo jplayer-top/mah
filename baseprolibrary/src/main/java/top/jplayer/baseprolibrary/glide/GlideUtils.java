@@ -1,5 +1,7 @@
 package top.jplayer.baseprolibrary.glide;
 
+import android.support.annotation.DrawableRes;
+
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import top.jplayer.baseprolibrary.R;
@@ -25,6 +27,10 @@ public class GlideUtils {
 
     public GlideOptions options() {
         return new GlideOptions().placeholder(R.drawable.placeholder).error(R.drawable.placeholder)
+                .diskCacheStrategy(DiskCacheStrategy.RESOURCE);
+    }
+    public GlideOptions options(@DrawableRes int res) {
+        return new GlideOptions().placeholder(res).error(res)
                 .diskCacheStrategy(DiskCacheStrategy.RESOURCE);
     }
 }

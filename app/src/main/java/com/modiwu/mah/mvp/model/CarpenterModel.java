@@ -4,6 +4,7 @@ import android.os.SystemClock;
 
 import com.modiwu.mah.mvp.MahServer;
 import com.modiwu.mah.mvp.model.bean.CarpenterBean;
+import com.modiwu.mah.mvp.model.bean.DockerBean;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -20,6 +21,17 @@ public class CarpenterModel {
         return RetrofitManager.init()
                 .create(MahServer.class)
                 .getCarpenterBean()
+                .subscribeOn(Schedulers.io())
+                .map(bean -> {
+                    SystemClock.sleep(1000);
+                    return bean;
+                })
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+    public Observable<DockerBean> requestDockerBean() {
+        return RetrofitManager.init()
+                .create(MahServer.class)
+                .getDockerBean()
                 .subscribeOn(Schedulers.io())
                 .map(bean -> {
                     SystemClock.sleep(1000);
