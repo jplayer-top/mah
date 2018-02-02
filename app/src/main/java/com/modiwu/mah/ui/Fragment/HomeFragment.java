@@ -102,16 +102,25 @@ public class HomeFragment extends BaseFragment implements HomeContract.HomeView 
         adapters.add(getHomeSectionLayoutAdapter("颜值单品"));
         adapters.add(new HomeSingleVLayoutAdapter(getContext(), new GridLayoutHelper(2), 6, HomeBean.BODY_SINGLE));
 
-
+        /**
+         * 匠心
+         */
         List<HomeBean.SjsBean> sjsBeans = homeBean.sjs;
         if (fanganBeans != null && fanganBeans.size() > 0) {
             List<HomeBean.SjsBean> realSjsBeans = new ArrayList<>();
-            Observable.fromIterable(sjsBeans).filter(sjsBean -> TextUtils.equals("sjs", sjsBean.navType)).subscribe(realSjsBeans::add);
+            List<HomeBean.SjsBean> urlBeans = new ArrayList<>();
+            Observable.fromIterable(sjsBeans).filter(sjsBean -> {
+                if (TextUtils.equals("url", sjsBean.navType)) {
+                    urlBeans.add(sjsBean);
+                }
+                return TextUtils.equals("sjs", sjsBean.navType);
+            }).subscribe(realSjsBeans::add);
             if (realSjsBeans.size() > 0) {
                 adapters.add(getHomeSectionLayoutAdapter("匠心"));
                 HomeRecommendLayoutAdapter recommendLayoutAdapter = getHomeRecommendLayoutAdapter(realSjsBeans);
                 recommendLayoutAdapter.setSjs(realSjsBeans);
                 adapters.add(recommendLayoutAdapter);
+            } else if (urlBeans.size() > 0) {
             }
         }
 

@@ -4,7 +4,9 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.modiwu.mah.MainActivity;
 import com.modiwu.mah.R;
 import com.modiwu.mah.base.BaseFragment;
@@ -19,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import devlight.io.library.ntb.NavigationTabBar;
+import top.jplayer.baseprolibrary.glide.GlideUtils;
 import top.jplayer.baseprolibrary.listener.NetNavigationBarListener;
 
 /**
@@ -33,6 +36,7 @@ public class CarpenterFragment extends BaseFragment implements CarpenterContract
     private CarpenterPresenter mPresenter;
     private CarpenterAdapter mAdapter1;
     private DockerAdapter mAdapter2;
+    private ImageView mIvHeard;
 
     @Override
     public int initLayout() {
@@ -62,7 +66,9 @@ public class CarpenterFragment extends BaseFragment implements CarpenterContract
     private void initRecyclerView2(ArrayList<DockerBean.RecordsBean> list) {
         mRecyclerView2.setLayoutManager(new GridLayoutManager(getContext(), 3));
         mAdapter2 = new DockerAdapter(list);
-        mAdapter2.addHeaderView(View.inflate(getContext(), R.layout.adapter_home_body_toshop, null));
+        View view = View.inflate(getContext(), R.layout.adapter_home_body_toshop, null);
+        mIvHeard = view.findViewById(R.id.ivHeard);
+        mAdapter2.addHeaderView(view);
         mRecyclerView2.setAdapter(mAdapter2);
     }
 
@@ -145,7 +151,9 @@ public class CarpenterFragment extends BaseFragment implements CarpenterContract
     @Override
     public void setDockerData(DockerBean bean) {
         this.mDockerBean = bean;
-
+        if (bean.top != null) {
+            Glide.with(this).load(bean.top.imgUrl).apply(GlideUtils.init().options()).into(mIvHeard);
+        }
         mAdapter2.setNewData(bean.records);
         mMultipleStatusView.showContent(R.id.recyclerView2);
     }
