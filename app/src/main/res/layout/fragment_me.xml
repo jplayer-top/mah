@@ -33,8 +33,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_10"
-                    android:background="@color/white"
-                    android:foreground="?android:selectableItemBackground"
+                    android:background="@drawable/selector_white_muti_press"
                     android:gravity="center_vertical"
                     android:padding="15dp">
 
@@ -131,6 +130,7 @@
                         tools:ignore="RtlHardcoded"/>
 
                     <TextView
+                        android:id="@+id/tvUpdate"
                         android:layout_width="match_parent"
                         android:layout_height="?attr/actionBarSize"
                         android:drawableLeft="@drawable/me_updata"
@@ -143,6 +143,7 @@
                         android:id="@+id/tvAbout"
                         android:layout_width="match_parent"
                         android:layout_height="?attr/actionBarSize"
+                        android:background="?selectableItemBackground"
                         android:drawableLeft="@drawable/me_about"
                         android:drawablePadding="@dimen/dp_10"
                         android:gravity="center_vertical"
@@ -158,11 +159,10 @@
                         android:drawablePadding="@dimen/dp_10"
                         android:gravity="center_vertical"
                         android:text="@string/me_set"
+                        android:visibility="gone"
                         tools:ignore="RtlHardcoded"/>
                 </LinearLayout>
             </LinearLayout>
         </android.support.v4.widget.NestedScrollView>
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
-
-
 </LinearLayout>

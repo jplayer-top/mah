@@ -1,9 +1,11 @@
 package com.modiwu.mah.ui.Fragment;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.TextView;
 
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.VirtualLayoutManager;
@@ -26,6 +28,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import io.reactivex.Observable;
+import top.jplayer.baseprolibrary.ui.ContactActivity;
 
 /**
  * Created by Obl on 2018/1/19.
@@ -36,6 +39,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.HomeView 
 
 
     protected RecyclerView mRecyclerView;
+    protected TextView tvCurLocal;
     private HomePresenter mPresenter;
     private DelegateAdapter mDelegateAdapter;
 
@@ -49,6 +53,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.HomeView 
         mMultipleStatusView = rootView.findViewById(R.id.multiplestatusview);
         smartRefreshLayout = rootView.findViewById(R.id.smartRefreshLayout);
         mRecyclerView = rootView.findViewById(R.id.recyclerView);
+        tvCurLocal = rootView.findViewById(R.id.tvCurLocal);
 
         VirtualLayoutManager manager = new VirtualLayoutManager(getContext());
         mRecyclerView.setLayoutManager(manager);
@@ -60,6 +65,8 @@ public class HomeFragment extends BaseFragment implements HomeContract.HomeView 
         mPresenter = new HomePresenter(this);
         showLoading();
         mPresenter.requestHomeData();
+        tvCurLocal.setVisibility(View.VISIBLE);
+        tvCurLocal.setOnClickListener(v -> startActivity(new Intent(getContext(), ContactActivity.class)));
     }
 
     @Override

@@ -29,6 +29,12 @@ public class GlideUtils {
         return new GlideOptions().placeholder(R.drawable.placeholder).error(R.drawable.placeholder)
                 .diskCacheStrategy(DiskCacheStrategy.RESOURCE);
     }
+
+    public GlideOptions gif() {
+        return new GlideOptions().centerCrop()
+                .diskCacheStrategy(DiskCacheStrategy.RESOURCE);
+    }
+
     public GlideOptions options(@DrawableRes int res) {
         return new GlideOptions().placeholder(res).error(res)
                 .diskCacheStrategy(DiskCacheStrategy.RESOURCE);
