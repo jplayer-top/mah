@@ -7,6 +7,7 @@ import android.view.View;
 import com.modiwu.mah.R;
 import com.modiwu.mah.mvp.model.bean.SchemeDetailBean;
 import com.modiwu.mah.ui.activity.SchemeDetailActivity;
+import com.modiwu.mah.ui.adapter.SchemeSingleAdapter;
 
 import java.util.List;
 
@@ -30,7 +31,7 @@ public class SchemeSingleFragment extends SuperBaseFragment {
 
         RecyclerView recyclerView = rootView.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
-//        recyclerView.setAdapter(new SchemeSingleAdapter(mGoodsBeans));
+        recyclerView.setAdapter(new SchemeSingleAdapter(mGoodsBeans));
     }
 
     @Override
