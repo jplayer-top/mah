@@ -73,6 +73,14 @@ public final class ScreenUtils {
         return point.x;
     }
 
+    public static int getWidthOfScreen(Context context, int diff, int count) {
+        WindowManager wm = (WindowManager) context
+                .getSystemService(Context.WINDOW_SERVICE);
+        DisplayMetrics metrics = new DisplayMetrics();
+        wm.getDefaultDisplay().getMetrics(metrics);
+        return (metrics.widthPixels - SizeUtils.dp2px(diff)) / count;
+    }
+
     /**
      * 获取屏幕的高度（单位：px）
      *

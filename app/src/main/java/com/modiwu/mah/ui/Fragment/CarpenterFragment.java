@@ -56,8 +56,6 @@ public class CarpenterFragment extends BaseFragment implements CarpenterContract
         initRecyclerView2(new ArrayList<>());
 
         mPresenter = new CarpenterPresenter(this);
-        showLoading();
-
         int type = ((MainActivity) getActivity()).carFragmentType;
         setShowTypeByClickMore(type);
     }
@@ -99,10 +97,11 @@ public class CarpenterFragment extends BaseFragment implements CarpenterContract
                 if (index == 0) {
                     mRecyclerView1.setVisibility(View.VISIBLE);
                     mRecyclerView2.setVisibility(View.GONE);
+                    click1();
                 } else {
                     mRecyclerView1.setVisibility(View.GONE);
                     mRecyclerView2.setVisibility(View.VISIBLE);
-                    mPresenter.requestDockerData();
+                    click2();
                 }
             }
         });
@@ -115,20 +114,30 @@ public class CarpenterFragment extends BaseFragment implements CarpenterContract
      */
     private void setShowTypeByClickMore(int type) {
         mNavigationTabBar.setModelIndex(type);
-        if (type == 0) {
-            if (mCarpenterBean != null) {
-                setCarpenterData(mCarpenterBean);
-            } else {
-                mPresenter.requestCarpenterData();
-            }
-        } else {
-            if (mDockerBean != null) {
-                setDockerData(mDockerBean);
-            } else {
-                mPresenter.requestDockerData();
-            }
-        }
+//        if (type == 0) {
+//            click1();
+//        } else {
+//            click2();
+//        }
 
+    }
+
+    private void click2() {
+        if (mDockerBean != null) {
+            setDockerData(mDockerBean);
+        } else {
+            showLoading();
+            mPresenter.requestDockerData();
+        }
+    }
+
+    private void click1() {
+        if (mCarpenterBean != null) {
+            setCarpenterData(mCarpenterBean);
+        } else {
+            showLoading();
+            mPresenter.requestCarpenterData();
+        }
     }
 
     @Override

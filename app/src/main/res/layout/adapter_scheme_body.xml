@@ -12,15 +12,14 @@
         android:id="@+id/ivBodyPic"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
-        android:src="@drawable/pic_05"/>
+        android:adjustViewBounds="true"/>
 
     <TextView
         android:id="@+id/tvItemTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/dp_10"
-        android:text="@string/text_title"
+        android:text=""
         android:textColor="@color/black"
         android:textSize="@dimen/sp_16"
         android:textStyle="bold"/>
@@ -30,5 +29,5 @@
         style="@style/textview_body_magin_10"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/text_body"/>
+        android:text=""/>
 </LinearLayout>

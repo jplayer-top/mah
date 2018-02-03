@@ -20,12 +20,39 @@
             android:layout_height="?actionBarSize"/>
     </android.support.design.widget.AppBarLayout>
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/viewPager"
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/smartRefreshLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+        android:background="@color/colorWhite"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:srlAccentColor="@android:color/white"
+        app:srlEnablePreviewInEditMode="true"
+        app:srlPrimaryColor="#444444">
 
+        <com.scwang.smartrefresh.header.BezierCircleHeader
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <top.jplayer.baseprolibrary.widgets.MultipleStatusView
+            android:id="@+id/multiplestatusview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:emptyView="@layout/layout_empty_view"
+            app:errorView="@layout/layout_error_view"
+            app:loadingView="@layout/layout_loading_view"
+            app:noNetworkView="@layout/layout_network_view">
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/viewPager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </top.jplayer.baseprolibrary.widgets.MultipleStatusView>
+
+        <com.scwang.smartrefresh.layout.footer.FalsifyFooter
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
     <include layout="@layout/shop_bottom"/>
 </android.support.design.widget.CoordinatorLayout>

@@ -347,7 +347,7 @@ public class LoginAnimActivity extends BaseSpecialActivity implements TextWatche
                     if (!mMap.isEmpty()) {
                         mMap.clear();
                     }
-                    mMap.put("phone", StringUtils.Builder.isNullable(mRNum, ""));
+                    mMap.put("phone", StringUtils.getInstance().isNullable(mRNum, ""));
                     if (!"验证账号".equals(mTvSetType.getText().toString()) || "完成绑定".equals(mBtRegister1.getText().toString())) {
                         mMap.put("check", "1");
                     } else {
@@ -362,32 +362,33 @@ public class LoginAnimActivity extends BaseSpecialActivity implements TextWatche
                 mRePwd = mRegisterPwd.getText().toString().trim();
                 mRe2Pwd = mEt2code.getText().toString().trim();
                 if (mViewGone.getVisibility() == View.VISIBLE) {
-                    if (StringUtils.Builder.isNullObj(nick) && StringUtils.Builder.isNullObj(mRePwd) && StringUtils.Builder.isNullObj(mRe2Pwd)) {
+                    if (StringUtils.getInstance().isNullObj(nick) && StringUtils.getInstance().isNullObj(mRePwd) && StringUtils.getInstance()
+                            .isNullObj(mRe2Pwd)) {
                         ToastUtils.init().showInfoToast(this, "请输入您的昵称和密码");
                     }
-                    if (StringUtils.Builder.isNullObj(nick)) {
+                    if (StringUtils.getInstance().isNullObj(nick)) {
                         ToastUtils.init().showInfoToast(this, "请输入您的昵称");
                         return;
                     }
                 }
-                if (StringUtils.Builder.isNullObj(mRePwd)) {
+                if (StringUtils.getInstance().isNullObj(mRePwd)) {
                     ToastUtils.init().showInfoToast(this, "请设置6-16位登录密码");
                 }
                 if (!mRePwd.equals(mRe2Pwd)) {
                     ToastUtils.init().showInfoToast(this, "您输入的密码不一致，请重新输入");
                     return;
                 }
-                if (StringUtils.Builder.isLengthRight(mEt2code)) {
+                if (StringUtils.getInstance().isLengthRight(mEt2code)) {
                     ToastUtils.init().showInfoToast(this, "请设置6-16位登录密码");
                     return;
                 }
                 if (!mMap.isEmpty()) {
                     mMap.clear();
                 }
-                mMap.put("phone", StringUtils.Builder.isNullable(mRNum, ""));
-                mMap.put("nick", StringUtils.Builder.isNullable(nick, ""));
-                mMap.put("smCode", StringUtils.Builder.isNullable(mRCode, ""));
-                mMap.put("password", StringUtils.Builder.isNullable(mRe2Pwd, ""));
+                mMap.put("phone", StringUtils.getInstance().isNullable(mRNum, ""));
+                mMap.put("nick", StringUtils.getInstance().isNullable(nick, ""));
+                mMap.put("smCode", StringUtils.getInstance().isNullable(mRCode, ""));
+                mMap.put("password", StringUtils.getInstance().isNullable(mRe2Pwd, ""));
                 if ("重置密码".equals(mBtFinishRegister.getText().toString())) {
                     mPresenter.forget(mMap);
                     break;

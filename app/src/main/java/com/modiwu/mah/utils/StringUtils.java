@@ -45,7 +45,6 @@ public class StringUtils {
         return spanString;
     }
 
-    public static StringUtils Builder = getInstance();
 
     /**
      * 获取输入文字

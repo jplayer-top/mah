@@ -6,6 +6,9 @@ import android.view.ViewGroup;
 
 import com.alibaba.android.vlayout.LayoutHelper;
 import com.modiwu.mah.R;
+import com.modiwu.mah.mvp.model.bean.HomeBean;
+
+import java.util.List;
 
 import top.jplayer.baseprolibrary.ui.adapter.VLayoutAdapter;
 
@@ -15,6 +18,9 @@ import top.jplayer.baseprolibrary.ui.adapter.VLayoutAdapter;
  */
 
 public class HomeAdvLayoutAdapter extends VLayoutAdapter<RecyclerView.ViewHolder> {
+    private List<HomeBean.ShiGongBean> mShiGong;
+    private List<HomeBean.ShouHouBean> mShouHou;
+
     public HomeAdvLayoutAdapter(Context context, LayoutHelper helper, int count, int itemType) {
         super(context, helper, count, itemType);
     }
@@ -24,4 +30,12 @@ public class HomeAdvLayoutAdapter extends VLayoutAdapter<RecyclerView.ViewHolder
         return R.layout.adapter_home_body_adv;
     }
 
+    @Override
+    protected void onBindViewHolderWithOffset(RecyclerView.ViewHolder holder, int position, int offsetTotal) {
+
+    }
+
+    public void setShouHou(List<HomeBean.ShouHouBean> shouHou) {
+        mShouHou = shouHou;
+    }
 }

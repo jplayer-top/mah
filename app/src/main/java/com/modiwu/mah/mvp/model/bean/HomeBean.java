@@ -4,6 +4,8 @@ import com.chad.library.adapter.base.entity.MultiItemEntity;
 
 import java.util.List;
 
+import top.jplayer.baseprolibrary.mvp.model.bean.BaseBean;
+
 /**
  * Created by Obl on 2018/1/22.
  * com.modiwu.mah.mvp.model.bean
@@ -53,8 +55,35 @@ public class HomeBean extends BaseBean implements MultiItemEntity {
 
     public List<BannerBean> banner;
     public List<FanganBean> fangan;
-    public List<?> goods;
+    public List<GoodBean> goods;
     public List<SjsBean> sjs;
+    public List<ShiGongBean> shigong;
+    public List<ShiDianBean> shidian;
+    public List<ShouHouBean> shouhou;
+
+    public static class ShiGongBean {
+
+
+        public String navType;
+        public String navValue;
+        public String imgUrl;
+    }
+
+    public static class ShiDianBean {
+
+
+        public String navType;
+        public String navValue;
+        public String imgUrl;
+    }
+
+    public static class ShouHouBean {
+
+
+        public String navType;
+        public String navValue;
+        public String imgUrl;
+    }
 
     public static class BannerBean {
         /**
@@ -83,6 +112,23 @@ public class HomeBean extends BaseBean implements MultiItemEntity {
         public String navValue;
         public String imgUrl;
         public String title;
+        public String subtitle;
+    }
+
+    public static class GoodBean {
+        /**
+         * "navType": "goods",
+         * "navValue": "10026",
+         * "imgUrl": "shop/6af981b24bda4454b9704675d1637ca6.png",
+         * "title": "我是测试",
+         * "subtitle": "我是测试"
+         */
+
+        public String navType;
+        public String navValue;
+        public String imgUrl;
+        public String title;
+        public String price;
         public String subtitle;
     }
 

@@ -104,10 +104,24 @@ public class HomeFragment extends BaseFragment implements HomeContract.HomeView 
         /**
          * 施工标准
          */
-        adapters.add(new HomeAdvLayoutAdapter(getContext(), new LinearLayoutHelper(), 1, HomeBean.BODY_ADV));
-
-        adapters.add(getHomeSectionLayoutAdapter("颜值单品"));
-        adapters.add(new HomeSingleVLayoutAdapter(getContext(), new GridLayoutHelper(2), 6, HomeBean.BODY_SINGLE));
+        List<HomeBean.ShiGongBean> shiGongBeans = homeBean.shigong;
+        if (shiGongBeans != null && shiGongBeans.size() > 0) {
+            HomeToShopLayoutAdapter standardLayoutAdapter = new HomeToShopLayoutAdapter(getContext(), new
+                    LinearLayoutHelper(), shiGongBeans.size(), HomeBean.BODY_TOSHOP);
+            adapters.add(standardLayoutAdapter);
+            standardLayoutAdapter.setShiGong(shiGongBeans);
+        }
+        /**
+         * 颜值单品
+         */
+        List<HomeBean.GoodBean> goodBeans = homeBean.goods;
+        if (goodBeans != null && goodBeans.size() > 0) {
+            adapters.add(getHomeSectionLayoutAdapter("颜值单品"));
+            HomeSingleVLayoutAdapter singleVLayoutAdapter = new HomeSingleVLayoutAdapter(getContext(), new
+                    GridLayoutHelper(2, goodBeans.size(), 10), goodBeans.size(), HomeBean.BODY_SINGLE);
+            singleVLayoutAdapter.setGoods(goodBeans);
+            adapters.add(singleVLayoutAdapter);
+        }
 
         /**
          * 匠心
@@ -115,30 +129,36 @@ public class HomeFragment extends BaseFragment implements HomeContract.HomeView 
         List<HomeBean.SjsBean> sjsBeans = homeBean.sjs;
         if (fanganBeans != null && fanganBeans.size() > 0) {
             List<HomeBean.SjsBean> realSjsBeans = new ArrayList<>();
-            List<HomeBean.SjsBean> urlBeans = new ArrayList<>();
-            Observable.fromIterable(sjsBeans).filter(sjsBean -> {
-                if (TextUtils.equals("url", sjsBean.navType)) {
-                    urlBeans.add(sjsBean);
-                }
-                return TextUtils.equals("sjs", sjsBean.navType);
-            }).subscribe(realSjsBeans::add);
+            Observable.fromIterable(sjsBeans).filter(sjsBean -> TextUtils.equals("sjs", sjsBean.navType)).subscribe(realSjsBeans::add);
             if (realSjsBeans.size() > 0) {
                 adapters.add(getHomeSectionLayoutAdapter("匠心"));
                 HomeRecommendLayoutAdapter recommendLayoutAdapter = getHomeRecommendLayoutAdapter(realSjsBeans);
                 recommendLayoutAdapter.setSjs(realSjsBeans);
                 adapters.add(recommendLayoutAdapter);
-            } else if (urlBeans.size() > 0) {
             }
         }
 
         /**
          * 服务保障
          */
-        adapters.add(new HomeAdvLayoutAdapter(getContext(), new LinearLayoutHelper(), 1, HomeBean.BODY_ADV));
+        List<HomeBean.ShouHouBean> shouHouBeans = homeBean.shouhou;
+        if (shouHouBeans != null && shouHouBeans.size() > 0) {
+            HomeAdvLayoutAdapter advLayoutAdapter = new HomeAdvLayoutAdapter(getContext(), new LinearLayoutHelper(), 1, HomeBean
+                    .BODY_ADV);
+            advLayoutAdapter.setShouHou(shouHouBeans);
+            adapters.add(advLayoutAdapter);
+        }
+
         /**
          * 实体店
          */
-        adapters.add(new HomeToShopLayoutAdapter(getContext(), new LinearLayoutHelper(), 1, HomeBean.BODY_TOSHOP));
+        List<HomeBean.ShiDianBean> shiDianBeans = homeBean.shidian;
+        if (shiDianBeans != null && shiDianBeans.size() > 0) {
+            HomeToShopLayoutAdapter standardLayoutAdapter = new HomeToShopLayoutAdapter(getContext(), new
+                    LinearLayoutHelper(), shiDianBeans.size(), HomeBean.BODY_TOSHOP);
+            adapters.add(standardLayoutAdapter);
+            standardLayoutAdapter.setShiDian(shiDianBeans);
+        }
 
 
         mDelegateAdapter.clear();

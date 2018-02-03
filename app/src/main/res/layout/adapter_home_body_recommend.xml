@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/dp_10"
-        android:text="@string/text_title"
+        android:text=""
         android:textColor="@color/black"
         android:textSize="@dimen/sp_16"
         android:textStyle="bold"/>
@@ -25,5 +25,5 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/dp_10"
-        android:text="@string/text_body"/>
+        android:text=""/>
 </LinearLayout>

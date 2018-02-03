@@ -34,12 +34,14 @@ public abstract class SuperBaseActivity extends AppCompatActivity {
     protected ImageView ivBarSearch;
     protected FrameLayout mFlRootView;
     public SuperBaseActivity mBaseActivity;
+    public String mTitle;
+    public Bundle mBundle;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(setDefView());
         initBundle(savedInstanceState);
+        setContentView(setDefView());
     }
 
 
@@ -51,6 +53,7 @@ public abstract class SuperBaseActivity extends AppCompatActivity {
     public View setDefView() {
         contentView = View.inflate(this, R.layout.activity_super_base, null);
         initDefSuperView(contentView);
+        if (mTitle != null) tvBarTitle.setText(mTitle);
         return contentView;
     }
 
@@ -87,12 +90,7 @@ public abstract class SuperBaseActivity extends AppCompatActivity {
      */
     public void customBarLeft() {
         mIvGoBack.setVisibility(View.VISIBLE);
-        mIvGoBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        mIvGoBack.setOnClickListener(v -> finish());
     }
 
     /**
@@ -101,7 +99,8 @@ public abstract class SuperBaseActivity extends AppCompatActivity {
      * @param savedInstanceState 所保存的状态信息
      */
     public void initBundle(Bundle savedInstanceState) {
-
+        mTitle = getIntent().getStringExtra("title");
+        mBundle = getIntent().getBundleExtra("bundle");
     }
 
     public DialogLoading mLoading;

@@ -10,41 +10,56 @@ import android.widget.TextView;
 
 import com.modiwu.mah.R;
 import com.modiwu.mah.base.BaseSpecialActivity;
-import com.modiwu.mah.mvp.model.ShopCartDaoUtil;
-import com.modiwu.mah.mvp.model.bean.ShopCartBean;
-import com.modiwu.mah.ui.adapter.AdapterPagerShcemDetail;
+import com.modiwu.mah.mvp.constract.SchemeDetialContract;
+import com.modiwu.mah.mvp.model.bean.SchemeDetailBean;
+import com.modiwu.mah.mvp.presenter.SchemeDetailPresenter;
+import com.modiwu.mah.ui.adapter.AdapterPagerSchemeDetail;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import top.jplayer.baseprolibrary.utils.LogUtil;
+import top.jplayer.baseprolibrary.widgets.MultipleStatusView;
 
 /**
  * Created by Obl on 2018/1/23.
  * com.modiwu.mah.ui.activity
  */
-public class SchemeDetailActivity extends BaseSpecialActivity {
+public class SchemeDetailActivity extends BaseSpecialActivity implements SchemeDetialContract.ISchemeDetialView {
 
-    private ImageView mIvCirRed;
+    @BindView(R.id.tabLayout)
+    TabLayout tabLayout;
+    @BindView(R.id.tvToCard)
+    TextView tvToCard;
+    @BindView(R.id.ivCirRed)
+    ImageView mIvCirRed;
+    @BindView(R.id.tvToBuy)
+    TextView mTvToBuy;
+    @BindView(R.id.viewPager)
+    ViewPager viewPager;
+    @BindView(R.id.rlSchemeDetailBottom)
+    LinearLayout llSchemeDetailBottom;
+    @BindView(R.id.multiplestatusview)
+    MultipleStatusView mMultipleStatusView;
+    @BindView(R.id.smartRefreshLayout)
+    SmartRefreshLayout smartRefreshLayout;
+    private Unbinder mUnbinder;
+    public SchemeDetailPresenter mPresenter;
+    private AdapterPagerSchemeDetail mAdapter;
 
     @Override
     public int setBaseLayout() {
         return R.layout.activity_scheme_detail;
     }
 
-    private LinearLayout llSchemeDetailBottom;
-
     @Override
     public void initBaseData() {
+        mUnbinder = ButterKnife.bind(this, contentView);
         findToolBarView(contentView);
-        tvBarTitle.setText("方案详情");
         customBarLeft();
-        TabLayout tabLayout = contentView.findViewById(R.id.tabLayout);
-        mIvCirRed = contentView.findViewById(R.id.ivCirRed);
-        ViewPager viewPager = contentView.findViewById(R.id.viewPager);
-        llSchemeDetailBottom = contentView.findViewById(R.id.rlSchemeDetailBottom);
-        TextView tvToBuy = contentView.findViewById(R.id.tvToBuy);
-        TextView tvToAdd = contentView.findViewById(R.id.tvToAdd);
-        TextView tvToCard = contentView.findViewById(R.id.tvToCard);
         tabLayout.setTabMode(TabLayout.MODE_FIXED);
         tabLayout.setupWithViewPager(viewPager);
         ArrayList<String> strings = new ArrayList<>();
@@ -53,8 +68,33 @@ public class SchemeDetailActivity extends BaseSpecialActivity {
         strings.add("软装");
         strings.add("楼盘");
         strings.add("单品");
-        AdapterPagerShcemDetail adapter = new AdapterPagerShcemDetail(getSupportFragmentManager(), strings);
-        viewPager.setAdapter(adapter);
+        mAdapter = new AdapterPagerSchemeDetail(getSupportFragmentManager(), strings);
+        mPresenter = new SchemeDetailPresenter(this);
+        String fangan_id = mBundle.getString("fangan_id");
+        if (fangan_id != null) {
+            mMultipleStatusView.showLoading();
+            mPresenter.requestSchemeDetialData(fangan_id);
+            smartRefreshLayout.setOnRefreshListener(refresh -> mPresenter.requestSchemeDetialData(fangan_id));
+        } else {
+            mMultipleStatusView.showEmpty();
+        }
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mUnbinder.unbind();
+    }
+
+    public SchemeDetailBean mSchemeDetailBean;
+
+    @Override
+    public void setSchemeDetialData(SchemeDetailBean bean) {
+        mMultipleStatusView.showContent();
+        smartRefreshLayout.finishRefresh();
+        this.mSchemeDetailBean = bean;
+        viewPager.setAdapter(mAdapter);
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -63,6 +103,7 @@ public class SchemeDetailActivity extends BaseSpecialActivity {
                     llSchemeDetailBottom.setVisibility(View.GONE);
                 } else
                     llSchemeDetailBottom.setVisibility(View.VISIBLE);
+
             }
 
             @Override
@@ -76,16 +117,33 @@ public class SchemeDetailActivity extends BaseSpecialActivity {
                 LogUtil.e("onTabReselected" + tab.getPosition());
             }
         });
-        tvToCard.setOnClickListener(view -> {
-            mIvCirRed.setVisibility(View.GONE);
-            startActivity(new Intent(mBaseActivity, ShopCartActivity.class));
-        });
-        ShopCartDaoUtil daoUtil = new ShopCartDaoUtil(this);
-        tvToAdd.setOnClickListener(v -> {
-            ShopCartBean bean = new ShopCartBean(null, "造作远山沙发", "成都酣然设计", "1894.00", "1", "sdasd");
-            boolean b = daoUtil.insertShopCart(bean);
-            mIvCirRed.setVisibility(b ? View.VISIBLE : View.GONE);
-        });
+        tvToCard.setOnClickListener(view -> startActivity(new Intent(mBaseActivity, ShopCartActivity.class)));
     }
 
+    @Override
+    public void showError() {
+        if (mMultipleStatusView != null) {
+            mMultipleStatusView.showError();
+        }
+        if (smartRefreshLayout != null && smartRefreshLayout.isRefreshing()) {
+            smartRefreshLayout.finishRefresh();
+        }
+    }
+
+    @Override
+    public void showLoading() {
+        if (mMultipleStatusView != null) {
+            mMultipleStatusView.showLoading();
+        }
+    }
+
+    @Override
+    public void showEmpty() {
+        if (mMultipleStatusView != null) {
+            mMultipleStatusView.showEmpty();
+        }
+        if (smartRefreshLayout != null && smartRefreshLayout.isRefreshing()) {
+            smartRefreshLayout.finishRefresh();
+        }
+    }
 }

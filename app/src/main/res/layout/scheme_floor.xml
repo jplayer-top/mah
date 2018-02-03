@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:showIn="@layout/fragment_scheme_floor">
+
+    <ImageView
+        android:id="@+id/building_adv_img"
+        style="@style/img_adjust_bounds"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:padding="@dimen/dp_10">
+
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"/>
+
+        <TextView
+            android:id="@+id/tvPrice"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:text="均价：xxx"
+            tools:ignore="RtlHardcoded"/>
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/tvStatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_1dp"
+        android:background="@color/white"
+        android:padding="@dimen/dp_10"
+        android:text="开盘状态"/>
+
+    <TextView
+        android:id="@+id/tvFloorLocal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:ellipsize="end"
+        android:lines="1"
+        android:padding="@dimen/dp_10"
+        android:text="地址："/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_1dp"
+        android:background="@color/white"
+        android:padding="@dimen/dp_10"
+        android:text="基本信息"
+        android:textSize="@dimen/sp_16"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/tvSellLocal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_1dp"
+        android:background="@color/white"
+        android:ellipsize="end"
+        android:lines="1"
+        android:padding="@dimen/dp_10"
+        android:text="售楼地址："/>
+
+    <TextView
+        android:id="@+id/tvPhone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:ellipsize="end"
+        android:lines="1"
+        android:padding="@dimen/dp_10"
+        android:text="联系电话："/>
+
+    <TextView
+        android:id="@+id/tvJFSJ"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:ellipsize="end"
+        android:lines="1"
+        android:padding="@dimen/dp_10"
+        android:text="交房时间："/>
+
+    <TextView
+        android:id="@+id/tvZLHX"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:ellipsize="end"
+        android:lines="1"
+        android:padding="@dimen/dp_10"
+        android:text="主力户型："/>
+
+    <TextView
+        android:id="@+id/tvWYLX"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:ellipsize="end"
+        android:lines="1"
+        android:padding="@dimen/dp_10"
+        android:text="物业类型："/>
+
+    <TextView
+        android:id="@+id/tvCQNX"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:ellipsize="end"
+        android:lines="1"
+        android:padding="@dimen/dp_10"
+        android:text="产权年限："/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_1dp"
+        android:background="@color/white"
+        android:padding="@dimen/dp_10"
+        android:text="项目介绍"
+        android:textSize="@dimen/sp_16"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/tvXMJJ"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_1dp"
+        android:background="@color/white"
+        android:padding="@dimen/dp_10"
+        android:text=""/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_1dp"
+        android:background="@color/white"
+        android:padding="@dimen/dp_10"
+        android:text="在售户型"
+        android:textSize="@dimen/sp_16"
+        android:textStyle="bold"/>
+
+    <cn.bingoogolapple.bgabanner.BGABanner
+        android:id="@+id/ViewPager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+</LinearLayout>

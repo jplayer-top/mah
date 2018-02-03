@@ -8,6 +8,9 @@ import android.widget.ImageView;
 import com.alibaba.android.vlayout.LayoutHelper;
 import com.bumptech.glide.Glide;
 import com.modiwu.mah.R;
+import com.modiwu.mah.mvp.model.bean.HomeBean;
+
+import java.util.List;
 
 import top.jplayer.baseprolibrary.glide.GlideUtils;
 import top.jplayer.baseprolibrary.ui.adapter.VLayoutAdapter;
@@ -18,6 +21,10 @@ import top.jplayer.baseprolibrary.ui.adapter.VLayoutAdapter;
  */
 
 public class HomeToShopLayoutAdapter extends VLayoutAdapter<RecyclerView.ViewHolder> {
+    private List<HomeBean.ShiGongBean> mShiGong;
+    private List<HomeBean.ShiDianBean> mShiDian;
+    private boolean beanType = false;
+
     public HomeToShopLayoutAdapter(Context context, LayoutHelper helper, int count, int itemType) {
         super(context, helper, count, itemType);
     }
@@ -30,6 +37,21 @@ public class HomeToShopLayoutAdapter extends VLayoutAdapter<RecyclerView.ViewHol
     @Override
     protected void onBindViewHolderWithOffset(RecyclerView.ViewHolder holder, int position, int offsetTotal) {
         ImageView imageView = holder.itemView.findViewById(R.id.ivHeard);
-        Glide.with(context).load(R.drawable.home_toshop).apply(GlideUtils.init().options()).into(imageView);
+        if (beanType) {
+            HomeBean.ShiDianBean shiDianBean = mShiDian.get(position);
+            Glide.with(context).load(shiDianBean.imgUrl).apply(GlideUtils.init().options()).into(imageView);
+        }else {
+            HomeBean.ShiGongBean shiGongBean = mShiGong.get(position);
+            Glide.with(context).load(shiGongBean.imgUrl).apply(GlideUtils.init().options()).into(imageView);
+        }
+    }
+
+    public void setShiGong(List<HomeBean.ShiGongBean> shiGong) {
+        beanType = false;
+        mShiGong = shiGong;
+    }
+    public void setShiDian(List<HomeBean.ShiDianBean> shiDian) {
+        beanType = true;
+        mShiDian = shiDian;
     }
 }

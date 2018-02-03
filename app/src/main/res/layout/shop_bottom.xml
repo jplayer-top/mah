@@ -27,7 +27,7 @@
         <TextView
             android:id="@+id/tvServer"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1.5"
             android:gravity="center"
             android:padding="@dimen/dimen_10dp"
@@ -43,7 +43,7 @@
             <TextView
                 android:id="@+id/tvToCard"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:gravity="center"
                 android:padding="10dp"
                 android:text="@string/shopping_cart"
@@ -65,7 +65,7 @@
         <TextView
             android:id="@+id/tvToBuy"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="3"
             android:gravity="center"
             android:padding="@dimen/dimen_5dp"
@@ -80,7 +80,8 @@
             android:gravity="center"
             android:padding="@dimen/dimen_5dp"
             android:text="@string/to_add"
-            android:textSize="@dimen/sp_16"/>
+            android:textSize="@dimen/sp_16"
+            android:visibility="gone"/>
 
     </LinearLayout>
 

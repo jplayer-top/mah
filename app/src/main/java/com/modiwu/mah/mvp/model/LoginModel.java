@@ -1,12 +1,12 @@
 package com.modiwu.mah.mvp.model;
 
 import com.modiwu.mah.mvp.MahServer;
-import com.modiwu.mah.mvp.model.bean.BaseBean;
 import com.modiwu.mah.mvp.model.bean.LoginBean;
 
 import java.util.Map;
 
 import io.reactivex.Observable;
+import top.jplayer.baseprolibrary.mvp.model.bean.BaseBean;
 import top.jplayer.baseprolibrary.net.IoMainSchedule;
 import top.jplayer.baseprolibrary.net.RetrofitManager;
 

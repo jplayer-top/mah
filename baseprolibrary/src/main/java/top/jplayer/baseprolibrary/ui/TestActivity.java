@@ -10,17 +10,6 @@ import android.view.ViewAnimationUtils;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.FrameLayout;
 
-import com.google.gson.Gson;
-
-import io.reactivex.functions.Function;
-import top.jplayer.baseprolibrary.mvp.model.bean.LoginBean;
-import top.jplayer.baseprolibrary.mvp.model.bean.SampleBean;
-import top.jplayer.baseprolibrary.net.ApiService;
-import top.jplayer.baseprolibrary.net.IoMainSchedule;
-import top.jplayer.baseprolibrary.net.RetrofitManager;
-import top.jplayer.baseprolibrary.net.SampleObserver;
-import top.jplayer.baseprolibrary.utils.LogUtil;
-
 /**
  * Created by Obl on 2018/1/18.
  * top.jplayer.baseprolibrary.ui

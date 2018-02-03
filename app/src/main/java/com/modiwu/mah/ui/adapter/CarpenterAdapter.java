@@ -1,13 +1,13 @@
 package com.modiwu.mah.ui.adapter;
 
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.modiwu.mah.R;
 import com.modiwu.mah.mvp.model.bean.CarpenterBean;
+import com.modiwu.mah.utils.StringUtils;
 
 import java.util.List;
 
@@ -29,10 +29,8 @@ public class CarpenterAdapter extends BaseQuickAdapter<CarpenterBean.RecordsBean
     @Override
     protected void convert(BaseViewHolder baseViewHolder, CarpenterBean.RecordsBean bean) {
         ImageView ivBodyPic = baseViewHolder.convertView.findViewById(R.id.ivBodyPic);
-        TextView tvItemTitle = baseViewHolder.convertView.findViewById(R.id.tvItemTitle);
-        TextView tvItemBody = baseViewHolder.convertView.findViewById(R.id.tvItemBody);
-        Glide.with(mContext).load(bean.designer_url).apply(GlideUtils.init().options(R.drawable.pic_06)).into(ivBodyPic);
-        tvItemTitle.setText(R.string.carpenter_title);
-        tvItemBody.setText(R.string.carpenter_body);
+        Glide.with(mContext).load(bean.designer_url).apply(GlideUtils.init().options()).into(ivBodyPic);
+        baseViewHolder.setText(R.id.tvItemTitle,StringUtils.getInstance().isNullable(bean.designer_name, "匠心"));
+        baseViewHolder.setText(R.id.tvItemBody,StringUtils.getInstance().isNullable(bean.designer_desc, "匠心设计"));
     }
 }
