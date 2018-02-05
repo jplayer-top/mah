@@ -2,10 +2,10 @@ package com.modiwu.mah.base;
 
 import android.support.v4.util.ArrayMap;
 
-import com.modiwu.mah.ui.Fragment.CarpenterFragment;
-import com.modiwu.mah.ui.Fragment.HomeFragment;
-import com.modiwu.mah.ui.Fragment.MeFragment;
-import com.modiwu.mah.ui.Fragment.SchemeFragment;
+import com.modiwu.mah.ui.fragment.CarpenterFragment;
+import com.modiwu.mah.ui.fragment.HomeFragment;
+import com.modiwu.mah.ui.fragment.MeFragment;
+import com.modiwu.mah.ui.fragment.SchemeFragment;
 
 import java.util.Map;
 

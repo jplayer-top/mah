@@ -1,8 +1,7 @@
-package com.modiwu.mah.ui.Fragment;
+package com.modiwu.mah.ui.fragment;
 
 import android.app.Dialog;
 import android.content.Intent;
-import android.net.Uri;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.ImageView;
@@ -21,7 +20,6 @@ import com.modiwu.mah.ui.activity.LoginAnimActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import top.jplayer.baseprolibrary.net.download.DownloadByChrome;
 import top.jplayer.baseprolibrary.ui.SampleActivity;
 
 /**

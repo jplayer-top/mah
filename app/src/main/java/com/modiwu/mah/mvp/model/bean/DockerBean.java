@@ -43,6 +43,7 @@ public class DockerBean extends BaseBean {
         public String parent_id;
         public String cat_name;
         public String cat_desc;
+        public String cat_icon;
         public int enabled;
     }
 }

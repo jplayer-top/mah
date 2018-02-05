@@ -3,11 +3,11 @@ package com.modiwu.mah.ui.adapter;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
-import com.modiwu.mah.ui.Fragment.SchemeAllFragment;
-import com.modiwu.mah.ui.Fragment.SchemeFloorFragment;
-import com.modiwu.mah.ui.Fragment.SchemeHardFragment;
-import com.modiwu.mah.ui.Fragment.SchemeSingleFragment;
-import com.modiwu.mah.ui.Fragment.SchemeSoftFragment;
+import com.modiwu.mah.ui.fragment.SchemeAllFragment;
+import com.modiwu.mah.ui.fragment.SchemeFloorFragment;
+import com.modiwu.mah.ui.fragment.SchemeHardFragment;
+import com.modiwu.mah.ui.fragment.SchemeSingleFragment;
+import com.modiwu.mah.ui.fragment.SchemeSoftFragment;
 
 import java.util.ArrayList;
 import java.util.List;

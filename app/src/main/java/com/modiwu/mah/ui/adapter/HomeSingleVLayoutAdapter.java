@@ -1,6 +1,7 @@
 package com.modiwu.mah.ui.adapter;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,12 +13,15 @@ import com.alibaba.android.vlayout.LayoutHelper;
 import com.bumptech.glide.Glide;
 import com.modiwu.mah.R;
 import com.modiwu.mah.mvp.model.bean.HomeBean;
+import com.modiwu.mah.ui.activity.ShopDetialActivity;
 import com.modiwu.mah.utils.StringUtils;
 
 import java.util.List;
+import java.util.Locale;
 
 import top.jplayer.baseprolibrary.glide.GlideUtils;
 import top.jplayer.baseprolibrary.ui.adapter.VLayoutAdapter;
+import top.jplayer.baseprolibrary.utils.ActivityUtils;
 import top.jplayer.baseprolibrary.utils.ScreenUtils;
 
 /**
@@ -32,6 +36,7 @@ public class HomeSingleVLayoutAdapter extends VLayoutAdapter<RecyclerView.ViewHo
     private TextView mTvTitle;
     private TextView mTvSubTitle;
     private TextView mTvPrice;
+    private View mItemView;
 
     public HomeSingleVLayoutAdapter(Context context, LayoutHelper helper, int count, int itemType) {
         super(context, helper, count, itemType);
@@ -40,12 +45,12 @@ public class HomeSingleVLayoutAdapter extends VLayoutAdapter<RecyclerView.ViewHo
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         RecyclerView.ViewHolder viewHolder = super.onCreateViewHolder(parent, viewType);
-        View itemView = viewHolder.itemView;
-        mIvBodyPic = itemView.findViewById(R.id.ivBodyPic);
-        mTvTitle = itemView.findViewById(R.id.tvTitle);
-        mTvSubTitle = itemView.findViewById(R.id.tvSubTitle);
-        mTvPrice = itemView.findViewById(R.id.tvPrice);
-        LinearLayout llTextView = itemView.findViewById(R.id.llTextView);
+        mItemView = viewHolder.itemView;
+        mIvBodyPic = mItemView.findViewById(R.id.ivBodyPic);
+        mTvTitle = mItemView.findViewById(R.id.tvTitle);
+        mTvSubTitle = mItemView.findViewById(R.id.tvSubTitle);
+        mTvPrice = mItemView.findViewById(R.id.tvPrice);
+        LinearLayout llTextView = mItemView.findViewById(R.id.llTextView);
         int i = ScreenUtils.getWidthOfScreen(context, 10, 2);
         mIvBodyPic.getLayoutParams().width = i;
         llTextView.getLayoutParams().width = i;
@@ -67,9 +72,15 @@ public class HomeSingleVLayoutAdapter extends VLayoutAdapter<RecyclerView.ViewHo
             Glide.with(context).load(goodBean.imgUrl).apply(GlideUtils.init().options()).into(mIvBodyPic);
 
         }
+        mItemView.setOnClickListener(v -> {
+            Bundle bundle = new Bundle();
+            bundle.putString("cat_id", String.format(Locale.CHINA, "%s", goodBean.navValue));
+            ActivityUtils.init().start(context, ShopDetialActivity.class, goodBean.title, bundle);
+        });
         mTvTitle.setText(StringUtils.getInstance().isNullable(goodBean.title, "整个家"));
         mTvSubTitle.setText(StringUtils.getInstance().isNullable(goodBean.subtitle, "整个家精心推荐"));
         mTvPrice.setText(StringUtils.getInstance().isNullable(goodBean.price, "￥0.00"));
+
     }
 
     public void setGoods(List<HomeBean.GoodBean> goods) {

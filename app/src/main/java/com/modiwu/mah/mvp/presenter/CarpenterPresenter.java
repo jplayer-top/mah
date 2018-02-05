@@ -2,7 +2,7 @@ package com.modiwu.mah.mvp.presenter;
 
 import com.modiwu.mah.mvp.constract.CarpenterContract;
 import com.modiwu.mah.mvp.model.CarpenterModel;
-import com.modiwu.mah.ui.Fragment.CarpenterFragment;
+import com.modiwu.mah.ui.fragment.CarpenterFragment;
 
 import io.reactivex.disposables.Disposable;
 import top.jplayer.baseprolibrary.mvp.contract.BasePresenter;

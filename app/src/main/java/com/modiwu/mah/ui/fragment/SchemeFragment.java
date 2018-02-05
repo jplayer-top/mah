@@ -1,4 +1,4 @@
-package com.modiwu.mah.ui.Fragment;
+package com.modiwu.mah.ui.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;

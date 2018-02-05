@@ -1,4 +1,4 @@
-package com.modiwu.mah.ui.Fragment;
+package com.modiwu.mah.ui.fragment;
 
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -16,6 +16,7 @@ import com.modiwu.mah.mvp.model.bean.CarpenterBean;
 import com.modiwu.mah.mvp.model.bean.DockerBean;
 import com.modiwu.mah.mvp.presenter.CarpenterPresenter;
 import com.modiwu.mah.ui.activity.DesignerActivity;
+import com.modiwu.mah.ui.activity.ShopDetialActivity;
 import com.modiwu.mah.ui.adapter.CarpenterAdapter;
 import com.modiwu.mah.ui.adapter.DockerAdapter;
 import com.modiwu.mah.utils.StringUtils;
@@ -72,6 +73,13 @@ public class CarpenterFragment extends BaseFragment implements CarpenterContract
         View view = View.inflate(getContext(), R.layout.adapter_home_body_toshop, null);
         mIvHeard = view.findViewById(R.id.ivHeard);
         mAdapter2.addHeaderView(view);
+        mAdapter2.setOnItemClickListener((adapter, view1, position) ->
+        {
+            DockerBean.RecordsBean recordsBean = (DockerBean.RecordsBean) adapter.getData().get(position);
+            Bundle bundle = new Bundle();
+            bundle.putString("cat_id", recordsBean.cat_id);
+            ActivityUtils.init().start(getContext(), ShopDetialActivity.class, recordsBean.cat_name, bundle);
+        });
         mRecyclerView2.setAdapter(mAdapter2);
     }
 

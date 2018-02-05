@@ -2,7 +2,7 @@ package com.modiwu.mah.mvp.presenter;
 
 import com.modiwu.mah.mvp.constract.HomeContract;
 import com.modiwu.mah.mvp.model.HomeModel;
-import com.modiwu.mah.ui.Fragment.HomeFragment;
+import com.modiwu.mah.ui.fragment.HomeFragment;
 
 import io.reactivex.disposables.Disposable;
 import top.jplayer.baseprolibrary.mvp.contract.BasePresenter;

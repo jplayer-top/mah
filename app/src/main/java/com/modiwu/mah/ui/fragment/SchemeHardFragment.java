@@ -1,4 +1,4 @@
-package com.modiwu.mah.ui.Fragment;
+package com.modiwu.mah.ui.fragment;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
