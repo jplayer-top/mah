@@ -28,7 +28,6 @@ public class SchemeSingleFragment extends SuperBaseFragment {
     protected void initData(View rootView) {
         mActivity = (SchemeDetailActivity) getActivity();
         mGoodsBeans = mActivity.mSchemeDetailBean.goods;
-
         RecyclerView recyclerView = rootView.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
         recyclerView.setAdapter(new SchemeSingleAdapter(mGoodsBeans));

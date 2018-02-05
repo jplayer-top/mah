@@ -6,8 +6,7 @@
 
     <ImageView
         android:id="@+id/ivBodyPic"
-        style="@style/img_adjust_bounds"
-        android:src="@drawable/pic_05"/>
+        style="@style/img_adjust_bounds"/>
 
     <TextView
         android:id="@+id/tvItemTitle"

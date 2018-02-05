@@ -7,14 +7,17 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.modiwu.mah.R;
-import com.modiwu.mah.mvp.model.bean.HomeBean;
 import com.modiwu.mah.mvp.model.bean.SchemeDetailBean;
+import com.modiwu.mah.utils.StringUtils;
 
 import java.util.List;
+import java.util.Locale;
 
+import top.jplayer.baseprolibrary.glide.GlideUtils;
 import top.jplayer.baseprolibrary.utils.ScreenUtils;
 
 /**
@@ -24,7 +27,6 @@ import top.jplayer.baseprolibrary.utils.ScreenUtils;
 
 public class SchemeSingleAdapter extends BaseQuickAdapter<SchemeDetailBean.GoodsBean, BaseViewHolder> {
 
-    private List<HomeBean.GoodBean> mGoods;
     private ImageView mIvBodyPic;
     private TextView mTvTitle;
     private TextView mTvSubTitle;
@@ -52,6 +54,11 @@ public class SchemeSingleAdapter extends BaseQuickAdapter<SchemeDetailBean.Goods
 
     @Override
     protected void convert(BaseViewHolder helper, SchemeDetailBean.GoodsBean item) {
-
+        Glide.with(mContext).load(item.goods_img)
+                .apply(GlideUtils.init().options(R.drawable.home_item_single01))
+                .into(mIvBodyPic);
+        helper.setText(R.id.tvTitle, StringUtils.getInstance().isNullable(item.goods_title, "整个家"))
+                .setText(R.id.tvPrice, String.format(Locale.CHINA, "￥%s", item.goods_price + ""))
+                .setText(R.id.tvSubTitle, StringUtils.getInstance().isNullable(item.goods_subtitle, "精心推荐"));
     }
 }

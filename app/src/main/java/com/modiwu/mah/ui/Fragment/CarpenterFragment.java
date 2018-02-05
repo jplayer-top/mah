@@ -1,5 +1,6 @@
 package com.modiwu.mah.ui.Fragment;
 
+import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,15 +15,19 @@ import com.modiwu.mah.mvp.constract.CarpenterContract;
 import com.modiwu.mah.mvp.model.bean.CarpenterBean;
 import com.modiwu.mah.mvp.model.bean.DockerBean;
 import com.modiwu.mah.mvp.presenter.CarpenterPresenter;
+import com.modiwu.mah.ui.activity.DesignerActivity;
 import com.modiwu.mah.ui.adapter.CarpenterAdapter;
 import com.modiwu.mah.ui.adapter.DockerAdapter;
+import com.modiwu.mah.utils.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import devlight.io.library.ntb.NavigationTabBar;
 import top.jplayer.baseprolibrary.glide.GlideUtils;
 import top.jplayer.baseprolibrary.listener.NetNavigationBarListener;
+import top.jplayer.baseprolibrary.utils.ActivityUtils;
 
 /**
  * Created by Obl on 2018/1/19.
@@ -73,6 +78,13 @@ public class CarpenterFragment extends BaseFragment implements CarpenterContract
     private void initRecyclerView1(List<CarpenterBean.RecordsBean> list) {
         mRecyclerView1.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         mAdapter1 = new CarpenterAdapter(list);
+        mAdapter1.setOnItemClickListener((adapter, view, position) -> {
+            Bundle bundle = new Bundle();
+            List<CarpenterBean.RecordsBean> data = adapter.getData();
+            bundle.putString("designer_id", String.format(Locale.CHINA, "%d", data.get(position).designer_id));
+            String designer = StringUtils.getInstance().isNullable(data.get(position).designer_name, "设计师");
+            ActivityUtils.init().start(getContext(), DesignerActivity.class, designer, bundle);
+        });
         mRecyclerView1.setAdapter(mAdapter1);
     }
 

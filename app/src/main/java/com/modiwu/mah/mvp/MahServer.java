@@ -2,6 +2,7 @@ package com.modiwu.mah.mvp;
 
 
 import com.modiwu.mah.mvp.model.bean.CarpenterBean;
+import com.modiwu.mah.mvp.model.bean.DesignBean;
 import com.modiwu.mah.mvp.model.bean.DockerBean;
 import com.modiwu.mah.mvp.model.bean.FloorBean;
 import com.modiwu.mah.mvp.model.bean.HomeBean;
@@ -57,4 +58,6 @@ public interface MahServer {
     @GET("fangan/detail?")
     Observable<SchemeDetailBean> getSchemeDetailBean(@Query("fangan_id") String fangan_id);
 
+    @GET("designer/detail?")
+    Observable<DesignBean> getDesignBean(@Query("designer_id") String designer_id);
 }

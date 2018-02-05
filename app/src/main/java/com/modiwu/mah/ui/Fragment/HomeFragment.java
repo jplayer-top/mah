@@ -61,6 +61,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.HomeView 
         pool.setMaxRecycledViews(0, 10);
         mRecyclerView.setRecycledViewPool(pool);
         mDelegateAdapter = new DelegateAdapter(manager, true);
+
         smartRefreshLayout.setOnRefreshListener(refresh -> mPresenter.requestHomeData());
         mPresenter = new HomePresenter(this);
         showLoading();

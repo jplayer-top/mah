@@ -5,6 +5,7 @@ import com.modiwu.mah.mvp.model.SchemeDetailModel;
 import com.modiwu.mah.mvp.model.bean.SchemeDetailBean;
 import com.modiwu.mah.ui.activity.SchemeDetailActivity;
 
+import io.reactivex.disposables.Disposable;
 import top.jplayer.baseprolibrary.mvp.contract.BasePresenter;
 import top.jplayer.baseprolibrary.net.SampleShowDialogObserver;
 
@@ -24,8 +25,9 @@ public class SchemeDetailPresenter extends BasePresenter<SchemeDetailActivity> i
 
     @Override
     public void requestSchemeDetialData(String fangan_id) {
-        mModel.requestSchemeDetailBean(fangan_id)
+        Disposable disposable = mModel.requestSchemeDetailBean(fangan_id)
                 .subscribe(schemeDetailBean -> mIView.setSchemeDetialData(schemeDetailBean));
+        addSubscription(disposable);
     }
 
     public void requestUpSchemeDetialData(String fangan_id) {
