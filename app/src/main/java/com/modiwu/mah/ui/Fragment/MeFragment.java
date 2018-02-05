@@ -99,12 +99,6 @@ public class MeFragment extends BaseFragment {
         // 更新
         builder.setPositiveButton("立即更新", (dialog, which) -> {
             dialog.dismiss();
-//            if (Build.VERSION.SDK_INT > 23) {
-//                Uri contentUri = getContext().getUriForFile(this, getString(R.string.pack_name), file);
-//                getContext().grantUriPermission(getContext().getPackageName(), contentUri, Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-//                intent.putExtra(MediaStore.EXTRA_OUTPUT, contentUri);
-//            }
-            DownloadByChrome.byChrome(getContext(), Uri.parse("http://jplayer.top/app-release.apk"));
 
         });
         // 稍后更新
