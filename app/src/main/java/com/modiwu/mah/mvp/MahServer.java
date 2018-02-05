@@ -10,6 +10,8 @@ import com.modiwu.mah.mvp.model.bean.LoginBean;
 import com.modiwu.mah.mvp.model.bean.SchemeBean;
 import com.modiwu.mah.mvp.model.bean.SchemeDetailBean;
 import com.modiwu.mah.mvp.model.bean.SelectBean;
+import com.modiwu.mah.mvp.model.bean.ShopSubListBean;
+import com.modiwu.mah.mvp.model.bean.SubTitleBean;
 
 import java.util.Map;
 
@@ -60,4 +62,10 @@ public interface MahServer {
 
     @GET("designer/detail?")
     Observable<DesignBean> getDesignBean(@Query("designer_id") String designer_id);
+
+    @GET("mall/goods/subcat?")
+    Observable<SubTitleBean> getSubTitleBean(@Query("cat_id") String cat_id);
+
+    @GET("mall/goods/l?")
+    Observable<ShopSubListBean> getSubListBean(@Query("pageNum") String page_num, @Query("cat_id") String cat_id);
 }

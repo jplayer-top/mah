@@ -22,6 +22,8 @@
             android:src="@drawable/placeholder"/>
 
         <TextView
+            android:lines="1"
+            android:ellipsize="end"
             android:id="@+id/tvTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -32,6 +34,8 @@
             android:textSize="@dimen/sp_14"/>
 
         <TextView
+            android:lines="1"
+            android:ellipsize="end"
             android:id="@+id/tvSubTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

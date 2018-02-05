@@ -16,7 +16,7 @@ import com.modiwu.mah.mvp.model.bean.CarpenterBean;
 import com.modiwu.mah.mvp.model.bean.DockerBean;
 import com.modiwu.mah.mvp.presenter.CarpenterPresenter;
 import com.modiwu.mah.ui.activity.DesignerActivity;
-import com.modiwu.mah.ui.activity.ShopDetialActivity;
+import com.modiwu.mah.ui.activity.ShopSubActivity;
 import com.modiwu.mah.ui.adapter.CarpenterAdapter;
 import com.modiwu.mah.ui.adapter.DockerAdapter;
 import com.modiwu.mah.utils.StringUtils;
@@ -78,7 +78,7 @@ public class CarpenterFragment extends BaseFragment implements CarpenterContract
             DockerBean.RecordsBean recordsBean = (DockerBean.RecordsBean) adapter.getData().get(position);
             Bundle bundle = new Bundle();
             bundle.putString("cat_id", recordsBean.cat_id);
-            ActivityUtils.init().start(getContext(), ShopDetialActivity.class, recordsBean.cat_name, bundle);
+            ActivityUtils.init().start(getContext(), ShopSubActivity.class, recordsBean.cat_name, bundle);
         });
         mRecyclerView2.setAdapter(mAdapter2);
     }
