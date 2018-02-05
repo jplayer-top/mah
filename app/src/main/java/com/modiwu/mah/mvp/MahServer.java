@@ -10,6 +10,7 @@ import com.modiwu.mah.mvp.model.bean.LoginBean;
 import com.modiwu.mah.mvp.model.bean.SchemeBean;
 import com.modiwu.mah.mvp.model.bean.SchemeDetailBean;
 import com.modiwu.mah.mvp.model.bean.SelectBean;
+import com.modiwu.mah.mvp.model.bean.ShopGoodsInfoBean;
 import com.modiwu.mah.mvp.model.bean.ShopSubListBean;
 import com.modiwu.mah.mvp.model.bean.SubTitleBean;
 
@@ -68,4 +69,8 @@ public interface MahServer {
 
     @GET("mall/goods/l?")
     Observable<ShopSubListBean> getSubListBean(@Query("pageNum") String page_num, @Query("cat_id") String cat_id);
+
+    @GET("mall/goods/info?")
+    Observable<ShopGoodsInfoBean> getGoodsInfoBean(@Query("goods_id") String goods_id);
+
 }

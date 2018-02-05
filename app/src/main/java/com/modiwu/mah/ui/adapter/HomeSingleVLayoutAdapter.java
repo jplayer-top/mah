@@ -74,7 +74,7 @@ public class HomeSingleVLayoutAdapter extends VLayoutAdapter<RecyclerView.ViewHo
         }
         mItemView.setOnClickListener(v -> {
             Bundle bundle = new Bundle();
-            bundle.putString("cat_id", String.format(Locale.CHINA, "%s", goodBean.navValue));
+            bundle.putString("goods_id", String.format(Locale.CHINA, "%s", goodBean.navValue));
             ActivityUtils.init().start(context, ShopDetialActivity.class, goodBean.title, bundle);
         });
         mTvTitle.setText(StringUtils.getInstance().isNullable(goodBean.title, "整个家"));

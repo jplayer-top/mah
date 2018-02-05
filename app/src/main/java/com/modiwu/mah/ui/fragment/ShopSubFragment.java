@@ -48,7 +48,7 @@ public class ShopSubFragment extends BaseFragment implements SubShopContract.ISu
         mAdapter.setOnItemClickListener((adapter1, view, position) -> {
             ShopSubListBean.RecordsBean goodsBean = (ShopSubListBean.RecordsBean) adapter1.getData().get(position);
             Bundle bundle = new Bundle();
-            bundle.putString("cat_id", String.format(Locale.CHINA, "%d", goodsBean.goods_id));
+            bundle.putString("goods_id", String.format(Locale.CHINA, "%d", goodsBean.goods_id));
             ActivityUtils.init().start(getContext(), ShopDetialActivity.class, goodsBean.goods_title, bundle);
         });
     }

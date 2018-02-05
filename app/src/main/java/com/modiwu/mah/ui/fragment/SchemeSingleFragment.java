@@ -39,7 +39,7 @@ public class SchemeSingleFragment extends SuperBaseFragment {
         adapter.setOnItemClickListener((adapter1, view, position) -> {
             SchemeDetailBean.GoodsBean goodsBean = (SchemeDetailBean.GoodsBean) adapter1.getData().get(position);
             Bundle bundle = new Bundle();
-            bundle.putString("cat_id", String.format(Locale.CHINA, "%d", goodsBean.cat_id));
+            bundle.putString("goods_id", String.format(Locale.CHINA, "%d", goodsBean.goods_id));
             ActivityUtils.init().start(getContext(), ShopDetialActivity.class, goodsBean.goods_title, bundle);
         });
     }
