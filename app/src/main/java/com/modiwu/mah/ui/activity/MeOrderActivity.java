@@ -44,7 +44,7 @@ public class MeOrderActivity extends BaseCommonActivity implements OrderListCont
         mRecyclerView.addItemDecoration(decor);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,
                 false));
-        ArrayList<MeOrderBean> data = new ArrayList<>();
+        ArrayList<MeOrderBean.RecordsBean> data = new ArrayList<>();
 
         mAdapter = new MeOrderAdapter(data);
         mRecyclerView.setAdapter(mAdapter);
@@ -56,7 +56,7 @@ public class MeOrderActivity extends BaseCommonActivity implements OrderListCont
 
     @Override
     public void setOrderListData(MeOrderBean bean) {
-//        mAdapter.setNewData(bean.records);
+        mAdapter.setNewData(bean.records);
     }
 
     @Override

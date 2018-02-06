@@ -12,13 +12,13 @@ import java.util.List;
  * com.modiwu.mah.ui.adapter
  */
 
-public class MeOrderAdapter extends BaseQuickAdapter<MeOrderBean, BaseViewHolder> {
-    public MeOrderAdapter(List<MeOrderBean> data) {
+public class MeOrderAdapter extends BaseQuickAdapter<MeOrderBean.RecordsBean, BaseViewHolder> {
+    public MeOrderAdapter(List<MeOrderBean.RecordsBean> data) {
         super(R.layout.adapter_me_order, data);
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, MeOrderBean item) {
+    protected void convert(BaseViewHolder helper, MeOrderBean.RecordsBean item) {
 
     }
 }
