@@ -7,7 +7,7 @@ import com.modiwu.mah.R;
 import com.modiwu.mah.base.BaseSpecialActivity;
 import com.modiwu.mah.mvp.constract.ShopDetailContract;
 import com.modiwu.mah.mvp.model.bean.ShopGoodsInfoBean;
-import com.modiwu.mah.mvp.presenter.ShopDetialPresenter;
+import com.modiwu.mah.mvp.presenter.ShopDetailPresenter;
 import com.modiwu.mah.ui.adapter.AdapterPagerShopDetial;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
@@ -30,7 +30,7 @@ public class ShopDetialActivity extends BaseSpecialActivity implements ShopDetai
     @BindView(R.id.viewPager)
     ViewPager mViewPager;
     private Unbinder mUnbinder;
-    private ShopDetialPresenter mPresenter;
+    private ShopDetailPresenter mPresenter;
     @BindView(R.id.multiplestatusview)
     public MultipleStatusView mMultipleStatusView;
     @BindView(R.id.smartRefreshLayout)
@@ -55,7 +55,7 @@ public class ShopDetialActivity extends BaseSpecialActivity implements ShopDetai
         mViewPager.setAdapter(new AdapterPagerShopDetial(getSupportFragmentManager(), list));
         mTabLayout.setupWithViewPager(mViewPager);
 
-        mPresenter = new ShopDetialPresenter(this);
+        mPresenter = new ShopDetailPresenter(this);
         showLoading();
     }
 

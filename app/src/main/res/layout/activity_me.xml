@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        style="@style/me_linearlayout_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:dividerPadding="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/tvAvatar"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_weight="1"
+                android:background="@drawable/selector_white_muti_press"
+                android:drawablePadding="@dimen/dp_10"
+                android:gravity="center_vertical"
+                android:text="头像"
+                tools:ignore="RtlHardcoded"/>
+
+            <ImageView
+                android:layout_width="@dimen/dimen_50dp"
+                android:layout_height="@dimen/dimen_50dp"
+                android:src="@mipmap/ic_launcher"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_weight="1"
+                android:background="@drawable/selector_white_muti_press"
+                android:drawablePadding="@dimen/dp_10"
+                android:gravity="center_vertical"
+                android:text="用户名称"
+                tools:ignore="RtlHardcoded"/>
+
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_width="wrap_content"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@drawable/selector_white_muti_press"
+                android:drawablePadding="@dimen/dp_10"
+                android:drawableRight="@drawable/right_arrow"
+                android:gravity="center|right"
+                android:text="@string/app_name"
+                tools:ignore="RtlHardcoded"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_weight="1"
+                android:background="@drawable/selector_white_muti_press"
+                android:drawablePadding="@dimen/dp_10"
+                android:gravity="center_vertical"
+                android:text="手机号"
+                tools:ignore="RtlHardcoded"/>
+
+            <TextView
+                android:id="@+id/tvPhone"
+                android:layout_width="wrap_content"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@drawable/selector_white_muti_press"
+                android:drawablePadding="@dimen/dp_10"
+                android:drawableRight="@drawable/right_arrow"
+                android:gravity="center|right"
+                android:text="183****8542"
+                tools:ignore="RtlHardcoded"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_weight="1"
+                android:background="@drawable/selector_white_muti_press"
+                android:drawablePadding="@dimen/dp_10"
+                android:gravity="center_vertical"
+                android:text="邮箱"
+                tools:ignore="RtlHardcoded"/>
+
+            <TextView
+                android:id="@+id/tvEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@drawable/selector_white_muti_press"
+                android:drawablePadding="@dimen/dp_10"
+                android:drawableRight="@drawable/right_arrow"
+                android:gravity="center|right"
+                android:text="183****8542@163.com"
+                tools:ignore="RtlHardcoded"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_weight="1"
+                android:background="@drawable/selector_white_muti_press"
+                android:drawablePadding="@dimen/dp_10"
+                android:gravity="center_vertical"
+                android:text="小区"
+                tools:ignore="RtlHardcoded"/>
+
+            <TextView
+                android:id="@+id/tvFloor"
+                android:layout_width="wrap_content"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@drawable/selector_white_muti_press"
+                android:drawablePadding="@dimen/dp_10"
+                android:drawableRight="@drawable/right_arrow"
+                android:gravity="center|right"
+                android:text="中华校园"
+                tools:ignore="RtlHardcoded"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_weight="1"
+                android:background="@drawable/selector_white_muti_press"
+                android:drawablePadding="@dimen/dp_10"
+                android:gravity="center_vertical"
+                android:text="户型"
+                tools:ignore="RtlHardcoded"/>
+
+            <TextView
+                android:id="@+id/tvType"
+                android:layout_width="wrap_content"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@drawable/selector_white_muti_press"
+                android:drawablePadding="@dimen/dp_10"
+                android:drawableRight="@drawable/right_arrow"
+                android:gravity="center|right"
+                android:text="三室一厅"
+                tools:ignore="RtlHardcoded"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_weight="1"
+                android:background="@drawable/selector_white_muti_press"
+                android:drawablePadding="@dimen/dp_10"
+                android:gravity="center_vertical"
+                android:text="面积"
+                tools:ignore="RtlHardcoded"/>
+
+            <TextView
+                android:id="@+id/tvArea"
+                android:layout_width="wrap_content"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@drawable/selector_white_muti_press"
+                android:drawablePadding="@dimen/dp_10"
+                android:drawableRight="@drawable/right_arrow"
+                android:gravity="center|right"
+                android:text="119m²"
+                tools:ignore="RtlHardcoded"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_weight="1"
+                android:background="@drawable/selector_white_muti_press"
+                android:drawablePadding="@dimen/dp_10"
+                android:gravity="center_vertical"
+                android:text="用户积分"
+                tools:ignore="RtlHardcoded"/>
+
+            <TextView
+                android:id="@+id/tvPoint"
+                android:layout_width="wrap_content"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@drawable/selector_white_muti_press"
+                android:drawablePadding="@dimen/dp_10"
+                android:drawableRight="@drawable/right_arrow"
+                android:gravity="center|right"
+                android:text="0"
+                tools:ignore="RtlHardcoded"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <Button
+        android:layout_margin="@dimen/dp_10"
+        android:id="@+id/btnLogout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/grey"
+        android:foreground="?android:selectableItemBackground"
+        android:text="退出登录"
+        android:textColor="@color/white"/>
+</LinearLayout>

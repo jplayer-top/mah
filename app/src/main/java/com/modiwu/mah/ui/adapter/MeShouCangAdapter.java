@@ -1,0 +1,24 @@
+package com.modiwu.mah.ui.adapter;
+
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.BaseViewHolder;
+import com.modiwu.mah.R;
+import com.modiwu.mah.mvp.model.bean.MeShouCangBean;
+
+import java.util.List;
+
+/**
+ * Created by Obl on 2018/2/6.
+ * com.modiwu.mah.ui.adapter
+ */
+
+public class MeShouCangAdapter extends BaseQuickAdapter<MeShouCangBean, BaseViewHolder> {
+    public MeShouCangAdapter(List<MeShouCangBean> data) {
+        super(R.layout.adapter_me_fangan, data);
+    }
+
+    @Override
+    protected void convert(BaseViewHolder helper, MeShouCangBean item) {
+
+    }
+}

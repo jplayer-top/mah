@@ -4,7 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <include layout="@layout/layout_logo_solagon"/>
+    <include
+        layout="@layout/layout_logo_solagon"
+        android:visibility="gone"/>
 
+    <ImageView
+        android:id="@+id/ivBackSplash"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/splash"/>
 
 </LinearLayout>

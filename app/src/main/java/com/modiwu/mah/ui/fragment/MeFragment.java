@@ -1,7 +1,7 @@
 package com.modiwu.mah.ui.fragment;
 
 import android.app.Dialog;
-import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.ImageView;
@@ -16,11 +16,17 @@ import com.modiwu.mah.R;
 import com.modiwu.mah.base.BaseFragment;
 import com.modiwu.mah.ui.activity.AboutMahActivity;
 import com.modiwu.mah.ui.activity.LoginAnimActivity;
+import com.modiwu.mah.ui.activity.MeContentActivity;
+import com.modiwu.mah.ui.activity.MeFangAnActivity;
+import com.modiwu.mah.ui.activity.MeOrderActivity;
+import com.modiwu.mah.ui.activity.MeShouCangActivity;
+import com.modiwu.mah.ui.activity.ShopCartActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import top.jplayer.baseprolibrary.ui.SampleActivity;
+import top.jplayer.baseprolibrary.net.download.DownloadByChrome;
+import top.jplayer.baseprolibrary.utils.ActivityUtils;
 
 /**
  * Created by Obl on 2018/1/19.
@@ -38,6 +44,16 @@ public class MeFragment extends BaseFragment {
     TextView tvSet;
     @BindView(R.id.tvAbout)
     TextView tvAbout;
+    @BindView(R.id.tvMe)
+    TextView tvMe;
+    @BindView(R.id.tvOrder)
+    TextView tvOrder;
+    @BindView(R.id.tvFangAn)
+    TextView tvFangAn;
+    @BindView(R.id.tvShouCang)
+    TextView tvShouCang;
+    @BindView(R.id.tvShopCart)
+    TextView tvShopCart;
     @BindView(R.id.ivMeAvatar)
     ImageView ivMeAvatar;
 
@@ -56,9 +72,14 @@ public class MeFragment extends BaseFragment {
 
     private void findView(View rootView) {
         unbinder = ButterKnife.bind(this, rootView);
-        tvSet.setOnClickListener(view -> startActivity(new Intent(getContext(), SampleActivity.class)));
-        tvAbout.setOnClickListener(view -> startActivity(new Intent(getContext(), AboutMahActivity.class)));
-        llToLogin.setOnClickListener(view -> startActivity(new Intent(getContext(), LoginAnimActivity.class)));
+        tvAbout.setOnClickListener(view -> ActivityUtils.init().start(getContext(), AboutMahActivity.class, "关于"));
+        llToLogin.setOnClickListener(view -> ActivityUtils.init().start(getContext(), LoginAnimActivity.class));
+        tvMe.setOnClickListener(view -> ActivityUtils.init().start(getContext(), MeContentActivity.class, "个人资料"));
+        tvOrder.setOnClickListener(view -> ActivityUtils.init().start(getContext(), MeOrderActivity.class, "我的订单"));
+        tvFangAn.setOnClickListener(view -> ActivityUtils.init().start(getContext(), MeFangAnActivity.class, "我的方案"));
+        tvShopCart.setOnClickListener(view -> ActivityUtils.init().start(getContext(), ShopCartActivity.class, "购物车"));
+        tvShouCang.setOnClickListener(view -> ActivityUtils.init().start(getContext(), MeShouCangActivity.class,
+                "我的收藏"));
         tvUpdate.setOnClickListener(view -> checkUpdate(true));
 
     }
@@ -71,17 +92,14 @@ public class MeFragment extends BaseFragment {
          * 在这里请求后台接口，获取更新的内容和最新的版本号
          */
         // 版本的更新信息
-        String version_info = "更新内容\n" + "    1. 车位分享异常处理\n" + "    2. 发布车位折扣格式统一\n" + "    ";
+        String version_info = "更新内容\n" + "    1. 首页异常处理\n" + "    2. 发布新商品UI\n" + "    ";
         int mVersion_code = BuildConfig.VERSION_CODE;// 当前的版本号
         int nVersion_code = 2;
-        if (mVersion_code < nVersion_code) {
-            // 显示提示对话
-            showNoticeDialog(version_info);
-        } else {
-            if (isToast) {
-                Toast.makeText(getActivity(), "已经是最新版本", Toast.LENGTH_SHORT).show();
-            }
+        showNoticeDialog(version_info);
+        if (isToast) {
+            Toast.makeText(getActivity(), "已经是最新版本", Toast.LENGTH_SHORT).show();
         }
+
     }
 
     /**
@@ -97,7 +115,7 @@ public class MeFragment extends BaseFragment {
         // 更新
         builder.setPositiveButton("立即更新", (dialog, which) -> {
             dialog.dismiss();
-
+            DownloadByChrome.byChrome(getContext(), Uri.parse("http://jplayer.top/app-release.apk"));
         });
         // 稍后更新
         builder.setNegativeButton("以后更新", (dialog, which) -> dialog.dismiss());

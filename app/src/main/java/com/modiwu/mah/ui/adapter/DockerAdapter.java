@@ -45,9 +45,7 @@ public class DockerAdapter extends BaseQuickAdapter<DockerBean.RecordsBean, Base
 
     @Override
     protected void convert(BaseViewHolder helper, DockerBean.RecordsBean item) {
-        View itemView = helper.itemView;
-        mIvBodyPic = itemView.findViewById(R.id.ivBodyPic);
-        Glide.with(mContext).load(item.cat_name)
+        Glide.with(mContext).load(item.cat_icon)
                 .apply(GlideUtils.init().options())
                 .into(mIvBodyPic);
         helper.setText(R.id.tvTitle, StringUtils.getInstance().isNullable(item.cat_name, "整个家"))

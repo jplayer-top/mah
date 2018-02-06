@@ -32,30 +32,9 @@ import top.jplayer.baseprolibrary.utils.ScreenUtils;
 public class HomeSingleVLayoutAdapter extends VLayoutAdapter<RecyclerView.ViewHolder> {
 
     private List<HomeBean.GoodBean> mGoods;
-    private ImageView mIvBodyPic;
-    private TextView mTvTitle;
-    private TextView mTvSubTitle;
-    private TextView mTvPrice;
-    private View mItemView;
 
     public HomeSingleVLayoutAdapter(Context context, LayoutHelper helper, int count, int itemType) {
         super(context, helper, count, itemType);
-    }
-
-    @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        RecyclerView.ViewHolder viewHolder = super.onCreateViewHolder(parent, viewType);
-        mItemView = viewHolder.itemView;
-        mIvBodyPic = mItemView.findViewById(R.id.ivBodyPic);
-        mTvTitle = mItemView.findViewById(R.id.tvTitle);
-        mTvSubTitle = mItemView.findViewById(R.id.tvSubTitle);
-        mTvPrice = mItemView.findViewById(R.id.tvPrice);
-        LinearLayout llTextView = mItemView.findViewById(R.id.llTextView);
-        int i = ScreenUtils.getWidthOfScreen(context, 10, 2);
-        mIvBodyPic.getLayoutParams().width = i;
-        llTextView.getLayoutParams().width = i;
-        mIvBodyPic.getLayoutParams().height = i;
-        return viewHolder;
     }
 
     @Override
@@ -65,13 +44,20 @@ public class HomeSingleVLayoutAdapter extends VLayoutAdapter<RecyclerView.ViewHo
 
     @Override
     protected void onBindViewHolderWithOffset(RecyclerView.ViewHolder holder, int position, int offsetTotal) {
-        HomeBean.GoodBean goodBean = mGoods.get(position);
-        if (position == 1) {
-            Glide.with(context).load(goodBean.imgUrl).apply(GlideUtils.init().options(R.drawable.home_item_single01)).into(mIvBodyPic);
-        } else {
-            Glide.with(context).load(goodBean.imgUrl).apply(GlideUtils.init().options()).into(mIvBodyPic);
+        View mItemView = holder.itemView;
+        LinearLayout llTextView = mItemView.findViewById(R.id.llTextView);
+        ImageView  mIvBodyPic = mItemView.findViewById(R.id.ivBodyPic);
+        TextView mTvTitle = mItemView.findViewById(R.id.tvTitle);
+        TextView mTvSubTitle = mItemView.findViewById(R.id.tvSubTitle);
+        TextView mTvPrice = mItemView.findViewById(R.id.tvPrice);
 
-        }
+        int i = ScreenUtils.getWidthOfScreen(context, 10, 2);
+        mIvBodyPic.getLayoutParams().width = i;
+        llTextView.getLayoutParams().width = i;
+        mIvBodyPic.getLayoutParams().height = i;
+
+        HomeBean.GoodBean goodBean = mGoods.get(position);
+        Glide.with(context).load(goodBean.imgUrl).apply(GlideUtils.init().options()).into(mIvBodyPic);
         mItemView.setOnClickListener(v -> {
             Bundle bundle = new Bundle();
             bundle.putString("goods_id", String.format(Locale.CHINA, "%s", goodBean.navValue));
@@ -79,7 +65,8 @@ public class HomeSingleVLayoutAdapter extends VLayoutAdapter<RecyclerView.ViewHo
         });
         mTvTitle.setText(StringUtils.getInstance().isNullable(goodBean.title, "整个家"));
         mTvSubTitle.setText(StringUtils.getInstance().isNullable(goodBean.subtitle, "整个家精心推荐"));
-        mTvPrice.setText(StringUtils.getInstance().isNullable(goodBean.price, "￥0.00"));
+        mTvPrice.setText(String.format(Locale.CHINA, "￥%s", StringUtils.getInstance().isNullable(goodBean.price,
+                "0.00")));
 
     }
 

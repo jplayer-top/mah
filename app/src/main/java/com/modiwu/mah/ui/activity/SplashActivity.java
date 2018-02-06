@@ -22,7 +22,7 @@ public class SplashActivity extends BaseSpecialActivity {
 
     @Override
     public void initBaseData() {
-        View view = contentView.findViewById(R.id.splashBg);
+        View view = contentView.findViewById(R.id.ivBackSplash);
         ViewAnimator.animate(view)
                 .alpha(1, 0.8f)
                 .scale(1f, 1.1f)

@@ -3,6 +3,7 @@ package com.modiwu.mah.ui.adapter;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
+import com.modiwu.mah.ui.fragment.ShopDetailAllFragment;
 import com.modiwu.mah.ui.fragment.ShopDetialFloorFragment;
 
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ public class AdapterPagerShopDetial extends BaseViewPagerFragmentAdapter<String>
     public AdapterPagerShopDetial(FragmentManager fm, List<String> data) {
         super(fm, data);
         mFragmentList = new ArrayList<>();
-        mFragmentList.add(new TestFragment());
+        mFragmentList.add(new ShopDetailAllFragment());
         mFragmentList.add(new TestFragment());
         mFragmentList.add(new ShopDetialFloorFragment());
     }

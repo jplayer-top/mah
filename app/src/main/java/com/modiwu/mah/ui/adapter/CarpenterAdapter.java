@@ -29,7 +29,7 @@ public class CarpenterAdapter extends BaseQuickAdapter<CarpenterBean.RecordsBean
     @Override
     protected void convert(BaseViewHolder baseViewHolder, CarpenterBean.RecordsBean bean) {
         ImageView ivBodyPic = baseViewHolder.convertView.findViewById(R.id.ivBodyPic);
-        Glide.with(mContext).load(bean.designer_url).apply(GlideUtils.init().options()).into(ivBodyPic);
+        Glide.with(mContext).load(bean.designer_avatar).apply(GlideUtils.init().options()).into(ivBodyPic);
         baseViewHolder.setText(R.id.tvItemTitle,StringUtils.getInstance().isNullable(bean.designer_name, "匠心"));
         baseViewHolder.setText(R.id.tvItemBody,StringUtils.getInstance().isNullable(bean.designer_desc, "匠心设计"));
     }

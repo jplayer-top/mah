@@ -119,7 +119,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.HomeView 
         if (goodBeans != null && goodBeans.size() > 0) {
             adapters.add(getHomeSectionLayoutAdapter("颜值单品"));
             HomeSingleVLayoutAdapter singleVLayoutAdapter = new HomeSingleVLayoutAdapter(getContext(), new
-                    GridLayoutHelper(2, goodBeans.size(), 10), goodBeans.size(), HomeBean.BODY_SINGLE);
+                    GridLayoutHelper(2, goodBeans.size()), goodBeans.size(), HomeBean.BODY_SINGLE);
             singleVLayoutAdapter.setGoods(goodBeans);
             adapters.add(singleVLayoutAdapter);
         }

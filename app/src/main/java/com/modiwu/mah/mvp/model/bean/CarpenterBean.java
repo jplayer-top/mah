@@ -28,6 +28,7 @@ public class CarpenterBean extends BaseBean {
 
         public int designer_id;
         public String designer_name;
+        public String designer_avatar;
         public String designer_desc;
         public String designer_flag;
         public String designer_url;
