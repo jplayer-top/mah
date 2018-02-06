@@ -13,7 +13,7 @@ import com.alibaba.android.vlayout.LayoutHelper;
 import com.bumptech.glide.Glide;
 import com.modiwu.mah.R;
 import com.modiwu.mah.mvp.model.bean.HomeBean;
-import com.modiwu.mah.ui.activity.ShopDetialActivity;
+import com.modiwu.mah.ui.activity.ShopDetailActivity;
 import com.modiwu.mah.utils.StringUtils;
 
 import java.util.List;
@@ -61,7 +61,7 @@ public class HomeSingleVLayoutAdapter extends VLayoutAdapter<RecyclerView.ViewHo
         mItemView.setOnClickListener(v -> {
             Bundle bundle = new Bundle();
             bundle.putString("goods_id", String.format(Locale.CHINA, "%s", goodBean.navValue));
-            ActivityUtils.init().start(context, ShopDetialActivity.class, goodBean.title, bundle);
+            ActivityUtils.init().start(context, ShopDetailActivity.class, goodBean.title, bundle);
         });
         mTvTitle.setText(StringUtils.getInstance().isNullable(goodBean.title, "整个家"));
         mTvSubTitle.setText(StringUtils.getInstance().isNullable(goodBean.subtitle, "整个家精心推荐"));

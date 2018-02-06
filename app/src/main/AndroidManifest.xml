@@ -77,7 +77,7 @@
             android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name=".ui.activity.ShopDetialActivity"
+            android:name=".ui.activity.ShopDetailActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait">
         </activity>

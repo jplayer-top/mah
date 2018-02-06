@@ -45,7 +45,7 @@ public class ShopSubFragmentAdapter extends BaseQuickAdapter<ShopSubListBean.Rec
 
     @Override
     protected void convert(BaseViewHolder helper, ShopSubListBean.RecordsBean item) {
-        Glide.with(mContext).load(item.goods_img)
+        Glide.with(mContext).load(item.goods_thumb)
                 .apply(GlideUtils.init().options())
                 .into(mIvBodyPic);
         helper.setText(R.id.tvTitle, StringUtils.getInstance().isNullable(item.goods_title, "整个家"))

@@ -11,7 +11,7 @@ import com.modiwu.mah.mvp.constract.SubShopContract;
 import com.modiwu.mah.mvp.model.bean.ShopSubListBean;
 import com.modiwu.mah.mvp.model.bean.SubTitleBean;
 import com.modiwu.mah.mvp.presenter.ShopSubFragmentPresenter;
-import com.modiwu.mah.ui.activity.ShopDetialActivity;
+import com.modiwu.mah.ui.activity.ShopDetailActivity;
 import com.modiwu.mah.ui.activity.ShopSubActivity;
 import com.modiwu.mah.ui.adapter.ShopSubFragmentAdapter;
 
@@ -49,7 +49,7 @@ public class ShopSubFragment extends BaseFragment implements SubShopContract.ISu
             ShopSubListBean.RecordsBean goodsBean = (ShopSubListBean.RecordsBean) adapter1.getData().get(position);
             Bundle bundle = new Bundle();
             bundle.putString("goods_id", String.format(Locale.CHINA, "%d", goodsBean.goods_id));
-            ActivityUtils.init().start(getContext(), ShopDetialActivity.class, goodsBean.goods_title, bundle);
+            ActivityUtils.init().start(getContext(), ShopDetailActivity.class, goodsBean.goods_title, bundle);
         });
     }
 

@@ -8,7 +8,7 @@ import android.view.View;
 import com.modiwu.mah.R;
 import com.modiwu.mah.mvp.model.bean.SchemeDetailBean;
 import com.modiwu.mah.ui.activity.SchemeDetailActivity;
-import com.modiwu.mah.ui.activity.ShopDetialActivity;
+import com.modiwu.mah.ui.activity.ShopDetailActivity;
 import com.modiwu.mah.ui.adapter.SchemeSingleAdapter;
 
 import java.util.List;
@@ -40,7 +40,7 @@ public class SchemeSingleFragment extends SuperBaseFragment {
             SchemeDetailBean.GoodsBean goodsBean = (SchemeDetailBean.GoodsBean) adapter1.getData().get(position);
             Bundle bundle = new Bundle();
             bundle.putString("goods_id", String.format(Locale.CHINA, "%d", goodsBean.goods_id));
-            ActivityUtils.init().start(getContext(), ShopDetialActivity.class, goodsBean.goods_title, bundle);
+            ActivityUtils.init().start(getContext(), ShopDetailActivity.class, goodsBean.goods_title, bundle);
         });
     }
 

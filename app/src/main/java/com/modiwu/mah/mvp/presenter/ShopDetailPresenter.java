@@ -2,7 +2,7 @@ package com.modiwu.mah.mvp.presenter;
 
 import com.modiwu.mah.mvp.constract.ShopDetailContract;
 import com.modiwu.mah.mvp.model.ShopDetailModel;
-import com.modiwu.mah.ui.activity.ShopDetialActivity;
+import com.modiwu.mah.ui.activity.ShopDetailActivity;
 
 import io.reactivex.disposables.Disposable;
 import top.jplayer.baseprolibrary.mvp.contract.BasePresenter;
@@ -12,11 +12,11 @@ import top.jplayer.baseprolibrary.mvp.contract.BasePresenter;
  * com.modiwu.mah.mvp.presenter
  */
 
-public class ShopDetailPresenter extends BasePresenter<ShopDetialActivity> implements ShopDetailContract.IShopDetailPresenter {
+public class ShopDetailPresenter extends BasePresenter<ShopDetailActivity> implements ShopDetailContract.IShopDetailPresenter {
 
     private final ShopDetailModel mModel;
 
-    public ShopDetailPresenter(ShopDetialActivity iView) {
+    public ShopDetailPresenter(ShopDetailActivity iView) {
         super(iView);
         mModel = new ShopDetailModel();
     }

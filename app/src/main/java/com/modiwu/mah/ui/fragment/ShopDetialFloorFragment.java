@@ -7,7 +7,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.modiwu.mah.R;
 import com.modiwu.mah.mvp.model.bean.SchemeDetailBean;
-import com.modiwu.mah.ui.activity.ShopDetialActivity;
+import com.modiwu.mah.ui.activity.ShopDetailActivity;
 import com.modiwu.mah.utils.StringUtils;
 
 import java.util.Locale;
@@ -26,7 +26,7 @@ import top.jplayer.baseprolibrary.ui.Fragment.SuperBaseFragment;
 
 public class ShopDetialFloorFragment extends SuperBaseFragment {
 
-    ShopDetialActivity mActivity;
+    ShopDetailActivity mActivity;
     SchemeDetailBean.LoupanBean mLoupanBeans;
     @BindView(R.id.building_adv_img)
     ImageView mBuildingAdvImg;
@@ -59,7 +59,7 @@ public class ShopDetialFloorFragment extends SuperBaseFragment {
     @Override
     protected void initData(View rootView) {
         mUnbinder = ButterKnife.bind(this, rootView);
-        mActivity = (ShopDetialActivity) getActivity();
+        mActivity = (ShopDetailActivity) getActivity();
 //        mLoupanBeans = mActivity.mSchemeDetailBean.loupan;
         Glide.with(getContext()).load(mLoupanBeans.building_adv_img).apply(GlideUtils.init().options()).into(mBuildingAdvImg);
         mTvName.setText(StringUtils.getInstance().isNullable(mLoupanBeans.building_name, getString(R.string.app_name)));
