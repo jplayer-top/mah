@@ -44,9 +44,10 @@ public class SchemeSearchActivity extends BaseCommonActivity implements SchemeSe
     @BindView(R.id.btnSure)
     Button mBtnSure;
     private Unbinder mUnbinder;
-    private OptionsPickerView mStylePicker;
-    private OptionsPickerView mTypePicker;
-    private OptionsPickerView mFloorPicker;
+    OptionsPickerView mStylePicker;
+    OptionsPickerView mTypePicker;
+    OptionsPickerView mFloorPicker;
+    OptionsPickerView mLocalPicker;
     private SchemeSelectPresenter mPresenter;
 
     @Override
@@ -90,6 +91,14 @@ public class SchemeSearchActivity extends BaseCommonActivity implements SchemeSe
             }
             dialogShow(this);
             mPresenter.requestFloorData();
+        });
+        mLlLocalSelect.setOnClickListener(v -> {
+            if (this.locals != null) {
+                setLocalData(this.locals);
+                return;
+            }
+            dialogShow(this);
+            mPresenter.requestLocalData("370200");
         });
     }
 
@@ -159,8 +168,16 @@ public class SchemeSearchActivity extends BaseCommonActivity implements SchemeSe
         }
     }
 
-    @Override
-    public void setLocalData(List<String> styles) {
+    private List<String> locals;
 
+    @Override
+    public void setLocalData(List<String> locals) {
+        this.locals = locals;
+        mLocalPicker = getPicker("地区", mTvLocal, locals);
+        mLocalPicker.setPicker(locals);
+        if (!mLocalPicker.isShowing()) {
+            dialogDismiss("");
+            mLocalPicker.show();
+        }
     }
 }

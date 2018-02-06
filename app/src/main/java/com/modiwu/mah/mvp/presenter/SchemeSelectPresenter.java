@@ -46,7 +46,10 @@ public class SchemeSelectPresenter extends BasePresenter<SchemeSearchActivity> i
     }
 
     @Override
-    public void requestLocalData() {
-
+    public void requestLocalData(String city_code) {
+        Disposable disposable = mModel.requestLocalData(city_code).subscribe(strings -> mIView.setLocalData(strings),
+                throwable
+                -> mIView.dialogDismiss(""));
+        addSubscription(disposable);
     }
 }

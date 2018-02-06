@@ -17,7 +17,7 @@ public interface SchemeSelectContract {
 
         void requestFloorData();
 
-        void requestLocalData();
+        void requestLocalData(String city_code);
     }
 
     interface ISchemeSelectView extends IContract.IView {

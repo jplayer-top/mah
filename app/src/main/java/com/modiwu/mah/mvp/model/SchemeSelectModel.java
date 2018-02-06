@@ -29,6 +29,19 @@ public class SchemeSelectModel {
 
     }
 
+    public Observable<List<String>> requestLocalData(String city_code) {
+
+        return RetrofitManager.init().create(MahServer.class)
+                .getLocalSelectBean(city_code)
+                .map(selectBean -> selectBean.rows)
+                .map(rowsBeans -> {
+                    List<String> list = new ArrayList<>();
+                    Observable.fromIterable(rowsBeans).subscribe(rowsBean -> list.add(rowsBean.area_name));
+                    return list;
+                }).compose(new IoMainSchedule<>());
+
+    }
+
     public Observable<List<String>> requestTypeData() {
         return RetrofitManager.init().create(MahServer.class)
                 .getTypeSelectBean()

@@ -12,6 +12,7 @@ import com.modiwu.mah.mvp.model.bean.MeShouCangBean;
 import com.modiwu.mah.mvp.model.bean.SchemeBean;
 import com.modiwu.mah.mvp.model.bean.SchemeDetailBean;
 import com.modiwu.mah.mvp.model.bean.SelectBean;
+import com.modiwu.mah.mvp.model.bean.SelectLocalBean;
 import com.modiwu.mah.mvp.model.bean.ShopGoodsInfoBean;
 import com.modiwu.mah.mvp.model.bean.ShopSubListBean;
 import com.modiwu.mah.mvp.model.bean.SubTitleBean;
@@ -45,6 +46,9 @@ public interface MahServer {
 
     @GET("select/style")
     Observable<SelectBean> getStyleSelectBean();
+
+    @GET("select/area?")
+    Observable<SelectLocalBean> getLocalSelectBean(@Query("city_code") String city_code);
 
     @GET("select/hxtype")
     Observable<SelectBean> getTypeSelectBean();
