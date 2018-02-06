@@ -1,5 +1,7 @@
 package com.modiwu.mah.mvp.model.bean;
 
+import java.util.List;
+
 import top.jplayer.baseprolibrary.mvp.model.bean.BaseBean;
 
 /**
@@ -8,4 +10,6 @@ import top.jplayer.baseprolibrary.mvp.model.bean.BaseBean;
  */
 
 public class MeOrderBean extends BaseBean {
+
+    public List<?> records;
 }

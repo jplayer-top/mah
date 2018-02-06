@@ -7,6 +7,8 @@ import com.modiwu.mah.mvp.model.bean.DockerBean;
 import com.modiwu.mah.mvp.model.bean.FloorBean;
 import com.modiwu.mah.mvp.model.bean.HomeBean;
 import com.modiwu.mah.mvp.model.bean.LoginBean;
+import com.modiwu.mah.mvp.model.bean.MeOrderBean;
+import com.modiwu.mah.mvp.model.bean.MeShouCangBean;
 import com.modiwu.mah.mvp.model.bean.SchemeBean;
 import com.modiwu.mah.mvp.model.bean.SchemeDetailBean;
 import com.modiwu.mah.mvp.model.bean.SelectBean;
@@ -21,6 +23,7 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
+import top.jplayer.baseprolibrary.mvp.model.bean.BaseBean;
 
 /**
  * Created by Obl on 2018/1/25.
@@ -72,5 +75,14 @@ public interface MahServer {
 
     @GET("mall/goods/info?")
     Observable<ShopGoodsInfoBean> getGoodsInfoBean(@Query("goods_id") String goods_id);
+
+    @GET("shoucang/all")
+    Observable<MeShouCangBean> getShouCangBean();
+
+    @POST("mall/order/l")
+    Observable<MeOrderBean> getOrderListBean();
+
+    @POST("shoucang/cancel")
+    Observable<BaseBean> getShouCangDel(@Query("fangan_id") String fangan_id);
 
 }

@@ -36,10 +36,6 @@ public class MeFangAnActivity extends BaseCommonActivity {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,
                 false));
         ArrayList<MeFangAnBean> data = new ArrayList<>();
-        data.add(new MeFangAnBean());
-        data.add(new MeFangAnBean());
-        data.add(new MeFangAnBean());
-        data.add(new MeFangAnBean());
         mRecyclerView.setAdapter(new MeFanganAdapter(data));
     }
 }

@@ -6,10 +6,14 @@ import android.support.v7.widget.RecyclerView;
 
 import com.modiwu.mah.R;
 import com.modiwu.mah.base.BaseCommonActivity;
+import com.modiwu.mah.mvp.constract.ShouCangContract;
 import com.modiwu.mah.mvp.model.bean.MeShouCangBean;
+import com.modiwu.mah.mvp.presenter.ShouCangPresenter;
 import com.modiwu.mah.ui.adapter.MeShouCangAdapter;
 
 import java.util.ArrayList;
+
+import top.jplayer.baseprolibrary.mvp.model.bean.BaseBean;
 
 /**
  * Created by Obl on 2018/2/6.
@@ -17,7 +21,11 @@ import java.util.ArrayList;
  */
 
 
-public class MeShouCangActivity extends BaseCommonActivity {
+public class MeShouCangActivity extends BaseCommonActivity implements ShouCangContract.IShouCangView {
+
+    private ShouCangPresenter mPresenter;
+    private MeShouCangAdapter mAdapter;
+
     @Override
     public int setBaseLayout() {
         return R.layout.activity_me_order;
@@ -36,11 +44,29 @@ public class MeShouCangActivity extends BaseCommonActivity {
         mRecyclerView.addItemDecoration(decor);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,
                 false));
-        ArrayList<MeShouCangBean> data = new ArrayList<>();
-        data.add(new MeShouCangBean());
-        data.add(new MeShouCangBean());
-        data.add(new MeShouCangBean());
-        data.add(new MeShouCangBean());
-        mRecyclerView.setAdapter(new MeShouCangAdapter(data));
+
+        ArrayList<MeShouCangBean.RowsBean> data = new ArrayList<>();
+        mAdapter = new MeShouCangAdapter(data);
+        mRecyclerView.setAdapter(mAdapter);
+        mAdapter.setOnItemChildClickListener((adapter, view, position) -> {
+            MeShouCangBean.RowsBean rowsBean = (MeShouCangBean.RowsBean) adapter.getData().get(position);
+            mPresenter.requestShouCangDel(rowsBean.fangan_id,position);
+            return false;
+        });
+
+        showLoading();
+        mPresenter = new ShouCangPresenter(this);
+        mPresenter.requestShouCangData();
+        smartRefreshLayout.setOnRefreshListener(refresh -> mPresenter.requestShouCangData());
+    }
+
+    @Override
+    public void setShouCangData(MeShouCangBean bean) {
+        mAdapter.setNewData(bean.rows);
+    }
+
+    @Override
+    public void setDelShouCang(BaseBean baseBean,int pos) {
+        mPresenter.requestShouCangData(true);
     }
 }

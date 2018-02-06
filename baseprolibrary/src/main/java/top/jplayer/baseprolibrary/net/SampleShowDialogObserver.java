@@ -105,7 +105,7 @@ public abstract class SampleShowDialogObserver<T extends BaseBean> implements Ob
      * @param isNetWorkError 是否是网络错误
      * @throws Exception
      */
-    protected abstract void onFailure(Throwable e, boolean isNetWorkError) throws Exception;
+    protected  void onFailure(Throwable e, boolean isNetWorkError) throws Exception{}
 
     protected void onRequestStart() {
         dialogShow(mContext);
