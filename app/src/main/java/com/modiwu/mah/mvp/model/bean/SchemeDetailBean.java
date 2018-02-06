@@ -161,6 +161,7 @@ public class SchemeDetailBean extends BaseBean {
         public String goods_ut;
         public String goods_bt;
         public String goods_rt;
+        public String goods_thumb;
         public int is_real;
         public int is_delete;
         public int is_preheat;

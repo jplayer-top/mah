@@ -12,7 +12,10 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.modiwu.mah.R;
 import com.modiwu.mah.mvp.model.bean.HomeBean;
+import com.modiwu.mah.mvp.model.event.HomeTypeModeEvent;
 import com.modiwu.mah.ui.activity.HouseSampleActivity;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,6 +25,7 @@ import cn.bingoogolapple.bgabanner.BGABanner;
 import io.reactivex.Observable;
 import top.jplayer.baseprolibrary.glide.GlideUtils;
 import top.jplayer.baseprolibrary.ui.adapter.VLayoutAdapter;
+import top.jplayer.baseprolibrary.utils.ToastUtils;
 
 /**
  * Created by Obl on 2018/1/23.
@@ -62,8 +66,16 @@ public class HomeHeardLayoutAdapter extends VLayoutAdapter<RecyclerView.ViewHold
                     .transition(DrawableTransitionOptions.withCrossFade())
                     .into((ImageView) itemView);
             itemView.setOnClickListener(v -> {
-                if (TextUtils.equals(mBanner.get(urlPosition).navType, "1")) {
+                if (TextUtils.equals(mBanner.get(urlPosition).navType, "fangan")) {
+                    EventBus.getDefault().post(new HomeTypeModeEvent(1));
+                } else if (TextUtils.equals(mBanner.get(urlPosition).navType, "goods")) {
+                    EventBus.getDefault().post(new HomeTypeModeEvent(2, 1));
+                } else if (TextUtils.equals(mBanner.get(urlPosition).navType, "sjs")) {
+                    EventBus.getDefault().post(new HomeTypeModeEvent(2, 0));
+                } else if (TextUtils.equals(mBanner.get(urlPosition).navType, "ybj")){
                     context.startActivity(new Intent(context, HouseSampleActivity.class));
+                }else {
+                    ToastUtils.init().showInfoToast(context,"我type是Url");
                 }
             });
         });

@@ -1,11 +1,9 @@
 package com.modiwu.mah.ui.adapter;
 
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -28,34 +26,29 @@ import top.jplayer.baseprolibrary.utils.ScreenUtils;
 public class SchemeSingleAdapter extends BaseQuickAdapter<SchemeDetailBean.GoodsBean, BaseViewHolder> {
 
     private ImageView mIvBodyPic;
-    private TextView mTvTitle;
-    private TextView mTvSubTitle;
-    private TextView mTvPrice;
+
 
     public SchemeSingleAdapter(List<SchemeDetailBean.GoodsBean> data) {
         super(R.layout.adapter_home_item_single, data);
     }
 
     @Override
-    public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        RecyclerView.ViewHolder viewHolder = super.onCreateViewHolder(parent, viewType);
+    protected BaseViewHolder onCreateDefViewHolder(ViewGroup parent, int viewType) {
+        BaseViewHolder viewHolder = super.onCreateDefViewHolder(parent, viewType);
         View itemView = viewHolder.itemView;
         mIvBodyPic = itemView.findViewById(R.id.ivBodyPic);
-        mTvTitle = itemView.findViewById(R.id.tvTitle);
-        mTvSubTitle = itemView.findViewById(R.id.tvSubTitle);
-        mTvPrice = itemView.findViewById(R.id.tvPrice);
         LinearLayout llTextView = itemView.findViewById(R.id.llTextView);
         int i = ScreenUtils.getWidthOfScreen(mContext, 10, 2);
         mIvBodyPic.getLayoutParams().width = i;
         llTextView.getLayoutParams().width = i;
         mIvBodyPic.getLayoutParams().height = i;
-        return super.onCreateViewHolder(parent, viewType);
+        return viewHolder;
     }
 
     @Override
     protected void convert(BaseViewHolder helper, SchemeDetailBean.GoodsBean item) {
-        Glide.with(mContext).load(item.goods_img)
-                .apply(GlideUtils.init().options(R.drawable.home_item_single01))
+        Glide.with(mContext).load(item.goods_thumb)
+                .apply(GlideUtils.init().options())
                 .into(mIvBodyPic);
         helper.setText(R.id.tvTitle, StringUtils.getInstance().isNullable(item.goods_title, "整个家"))
                 .setText(R.id.tvPrice, String.format(Locale.CHINA, "￥%s", item.goods_price + ""))
