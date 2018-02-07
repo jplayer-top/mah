@@ -6,6 +6,8 @@ import com.modiwu.mah.mvp.model.bean.DesignBean;
 import com.modiwu.mah.mvp.model.bean.DockerBean;
 import com.modiwu.mah.mvp.model.bean.FloorBean;
 import com.modiwu.mah.mvp.model.bean.HomeBean;
+import com.modiwu.mah.mvp.model.bean.LocalBean;
+import com.modiwu.mah.mvp.model.bean.LocalListBean;
 import com.modiwu.mah.mvp.model.bean.LoginBean;
 import com.modiwu.mah.mvp.model.bean.MeOrderBean;
 import com.modiwu.mah.mvp.model.bean.MeShouCangBean;
@@ -88,5 +90,23 @@ public interface MahServer {
 
     @POST("shoucang/cancel")
     Observable<BaseBean> getShouCangDel(@Query("fangan_id") String fangan_id);
+
+    @GET("area")
+    Observable<LocalBean> getLocalBean();
+
+    @GET("mall/addr/l")
+    Observable<LocalListBean> getLocalListBean();
+
+    @POST("mall/addr/remove?")
+    Observable<BaseBean> getLocalDelBean(@Query("rpid") String rpid);
+
+    @POST("mall/addr/update?")
+    Observable<BaseBean> getLocalEditBean(@QueryMap() Map<String, String> map);
+
+    @POST("mall/addr/create?")
+    Observable<BaseBean> getLocalSaveBean(@QueryMap() Map<String, String> map);
+
+    @POST("mall/addr/sd?")
+    Observable<BaseBean> getLocalDefBean(@Query("rpid") String rpid, @Query("rp_default") String rp_default);
 
 }

@@ -144,7 +144,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.HomeView 
          */
         List<HomeBean.ShouHouBean> shouHouBeans = homeBean.shouhou;
         if (shouHouBeans != null && shouHouBeans.size() > 0) {
-            HomeAdvLayoutAdapter advLayoutAdapter = new HomeAdvLayoutAdapter(getContext(), new LinearLayoutHelper(), 1, HomeBean
+            HomeAdvLayoutAdapter advLayoutAdapter = new HomeAdvLayoutAdapter(getContext(), new LinearLayoutHelper(), shouHouBeans.size(), HomeBean
                     .BODY_ADV);
             advLayoutAdapter.setShouHou(shouHouBeans);
             adapters.add(advLayoutAdapter);

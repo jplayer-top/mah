@@ -111,6 +111,7 @@
                         tools:ignore="RtlHardcoded"/>
 
                     <TextView
+                        android:id="@+id/tvLocal"
                         android:layout_width="match_parent"
                         android:layout_height="?attr/actionBarSize"
                         android:drawableLeft="@drawable/me_local"

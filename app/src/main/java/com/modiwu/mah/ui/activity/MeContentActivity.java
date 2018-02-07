@@ -8,7 +8,8 @@ import com.modiwu.mah.base.BaseCommonActivity;
  * com.modiwu.mah.ui.activity
  */
 
-public class MeContentActivity extends BaseCommonActivity{
+public class MeContentActivity extends BaseCommonActivity {
+
     @Override
     public int setBaseLayout() {
         return R.layout.activity_me;
@@ -16,6 +17,7 @@ public class MeContentActivity extends BaseCommonActivity{
 
     @Override
     public void initBaseData() {
-
     }
+
+
 }

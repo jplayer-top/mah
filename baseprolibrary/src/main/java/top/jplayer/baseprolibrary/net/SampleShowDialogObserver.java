@@ -41,8 +41,7 @@ public abstract class SampleShowDialogObserver<T extends BaseBean> implements Ob
     public void onNext(T t) {
         if (t.isSuccess()) {
             try {
-                onSuccess(t);
-                onRequestEnd("");
+                onRequestEnd(t);
             } catch (Exception e) {
                 e.printStackTrace();
                 onRequestEnd(t.msg);
@@ -105,7 +104,8 @@ public abstract class SampleShowDialogObserver<T extends BaseBean> implements Ob
      * @param isNetWorkError 是否是网络错误
      * @throws Exception
      */
-    protected  void onFailure(Throwable e, boolean isNetWorkError) throws Exception{}
+    protected void onFailure(Throwable e, boolean isNetWorkError) throws Exception {
+    }
 
     protected void onRequestStart() {
         dialogShow(mContext);
@@ -113,6 +113,10 @@ public abstract class SampleShowDialogObserver<T extends BaseBean> implements Ob
 
     protected void onRequestEnd(String msg) {
         dialogDismiss(msg);
+    }
+
+    protected void onRequestEnd(T t) {
+        dialogDismiss(t);
     }
 
     public DialogLoading mLoading;
@@ -126,9 +130,26 @@ public abstract class SampleShowDialogObserver<T extends BaseBean> implements Ob
             Observable.timer(l < 1000 ? 1000 - l : 0, TimeUnit.MILLISECONDS)
                     .compose(new IoMainSchedule<>())
                     .subscribe(aLong -> {
-                        mLoading.dismiss();
-                        if (!msg.equals("")) {
-                            ToastUtils.init().showInfoToast(mContext, msg);
+                        if (mLoading != null && mLoading.isShowing()) {
+                            mLoading.dismiss();
+                            if (!msg.equals("")) {
+                                ToastUtils.init().showInfoToast(mContext, msg);
+                            }
+                        }
+                    });
+        }
+    }
+
+    public void dialogDismiss(T t) {
+        if (mLoading != null && mLoading.isShowing()) {
+            long aftTime = mDate.getTime();
+            long l = aftTime - mPreTime;
+            Observable.timer(l < 1000 ? 1000 - l : 0, TimeUnit.MILLISECONDS)
+                    .compose(new IoMainSchedule<>())
+                    .subscribe(aLong -> {
+                        if (mLoading != null && mLoading.isShowing()) {
+                            mLoading.dismiss();
+                            onSuccess(t);
                         }
                     });
         }

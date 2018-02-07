@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginBottom="@dimen/dimen_10dp"
+              android:layout_marginTop="@dimen/dimen_1dp"
+              android:background="@color/white"
+              android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dimen_15dp"
+        android:layout_marginRight="@dimen/dimen_15dp"
+        android:layout_marginTop="@dimen/dimen_10dp">
+
+        <TextView
+            android:id="@+id/tvLocalName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:lines="1"
+            android:text="我"
+            android:textColor="@color/color323232"
+            android:textSize="@dimen/dimen_15sp"/>
+
+        <TextView
+            android:id="@+id/tvLocalPhone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:textColor="@color/color323232"
+            android:textSize="@dimen/dimen_15sp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dimen_15dp"
+        android:layout_marginRight="@dimen/dimen_15dp"
+        android:layout_marginTop="@dimen/dimen_15dp">
+
+        <TextView
+            android:id="@+id/tvPersonLocal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:lines="1"
+            android:textColor="@color/color323232"
+            android:textSize="@dimen/dimen_15sp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_40dp"
+        android:layout_marginLeft="@dimen/dimen_15dp"
+        android:layout_marginRight="@dimen/dimen_15dp"
+        android:layout_marginTop="@dimen/dimen_15dp"
+        android:gravity="center">
+
+        <CheckBox
+            android:id="@+id/checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dimen_10dp"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:lines="1"
+            android:text="默认地址"
+            android:textColor="@color/color999"
+            android:textSize="@dimen/dimen_15sp"/>
+
+        <TextView
+            android:id="@+id/localEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginRight="@dimen/dimen_15dp"
+            android:drawableLeft="@drawable/shop_local_edit"
+            android:drawablePadding="@dimen/dimen_6dp"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:lines="1"
+            android:text="编辑"
+            android:textColor="@color/color999"
+            android:textSize="@dimen/dimen_15sp"/>
+
+        <TextView
+            android:id="@+id/localDel"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:drawableLeft="@drawable/shop_local_del"
+            android:drawablePadding="@dimen/dimen_6dp"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:lines="1"
+            android:text="删除"
+            android:textColor="@color/color999"
+            android:textSize="@dimen/dimen_15sp"/>
+
+    </LinearLayout>
+</LinearLayout>

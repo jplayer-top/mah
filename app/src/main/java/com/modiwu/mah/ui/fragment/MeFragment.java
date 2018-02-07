@@ -15,6 +15,7 @@ import com.modiwu.mah.BuildConfig;
 import com.modiwu.mah.R;
 import com.modiwu.mah.base.BaseFragment;
 import com.modiwu.mah.ui.activity.AboutMahActivity;
+import com.modiwu.mah.ui.activity.LocalListActivity;
 import com.modiwu.mah.ui.activity.LoginAnimActivity;
 import com.modiwu.mah.ui.activity.MeContentActivity;
 import com.modiwu.mah.ui.activity.MeFangAnActivity;
@@ -54,6 +55,8 @@ public class MeFragment extends BaseFragment {
     TextView tvShouCang;
     @BindView(R.id.tvShopCart)
     TextView tvShopCart;
+    @BindView(R.id.tvLocal)
+    TextView tvLocal;
     @BindView(R.id.ivMeAvatar)
     ImageView ivMeAvatar;
 
@@ -76,6 +79,8 @@ public class MeFragment extends BaseFragment {
         llToLogin.setOnClickListener(view -> ActivityUtils.init().start(getContext(), LoginAnimActivity.class));
         tvMe.setOnClickListener(view -> ActivityUtils.init().start(getContext(), MeContentActivity.class, "个人资料"));
         tvOrder.setOnClickListener(view -> ActivityUtils.init().start(getContext(), MeOrderActivity.class, "我的订单"));
+        tvLocal.setOnClickListener(view -> ActivityUtils.init().start(getContext(), LocalListActivity.class,
+                "收货地址"));
         tvFangAn.setOnClickListener(view -> ActivityUtils.init().start(getContext(), MeFangAnActivity.class, "我的方案"));
         tvShopCart.setOnClickListener(view -> ActivityUtils.init().start(getContext(), ShopCartActivity.class, "购物车"));
         tvShouCang.setOnClickListener(view -> ActivityUtils.init().start(getContext(), MeShouCangActivity.class,
