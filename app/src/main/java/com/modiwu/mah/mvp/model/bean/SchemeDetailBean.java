@@ -1,5 +1,7 @@
 package com.modiwu.mah.mvp.model.bean;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 import top.jplayer.baseprolibrary.mvp.model.bean.BaseBean;
@@ -25,6 +27,7 @@ public class SchemeDetailBean extends BaseBean {
     public List<YingBean> ying;
     public List<RuanBean> ruan;
     public List<GoodsBean> goods;
+    public List<LoupanhuxingBean> loupanhuxing;
 
     public static class LoupanBean {
         /**
@@ -125,13 +128,33 @@ public class SchemeDetailBean extends BaseBean {
         public String img;
     }
 
+
+    public static class LoupanhuxingBean {
+        /**
+         * huxing_id : 3
+         * building_id : 1
+         * huxing_name : 两室一厅 84
+         * huxing_avatar : https://mah.oss-cn-beijing.aliyuncs.com/foo/7fb256affb3231569e9ff547235ba2b1.png
+         * huxing_type : 两室一厅
+         * huxing_size : 84.0
+         */
+
+        public int huxing_id;
+        public int building_id;
+        public String huxing_name;
+        public String huxing_avatar;
+        public String huxing_type;
+        public double huxing_size;
+    }
+
     public static class GoodsBean {
         /**
          * goods_id : 10017
          * cat_id : 16
          * goods_sn :
          * goods_title : 小椅盒子
-         * goods_subtitle :
+         * goods_subtitle : asdfasdfasdf
+         * goods_thumb : https://mah.oss-cn-beijing.aliyuncs.com/foo/3.jpg
          * goods_img : shop/77efa3e8cbc54bffb3ff85a1b440d9a6.jpg,shop/de1701aaab624400b3477f29ed248a9b.jpg
          * goods_price : 77700
          * goods_stocks : 180
@@ -145,6 +168,7 @@ public class SchemeDetailBean extends BaseBean {
          * is_delete : 1
          * is_preheat : 0
          * goods_remark : 测试
+         * goods_price_yuan : 777.00
          */
 
         public int goods_id;
@@ -152,6 +176,7 @@ public class SchemeDetailBean extends BaseBean {
         public String goods_sn;
         public String goods_title;
         public String goods_subtitle;
+        public String goods_thumb;
         public String goods_img;
         public int goods_price;
         public int goods_stocks;
@@ -161,10 +186,10 @@ public class SchemeDetailBean extends BaseBean {
         public String goods_ut;
         public String goods_bt;
         public String goods_rt;
-        public String goods_thumb;
         public int is_real;
         public int is_delete;
         public int is_preheat;
         public String goods_remark;
+        public String goods_price_yuan;
     }
 }

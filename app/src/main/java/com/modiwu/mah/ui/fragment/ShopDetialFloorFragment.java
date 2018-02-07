@@ -52,8 +52,8 @@ public class ShopDetialFloorFragment extends SuperBaseFragment {
     TextView mTvCQNX;
     @BindView(R.id.tvXMJJ)
     TextView mTvXMJJ;
-    @BindView(R.id.ViewPager)
-    BGABanner mViewPager;
+    @BindView(R.id.bgaBanner)
+    BGABanner bgaBanner;
     private Unbinder mUnbinder;
 
     @Override

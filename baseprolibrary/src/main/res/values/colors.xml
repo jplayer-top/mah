@@ -150,6 +150,7 @@
     <color name="mediumorchid">#ba55d3</color>
     <color name="cdcdcd">#cdcdcd</color>
     <color name="color666">#666666</color><!--中粉紫色 -->
+    <color name="color999">#999</color><!--中粉紫色 -->
     <color name="colorTran666">#55666666</color>
     <color name="color55grey">#ff424242</color>
 </resources>

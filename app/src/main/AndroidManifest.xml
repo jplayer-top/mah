@@ -112,6 +112,11 @@
             android:screenOrientation="portrait">
         </activity>
         <activity
+            android:name=".ui.activity.ShopToBuyAvtivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
             android:name=".ui.activity.LocalCreateActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"

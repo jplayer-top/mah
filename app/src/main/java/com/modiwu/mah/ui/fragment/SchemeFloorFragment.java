@@ -1,23 +1,37 @@
 package com.modiwu.mah.ui.fragment;
 
+import android.content.Intent;
+import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.modiwu.mah.R;
 import com.modiwu.mah.mvp.model.bean.SchemeDetailBean;
+import com.modiwu.mah.mvp.model.event.HomeTypeModeEvent;
+import com.modiwu.mah.ui.activity.HouseSampleActivity;
 import com.modiwu.mah.ui.activity.SchemeDetailActivity;
 import com.modiwu.mah.utils.StringUtils;
 
+import org.greenrobot.eventbus.EventBus;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import cn.bingoogolapple.bgabanner.BGABanner;
+import io.reactivex.Observable;
+import io.reactivex.functions.Function;
 import top.jplayer.baseprolibrary.glide.GlideUtils;
 import top.jplayer.baseprolibrary.ui.Fragment.SuperBaseFragment;
+import top.jplayer.baseprolibrary.utils.ToastUtils;
 
 /**
  * Created by Administrator on 2018/1/23.
@@ -52,15 +66,17 @@ public class SchemeFloorFragment extends SuperBaseFragment {
     TextView mTvCQNX;
     @BindView(R.id.tvXMJJ)
     TextView mTvXMJJ;
-    @BindView(R.id.ViewPager)
-    BGABanner mViewPager;
+    @BindView(R.id.bgaBanner)
+    BGABanner bgaBanner;
     private Unbinder mUnbinder;
+    private List<SchemeDetailBean.LoupanhuxingBean> loupanhuxingBeans;
 
     @Override
     protected void initData(View rootView) {
         mUnbinder = ButterKnife.bind(this, rootView);
         mActivity = (SchemeDetailActivity) getActivity();
         mLoupanBeans = mActivity.mSchemeDetailBean.loupan;
+        loupanhuxingBeans = mActivity.mSchemeDetailBean.loupanhuxing;
         Glide.with(getContext()).load(mLoupanBeans.building_adv_img).apply(GlideUtils.init().options()).into(mBuildingAdvImg);
         mTvName.setText(StringUtils.getInstance().isNullable(mLoupanBeans.building_name, getString(R.string.app_name)));
         mTvPrice.setText(String.format(Locale.CHINA, "均价%d元/平米", mLoupanBeans.building_price));
@@ -82,6 +98,19 @@ public class SchemeFloorFragment extends SuperBaseFragment {
                 StringUtils.getInstance().isNullable(mLoupanBeans.building_cqnx, "未知")));
         mTvXMJJ.setText(String.format(Locale.CHINA, "%s",
                 StringUtils.getInstance().isNullable(mLoupanBeans.building_xmjj, "未知")));
+        bgaBanner.setAdapter((banner, itemView, model, urlPosition) -> {
+            Glide.with(getContext()).load(model)
+                    .apply(GlideUtils.init().options())
+                    .transition(DrawableTransitionOptions.withCrossFade())
+                    .into((ImageView) itemView);
+        });
+        List<String> mImgUrls = new ArrayList<>();
+        List<String> mTypeUrls = new ArrayList<>();
+        for (SchemeDetailBean.LoupanhuxingBean bean : loupanhuxingBeans) {
+            mImgUrls.add(bean.huxing_avatar);
+            mTypeUrls.add(bean.huxing_type);
+        }
+        bgaBanner.setData(mImgUrls, mTypeUrls);
     }
 
     @Override
