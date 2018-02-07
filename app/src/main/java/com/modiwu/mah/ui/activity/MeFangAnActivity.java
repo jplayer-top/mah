@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import com.modiwu.mah.R;
 import com.modiwu.mah.base.BaseCommonActivity;
 import com.modiwu.mah.mvp.model.bean.MeFangAnBean;
+import com.modiwu.mah.mvp.presenter.MeFangAnPresenter;
 import com.modiwu.mah.ui.adapter.MeFanganAdapter;
 
 import java.util.ArrayList;
@@ -17,6 +18,10 @@ import java.util.ArrayList;
  */
 
 public class MeFangAnActivity extends BaseCommonActivity {
+
+    private MeFanganAdapter mAdapter;
+    private MeFangAnPresenter mPresenter;
+
     @Override
     public int setBaseLayout() {
         return R.layout.activity_me_fangan;
@@ -35,7 +40,15 @@ public class MeFangAnActivity extends BaseCommonActivity {
         mRecyclerView.addItemDecoration(decor);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,
                 false));
-        ArrayList<MeFangAnBean> data = new ArrayList<>();
-        mRecyclerView.setAdapter(new MeFanganAdapter(data));
+        ArrayList<MeFangAnBean.RowsBean> data = new ArrayList<>();
+        mPresenter = new MeFangAnPresenter(this);
+        mPresenter.requestFangAnData();
+        mAdapter = new MeFanganAdapter(data);
+        mRecyclerView.setAdapter(mAdapter);
+        smartRefreshLayout.setOnRefreshListener(refresh -> mPresenter.requestFangAnData());
+    }
+
+    public void setMeFangAn(MeFangAnBean bean) {
+        mAdapter.setNewData(bean.rows);
     }
 }

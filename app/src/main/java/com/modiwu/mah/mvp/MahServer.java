@@ -9,6 +9,7 @@ import com.modiwu.mah.mvp.model.bean.HomeBean;
 import com.modiwu.mah.mvp.model.bean.LocalBean;
 import com.modiwu.mah.mvp.model.bean.LocalListBean;
 import com.modiwu.mah.mvp.model.bean.LoginBean;
+import com.modiwu.mah.mvp.model.bean.MeFangAnBean;
 import com.modiwu.mah.mvp.model.bean.MeOrderBean;
 import com.modiwu.mah.mvp.model.bean.MeShouCangBean;
 import com.modiwu.mah.mvp.model.bean.SchemeBean;
@@ -96,6 +97,9 @@ public interface MahServer {
 
     @GET("mall/addr/l")
     Observable<LocalListBean> getLocalListBean();
+
+    @GET("fangan/order/all")
+    Observable<MeFangAnBean> getMeSchemeListBean();
 
     @POST("mall/addr/remove?")
     Observable<BaseBean> getLocalDelBean(@Query("rpid") String rpid);

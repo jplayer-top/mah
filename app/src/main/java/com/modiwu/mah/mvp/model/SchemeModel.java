@@ -1,8 +1,7 @@
 package com.modiwu.mah.mvp.model;
 
-import android.os.SystemClock;
-
 import com.modiwu.mah.mvp.MahServer;
+import com.modiwu.mah.mvp.model.bean.MeFangAnBean;
 import com.modiwu.mah.mvp.model.bean.SchemeBean;
 
 import io.reactivex.Observable;
@@ -21,10 +20,14 @@ public class SchemeModel {
                 .create(MahServer.class)
                 .getSchemeBean()
                 .subscribeOn(Schedulers.io())
-                .map(homeBean -> {
-                    SystemClock.sleep(1000);
-                    return homeBean;
-                })
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Observable<MeFangAnBean> requestMeFangAnBean() {
+        return RetrofitManager.init()
+                .create(MahServer.class)
+                .getMeSchemeListBean()
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
 }

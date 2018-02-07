@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import top.jplayer.baseprolibrary.utils.ActivityUtils;
+import top.jplayer.baseprolibrary.utils.ToastUtils;
 
 /**
  * Created by Obl on 2018/2/7.
@@ -75,6 +76,11 @@ public class LocalListActivity extends BaseCommonActivity {
                     mPresenter.delLocal(rpid);
                     break;
                 case R.id.checkbox:
+                    if (recordsBeans.get(position).rp_default == 1) {
+                        ToastUtils.init().showInfoToast(this,"必须有一个默认地址");
+                        mAdapter.notifyItemChanged(position);
+                        break;
+                    }
                     String rp_id = recordsBeans.get(position).rp_id + "";
                     mPresenter.setDefLocal(rp_id);
                     break;

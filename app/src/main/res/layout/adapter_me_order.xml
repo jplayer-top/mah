@@ -1,151 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:background="@color/white"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
-              android:orientation="vertical"
 
-              tools:ignore="RtlHardcoded,RtlSymmetry">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/tvOrder"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:drawablePadding="@dimen/dp_10"
-            android:gravity="center_vertical"
-            android:padding="@dimen/dp_10"
-            android:text="@string/me_order"
-            tools:ignore="RtlHardcoded"/>
-
-        <TextView
-            android:id="@+id/tvOrderStatue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawablePadding="@dimen/dp_10"
-            android:gravity="center_vertical"
-            android:padding="@dimen/dp_10"
-            android:text="待付款"
-            android:textColor="@color/chocolate"
-            tools:ignore="RtlHardcoded"/>
-    </LinearLayout>
+    <ImageView
+        android:id="@+id/ivFangAnPic"
+        android:layout_width="@dimen/dimen_80dp"
+        android:layout_height="@dimen/dimen_80dp"
+        android:layout_margin="@dimen/dp_10"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
-        android:id="@+id/tvOrderID"
+        android:id="@+id/tvFangAnName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:drawablePadding="@dimen/dp_10"
-        android:gravity="center_vertical"
-        android:padding="@dimen/dp_10"
-        android:text="订单编号：201702312312312313"
-        tools:ignore="RtlHardcoded"/>
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginStart="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_10"
+        android:text="@string/app_name"
+
+        app:layout_constraintLeft_toRightOf="@id/ivFangAnPic"
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
-        android:id="@+id/tvOrderTitle"
+        android:id="@+id/tvFangAnDel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:drawablePadding="@dimen/dp_10"
-        android:gravity="center_vertical"
-        android:padding="@dimen/dp_10"
-        android:text="【未来科技】"
-        tools:ignore="RtlHardcoded"/>
-
-    <TextView
-        android:id="@+id/tvOrderLocal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:drawablePadding="@dimen/dp_10"
-        android:gravity="center_vertical"
-        android:paddingLeft="@dimen/dp_10"
-        android:paddingStart="@dimen/dp_10"
-        android:paddingTop="@dimen/dimen_5dp"
-        android:text="楼盘：中华校园"
-        tools:ignore="RtlHardcoded"/>
-
-    <TextView
-        android:id="@+id/tvOrderType"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:drawablePadding="@dimen/dp_10"
-        android:gravity="center_vertical"
-        android:paddingLeft="@dimen/dp_10"
-        android:paddingStart="@dimen/dp_10"
-        android:paddingTop="@dimen/dimen_5dp"
-        android:text="户型：三室一厅"
-        tools:ignore="RtlHardcoded"/>
-
-    <TextView
-        android:id="@+id/tvOrderFangAn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:drawablePadding="@dimen/dp_10"
-        android:gravity="center_vertical"
-        android:paddingLeft="@dimen/dp_10"
-        android:paddingStart="@dimen/dp_10"
-        android:paddingTop="@dimen/dimen_5dp"
-        android:text="方案：维拉创新"
-        />
-
-    <TextView
-        android:id="@+id/tvOrderRuan"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:drawablePadding="@dimen/dp_10"
-        android:gravity="center_vertical"
-        android:paddingLeft="@dimen/dp_10"
-        android:paddingStart="@dimen/dp_10"
-        android:paddingTop="@dimen/dimen_5dp"
-        android:text="软装：未来唤醒"
-        tools:ignore="RtlHardcoded"/>
-
-    <LinearLayout
-        android:paddingBottom="@dimen/dimen_5dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/tvOrderMoney"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:drawablePadding="@dimen/dp_10"
-            android:gravity="center_vertical"
-            android:padding="@dimen/dp_10"
-            android:text="￥1.0"
-            android:textColor="@color/chocolate"
-            tools:ignore="RtlHardcoded"/>
-
-        <TextView
-            android:id="@+id/tvOrderToCancel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/shape_border_grey"
-            android:drawablePadding="@dimen/dp_10"
-            android:gravity="center_vertical"
-            android:padding="@dimen/dp_4"
-            android:text="取消订单"
-
-            tools:ignore="RtlHardcoded"/>
-
-        <TextView
-            android:id="@+id/tvOrderToPay"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dp_10"
-            android:layout_marginRight="@dimen/dp_10"
-            android:background="@drawable/shape_border_red"
-            android:drawablePadding="@dimen/dp_10"
-            android:gravity="center_vertical"
-            android:padding="@dimen/dp_4"
-            android:text="去付款"
-            android:textColor="@color/chocolate"
-            tools:ignore="RtlHardcoded"/>
-    </LinearLayout>
-
-</LinearLayout>
+        android:layout_below="@id/tvFangAnName"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginStart="@dimen/dp_10"
+        android:background="@drawable/shape_border_red"
+        android:padding="@dimen/dp_4"
+        android:text="删除收藏"
+        android:textColor="@color/chocolate"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/ivFangAnPic"
+        app:layout_constraintTop_toBottomOf="@id/tvFangAnName"/>
+</android.support.constraint.ConstraintLayout>

@@ -156,7 +156,8 @@ public abstract class SampleShowDialogObserver<T extends BaseBean> implements Ob
     }
 
     public void dialogShow(Context context) {
-        mLoading = new DialogLoading(context);
+        mLoading = new DialogLoading(context, false, dialog -> {
+        });
         if (!mLoading.isShowing()) {
             mDate = new Date();
             mLoading.show();
