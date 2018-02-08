@@ -25,10 +25,11 @@ public class MeFanganAdapter extends BaseQuickAdapter<MeFangAnBean.RowsBean, Bas
         String status = String.format(Locale.CHINA, "%s", item.order_status);
         helper.setText(R.id.tvOrderID, String.format(Locale.CHINA, "订单编号:%s", item.order_no))
                 .setText(R.id.tvOrderStatue, status)
+                .addOnClickListener(R.id.tvOrderToCancel)
                 .setText(R.id.tvOrder, String.format(Locale.CHINA, "%s", item.order_time))
                 .setText(R.id.tvOrderMoney, String.format(Locale.CHINA, "￥%s", item.order_fee_yuan))
                 .setText(R.id.tvOrderLocal, String.format(Locale.CHINA, "%s", item.order_desc))
                 .setText(R.id.tvOrderTitle, String.format(Locale.CHINA, "【%s】", item.order_title))
-                .setVisible(R.id.llStatus, !TextUtils.equals("待付款", status));
+                .setVisible(R.id.llStatus, TextUtils.equals("待付款", status));
     }
 }

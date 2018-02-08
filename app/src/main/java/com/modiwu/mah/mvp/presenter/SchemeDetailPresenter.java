@@ -2,12 +2,15 @@ package com.modiwu.mah.mvp.presenter;
 
 import com.modiwu.mah.mvp.constract.SchemeDetialContract;
 import com.modiwu.mah.mvp.model.SchemeDetailModel;
+import com.modiwu.mah.mvp.model.bean.CollectionHaseBean;
 import com.modiwu.mah.mvp.model.bean.SchemeDetailBean;
 import com.modiwu.mah.ui.activity.SchemeDetailActivity;
 
 import io.reactivex.disposables.Disposable;
 import top.jplayer.baseprolibrary.mvp.contract.BasePresenter;
+import top.jplayer.baseprolibrary.mvp.model.bean.BaseBean;
 import top.jplayer.baseprolibrary.net.SampleShowDialogObserver;
+import top.jplayer.baseprolibrary.utils.ToastUtils;
 
 /**
  * Created by Obl on 2018/1/25.
@@ -42,6 +45,32 @@ public class SchemeDetailPresenter extends BasePresenter<SchemeDetailActivity> i
                     @Override
                     protected void onFailure(Throwable e, boolean isNetWorkError) throws Exception {
                         mIView.showError();
+                    }
+                });
+    }
+
+    public void requestCollection(String fangan_id) {
+        mModel.requestSchemeCollectionBean(fangan_id)
+                .subscribe(new SampleShowDialogObserver<BaseBean>(mIView) {
+
+                    @Override
+                    protected void onSuccess(BaseBean baseBean) throws Exception {
+                        mIView.setSchemeCollectionData(baseBean);
+                    }
+                });
+    }
+
+    public void requestHasCollection(String fangan_id) {
+        mModel.requestSchemeHasCollectionBean(fangan_id)
+                .subscribe(new SampleShowDialogObserver<CollectionHaseBean>(mIView) {
+                    @Override
+                    protected void onSuccess(CollectionHaseBean baseBean) throws Exception {
+
+                        if (baseBean.has) {
+                            ToastUtils.init().showInfoToast(mIView, "已经收藏过了");
+                        } else {
+                            requestCollection(fangan_id);
+                        }
                     }
                 });
     }

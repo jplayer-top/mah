@@ -7,6 +7,8 @@ import com.modiwu.mah.ui.activity.MeOrderActivity;
 
 import io.reactivex.disposables.Disposable;
 import top.jplayer.baseprolibrary.mvp.contract.BasePresenter;
+import top.jplayer.baseprolibrary.mvp.model.bean.BaseBean;
+import top.jplayer.baseprolibrary.net.SampleShowDialogObserver;
 
 /**
  * Created by Obl on 2018/1/25.
@@ -53,7 +55,13 @@ public class OrderListPresenter extends BasePresenter<MeOrderActivity> implement
     }
 
     @Override
-    public void requestOrderListDel(String uid) {
-
+    public void requestOrderListDel(String orderId) {
+        mModel.requestOrderDelBean(orderId, "z")
+                .subscribe(new SampleShowDialogObserver<BaseBean>(mIView) {
+                    @Override
+                    protected void onSuccess(BaseBean baseBean) throws Exception {
+                        requestOrderListData();
+                    }
+                });
     }
 }

@@ -44,6 +44,11 @@ public class MeFangAnActivity extends BaseCommonActivity {
         mPresenter = new MeFangAnPresenter(this);
         mPresenter.requestFangAnData();
         mAdapter = new MeFanganAdapter(data);
+        mAdapter.setOnItemChildClickListener((adapter, view, position) -> {
+            String order_no = mAdapter.getData().get(position).order_no;
+            mPresenter.requestDelFangAnData(order_no);
+            return false;
+        });
         mRecyclerView.setAdapter(mAdapter);
         smartRefreshLayout.setOnRefreshListener(refresh -> mPresenter.requestFangAnData());
     }

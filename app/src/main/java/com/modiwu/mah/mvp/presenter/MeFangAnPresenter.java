@@ -7,6 +7,8 @@ import com.modiwu.mah.ui.activity.MeFangAnActivity;
 import io.reactivex.disposables.Disposable;
 import top.jplayer.baseprolibrary.mvp.contract.BasePresenter;
 import top.jplayer.baseprolibrary.mvp.contract.IContract;
+import top.jplayer.baseprolibrary.mvp.model.bean.BaseBean;
+import top.jplayer.baseprolibrary.net.SampleShowDialogObserver;
 
 /**
  * Created by Obl on 2018/1/25.
@@ -39,4 +41,12 @@ public class MeFangAnPresenter extends BasePresenter<MeFangAnActivity> implement
         }
     }
 
+    public void requestDelFangAnData(String order_no) {
+        mModel.requestMeFangAnDelBean(order_no).subscribe(new SampleShowDialogObserver<BaseBean>(mIView) {
+            @Override
+            protected void onSuccess(BaseBean baseBean) throws Exception {
+                requestFangAnData();
+            }
+        });
+    }
 }

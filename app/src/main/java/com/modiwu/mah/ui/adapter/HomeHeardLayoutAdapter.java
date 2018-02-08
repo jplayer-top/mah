@@ -25,6 +25,7 @@ import cn.bingoogolapple.bgabanner.BGABanner;
 import io.reactivex.Observable;
 import top.jplayer.baseprolibrary.glide.GlideUtils;
 import top.jplayer.baseprolibrary.ui.adapter.VLayoutAdapter;
+import top.jplayer.baseprolibrary.utils.ActivityUtils;
 import top.jplayer.baseprolibrary.utils.ToastUtils;
 
 /**
@@ -72,10 +73,10 @@ public class HomeHeardLayoutAdapter extends VLayoutAdapter<RecyclerView.ViewHold
                     EventBus.getDefault().post(new HomeTypeModeEvent(2, 1));
                 } else if (TextUtils.equals(mBanner.get(urlPosition).navType, "sjs")) {
                     EventBus.getDefault().post(new HomeTypeModeEvent(2, 0));
-                } else if (TextUtils.equals(mBanner.get(urlPosition).navType, "ybj")){
-                    context.startActivity(new Intent(context, HouseSampleActivity.class));
-                }else {
-                    ToastUtils.init().showInfoToast(context,"我type是Url");
+                } else if (TextUtils.equals(mBanner.get(urlPosition).navType, "ybj")) {
+                    ActivityUtils.init().start(context, HouseSampleActivity.class, "样板间征集");
+                } else {
+                    ToastUtils.init().showInfoToast(context, "我type是Url");
                 }
             });
         });

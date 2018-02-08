@@ -1,5 +1,9 @@
 package com.modiwu.mah.ui.adapter;
 
+import android.view.View;
+import android.widget.ImageView;
+
+import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.modiwu.mah.R;
@@ -7,6 +11,8 @@ import com.modiwu.mah.mvp.model.bean.ShopCartBean;
 
 import java.util.List;
 import java.util.Locale;
+
+import top.jplayer.baseprolibrary.glide.GlideUtils;
 
 /**
  * Created by Administrator on 2018/1/28.
@@ -20,6 +26,8 @@ public class ShopCartAdapter extends BaseQuickAdapter<ShopCartBean, BaseViewHold
 
     @Override
     protected void convert(BaseViewHolder helper, ShopCartBean item) {
+        ImageView ivPic = helper.itemView.findViewById(R.id.ivShopDel);
+        Glide.with(mContext).load(item.getPic_url()).apply(GlideUtils.init().options()).into(ivPic);
         helper.setVisible(R.id.llContent, !item.isEdit)
                 .addOnClickListener(R.id.checkbox)
                 .setText(R.id.tvTitle, item.title)

@@ -2,6 +2,8 @@ package com.modiwu.mah.mvp;
 
 
 import com.modiwu.mah.mvp.model.bean.CarpenterBean;
+import com.modiwu.mah.mvp.model.bean.CityCodeBean;
+import com.modiwu.mah.mvp.model.bean.CollectionHaseBean;
 import com.modiwu.mah.mvp.model.bean.DefLocalBean;
 import com.modiwu.mah.mvp.model.bean.DesignBean;
 import com.modiwu.mah.mvp.model.bean.DockerBean;
@@ -22,9 +24,11 @@ import com.modiwu.mah.mvp.model.bean.SelectLocalBean;
 import com.modiwu.mah.mvp.model.bean.ShopGoodsInfoBean;
 import com.modiwu.mah.mvp.model.bean.ShopSubListBean;
 import com.modiwu.mah.mvp.model.bean.SubTitleBean;
+import com.modiwu.mah.mvp.model.bean.YBJBean;
 
 import java.util.Map;
 
+import io.reactivex.Completable;
 import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
@@ -59,11 +63,14 @@ public interface MahServer {
     @GET("select/hxtype")
     Observable<SelectBean> getTypeSelectBean();
 
-    @GET("select/building/select")
-    Observable<FloorBean> getFloorSelectBean();
+    @GET("select/building?")
+    Observable<FloorBean> getFloorSelectBean(@Query("area_code") String area_code);
 
     @GET("fangan/list")
     Observable<SchemeBean> getSchemeBean();
+
+    @GET("fangan/list?")
+    Observable<SchemeBean> getSchemeBean(@QueryMap Map<String, String> map);
 
     @GET("designer/list")
     Observable<CarpenterBean> getCarpenterBean();
@@ -128,4 +135,33 @@ public interface MahServer {
     @POST("fangan/order/submit?")
     Observable<OrderCreateBean> getSchemeCreateBean(@QueryMap() Map<String, String> map);
 
+    @GET("ope//info")
+    Observable<YBJBean> getYBJBean();
+
+    @POST("ope//ybj?")
+    Observable<BaseBean> getYBJSubmitBean(@QueryMap() Map<String, String> map);
+
+    @POST("shoucang/add?")
+    Observable<BaseBean> getSchemeCollectionBean(@Query("fangan_id") String fangan_id);
+
+    @GET("shoucang/has?")
+    Observable<CollectionHaseBean> getSchemeHasCollectionBean(@Query("fangan_id") String fangan_id);
+
+    @GET("select/city/code?")
+    Observable<CityCodeBean> getCityCodeBean(@Query("city") String city);
+
+    @POST("yyfa//add?")
+    Observable<BaseBean> getYYSubmitBean(@QueryMap Map<String, String> map);
+
+    @POST("fangan/order/remove?")
+    Observable<BaseBean> getRemoveFangAn(@Query("order_no") String order_no);
+
+    @POST("mall/order/close?")
+    Observable<BaseBean> getOrderDelBean(@Query("order_id") String order_id, @Query("reason") String reason);
+
+    @POST("profile/update?")
+    Observable<BaseBean> getMeInfoBean(@Query("col") String col, @Query("value") String value);
+
+    @GET("profile/info?")
+    Observable<BaseBean> getMeInfoStartBean(@Query("uid") String uid);
 }

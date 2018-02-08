@@ -1,282 +1,313 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView
+<com.scwang.smartrefresh.layout.SmartRefreshLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/smartRefreshLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    android:fitsSystemWindows="true">
+    android:background="@color/colorWhite"
+    app:srlAccentColor="@android:color/white"
+    app:srlEnablePureScrollMode="true"
+    app:srlPrimaryColor="@color/white">
 
-    <LinearLayout
+    <android.support.v4.widget.NestedScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:focusableInTouchMode="true"
-        android:orientation="vertical">
+        android:background="@color/white"
+        android:fitsSystemWindows="true">
 
-        <ImageView
-            style="@style/img_adjust_bounds"
+        <top.jplayer.baseprolibrary.widgets.MultipleStatusView
+            android:id="@+id/multiplestatusview"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/pic_04"/>
+            android:layout_height="match_parent"
+            app:emptyView="@layout/layout_empty_view"
+            app:errorView="@layout/layout_error_view"
+            app:loadingView="@layout/layout_loading_view"
+            app:noNetworkView="@layout/layout_network_view">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/dp_10"
-            android:lineSpacingExtra="@dimen/lineSpacingExtra_3"
-            android:text="@string/so_many_str"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/generalHeight"
-            android:layout_marginTop="@dimen/dp_10"
-            android:paddingEnd="@dimen/dp_10"
-            android:paddingLeft="@dimen/dp_10"
-            android:paddingRight="@dimen/dp_10"
-            android:paddingStart="@dimen/dp_10">
-
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="@string/your_name"
-                android:textSize="@dimen/sp_18"
-                android:textStyle="bold"/>
+                android:focusableInTouchMode="true"
+                android:orientation="vertical">
 
-            <EditText
-                style="@style/OblAppTheme.EditText"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:background="@drawable/shape_edit_black_glod"
-                android:hint="@string/input_name"
-                android:paddingLeft="@dimen/dp_10"
-                android:paddingStart="@dimen/dp_10"
-                tools:ignore="RtlHardcoded,RtlSymmetry"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/generalHeight"
-            android:paddingEnd="@dimen/dp_10"
-            android:paddingLeft="@dimen/dp_10"
-            android:paddingRight="@dimen/dp_10"
-            android:paddingStart="@dimen/dp_10">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="@string/your_phone"
-                android:textSize="@dimen/sp_18"
-                android:textStyle="bold"/>
-
-            <EditText
-                style="@style/OblAppTheme.EditText"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:background="@drawable/shape_edit_black_glod"
-                android:hint="@string/input_phone"
-                android:inputType="number"
-                android:paddingLeft="@dimen/dp_10"
-                android:paddingStart="@dimen/dp_10"
-                tools:ignore="RtlHardcoded,RtlSymmetry"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/generalHeight"
-            android:paddingEnd="@dimen/dp_10"
-            android:paddingLeft="@dimen/dp_10"
-            android:paddingRight="@dimen/dp_10"
-            android:paddingStart="@dimen/dp_10">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="@string/your_house"
-                android:textSize="@dimen/sp_18"
-                android:textStyle="bold"/>
-
-            <EditText
-                style="@style/OblAppTheme.EditText"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:background="@drawable/shape_edit_black_glod"
-                android:hint="@string/input_house"
-                android:inputType="number"
-                android:paddingLeft="@dimen/dp_10"
-                android:paddingStart="@dimen/dp_10"
-                tools:ignore="RtlHardcoded,RtlSymmetry"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/generalHeight"
-            android:paddingEnd="@dimen/dp_10"
-            android:paddingLeft="@dimen/dp_10"
-            android:paddingRight="@dimen/dp_10"
-            android:paddingStart="@dimen/dp_10">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="@string/your_type"
-                android:textSize="@dimen/sp_18"
-                android:textStyle="bold"/>
-
-            <EditText
-                style="@style/OblAppTheme.EditText"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:background="@drawable/shape_edit_black_glod"
-                android:hint="@string/input_type"
-                android:inputType="number"
-                android:paddingLeft="@dimen/dp_10"
-                android:paddingStart="@dimen/dp_10"
-                tools:ignore="RtlHardcoded,RtlSymmetry"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/generalHeight"
-            android:paddingEnd="@dimen/dp_10"
-            android:paddingLeft="@dimen/dp_10"
-            android:paddingRight="@dimen/dp_10"
-            android:paddingStart="@dimen/dp_10">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="@string/your_area"
-                android:textSize="@dimen/sp_18"
-                android:textStyle="bold"/>
-
-            <EditText
-                style="@style/OblAppTheme.EditText"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:background="@drawable/shape_edit_black_glod"
-                android:hint="@string/input_area"
-                android:inputType="number"
-                android:paddingLeft="@dimen/dp_10"
-                android:paddingStart="@dimen/dp_10"
-                tools:ignore="RtlHardcoded,RtlSymmetry"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/dp_10"
-            android:paddingEnd="@dimen/dp_10"
-            android:paddingLeft="@dimen/dp_10"
-            android:paddingRight="@dimen/dp_10"
-            android:paddingStart="@dimen/dp_10">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/generalHeight"
-                android:gravity="center"
-                android:text="@string/your_style"
-                android:textSize="@dimen/sp_18"
-                android:textStyle="bold"/>
-
-            <android.support.constraint.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_10">
-
-                <CheckBox
-                    android:id="@+id/checkBox1"
-                    android:layout_width="wrap_content"
+                <ImageView
+                    android:id="@+id/ivPic"
+                    style="@style/img_adjust_bounds"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="现代"
-                    app:layout_constraintLeft_toRightOf="parent"/>
-
-                <CheckBox
-                    android:id="@+id/checkBox2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="欧式"
-                    app:layout_constraintLeft_toRightOf="@id/checkBox1"
-                    app:layout_constraintRight_toRightOf="parent"/>
-
-                <CheckBox
-                    android:id="@+id/checkBox3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="田园"
-                    app:layout_constraintTop_toBottomOf="@+id/checkBox1"/>
-
-                <CheckBox
-                    android:id="@+id/checkBox4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="新中式"
-                    app:layout_constraintLeft_toLeftOf="@id/checkBox2"
-                    app:layout_constraintTop_toBottomOf="@id/checkBox2"/>
-
-                <CheckBox
-                    android:id="@+id/checkBox5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="日式"
-                    app:layout_constraintLeft_toLeftOf="@id/checkBox3"
-                    app:layout_constraintTop_toBottomOf="@id/checkBox3"/>
-
-                <CheckBox
-                    android:id="@+id/checkBox6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="北欧"
-                    app:layout_constraintLeft_toLeftOf="@id/checkBox4"
-                    app:layout_constraintTop_toBottomOf="@id/checkBox4"/>
+                    android:src="@drawable/placeholder"/>
 
                 <TextView
-                    android:id="@+id/tvOther"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_marginTop="5dp"
-                    android:gravity="center"
-                    android:text="@string/your_other"
-                    android:textSize="@dimen/generalTextViewSize"
-                    android:textStyle="bold"
-                    app:layout_constraintLeft_toLeftOf="@id/checkBox5"
-                    app:layout_constraintTop_toBottomOf="@id/checkBox5"/>
+                    android:id="@+id/tvInfo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dp_10"
+                    android:lineSpacingExtra="@dimen/lineSpacingExtra_3"
+                    android:text="@string/app_name"/>
 
-                <EditText
-                    style="@style/OblAppTheme.EditText"
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:layout_marginRight="@dimen/dp_10"
-                    android:background="@drawable/shape_edit_black_glod"
-                    android:hint="@string/input_other"
-                    android:inputType="number"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/generalHeight"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:paddingEnd="@dimen/dp_10"
                     android:paddingLeft="@dimen/dp_10"
-                    android:paddingStart="@dimen/dp_10"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintHorizontal_chainStyle="spread"
-                    app:layout_constraintLeft_toRightOf="@id/tvOther"
-                    app:layout_constraintRight_toRightOf="parent"
-                    tools:ignore="RtlHardcoded,RtlSymmetry"/>
+                    android:paddingRight="@dimen/dp_10"
+                    android:paddingStart="@dimen/dp_10">
 
-            </android.support.constraint.ConstraintLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="@string/your_name"
+                        android:textSize="@dimen/sp_18"
+                        android:textStyle="bold"/>
 
-        </LinearLayout>
+                    <EditText
+                        android:id="@+id/editName"
+                        style="@style/OblAppTheme.EditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:background="@drawable/shape_edit_black_glod"
+                        android:hint="@string/input_name"
+                        android:paddingLeft="@dimen/dp_10"
+                        android:paddingStart="@dimen/dp_10"
+                        tools:ignore="RtlHardcoded,RtlSymmetry"/>
+                </LinearLayout>
 
-        <Button
-            android:id="@+id/btnSublime"
-            style="@style/textview_body_magin_10"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/generalHeight"
-            android:layout_marginBottom="@dimen/dp_10"
-            android:background="@color/colorBlackGrey"
-            android:clickable="true"
-            android:foreground="?android:selectableItemBackground"
-            android:text="@string/sublime"
-            android:textColor="@color/white"/>
-    </LinearLayout>
-</android.support.v4.widget.NestedScrollView>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/generalHeight"
+                    android:paddingEnd="@dimen/dp_10"
+                    android:paddingLeft="@dimen/dp_10"
+                    android:paddingRight="@dimen/dp_10"
+                    android:paddingStart="@dimen/dp_10">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="@string/your_phone"
+                        android:textSize="@dimen/sp_18"
+                        android:textStyle="bold"/>
+
+                    <EditText
+                        android:id="@+id/editPhone"
+                        style="@style/OblAppTheme.EditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:background="@drawable/shape_edit_black_glod"
+                        android:hint="@string/input_phone"
+                        android:inputType="number"
+                        android:paddingLeft="@dimen/dp_10"
+                        android:paddingStart="@dimen/dp_10"
+                        tools:ignore="RtlHardcoded,RtlSymmetry"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/generalHeight"
+                    android:paddingEnd="@dimen/dp_10"
+                    android:paddingLeft="@dimen/dp_10"
+                    android:paddingRight="@dimen/dp_10"
+                    android:paddingStart="@dimen/dp_10">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="@string/your_house"
+                        android:textSize="@dimen/sp_18"
+                        android:textStyle="bold"/>
+
+                    <EditText
+                        android:id="@+id/editFloor"
+                        style="@style/OblAppTheme.EditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:background="@drawable/shape_edit_black_glod"
+                        android:hint="@string/input_house"
+                        android:inputType="number"
+                        android:paddingLeft="@dimen/dp_10"
+                        android:paddingStart="@dimen/dp_10"
+                        tools:ignore="RtlHardcoded,RtlSymmetry"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/generalHeight"
+                    android:paddingEnd="@dimen/dp_10"
+                    android:paddingLeft="@dimen/dp_10"
+                    android:paddingRight="@dimen/dp_10"
+                    android:paddingStart="@dimen/dp_10">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="@string/your_type"
+                        android:textSize="@dimen/sp_18"
+                        android:textStyle="bold"/>
+
+                    <EditText
+                        android:id="@+id/editType"
+                        style="@style/OblAppTheme.EditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:background="@drawable/shape_edit_black_glod"
+                        android:hint="@string/input_type"
+                        android:inputType="number"
+                        android:paddingLeft="@dimen/dp_10"
+                        android:paddingStart="@dimen/dp_10"
+                        tools:ignore="RtlHardcoded,RtlSymmetry"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/generalHeight"
+                    android:paddingEnd="@dimen/dp_10"
+                    android:paddingLeft="@dimen/dp_10"
+                    android:paddingRight="@dimen/dp_10"
+                    android:paddingStart="@dimen/dp_10">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="@string/your_area"
+                        android:textSize="@dimen/sp_18"
+                        android:textStyle="bold"/>
+
+                    <EditText
+                        android:id="@+id/editArea"
+                        style="@style/OblAppTheme.EditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:background="@drawable/shape_edit_black_glod"
+                        android:hint="@string/input_area"
+                        android:inputType="number"
+                        android:paddingLeft="@dimen/dp_10"
+                        android:paddingStart="@dimen/dp_10"
+                        tools:ignore="RtlHardcoded,RtlSymmetry"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/dp_10"
+                    android:paddingEnd="@dimen/dp_10"
+                    android:paddingLeft="@dimen/dp_10"
+                    android:paddingRight="@dimen/dp_10"
+                    android:paddingStart="@dimen/dp_10">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/generalHeight"
+                        android:gravity="center"
+                        android:text="@string/your_style"
+                        android:textSize="@dimen/sp_18"
+                        android:textStyle="bold"/>
+
+                    <android.support.constraint.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_10">
+
+                        <CheckBox
+                            android:id="@+id/checkBox1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="现代"
+                            app:layout_constraintLeft_toRightOf="parent"/>
+
+                        <CheckBox
+                            android:id="@+id/checkBox2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="欧式"
+                            app:layout_constraintLeft_toRightOf="@id/checkBox1"
+                            app:layout_constraintRight_toRightOf="parent"/>
+
+                        <CheckBox
+                            android:id="@+id/checkBox3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="田园"
+                            app:layout_constraintTop_toBottomOf="@+id/checkBox1"/>
+
+                        <CheckBox
+                            android:id="@+id/checkBox4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="新中式"
+                            app:layout_constraintLeft_toLeftOf="@id/checkBox2"
+                            app:layout_constraintTop_toBottomOf="@id/checkBox2"/>
+
+                        <CheckBox
+                            android:id="@+id/checkBox5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="日式"
+                            app:layout_constraintLeft_toLeftOf="@id/checkBox3"
+                            app:layout_constraintTop_toBottomOf="@id/checkBox3"/>
+
+                        <CheckBox
+                            android:id="@+id/checkBox6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="北欧"
+                            app:layout_constraintLeft_toLeftOf="@id/checkBox4"
+                            app:layout_constraintTop_toBottomOf="@id/checkBox4"/>
+
+                        <TextView
+                            android:id="@+id/tvOther"
+                            android:layout_width="wrap_content"
+                            android:layout_height="30dp"
+                            android:layout_marginTop="5dp"
+                            android:gravity="center"
+                            android:text="@string/your_other"
+                            android:textSize="@dimen/generalTextViewSize"
+                            android:textStyle="bold"
+                            app:layout_constraintLeft_toLeftOf="@id/checkBox5"
+                            app:layout_constraintTop_toBottomOf="@id/checkBox5"/>
+
+                        <EditText
+                            android:id="@+id/editOther"
+                            style="@style/OblAppTheme.EditText"
+                            android:layout_width="0dp"
+                            android:layout_height="30dp"
+                            android:layout_marginRight="@dimen/dp_10"
+                            android:background="@drawable/shape_edit_black_glod"
+                            android:hint="@string/input_other"
+                            android:inputType="number"
+                            android:paddingLeft="@dimen/dp_10"
+                            android:paddingStart="@dimen/dp_10"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintHorizontal_chainStyle="spread"
+                            app:layout_constraintLeft_toRightOf="@id/tvOther"
+                            app:layout_constraintRight_toRightOf="parent"
+                            tools:ignore="RtlHardcoded,RtlSymmetry"/>
+
+                    </android.support.constraint.ConstraintLayout>
+
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/btnSublime"
+                    style="@style/textview_body_magin_10"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/generalHeight"
+                    android:layout_marginBottom="@dimen/dp_10"
+                    android:background="@color/colorBlackGrey"
+                    android:clickable="true"
+                    android:foreground="?android:selectableItemBackground"
+                    android:text="@string/sublime"
+                    android:textColor="@color/white"/>
+            </LinearLayout>
+        </top.jplayer.baseprolibrary.widgets.MultipleStatusView>
+    </android.support.v4.widget.NestedScrollView>
+</com.scwang.smartrefresh.layout.SmartRefreshLayout>

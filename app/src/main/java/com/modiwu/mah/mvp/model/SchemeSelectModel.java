@@ -1,6 +1,10 @@
 package com.modiwu.mah.mvp.model;
 
 import com.modiwu.mah.mvp.MahServer;
+import com.modiwu.mah.mvp.model.bean.CityCodeBean;
+import com.modiwu.mah.mvp.model.bean.FloorBean;
+import com.modiwu.mah.mvp.model.bean.SelectBean;
+import com.modiwu.mah.mvp.model.bean.SelectLocalBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,16 +33,11 @@ public class SchemeSelectModel {
 
     }
 
-    public Observable<List<String>> requestLocalData(String city_code) {
+    public Observable<SelectLocalBean> requestLocalData(String city_code) {
 
         return RetrofitManager.init().create(MahServer.class)
                 .getLocalSelectBean(city_code)
-                .map(selectBean -> selectBean.rows)
-                .map(rowsBeans -> {
-                    List<String> list = new ArrayList<>();
-                    Observable.fromIterable(rowsBeans).subscribe(rowsBean -> list.add(rowsBean.area_name));
-                    return list;
-                }).compose(new IoMainSchedule<>());
+                .compose(new IoMainSchedule<>());
 
     }
 
@@ -54,15 +53,17 @@ public class SchemeSelectModel {
 
     }
 
-    public Observable<List<String>> requestFloorData() {
+    public Observable<FloorBean> requestFloorData(String area_code) {
         return RetrofitManager.init().create(MahServer.class)
-                .getFloorSelectBean()
-                .map(selectBean -> selectBean.rows)
-                .map(rowsBeans -> {
-                    List<String> list = new ArrayList<>();
-                    Observable.fromIterable(rowsBeans).subscribe(rowsBean -> list.add(rowsBean.building_name));
-                    return list;
-                }).compose(new IoMainSchedule<>());
+                .getFloorSelectBean(area_code)
+                .compose(new IoMainSchedule<>());
+
+    }
+
+    public Observable<CityCodeBean> requestCodeData(String city) {
+        return RetrofitManager.init().create(MahServer.class)
+                .getCityCodeBean(city)
+                .compose(new IoMainSchedule<>());
 
     }
 }

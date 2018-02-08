@@ -47,6 +47,17 @@ public class MeOrderActivity extends BaseCommonActivity implements OrderListCont
         ArrayList<MeOrderBean.RecordsBean> data = new ArrayList<>();
 
         mAdapter = new MeOrderAdapter(data);
+        mAdapter.setOnItemChildClickListener((adapter, view, position) -> {
+            switch (view.getId()) {
+                case R.id.tvOrderToCancel:
+                    String order_id = mAdapter.getData().get(position).order_id;
+                    mPresenter.requestOrderListDel(order_id);
+                    break;
+                case R.id.tvOrderToPay:
+                    break;
+            }
+            return false;
+        });
         mRecyclerView.setAdapter(mAdapter);
         mPresenter = new OrderListPresenter(this);
         showLoading();

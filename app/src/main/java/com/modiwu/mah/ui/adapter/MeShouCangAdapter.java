@@ -20,7 +20,7 @@ import top.jplayer.baseprolibrary.glide.GlideUtils;
 
 public class MeShouCangAdapter extends BaseQuickAdapter<MeShouCangBean.RowsBean, BaseViewHolder> {
     public MeShouCangAdapter(List<MeShouCangBean.RowsBean> data) {
-        super(R.layout.adapter_me_fangan, data);
+        super(R.layout.adapter_me_order, data);
     }
 
     @Override

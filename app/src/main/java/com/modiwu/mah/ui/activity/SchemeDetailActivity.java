@@ -22,8 +22,10 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import top.jplayer.baseprolibrary.mvp.model.bean.BaseBean;
 import top.jplayer.baseprolibrary.utils.ActivityUtils;
 import top.jplayer.baseprolibrary.utils.LogUtil;
+import top.jplayer.baseprolibrary.utils.ToastUtils;
 import top.jplayer.baseprolibrary.widgets.MultipleStatusView;
 
 /**
@@ -63,6 +65,8 @@ public class SchemeDetailActivity extends BaseSpecialActivity implements SchemeD
         mUnbinder = ButterKnife.bind(this, contentView);
         findToolBarView(contentView);
         customBarLeft();
+        ivBarSearch.setVisibility(View.VISIBLE);
+        ivBarSearch.setImageDrawable(getResources().getDrawable(R.drawable.shop_collection));
         tabLayout.setTabMode(TabLayout.MODE_FIXED);
         tabLayout.setupWithViewPager(viewPager);
         ArrayList<String> strings = new ArrayList<>();
@@ -74,6 +78,7 @@ public class SchemeDetailActivity extends BaseSpecialActivity implements SchemeD
         mAdapter = new AdapterPagerSchemeDetail(getSupportFragmentManager(), strings);
         mPresenter = new SchemeDetailPresenter(this);
         mFangan_id = mBundle.getString("fangan_id");
+        tvBarTitle.setText(getIntent().getStringExtra("title"));
         if (mFangan_id != null) {
             mMultipleStatusView.showLoading();
             mPresenter.requestSchemeDetialData(mFangan_id);
@@ -81,7 +86,8 @@ public class SchemeDetailActivity extends BaseSpecialActivity implements SchemeD
         } else {
             mMultipleStatusView.showEmpty();
         }
-
+        ivBarSearch.setOnClickListener(view ->
+                mPresenter.requestHasCollection(mFangan_id));
     }
 
     @Override
@@ -153,5 +159,9 @@ public class SchemeDetailActivity extends BaseSpecialActivity implements SchemeD
         if (smartRefreshLayout != null && smartRefreshLayout.isRefreshing()) {
             smartRefreshLayout.finishRefresh();
         }
+    }
+
+    public void setSchemeCollectionData(BaseBean baseBean) {
+        ToastUtils.init().showSuccessToast(this, baseBean.msg);
     }
 }

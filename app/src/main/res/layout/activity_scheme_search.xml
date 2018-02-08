@@ -1,162 +1,175 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<com.scwang.smartrefresh.layout.SmartRefreshLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/smartRefreshLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    android:divider="@drawable/shape_divider"
-    android:orientation="vertical"
-    android:showDividers="middle">
+    android:background="@color/colorWhite"
+    app:srlAccentColor="@android:color/white"
+    app:srlEnablePureScrollMode="true"
+    app:srlPrimaryColor="@color/white">
 
     <LinearLayout
-        android:id="@+id/llLocalSelect"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/generalHeight"
-        android:background="@drawable/selector_white_muti_press"
-        android:orientation="horizontal"
-        android:paddingEnd="@dimen/dp_10"
-        android:paddingLeft="@dimen/dp_10"
-        android:paddingRight="@dimen/dp_10"
-        android:paddingStart="@dimen/dp_10">
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:divider="@drawable/shape_divider"
+        android:orientation="vertical"
+        android:showDividers="middle">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/generalHeight"
-            android:layout_marginRight="@dimen/magin_30"
-            android:drawableLeft="@drawable/me_local"
-            android:drawablePadding="@dimen/dp_10"
-            android:drawableStart="@drawable/me_local"
-            android:gravity="center_vertical"
-            android:text="@string/select_local"
-            tools:ignore="RtlHardcoded"/>
-
-        <TextView
-            android:id="@+id/tvLocal"
+        <LinearLayout
+            android:id="@+id/llLocalSelect"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="5dp"
-            android:drawableEnd="@drawable/select_local"
-            android:drawablePadding="@dimen/dimen_5dp"
-            android:drawableRight="@drawable/select_local"
-            android:gravity="center_vertical|right"
-            android:paddingEnd="@dimen/dp_10"
-            tools:ignore="RtlHardcoded,RtlSymmetry"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/llFloorSelect"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/generalHeight"
-        android:background="@drawable/selector_white_muti_press"
-        android:orientation="horizontal"
-        android:paddingEnd="@dimen/dp_10"
-        android:paddingLeft="@dimen/dp_10"
-        android:paddingRight="@dimen/dp_10"
-        android:paddingStart="@dimen/dp_10">
-
-        <TextView
-            android:layout_width="wrap_content"
             android:layout_height="@dimen/generalHeight"
-            android:layout_marginRight="@dimen/magin_30"
-            android:drawableLeft="@drawable/me_local"
-            android:drawablePadding="@dimen/dp_10"
-            android:drawableStart="@drawable/me_local"
-            android:gravity="center_vertical"
-            android:text="@string/select_floor"
-            tools:ignore="RtlHardcoded"/>
-
-        <TextView
-            android:id="@+id/tvFloor"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="5dp"
-            android:drawableEnd="@drawable/select_local"
-            android:drawablePadding="@dimen/dimen_5dp"
-            android:drawableRight="@drawable/select_local"
-            android:gravity="center_vertical|right"
+            android:background="@drawable/selector_white_muti_press"
+            android:orientation="horizontal"
             android:paddingEnd="@dimen/dp_10"
-            tools:ignore="RtlHardcoded,RtlSymmetry"/>
-    </LinearLayout>
+            android:paddingLeft="@dimen/dp_10"
+            android:paddingRight="@dimen/dp_10"
+            android:paddingStart="@dimen/dp_10">
 
-    <LinearLayout
-        android:id="@+id/llStyleSelect"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/generalHeight"
-        android:background="@drawable/selector_white_muti_press"
-        android:orientation="horizontal"
-        android:paddingEnd="@dimen/dp_10"
-        android:paddingLeft="@dimen/dp_10"
-        android:paddingRight="@dimen/dp_10"
-        android:paddingStart="@dimen/dp_10">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/generalHeight"
+                android:layout_marginRight="@dimen/magin_30"
+                android:drawableLeft="@drawable/me_local"
+                android:drawablePadding="@dimen/dp_10"
+                android:drawableStart="@drawable/me_local"
+                android:gravity="center_vertical"
+                android:text="@string/select_local"
+                tools:ignore="RtlHardcoded"/>
 
-        <TextView
-            android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/tvLocal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:drawableEnd="@drawable/select_local"
+                android:drawablePadding="@dimen/dimen_5dp"
+                android:drawableRight="@drawable/select_local"
+                android:gravity="center_vertical|right"
+                android:paddingEnd="@dimen/dp_10"
+                tools:ignore="RtlHardcoded,RtlSymmetry"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llFloorSelect"
+            android:layout_width="match_parent"
             android:layout_height="@dimen/generalHeight"
-            android:layout_marginRight="@dimen/magin_30"
-            android:drawableLeft="@drawable/me_local"
-            android:drawablePadding="@dimen/dp_10"
-            android:drawableStart="@drawable/me_local"
-            android:gravity="center_vertical"
-            android:text="@string/select_style"
-            tools:ignore="RtlHardcoded"/>
-
-        <TextView
-            android:id="@+id/tvStyle"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="5dp"
-            android:drawableEnd="@drawable/select_local"
-            android:drawablePadding="@dimen/dimen_5dp"
-            android:drawableRight="@drawable/select_local"
-            android:gravity="center_vertical|right"
+            android:background="@drawable/selector_white_muti_press"
+            android:orientation="horizontal"
             android:paddingEnd="@dimen/dp_10"
-            tools:ignore="RtlHardcoded,RtlSymmetry"/>
-    </LinearLayout>
+            android:paddingLeft="@dimen/dp_10"
+            android:paddingRight="@dimen/dp_10"
+            android:paddingStart="@dimen/dp_10">
 
-    <LinearLayout
-        android:id="@+id/llTypeSelect"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/generalHeight"
-        android:background="@drawable/selector_white_muti_press"
-        android:orientation="horizontal"
-        android:paddingEnd="@dimen/dp_10"
-        android:paddingLeft="@dimen/dp_10"
-        android:paddingRight="@dimen/dp_10"
-        android:paddingStart="@dimen/dp_10">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/generalHeight"
+                android:layout_marginRight="@dimen/magin_30"
+                android:drawableLeft="@drawable/me_local"
+                android:drawablePadding="@dimen/dp_10"
+                android:drawableStart="@drawable/me_local"
+                android:gravity="center_vertical"
+                android:text="@string/select_floor"
+                tools:ignore="RtlHardcoded"/>
 
-        <TextView
-            android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/tvFloor"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:drawableEnd="@drawable/select_local"
+                android:drawablePadding="@dimen/dimen_5dp"
+                android:drawableRight="@drawable/select_local"
+                android:gravity="center_vertical|right"
+                android:paddingEnd="@dimen/dp_10"
+                tools:ignore="RtlHardcoded,RtlSymmetry"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llStyleSelect"
+            android:layout_width="match_parent"
             android:layout_height="@dimen/generalHeight"
-            android:layout_marginRight="@dimen/magin_30"
-            android:drawableLeft="@drawable/me_local"
-            android:drawablePadding="@dimen/dp_10"
-            android:drawableStart="@drawable/me_local"
-            android:gravity="center_vertical"
-            android:text="@string/select_type"
-            tools:ignore="RtlHardcoded"/>
-
-        <TextView
-            android:id="@+id/tvType"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="5dp"
-            android:drawableEnd="@drawable/select_local"
-            android:drawablePadding="@dimen/dimen_5dp"
-            android:drawableRight="@drawable/select_local"
-            android:gravity="center_vertical|right"
+            android:background="@drawable/selector_white_muti_press"
+            android:orientation="horizontal"
             android:paddingEnd="@dimen/dp_10"
-            tools:ignore="RtlHardcoded,RtlSymmetry"/>
-    </LinearLayout>
+            android:paddingLeft="@dimen/dp_10"
+            android:paddingRight="@dimen/dp_10"
+            android:paddingStart="@dimen/dp_10">
 
-    <Button
-        android:id="@+id/btnSure"
-        style="@style/textview_body_magin_10"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dimen_30dp"
-        android:background="@drawable/selector_grey_muti_press"
-        android:gravity="center"
-        android:text="确定"
-        android:textColor="@drawable/selector_text_press"/>
-</LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/generalHeight"
+                android:layout_marginRight="@dimen/magin_30"
+                android:drawableLeft="@drawable/me_local"
+                android:drawablePadding="@dimen/dp_10"
+                android:drawableStart="@drawable/me_local"
+                android:gravity="center_vertical"
+                android:text="@string/select_style"
+                tools:ignore="RtlHardcoded"/>
+
+            <TextView
+                android:id="@+id/tvStyle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:drawableEnd="@drawable/select_local"
+                android:drawablePadding="@dimen/dimen_5dp"
+                android:drawableRight="@drawable/select_local"
+                android:gravity="center_vertical|right"
+                android:paddingEnd="@dimen/dp_10"
+                tools:ignore="RtlHardcoded,RtlSymmetry"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llTypeSelect"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/generalHeight"
+            android:background="@drawable/selector_white_muti_press"
+            android:orientation="horizontal"
+            android:paddingEnd="@dimen/dp_10"
+            android:paddingLeft="@dimen/dp_10"
+            android:paddingRight="@dimen/dp_10"
+            android:paddingStart="@dimen/dp_10">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/generalHeight"
+                android:layout_marginRight="@dimen/magin_30"
+                android:drawableLeft="@drawable/me_local"
+                android:drawablePadding="@dimen/dp_10"
+                android:drawableStart="@drawable/me_local"
+                android:gravity="center_vertical"
+                android:text="@string/select_type"
+                tools:ignore="RtlHardcoded"/>
+
+            <TextView
+                android:id="@+id/tvType"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:drawableEnd="@drawable/select_local"
+                android:drawablePadding="@dimen/dimen_5dp"
+                android:drawableRight="@drawable/select_local"
+                android:gravity="center_vertical|right"
+                android:paddingEnd="@dimen/dp_10"
+                tools:ignore="RtlHardcoded,RtlSymmetry"/>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnSure"
+            style="@style/textview_body_magin_10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_30dp"
+            android:background="@drawable/selector_grey_muti_press"
+            android:gravity="center"
+            android:text="确定"
+            android:textColor="@drawable/selector_text_press"/>
+    </LinearLayout>
+</com.scwang.smartrefresh.layout.SmartRefreshLayout>

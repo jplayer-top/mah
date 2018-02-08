@@ -1,5 +1,8 @@
 package com.modiwu.mah.mvp.constract;
 
+import com.modiwu.mah.mvp.model.bean.FloorBean;
+import com.modiwu.mah.mvp.model.bean.SelectLocalBean;
+
 import java.util.List;
 
 import top.jplayer.baseprolibrary.mvp.contract.IContract;
@@ -15,7 +18,7 @@ public interface SchemeSelectContract {
 
         void requestTypeData();
 
-        void requestFloorData();
+        void requestFloorData(String area_code);
 
         void requestLocalData(String city_code);
     }
@@ -25,9 +28,9 @@ public interface SchemeSelectContract {
 
         void setTypeData(List<String> styles);
 
-        void setFloorData(List<String> styles);
+        void setFloorData(FloorBean styles);
 
-        void setLocalData(List<String> styles);
+        void setLocalData(SelectLocalBean styles);
 
     }
 }

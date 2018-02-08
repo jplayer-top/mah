@@ -4,6 +4,10 @@ import com.modiwu.mah.mvp.constract.SchemeSelectContract;
 import com.modiwu.mah.mvp.model.SchemeSelectModel;
 import com.modiwu.mah.ui.activity.SchemeSearchActivity;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import io.reactivex.Observable;
 import io.reactivex.disposables.Disposable;
 import top.jplayer.baseprolibrary.mvp.contract.BasePresenter;
 
@@ -39,17 +43,27 @@ public class SchemeSelectPresenter extends BasePresenter<SchemeSearchActivity> i
     }
 
     @Override
-    public void requestFloorData() {
-        Disposable disposable = mModel.requestFloorData().subscribe(strings -> mIView.setFloorData(strings), throwable
+    public void requestFloorData(String area_code) {
+        Disposable disposable = mModel.requestFloorData(area_code).subscribe(strings ->
+                mIView.setFloorData(strings), throwable
                 -> mIView.dialogDismiss(""));
         addSubscription(disposable);
     }
 
     @Override
     public void requestLocalData(String city_code) {
-        Disposable disposable = mModel.requestLocalData(city_code).subscribe(strings -> mIView.setLocalData(strings),
+        Disposable disposable = mModel.requestLocalData(city_code)
+                .subscribe(strings -> mIView.setLocalData(strings),
                 throwable
                 -> mIView.dialogDismiss(""));
+        addSubscription(disposable);
+    }
+
+    public void requestCode(String city) {
+        Disposable disposable = mModel.requestCodeData(city)
+                .subscribe(bean -> mIView.setCityCodeData(bean),
+                throwable
+                        -> mIView.dialogDismiss(""));
         addSubscription(disposable);
     }
 }

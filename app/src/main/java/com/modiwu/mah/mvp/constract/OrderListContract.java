@@ -15,7 +15,7 @@ public interface OrderListContract {
         void requestOrderListData();
 
 
-        void requestOrderListDel(String uid);
+        void requestOrderListDel(String orderId);
     }
 
     interface IOrderListView extends IContract.IView {
