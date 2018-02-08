@@ -23,7 +23,7 @@ public class ShopCartAdapter extends BaseQuickAdapter<ShopCartBean, BaseViewHold
         helper.setVisible(R.id.llContent, !item.isEdit)
                 .addOnClickListener(R.id.checkbox)
                 .setText(R.id.tvTitle, item.title)
-                .setText(R.id.tvSubTitle, item.sub_title)
+                .setText(R.id.tvSubTitle, String.format(Locale.CHINA, "￥%s", item.price))
                 .setText(R.id.tvEditNum, item.count)
                 .addOnClickListener(R.id.tvAdd)
                 .addOnClickListener(R.id.tvRemove)

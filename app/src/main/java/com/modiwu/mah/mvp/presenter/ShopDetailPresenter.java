@@ -34,4 +34,5 @@ public class ShopDetailPresenter extends BasePresenter<ShopDetailActivity> imple
         }, throwable -> mIView.showError());
         addSubscription(disposable);
     }
+
 }

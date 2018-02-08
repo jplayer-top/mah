@@ -1,9 +1,9 @@
 package com.modiwu.mah.ui.fragment;
 
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -49,6 +49,8 @@ public class ShopDetailAllFragment extends BaseFragment implements View.OnClickL
     private Unbinder mUnbinder;
     @BindView(R.id.recycleItem)
     RecyclerView mRecyclerView;
+    @BindView(R.id.flClickDialog)
+    FrameLayout flClickDialog;
     private ShopSpecAdapter mAdapter;
     private int curItem = -1;
     private ImageView mIvTumb;
@@ -60,6 +62,7 @@ public class ShopDetailAllFragment extends BaseFragment implements View.OnClickL
     @Override
     public int initLayout() {
         viewFooter = View.inflate(getActivity(), R.layout.item_sel_type_foot, null);
+        viewFooter.setVisibility(View.GONE);
         return R.layout.fragment_shop_detail_all;
     }
 
@@ -70,7 +73,6 @@ public class ShopDetailAllFragment extends BaseFragment implements View.OnClickL
         activity = (ShopDetailActivity) getActivity();
         ShopGoodsInfoBean infoBean = activity.bean;
         ShopGoodsInfoBean.GoodsBean goods = infoBean.goods;
-        List<ShopGoodsInfoBean.AttrsBean> attrs = infoBean.attrs;
         List<ShopGoodsInfoBean.SpecsBean> specs = infoBean.specs;
         mUnbinder = ButterKnife.bind(this, rootView);
         Glide.with(getContext()).load(goods.goods_thumb).apply(GlideUtils.init().options()).into(mIvShopPic);
@@ -80,15 +82,6 @@ public class ShopDetailAllFragment extends BaseFragment implements View.OnClickL
         mTvCount = viewFooter.findViewById(R.id.tvCount);
         viewFooter.findViewById(R.id.ivAddGoods).setOnClickListener(this);
         viewFooter.findViewById(R.id.ivDelGoods).setOnClickListener(this);
-        mTvCollection.setOnClickListener(v -> {
-            FsShopDetialDialog fsShopDetialDialog = new FsShopDetialDialog();
-            Bundle bundle = new Bundle();
-            bundle.putParcelable("type", infoBean);
-            bundle.putString("num", String.format(Locale.CHINA, "%d", goods.goods_id));
-            bundle.putString("price", goods.goods_price_yuan);
-            fsShopDetialDialog.setArguments(bundle);
-            fsShopDetialDialog.show(getFragmentManager(), "fs");
-        });
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         if (infoBean.attrs != null) {
             attr_ids = new StringBuilder();
@@ -96,6 +89,10 @@ public class ShopDetailAllFragment extends BaseFragment implements View.OnClickL
             mRecyclerView.setAdapter(mAdapter);
         }
         mAdapter.addFooterView(viewFooter);
+        flClickDialog.setOnClickListener(view -> activity.callListener());
+        mTvCollection.setOnClickListener(v -> {
+
+        });
     }
 
     public StringBuilder attr_ids;

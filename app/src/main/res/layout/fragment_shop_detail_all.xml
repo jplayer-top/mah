@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -41,6 +42,7 @@
                 android:gravity="center"
                 android:padding="@dimen/dimen_5dp"
                 android:text="收藏"
+                android:visibility="invisible"
                 tools:ignore="RtlHardcoded"/>
         </LinearLayout>
 
@@ -60,16 +62,27 @@
             android:layout_marginTop="5dp"
             android:text="￥0.00"/>
 
-        <View
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_1px"
-            android:layout_margin="@dimen/dimen_15dp"/>
+            android:layout_height="match_parent">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycleItem"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/dimen_46dp"
-            android:overScrollMode="never"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_1px"
+                android:layout_margin="@dimen/dimen_15dp"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycleItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dimen_46dp"
+                android:overScrollMode="never"/>
+
+            <FrameLayout
+                android:id="@+id/flClickDialog"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </FrameLayout>
     </LinearLayout>
+
 </android.support.v4.widget.NestedScrollView>

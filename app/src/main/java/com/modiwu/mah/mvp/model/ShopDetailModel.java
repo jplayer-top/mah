@@ -1,13 +1,14 @@
 package com.modiwu.mah.mvp.model;
 
-import android.os.SystemClock;
-
 import com.modiwu.mah.mvp.MahServer;
+import com.modiwu.mah.mvp.model.bean.DefLocalBean;
+import com.modiwu.mah.mvp.model.bean.OrderCreateBean;
 import com.modiwu.mah.mvp.model.bean.ShopGoodsInfoBean;
 
+import java.util.Map;
+
 import io.reactivex.Observable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
+import top.jplayer.baseprolibrary.net.IoMainSchedule;
 import top.jplayer.baseprolibrary.net.RetrofitManager;
 
 /**
@@ -20,11 +21,21 @@ public class ShopDetailModel {
         return RetrofitManager.init()
                 .create(MahServer.class)
                 .getGoodsInfoBean(goods_id)
-                .subscribeOn(Schedulers.io())
-                .map(bean -> {
-                    SystemClock.sleep(1000);
-                    return bean;
-                })
-                .observeOn(AndroidSchedulers.mainThread());
+                .compose(new IoMainSchedule<>());
     }
+
+    public Observable<OrderCreateBean> requestOrderCreateBean(Map<String, String> map) {
+        return RetrofitManager.init()
+                .create(MahServer.class)
+                .getOrderCreateBean(map)
+                .compose(new IoMainSchedule<>());
+    }
+
+    public Observable<DefLocalBean> requestOrderLocalBean() {
+        return RetrofitManager.init()
+                .create(MahServer.class)
+                .getOrderLocalBean()
+                .compose(new IoMainSchedule<>());
+    }
+
 }

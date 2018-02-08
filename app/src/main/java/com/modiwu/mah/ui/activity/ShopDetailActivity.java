@@ -4,10 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.modiwu.mah.R;
 import com.modiwu.mah.base.BaseSpecialActivity;
 import com.modiwu.mah.mvp.constract.ShopDetailContract;
@@ -16,10 +18,15 @@ import com.modiwu.mah.mvp.model.bean.ShopCartBean;
 import com.modiwu.mah.mvp.model.bean.ShopGoodsInfoBean;
 import com.modiwu.mah.mvp.presenter.ShopDetailPresenter;
 import com.modiwu.mah.ui.adapter.AdapterPagerShopDetial;
+import com.modiwu.mah.ui.dialog.FsShopDetialDialog;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -61,6 +68,7 @@ public class ShopDetailActivity extends BaseSpecialActivity implements ShopDetai
 
     @Override
     public void initBaseData() {
+        EventBus.getDefault().register(this);
         findToolBarView(contentView);
         customBarLeft();
         String goods_id = mBundle.getString("goods_id");
@@ -76,20 +84,60 @@ public class ShopDetailActivity extends BaseSpecialActivity implements ShopDetai
             ivCirRed.setVisibility(View.GONE);
         });
         tvToBuy.setOnClickListener(view -> {
-            ActivityUtils.init().start(this, ShopToBuyAvtivity.class, "确认订单");
+            typeClick = true;
+            callListener();
         });
         tvToAdd.setVisibility(View.VISIBLE);
+
         tvToAdd.setOnClickListener(view -> {
-            if (bean == null || bean.goods == null) {
-                return;
+            {
+                typeClick = false;
+                callListener();
             }
-            ShopCartDaoUtil daoUtil = new ShopCartDaoUtil(this);
-            ShopCartBean bean = new ShopCartBean();
+        });
+    }
+
+    boolean typeClick = false;
+
+    public void callListener() {
+        if (bean == null || bean.goods == null) {
+            return;
+        }
+        FsShopDetialDialog fsShopDetialDialog = new FsShopDetialDialog();
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("type", bean);
+        bundle.putString("num", String.format(Locale.CHINA, "%d", bean.goods.goods_id));
+        bundle.putString("price", bean.goods.goods_price_yuan);
+        fsShopDetialDialog.setArguments(bundle);
+        fsShopDetialDialog.show(getSupportFragmentManager(), "fs");
+    }
+
+    @Subscribe
+    public void clickDialog(FsShopDetialDialog.ShodeDetialOKEvent event) {
+        ShopCartDaoUtil daoUtil = new ShopCartDaoUtil(this);
+        ShopGoodsInfoBean.GoodsBean goods = this.bean.goods;
+        String goods_attr_id = "";
+        for (ShopGoodsInfoBean.SpecsBean spec : bean.specs) {
+            if (TextUtils.equals(event.attr_ids, spec.attr_id)) {
+                goods_attr_id = String.format(Locale.CHINA, "%d", spec.goods_attr_id);
+            }
+        }
+        ShopCartBean bean = new ShopCartBean(null, goods.goods_title, goods_attr_id, goods.goods_price_yuan, event.amount +
+                "", goods.goods_thumb);
+        if (typeClick) {
+            Bundle bundle = new Bundle();
+            List<ShopCartBean> list = new ArrayList<>();
+            list.add(bean);
+            String json = new Gson().toJson(list);
+            bundle.putString("json", json);
+            bundle.putString("goods_num", String.format(Locale.CHINA, "%s,%d", goods_attr_id, event.amount));
+            ActivityUtils.init().start(this, ShopToBuyAvtivity.class, "确认购买", bundle);
+        } else {
             boolean insertShopCart = daoUtil.insertShopCart(bean);
             if (insertShopCart) {
                 ivCirRed.setVisibility(View.VISIBLE);
             }
-        });
+        }
     }
 
     public ShopGoodsInfoBean bean;
@@ -109,6 +157,7 @@ public class ShopDetailActivity extends BaseSpecialActivity implements ShopDetai
     protected void onDestroy() {
         super.onDestroy();
         mUnbinder.unbind();
+        EventBus.getDefault().unregister(this);
     }
 
 

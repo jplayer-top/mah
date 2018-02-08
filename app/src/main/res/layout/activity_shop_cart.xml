@@ -25,7 +25,8 @@
             android:paddingStart="@dimen/dp_10"
             android:text="移入收藏夹"
             android:textColor="@color/chocolate"
-            android:textSize="@dimen/dimen_15sp"/>
+            android:textSize="@dimen/dimen_15sp"
+            android:visibility="invisible"/>
 
         <TextView
             android:id="@+id/tv2Del"

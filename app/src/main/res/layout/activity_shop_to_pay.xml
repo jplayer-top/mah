@@ -12,193 +12,162 @@
     app:srlPrimaryColor="@color/white"
     tools:ignore="RtlHardcoded,RtlSymmetry">
 
-    <android.support.v4.widget.NestedScrollView
+    <top.jplayer.baseprolibrary.widgets.MultipleStatusView
+        android:id="@+id/multiplestatusview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
-        android:fitsSystemWindows="true">
+        app:emptyView="@layout/layout_empty_view"
+        app:errorView="@layout/layout_error_view"
+        app:loadingView="@layout/layout_loading_view"
+        app:noNetworkView="@layout/layout_network_view">
 
-        <LinearLayout
+        <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_10"
-                android:background="@color/whitesmoke"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/dp_10"
-                android:text="您需要我们送到哪里？"
-                android:textSize="@dimen/sp_18"
-                android:textStyle="bold"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/generalHeight"
-                android:drawableRight="@drawable/right_arrow"
-                android:gravity="center_vertical"
-                android:paddingLeft="@dimen/dimen_15dp"
-                android:text="添加收货地址"/>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_1dp"
-                android:layout_marginLeft="@dimen/dimen_15dp"
-                android:background="@drawable/shape_divider"/>
-
-            <CheckBox
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/generalHeight"
-                android:layout_marginLeft="@dimen/dimen_15dp"
-                android:text="我已阅读并同意《物流及售后协议》"/>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_10dp"
-                android:background="@color/whitesmoke"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/dp_10"
-                android:text="如果还有别的需要，备注一句"
-                android:textSize="@dimen/sp_18"
-                android:textStyle="bold"/>
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/dimen_15dp"
-                android:background="@drawable/border_bg"
-                android:gravity="left"
-                android:hint="在这里给我们捎些话"
-                android:padding="@dimen/dimen_10dp"/>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_10"
-                android:background="@color/whitesmoke"/>
-
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/dp_10"
-                android:text="您是否需要发票？"
-                android:textSize="@dimen/sp_18"
-                android:textStyle="bold"/>
-
-            <CheckBox
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dimen_15dp"
-                android:text="开发票"/>
+            android:background="@color/white"
+            android:fitsSystemWindows="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/whitesmoke"
-                android:orientation="vertical"
-                android:paddingBottom="@dimen/dimen_15dp">
+                android:layout_height="match_parent"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_10"
+                    android:background="@color/whitesmoke"/>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/dp_10"
-                    android:text="您的商品清单"
+                    android:text="您需要我们送到哪里？"
                     android:textSize="@dimen/sp_18"
                     android:textStyle="bold"/>
 
                 <TextView
+                    android:id="@+id/tvLocal"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dimen_15dp"
-                    android:layout_marginRight="@dimen/dimen_15dp"
-                    android:background="@color/white"
-                    android:padding="@dimen/dp_10"
-                    android:text="单品"/>
+                    android:layout_height="@dimen/generalHeight"
+                    android:drawableRight="@drawable/right_arrow"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/dimen_15dp"
+                    android:text="添加收货地址"/>
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
+                    android:layout_height="@dimen/dimen_1dp"
                     android:layout_marginLeft="@dimen/dimen_15dp"
-                    android:layout_marginRight="@dimen/dimen_15dp"
                     android:background="@drawable/shape_divider"/>
 
-                <RelativeLayout
+                <CheckBox
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/generalHeight"
+                    android:layout_marginLeft="@dimen/dimen_15dp"
+                    android:checked="true"
+                    android:text="我已阅读并同意《物流及售后协议》"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_10dp"
+                    android:background="@color/whitesmoke"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dp_10"
+                    android:text="如果还有别的需要，备注一句"
+                    android:textSize="@dimen/sp_18"
+                    android:textStyle="bold"/>
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen_15dp"
+                    android:background="@drawable/border_bg"
+                    android:gravity="left"
+                    android:hint="在这里给我们捎些话"
+                    android:padding="@dimen/dimen_10dp"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_10"
+                    android:background="@color/whitesmoke"/>
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dp_10"
+                    android:text="您是否需要发票？"
+                    android:textSize="@dimen/sp_18"
+                    android:textStyle="bold"/>
+
+                <CheckBox
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dimen_15dp"
-                    android:layout_marginRight="@dimen/dimen_15dp"
-                    android:background="@color/white">
-
-                    <ImageView
-                        android:id="@+id/ivShopPic"
-                        android:layout_width="@dimen/dimen_80dp"
-                        android:layout_height="@dimen/dimen_80dp"
-                        android:padding="@dimen/dimen_5dp"
-                        android:src="@drawable/home_item_single01"/>
-
-                    <LinearLayout
-
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/dimen_80dp"
-                        android:layout_toRightOf="@id/ivShopPic"
-                        android:gravity="center_vertical"
-                        android:orientation="vertical"
-                        tools:ignore="RtlHardcoded">
-
-                        <TextView
-                            android:id="@+id/tvTitle"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="@dimen/dimen_5dp"
-                            android:text="抒情刷法"/>
-
-                        <TextView
-                            android:id="@+id/tvSubTitle"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="十大撒大多"
-                            android:textColor="@color/grey"/>
-
-                        <TextView
-                            android:id="@+id/tvMoney"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:text="￥0.00"/>
-                    </LinearLayout>
-                </RelativeLayout>
+                    android:text="开发票"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/generalHeight"
-                    android:layout_marginTop="@dimen/dimen_15dp"
-                    android:background="@color/white">
+                    android:layout_height="wrap_content"
+                    android:background="@color/whitesmoke"
+                    android:orientation="vertical"
+                    android:paddingBottom="@dimen/dimen_15dp">
 
                     <TextView
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="15dp"
-                        android:layout_weight="1"
-                        android:text="￥0.00"
-                        android:textSize="@dimen/sp_18"/>
+                        android:layout_margin="@dimen/dp_10"
+                        android:text="您的商品清单"
+                        android:textSize="@dimen/sp_18"
+                        android:textStyle="bold"/>
 
                     <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dimen_15dp"
+                        android:layout_marginRight="@dimen/dimen_15dp"
+                        android:background="@color/white"
+                        android:padding="@dimen/dp_10"
+                        android:text="单品"/>
 
-                        android:layout_width="@dimen/dimen_100dp"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/selector_grey_muti_press"
-                        android:gravity="center"
-                        android:text="马上结算"
-                        android:textColor="@color/white"/>
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recycleItem"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:overScrollMode="never"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/generalHeight"
+                        android:layout_marginTop="@dimen/dimen_15dp"
+                        android:background="@color/white">
+
+                        <TextView
+                            android:id="@+id/tvCountPrice"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:layout_weight="1"
+                            android:text="￥0.00"
+                            android:textSize="@dimen/sp_18"/>
+
+                        <Button
+                            android:id="@+id/btnSubmit"
+                            android:layout_width="@dimen/dimen_100dp"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/selector_grey_muti_press"
+                            android:gravity="center"
+                            android:text="马上结算"
+                            android:textColor="@color/white"/>
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
-    </android.support.v4.widget.NestedScrollView>
+        </android.support.v4.widget.NestedScrollView>
+    </top.jplayer.baseprolibrary.widgets.MultipleStatusView>
 </com.scwang.smartrefresh.layout.SmartRefreshLayout>

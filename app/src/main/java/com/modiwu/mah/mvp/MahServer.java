@@ -2,6 +2,7 @@ package com.modiwu.mah.mvp;
 
 
 import com.modiwu.mah.mvp.model.bean.CarpenterBean;
+import com.modiwu.mah.mvp.model.bean.DefLocalBean;
 import com.modiwu.mah.mvp.model.bean.DesignBean;
 import com.modiwu.mah.mvp.model.bean.DockerBean;
 import com.modiwu.mah.mvp.model.bean.FloorBean;
@@ -12,6 +13,7 @@ import com.modiwu.mah.mvp.model.bean.LoginBean;
 import com.modiwu.mah.mvp.model.bean.MeFangAnBean;
 import com.modiwu.mah.mvp.model.bean.MeOrderBean;
 import com.modiwu.mah.mvp.model.bean.MeShouCangBean;
+import com.modiwu.mah.mvp.model.bean.OrderCreateBean;
 import com.modiwu.mah.mvp.model.bean.SchemeBean;
 import com.modiwu.mah.mvp.model.bean.SchemeDetailBean;
 import com.modiwu.mah.mvp.model.bean.SelectBean;
@@ -101,6 +103,9 @@ public interface MahServer {
     @GET("fangan/order/all")
     Observable<MeFangAnBean> getMeSchemeListBean();
 
+    @GET("mall/order/addr")
+    Observable<DefLocalBean> getOrderLocalBean();
+
     @POST("mall/addr/remove?")
     Observable<BaseBean> getLocalDelBean(@Query("rpid") String rpid);
 
@@ -112,5 +117,8 @@ public interface MahServer {
 
     @POST("mall/addr/sd?")
     Observable<BaseBean> getLocalDefBean(@Query("rpid") String rpid, @Query("rp_default") String rp_default);
+
+    @POST("mall/order/create?")
+    Observable<OrderCreateBean> getOrderCreateBean(@QueryMap() Map<String, String> map);
 
 }
