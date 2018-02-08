@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/dimen_30dp"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_80dp"
+            android:layout_marginBottom="@dimen/dp_10"
+            android:layout_marginLeft="@dimen/dimen_15dp"
+            android:clipChildren="true">
+
+            <ImageView
+                android:id="@+id/ivNotSel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_margin="@dimen/dp_10"
+                android:padding="@dimen/dimen_10dp"
+                android:src="@drawable/select_local"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_115dp"
+                android:layout_marginTop="@dimen/dimen_20dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvOnePrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textSize="@dimen/dimen_16sp"/>
+
+                <TextView
+                    android:id="@+id/tvGoodNum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:lines="1"
+                    android:text="商品编号：000"
+                    android:textColor="@color/color999"
+                    android:textSize="@dimen/dimen_16sp"/>
+            </LinearLayout>
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1px"
+            android:layout_margin="@dimen/dimen_15dp"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycleItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dimen_46dp"
+            android:overScrollMode="never"/>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/ivGoodsTumb"
+        android:layout_width="@dimen/dimen_100dp"
+        android:layout_height="@dimen/dimen_100dp"
+        android:layout_marginLeft="@dimen/dimen_15dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/home_item_single01"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom">
+
+        <TextView
+            android:id="@+id/tvOKSel"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_46dp"
+            android:background="@drawable/selector_grey_muti_press"
+            android:gravity="center"
+            android:text="确定"
+            android:textColor="@drawable/selector_text_press"
+            android:textSize="@dimen/dimen_17sp"/>
+
+    </LinearLayout>
+</FrameLayout>

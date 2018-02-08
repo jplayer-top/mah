@@ -61,6 +61,8 @@ ext {
     greendao = 'org.greenrobot:greendao:3.2.2'
     //自定义Toast
     toasty = 'com.github.GrenderG:Toasty:1.1.4'
+    //自定义Toast
+    flowlayout = 'com.zhy:flowlayout-lib:1.0.3'
     //PickerView
     pickerview = 'com.contrarywind:Android-PickerView:3.2.7'
 
@@ -72,7 +74,7 @@ ext {
     supportLibs = supportDeps.values()
     networkLibs = retrofit.values()
     rxJavaLibs = rxJava.values()
-    otherLibs = [barlibrary, glide, smartrefresh, smartrefresh_heard, viewanimator, toasty, pickerview]
+    otherLibs = [barlibrary, glide, smartrefresh, smartrefresh_heard, viewanimator, toasty, pickerview, flowlayout]
     annotationProcessorLibs = [glideCompiler]
 
 }
