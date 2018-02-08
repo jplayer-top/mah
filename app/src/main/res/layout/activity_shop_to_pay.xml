@@ -47,6 +47,7 @@
                     android:textSize="@dimen/sp_18"
                     android:textStyle="bold"/>
 
+
                 <TextView
                     android:id="@+id/tvLocal"
                     android:layout_width="match_parent"
@@ -57,6 +58,11 @@
                     android:text="添加收货地址"
                     android:visibility="visible"/>
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_1dp"
+                    android:layout_marginLeft="@dimen/dimen_15dp"
+                    android:background="@drawable/shape_divider"/>
                 <TextView
                     android:id="@+id/tvName"
                     android:layout_width="match_parent"
