@@ -16,6 +16,7 @@ import com.modiwu.mah.mvp.model.bean.MeShouCangBean;
 import com.modiwu.mah.mvp.model.bean.OrderCreateBean;
 import com.modiwu.mah.mvp.model.bean.SchemeBean;
 import com.modiwu.mah.mvp.model.bean.SchemeDetailBean;
+import com.modiwu.mah.mvp.model.bean.SchemeOrderCreateBean;
 import com.modiwu.mah.mvp.model.bean.SelectBean;
 import com.modiwu.mah.mvp.model.bean.SelectLocalBean;
 import com.modiwu.mah.mvp.model.bean.ShopGoodsInfoBean;
@@ -73,6 +74,9 @@ public interface MahServer {
     @GET("fangan/detail?")
     Observable<SchemeDetailBean> getSchemeDetailBean(@Query("fangan_id") String fangan_id);
 
+    @GET("fangan/goods?")
+    Observable<SchemeOrderCreateBean> getSchemeOrderCreateBean(@Query("fangan_id") String fangan_id);
+
     @GET("designer/detail?")
     Observable<DesignBean> getDesignBean(@Query("designer_id") String designer_id);
 
@@ -120,5 +124,8 @@ public interface MahServer {
 
     @POST("mall/order/create?")
     Observable<OrderCreateBean> getOrderCreateBean(@QueryMap() Map<String, String> map);
+
+    @POST("fangan/order/submit?")
+    Observable<OrderCreateBean> getSchemeCreateBean(@QueryMap() Map<String, String> map);
 
 }

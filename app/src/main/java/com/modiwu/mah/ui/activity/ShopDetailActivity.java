@@ -123,7 +123,7 @@ public class ShopDetailActivity extends BaseSpecialActivity implements ShopDetai
             }
         }
         ShopCartBean bean = new ShopCartBean(null, goods.goods_title, goods_attr_id, goods.goods_price_yuan, event.amount +
-                "", goods.goods_thumb);
+                "", goods.goods_thumb, goods_attr_id);
         if (typeClick) {
             Bundle bundle = new Bundle();
             List<ShopCartBean> list = new ArrayList<>();

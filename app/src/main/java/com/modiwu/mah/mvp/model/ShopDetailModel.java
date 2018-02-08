@@ -31,6 +31,13 @@ public class ShopDetailModel {
                 .compose(new IoMainSchedule<>());
     }
 
+    public Observable<OrderCreateBean> requestSchemeCreateBean(Map<String, String> map) {
+        return RetrofitManager.init()
+                .create(MahServer.class)
+                .getSchemeCreateBean(map)
+                .compose(new IoMainSchedule<>());
+    }
+
     public Observable<DefLocalBean> requestOrderLocalBean() {
         return RetrofitManager.init()
                 .create(MahServer.class)

@@ -1,6 +1,7 @@
 package com.modiwu.mah.ui.activity;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.view.View;
@@ -21,6 +22,7 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import top.jplayer.baseprolibrary.utils.ActivityUtils;
 import top.jplayer.baseprolibrary.utils.LogUtil;
 import top.jplayer.baseprolibrary.widgets.MultipleStatusView;
 
@@ -49,6 +51,7 @@ public class SchemeDetailActivity extends BaseSpecialActivity implements SchemeD
     private Unbinder mUnbinder;
     public SchemeDetailPresenter mPresenter;
     private AdapterPagerSchemeDetail mAdapter;
+    private String mFangan_id;
 
     @Override
     public int setBaseLayout() {
@@ -70,11 +73,11 @@ public class SchemeDetailActivity extends BaseSpecialActivity implements SchemeD
         strings.add("单品");
         mAdapter = new AdapterPagerSchemeDetail(getSupportFragmentManager(), strings);
         mPresenter = new SchemeDetailPresenter(this);
-        String fangan_id = mBundle.getString("fangan_id");
-        if (fangan_id != null) {
+        mFangan_id = mBundle.getString("fangan_id");
+        if (mFangan_id != null) {
             mMultipleStatusView.showLoading();
-            mPresenter.requestSchemeDetialData(fangan_id);
-            smartRefreshLayout.setOnRefreshListener(refresh -> mPresenter.requestSchemeDetialData(fangan_id));
+            mPresenter.requestSchemeDetialData(mFangan_id);
+            smartRefreshLayout.setOnRefreshListener(refresh -> mPresenter.requestSchemeDetialData(mFangan_id));
         } else {
             mMultipleStatusView.showEmpty();
         }
@@ -118,6 +121,11 @@ public class SchemeDetailActivity extends BaseSpecialActivity implements SchemeD
             }
         });
         tvToCard.setOnClickListener(view -> startActivity(new Intent(mBaseActivity, ShopCartActivity.class)));
+        mTvToBuy.setOnClickListener(view -> {
+            Bundle bundle = new Bundle();
+            bundle.putString("fangan_id", mFangan_id);
+            ActivityUtils.init().start(mBaseActivity, SchemeOrderCreateActivity.class, "方案订单", bundle);
+        });
     }
 
     @Override

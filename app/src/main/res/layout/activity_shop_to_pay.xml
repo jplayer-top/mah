@@ -54,7 +54,28 @@
                     android:drawableRight="@drawable/right_arrow"
                     android:gravity="center_vertical"
                     android:paddingLeft="@dimen/dimen_15dp"
-                    android:text="添加收货地址"/>
+                    android:text="添加收货地址"
+                    android:visibility="visible"/>
+
+                <TextView
+                    android:id="@+id/tvName"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/generalHeight"
+                    android:drawableRight="@drawable/right_arrow"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/dimen_15dp"
+                    android:text="添加姓名"
+                    android:visibility="gone"/>
+
+                <TextView
+                    android:id="@+id/tvPhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/generalHeight"
+                    android:drawableRight="@drawable/right_arrow"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/dimen_15dp"
+                    android:text="添加手机号"
+                    android:visibility="gone"/>
 
                 <View
                     android:layout_width="match_parent"

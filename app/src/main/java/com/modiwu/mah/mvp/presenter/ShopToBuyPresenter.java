@@ -47,4 +47,12 @@ public class ShopToBuyPresenter extends BasePresenter<ShopToBuyAvtivity> impleme
         addSubscription(disposable);
     }
 
+    public void requestSchemeCreateData(Map<String, String> map) {
+        mModel.requestSchemeCreateBean(map).subscribe(new SampleShowDialogObserver<OrderCreateBean>(mIView) {
+            @Override
+            protected void onSuccess(OrderCreateBean baseBean) throws Exception {
+                mIView.setOrderCreate(baseBean);
+            }
+        });
+    }
 }

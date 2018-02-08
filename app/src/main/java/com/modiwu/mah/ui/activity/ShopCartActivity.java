@@ -1,11 +1,13 @@
 package com.modiwu.mah.ui.activity;
 
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.modiwu.mah.R;
 import com.modiwu.mah.base.BaseCommonActivity;
 import com.modiwu.mah.mvp.constract.ShopCartContract;
@@ -15,12 +17,16 @@ import com.modiwu.mah.ui.adapter.ShopCartAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import io.reactivex.Observable;
 import top.jplayer.baseprolibrary.net.IoMainSchedule;
+import top.jplayer.baseprolibrary.utils.ActivityUtils;
+import top.jplayer.baseprolibrary.utils.LogUtil;
+import top.jplayer.baseprolibrary.utils.MoneyUtils;
 import top.jplayer.baseprolibrary.utils.ToastUtils;
 
 /**
@@ -33,6 +39,10 @@ public class ShopCartActivity extends BaseCommonActivity implements ShopCartCont
     TextView mTv2Collection;
     @BindView(R.id.tv2Del)
     TextView mTv2Del;
+    @BindView(R.id.tvMoney)
+    TextView tvMoney;
+    @BindView(R.id.tvToBuy)
+    TextView tvToBuy;
     @BindView(R.id.llEditToDel)
     LinearLayout mLlEditToDel;
     @BindView(R.id.recyclerView)
@@ -51,7 +61,8 @@ public class ShopCartActivity extends BaseCommonActivity implements ShopCartCont
     public void initBaseData() {
         findToolBarView(addRootView);
         mUnbinder = ButterKnife.bind(this, addRootView);
-
+        goods_attr_id = new StringBuilder("");
+        sublimCartBeans = new ArrayList<>();
         mMultipleStatusView = addRootView.findViewById(R.id.multiplestatusview);
         smartRefreshLayout = addRootView.findViewById(R.id.smartRefreshLayout);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
@@ -86,6 +97,7 @@ public class ShopCartActivity extends BaseCommonActivity implements ShopCartCont
                 case R.id.checkbox:
                     ShopCartBean shopCartBean = shopCartBeans.get(position);
                     shopCartBean.isCheck = !shopCartBean.isCheck;
+                    moneyChange();
                     break;
             }
             return false;
@@ -105,7 +117,6 @@ public class ShopCartActivity extends BaseCommonActivity implements ShopCartCont
             }
         });
 
-
         mTv2Del.setOnClickListener(v -> {
             List<ShopCartBean> list = new ArrayList<>();
             Observable.fromIterable(shopCartBeans)
@@ -114,14 +125,22 @@ public class ShopCartActivity extends BaseCommonActivity implements ShopCartCont
             mPresenter.delData(list);
         });
         mTv2Collection.setOnClickListener(v -> {
-                    List<ShopCartBean> list = new ArrayList<>();
-                    Observable.fromIterable(shopCartBeans)
-                            .filter(shopCartBean -> shopCartBean.isCheck)
-                            .subscribe(list::add);
-                    mPresenter.delData(list);
-                }
-        );
+            List<ShopCartBean> list = new ArrayList<>();
+            Observable.fromIterable(shopCartBeans)
+                    .filter(shopCartBean -> shopCartBean.isCheck)
+                    .subscribe(list::add);
+            mPresenter.delData(list);
+        });
+        tvToBuy.setOnClickListener(v -> {
+            Bundle bundle = new Bundle();
+            String json = new Gson().toJson(sublimCartBeans);
+            bundle.putString("json", json);
+            bundle.putString("goods_num", goods_attr_id.toString());
+            ActivityUtils.init().start(this, ShopToBuyAvtivity.class, "确认购买", bundle);
+        });
     }
+
+    StringBuilder goods_attr_id;
 
     @Override
     public void showEmpty() {
@@ -135,14 +154,49 @@ public class ShopCartActivity extends BaseCommonActivity implements ShopCartCont
         shopCartBean.count = String.valueOf(i);
         mAdapter.notifyItemChanged(position);
         mPresenter.updataBean(position, shopCartBean);
+        moneyChange();
     }
 
     List<ShopCartBean> shopCartBeans;
+    List<ShopCartBean> sublimCartBeans;
 
     @Override
     public void setShopCartData(List<ShopCartBean> shopCartBeans) {
         this.shopCartBeans = shopCartBeans;
+        moneyChange();
         mAdapter.setNewData(shopCartBeans);
+    }
+
+    float countMoney = 0;
+
+    private void moneyChange() {
+        countMoney = 0;
+        if (sublimCartBeans != null) {
+            sublimCartBeans.clear();
+        } else {
+            sublimCartBeans = new ArrayList<>();
+        }
+        if (goods_attr_id != null) {
+            goods_attr_id.delete(0, goods_attr_id.length());
+        }
+        Observable.fromIterable(shopCartBeans)
+                .filter(shopCartBean -> shopCartBean.isCheck)
+                .subscribe(shopCartBean -> {
+                    String strPrice = shopCartBean.price;
+                    String count = shopCartBean.count;
+                    int parseIntF = MoneyUtils.parseIntF(strPrice) * Integer.parseInt(count);
+                    countMoney += parseIntF;
+                    goods_attr_id.append(shopCartBean.getGoods_attr_id());
+                    goods_attr_id.append(",");
+                    goods_attr_id.append(shopCartBean.count);
+                    goods_attr_id.append("|");
+                    sublimCartBeans.add(shopCartBean);
+                });
+        LogUtil.e(goods_attr_id.toString());
+        if (goods_attr_id != null && !goods_attr_id.toString().equals("")) {
+            goods_attr_id.deleteCharAt(goods_attr_id.lastIndexOf("|"));
+        }
+        tvMoney.setText(String.format(Locale.CHINA, "￥%.2f", countMoney / 100f));
     }
 
     @Override
@@ -159,4 +213,5 @@ public class ShopCartActivity extends BaseCommonActivity implements ShopCartCont
         super.onDestroy();
         mUnbinder.unbind();
     }
+
 }

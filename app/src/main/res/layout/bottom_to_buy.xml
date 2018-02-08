@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/generalHeight"
+    android:orientation="horizontal"
+    android:weightSum="5"
+    tools:ignore="RtlHardcoded,RtlSymmetry"
+    tools:showIn="@layout/activity_shop_cart">
+
+    <TextView
+        android:id="@+id/tvMoney"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="4"
+        android:background="@color/grey"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/magin_30"
+        android:paddingStart="@dimen/magin_30"
+        android:text="￥ 00.00"
+        android:textSize="@dimen/sp_18"/>
+
+    <TextView
+        android:id="@+id/tvToBuy"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/dp_4"
+        android:layout_weight="1"
+        android:background="@color/colorBlackGold"
+        android:gravity="center"
+        android:text="下单"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_18"/>
+</LinearLayout>
