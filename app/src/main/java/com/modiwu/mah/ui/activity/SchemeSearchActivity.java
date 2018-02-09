@@ -58,7 +58,7 @@ public class SchemeSearchActivity extends BaseCommonActivity implements SchemeSe
     OptionsPickerView mFloorPicker;
     OptionsPickerView mLocalPicker;
     private SchemeSelectPresenter mPresenter;
-    private String city_code;
+    private String city_code = "";
 
     @Override
     public int setBaseLayout() {

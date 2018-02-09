@@ -79,7 +79,6 @@ public class SchemeFragment extends BaseFragment implements SchemeContract.ISche
         Map<String, String> map = new HashMap<>();
         if (!TextUtils.equals("", event.building_id))
             map.put("building_id", event.building_id);
-
         if (!TextUtils.equals("", event.area_code))
             map.put("area_code", event.area_code);
         if (!TextUtils.equals("", event.city_code))
