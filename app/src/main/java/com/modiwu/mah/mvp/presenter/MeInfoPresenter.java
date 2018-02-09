@@ -11,6 +11,7 @@ import top.jplayer.baseprolibrary.mvp.contract.IContract;
 import top.jplayer.baseprolibrary.mvp.model.bean.BaseBean;
 import top.jplayer.baseprolibrary.net.SampleShowDialogObserver;
 import top.jplayer.baseprolibrary.utils.LogUtil;
+import top.jplayer.baseprolibrary.utils.ToastUtils;
 
 /**
  * Created by Obl on 2018/1/25.
@@ -39,7 +40,11 @@ public class MeInfoPresenter extends BasePresenter<MeContentActivity> implements
 
 
     public void getMeInfo(String uid) {
-        Disposable subscribe = mModel.requestGetInfo(uid).subscribe(baseBean -> mIView.successGet(baseBean));
+        Disposable subscribe = mModel.requestGetInfo(uid).subscribe(baseBean -> mIView.successGet(baseBean), throwable
+                -> {
+            ToastUtils.init().showInfoToast(mIView, "请先登录");
+            mIView.finish();
+        });
         addSubscription(subscribe);
     }
 
@@ -49,5 +54,15 @@ public class MeInfoPresenter extends BasePresenter<MeContentActivity> implements
             LogUtil.e(throwable.getMessage());
             mIView.successAvatar(new BaseBean());
         });
+    }
+
+    public void requestLogout() {
+        mModel.requestLogout()
+                .subscribe(new SampleShowDialogObserver<BaseBean>(mIView) {
+                    @Override
+                    protected void onSuccess(BaseBean bean) throws Exception {
+                        mIView.logout();
+                    }
+                });
     }
 }

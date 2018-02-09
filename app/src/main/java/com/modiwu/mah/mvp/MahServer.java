@@ -179,8 +179,20 @@ public interface MahServer {
     Observable<BaseBean> getMeAvatarBean(@Part MultipartBody.Part file);
 
     @POST("mall/order/prePay?")
-    Observable<WxPayInfoBean> getOrderWXPrePay(@Query("orderId")String orderId,@Query("payType") String payType);
+    Observable<WxPayInfoBean> getOrderWXPrePay(@Query("orderId") String orderId, @Query("payType") String payType);
+
+    @POST("fangan/order/prePay?")
+    Observable<WxPayInfoBean> getOrderWXPrePayFangAn(@Query("orderId") String orderId, @Query("payType") String payType);
 
     @POST("mall/order/prePay?")
-    Observable<AliPayInfoBean> getOrderAliPrePay(@Query("orderId")String orderId, @Query("payType")String payType);
+    Observable<AliPayInfoBean> getOrderAliPrePay(@Query("orderId") String orderId, @Query("payType") String payType);
+
+    @POST("fangan/order/prePay?")
+    Observable<AliPayInfoBean> getOrderAliPrePayFangAn(@Query("orderId") String orderId, @Query("payType") String payType);
+
+    @POST("user/logout?")
+    Observable<BaseBean> getLogout();
+
+    @POST("user/register?")
+    Observable<BaseBean> register(@QueryMap() Map<String, String> map);
 }

@@ -1,5 +1,6 @@
 package com.modiwu.mah.ui.activity;
 
+import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,8 +13,10 @@ import com.modiwu.mah.mvp.presenter.OrderListPresenter;
 import com.modiwu.mah.ui.adapter.MeOrderAdapter;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import top.jplayer.baseprolibrary.mvp.model.bean.BaseBean;
+import top.jplayer.baseprolibrary.utils.ActivityUtils;
 
 /**
  * Created by Obl on 2018/2/6.
@@ -48,12 +51,17 @@ public class MeOrderActivity extends BaseCommonActivity implements OrderListCont
 
         mAdapter = new MeOrderAdapter(data);
         mAdapter.setOnItemChildClickListener((adapter, view, position) -> {
+            MeOrderBean.RecordsBean bean = mAdapter.getData().get(position);
             switch (view.getId()) {
                 case R.id.tvOrderToCancel:
-                    String order_id = mAdapter.getData().get(position).order_id;
-                    mPresenter.requestOrderListDel(order_id);
+                    mPresenter.requestOrderListDel(bean.order_id);
                     break;
                 case R.id.tvOrderToPay:
+                    Bundle bundle = new Bundle();
+                    bundle.putString("totalPrice", String.format(Locale.CHINA, "￥%s", bean.actual_price + ""));
+                    bundle.putString("orderId", bean.order_id);
+                    bundle.putString("type", "订单");
+                    ActivityUtils.init().start(this, ShopPayActivity.class, "支付", bundle);
                     break;
             }
             return false;

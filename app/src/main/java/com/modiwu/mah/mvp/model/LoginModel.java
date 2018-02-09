@@ -35,4 +35,10 @@ public class LoginModel {
                 .verfiyCode(phone, smCode)
                 .compose(new IoMainSchedule<>());
     }
+
+    public Observable<BaseBean> requestRegister(Map<String, String> map) {
+        return RetrofitManager.init().create(MahServer.class)
+                .register(map)
+                .compose(new IoMainSchedule<>());
+    }
 }

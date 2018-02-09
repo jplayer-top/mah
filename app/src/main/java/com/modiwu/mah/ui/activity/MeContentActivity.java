@@ -90,6 +90,7 @@ public class MeContentActivity extends BaseCommonActivity {
         });
         int uid = (int) SharePreUtil.getData(this, "uid", 0);
         presenter.getMeInfo(uid + "");
+        btnLogout.setOnClickListener(v -> presenter.requestLogout());
     }
 
     private void messageChange(String key, TextView view) {
@@ -209,5 +210,9 @@ public class MeContentActivity extends BaseCommonActivity {
 
     public void successAvatar(BaseBean baseBean) {
         Glide.with(this).load(mFile).apply(GlideUtils.init().options()).apply(RequestOptions.circleCropTransform()).into(ivMeAvatar);
+    }
+
+    public void logout() {
+
     }
 }

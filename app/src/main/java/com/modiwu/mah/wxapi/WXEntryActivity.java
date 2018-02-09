@@ -1,6 +1,10 @@
 package com.modiwu.mah.wxapi;
 
-import com.modiwu.mah.base.BaseSpecialActivity;
+import android.os.Bundle;
+import android.os.PersistableBundle;
+import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
+
 import com.tencent.mm.opensdk.modelbase.BaseReq;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
 import com.tencent.mm.opensdk.modelmsg.SendAuth;
@@ -18,21 +22,16 @@ import static android.provider.UserDictionary.Words.APP_ID;
  * com.ilanchuang.xiaoi.wxapi
  */
 
-public class WXEntryActivity extends BaseSpecialActivity implements IWXAPIEventHandler {
-
-
-    @Override
-    public int setBaseLayout() {
-        return top.jplayer.baseprolibrary.R.layout.fragment_base;
-    }
+public class WXEntryActivity extends AppCompatActivity implements IWXAPIEventHandler {
 
     @Override
-    public void initBaseData() {
+    public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
+        super.onCreate(savedInstanceState, persistentState);
         IWXAPI wxapi = WXAPIFactory.createWXAPI(this, APP_ID, false);
         wxapi.handleIntent(getIntent(), this);
-        contentView.setAlpha(0);
-
     }
+
+
 
     @Override
     public void onReq(BaseReq baseReq) {

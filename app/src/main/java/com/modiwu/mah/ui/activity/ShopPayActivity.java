@@ -59,25 +59,49 @@ public class ShopPayActivity extends BaseCommonActivity {
             mCheckbox1.setChecked(!isChecked);
         });
         mModel = new ShopDetailModel();
+        boolean type = "方案".equals(mBundle.getString("type"));
+
         tv2Pay.setOnClickListener(v -> {
             boolean checked = mCheckbox1.isChecked();
             if (checked) {
-                mModel.requestWXPrePay(orderId, "2").subscribe(new SampleShowDialogObserver<WxPayInfoBean>(mBaseActivity) {
-                    @Override
-                    protected void onSuccess(WxPayInfoBean wxPayInfoBean) throws Exception {
-                        wxPay(wxPayInfoBean);
-                    }
-                });
+                if (type) {
+                    mModel.requestWXPrePayFangAn(orderId, "2").subscribe(new SampleShowDialogObserver<WxPayInfoBean>
+                            (mBaseActivity) {
+                        @Override
+                        protected void onSuccess(WxPayInfoBean wxPayInfoBean) throws Exception {
+                            wxPay(wxPayInfoBean);
+                        }
+                    });
+                } else {
+                    mModel.requestWXPrePay(orderId, "2").subscribe(new SampleShowDialogObserver<WxPayInfoBean>(mBaseActivity) {
+                        @Override
+                        protected void onSuccess(WxPayInfoBean wxPayInfoBean) throws Exception {
+                            wxPay(wxPayInfoBean);
+                        }
+                    });
+                }
             } else {
-                mModel.requestAliPrePay(orderId, "1").subscribe(new SampleShowDialogObserver<AliPayInfoBean>(mBaseActivity) {
-                    @Override
-                    protected void onSuccess(AliPayInfoBean aliPayInfoBean) throws Exception {
-                        aliPay(aliPayInfoBean);
-                    }
-                });
+                if (type) {
+                    mModel.requestAliPrePayFangAn(orderId, "1").subscribe(new SampleShowDialogObserver<AliPayInfoBean>
+                            (mBaseActivity) {
+                        @Override
+                        protected void onSuccess(AliPayInfoBean aliPayInfoBean) throws Exception {
+                            aliPay(aliPayInfoBean);
+                        }
+                    });
+                } else {
+                    mModel.requestAliPrePay(orderId, "1").subscribe(new SampleShowDialogObserver<AliPayInfoBean>(mBaseActivity) {
+                        @Override
+                        protected void onSuccess(AliPayInfoBean aliPayInfoBean) throws Exception {
+                            aliPay(aliPayInfoBean);
+                        }
+                    });
+                }
+
             }
         });
     }
+
     IWXAPI api;
 
     // 检查微信是否安装
@@ -96,6 +120,7 @@ public class ShopPayActivity extends BaseCommonActivity {
         }
         return false;
     }
+
     private void wxPay(WxPayInfoBean response) {
         WxPayInfoBean.OrderStrBean orderStrBean = response.orderStr;
         if (api == null) {
@@ -116,6 +141,7 @@ public class ShopPayActivity extends BaseCommonActivity {
         request.sign = orderStrBean.sign;
         api.sendReq(request);
     }
+
     private void aliPay(final AliPayInfoBean response) {
         Observable.just(response).subscribeOn(Schedulers.io())
                 .map(aliPayInfoBean -> {

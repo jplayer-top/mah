@@ -1,5 +1,6 @@
 package com.modiwu.mah.ui.activity;
 
+import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +12,9 @@ import com.modiwu.mah.mvp.presenter.MeFangAnPresenter;
 import com.modiwu.mah.ui.adapter.MeFanganAdapter;
 
 import java.util.ArrayList;
+import java.util.Locale;
+
+import top.jplayer.baseprolibrary.utils.ActivityUtils;
 
 /**
  * Created by Obl on 2018/2/6.
@@ -45,8 +49,20 @@ public class MeFangAnActivity extends BaseCommonActivity {
         mPresenter.requestFangAnData();
         mAdapter = new MeFanganAdapter(data);
         mAdapter.setOnItemChildClickListener((adapter, view, position) -> {
-            String order_no = mAdapter.getData().get(position).order_no;
-            mPresenter.requestDelFangAnData(order_no);
+            MeFangAnBean.RowsBean bean = mAdapter.getData().get(position);
+            switch (view.getId()) {
+                case R.id.tvOrderToCancel:
+                    mPresenter.requestDelFangAnData(bean.order_no);
+                    break;
+                case R.id.tvOrderToPay:
+                    Bundle bundle = new Bundle();
+                    bundle.putString("totalPrice", String.format(Locale.CHINA, "￥%s", bean.order_fee_yuan));
+                    bundle.putString("orderId", bean.order_no);
+                    bundle.putString("type", "方案");
+                    ActivityUtils.init().start(this, ShopPayActivity.class, "支付", bundle);
+                    break;
+            }
+
             return false;
         });
         mRecyclerView.setAdapter(mAdapter);

@@ -13,6 +13,7 @@ import java.util.Map;
 
 import io.reactivex.disposables.Disposable;
 import top.jplayer.baseprolibrary.mvp.contract.BasePresenter;
+import top.jplayer.baseprolibrary.mvp.model.bean.BaseBean;
 import top.jplayer.baseprolibrary.net.SampleShowDialogObserver;
 
 /**
@@ -47,7 +48,12 @@ public class LoginPresenter extends BasePresenter<LoginAnimActivity> implements 
 
     @Override
     public void register(Map<String, String> map) {
-
+        mModel.requestRegister(map).subscribe(new SampleShowDialogObserver<BaseBean>(mIView) {
+            @Override
+            protected void onSuccess(BaseBean baseBean) throws Exception {
+                mIView.register();
+            }
+        });
     }
 
     @Override

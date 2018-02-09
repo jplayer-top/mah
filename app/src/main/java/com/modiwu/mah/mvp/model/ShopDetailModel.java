@@ -61,4 +61,17 @@ public class ShopDetailModel {
                 .compose(new IoMainSchedule<>());
     }
 
+    public Observable<AliPayInfoBean> requestAliPrePayFangAn(String orderId, String payType) {
+        return RetrofitManager.init()
+                .create(MahServer.class)
+                .getOrderAliPrePayFangAn(orderId, payType)
+                .compose(new IoMainSchedule<>());
+    }
+
+    public Observable<WxPayInfoBean> requestWXPrePayFangAn(String orderId, String payType) {
+        return RetrofitManager.init()
+                .create(MahServer.class)
+                .getOrderWXPrePayFangAn(orderId, payType)
+                .compose(new IoMainSchedule<>());
+    }
 }

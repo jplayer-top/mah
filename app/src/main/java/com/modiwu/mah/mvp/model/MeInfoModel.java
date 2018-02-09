@@ -45,7 +45,7 @@ public class MeInfoModel {
                 MultipartBody.Part.createFormData("img", file.getName(), requestFile);
         return RetrofitManager.init()
                 .create(MahServer.class)
-                .getMeAvatarBean( body)
+                .getMeAvatarBean(body)
                 .compose(new IoMainSchedule<>());
     }
 
@@ -56,4 +56,13 @@ public class MeInfoModel {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
+
+    public Observable<BaseBean> requestLogout() {
+        return RetrofitManager.init()
+                .create(MahServer.class)
+                .getLogout()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
 }

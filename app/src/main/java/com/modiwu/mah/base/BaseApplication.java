@@ -4,6 +4,9 @@ import android.app.Application;
 import android.content.Context;
 import android.os.Handler;
 
+import com.modiwu.mah.wxapi.WXEntryActivity;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
+
 import top.jplayer.baseprolibrary.BaseInitApplication;
 import top.jplayer.baseprolibrary.utils.Utils;
 
@@ -33,4 +36,6 @@ public class BaseApplication extends Application {
         mMainThreadHandler = new Handler();
         BaseInitApplication.init(AppContext);
     }
+
+
 }
