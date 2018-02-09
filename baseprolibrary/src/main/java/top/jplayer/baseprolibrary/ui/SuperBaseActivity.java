@@ -3,6 +3,7 @@ package top.jplayer.baseprolibrary.ui;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -10,6 +11,8 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.yanzhenjie.permission.AndPermission;
 
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
@@ -76,7 +79,14 @@ public abstract class SuperBaseActivity extends AppCompatActivity {
         tvBarTitle = contentView.findViewById(R.id.tvBarTitle);
         ivBarSearch = contentView.findViewById(R.id.ivBarSearch);
     }
-
+    /**
+     * 权限反馈
+     */
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        AndPermission.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
+    }
 
     /**
      * 默认原始根布局下的FrameLayout,基于相同ToolBar 的视图

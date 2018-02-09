@@ -65,6 +65,8 @@ ext {
     flowlayout = 'com.zhy:flowlayout-lib:1.0.3'
     //PickerView
     pickerview = 'com.contrarywind:Android-PickerView:3.2.7'
+    //权限申请
+    permission = 'com.yanzhenjie:permission:1.0.5'
 
     glide = "com.github.bumptech.glide:glide:$dependVersion.glideSdkVersion"
     glideCompiler = "com.github.bumptech.glide:compiler:$dependVersion.glideSdkVersion"
@@ -74,7 +76,7 @@ ext {
     supportLibs = supportDeps.values()
     networkLibs = retrofit.values()
     rxJavaLibs = rxJava.values()
-    otherLibs = [barlibrary, glide, smartrefresh, smartrefresh_heard, viewanimator, toasty, pickerview, flowlayout]
+    otherLibs = [barlibrary, glide, smartrefresh, smartrefresh_heard, viewanimator, toasty, pickerview, flowlayout,permission]
     annotationProcessorLibs = [glideCompiler]
 
 }

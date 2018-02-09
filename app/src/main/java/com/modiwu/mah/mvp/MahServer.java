@@ -28,10 +28,12 @@ import com.modiwu.mah.mvp.model.bean.YBJBean;
 
 import java.util.Map;
 
-import io.reactivex.Completable;
 import io.reactivex.Observable;
+import okhttp3.MultipartBody;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 import top.jplayer.baseprolibrary.mvp.model.bean.BaseBean;
@@ -164,4 +166,8 @@ public interface MahServer {
 
     @GET("profile/info?")
     Observable<BaseBean> getMeInfoStartBean(@Query("uid") String uid);
+
+    @Multipart
+    @POST("profile/avatar?")
+    Observable<BaseBean> getMeAvatarBean(@Query("img") String img, @Query("fileName") String fileName, @Part MultipartBody.Part file);
 }

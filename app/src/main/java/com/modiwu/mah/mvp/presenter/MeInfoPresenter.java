@@ -1,11 +1,9 @@
 package com.modiwu.mah.mvp.presenter;
 
 import com.modiwu.mah.mvp.model.MeInfoModel;
-import com.modiwu.mah.mvp.model.YBJModel;
-import com.modiwu.mah.ui.activity.HouseSampleActivity;
 import com.modiwu.mah.ui.activity.MeContentActivity;
 
-import java.util.Map;
+import java.io.File;
 
 import io.reactivex.disposables.Disposable;
 import top.jplayer.baseprolibrary.mvp.contract.BasePresenter;
@@ -29,19 +27,22 @@ public class MeInfoPresenter extends BasePresenter<MeContentActivity> implements
 
 
     public void setMeInfo(String col, String value) {
-        mModel.requestInfoBean(col,value)
+        mModel.requestInfoBean(col, value)
                 .subscribe(new SampleShowDialogObserver<BaseBean>(mIView) {
                     @Override
                     protected void onSuccess(BaseBean bean) throws Exception {
-                        mIView.success(col,value);
+                        mIView.success(col, value);
                     }
                 });
     }
 
 
     public void getMeInfo(String uid) {
-
         Disposable subscribe = mModel.requestGetInfo(uid).subscribe(baseBean -> mIView.successGet(baseBean));
         addSubscription(subscribe);
+    }
+
+    public void upDateAvatarMes(String img, String fileName, File file) {
+        mModel.requestAvatarInfo(img, fileName, file).subscribe(baseBean -> mIView.successAvatar(baseBean));
     }
 }

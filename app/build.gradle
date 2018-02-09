@@ -45,4 +45,6 @@ dependencies {
     implementation 'org.greenrobot:eventbus:3.0.0'
     //微信登录
     implementation 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:1.1.6'
+    //图片选择器
+    implementation 'com.jaikydota.imagespickers:imagespickers:1.0.6'
 }

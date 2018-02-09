@@ -41,6 +41,7 @@
                     tools:ignore="RtlHardcoded"/>
 
                 <ImageView
+                    android:id="@+id/ivMeAvatar"
                     android:layout_width="@dimen/dimen_50dp"
                     android:layout_height="@dimen/dimen_50dp"
                     android:src="@mipmap/ic_launcher"/>
@@ -215,10 +216,10 @@
             </LinearLayout>
 
             <LinearLayout
-                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="0dp"

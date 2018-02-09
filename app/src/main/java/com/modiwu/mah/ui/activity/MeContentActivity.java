@@ -1,25 +1,39 @@
 package com.modiwu.mah.ui.activity;
 
+import android.Manifest;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+import com.jaiky.imagespickers.ImageSelectorActivity;
 import com.modiwu.mah.R;
 import com.modiwu.mah.base.BaseCommonActivity;
 import com.modiwu.mah.mvp.model.event.MessageEvent;
 import com.modiwu.mah.mvp.presenter.MeInfoPresenter;
+import com.modiwu.mah.utils.CameraUtils;
+import com.yanzhenjie.permission.AndPermission;
+import com.yanzhenjie.permission.PermissionNo;
+import com.yanzhenjie.permission.PermissionYes;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.io.File;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import top.jplayer.baseprolibrary.glide.GlideUtils;
 import top.jplayer.baseprolibrary.mvp.model.bean.BaseBean;
+import top.jplayer.baseprolibrary.ui.SuperBaseActivity;
 import top.jplayer.baseprolibrary.utils.ActivityUtils;
+
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
 /**
  * Created by Obl on 2018/2/6.
@@ -44,6 +58,8 @@ public class MeContentActivity extends BaseCommonActivity {
     TextView tvArea;
     @BindView(R.id.tvPoint)
     TextView tvPoint;
+    @BindView(R.id.ivMeAvatar)
+    ImageView ivMeAvatar;
     @BindView(R.id.btnLogout)
     Button btnLogout;
     private Unbinder bind;
@@ -64,7 +80,10 @@ public class MeContentActivity extends BaseCommonActivity {
         tvFloor.setOnClickListener(view -> messageChange("小区", tvFloor));
         tvEmail.setOnClickListener(view -> messageChange("邮箱", tvEmail));
         presenter = new MeInfoPresenter(this);
+        tvAvatar.setOnClickListener(v -> {
+            setPermission(this, 100, WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA);
 
+        });
         presenter.getMeInfo("0");
     }
 
@@ -123,7 +142,51 @@ public class MeContentActivity extends BaseCommonActivity {
         }
     }
 
+    public static void setPermission(final SuperBaseActivity activity, int code, String... permissions) {
+        AndPermission.with(activity)
+                .requestCode(code)
+                .permission(permissions)
+                .rationale((requestCode, rationale) -> {
+                            // 此对话框可以自定义，调用rationale.resume()就可以继续申请。
+                            AndPermission.rationaleDialog(activity, rationale).show();
+                        }
+                )
+                .send();
+    }
+
+    File mFile;
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1 && resultCode == RESULT_OK && data != null) {
+            // Get Image Path List
+            List<String> pathList = data.getStringArrayListExtra(ImageSelectorActivity.EXTRA_RESULT);
+            for (String path : pathList) {
+                mFile = new File(path);
+                String fileName = mFile.getName() + mFile.getPath().substring(mFile.getPath().indexOf("."));
+                presenter.upDateAvatarMes("img", fileName, mFile);
+            }
+        }
+    }
+
+    @PermissionYes(100)
+    protected void getLocationYes(List<String> grantedPermissions) {
+        CameraUtils.getInstance().openSingalCamer(this);
+    }
+
+    @PermissionNo(100)
+    protected void getLocationNo(List<String> deniedPermissions) {
+        if (AndPermission.hasAlwaysDeniedPermission(this, deniedPermissions)) {
+            AndPermission.defaultSettingDialog(this, 100).show();
+        }
+    }
+
     public void successGet(BaseBean baseBean) {
 
+    }
+
+    public void successAvatar(BaseBean baseBean) {
+        Glide.with(this).load(mFile).apply(GlideUtils.init().options()).apply(RequestOptions.circleCropTransform()).into(ivMeAvatar);
     }
 }
