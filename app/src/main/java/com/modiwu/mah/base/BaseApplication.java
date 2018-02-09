@@ -4,9 +4,6 @@ import android.app.Application;
 import android.content.Context;
 import android.os.Handler;
 
-import com.modiwu.mah.wxapi.WXEntryActivity;
-import com.tencent.mm.opensdk.openapi.IWXAPI;
-
 import top.jplayer.baseprolibrary.BaseInitApplication;
 import top.jplayer.baseprolibrary.utils.Utils;
 
@@ -17,7 +14,7 @@ import top.jplayer.baseprolibrary.utils.Utils;
 
 public class BaseApplication extends Application {
     public static Context AppContext;
-    public final static String APP_ID = "wx406a4ce41fd6f37d";
+    public final static String APP_ID = "wx510d1dded9bba6cb";
     private static Handler mMainThreadHandler;
 
     /**

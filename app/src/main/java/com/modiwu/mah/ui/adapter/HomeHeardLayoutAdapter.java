@@ -12,14 +12,15 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.modiwu.mah.R;
 import com.modiwu.mah.mvp.model.bean.HomeBean;
-import com.modiwu.mah.mvp.model.event.HomeTypeModeEvent;
+import com.modiwu.mah.ui.activity.DesignerActivity;
 import com.modiwu.mah.ui.activity.HouseSampleActivity;
-
-import org.greenrobot.eventbus.EventBus;
+import com.modiwu.mah.ui.activity.SchemeDetailActivity;
+import com.modiwu.mah.ui.activity.ShopDetailActivity;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 import cn.bingoogolapple.bgabanner.BGABanner;
 import io.reactivex.Observable;
@@ -67,17 +68,31 @@ public class HomeHeardLayoutAdapter extends VLayoutAdapter<RecyclerView.ViewHold
                     .transition(DrawableTransitionOptions.withCrossFade())
                     .into((ImageView) itemView);
             itemView.setOnClickListener(v -> {
-                if (TextUtils.equals(mBanner.get(urlPosition).navType, "fangan")) {
-                    EventBus.getDefault().post(new HomeTypeModeEvent(1));
-                } else if (TextUtils.equals(mBanner.get(urlPosition).navType, "goods")) {
-                    EventBus.getDefault().post(new HomeTypeModeEvent(2, 1));
-                } else if (TextUtils.equals(mBanner.get(urlPosition).navType, "sjs")) {
-                    EventBus.getDefault().post(new HomeTypeModeEvent(2, 0));
-                } else if (TextUtils.equals(mBanner.get(urlPosition).navType, "ybj")) {
+                HomeBean.BannerBean bannerBean = mBanner.get(urlPosition);
+                String navType = bannerBean.navType;
+                if (TextUtils.equals(navType, "fangan")) {
+
+                    Bundle bundle = new Bundle();
+                    bundle.putString("fangan_id", bannerBean.navValue);
+                    ActivityUtils.init().start(context, SchemeDetailActivity.class, "方案详情", bundle);
+
+                } else if (TextUtils.equals(navType, "goods")) {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("goods_id", String.format(Locale.CHINA, "%s", bannerBean.navValue));
+                    ActivityUtils.init().start(context, ShopDetailActivity.class, "商品详情", bundle);
+
+                } else if (TextUtils.equals(navType, "sjs")) {
+
+                    Bundle bundle = new Bundle();
+                    bundle.putString("designer_id", bannerBean.navValue);
+                    String designer = "设计师";
+                    ActivityUtils.init().start(context, DesignerActivity.class, designer, bundle);
+
+                } else if (TextUtils.equals(navType, "ybj")) {
                     ActivityUtils.init().start(context, HouseSampleActivity.class, "样板间征集");
                 } else {
                     Bundle bundle = new Bundle();
-                    bundle.putString("url", mBanner.get(urlPosition).navValue);
+                    bundle.putString("url", bannerBean.navValue);
                     ActivityUtils.init().start(context, WebFullScreenActivity.class, context.getString(R.string
                                     .app_name),
                             bundle);

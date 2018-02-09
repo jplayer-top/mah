@@ -1,6 +1,7 @@
 package com.modiwu.mah.ui.activity;
 
 import android.os.Bundle;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -66,6 +67,9 @@ public class ShopCartActivity extends BaseCommonActivity implements ShopCartCont
         mMultipleStatusView = addRootView.findViewById(R.id.multiplestatusview);
         smartRefreshLayout = addRootView.findViewById(R.id.smartRefreshLayout);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        DividerItemDecoration decor = new DividerItemDecoration(this, LinearLayoutManager.VERTICAL);
+        decor.setDrawable(getResources().getDrawable(R.drawable.shape_divider));
+        mRecyclerView.addItemDecoration(decor);
         mPresenter = new ShopCartPresenter(this);
         showLoading();
         mPresenter.requestShopCartData();

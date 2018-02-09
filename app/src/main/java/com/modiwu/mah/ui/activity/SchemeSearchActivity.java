@@ -1,8 +1,6 @@
 package com.modiwu.mah.ui.activity;
 
 import android.graphics.Color;
-import android.text.TextUtils;
-import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -10,11 +8,11 @@ import android.widget.TextView;
 import com.bigkoo.pickerview.OptionsPickerView;
 import com.modiwu.mah.R;
 import com.modiwu.mah.base.BaseCommonActivity;
-import com.modiwu.mah.mvp.model.bean.FloorBean;
-import com.modiwu.mah.mvp.model.event.SchemeSelectEvent;
 import com.modiwu.mah.mvp.constract.SchemeSelectContract;
 import com.modiwu.mah.mvp.model.bean.CityCodeBean;
+import com.modiwu.mah.mvp.model.bean.FloorBean;
 import com.modiwu.mah.mvp.model.bean.SelectLocalBean;
+import com.modiwu.mah.mvp.model.event.SchemeSelectEvent;
 import com.modiwu.mah.mvp.presenter.SchemeSelectPresenter;
 
 import org.greenrobot.eventbus.EventBus;
@@ -27,7 +25,6 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import io.reactivex.Observable;
 import top.jplayer.baseprolibrary.utils.ActivityUtils;
-import top.jplayer.baseprolibrary.utils.LogUtil;
 import top.jplayer.baseprolibrary.utils.SharePreUtil;
 import top.jplayer.baseprolibrary.utils.ToastUtils;
 
@@ -73,31 +70,28 @@ public class SchemeSearchActivity extends BaseCommonActivity implements SchemeSe
         findToolBarView(mFlRootView);
         mUnbinder = ButterKnife.bind(this, addRootView);
         tvBarTitle.setText("选择条件");
-        ivBarSearch.setVisibility(View.VISIBLE);
-        ivBarSearch.setImageResource(R.drawable.main_me);
-        ivBarSearch.setOnClickListener(v -> LogUtil.e("客服"));
         initPicker();
         mPresenter = new SchemeSelectPresenter(this);
         mBtnSure.setOnClickListener(view -> {
-            if ("".equals(selectAreaCode)) {
-                ToastUtils.init().showInfoToast(this, "请选择地区");
-                return;
-            }
-            if ("".equals(selectBuildingId)) {
-                ToastUtils.init().showInfoToast(this, "请选择楼盘");
-                return;
-            }
+//            if ("".equals(selectAreaCode)) {
+//                ToastUtils.init().showInfoToast(this, "请选择地区");
+//                return;
+//            }
+//            if ("".equals(selectBuildingId)) {
+//                ToastUtils.init().showInfoToast(this, "请选择楼盘");
+//                return;
+//            }
 
             String style = mTvStyle.getText().toString().trim();
-            if ("".equals(style)) {
-                ToastUtils.init().showInfoToast(this, "请选择风格");
-                return;
-            }
+//            if ("".equals(style)) {
+//                ToastUtils.init().showInfoToast(this, "请选择风格");
+//                return;
+//            }
             String type = mTvType.getText().toString().trim();
-            if ("".equals(type)) {
-                ToastUtils.init().showInfoToast(this, "请选择户型");
-                return;
-            }
+//            if ("".equals(type)) {
+//                ToastUtils.init().showInfoToast(this, "请选择户型");
+//                return;
+//            }
             SchemeSelectEvent event = new SchemeSelectEvent
                     (city_code, selectAreaCode, selectBuildingId, style, type);
             EventBus.getDefault().post(event);
@@ -203,6 +197,7 @@ public class SchemeSearchActivity extends BaseCommonActivity implements SchemeSe
             tv.setText(text);
             if ("其他".equals(text)) {
                 ActivityUtils.init().start(this, HouseSampleActivity.class, "预约方案");
+                finish();
             }
         })
                 .setTitleText(title)

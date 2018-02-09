@@ -162,7 +162,9 @@
         android:id="@+id/bgaBanner"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        bga:banner_contentBottomMargin="30dp"
+        android:paddingTop="@dimen/dp_10"
+        android:background="@color/white"
+        android:scaleType="fitCenter"
         bga:banner_pointAutoPlayAble="false"
-        bga:banner_transitionEffect="accordion"/>
+        bga:banner_pointTopBottomMargin="@dimen/dp_20"/>
 </LinearLayout>

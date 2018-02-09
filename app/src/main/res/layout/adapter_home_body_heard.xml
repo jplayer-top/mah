@@ -12,6 +12,5 @@
         bga:banner_contentBottomMargin="30dp"
         bga:banner_pointAutoPlayAble="true"
         bga:banner_pointContainerBackground="@color/colorWhite"
-        bga:banner_pointDrawable="@drawable/selector_banner_unequal"
-        bga:banner_transitionEffect="accordion"/>
+        bga:banner_pointDrawable="@drawable/selector_banner_unequal"/>
 </LinearLayout>

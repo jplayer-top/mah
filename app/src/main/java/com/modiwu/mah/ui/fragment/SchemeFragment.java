@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 
 import com.modiwu.mah.R;
@@ -74,16 +75,23 @@ public class SchemeFragment extends BaseFragment implements SchemeContract.ISche
     }
 
     @Subscribe
-    public void selectScheme(SchemeSelectEvent event){
-        Map<String,String> map = new HashMap<>();
-        map.put("building_id",event.building_id);
-        map.put("area_code",event.area_code);
-        map.put("city_code  ",event.city_code);
-        map.put("fangan_style  ",event.fangan_style);
-        map.put("huxing_type  ",event.huxing_type);
+    public void selectScheme(SchemeSelectEvent event) {
+        Map<String, String> map = new HashMap<>();
+        if (!TextUtils.equals("", event.building_id))
+            map.put("building_id", event.building_id);
+
+        if (!TextUtils.equals("", event.area_code))
+            map.put("area_code", event.area_code);
+        if (!TextUtils.equals("", event.city_code))
+            map.put("city_code  ", event.city_code);
+        if (!TextUtils.equals("", event.fangan_style))
+            map.put("fangan_style  ", event.fangan_style);
+        if (!TextUtils.equals("", event.huxing_type))
+            map.put("huxing_type  ", event.huxing_type);
         showLoading();
         mPresenter.requestSchemeData(map);
     }
+
     @Override
 
     public void onDestroy() {

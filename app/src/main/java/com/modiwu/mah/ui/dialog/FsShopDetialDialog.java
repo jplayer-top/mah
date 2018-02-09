@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import top.jplayer.baseprolibrary.glide.GlideUtils;
 import top.jplayer.baseprolibrary.utils.ScreenUtils;
 import top.jplayer.baseprolibrary.utils.ToastUtils;
 
@@ -112,7 +113,7 @@ public class FsShopDetialDialog extends BottomTopDialogFragment implements View.
         tvOnePrice.setText(String.format(Locale.CHINA, "￥%s", bundle.getString("price")));
         tvGoodNum.setText(String.format(Locale.CHINA, "订单编号：%s", bundle.getString("num")));
         if (detialBean != null) {
-            Glide.with(getContext()).load(detialBean.goods.goods_thumb).into(mIvTumb);
+            Glide.with(getContext()).load(detialBean.goods.goods_thumb).apply(GlideUtils.init().options()).into(mIvTumb);
             if (detialBean.attrs != null) {
                 attr_ids = new StringBuilder();
                 mAdapter = new ShopSpecAdapter(getContext(), detialBean.attrs);
