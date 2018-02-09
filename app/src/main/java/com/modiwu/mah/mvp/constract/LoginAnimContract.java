@@ -2,6 +2,8 @@ package com.modiwu.mah.mvp.constract;
 
 import android.widget.TextView;
 
+import com.modiwu.mah.mvp.model.bean.LoginBean;
+
 import java.util.Map;
 
 import top.jplayer.baseprolibrary.mvp.contract.IContract;
@@ -30,7 +32,7 @@ public interface LoginAnimContract {
 
     interface ILoginAnimView extends IContract.IView {
 
-        void login();
+        void login(LoginBean loginBean);
 
         void register();
 

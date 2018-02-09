@@ -1,12 +1,12 @@
 package com.modiwu.mah.mvp.presenter;
 
 import com.modiwu.mah.mvp.model.ShopDetailModel;
+import com.modiwu.mah.mvp.model.bean.DefLocalBean;
 import com.modiwu.mah.mvp.model.bean.OrderCreateBean;
 import com.modiwu.mah.ui.activity.ShopToBuyAvtivity;
 
 import java.util.Map;
 
-import io.reactivex.disposables.Disposable;
 import top.jplayer.baseprolibrary.mvp.contract.BasePresenter;
 import top.jplayer.baseprolibrary.mvp.contract.IContract;
 import top.jplayer.baseprolibrary.net.SampleShowDialogObserver;
@@ -36,15 +36,17 @@ public class ShopToBuyPresenter extends BasePresenter<ShopToBuyAvtivity> impleme
     }
 
     public void requestOrderLocalData() {
-        Disposable disposable = mModel.requestOrderLocalBean().subscribe(bean -> {
-            if (bean == null) {
-                mIView.showEmpty();
-            } else {
-                mIView.mMultipleStatusView.showContent();
-                mIView.setOrderLocal(bean);
+        mModel.requestOrderLocalBean().subscribe(new SampleShowDialogObserver<DefLocalBean>(mIView) {
+            @Override
+            protected void onSuccess(DefLocalBean defLocalBean) throws Exception {
+                if (defLocalBean != null && defLocalBean.addr != null) {
+                    mIView.setOrderLocal(defLocalBean);
+                }else {
+                    mIView.setNoOrderLocal();
+                }
+
             }
-        }, throwable -> mIView.showError());
-        addSubscription(disposable);
+        });
     }
 
     public void requestSchemeCreateData(Map<String, String> map) {

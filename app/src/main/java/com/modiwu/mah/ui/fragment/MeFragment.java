@@ -11,9 +11,13 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.google.gson.Gson;
 import com.modiwu.mah.BuildConfig;
 import com.modiwu.mah.R;
 import com.modiwu.mah.base.BaseFragment;
+import com.modiwu.mah.mvp.model.MeInfoModel;
+import com.modiwu.mah.mvp.model.bean.MeInfoBean;
+import com.modiwu.mah.mvp.model.event.LoginSuccessEvent;
 import com.modiwu.mah.ui.activity.AboutMahActivity;
 import com.modiwu.mah.ui.activity.LocalListActivity;
 import com.modiwu.mah.ui.activity.LoginAnimActivity;
@@ -23,11 +27,17 @@ import com.modiwu.mah.ui.activity.MeOrderActivity;
 import com.modiwu.mah.ui.activity.MeShouCangActivity;
 import com.modiwu.mah.ui.activity.ShopCartActivity;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import top.jplayer.baseprolibrary.glide.GlideUtils;
+import top.jplayer.baseprolibrary.net.SampleShowDialogObserver;
 import top.jplayer.baseprolibrary.net.download.DownloadByChrome;
 import top.jplayer.baseprolibrary.utils.ActivityUtils;
+import top.jplayer.baseprolibrary.utils.SharePreUtil;
 
 /**
  * Created by Obl on 2018/1/19.
@@ -57,8 +67,11 @@ public class MeFragment extends BaseFragment {
     TextView tvShopCart;
     @BindView(R.id.tvLocal)
     TextView tvLocal;
+    @BindView(R.id.tvName)
+    TextView tvName;
     @BindView(R.id.ivMeAvatar)
     ImageView ivMeAvatar;
+    private MeInfoModel mModel;
 
     @Override
     public int initLayout() {
@@ -70,7 +83,7 @@ public class MeFragment extends BaseFragment {
         super.initData(rootView);
         tvBarTitle.setText("我的");
         findView(rootView);
-        Glide.with(getContext()).load(R.drawable.home_toshop).apply(RequestOptions.circleCropTransform()).into(ivMeAvatar);
+        EventBus.getDefault().register(this);
     }
 
     private void findView(View rootView) {
@@ -87,6 +100,19 @@ public class MeFragment extends BaseFragment {
                 "我的收藏"));
         tvUpdate.setOnClickListener(view -> checkUpdate(true));
 
+        mModel = new MeInfoModel();
+        mModel.requestIsLogin().subscribe(baseBean -> {
+            if (baseBean != null && "1".equals(baseBean.login)) {
+                String infoJson = (String) SharePreUtil.getData(getContext(), "info", "");
+                MeInfoBean meInfoBean = new Gson().fromJson(infoJson, MeInfoBean.class);
+                if (meInfoBean != null) {
+                    bindInfo(meInfoBean);
+                }
+                llToLogin.setEnabled(false);
+            } else {
+                llToLogin.setEnabled(true);
+            }
+        });
     }
 
     /**
@@ -117,6 +143,7 @@ public class MeFragment extends BaseFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("更新提示");
         builder.setMessage(version_info);
+
         // 更新
         builder.setPositiveButton("立即更新", (dialog, which) -> {
             dialog.dismiss();
@@ -128,10 +155,30 @@ public class MeFragment extends BaseFragment {
         noticeDialog.show();
     }
 
+    @Subscribe
+    public void userInfo(LoginSuccessEvent event) {
+
+        mModel.requestGetInfo(event.uid + "").subscribe(new SampleShowDialogObserver<MeInfoBean>(getContext()) {
+            @Override
+            protected void onSuccess(MeInfoBean baseBean) throws Exception {
+                bindInfo(baseBean);
+                String json = new Gson().toJson(baseBean);
+                SharePreUtil.saveData(getContext(), "info", json);
+            }
+        });
+    }
+
+    private void bindInfo(MeInfoBean baseBean) {
+        Glide.with(getContext()).load(baseBean.profile.user_avatar)
+                .apply(GlideUtils.init().options())
+                .apply(RequestOptions.circleCropTransform()).into(ivMeAvatar);
+        tvName.setText(baseBean.profile.user_name);
+    }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+        EventBus.getDefault().unregister(this);
     }
 }

@@ -1,19 +1,19 @@
 package com.modiwu.mah.ui.activity;
 
-import android.widget.ImageView;
+import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
+import com.modiwu.mah.BuildConfig;
 import com.modiwu.mah.R;
-import com.modiwu.mah.base.BaseSpecialActivity;
+import com.modiwu.mah.base.BaseCommonActivity;
 
-import top.jplayer.baseprolibrary.glide.GlideUtils;
+import java.util.Locale;
 
 /**
  * Created by Obl on 2018/2/2.
  * com.modiwu.mah.ui.activity
  */
 
-public class AboutMahActivity extends BaseSpecialActivity {
+public class AboutMahActivity extends BaseCommonActivity {
     @Override
     public int setBaseLayout() {
         return R.layout.activity_about;
@@ -21,11 +21,8 @@ public class AboutMahActivity extends BaseSpecialActivity {
 
     @Override
     public void initBaseData() {
-        ImageView ivAbout = contentView.findViewById(R.id.ivAbout);
-        Glide.with(this)
-                .asGif()
-                .load("http://images.shejidaren.com/wp-content/uploads/2015/04/20150326222456182.gif")
-                .apply(GlideUtils.init().gif())
-                .into(ivAbout);
+        findToolBarView(addRootView);
+        TextView tvVersion = addRootView.findViewById(R.id.tvVersion);
+        tvVersion.setText(String.format(Locale.CHINA, "版本号：%s", BuildConfig.VERSION_NAME));
     }
 }

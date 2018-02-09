@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.os.Handler;
 
+import top.jplayer.baseprolibrary.BaseInitApplication;
 import top.jplayer.baseprolibrary.utils.Utils;
 
 /**
@@ -30,5 +31,6 @@ public class BaseApplication extends Application {
         Utils.init(this);
         //主线程的Handler
         mMainThreadHandler = new Handler();
+        BaseInitApplication.init(AppContext);
     }
 }

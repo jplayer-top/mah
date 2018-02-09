@@ -1,5 +1,6 @@
 package com.modiwu.mah.ui.activity;
 
+import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -15,6 +16,9 @@ import com.modiwu.mah.mvp.model.bean.OrderCreateBean;
 import com.modiwu.mah.mvp.model.bean.ShopCartBean;
 import com.modiwu.mah.mvp.presenter.ShopToBuyPresenter;
 import com.modiwu.mah.ui.adapter.OrderCreateInfoAdapter;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.HashMap;
 import java.util.List;
@@ -63,6 +67,7 @@ public class ShopToBuyAvtivity extends BaseCommonActivity {
     @Override
     public void initBaseData() {
         mUnbinder = ButterKnife.bind(this, addRootView);
+        EventBus.getDefault().register(this);
         mMultipleStatusView = addRootView.findViewById(R.id.multiplestatusview);
         mPresenter = new ShopToBuyPresenter(this);
         mPresenter.requestOrderLocalData();
@@ -102,15 +107,38 @@ public class ShopToBuyAvtivity extends BaseCommonActivity {
         });
         tvCountPrice.setText(String.format(Locale.CHINA, "￥%.2f", countPrice / 100f));
 
-
+        tvName.setOnClickListener(toAddLocal());
+        mTvLocal.setOnClickListener(toAddLocal());
+        tvPhone.setOnClickListener(toAddLocal());
     }
+
+    @NonNull
+    private View.OnClickListener toAddLocal() {
+        return v -> {
+            ActivityUtils.init().start(this, LocalListActivity.class, "地址列表");
+        };
+    }
+
+    @Subscribe
+    public void getLocalEvent(DefLocalBean.AddrBean addr) {
+        setAddrBean(addr);
+    }
+
 
     public void setOrderCreate(OrderCreateBean bean) {
 
     }
 
+    public void setNoOrderLocal() {
+
+    }
+
     public void setOrderLocal(DefLocalBean localBean) {
-        mAddrBean = localBean.addr;
+        setAddrBean(localBean.addr);
+    }
+
+    private void setAddrBean(DefLocalBean.AddrBean addr) {
+        mAddrBean = addr;
         if (mFangan_id != null) {
             mMap.put("user_name", mAddrBean.rp_name);
             mMap.put("user_phone", mAddrBean.rp_phone);
@@ -130,5 +158,8 @@ public class ShopToBuyAvtivity extends BaseCommonActivity {
     protected void onDestroy() {
         super.onDestroy();
         mUnbinder.unbind();
+        EventBus.getDefault().unregister(this);
     }
+
+
 }

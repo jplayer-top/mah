@@ -6,8 +6,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.google.gson.Gson;
 import com.modiwu.mah.R;
 import com.modiwu.mah.base.BaseCommonActivity;
+import com.modiwu.mah.mvp.model.bean.DefLocalBean;
 import com.modiwu.mah.mvp.model.bean.LocalListBean;
 import com.modiwu.mah.mvp.model.event.LocalEvent;
 import com.modiwu.mah.mvp.presenter.LocalListPresenter;
@@ -77,7 +79,7 @@ public class LocalListActivity extends BaseCommonActivity {
                     break;
                 case R.id.checkbox:
                     if (recordsBeans.get(position).rp_default == 1) {
-                        ToastUtils.init().showInfoToast(this,"必须有一个默认地址");
+                        ToastUtils.init().showInfoToast(this, "必须有一个默认地址");
                         mAdapter.notifyItemChanged(position);
                         break;
                     }
@@ -86,6 +88,14 @@ public class LocalListActivity extends BaseCommonActivity {
                     break;
             }
             return false;
+        });
+        mAdapter.setOnItemClickListener((adapter, view, position) -> {
+            LocalListBean.RecordsBean recordsBean = mAdapter.getData().get(position);
+            Gson gson = new Gson();
+            String json = gson.toJson(recordsBean);
+            DefLocalBean.AddrBean localBean = gson.fromJson(json, DefLocalBean.AddrBean.class);
+            EventBus.getDefault().post(localBean);
+            finish();
         });
     }
 

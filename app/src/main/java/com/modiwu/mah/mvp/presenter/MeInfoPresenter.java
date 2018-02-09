@@ -10,6 +10,7 @@ import top.jplayer.baseprolibrary.mvp.contract.BasePresenter;
 import top.jplayer.baseprolibrary.mvp.contract.IContract;
 import top.jplayer.baseprolibrary.mvp.model.bean.BaseBean;
 import top.jplayer.baseprolibrary.net.SampleShowDialogObserver;
+import top.jplayer.baseprolibrary.utils.LogUtil;
 
 /**
  * Created by Obl on 2018/1/25.
@@ -43,6 +44,10 @@ public class MeInfoPresenter extends BasePresenter<MeContentActivity> implements
     }
 
     public void upDateAvatarMes(String img, String fileName, File file) {
-        mModel.requestAvatarInfo(img, fileName, file).subscribe(baseBean -> mIView.successAvatar(baseBean));
+        mModel.requestAvatarInfo(img, fileName, file).subscribe(baseBean -> mIView.successAvatar(baseBean), throwable
+                -> {
+            LogUtil.e(throwable.getMessage());
+            mIView.successAvatar(new BaseBean());
+        });
     }
 }

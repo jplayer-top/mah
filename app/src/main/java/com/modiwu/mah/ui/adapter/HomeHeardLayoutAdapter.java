@@ -1,7 +1,7 @@
 package com.modiwu.mah.ui.adapter;
 
 import android.content.Context;
-import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.ViewGroup;
@@ -24,9 +24,9 @@ import java.util.List;
 import cn.bingoogolapple.bgabanner.BGABanner;
 import io.reactivex.Observable;
 import top.jplayer.baseprolibrary.glide.GlideUtils;
+import top.jplayer.baseprolibrary.ui.WebFullScreenActivity;
 import top.jplayer.baseprolibrary.ui.adapter.VLayoutAdapter;
 import top.jplayer.baseprolibrary.utils.ActivityUtils;
-import top.jplayer.baseprolibrary.utils.ToastUtils;
 
 /**
  * Created by Obl on 2018/1/23.
@@ -76,7 +76,11 @@ public class HomeHeardLayoutAdapter extends VLayoutAdapter<RecyclerView.ViewHold
                 } else if (TextUtils.equals(mBanner.get(urlPosition).navType, "ybj")) {
                     ActivityUtils.init().start(context, HouseSampleActivity.class, "样板间征集");
                 } else {
-                    ToastUtils.init().showInfoToast(context, "我type是Url");
+                    Bundle bundle = new Bundle();
+                    bundle.putString("url", mBanner.get(urlPosition).navValue);
+                    ActivityUtils.init().start(context, WebFullScreenActivity.class, context.getString(R.string
+                                    .app_name),
+                            bundle);
                 }
             });
         });

@@ -13,4 +13,5 @@ public class LoginBean extends BaseBean {
     public String imtoken;
     public int fid;
     public String fname;
+
 }

@@ -6,12 +6,14 @@ import android.widget.TextView;
 
 import com.modiwu.mah.mvp.constract.LoginAnimContract;
 import com.modiwu.mah.mvp.model.LoginModel;
+import com.modiwu.mah.mvp.model.bean.LoginBean;
 import com.modiwu.mah.ui.activity.LoginAnimActivity;
 
 import java.util.Map;
 
 import io.reactivex.disposables.Disposable;
 import top.jplayer.baseprolibrary.mvp.contract.BasePresenter;
+import top.jplayer.baseprolibrary.net.SampleShowDialogObserver;
 
 /**
  * Created by Obl on 2018/1/29.
@@ -29,16 +31,12 @@ public class LoginPresenter extends BasePresenter<LoginAnimActivity> implements 
 
     @Override
     public void login(String phone, String password) {
-        Disposable disposable = mModel.requestLogin(phone, password)
-                .subscribe(loginBean -> {
-                            if (TextUtils.equals("000", loginBean.code)) {
-                                mIView.login();
-                            } else {
-                                mIView.showSpecError(loginBean.msg);
-                            }
-                        },
-                        throwable -> mIView.showError());
-        addSubscription(disposable);
+        mModel.requestLogin(phone, password).subscribe(new SampleShowDialogObserver<LoginBean>(mIView) {
+            @Override
+            protected void onSuccess(LoginBean loginBean) throws Exception {
+                mIView.login(loginBean);
+            }
+        });
 
     }
 

@@ -24,7 +24,7 @@ public class HomeModel {
                 //模拟耗时网络请求
                 .subscribeOn(Schedulers.io())
                 .map(homeBean -> {
-                    SystemClock.sleep(1000);
+                    SystemClock.sleep(500);
                     return homeBean;
                 })
                 .observeOn(AndroidSchedulers.mainThread());

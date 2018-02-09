@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
-import io.reactivex.functions.Consumer;
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -16,7 +15,10 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+import top.jplayer.baseprolibrary.BaseInitApplication;
 import top.jplayer.baseprolibrary.BuildConfig;
+import top.jplayer.baseprolibrary.net.cookie.CookieJarImpl;
+import top.jplayer.baseprolibrary.net.cookie.OKhttpCookieChange;
 import top.jplayer.baseprolibrary.utils.GsonUtils;
 import top.jplayer.baseprolibrary.utils.LogUtil;
 
@@ -45,12 +47,9 @@ public class RetrofitManager {
     public OkHttpClient.Builder reBuilder(Interceptor... interceptors) {
         final OkHttpClient.Builder builder = defBuilder();
         Observable.fromArray(interceptors)
-                .subscribe(new Consumer<Interceptor>() {
-                    @Override
-                    public void accept(Interceptor interceptor) throws Exception {
-                        if (interceptor != null) {
-                            builder.addInterceptor(interceptor);
-                        }
+                .subscribe(interceptor -> {
+                    if (interceptor != null) {
+                        builder.addInterceptor(interceptor);
                     }
                 });
         return builder;
@@ -128,11 +127,12 @@ public class RetrofitManager {
     }
 
     @NonNull
-    private OkHttpClient.Builder defBuilder() {
+    public OkHttpClient.Builder defBuilder() {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
         HttpLoggingInterceptor LoginInterceptor = addHttpLoggingInterceptor();
         builder.addInterceptor(addQueryParameterInterceptor())
-                .addInterceptor(addHeaderInterceptor());
+                .addInterceptor(addHeaderInterceptor())
+                .cookieJar(new CookieJarImpl(new OKhttpCookieChange(BaseInitApplication.mContext)));
 
         if (BuildConfig.DEBUG) {
             builder.addInterceptor(LoginInterceptor);

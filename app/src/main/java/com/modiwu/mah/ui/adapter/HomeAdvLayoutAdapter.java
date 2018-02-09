@@ -1,6 +1,7 @@
 package com.modiwu.mah.ui.adapter;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -13,7 +14,9 @@ import com.modiwu.mah.mvp.model.bean.HomeBean;
 import java.util.List;
 
 import top.jplayer.baseprolibrary.glide.GlideUtils;
+import top.jplayer.baseprolibrary.ui.WebFullScreenActivity;
 import top.jplayer.baseprolibrary.ui.adapter.VLayoutAdapter;
+import top.jplayer.baseprolibrary.utils.ActivityUtils;
 
 /**
  * Created by Obl on 2018/1/23.
@@ -36,7 +39,13 @@ public class HomeAdvLayoutAdapter extends VLayoutAdapter<RecyclerView.ViewHolder
     protected void onBindViewHolderWithOffset(RecyclerView.ViewHolder holder, int position, int offsetTotal) {
         ImageView ivShouHou = holder.itemView.findViewById(R.id.ivShouHou);
         Glide.with(context).load(mShouHou.get(position).imgUrl).apply(GlideUtils.init().options()).into(ivShouHou);
-
+        ivShouHou.setOnClickListener(v -> {
+            Bundle bundle = new Bundle();
+            bundle.putString("url", mShouHou.get(position).navValue);
+            ActivityUtils.init().start(context, WebFullScreenActivity.class, context.getString(R.string
+                            .app_name),
+                    bundle);
+        });
     }
 
     public void setShouHou(List<HomeBean.ShouHouBean> shouHou) {

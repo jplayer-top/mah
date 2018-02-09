@@ -1,6 +1,8 @@
 package com.modiwu.mah.mvp.model;
 
 import com.modiwu.mah.mvp.MahServer;
+import com.modiwu.mah.mvp.model.bean.LoginStatusbean;
+import com.modiwu.mah.mvp.model.bean.MeInfoBean;
 
 import java.io.File;
 
@@ -28,7 +30,7 @@ public class MeInfoModel {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    public Observable<BaseBean> requestGetInfo(String uid) {
+    public Observable<MeInfoBean> requestGetInfo(String uid) {
         return RetrofitManager.init()
                 .create(MahServer.class)
                 .getMeInfoStartBean(uid)
@@ -43,7 +45,15 @@ public class MeInfoModel {
                 MultipartBody.Part.createFormData("img", file.getName(), requestFile);
         return RetrofitManager.init()
                 .create(MahServer.class)
-                .getMeAvatarBean(img, fileName, body)
+                .getMeAvatarBean( body)
                 .compose(new IoMainSchedule<>());
+    }
+
+    public Observable<LoginStatusbean> requestIsLogin() {
+        return RetrofitManager.init()
+                .create(MahServer.class)
+                .getLoginStatus()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
     }
 }

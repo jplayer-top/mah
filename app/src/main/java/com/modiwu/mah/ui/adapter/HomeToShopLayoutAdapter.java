@@ -1,6 +1,7 @@
 package com.modiwu.mah.ui.adapter;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -13,7 +14,9 @@ import com.modiwu.mah.mvp.model.bean.HomeBean;
 import java.util.List;
 
 import top.jplayer.baseprolibrary.glide.GlideUtils;
+import top.jplayer.baseprolibrary.ui.WebFullScreenActivity;
 import top.jplayer.baseprolibrary.ui.adapter.VLayoutAdapter;
+import top.jplayer.baseprolibrary.utils.ActivityUtils;
 
 /**
  * Created by Obl on 2018/1/23.
@@ -40,9 +43,23 @@ public class HomeToShopLayoutAdapter extends VLayoutAdapter<RecyclerView.ViewHol
         if (beanType) {
             HomeBean.ShiDianBean shiDianBean = mShiDian.get(position);
             Glide.with(context).load(shiDianBean.imgUrl).apply(GlideUtils.init().options()).into(imageView);
-        }else {
+            imageView.setOnClickListener(v -> {
+                Bundle bundle = new Bundle();
+                bundle.putString("url", mShiDian.get(position).navValue);
+                ActivityUtils.init().start(context, WebFullScreenActivity.class, context.getString(R.string
+                                .app_name),
+                        bundle);
+            });
+        } else {
             HomeBean.ShiGongBean shiGongBean = mShiGong.get(position);
             Glide.with(context).load(shiGongBean.imgUrl).apply(GlideUtils.init().options()).into(imageView);
+            imageView.setOnClickListener(v -> {
+                Bundle bundle = new Bundle();
+                bundle.putString("url", shiGongBean.navValue);
+                ActivityUtils.init().start(context, WebFullScreenActivity.class, context.getString(R.string
+                                .app_name),
+                        bundle);
+            });
         }
     }
 
@@ -50,6 +67,7 @@ public class HomeToShopLayoutAdapter extends VLayoutAdapter<RecyclerView.ViewHol
         beanType = false;
         mShiGong = shiGong;
     }
+
     public void setShiDian(List<HomeBean.ShiDianBean> shiDian) {
         beanType = true;
         mShiDian = shiDian;

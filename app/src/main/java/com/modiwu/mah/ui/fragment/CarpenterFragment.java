@@ -28,6 +28,7 @@ import java.util.Locale;
 import devlight.io.library.ntb.NavigationTabBar;
 import top.jplayer.baseprolibrary.glide.GlideUtils;
 import top.jplayer.baseprolibrary.listener.NetNavigationBarListener;
+import top.jplayer.baseprolibrary.ui.WebFullScreenActivity;
 import top.jplayer.baseprolibrary.utils.ActivityUtils;
 
 /**
@@ -81,6 +82,7 @@ public class CarpenterFragment extends BaseFragment implements CarpenterContract
             ActivityUtils.init().start(getContext(), ShopSubActivity.class, recordsBean.cat_name, bundle);
         });
         mRecyclerView2.setAdapter(mAdapter2);
+
     }
 
     private void initRecyclerView1(List<CarpenterBean.RecordsBean> list) {
@@ -185,5 +187,12 @@ public class CarpenterFragment extends BaseFragment implements CarpenterContract
         }
         mAdapter2.setNewData(bean.records);
         mMultipleStatusView.showContent(R.id.recyclerView2);
+        mIvHeard.setOnClickListener(v -> {
+            Bundle bundle = new Bundle();
+            if ("url".equals(bean.top.navType)) {
+                bundle.putString("url", bean.top.navValue);
+                ActivityUtils.init().start(getContext(), WebFullScreenActivity.class, getString(R.string.app_name), bundle);
+            }
+        });
     }
 }

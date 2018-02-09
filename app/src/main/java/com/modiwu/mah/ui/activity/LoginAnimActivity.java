@@ -17,6 +17,8 @@ import com.modiwu.mah.R;
 import com.modiwu.mah.base.BaseApplication;
 import com.modiwu.mah.base.BaseSpecialActivity;
 import com.modiwu.mah.mvp.constract.LoginAnimContract;
+import com.modiwu.mah.mvp.model.bean.LoginBean;
+import com.modiwu.mah.mvp.model.event.LoginSuccessEvent;
 import com.modiwu.mah.mvp.model.event.TokenEvent;
 import com.modiwu.mah.mvp.presenter.LoginPresenter;
 import com.modiwu.mah.utils.EditTextUtils;
@@ -25,6 +27,7 @@ import com.tencent.mm.opensdk.modelmsg.SendAuth;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
+import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.util.Calendar;
@@ -41,6 +44,7 @@ import io.reactivex.Observable;
 import io.reactivex.disposables.Disposable;
 import top.jplayer.baseprolibrary.net.IoMainSchedule;
 import top.jplayer.baseprolibrary.utils.ScreenUtils;
+import top.jplayer.baseprolibrary.utils.SharePreUtil;
 import top.jplayer.baseprolibrary.utils.SizeUtils;
 import top.jplayer.baseprolibrary.utils.ToastUtils;
 
@@ -199,8 +203,11 @@ public class LoginAnimActivity extends BaseSpecialActivity implements TextWatche
     public boolean isRegister = false;
 
     @Override
-    public void login() {
-
+    public void login(LoginBean loginBean) {
+        SharePreUtil.saveData(this, "uid", loginBean.uid);
+        SharePreUtil.saveData(this, "token", loginBean.imtoken);
+        EventBus.getDefault().post(new LoginSuccessEvent(loginBean.uid, loginBean.imtoken));
+        finish();
     }
 
     @Override
@@ -325,7 +332,6 @@ public class LoginAnimActivity extends BaseSpecialActivity implements TextWatche
                     ToastUtils.init().showInfoToast(this, "请输入您的密码");
                     return;
                 }
-                showLoading();
                 mPresenter.login(mPhone, mPassword);
                 break;
             case R.id.wechat://微信登录

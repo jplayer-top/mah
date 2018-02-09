@@ -12,9 +12,11 @@ import com.bumptech.glide.request.RequestOptions;
 import com.jaiky.imagespickers.ImageSelectorActivity;
 import com.modiwu.mah.R;
 import com.modiwu.mah.base.BaseCommonActivity;
+import com.modiwu.mah.mvp.model.bean.MeInfoBean;
 import com.modiwu.mah.mvp.model.event.MessageEvent;
 import com.modiwu.mah.mvp.presenter.MeInfoPresenter;
 import com.modiwu.mah.utils.CameraUtils;
+import com.modiwu.mah.utils.StringUtils;
 import com.yanzhenjie.permission.AndPermission;
 import com.yanzhenjie.permission.PermissionNo;
 import com.yanzhenjie.permission.PermissionYes;
@@ -24,6 +26,7 @@ import org.greenrobot.eventbus.Subscribe;
 
 import java.io.File;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -32,6 +35,7 @@ import top.jplayer.baseprolibrary.glide.GlideUtils;
 import top.jplayer.baseprolibrary.mvp.model.bean.BaseBean;
 import top.jplayer.baseprolibrary.ui.SuperBaseActivity;
 import top.jplayer.baseprolibrary.utils.ActivityUtils;
+import top.jplayer.baseprolibrary.utils.SharePreUtil;
 
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
@@ -84,7 +88,8 @@ public class MeContentActivity extends BaseCommonActivity {
             setPermission(this, 100, WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA);
 
         });
-        presenter.getMeInfo("0");
+        int uid = (int) SharePreUtil.getData(this, "uid", 0);
+        presenter.getMeInfo(uid + "");
     }
 
     private void messageChange(String key, TextView view) {
@@ -164,7 +169,7 @@ public class MeContentActivity extends BaseCommonActivity {
             List<String> pathList = data.getStringArrayListExtra(ImageSelectorActivity.EXTRA_RESULT);
             for (String path : pathList) {
                 mFile = new File(path);
-                String fileName = mFile.getName() + mFile.getPath().substring(mFile.getPath().indexOf("."));
+                String fileName = mFile.getName();
                 presenter.upDateAvatarMes("img", fileName, mFile);
             }
         }
@@ -182,8 +187,24 @@ public class MeContentActivity extends BaseCommonActivity {
         }
     }
 
-    public void successGet(BaseBean baseBean) {
-
+    public void successGet(MeInfoBean baseBean) {
+        MeInfoBean.ProfileBean profile = baseBean.profile;
+        Glide.with(this).load(profile.user_avatar)
+                .apply(GlideUtils.init().options())
+                .apply(RequestOptions.circleCropTransform())
+                .into(ivMeAvatar);
+        tvArea.setText(String.format(Locale.CHINA, "%s m²", StringUtils.getInstance().isNullable(profile.user_mian,
+                "")));
+        tvType.setText(String.format(Locale.CHINA, "%s", StringUtils.getInstance().isNullable(profile.user_huxing,
+                "")));
+        tvEmail.setText(String.format(Locale.CHINA, "%s", StringUtils.getInstance().isNullable(profile.user_email,
+                "")));
+        tvPhone.setText(String.format(Locale.CHINA, "%s", StringUtils.getInstance().isNullable(profile.user_phone,
+                "")));
+        tvName.setText(String.format(Locale.CHINA, "%s", StringUtils.getInstance().isNullable(profile.user_name,
+                "")));
+        tvFloor.setText(String.format(Locale.CHINA, "%s", StringUtils.getInstance().isNullable(profile.user_building,
+                "")));
     }
 
     public void successAvatar(BaseBean baseBean) {

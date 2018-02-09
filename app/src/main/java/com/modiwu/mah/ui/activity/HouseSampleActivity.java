@@ -1,6 +1,5 @@
 package com.modiwu.mah.ui.activity;
 
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.widget.Button;
@@ -14,7 +13,6 @@ import com.modiwu.mah.R;
 import com.modiwu.mah.base.BaseCommonActivity;
 import com.modiwu.mah.mvp.model.bean.YBJBean;
 import com.modiwu.mah.mvp.presenter.YBJPresenter;
-import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -25,7 +23,6 @@ import butterknife.Unbinder;
 import top.jplayer.baseprolibrary.glide.GlideUtils;
 import top.jplayer.baseprolibrary.mvp.model.bean.BaseBean;
 import top.jplayer.baseprolibrary.utils.ToastUtils;
-import top.jplayer.baseprolibrary.widgets.MultipleStatusView;
 import top.jplayer.baseprolibrary.widgets.dialog.DialogFlowSure;
 
 /**
@@ -108,13 +105,13 @@ public class HouseSampleActivity extends BaseCommonActivity {
                 ToastUtils.init().showInfoToast(this, "请输入您的户型");
                 return;
             }
-            mapPutKey("huxing", "huxing_type", editType);
+            mapPutKey("huxing", "huxing", editType);
 
             if (TextUtils.equals(editArea.getText(), "")) {
                 ToastUtils.init().showInfoToast(this, "请输入您的房屋面积");
                 return;
             }
-            mapPutKey("mianji", "huxing_mian", editArea);
+            mapPutKey("mianji", "mianji", editArea);
 
             StringBuilder stringBuilder = new StringBuilder("");
             for (CheckBox checkBox : checkBoxes) {
@@ -129,9 +126,10 @@ public class HouseSampleActivity extends BaseCommonActivity {
                 return;
             }
             map.put("fengge", (stringBuilder.toString()));
+
             if (isYBJ) {
                 presenter.requestSubmit(map);
-            }else {
+            } else {
                 presenter.requestYYSubmit(map);
             }
         });

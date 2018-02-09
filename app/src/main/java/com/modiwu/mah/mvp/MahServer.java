@@ -12,7 +12,9 @@ import com.modiwu.mah.mvp.model.bean.HomeBean;
 import com.modiwu.mah.mvp.model.bean.LocalBean;
 import com.modiwu.mah.mvp.model.bean.LocalListBean;
 import com.modiwu.mah.mvp.model.bean.LoginBean;
+import com.modiwu.mah.mvp.model.bean.LoginStatusbean;
 import com.modiwu.mah.mvp.model.bean.MeFangAnBean;
+import com.modiwu.mah.mvp.model.bean.MeInfoBean;
 import com.modiwu.mah.mvp.model.bean.MeOrderBean;
 import com.modiwu.mah.mvp.model.bean.MeShouCangBean;
 import com.modiwu.mah.mvp.model.bean.OrderCreateBean;
@@ -64,6 +66,9 @@ public interface MahServer {
 
     @GET("select/hxtype")
     Observable<SelectBean> getTypeSelectBean();
+
+    @GET("profile/index")
+    Observable<LoginStatusbean> getLoginStatus();
 
     @GET("select/building?")
     Observable<FloorBean> getFloorSelectBean(@Query("area_code") String area_code);
@@ -165,9 +170,9 @@ public interface MahServer {
     Observable<BaseBean> getMeInfoBean(@Query("col") String col, @Query("value") String value);
 
     @GET("profile/info?")
-    Observable<BaseBean> getMeInfoStartBean(@Query("uid") String uid);
+    Observable<MeInfoBean> getMeInfoStartBean(@Query("uid") String uid);
 
     @Multipart
     @POST("profile/avatar?")
-    Observable<BaseBean> getMeAvatarBean(@Query("img") String img, @Query("fileName") String fileName, @Part MultipartBody.Part file);
+    Observable<BaseBean> getMeAvatarBean(@Part MultipartBody.Part file);
 }
