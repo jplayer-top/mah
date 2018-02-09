@@ -1,9 +1,11 @@
 package com.modiwu.mah.mvp.model;
 
 import com.modiwu.mah.mvp.MahServer;
+import com.modiwu.mah.mvp.model.bean.AliPayInfoBean;
 import com.modiwu.mah.mvp.model.bean.DefLocalBean;
 import com.modiwu.mah.mvp.model.bean.OrderCreateBean;
 import com.modiwu.mah.mvp.model.bean.ShopGoodsInfoBean;
+import com.modiwu.mah.mvp.model.bean.WxPayInfoBean;
 
 import java.util.Map;
 
@@ -42,6 +44,20 @@ public class ShopDetailModel {
         return RetrofitManager.init()
                 .create(MahServer.class)
                 .getOrderLocalBean()
+                .compose(new IoMainSchedule<>());
+    }
+
+    public Observable<WxPayInfoBean> requestWXPrePay(String orderId, String payType) {
+        return RetrofitManager.init()
+                .create(MahServer.class)
+                .getOrderWXPrePay(orderId, payType)
+                .compose(new IoMainSchedule<>());
+    }
+
+    public Observable<AliPayInfoBean> requestAliPrePay(String orderId, String payType) {
+        return RetrofitManager.init()
+                .create(MahServer.class)
+                .getOrderAliPrePay(orderId, payType)
                 .compose(new IoMainSchedule<>());
     }
 

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginTop="@dimen/dimen_2dp"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/dimen_15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dimen_10dp"
+            android:text="您需要支付："
+            android:textColor="@color/color323232"
+            android:textSize="@dimen/dimen_15sp"/>
+
+        <TextView
+            android:id="@+id/tvPayMoney"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="￥0.00"
+            android:textColor="@color/coral"
+            android:textSize="16sp"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_5dp"
+        android:layout_marginBottom="@dimen/dimen_10dp"
+        android:background="@color/whitesmoke"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_50dp"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/dimen_15dp"
+        android:paddingRight="@dimen/dimen_15dp"
+        android:visibility="visible">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/wxpay"
+            android:drawablePadding="@dimen/dimen_21dp"
+            android:text="微信支付"
+            android:textColor="@color/color323232"
+            android:textSize="@dimen/dimen_15sp"/>
+
+        <CheckBox
+            android:id="@+id/checkbox1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginLeft="@dimen/dimen_15dp"
+        android:layout_marginRight="@dimen/dimen_15dp"
+        android:background="@drawable/shape_divider"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_50dp"
+        android:layout_marginBottom="@dimen/dimen_30dp"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/dimen_15dp"
+        android:paddingRight="@dimen/dimen_15dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/alipay"
+            android:drawablePadding="@dimen/dimen_21dp"
+            android:text="支付宝支付"
+            android:textColor="@color/color323232"
+            android:textSize="@dimen/dimen_15sp"/>
+
+        <CheckBox
+            android:id="@+id/checkbox2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv2Pay"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_46dp"
+        android:layout_margin="@dimen/dimen_15dp"
+        android:background="@drawable/selector_grey_muti_press"
+        android:gravity="center"
+        android:text="确认支付"
+        android:textColor="@drawable/selector_text_press"/>
+</LinearLayout>

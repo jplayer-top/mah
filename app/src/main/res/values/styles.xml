@@ -39,4 +39,22 @@
         <item name="android:layout_height">1px</item>
         <item name="android:background">#cecece</item>
     </style>
+
+
+
+    <style name="AnimBottom">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowEnterAnimation">@anim/bottem_enter</item>
+        <item name="android:windowExitAnimation">@anim/bottem_exit</item>
+    </style>
+
+    <style name="dialog_custom" parent="@android:style/Theme.Dialog">
+        <item name="android:windowNoTitle">false</item>       <!--是否有标题-->
+        <item name="android:windowIsTranslucent">true</item> <!--是否半透明-->
+        <item name="android:windowBackground">@android:color/transparent</item> <!--窗口背景色透明-->
+        <item name="android:background">#00000000</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:backgroundDimEnabled">false</item> <!--背景是否模糊显示-->
+    </style>
+
 </resources>

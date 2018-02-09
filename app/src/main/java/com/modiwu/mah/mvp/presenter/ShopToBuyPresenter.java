@@ -29,8 +29,7 @@ public class ShopToBuyPresenter extends BasePresenter<ShopToBuyAvtivity> impleme
         mModel.requestOrderCreateBean(map).subscribe(new SampleShowDialogObserver<OrderCreateBean>(mIView) {
             @Override
             protected void onSuccess(OrderCreateBean baseBean) throws Exception {
-                mIView.setOrderCreate(baseBean);
-
+                mIView.setOrderCreate(baseBean,"订单");
             }
         });
     }
@@ -53,7 +52,7 @@ public class ShopToBuyPresenter extends BasePresenter<ShopToBuyAvtivity> impleme
         mModel.requestSchemeCreateBean(map).subscribe(new SampleShowDialogObserver<OrderCreateBean>(mIView) {
             @Override
             protected void onSuccess(OrderCreateBean baseBean) throws Exception {
-                mIView.setOrderCreate(baseBean);
+                mIView.setOrderCreate(baseBean,"方案");
             }
         });
     }

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="@color/white"
+              android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_30dp"
+        android:gravity="center">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1px"
+            android:layout_margin="@dimen/dimen_15dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_divider"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="分享至"
+            android:textColor="@color/color999"
+            android:textSize="@dimen/dimen_13sp"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1px"
+            android:layout_margin="@dimen/dimen_15dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_divider"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_40"
+        android:gravity="center">
+
+        <ImageView
+            android:layout_width="@dimen/dimen_40dp"
+            android:layout_height="@dimen/dimen_40dp"
+            android:layout_marginRight="@dimen/dimen_20dp"
+            android:src="@drawable/wechat"/>
+
+        <ImageView
+            android:layout_width="@dimen/dimen_40dp"
+            android:layout_height="@dimen/dimen_40dp"
+            android:layout_marginLeft="@dimen/dimen_20dp"
+            android:src="@drawable/wx_fri"/>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_46dp"
+        android:layout_marginBottom="@dimen/dp_20"
+        android:layout_marginLeft="@dimen/dimen_15dp"
+        android:layout_marginRight="@dimen/dimen_15dp"
+        android:layout_marginTop="@dimen/dimen_50dp"
+        android:background="@drawable/selector_55gref_muti_press"
+        android:gravity="center"
+        android:text="分享"
+        android:textColor="@drawable/selector_text_press"
+        android:textSize="@dimen/dimen_14sp"/>
+
+</LinearLayout>

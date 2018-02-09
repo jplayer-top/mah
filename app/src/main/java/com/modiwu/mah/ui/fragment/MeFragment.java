@@ -26,6 +26,7 @@ import com.modiwu.mah.ui.activity.MeFangAnActivity;
 import com.modiwu.mah.ui.activity.MeOrderActivity;
 import com.modiwu.mah.ui.activity.MeShouCangActivity;
 import com.modiwu.mah.ui.activity.ShopCartActivity;
+import com.modiwu.mah.ui.dialog.ShareDialog;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -69,6 +70,8 @@ public class MeFragment extends BaseFragment {
     TextView tvLocal;
     @BindView(R.id.tvName)
     TextView tvName;
+    @BindView(R.id.tvShare)
+    TextView tvShare;
     @BindView(R.id.ivMeAvatar)
     ImageView ivMeAvatar;
     private MeInfoModel mModel;
@@ -99,7 +102,7 @@ public class MeFragment extends BaseFragment {
         tvShouCang.setOnClickListener(view -> ActivityUtils.init().start(getContext(), MeShouCangActivity.class,
                 "我的收藏"));
         tvUpdate.setOnClickListener(view -> checkUpdate(true));
-
+        tvShare.setOnClickListener(v -> new ShareDialog(getContext()).show());
         mModel = new MeInfoModel();
         mModel.requestIsLogin().subscribe(baseBean -> {
             if (baseBean != null && "1".equals(baseBean.login)) {
@@ -127,10 +130,6 @@ public class MeFragment extends BaseFragment {
         int mVersion_code = BuildConfig.VERSION_CODE;// 当前的版本号
         int nVersion_code = 2;
         showNoticeDialog(version_info);
-        if (isToast) {
-            Toast.makeText(getActivity(), "已经是最新版本", Toast.LENGTH_SHORT).show();
-        }
-
     }
 
     /**

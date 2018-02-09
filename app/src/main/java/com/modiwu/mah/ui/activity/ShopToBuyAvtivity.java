@@ -1,5 +1,6 @@
 package com.modiwu.mah.ui.activity;
 
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -125,8 +126,13 @@ public class ShopToBuyAvtivity extends BaseCommonActivity {
     }
 
 
-    public void setOrderCreate(OrderCreateBean bean) {
+    public void setOrderCreate(OrderCreateBean bean, String type) {
 
+        Bundle bundle = new Bundle();
+        bundle.putString("totalPrice", String.format(Locale.CHINA, "￥%s", bean.totalPrice));
+        bundle.putString("orderId", bean.orderId);
+        bundle.putString("type", type);
+        ActivityUtils.init().start(this, ShopPayActivity.class, "支付", bundle);
     }
 
     public void setNoOrderLocal() {

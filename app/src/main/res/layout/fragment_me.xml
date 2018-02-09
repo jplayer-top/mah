@@ -130,10 +130,12 @@
                     android:animateLayoutChanges="true">
 
                     <TextView
+                        android:id="@+id/tvShare"
                         android:layout_width="match_parent"
                         android:layout_height="?attr/actionBarSize"
                         android:drawableLeft="@drawable/me_share"
                         android:drawablePadding="@dimen/dp_10"
+                        android:background="@drawable/selector_white_muti_press"
                         android:gravity="center_vertical"
                         android:text="@string/share_mah"
                         tools:ignore="RtlHardcoded"/>

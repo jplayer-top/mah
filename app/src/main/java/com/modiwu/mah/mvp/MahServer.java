@@ -1,6 +1,7 @@
 package com.modiwu.mah.mvp;
 
 
+import com.modiwu.mah.mvp.model.bean.AliPayInfoBean;
 import com.modiwu.mah.mvp.model.bean.CarpenterBean;
 import com.modiwu.mah.mvp.model.bean.CityCodeBean;
 import com.modiwu.mah.mvp.model.bean.CollectionHaseBean;
@@ -26,6 +27,7 @@ import com.modiwu.mah.mvp.model.bean.SelectLocalBean;
 import com.modiwu.mah.mvp.model.bean.ShopGoodsInfoBean;
 import com.modiwu.mah.mvp.model.bean.ShopSubListBean;
 import com.modiwu.mah.mvp.model.bean.SubTitleBean;
+import com.modiwu.mah.mvp.model.bean.WxPayInfoBean;
 import com.modiwu.mah.mvp.model.bean.YBJBean;
 
 import java.util.Map;
@@ -175,4 +177,10 @@ public interface MahServer {
     @Multipart
     @POST("profile/avatar?")
     Observable<BaseBean> getMeAvatarBean(@Part MultipartBody.Part file);
+
+    @POST("mall/order/prePay?")
+    Observable<WxPayInfoBean> getOrderWXPrePay(@Query("orderId")String orderId,@Query("payType") String payType);
+
+    @POST("mall/order/prePay?")
+    Observable<AliPayInfoBean> getOrderAliPrePay(@Query("orderId")String orderId, @Query("payType")String payType);
 }
