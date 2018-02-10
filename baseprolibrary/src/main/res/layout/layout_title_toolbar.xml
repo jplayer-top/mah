@@ -41,7 +41,7 @@
             android:paddingLeft="10dp"
             android:paddingStart="10dp"
             android:scaleType="center"
-            android:text="定位"
+            android:text="烟台"
             android:visibility="gone"
             tools:ignore="PrivateResource,RtlHardcoded,RtlSymmetry"/>
 
