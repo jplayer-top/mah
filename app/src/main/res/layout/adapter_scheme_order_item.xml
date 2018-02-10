@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
               xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
@@ -9,7 +10,18 @@
               android:gravity="center_vertical"
               android:orientation="vertical">
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_1px"
+        android:background="@drawable/shape_divider"/>
+
     <include layout="@layout/adapter_scheme_order_heard"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_1px"
+        android:background="@color/whitesmoke"
+        android:padding="@dimen/dp_10"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -27,6 +39,8 @@
             android:id="@+id/ivShopDel"
             android:layout_width="70dp"
             android:layout_height="70dp"
+            android:padding="@dimen/dimen_5dp"
+            android:scaleType="centerCrop"
             android:src="@drawable/placeholder"/>
 
         <FrameLayout
@@ -48,7 +62,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/dp_4"
-                    android:text="造作远山沙发"/>
+                    android:text=""/>
 
                 <TextView
                     android:id="@+id/tvSubTitle"
@@ -59,7 +73,7 @@
                     android:lines="1"
                     android:paddingEnd="@dimen/magin_30"
                     android:paddingRight="@dimen/magin_30"
-                    android:text="成都悠然设计匠心制作"
+                    android:text=""
                     tools:ignore="RtlSymmetry"/>
 
                 <TextView
@@ -68,48 +82,50 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
                     android:layout_margin="@dimen/dp_10"
+                    android:padding="@dimen/dp_10"
                     android:text="X1"
-                    android:visibility="invisible"
                     tools:ignore="RtlHardcoded"/>
+
+                <LinearLayout
+                    android:id="@+id/llEditNum"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center|right|end"
+                    android:visibility="visible"
+                    tools:ignore="RtlHardcoded">
+
+                    <TextView
+                        android:id="@+id/tvRemove"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="@color/whitesmoke"
+                        android:gravity="center"
+                        android:text="—"
+                        android:textSize="@dimen/sp_18"/>
+
+                    <TextView
+                        android:id="@+id/tvEditNum"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="@dimen/dp_10"
+                        android:text="0"/>
+
+                    <TextView
+                        android:id="@+id/tvAdd"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginEnd="@dimen/dp_10"
+                        android:layout_marginRight="@dimen/dp_10"
+                        android:background="@color/whitesmoke"
+                        android:gravity="center"
+                        android:text="+"
+                        android:textSize="@dimen/sp_18"/>
+                </LinearLayout>
             </RelativeLayout>
 
-            <LinearLayout
-                android:id="@+id/llEditNum"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center|right|end"
-                android:visibility="gone"
-                tools:ignore="RtlHardcoded">
-
-                <TextView
-                    android:id="@+id/tvRemove"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:background="@color/whitesmoke"
-                    android:gravity="center"
-                    android:text="—"
-                    android:textSize="@dimen/sp_18"/>
-
-                <TextView
-                    android:id="@+id/tvEditNum"
-                    android:layout_width="50dp"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:padding="@dimen/dp_10"
-                    android:text="0"/>
-
-                <TextView
-                    android:id="@+id/tvAdd"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginEnd="@dimen/dp_10"
-                    android:layout_marginRight="@dimen/dp_10"
-                    android:background="@color/whitesmoke"
-                    android:gravity="center"
-                    android:text="+"
-                    android:textSize="@dimen/sp_18"/>
-            </LinearLayout>
         </FrameLayout>
     </LinearLayout>
 </LinearLayout>

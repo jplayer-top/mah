@@ -81,6 +81,7 @@ public class SchemeOrderCreateBean extends BaseBean {
          * goods_price : 77700
          */
         public boolean isCheck;
+        public boolean isHeardCheck;
         public int fangan_id;
         public int goods_id;
         public String goods_title;

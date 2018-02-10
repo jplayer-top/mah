@@ -5,8 +5,7 @@
     android:layout_height="@dimen/dimen_50dp"
     android:layout_marginBottom="@dimen/dimen_15dp"
     android:gravity="center_vertical"
-    android:paddingLeft="@dimen/dimen_15dp"
-    android:paddingRight="@dimen/dimen_15dp">
+    android:paddingLeft="@dimen/dimen_15dp">
 
     <TextView
         android:layout_width="0dp"
@@ -17,45 +16,38 @@
         android:textSize="@dimen/dimen_14sp"/>
 
     <LinearLayout
-        android:layout_width="@dimen/dimen_100dp"
-        android:layout_height="@dimen/dimen_30dp"
-        android:background="@drawable/shape_border_grey"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:gravity="center">
 
-        <ImageView
+        <TextView
             android:id="@+id/ivDelGoods"
-            android:layout_width="30dp"
-            android:layout_height="match_parent"
-            android:padding="@dimen/dimen_5dp"
-            android:src="@drawable/shpo_detial_del"/>
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/whitesmoke"
+            android:gravity="center"
+            android:text="—"
+            android:textSize="@dimen/sp_18"/>
 
-        <View
-            android:layout_width="@dimen/dimen_1px"
-            android:layout_height="match_parent"
-            android:background="@color/color999"/>
 
         <TextView
             android:id="@+id/tvCount"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:ellipsize="end"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
             android:gravity="center"
-            android:lines="1"
-            android:text="1"
-            android:textColor="@color/black"
-            android:textSize="@dimen/dimen_15sp"/>
+            android:padding="@dimen/dp_10"
+            android:text="1"/>
 
-        <View
-            android:layout_width="@dimen/dimen_1px"
-            android:layout_height="match_parent"
-            android:background="@color/color999"/>
 
-        <ImageView
+        <TextView
             android:id="@+id/ivAddGoods"
-            android:layout_width="30dp"
-            android:layout_height="match_parent"
-            android:padding="@dimen/dimen_5dp"
-            android:src="@drawable/add"/>
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_10"
+            android:background="@color/whitesmoke"
+            android:gravity="center"
+            android:text="+"
+            android:textSize="@dimen/sp_18"/>
     </LinearLayout>
 </LinearLayout>

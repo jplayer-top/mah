@@ -146,33 +146,38 @@ public class SchemeOrderCreateActivity extends BaseCommonActivity {
         goods_num.delete(0, goods_num.length());
 
         Observable.fromIterable(mBean.she).subscribe(sheBean -> {
-            countPrice += sheBean.goods_price;
-            ShopCartBean bean = new ShopCartBean(null, sheBean.goods_title, "1", sheBean.goods_price_yuan, "1",
+            countPrice += (sheBean.goods_price * sheBean.goods_num);
+            ShopCartBean bean = new ShopCartBean(null, sheBean.goods_title, String.valueOf(sheBean.goods_num), sheBean
+                    .goods_price_yuan, String.valueOf(sheBean.goods_num),
                     sheBean.goods_thumb, String.valueOf(sheBean.goods_attr_id));
             mCartBeans.add(bean);
             goods_num.append(sheBean.goods_attr_id);
             goods_num.append(",");
-            goods_num.append("1|");
+            goods_num.append(String.valueOf(sheBean.goods_num));
+            goods_num.append("|");
         });
-        Observable.fromIterable(mBean.ruan)
+        Observable.fromIterable(mBean.ruan).filter(ruanBean -> ruanBean.isCheck)
                 .subscribe(ruanBean -> {
-                    countPrice += ruanBean.goods_price;
-                    ShopCartBean bean = new ShopCartBean(null, ruanBean.goods_title, "1", ruanBean.goods_price_yuan,
-                            "1", ruanBean.goods_thumb, String.valueOf(ruanBean.goods_attr_id));
+                    countPrice += (ruanBean.goods_price * ruanBean.goods_num);
+                    ShopCartBean bean = new ShopCartBean(null, ruanBean.goods_title, String.valueOf(ruanBean.goods_num), ruanBean
+                            .goods_price_yuan,
+                            String.valueOf(ruanBean.goods_num), ruanBean.goods_thumb, String.valueOf(ruanBean.goods_attr_id));
                     mCartBeans.add(bean);
                     goods_num.append(ruanBean.goods_attr_id);
                     goods_num.append(",");
-                    goods_num.append("1|");
+                    goods_num.append(String.valueOf(ruanBean.goods_num));
+                    goods_num.append("|");
                 });
-        Observable.fromIterable(mBean.ying).filter(yingBean -> yingBean.isCheck)
+        Observable.fromIterable(mBean.ying)
                 .subscribe(yingBean -> {
-                    countPrice += yingBean.goods_price;
-                    ShopCartBean bean = new ShopCartBean(null, yingBean.goods_title, "1", yingBean.goods_price_yuan,
-                            "1", yingBean.goods_thumb, String.valueOf(yingBean.goods_attr_id));
+                    countPrice += (yingBean.goods_price * yingBean.goods_num);
+                    ShopCartBean bean = new ShopCartBean(null, yingBean.goods_title, String.valueOf(yingBean.goods_num), yingBean.goods_price_yuan,
+                            String.valueOf(yingBean.goods_num), yingBean.goods_thumb, String.valueOf(yingBean.goods_attr_id));
                     mCartBeans.add(bean);
                     goods_num.append(yingBean.goods_attr_id);
                     goods_num.append(",");
-                    goods_num.append("1|");
+                    goods_num.append(String.valueOf(yingBean.goods_num));
+                    goods_num.append("|");
                 });
         goods_num.deleteCharAt(goods_num.lastIndexOf("|"));
         LogUtil.e(goods_num.toString());

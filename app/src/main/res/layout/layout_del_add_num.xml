@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/llEditNum"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center|right|end"
+    android:visibility="gone"
+    tools:ignore="RtlHardcoded">
+
+    <TextView
+        android:id="@+id/tvRemove"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@color/whitesmoke"
+        android:gravity="center"
+        android:text="—"
+        android:textSize="@dimen/sp_18"/>
+
+    <TextView
+        android:id="@+id/tvEditNum"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="@dimen/dp_10"
+        android:text="0"/>
+
+    <TextView
+        android:id="@+id/tvAdd"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        android:background="@color/whitesmoke"
+        android:gravity="center"
+        android:text="+"
+        android:textSize="@dimen/sp_18"/>
+</LinearLayout>

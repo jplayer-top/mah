@@ -75,11 +75,17 @@ public class FsShopDetialDialog extends BottomTopDialogFragment implements View.
         int parseInt = Integer.parseInt(count);
         switch (v.getId()) {
             case R.id.ivDelGoods:
-                if (parseInt != 1) {
-                    mTvCount.setText(String.format(Locale.CHINA, "%d", parseInt - 1));
+                if (parseInt <= 1) {
+                    ToastUtils.init().showInfoToast(getContext(), "客官，不能再少了");
+                    return;
                 }
+                mTvCount.setText(String.format(Locale.CHINA, "%d", parseInt - 1));
                 break;
             case R.id.ivAddGoods:
+                if (parseInt >= 999) {
+                    ToastUtils.init().showInfoToast(getContext(), "客官，分批买吧");
+                    return;
+                }
                 mTvCount.setText(String.format(Locale.CHINA, "%d", parseInt + 1));
                 break;
             case R.id.tvOKSel:
