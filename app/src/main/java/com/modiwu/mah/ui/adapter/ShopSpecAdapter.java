@@ -8,10 +8,15 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.modiwu.mah.R;
 import com.modiwu.mah.mvp.model.bean.ShopGoodsInfoBean;
+import com.modiwu.mah.mvp.model.event.TouchAttrEvent;
 import com.zhy.view.flowlayout.TagFlowLayout;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 import java.util.Map;
+
+import top.jplayer.baseprolibrary.utils.LogUtil;
 
 /**
  * Created by Obl on 2017/7/6.
@@ -44,6 +49,8 @@ public class ShopSpecAdapter extends BaseQuickAdapter<ShopGoodsInfoBean.AttrsBea
                 mSelAttrMap.remove(layoutPosition);
             } else {
                 mSelAttrMap.put(layoutPosition, item.attrInfo.get(position).attr_id);
+                LogUtil.e(mSelAttrMap);
+                EventBus.getDefault().post(new TouchAttrEvent(mSelAttrMap));
             }
             return true;
         });

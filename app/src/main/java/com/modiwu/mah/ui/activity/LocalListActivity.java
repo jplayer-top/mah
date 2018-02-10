@@ -69,6 +69,7 @@ public class LocalListActivity extends BaseCommonActivity {
                 case R.id.localEdit:
                     Bundle bundle = new Bundle();
                     bundle.putString("isCreate", "0");
+                    bundle.putString("rp_id", recordsBeans.get(position).rp_id + "");
                     bundle.putParcelable("local", recordsBeans.get(position));
                     ActivityUtils.init().start(this, LocalCreateActivity.class,
                             "收货地址", bundle);

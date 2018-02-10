@@ -1,6 +1,7 @@
 package com.modiwu.mah.ui.dialog;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
@@ -12,9 +13,11 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.modiwu.mah.R;
 import com.modiwu.mah.mvp.model.bean.ShopGoodsInfoBean;
+import com.modiwu.mah.mvp.model.event.TouchAttrEvent;
 import com.modiwu.mah.ui.adapter.ShopSpecAdapter;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -22,6 +25,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import io.reactivex.Observable;
 import top.jplayer.baseprolibrary.glide.GlideUtils;
 import top.jplayer.baseprolibrary.utils.ScreenUtils;
 import top.jplayer.baseprolibrary.utils.ToastUtils;
@@ -41,9 +45,11 @@ public class FsShopDetialDialog extends BottomTopDialogFragment implements View.
     private int curItem = -1;
     private ImageView mIvTumb;
     private View viewFooter;
+    private ShopGoodsInfoBean mDetialBean;
 
     @Override
     public void bindContent(ViewGroup viewGroup) {
+        EventBus.getDefault().register(this);
         viewGroup.getLayoutParams().height = ScreenUtils.getScreenHeight() / 5 * 4;
         tvOnePrice = (TextView) viewGroup.findViewById(R.id.tvOnePrice);
         tvGoodNum = (TextView) viewGroup.findViewById(R.id.tvGoodNum);
@@ -93,16 +99,7 @@ public class FsShopDetialDialog extends BottomTopDialogFragment implements View.
                     ToastUtils.init().showInfoToast(getActivity(), "请选择商品规格");
                     break;
                 } else {
-                    List<Integer> list = new ArrayList<>();
-                    for (Map.Entry<Integer, Integer> entry : mAdapter.mSelAttrMap.entrySet()) {
-                        list.add(entry.getValue());
-                    }
-                    Collections.sort(list);
-                    for (Integer integer : list) {
-                        attr_ids.append(integer);
-                        attr_ids.append(",");
-                    }
-                    String string = attr_ids.toString();
+                    String string = getAttrId();
                     EventBus.getDefault().post(new ShodeDetialOKEvent(string.substring(0, string.lastIndexOf(",")), parseInt));
                     onDismissWithAnim();
                     break;
@@ -113,21 +110,59 @@ public class FsShopDetialDialog extends BottomTopDialogFragment implements View.
         }
     }
 
+    @NonNull
+    private String getAttrId() {
+        attr_ids.delete(0, attr_ids.length());
+        List<Integer> list = new ArrayList<>();
+        for (Map.Entry<Integer, Integer> entry : mAdapter.mSelAttrMap.entrySet()) {
+            list.add(entry.getValue());
+        }
+        Collections.sort(list);
+        for (Integer integer : list) {
+            attr_ids.append(integer);
+            attr_ids.append(",");
+        }
+        return attr_ids.toString();
+    }
+
     public void setData() {
         Bundle bundle = getArguments();
-        final ShopGoodsInfoBean detialBean = bundle.getParcelable("type");
+        mDetialBean = bundle.getParcelable("type");
         tvOnePrice.setText(String.format(Locale.CHINA, "￥%s", bundle.getString("price")));
-        tvGoodNum.setText(String.format(Locale.CHINA, "订单编号：%s", bundle.getString("num")));
-        if (detialBean != null) {
-            Glide.with(getContext()).load(detialBean.goods.goods_thumb).apply(GlideUtils.init().options()).into(mIvTumb);
-            if (detialBean.attrs != null) {
+        tvGoodNum.setText(String.format(Locale.CHINA, "库存：%s", bundle.getString("num")));
+        if (mDetialBean != null) {
+            Glide.with(getContext()).load(mDetialBean.goods.goods_thumb).apply(GlideUtils.init().options()).into(mIvTumb);
+            if (mDetialBean.attrs != null) {
                 attr_ids = new StringBuilder();
-                mAdapter = new ShopSpecAdapter(getContext(), detialBean.attrs);
+                mAdapter = new ShopSpecAdapter(getContext(), mDetialBean.attrs);
                 mRecyclerView.setAdapter(mAdapter);
             }
             mAdapter.addFooterView(viewFooter);
         }
 
+    }
+
+    @Subscribe
+    public void touchAttr(TouchAttrEvent event) {
+        Map<Integer, Integer> selAttrMap = event.selAttrMap;
+        if (mDetialBean != null && mDetialBean.attrs != null) {
+            List<ShopGoodsInfoBean.AttrsBean> attrs = mDetialBean.attrs;
+            if (attrs.size() == selAttrMap.size()) {
+                String attrId = getAttrId();
+                Observable.fromIterable(mDetialBean.specs)
+                        .filter(specsBean -> attrId.equals(specsBean.attr_id + ","))
+                        .subscribe(specsBean -> {
+                            tvOnePrice.setText(String.format(Locale.CHINA, "￥%s", specsBean.goods_best_price_yuan));
+                            tvGoodNum.setText(String.format(Locale.CHINA, "库存：%d", specsBean.goods_stock));
+                        });
+            }
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 
     public StringBuilder attr_ids;

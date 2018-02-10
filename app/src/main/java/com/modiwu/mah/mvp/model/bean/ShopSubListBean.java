@@ -34,6 +34,7 @@ public class ShopSubListBean extends BaseBean {
         public String goods_thumb;
         public String goods_img;
         public int goods_price;
+        public String goods_price_yuan;
         public int goods_stocks;
         public int goods_id;
     }

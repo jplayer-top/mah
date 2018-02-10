@@ -53,6 +53,7 @@ public class LocalCreateActivity extends BaseCommonActivity {
     private boolean mIsEdit;
     private Map<String, String> mMap;
     private LocalCreatePresenter mPresenter;
+    private String mRp_id;
 
     @Override
     public int setBaseLayout() {
@@ -72,6 +73,7 @@ public class LocalCreateActivity extends BaseCommonActivity {
                 mProvince_name = recordsBean.rp_province;
                 mCity_name = recordsBean.rp_city;
                 mArea_name = recordsBean.rp_area;
+                mRp_id = bundle.getString("rp_id");
                 String addr = StringUtils.getInstance().isNullable("", mProvince_name, mCity_name,
                         mArea_name);
                 mTvLocalSecOk.setText(addr);
@@ -119,6 +121,7 @@ public class LocalCreateActivity extends BaseCommonActivity {
         mMap.put("rp_city", mCity_name);
         mMap.put("rp_area", mArea_name);
         if (mIsEdit) {
+            mMap.put("rp_id", mRp_id);
             mPresenter.editLocal(mMap);
         } else {
             mPresenter.saveLocal(mMap);

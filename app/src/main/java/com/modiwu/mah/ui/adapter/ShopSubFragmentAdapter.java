@@ -49,7 +49,7 @@ public class ShopSubFragmentAdapter extends BaseQuickAdapter<ShopSubListBean.Rec
                 .apply(GlideUtils.init().options())
                 .into(mIvBodyPic);
         helper.setText(R.id.tvTitle, StringUtils.getInstance().isNullable(item.goods_title, "整个家"))
-                .setText(R.id.tvPrice, String.format(Locale.CHINA, "￥%s", item.goods_price + ""))
+                .setText(R.id.tvPrice, String.format(Locale.CHINA, "￥%s", item.goods_price_yuan))
                 .setText(R.id.tvSubTitle, StringUtils.getInstance().isNullable(item.goods_subtitle, "精心推荐"));
     }
 }

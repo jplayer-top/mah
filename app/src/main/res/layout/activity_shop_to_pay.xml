@@ -160,7 +160,7 @@
                         android:layout_marginRight="@dimen/dimen_15dp"
                         android:background="@color/white"
                         android:padding="@dimen/dp_10"
-                        android:text="单品"/>
+                        android:text="清单列表"/>
 
 
                     <android.support.v7.widget.RecyclerView

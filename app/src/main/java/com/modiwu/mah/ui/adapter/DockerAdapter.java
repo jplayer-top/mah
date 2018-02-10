@@ -1,9 +1,11 @@
 package com.modiwu.mah.ui.adapter;
 
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -27,7 +29,7 @@ public class DockerAdapter extends BaseQuickAdapter<DockerBean.RecordsBean, Base
     private ImageView mIvBodyPic;
 
     public DockerAdapter(List<DockerBean.RecordsBean> data) {
-        super(R.layout.adapter_home_item_single, data);
+        super(R.layout.adapter_home_item_single3, data);
     }
 
     @Override
