@@ -18,6 +18,7 @@ import com.modiwu.mah.base.BaseApplication;
 import com.modiwu.mah.base.BaseSpecialActivity;
 import com.modiwu.mah.mvp.constract.LoginAnimContract;
 import com.modiwu.mah.mvp.model.bean.LoginBean;
+import com.modiwu.mah.mvp.model.bean.RegisterBean;
 import com.modiwu.mah.mvp.model.event.LoginSuccessEvent;
 import com.modiwu.mah.mvp.model.event.TokenEvent;
 import com.modiwu.mah.mvp.presenter.LoginPresenter;
@@ -211,7 +212,7 @@ public class LoginAnimActivity extends BaseSpecialActivity implements TextWatche
     }
 
     @Override
-    public void register() {
+    public void register(RegisterBean registerBean) {
 
     }
 
@@ -654,4 +655,6 @@ public class LoginAnimActivity extends BaseSpecialActivity implements TextWatche
         mPresenter.addSubscription(disposable);
         dialogDismiss("");
     }
+
+
 }

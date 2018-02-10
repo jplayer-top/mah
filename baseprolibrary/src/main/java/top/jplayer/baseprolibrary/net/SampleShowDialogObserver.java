@@ -59,7 +59,11 @@ public abstract class SampleShowDialogObserver<T extends BaseBean> implements Ob
     @Override
     public void onError(Throwable e) {
         Log.w("obl-base-error", "onError: " + e.getMessage());
-        onRequestEnd("网络错误");
+        if (e.getMessage().contains("401")) {
+            onRequestEnd("请先前往登录");
+        } else {
+            onRequestEnd("网络错误");
+        }
         try {
             if (e instanceof ConnectException
                     || e instanceof TimeoutException

@@ -11,6 +11,7 @@ public class BaseBean {
     private static final String SUCCESS_CODE = "000";
     public String code;
     public String msg;
+    public String kfuid;
 
     public String getCode() {
         return code;

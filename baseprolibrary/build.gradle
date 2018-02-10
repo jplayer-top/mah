@@ -14,9 +14,10 @@ android {
         }
         ndk {
             //APP的build.gradle设置支持的SO库架构
-            abiFilters 'armeabi', 'armeabi-v7a', 'x86'
+            abiFilters  'armeabi-v7a'
         }
     }
+
     signingConfigs {
         config {
             keyAlias "obl"
@@ -45,14 +46,14 @@ android {
             buildConfigField "String", "HOST", "\"${url["release"]}\""
             minifyEnabled false // 开启混淆
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            manifestPlaceholders = [RONG_KEY: "x18ywvqfxndcc", CHANNEL_NAME: "dev", UMENG_APPKEY_VALUE: "58d336e92ae85b376300093e", UMENG_APPKEY_SERVER_VALUE: "be88895feef7fba6f36dc0c47d741010"]
+//            manifestPlaceholders = [RONG_KEY: "x18ywvqfxndcc", CHANNEL_NAME: "dev", UMENG_APPKEY_VALUE: "58d336e92ae85b376300093e", UMENG_APPKEY_SERVER_VALUE: "be88895feef7fba6f36dc0c47d741010"]
             signingConfig signingConfigs.config
         }
         debug {
             buildConfigField "String", "HOST", "\"${url["debug"]}\""
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            manifestPlaceholders = [RONG_KEY: "x18ywvqfxndcc", CHANNEL_NAME: "dev", UMENG_APPKEY_VALUE: "58eed55ef43e48045d001e7e", UMENG_APPKEY_SERVER_VALUE: "957ecef7056612e73699ba147d70ec2b"]
+//            manifestPlaceholders = [RONG_KEY: "x18ywvqfxndcc", CHANNEL_NAME: "dev", UMENG_APPKEY_VALUE: "58eed55ef43e48045d001e7e", UMENG_APPKEY_SERVER_VALUE: "957ecef7056612e73699ba147d70ec2b"]
             signingConfig signingConfigs.config
         }
     }

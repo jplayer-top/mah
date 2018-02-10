@@ -3,6 +3,7 @@ package com.modiwu.mah.mvp.constract;
 import android.widget.TextView;
 
 import com.modiwu.mah.mvp.model.bean.LoginBean;
+import com.modiwu.mah.mvp.model.bean.RegisterBean;
 
 import java.util.Map;
 
@@ -34,7 +35,7 @@ public interface LoginAnimContract {
 
         void login(LoginBean loginBean);
 
-        void register();
+        void register(RegisterBean registerBean);
 
         void forget();
 

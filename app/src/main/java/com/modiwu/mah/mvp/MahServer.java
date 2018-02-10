@@ -19,6 +19,7 @@ import com.modiwu.mah.mvp.model.bean.MeInfoBean;
 import com.modiwu.mah.mvp.model.bean.MeOrderBean;
 import com.modiwu.mah.mvp.model.bean.MeShouCangBean;
 import com.modiwu.mah.mvp.model.bean.OrderCreateBean;
+import com.modiwu.mah.mvp.model.bean.RegisterBean;
 import com.modiwu.mah.mvp.model.bean.SchemeBean;
 import com.modiwu.mah.mvp.model.bean.SchemeDetailBean;
 import com.modiwu.mah.mvp.model.bean.SchemeOrderCreateBean;
@@ -194,5 +195,9 @@ public interface MahServer {
     Observable<BaseBean> getLogout();
 
     @POST("user/register?")
-    Observable<BaseBean> register(@QueryMap() Map<String, String> map);
+    Observable<RegisterBean> register(@QueryMap() Map<String, String> map);
+
+    @POST("user/resetpw?")
+    Observable<RegisterBean> forget(@QueryMap() Map<String, String> map);
+
 }

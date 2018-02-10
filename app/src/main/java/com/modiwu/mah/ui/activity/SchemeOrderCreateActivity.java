@@ -154,7 +154,7 @@ public class SchemeOrderCreateActivity extends BaseCommonActivity {
             goods_num.append(",");
             goods_num.append("1|");
         });
-        Observable.fromIterable(mBean.ruan).filter(ruanBean -> ruanBean.isCheck)
+        Observable.fromIterable(mBean.ruan)
                 .subscribe(ruanBean -> {
                     countPrice += ruanBean.goods_price;
                     ShopCartBean bean = new ShopCartBean(null, ruanBean.goods_title, "1", ruanBean.goods_price_yuan,

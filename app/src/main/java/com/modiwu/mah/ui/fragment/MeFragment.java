@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -18,6 +17,8 @@ import com.modiwu.mah.base.BaseFragment;
 import com.modiwu.mah.mvp.model.MeInfoModel;
 import com.modiwu.mah.mvp.model.bean.MeInfoBean;
 import com.modiwu.mah.mvp.model.event.LoginSuccessEvent;
+import com.modiwu.mah.mvp.model.event.LogoutEvent;
+import com.modiwu.mah.mvp.model.event.UpAvatarEvent;
 import com.modiwu.mah.ui.activity.AboutMahActivity;
 import com.modiwu.mah.ui.activity.LocalListActivity;
 import com.modiwu.mah.ui.activity.LoginAnimActivity;
@@ -104,6 +105,10 @@ public class MeFragment extends BaseFragment {
         tvUpdate.setOnClickListener(view -> checkUpdate(true));
         tvShare.setOnClickListener(v -> new ShareDialog(getContext()).show());
         mModel = new MeInfoModel();
+        isLogin();
+    }
+
+    private void isLogin() {
         mModel.requestIsLogin().subscribe(baseBean -> {
             if (baseBean != null && "1".equals(baseBean.login)) {
                 String infoJson = (String) SharePreUtil.getData(getContext(), "info", "");
@@ -114,6 +119,8 @@ public class MeFragment extends BaseFragment {
                 llToLogin.setEnabled(false);
             } else {
                 llToLogin.setEnabled(true);
+                Glide.with(getContext()).load(R.mipmap.ic_launcher).apply(RequestOptions.circleCropTransform()).into(ivMeAvatar);
+                tvName.setText("点击登录");
             }
         });
     }
@@ -154,10 +161,18 @@ public class MeFragment extends BaseFragment {
         noticeDialog.show();
     }
 
+    private String uid = "0";
+
     @Subscribe
     public void userInfo(LoginSuccessEvent event) {
 
-        mModel.requestGetInfo(event.uid + "").subscribe(new SampleShowDialogObserver<MeInfoBean>(getContext()) {
+        int uid = event.uid;
+        this.uid = uid + "";
+        refreshInfo(this.uid);
+    }
+
+    private void refreshInfo(String uid) {
+        mModel.requestGetInfo(uid).subscribe(new SampleShowDialogObserver<MeInfoBean>(getContext()) {
             @Override
             protected void onSuccess(MeInfoBean baseBean) throws Exception {
                 bindInfo(baseBean);
@@ -167,11 +182,22 @@ public class MeFragment extends BaseFragment {
         });
     }
 
+    @Subscribe
+    public void logout(LogoutEvent logoutEvent) {
+        isLogin();
+    }
+
+    @Subscribe
+    public void upAvatar(UpAvatarEvent event) {
+        refreshInfo(uid);
+    }
+
     private void bindInfo(MeInfoBean baseBean) {
         Glide.with(getContext()).load(baseBean.profile.user_avatar)
                 .apply(GlideUtils.init().options())
                 .apply(RequestOptions.circleCropTransform()).into(ivMeAvatar);
         tvName.setText(baseBean.profile.user_name);
+        llToLogin.setEnabled(false);
     }
 
     @Override

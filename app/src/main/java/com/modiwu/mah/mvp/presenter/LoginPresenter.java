@@ -2,19 +2,24 @@ package com.modiwu.mah.mvp.presenter;
 
 
 import android.text.TextUtils;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.modiwu.mah.mvp.constract.LoginAnimContract;
 import com.modiwu.mah.mvp.model.LoginModel;
 import com.modiwu.mah.mvp.model.bean.LoginBean;
+import com.modiwu.mah.mvp.model.bean.RegisterBean;
 import com.modiwu.mah.ui.activity.LoginAnimActivity;
 
 import java.util.Map;
 
 import io.reactivex.disposables.Disposable;
+import io.rong.imkit.RongIM;
+import io.rong.imlib.RongIMClient;
 import top.jplayer.baseprolibrary.mvp.contract.BasePresenter;
-import top.jplayer.baseprolibrary.mvp.model.bean.BaseBean;
 import top.jplayer.baseprolibrary.net.SampleShowDialogObserver;
+
+import static com.modiwu.mah.base.BaseApplication.getCurProcessName;
 
 /**
  * Created by Obl on 2018/1/29.
@@ -35,6 +40,7 @@ public class LoginPresenter extends BasePresenter<LoginAnimActivity> implements 
         mModel.requestLogin(phone, password).subscribe(new SampleShowDialogObserver<LoginBean>(mIView) {
             @Override
             protected void onSuccess(LoginBean loginBean) throws Exception {
+                connect(loginBean.imtoken);
                 mIView.login(loginBean);
             }
         });
@@ -48,17 +54,22 @@ public class LoginPresenter extends BasePresenter<LoginAnimActivity> implements 
 
     @Override
     public void register(Map<String, String> map) {
-        mModel.requestRegister(map).subscribe(new SampleShowDialogObserver<BaseBean>(mIView) {
+        mModel.requestRegister(map).subscribe(new SampleShowDialogObserver<RegisterBean>(mIView) {
             @Override
-            protected void onSuccess(BaseBean baseBean) throws Exception {
-                mIView.register();
+            protected void onSuccess(RegisterBean baseBean) throws Exception {
+                login(map.get("phone"), map.get("password"));
             }
         });
     }
 
     @Override
     public void forget(Map<String, String> map) {
-
+        mModel.requestForget(map).subscribe(new SampleShowDialogObserver<RegisterBean>(mIView) {
+            @Override
+            protected void onSuccess(RegisterBean baseBean) throws Exception {
+                mIView.forget();
+            }
+        });
     }
 
     @Override
@@ -94,4 +105,31 @@ public class LoginPresenter extends BasePresenter<LoginAnimActivity> implements 
     public void wxLogin(String token, String phone, String smCode) {
 
     }
+
+
+    private void connect(String token) {
+
+        if (mIView.getApplicationInfo().packageName.equals(getCurProcessName(mIView.getApplicationContext()))) {
+
+            RongIM.connect(token, new RongIMClient.ConnectCallback() {
+
+                @Override
+                public void onTokenIncorrect() {
+
+                }
+
+                @Override
+                public void onSuccess(String userid) {
+                    Log.d("LoginActivity", "--onSuccess" + userid);
+
+                }
+
+                @Override
+                public void onError(RongIMClient.ErrorCode errorCode) {
+
+                }
+            });
+        }
+    }
+
 }

@@ -58,7 +58,7 @@ public class MeOrderActivity extends BaseCommonActivity implements OrderListCont
                     break;
                 case R.id.tvOrderToPay:
                     Bundle bundle = new Bundle();
-                    bundle.putString("totalPrice", String.format(Locale.CHINA, "￥%s", bean.actual_price + ""));
+                    bundle.putString("totalPrice", String.format(Locale.CHINA, "￥%.2f", bean.actual_price / 100f));
                     bundle.putString("orderId", bean.order_id);
                     bundle.putString("type", "订单");
                     ActivityUtils.init().start(this, ShopPayActivity.class, "支付", bundle);

@@ -13,7 +13,9 @@ import com.jaiky.imagespickers.ImageSelectorActivity;
 import com.modiwu.mah.R;
 import com.modiwu.mah.base.BaseCommonActivity;
 import com.modiwu.mah.mvp.model.bean.MeInfoBean;
+import com.modiwu.mah.mvp.model.event.LogoutEvent;
 import com.modiwu.mah.mvp.model.event.MessageEvent;
+import com.modiwu.mah.mvp.model.event.UpAvatarEvent;
 import com.modiwu.mah.mvp.presenter.MeInfoPresenter;
 import com.modiwu.mah.utils.CameraUtils;
 import com.modiwu.mah.utils.StringUtils;
@@ -209,10 +211,12 @@ public class MeContentActivity extends BaseCommonActivity {
     }
 
     public void successAvatar(BaseBean baseBean) {
+        EventBus.getDefault().post(new UpAvatarEvent());
         Glide.with(this).load(mFile).apply(GlideUtils.init().options()).apply(RequestOptions.circleCropTransform()).into(ivMeAvatar);
     }
 
     public void logout() {
-
+        EventBus.getDefault().post(new LogoutEvent());
+        finish();
     }
 }

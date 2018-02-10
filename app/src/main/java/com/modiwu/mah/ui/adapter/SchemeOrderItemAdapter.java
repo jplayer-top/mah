@@ -63,16 +63,13 @@ public class SchemeOrderItemAdapter extends VLayoutAdapter<RecyclerView.ViewHold
             tvSubTitle.setText(String.format(Locale.CHINA, "￥%s", sheBean.goods_price_yuan));
             Glide.with(context).load(sheBean.goods_thumb).apply(GlideUtils.init().options()).into(ivShopDel);
         } else if (type == YING) {
-            checkHeard.setOnClickListener(v -> {
-                yingCheck();
-            });
-            checkbox.setOnClickListener(v -> {
-                mYing.get(position).isCheck = !mYing.get(position).isCheck;
-                this.notifyItemChanged(position);
-                EventBus.getDefault().post(new MoneyChangeEvent());
-            });
+            checkHeard.setChecked(true);
+            checkHeard.setEnabled(false);
+
+            checkbox.setChecked(true);
+            checkbox.setEnabled(false);
+
             SchemeOrderCreateBean.YingBean yingBean = mYing.get(position);
-            checkbox.setChecked(yingBean.isCheck);
             tvTitle.setText(yingBean.goods_title);
             tvSubTitle.setText(String.format(Locale.CHINA, "￥%s", yingBean.goods_price_yuan));
             Glide.with(context).load(yingBean.goods_thumb).apply(GlideUtils.init().options()).into(ivShopDel);

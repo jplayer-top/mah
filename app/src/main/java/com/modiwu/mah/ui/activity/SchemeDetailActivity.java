@@ -38,6 +38,8 @@ public class SchemeDetailActivity extends BaseSpecialActivity implements SchemeD
     TabLayout tabLayout;
     @BindView(R.id.tvToCard)
     TextView tvToCard;
+    @BindView(R.id.tvServer)
+    TextView tvServer;
     @BindView(R.id.ivCirRed)
     ImageView mIvCirRed;
     @BindView(R.id.tvToBuy)
@@ -131,6 +133,9 @@ public class SchemeDetailActivity extends BaseSpecialActivity implements SchemeD
             Bundle bundle = new Bundle();
             bundle.putString("fangan_id", mFangan_id);
             ActivityUtils.init().start(mBaseActivity, SchemeOrderCreateActivity.class, "方案订单", bundle);
+        });
+        tvServer.setOnClickListener(v -> {
+            ActivityUtils.init().startConversion(this, ConversationOneActivity.class, mSchemeDetailBean.kfuid);
         });
     }
 

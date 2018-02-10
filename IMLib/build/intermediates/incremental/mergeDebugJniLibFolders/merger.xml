@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="3"><dataSet config="main"><source path="C:\Users\newone\Desktop\work\mah\IMLib\libs"><file name="armeabi-v7a/libRongIMLib.so" path="C:\Users\newone\Desktop\work\mah\IMLib\libs\armeabi-v7a\libRongIMLib.so"/><file name="Rong_IMLib.jar" path="C:\Users\newone\Desktop\work\mah\IMLib\libs\Rong_IMLib.jar"/></source></dataSet><dataSet config="debug"><source path="C:\Users\newone\Desktop\work\mah\IMLib\src\debug\jniLibs"/></dataSet></merger>

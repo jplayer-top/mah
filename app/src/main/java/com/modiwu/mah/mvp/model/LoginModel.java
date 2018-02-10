@@ -2,6 +2,7 @@ package com.modiwu.mah.mvp.model;
 
 import com.modiwu.mah.mvp.MahServer;
 import com.modiwu.mah.mvp.model.bean.LoginBean;
+import com.modiwu.mah.mvp.model.bean.RegisterBean;
 
 import java.util.Map;
 
@@ -36,9 +37,15 @@ public class LoginModel {
                 .compose(new IoMainSchedule<>());
     }
 
-    public Observable<BaseBean> requestRegister(Map<String, String> map) {
+    public Observable<RegisterBean> requestRegister(Map<String, String> map) {
         return RetrofitManager.init().create(MahServer.class)
                 .register(map)
+                .compose(new IoMainSchedule<>());
+    }
+
+    public Observable<RegisterBean> requestForget(Map<String, String> map) {
+        return RetrofitManager.init().create(MahServer.class)
+                .forget(map)
                 .compose(new IoMainSchedule<>());
     }
 }
