@@ -151,6 +151,8 @@ public class ShopDetailActivity extends BaseSpecialActivity implements ShopDetai
         list.add("方案");
         mViewPager.setAdapter(new AdapterPagerShopDetial(getSupportFragmentManager(), list));
         mTabLayout.setupWithViewPager(mViewPager);
+        tvServer.setOnClickListener(v -> ActivityUtils.init().startConversion(this, ConversationOneActivity.class,
+                bean.kfuid));
     }
 
     @Override

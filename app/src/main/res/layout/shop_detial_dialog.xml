@@ -71,7 +71,7 @@
         android:layout_height="@dimen/dimen_100dp"
         android:layout_marginLeft="@dimen/dimen_15dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/home_item_single01"/>
+        android:src="@drawable/placeholder"/>
 
     <LinearLayout
         android:layout_width="match_parent"

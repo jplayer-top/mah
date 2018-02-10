@@ -13,6 +13,7 @@
         android:orientation="vertical">
 
         <ImageView
+            style="@style/img_adjust_bounds"
             android:id="@+id/ivShopPic"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

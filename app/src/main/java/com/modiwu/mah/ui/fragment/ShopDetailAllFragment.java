@@ -89,9 +89,9 @@ public class ShopDetailAllFragment extends BaseFragment implements View.OnClickL
             mRecyclerView.setAdapter(mAdapter);
         }
         mAdapter.addFooterView(viewFooter);
-        flClickDialog.setOnClickListener(view -> activity.callListener());
+        flClickDialog.setOnClickListener(view -> {
+        });
         mTvCollection.setOnClickListener(v -> {
-
         });
     }
 
