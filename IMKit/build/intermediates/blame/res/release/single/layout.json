@@ -28,12 +28,12 @@
         "source": "C:\\Users\\newone\\Desktop\\work\\mah\\IMKit\\src\\main\\res\\layout\\rc_ac_camera.xml"
     },
     {
-        "merged": "C:\\Users\\newone\\Desktop\\work\\mah\\IMKit\\build\\intermediates\\res\\merged\\release\\layout\\notification_template_big_media_custom.xml",
-        "source": "C:\\Users\\newone\\.gradle\\wrapper\\dists\\gradle-4.1\\caches\\transforms-1\\files-1.1\\support-media-compat-26.0.2.aar\\683e0d6dc124ea26bf60d90e4f4cda75\\res\\layout\\notification_template_big_media_custom.xml"
-    },
-    {
         "merged": "C:\\Users\\newone\\Desktop\\work\\mah\\IMKit\\build\\intermediates\\res\\merged\\release\\layout\\notification_action_tombstone.xml",
         "source": "C:\\Users\\newone\\.gradle\\wrapper\\dists\\gradle-4.1\\caches\\transforms-1\\files-1.1\\support-compat-26.0.2.aar\\3f99ccfcb4f2a5541d4710ccff5ee7bf\\res\\layout\\notification_action_tombstone.xml"
+    },
+    {
+        "merged": "C:\\Users\\newone\\Desktop\\work\\mah\\IMKit\\build\\intermediates\\res\\merged\\release\\layout\\notification_template_big_media_custom.xml",
+        "source": "C:\\Users\\newone\\.gradle\\wrapper\\dists\\gradle-4.1\\caches\\transforms-1\\files-1.1\\support-media-compat-26.0.2.aar\\683e0d6dc124ea26bf60d90e4f4cda75\\res\\layout\\notification_template_big_media_custom.xml"
     },
     {
         "merged": "C:\\Users\\newone\\Desktop\\work\\mah\\IMKit\\build\\intermediates\\res\\merged\\release\\layout\\rc_cs_single_choice_layout.xml",
@@ -80,12 +80,12 @@
         "source": "C:\\Users\\newone\\Desktop\\work\\mah\\IMKit\\src\\main\\res\\layout\\rc_fr_public_service_sub_list.xml"
     },
     {
-        "merged": "C:\\Users\\newone\\Desktop\\work\\mah\\IMKit\\build\\intermediates\\res\\merged\\release\\layout\\rc_cs_item_single_choice.xml",
-        "source": "C:\\Users\\newone\\Desktop\\work\\mah\\IMKit\\src\\main\\res\\layout\\rc_cs_item_single_choice.xml"
-    },
-    {
         "merged": "C:\\Users\\newone\\Desktop\\work\\mah\\IMKit\\build\\intermediates\\res\\merged\\release\\layout\\rc_fr_photo.xml",
         "source": "C:\\Users\\newone\\Desktop\\work\\mah\\IMKit\\src\\main\\res\\layout\\rc_fr_photo.xml"
+    },
+    {
+        "merged": "C:\\Users\\newone\\Desktop\\work\\mah\\IMKit\\build\\intermediates\\res\\merged\\release\\layout\\rc_cs_item_single_choice.xml",
+        "source": "C:\\Users\\newone\\Desktop\\work\\mah\\IMKit\\src\\main\\res\\layout\\rc_cs_item_single_choice.xml"
     },
     {
         "merged": "C:\\Users\\newone\\Desktop\\work\\mah\\IMKit\\build\\intermediates\\res\\merged\\release\\layout\\rc_ext_emoticon_tab_container.xml",
@@ -96,16 +96,16 @@
         "source": "C:\\Users\\newone\\Desktop\\work\\mah\\IMKit\\src\\main\\res\\layout\\rc_fr_conversationlist.xml"
     },
     {
-        "merged": "C:\\Users\\newone\\Desktop\\work\\mah\\IMKit\\build\\intermediates\\res\\merged\\release\\layout\\rc_wi_file_list_adapter.xml",
-        "source": "C:\\Users\\newone\\Desktop\\work\\mah\\IMKit\\src\\main\\res\\layout\\rc_wi_file_list_adapter.xml"
+        "merged": "C:\\Users\\newone\\Desktop\\work\\mah\\IMKit\\build\\intermediates\\res\\merged\\release\\layout\\rc_ext_root_menu_item.xml",
+        "source": "C:\\Users\\newone\\Desktop\\work\\mah\\IMKit\\src\\main\\res\\layout\\rc_ext_root_menu_item.xml"
     },
     {
         "merged": "C:\\Users\\newone\\Desktop\\work\\mah\\IMKit\\build\\intermediates\\res\\merged\\release\\layout\\rc_cs_alert_human_evaluation.xml",
         "source": "C:\\Users\\newone\\Desktop\\work\\mah\\IMKit\\src\\main\\res\\layout\\rc_cs_alert_human_evaluation.xml"
     },
     {
-        "merged": "C:\\Users\\newone\\Desktop\\work\\mah\\IMKit\\build\\intermediates\\res\\merged\\release\\layout\\rc_ext_root_menu_item.xml",
-        "source": "C:\\Users\\newone\\Desktop\\work\\mah\\IMKit\\src\\main\\res\\layout\\rc_ext_root_menu_item.xml"
+        "merged": "C:\\Users\\newone\\Desktop\\work\\mah\\IMKit\\build\\intermediates\\res\\merged\\release\\layout\\rc_wi_file_list_adapter.xml",
+        "source": "C:\\Users\\newone\\Desktop\\work\\mah\\IMKit\\src\\main\\res\\layout\\rc_wi_file_list_adapter.xml"
     },
     {
         "merged": "C:\\Users\\newone\\Desktop\\work\\mah\\IMKit\\build\\intermediates\\res\\merged\\release\\layout\\rc_fr_public_service_inf.xml",
