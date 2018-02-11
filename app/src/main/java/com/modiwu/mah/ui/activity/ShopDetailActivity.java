@@ -73,7 +73,7 @@ public class ShopDetailActivity extends BaseSpecialActivity implements ShopDetai
         customBarLeft();
         String goods_id = mBundle.getString("goods_id");
         mUnbinder = ButterKnife.bind(this, contentView);
-        mTabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
+        mTabLayout.setTabMode(TabLayout.MODE_FIXED);
 
 
         mPresenter = new ShopDetailPresenter(this);

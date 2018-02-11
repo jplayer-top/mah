@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "C:\\Users\\newone\\Desktop\\work\\mah\\IMLib\\build\\intermediates\\res\\merged\\release\\drawable\\notification_tile_bg.xml",
+        "source": "C:\\Users\\newone\\.gradle\\wrapper\\dists\\gradle-4.1\\caches\\transforms-1\\files-1.1\\support-compat-26.0.2.aar\\3f99ccfcb4f2a5541d4710ccff5ee7bf\\res\\drawable\\notification_tile_bg.xml"
+    },
+    {
+        "merged": "C:\\Users\\newone\\Desktop\\work\\mah\\IMLib\\build\\intermediates\\res\\merged\\release\\drawable\\notification_bg.xml",
+        "source": "C:\\Users\\newone\\.gradle\\wrapper\\dists\\gradle-4.1\\caches\\transforms-1\\files-1.1\\support-compat-26.0.2.aar\\3f99ccfcb4f2a5541d4710ccff5ee7bf\\res\\drawable\\notification_bg.xml"
+    },
+    {
+        "merged": "C:\\Users\\newone\\Desktop\\work\\mah\\IMLib\\build\\intermediates\\res\\merged\\release\\drawable\\notification_bg_low.xml",
+        "source": "C:\\Users\\newone\\.gradle\\wrapper\\dists\\gradle-4.1\\caches\\transforms-1\\files-1.1\\support-compat-26.0.2.aar\\3f99ccfcb4f2a5541d4710ccff5ee7bf\\res\\drawable\\notification_bg_low.xml"
+    },
+    {
+        "merged": "C:\\Users\\newone\\Desktop\\work\\mah\\IMLib\\build\\intermediates\\res\\merged\\release\\drawable\\notification_icon_background.xml",
+        "source": "C:\\Users\\newone\\.gradle\\wrapper\\dists\\gradle-4.1\\caches\\transforms-1\\files-1.1\\support-compat-26.0.2.aar\\3f99ccfcb4f2a5541d4710ccff5ee7bf\\res\\drawable\\notification_icon_background.xml"
+    }
+]

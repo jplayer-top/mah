@@ -1,0 +1,34 @@
+{
+    "logs": [
+        {
+            "outputFile": "C:\\Users\\newone\\Desktop\\work\\mah\\IMLib\\build\\intermediates\\res\\merged\\release\\values-cs\\values-cs.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\newone\\.gradle\\wrapper\\dists\\gradle-4.1\\caches\\transforms-1\\files-1.1\\support-compat-26.0.2.aar\\3f99ccfcb4f2a5541d4710ccff5ee7bf\\res\\values-cs\\values-cs.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "100",
+                        "endOffsets": "151"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\newone\\Desktop\\work\\mah\\IMLib\\build\\intermediates\\incremental\\mergeReleaseResources\\merged.dir\\values-cs\\values-cs.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\newone\\.gradle\\wrapper\\dists\\gradle-4.1\\caches\\transforms-1\\files-1.1\\support-compat-26.0.2.aar\\3f99ccfcb4f2a5541d4710ccff5ee7bf\\res\\values-cs\\values-cs.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "100",
+                        "endOffsets": "151"
+                    }
+                }
+            ]
+        }
+    ]
+}

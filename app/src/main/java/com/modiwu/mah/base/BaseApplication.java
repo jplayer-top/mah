@@ -3,11 +3,22 @@ package com.modiwu.mah.base;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.os.Handler;
+import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
+import android.widget.Toast;
+
+import com.modiwu.mah.BuildConfig;
+import com.tencent.bugly.Bugly;
+import com.tencent.bugly.beta.Beta;
+import com.tencent.bugly.beta.interfaces.BetaPatchListener;
+
+import java.util.Locale;
 
 import io.rong.imkit.RongIM;
 import top.jplayer.baseprolibrary.BaseInitApplication;
 import top.jplayer.baseprolibrary.utils.Utils;
+
+import static com.tencent.bugly.beta.tinker.TinkerManager.getApplication;
 
 /**
  * Created by Obl on 2018/1/9.
@@ -36,9 +47,19 @@ public class BaseApplication extends MultiDexApplication {
         BaseInitApplication.init(AppContext);
         if (getApplicationInfo().packageName.equals(getCurProcessName(getApplicationContext()))) {
             RongIM.init(this);
+            Bugly.init(this, "d764308e59", false);
+            openBugly();
         }
     }
 
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        // you must install multiDex whatever tinker is installed!
+        MultiDex.install(base);
+        // 安装tinker
+        Beta.installTinker();
+    }
 
     /**
      * 获得当前进程的名字
@@ -61,6 +82,54 @@ public class BaseApplication extends MultiDexApplication {
             }
         }
         return null;
+    }
+    private void openBugly() {
+        // 补丁回调接口
+        if (BuildConfig.DEBUG) {
+            Beta.canNotifyUserRestart = BuildConfig.DEBUG;
+            Beta.betaPatchListener = new BetaPatchListener() {
+                @Override
+                public void onPatchReceived(String patchFile) {
+                    Toast.makeText(getApplication(), "补丁下载地址" + patchFile, Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onDownloadReceived(long savedLength, long totalLength) {
+                    Toast.makeText(getApplication(),
+                            String.format(Locale.getDefault(), "%s %d%%",
+                                    Beta.strNotificationDownloading,
+                                    (int) (totalLength == 0 ? 0 : savedLength * 100 / totalLength)),
+                            Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onDownloadSuccess(String msg) {
+                    Toast.makeText(getApplication(), "补丁下载成功", Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onDownloadFailure(String msg) {
+                    Toast.makeText(getApplication(), "补丁下载失败", Toast.LENGTH_SHORT).show();
+
+                }
+
+                @Override
+                public void onApplySuccess(String msg) {
+                    Toast.makeText(getApplication(), "补丁应用成功", Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onApplyFailure(String msg) {
+                    Toast.makeText(getApplication(), "补丁应用失败", Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onPatchRollback() {
+
+                }
+            };
+
+        }
     }
 
 }

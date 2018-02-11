@@ -57,8 +57,8 @@ public class ShopSubActivity extends BaseSpecialActivity implements SubShopContr
 
     @Override
     public void setSubTitleData(SubTitleBean bean) {
+        List<String> titleList = new ArrayList<>();
         Observable.fromIterable(bean.records).map(recordsBean -> {
-            List<String> titleList = new ArrayList<>();
             titleList.add(recordsBean.cat_name);
             return titleList;
         }).compose(new IoMainSchedule<>())

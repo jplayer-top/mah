@@ -167,7 +167,7 @@ public interface MahServer {
     Observable<BaseBean> getRemoveFangAn(@Query("order_no") String order_no);
 
     @POST("mall/order/close?")
-    Observable<BaseBean> getOrderDelBean(@Query("order_id") String order_id, @Query("reason") String reason);
+    Observable<BaseBean> getOrderDelBean(@Query("orderId") String order_id, @Query("reason") String reason);
 
     @POST("profile/update?")
     Observable<BaseBean> getMeInfoBean(@Query("col") String col, @Query("value") String value);

@@ -4,7 +4,22 @@
             "outputFile": "C:\\Users\\newone\\Desktop\\work\\mah\\IMKit\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-port\\values-port.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\newone\\.gradle\\wrapper\\dists\\gradle-4.1\\caches\\transforms-1\\files-1.1\\support-compat-26.0.2.aar\\11c713d603bd624086d239b6d7ab711e\\res\\values-port\\values-port.xml",
+                    "source": "C:\\Users\\newone\\.gradle\\wrapper\\dists\\gradle-4.1\\caches\\transforms-1\\files-1.1\\support-compat-26.0.2.aar\\3f99ccfcb4f2a5541d4710ccff5ee7bf\\res\\values-port\\values-port.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "55",
+                        "endOffsets": "106"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\newone\\Desktop\\work\\mah\\IMKit\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-port\\values-port.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\newone\\.gradle\\wrapper\\dists\\gradle-4.1\\caches\\transforms-1\\files-1.1\\support-compat-26.0.2.aar\\3f99ccfcb4f2a5541d4710ccff5ee7bf\\res\\values-port\\values-port.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

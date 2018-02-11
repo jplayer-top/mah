@@ -3,11 +3,12 @@
           xmlns:tools="http://schemas.android.com/tools"
           package="com.modiwu.mah">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_LOGS"/>
 
     <application
         android:name=".base.BaseApplication"
@@ -172,8 +173,11 @@
             android:screenOrientation="behind"
             android:windowSoftInputMode="adjustResize|stateHidden">
         </activity>
-
-
+        <!--bugly-->
+        <activity
+            android:name="com.tencent.bugly.beta.ui.BetaActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize|locale"
+            android:theme="@android:style/Theme.Translucent"/>
         <!--融云-->
         <activity
             android:name=".ui.activity.ConversationOneActivity"
@@ -181,14 +185,18 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize">
         </activity>
+        <!--7.0 -->
         <provider
             android:name="android.support.v4.content.FileProvider"
-            android:authorities="com.modiwu.mah.FileProvider"
+            android:authorities="${applicationId}.FileProvider"
             android:exported="false"
-            android:grantUriPermissions="true">
+            android:grantUriPermissions="true"
+            tools:replace="name,authorities,exported,grantUriPermissions">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/rc_file_path"/>
+                android:resource="@xml/file_path"
+                tools:replace="name,resource"/>
+
         </provider>
 
         <meta-data
