@@ -33,6 +33,7 @@ public class SplashActivity extends BaseSpecialActivity {
         ViewAnimator.animate(view)
                 .alpha(1, 0.8f)
                 .scale(1f, 1.1f)
+
                 .duration(2000)
                 .onStart(() -> {
                     String token = (String) SharePreUtil.getData(this, "token", "");
