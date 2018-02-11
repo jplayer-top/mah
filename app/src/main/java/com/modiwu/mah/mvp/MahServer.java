@@ -53,6 +53,9 @@ public interface MahServer {
     @GET("home")
     Observable<HomeBean> getHomeBean();
 
+    @GET("home?")
+    Observable<HomeBean> getHomeBean(@Query("city_code") String city_code);
+
     @POST("user/login?")
     Observable<LoginBean> getLoginBean(@Query("phone") String phone, @Query("password") String password);
 

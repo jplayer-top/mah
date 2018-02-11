@@ -28,7 +28,11 @@ import java.util.LinkedList;
 import java.util.List;
 
 import io.reactivex.Observable;
+import top.jplayer.baseprolibrary.BaseInitApplication;
 import top.jplayer.baseprolibrary.ui.ContactActivity;
+import top.jplayer.baseprolibrary.utils.ActivityUtils;
+
+import static android.app.Activity.RESULT_FIRST_USER;
 
 /**
  * Created by Obl on 2018/1/19.
@@ -67,7 +71,16 @@ public class HomeFragment extends BaseFragment implements HomeContract.HomeView 
         showLoading();
         mPresenter.requestHomeData();
         tvCurLocal.setVisibility(View.VISIBLE);
-        tvCurLocal.setOnClickListener(v -> startActivity(new Intent(getContext(), ContactActivity.class)));
+        tvCurLocal.setOnClickListener(v -> ActivityUtils.init().startFragmentForResult(this, ContactActivity.class,
+                "定位城市", RESULT_FIRST_USER));
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == RESULT_FIRST_USER && resultCode == BaseInitApplication.DEF_RESULT) {
+            String city = data.getStringExtra("city");
+            mPresenter.requestCityCode(city);
+        }
     }
 
     @Override
@@ -80,6 +93,16 @@ public class HomeFragment extends BaseFragment implements HomeContract.HomeView 
 
     @Override
     public void setHomeData(HomeBean homeBean) {
+        homeMethod(homeBean);
+        tvCurLocal.setText("烟台");
+    }
+
+    public void setHomeData(HomeBean homeBean, String city) {
+        homeMethod(homeBean);
+        tvCurLocal.setText(city);
+    }
+
+    private void homeMethod(HomeBean homeBean) {
         List<DelegateAdapter.Adapter> adapters = new LinkedList<>();
         /**
          * banner 数据

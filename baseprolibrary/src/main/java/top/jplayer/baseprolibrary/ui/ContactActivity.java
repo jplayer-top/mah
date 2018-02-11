@@ -1,5 +1,6 @@
 package top.jplayer.baseprolibrary.ui;
 
+import android.content.Intent;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,6 +18,7 @@ import java.util.List;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+import top.jplayer.baseprolibrary.BaseInitApplication;
 import top.jplayer.baseprolibrary.R;
 import top.jplayer.baseprolibrary.mvp.model.bean.ModelContactCity;
 import top.jplayer.baseprolibrary.ui.adapter.ContactCityAdapter;
@@ -65,6 +67,17 @@ public class ContactActivity extends SuperBaseActivity {
                 .subscribe(modelContactCities -> {
                     mAdapterContactCity = new ContactCityAdapter(modelContactCities);
                     mRecyclerView.setAdapter(mAdapterContactCity);
+                    mAdapterContactCity.setOnItemClickListener((adapter, view, position) -> {
+                        ModelContactCity contactCity = mAdapterContactCity.getData().get(position);
+                        if (contactCity.type != ModelContactCity.HEARD) {
+                            if (contactCity.type != ModelContactCity.LOCAL) {
+                                Intent i = new Intent();
+                                i.putExtra("city", contactCity.name);
+                                setResult(BaseInitApplication.DEF_RESULT, i);
+                            }
+                            finish();
+                        }
+                    });
                 });
 
         mSideBarView.setOnTouchLetterChangeListener(letter -> {

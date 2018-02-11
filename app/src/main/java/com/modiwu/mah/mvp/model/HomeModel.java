@@ -3,11 +3,13 @@ package com.modiwu.mah.mvp.model;
 import android.os.SystemClock;
 
 import com.modiwu.mah.mvp.MahServer;
+import com.modiwu.mah.mvp.model.bean.CityCodeBean;
 import com.modiwu.mah.mvp.model.bean.HomeBean;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+import top.jplayer.baseprolibrary.net.IoMainSchedule;
 import top.jplayer.baseprolibrary.net.RetrofitManager;
 
 /**
@@ -28,5 +30,20 @@ public class HomeModel {
                     return homeBean;
                 })
                 .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Observable<CityCodeBean> requestCodeData(String city) {
+        return RetrofitManager.init().create(MahServer.class)
+                .getCityCodeBean(city)
+                .compose(new IoMainSchedule<>());
+
+    }
+
+    public Observable<HomeBean> requestHomeBean(String city_code) {
+        return RetrofitManager.init()
+                .create(MahServer.class)
+                .getHomeBean(city_code)
+                .compose(new IoMainSchedule<>());
+
     }
 }

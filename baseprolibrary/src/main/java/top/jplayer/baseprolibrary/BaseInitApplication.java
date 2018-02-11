@@ -25,4 +25,7 @@ public class BaseInitApplication {
         mContext = context;
         mWeakReference = new WeakReference<>(context);
     }
+
+    public static final int DEF_REQUEST = 1;
+    public static final int DEF_RESULT = 1;
 }
