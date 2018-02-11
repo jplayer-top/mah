@@ -70,11 +70,9 @@ public class ContactActivity extends SuperBaseActivity {
                     mAdapterContactCity.setOnItemClickListener((adapter, view, position) -> {
                         ModelContactCity contactCity = mAdapterContactCity.getData().get(position);
                         if (contactCity.type != ModelContactCity.HEARD) {
-                            if (contactCity.type != ModelContactCity.LOCAL) {
-                                Intent i = new Intent();
-                                i.putExtra("city", contactCity.name);
-                                setResult(BaseInitApplication.DEF_RESULT, i);
-                            }
+                            Intent i = new Intent();
+                            i.putExtra("city", contactCity.name);
+                            setResult(BaseInitApplication.DEF_RESULT, i);
                             finish();
                         }
                     });
