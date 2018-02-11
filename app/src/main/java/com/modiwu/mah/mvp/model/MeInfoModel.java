@@ -3,6 +3,7 @@ package com.modiwu.mah.mvp.model;
 import com.modiwu.mah.mvp.MahServer;
 import com.modiwu.mah.mvp.model.bean.LoginStatusbean;
 import com.modiwu.mah.mvp.model.bean.MeInfoBean;
+import com.modiwu.mah.mvp.model.bean.VersionBean;
 
 import java.io.File;
 
@@ -65,4 +66,11 @@ public class MeInfoModel {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
+    public Observable<VersionBean> requestVersion() {
+        return RetrofitManager.init()
+                .create(MahServer.class)
+                .getVersion()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
 }

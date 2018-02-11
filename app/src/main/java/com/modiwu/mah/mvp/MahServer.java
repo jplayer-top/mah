@@ -28,6 +28,7 @@ import com.modiwu.mah.mvp.model.bean.SelectLocalBean;
 import com.modiwu.mah.mvp.model.bean.ShopGoodsInfoBean;
 import com.modiwu.mah.mvp.model.bean.ShopSubListBean;
 import com.modiwu.mah.mvp.model.bean.SubTitleBean;
+import com.modiwu.mah.mvp.model.bean.VersionBean;
 import com.modiwu.mah.mvp.model.bean.WxPayInfoBean;
 import com.modiwu.mah.mvp.model.bean.YBJBean;
 
@@ -200,4 +201,6 @@ public interface MahServer {
     @POST("user/resetpw?")
     Observable<RegisterBean> forget(@QueryMap() Map<String, String> map);
 
+    @GET("ver")
+    Observable<VersionBean> getVersion();
 }

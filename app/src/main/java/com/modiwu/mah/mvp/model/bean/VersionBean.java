@@ -27,13 +27,11 @@ public class VersionBean extends BaseBean {
          * ct : 2017-04-27 14:51:23
          */
 
-        public int id;
-        public String ver_num;
-        public String build_num;
-        public String channel;
-        public int terminal;
-        public String url;
-        public String description;
-        public String ct;
+        public String version;
+        public String build;
+        public int versionCode;
+        public String file_url;
+        public String add_time;
+        public String content;
     }
 }

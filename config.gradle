@@ -18,7 +18,7 @@ ext {
     ]
     url = [
 //            "debug"  : "http://modiwu.com/app1/",
-            "debug"  : "https://app.modiwu.com/app/",
+            "debug"  : "http://modiwu.com/app1/",
             "release": "https://app.modiwu.com/app/",
     ]
     supportDeps = [

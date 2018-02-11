@@ -16,6 +16,7 @@ import com.modiwu.mah.R;
 import com.modiwu.mah.base.BaseFragment;
 import com.modiwu.mah.mvp.model.MeInfoModel;
 import com.modiwu.mah.mvp.model.bean.MeInfoBean;
+import com.modiwu.mah.mvp.model.bean.VersionBean;
 import com.modiwu.mah.mvp.model.event.LoginSuccessEvent;
 import com.modiwu.mah.mvp.model.event.LogoutEvent;
 import com.modiwu.mah.mvp.model.event.UpAvatarEvent;
@@ -40,6 +41,7 @@ import top.jplayer.baseprolibrary.net.SampleShowDialogObserver;
 import top.jplayer.baseprolibrary.net.download.DownloadByChrome;
 import top.jplayer.baseprolibrary.utils.ActivityUtils;
 import top.jplayer.baseprolibrary.utils.SharePreUtil;
+import top.jplayer.baseprolibrary.utils.ToastUtils;
 
 /**
  * Created by Obl on 2018/1/19.
@@ -102,7 +104,16 @@ public class MeFragment extends BaseFragment {
         tvShopCart.setOnClickListener(view -> ActivityUtils.init().start(getContext(), ShopCartActivity.class, "购物车"));
         tvShouCang.setOnClickListener(view -> ActivityUtils.init().start(getContext(), MeShouCangActivity.class,
                 "我的收藏"));
-        tvUpdate.setOnClickListener(view -> checkUpdate(true));
+        tvUpdate.setOnClickListener(view -> {
+            mModel.requestVersion().subscribe(new SampleShowDialogObserver<VersionBean>(getContext()) {
+                @Override
+                protected void onSuccess(VersionBean versionBean) throws Exception {
+                    if (versionBean != null && versionBean.ver != null) {
+                        checkUpdate(versionBean);
+                    }
+                }
+            });
+        });
         tvShare.setOnClickListener(v -> new ShareDialog(getContext()).show());
         mModel = new MeInfoModel();
         isLogin();
@@ -128,32 +139,31 @@ public class MeFragment extends BaseFragment {
     /**
      * - 检测软件更新
      */
-    public void checkUpdate(final boolean isToast) {
-        /**
-         * 在这里请求后台接口，获取更新的内容和最新的版本号
-         */
-        // 版本的更新信息
-        String version_info = "更新内容\n" + "    1. 首页异常处理\n" + "    2. 发布新商品UI\n" + "    ";
-        int mVersion_code = BuildConfig.VERSION_CODE;// 当前的版本号
-        int nVersion_code = 2;
-        showNoticeDialog(version_info);
+    public void checkUpdate(VersionBean versionBean) {
+
+        VersionBean.VerBean verBean = versionBean.ver;
+        String version_info = verBean.content;
+        int curVerCode = BuildConfig.VERSION_CODE;// 当前的版本号
+        int urlCode = verBean.versionCode;
+        if (urlCode > curVerCode) {
+            showNoticeDialog(verBean);
+        } else {
+            ToastUtils.init().showSuccessToast(getContext(), "已经是最新版本了");
+        }
     }
 
     /**
      * 显示更新对话框
-     *
-     * @param version_info
      */
-    private void showNoticeDialog(String version_info) {
+    private void showNoticeDialog(VersionBean.VerBean verBean) {
         // 构造对话框
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("更新提示");
-        builder.setMessage(version_info);
-
+        builder.setMessage(verBean.content);
         // 更新
         builder.setPositiveButton("立即更新", (dialog, which) -> {
             dialog.dismiss();
-            DownloadByChrome.byChrome(getContext(), Uri.parse("http://jplayer.top/app-release.apk"));
+            DownloadByChrome.byChrome(getContext(), Uri.parse(verBean.file_url));
         });
         // 稍后更新
         builder.setNegativeButton("以后更新", (dialog, which) -> dialog.dismiss());
