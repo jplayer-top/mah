@@ -12,3 +12,5 @@ baseLibrary 集成框架：
 - SmartRefresh
 - MVP 模式
 - BaseAdapter 万盟适配器
+- 融云聊天
+- 电商商城
