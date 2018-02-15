@@ -5,6 +5,7 @@ import devlight.io.library.ntb.NavigationTabBar;
 /**
  * Created by Obl on 2018/1/18.
  * top.jplayer.baseprolibrary.listener
+ * 这可点击一次的底部栏
  */
 
 public abstract class NetNavigationBarListener implements devlight.io.library.ntb.NavigationTabBar.OnTabBarSelectedIndexListener {
