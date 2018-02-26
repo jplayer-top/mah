@@ -33,7 +33,7 @@ public class DesignerDetialsAdapter extends VLayoutAdapter<RecyclerView.ViewHold
 
     @Override
     protected int addHolderLayout(ViewGroup parent, int viewType) {
-        return R.layout.adapter_home_body_recommend;
+        return R.layout.adapter_designer_detials;
     }
 
     @Override

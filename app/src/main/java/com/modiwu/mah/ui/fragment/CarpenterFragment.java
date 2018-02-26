@@ -71,7 +71,7 @@ public class CarpenterFragment extends BaseFragment implements CarpenterContract
     private void initRecyclerView2(ArrayList<DockerBean.RecordsBean> list) {
         mRecyclerView2.setLayoutManager(new GridLayoutManager(getContext(), 3));
         mAdapter2 = new DockerAdapter(list);
-        View view = View.inflate(getContext(), R.layout.adapter_home_body_toshop, null);
+        View view = View.inflate(getContext(), R.layout.adapter_carpenter_body, null);
         mIvHeard = view.findViewById(R.id.ivHeard);
         mAdapter2.addHeaderView(view);
         mAdapter2.setOnItemClickListener((adapter, view1, position) ->

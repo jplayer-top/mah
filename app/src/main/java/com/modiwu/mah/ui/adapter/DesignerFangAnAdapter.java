@@ -37,7 +37,7 @@ public class DesignerFangAnAdapter extends VLayoutAdapter<RecyclerView.ViewHolde
 
     @Override
     protected int addHolderLayout(ViewGroup parent, int viewType) {
-        return R.layout.adapter_home_body_recommend;
+        return R.layout.adapter_fangan_designer;
     }
 
     @Override

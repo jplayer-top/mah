@@ -8,9 +8,9 @@
     <cn.bingoogolapple.bgabanner.BGABanner
         android:id="@+id/bgaBanner"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        bga:banner_contentBottomMargin="30dp"
+        android:layout_height="250dp"
         bga:banner_pointAutoPlayAble="true"
-        bga:banner_pointContainerBackground="@color/colorWhite"
+        bga:banner_indicatorGravity="bottom"
+        bga:banner_pointContainerBackground="@color/trans"
         bga:banner_pointDrawable="@drawable/selector_banner_unequal"/>
 </LinearLayout>
