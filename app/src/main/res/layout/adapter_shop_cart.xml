@@ -4,6 +4,7 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:layout_gravity="center_vertical"
+              android:layout_marginBottom="@dimen/dimen_20dp"
               android:animateLayoutChanges="true"
               android:background="@color/white"
               android:gravity="center_vertical"
@@ -19,11 +20,12 @@
         android:id="@+id/ivShopDel"
         android:layout_width="70dp"
         android:layout_height="70dp"
+        android:scaleType="centerCrop"
         android:src="@drawable/placeholder"/>
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="@dimen/dimen_100dp">
 
         <RelativeLayout
             android:id="@+id/llContent"
@@ -60,8 +62,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:layout_margin="@dimen/dp_10"
-                android:text="X1"
+                android:layout_margin="@dimen/dimen_20dp"
+                android:text="x1"
                 tools:ignore="RtlHardcoded"/>
         </RelativeLayout>
 

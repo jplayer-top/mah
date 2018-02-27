@@ -5,10 +5,6 @@
               android:orientation="vertical">
 
     <android.support.v7.widget.RecyclerView
-        android:layout_marginEnd="@dimen/dp_10"
-        android:layout_marginLeft="@dimen/dp_10"
-        android:layout_marginRight="@dimen/dp_10"
-        android:layout_marginStart="@dimen/dp_10"
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

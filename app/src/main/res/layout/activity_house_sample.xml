@@ -72,7 +72,7 @@
                         style="@style/OblAppTheme.EditText"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:background="@drawable/shape_edit_black_glod"
+                        android:background="@null"
                         android:hint="@string/input_name"
                         android:paddingLeft="@dimen/dp_10"
                         android:paddingStart="@dimen/dp_10"
@@ -100,7 +100,7 @@
                         style="@style/OblAppTheme.EditText"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:background="@drawable/shape_edit_black_glod"
+                        android:background="@null"
                         android:hint="@string/input_phone"
                         android:inputType="number"
                         android:paddingLeft="@dimen/dp_10"
@@ -129,7 +129,7 @@
                         style="@style/OblAppTheme.EditText"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:background="@drawable/shape_edit_black_glod"
+                        android:background="@null"
                         android:hint="@string/input_house"
                         android:inputType="number"
                         android:paddingLeft="@dimen/dp_10"
@@ -158,7 +158,7 @@
                         style="@style/OblAppTheme.EditText"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:background="@drawable/shape_edit_black_glod"
+                        android:background="@null"
                         android:hint="@string/input_type"
                         android:inputType="number"
                         android:paddingLeft="@dimen/dp_10"
@@ -187,7 +187,7 @@
                         style="@style/OblAppTheme.EditText"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:background="@drawable/shape_edit_black_glod"
+                        android:background="@null"
                         android:hint="@string/input_area"
                         android:inputType="number"
                         android:paddingLeft="@dimen/dp_10"
@@ -281,7 +281,7 @@
                             android:layout_width="0dp"
                             android:layout_height="30dp"
                             android:layout_marginRight="@dimen/dp_10"
-                            android:background="@drawable/shape_edit_black_glod"
+                            android:background="@null"
                             android:hint="@string/input_other"
                             android:inputType="number"
                             android:paddingLeft="@dimen/dp_10"
@@ -306,7 +306,7 @@
                     android:clickable="true"
                     android:foreground="?android:selectableItemBackground"
                     android:text="@string/sublime"
-                    android:textColor="@color/white"/>
+                    android:textColor="@color/chocolate"/>
             </LinearLayout>
         </top.jplayer.baseprolibrary.widgets.MultipleStatusView>
     </android.support.v4.widget.NestedScrollView>

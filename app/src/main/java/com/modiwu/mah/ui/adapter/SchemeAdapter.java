@@ -23,7 +23,7 @@ public class SchemeAdapter extends BaseQuickAdapter<SchemeBean.RecordsBean, Base
     private SuperBaseActivity activity;
 
     public SchemeAdapter(List<SchemeBean.RecordsBean> data) {
-        super(R.layout.adapter_scheme_body, data);
+        super(R.layout.adapter_scheme_item, data);
     }
 
     @Override

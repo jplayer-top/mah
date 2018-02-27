@@ -46,7 +46,7 @@ public class SchemeSingleFragment extends SuperBaseFragment {
 
     @Override
     public int initLayout() {
-        return R.layout.fragment_scheme_hard;
+        return R.layout.fragment_scheme_single;
     }
 
 }

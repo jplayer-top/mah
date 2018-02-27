@@ -67,9 +67,7 @@ public class ShopCartActivity extends BaseCommonActivity implements ShopCartCont
         mMultipleStatusView = addRootView.findViewById(R.id.multiplestatusview);
         smartRefreshLayout = addRootView.findViewById(R.id.smartRefreshLayout);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        DividerItemDecoration decor = new DividerItemDecoration(this, LinearLayoutManager.VERTICAL);
-        decor.setDrawable(getResources().getDrawable(R.drawable.shape_divider));
-        mRecyclerView.addItemDecoration(decor);
+        mRecyclerView.setBackgroundColor(getResources().getColor(R.color.whitesmoke));
         mPresenter = new ShopCartPresenter(this);
         showLoading();
         mPresenter.requestShopCartData();

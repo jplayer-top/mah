@@ -14,11 +14,12 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="4"
-        android:background="@color/grey"
+        android:background="@color/black"
         android:gravity="center_vertical"
         android:paddingLeft="@dimen/magin_30"
         android:paddingStart="@dimen/magin_30"
         android:text="￥ 00.00"
+        android:textColor="@color/white"
         android:textSize="@dimen/sp_18"/>
 
     <TextView
@@ -26,9 +27,9 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:background="@color/colorBlackGold"
+        android:background="@color/chocolate"
         android:gravity="center"
-        android:text="下单"
-        android:textColor="@color/white"
+        android:text="确认"
+        android:textColor="@color/black"
         android:textSize="@dimen/sp_18"/>
 </LinearLayout>

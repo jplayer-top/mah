@@ -36,9 +36,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/generalHeight"
                 android:layout_marginRight="@dimen/magin_30"
-                android:drawableLeft="@drawable/me_local"
+                android:drawableLeft="@drawable/sheme_local_sel"
                 android:drawablePadding="@dimen/dp_10"
-                android:drawableStart="@drawable/me_local"
+                android:drawableStart="@drawable/sheme_local_sel"
                 android:gravity="center_vertical"
                 android:text="@string/select_local"
                 tools:ignore="RtlHardcoded"/>
@@ -71,9 +71,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/generalHeight"
                 android:layout_marginRight="@dimen/magin_30"
-                android:drawableLeft="@drawable/me_local"
+                android:drawableLeft="@drawable/scheme_floor_sel"
                 android:drawablePadding="@dimen/dp_10"
-                android:drawableStart="@drawable/me_local"
+                android:drawableStart="@drawable/scheme_floor_sel"
                 android:gravity="center_vertical"
                 android:text="@string/select_floor"
                 tools:ignore="RtlHardcoded"/>
@@ -106,9 +106,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/generalHeight"
                 android:layout_marginRight="@dimen/magin_30"
-                android:drawableLeft="@drawable/me_local"
+                android:drawableLeft="@drawable/scheme_style_sel"
                 android:drawablePadding="@dimen/dp_10"
-                android:drawableStart="@drawable/me_local"
+                android:drawableStart="@drawable/scheme_style_sel"
                 android:gravity="center_vertical"
                 android:text="@string/select_style"
                 tools:ignore="RtlHardcoded"/>
@@ -141,9 +141,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/generalHeight"
                 android:layout_marginRight="@dimen/magin_30"
-                android:drawableLeft="@drawable/me_local"
+                android:drawableLeft="@drawable/scheme_type_sel"
                 android:drawablePadding="@dimen/dp_10"
-                android:drawableStart="@drawable/me_local"
+                android:drawableStart="@drawable/scheme_type_sel"
                 android:gravity="center_vertical"
                 android:text="@string/select_type"
                 tools:ignore="RtlHardcoded"/>
@@ -167,9 +167,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dimen_30dp"
-            android:background="@drawable/selector_grey_muti_press"
+            android:background="@color/black"
             android:gravity="center"
-            android:text="确定"
-            android:textColor="@drawable/selector_text_press"/>
+            android:text="确认"
+            android:textColor="@color/chocolate"
+            android:textSize="@dimen/dimen_15sp"/>
     </LinearLayout>
 </com.scwang.smartrefresh.layout.SmartRefreshLayout>

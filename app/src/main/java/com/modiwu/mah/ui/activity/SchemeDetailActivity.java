@@ -1,6 +1,5 @@
 package com.modiwu.mah.ui.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -128,7 +127,7 @@ public class SchemeDetailActivity extends BaseSpecialActivity implements SchemeD
                 LogUtil.e("onTabReselected" + tab.getPosition());
             }
         });
-        tvToCard.setOnClickListener(view -> startActivity(new Intent(mBaseActivity, ShopCartActivity.class)));
+        tvToCard.setOnClickListener(view -> ActivityUtils.init().start(this, ShopCartActivity.class, "购物车"));
         mTvToBuy.setOnClickListener(view -> {
             Bundle bundle = new Bundle();
             bundle.putString("fangan_id", mFangan_id);

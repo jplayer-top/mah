@@ -51,10 +51,10 @@ public class HomeSingleVLayoutAdapter extends VLayoutAdapter<RecyclerView.ViewHo
         TextView mTvSubTitle = mItemView.findViewById(R.id.tvSubTitle);
         TextView mTvPrice = mItemView.findViewById(R.id.tvPrice);
 
-        int i = ScreenUtils.getWidthOfScreen(context, 10, 2);
+        int i = ScreenUtils.getWidthOfScreen(context, 1, 2);
         mIvBodyPic.getLayoutParams().width = i;
-        llTextView.getLayoutParams().width = i;
         mIvBodyPic.getLayoutParams().height = i;
+        llTextView.getLayoutParams().width = i;
 
         HomeBean.GoodBean goodBean = mGoods.get(position);
         Glide.with(context).load(goodBean.imgUrl).apply(GlideUtils.init().options()).into(mIvBodyPic);

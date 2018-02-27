@@ -1,6 +1,5 @@
 package com.modiwu.mah.ui.adapter;
 
-import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -35,7 +34,7 @@ public class ShopCartAdapter extends BaseQuickAdapter<ShopCartBean, BaseViewHold
                 .setText(R.id.tvEditNum, item.count)
                 .addOnClickListener(R.id.tvAdd)
                 .addOnClickListener(R.id.tvRemove)
-                .setText(R.id.tvNum, String.format(Locale.CHINA, "X%s", item.count))
+                .setText(R.id.tvNum, String.format(Locale.CHINA, "x%s", item.count))
                 .setChecked(R.id.checkbox, item.isCheck)
                 .setVisible(R.id.llEditNum, item.isEdit);
 
