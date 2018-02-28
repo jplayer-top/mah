@@ -36,4 +36,12 @@ public class OrderListModel {
                 .compose(new IoMainSchedule<>());
 
     }
+
+    public Observable<BaseBean> requestOrderOkBean(String order_id) {
+        return RetrofitManager.init()
+                .create(MahServer.class)
+                .getOrderOkBean(order_id)
+                .compose(new IoMainSchedule<>());
+
+    }
 }

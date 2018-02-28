@@ -18,8 +18,8 @@ import top.jplayer.baseprolibrary.utils.MoneyUtils;
  * com.modiwu.mah.ui.adapter
  */
 
-public class OrderWillPayAdapter extends BaseQuickAdapter<MeOrderBean.RecordsBean, BaseViewHolder> {
-    public OrderWillPayAdapter(List<MeOrderBean.RecordsBean> data) {
+public class OrderIsPayAdapter extends BaseQuickAdapter<MeOrderBean.RecordsBean, BaseViewHolder> {
+    public OrderIsPayAdapter(List<MeOrderBean.RecordsBean> data) {
         super(R.layout.adapter_me_order_whill_pay, data);
     }
 
@@ -29,8 +29,10 @@ public class OrderWillPayAdapter extends BaseQuickAdapter<MeOrderBean.RecordsBea
         helper.setText(R.id.tvOrderId, String.format(Locale.CHINA, "订单编号：%s", item.order_id))
                 .setText(R.id.tvOrderTitle, item.order_title)
                 .addOnClickListener(R.id.tvOrderToCancel)
+                .setVisible(R.id.tvOrderToCancel, false)
                 .addOnClickListener(R.id.tvOrderToPay)
-                .setText(R.id.tvStatus, "待支付")
+                .setText(R.id.tvOrderToPay, "确认收货")
+                .setText(R.id.tvStatus, "送货中")
                 .setText(R.id.tvOrderMoney, String.format(Locale.CHINA, "合计：%s", MoneyUtils.formatIntF(item.actual_price)))
                 .setText(R.id.tvOrderNum, String.format(Locale.CHINA, "共%d件", item.total_amount));
         RecyclerView recyclerView = helper.itemView.findViewById(R.id.recycleItem);

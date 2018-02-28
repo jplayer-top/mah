@@ -70,5 +70,6 @@ public class MeOrderListActivity extends BaseSpecialActivity {
     public void findToolBarView(View rootView) {
         mIvGoBack = contentView.findViewById(top.jplayer.baseprolibrary.R.id.ivGoBack);
         tvBarTitle = contentView.findViewById(top.jplayer.baseprolibrary.R.id.tvBarTitle);
+        tvBarTitle.setText(getIntent().getStringExtra("title"));
     }
 }
