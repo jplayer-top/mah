@@ -16,6 +16,7 @@ import com.modiwu.mah.ui.activity.DesignerActivity;
 import com.modiwu.mah.ui.activity.HouseSampleActivity;
 import com.modiwu.mah.ui.activity.SchemeDetailActivity;
 import com.modiwu.mah.ui.activity.ShopDetailActivity;
+import com.modiwu.mah.utils.StringUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -74,12 +75,13 @@ public class HomeHeardLayoutAdapter extends VLayoutAdapter<RecyclerView.ViewHold
 
                     Bundle bundle = new Bundle();
                     bundle.putString("fangan_id", bannerBean.navValue);
-                    ActivityUtils.init().start(context, SchemeDetailActivity.class, "方案详情", bundle);
+                    ActivityUtils.init().start(context, SchemeDetailActivity.class, bannerBean.title, bundle);
 
                 } else if (TextUtils.equals(navType, "goods")) {
                     Bundle bundle = new Bundle();
                     bundle.putString("goods_id", String.format(Locale.CHINA, "%s", bannerBean.navValue));
-                    ActivityUtils.init().start(context, ShopDetailActivity.class, "商品详情", bundle);
+                    ActivityUtils.init().start(context, ShopDetailActivity.class, StringUtils.getInstance()
+                            .isNullable(bannerBean.title, "商品详情"), bundle);
 
                 } else if (TextUtils.equals(navType, "sjs")) {
 

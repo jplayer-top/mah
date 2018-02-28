@@ -43,10 +43,11 @@ public class ShopDetailFangAnFragment extends BaseFragment {
             mAdapter = new ShopDetailAdpater(fangans);
             recyclerView.setAdapter(mAdapter);
             mAdapter.setOnItemChildClickListener((adapter1, view, position) -> {
-                int fangan_id = mAdapter.getData().get(position).fangan_id;
+                ShopGoodsInfoBean.FangansBean fangansBean = mAdapter.getData().get(position);
+                int fangan_id = fangansBean.fangan_id;
                 Bundle bundle = new Bundle();
                 bundle.putString("fangan_id", fangan_id + "");
-                ActivityUtils.init().start(getContext(), SchemeDetailActivity.class, "方案详情", bundle);
+                ActivityUtils.init().start(getContext(), SchemeDetailActivity.class, fangansBean.fangan_name, bundle);
                 return false;
             });
         }

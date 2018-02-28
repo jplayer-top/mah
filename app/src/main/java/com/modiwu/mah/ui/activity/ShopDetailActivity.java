@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -31,6 +30,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import top.jplayer.baseprolibrary.utils.ActivityUtils;
+import top.jplayer.baseprolibrary.utils.ToastUtils;
 import top.jplayer.baseprolibrary.widgets.MultipleStatusView;
 
 /**
@@ -78,15 +78,20 @@ public class ShopDetailActivity extends BaseSpecialActivity implements ShopDetai
         mPresenter = new ShopDetailPresenter(this);
         showLoading();
         mPresenter.requestShopDetailData(goods_id);
+        tvToCard.setText("加入购物车");
         tvToCard.setOnClickListener(view -> {
-            ActivityUtils.init().start(this, ShopCartActivity.class, "购物车");
-            ivCirRed.setVisibility(View.GONE);
+//            ActivityUtils.init().start(this, ShopCartActivity.class, "购物车");
+//            ivCirRed.setVisibility(View.GONE);
+            typeClick = false;
+            callListener();
         });
         tvToBuy.setOnClickListener(view -> {
             typeClick = true;
             callListener();
         });
-        tvToAdd.setVisibility(View.VISIBLE);
+        tvBarTitle.setMaxEms(6);
+        tvBarTitle.setEllipsize(TextUtils.TruncateAt.END);
+        tvBarTitle.setLines(1);
 
         tvToAdd.setOnClickListener(view -> {
             {
@@ -134,7 +139,8 @@ public class ShopDetailActivity extends BaseSpecialActivity implements ShopDetai
         } else {
             boolean insertShopCart = daoUtil.insertShopCart(bean);
             if (insertShopCart) {
-                ivCirRed.setVisibility(View.VISIBLE);
+//                ivCirRed.setVisibility(View.VISIBLE);
+                ToastUtils.init().showSuccessToast(this, "加入成功");
             }
         }
     }

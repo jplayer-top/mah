@@ -77,8 +77,10 @@ public abstract class SuperBaseActivity extends AppCompatActivity {
     public void findToolBarView(View rootView) {
         mIvGoBack = contentView.findViewById(R.id.ivGoBack);
         tvBarTitle = contentView.findViewById(R.id.tvBarTitle);
+        tvBarTitle.setText(getIntent().getStringExtra("title"));
         ivBarSearch = contentView.findViewById(R.id.ivBarSearch);
     }
+
     /**
      * 权限反馈
      */

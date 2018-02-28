@@ -51,7 +51,8 @@ public class DesignerFangAnAdapter extends VLayoutAdapter<RecyclerView.ViewHolde
 
         Bundle bundle = new Bundle();
         bundle.putString("fangan_id", String.format(Locale.CHINA, "%d", fanganBean.fangan_id));
-        itemView.setOnClickListener(v -> ActivityUtils.init().start(context, SchemeDetailActivity.class, "方案详情", bundle));
+        itemView.setOnClickListener(v -> ActivityUtils.init().start(context, SchemeDetailActivity.class, fanganBean.fangan_name,
+                bundle));
 
         Glide.with(context).load(fanganBean.fangan_avatar).apply(GlideUtils.init().options()).into(ivBodyPic);
         tvItemTitle.setText(StringUtils.getInstance().isNullable(fanganBean.fangan_name, "设计师方案"));

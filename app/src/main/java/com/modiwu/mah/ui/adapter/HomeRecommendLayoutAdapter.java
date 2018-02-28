@@ -60,7 +60,9 @@ public class HomeRecommendLayoutAdapter extends VLayoutAdapter<RecyclerView.View
         } else {
             Bundle bundle = new Bundle();
             bundle.putString("fangan_id", mFangAn.get(position).navValue);
-            itemView.setOnClickListener(v -> ActivityUtils.init().start(context, SchemeDetailActivity.class, "方案详情", bundle));
+            itemView.setOnClickListener(v -> ActivityUtils.init().start(context, SchemeDetailActivity.class, mFangAn
+                            .get(position).title,
+                    bundle));
             HomeBean.FanganBean fanganBean = mFangAn.get(position);
             Glide.with(context).load(fanganBean.imgUrl).apply(GlideUtils.init().options()).into(ivBodyPic);
             tvItemTitle.setText(StringUtils.getInstance().isNullable(fanganBean.title, "整个家"));
