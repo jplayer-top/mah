@@ -5,6 +5,14 @@
               android:layout_height="match_parent"
               android:orientation="vertical">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="@dimen/dp_10"
+        android:text="个人信息"
+        android:textColor="@color/color999"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_50dp"
@@ -18,7 +26,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="收货人"
+            android:text="收货人："
             android:textColor="@color/color323232"
             android:textSize="@dimen/dimen_14sp"/>
 
@@ -44,7 +52,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="联系电话"
+            android:text="联系电话："
             android:textColor="@color/color323232"
             android:textSize="@dimen/dimen_14sp"/>
 
@@ -64,6 +72,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_50dp"
         android:layout_marginBottom="@dimen/dimen_1dp"
+        android:layout_marginTop="@dimen/dp_10"
         android:background="@color/white"
         android:gravity="center_vertical"
         android:paddingLeft="@dimen/dimen_15dp"
@@ -73,7 +82,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="地区"
+            android:text="地区："
             android:textColor="@color/color323232"
             android:textSize="@dimen/dimen_14sp"/>
 
@@ -81,8 +90,10 @@
             android:id="@+id/tvLocalSecOk"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:hint="省份  城市   区县"
             android:text=""
             android:textColor="@color/color323232"
+            android:textColorHint="@color/color999"
             android:textSize="@dimen/dimen_14sp"/>
 
         <ImageView
@@ -103,18 +114,54 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="地址"
+            android:text="详细地址："
             android:textColor="@color/color323232"
             android:textSize="@dimen/dimen_14sp"/>
 
         <EditText
             android:id="@+id/editDetailLocal"
+
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginLeft="@dimen/dimen_5dp"
             android:background="@null"
             android:gravity="center_vertical|right"
-            android:paddingRight="@dimen/dimen_10dp"/>
+            android:hint="街道编号/名称  楼宇地址"
+            android:paddingRight="@dimen/dimen_10dp"
+            android:textColorHint="@color/color999"
+            android:textSize="@dimen/dimen_13sp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_50dp"
+        android:layout_marginBottom="@dimen/dimen_1dp"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/dimen_15dp"
+        android:paddingRight="@dimen/dimen_15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="电子邮箱："
+            android:textColor="@color/color323232"
+            android:textSize="@dimen/dimen_14sp"/>
+
+        <EditText
+            android:id="@+id/editEmail"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="@dimen/dimen_5dp"
+            android:background="@null"
+            android:ellipsize="end"
+            android:gravity="center_vertical|right"
+            android:hint="效果图施工图等图纸等以电子邮件的形式发送给您"
+            android:inputType="textEmailAddress"
+            android:lines="1"
+            android:paddingRight="@dimen/dimen_10dp"
+            android:textColorHint="@color/color999"
+            android:textSize="@dimen/sp_12"/>
     </LinearLayout>
 
     <LinearLayout
@@ -143,12 +190,18 @@
             app:tintColor="@color/colorBlackGold"/>
     </LinearLayout>
 
-    <Button
-        android:id="@+id/btnSave"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/dp_10"
-        android:background="@drawable/selector_grey_muti_press"
-        android:text="保存"
-        android:textColor="@color/white"/>
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_margin="@dimen/dp_10"
+            android:background="@color/black"
+            android:text="添加地址"
+            android:textColor="@color/chocolate"/>
+    </LinearLayout>
 </LinearLayout>
