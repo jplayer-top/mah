@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="@color/whitesmoke"
+              android:divider="@drawable/shape_divider"
+              android:dividerPadding="@dimen/dp_10"
+              android:orientation="vertical"
+              android:showDividers="middle"
+              tools:ignore="RtlHardcoded,RtlSymmetry">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:paddingLeft="@dimen/dimen_15dp"
+        android:paddingRight="@dimen/dimen_15dp">
+
+        <TextView
+            android:id="@+id/tvOrderId"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/generalHeight"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="订单编号：201723123123"/>
+
+        <TextView
+            android:id="@+id/tvStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="待支付"
+            android:textColor="@color/cadetblue"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:paddingLeft="@dimen/dimen_15dp"
+        android:paddingRight="@dimen/dimen_15dp"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/tvOrderTitle"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/generalHeight"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:lines="1"
+            android:text="@string/app_name"/>
+
+
+    </LinearLayout>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycleItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"/>
+
+    <LinearLayout
+        android:id="@+id/llStatus"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_50dp"
+        android:layout_marginBottom="@dimen/dp_10"
+        android:background="@color/white"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/tvOrderNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:paddingBottom="@dimen/dimen_5dp"
+            android:paddingLeft="@dimen/dp_10"
+            android:paddingRight="@dimen/dp_10"
+            android:paddingTop="@dimen/dimen_5dp"
+            android:text="共0件"
+            tools:ignore="RtlHardcoded"/>
+
+        <TextView
+            android:id="@+id/tvOrderMoney"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:paddingBottom="@dimen/dimen_5dp"
+            android:paddingLeft="@dimen/dp_10"
+            android:paddingRight="@dimen/dp_10"
+            android:paddingTop="@dimen/dimen_5dp"
+            android:text="合计 ：￥0.00"
+            tools:ignore="RtlHardcoded"/>
+
+        <TextView
+            android:id="@+id/tvOrderToCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/whitesmoke"
+            android:gravity="center_vertical"
+            android:paddingBottom="@dimen/dimen_5dp"
+            android:paddingLeft="@dimen/dp_10"
+            android:paddingRight="@dimen/dp_10"
+            android:paddingTop="@dimen/dimen_5dp"
+            android:text="取消订单"
+            tools:ignore="RtlHardcoded"/>
+
+        <TextView
+            android:id="@+id/tvOrderToPay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_10"
+            android:background="@color/black"
+            android:gravity="center_vertical"
+            android:paddingBottom="@dimen/dimen_5dp"
+            android:paddingLeft="@dimen/dp_10"
+            android:paddingRight="@dimen/dp_10"
+            android:paddingTop="@dimen/dimen_5dp"
+            android:text="去付款"
+            android:textColor="@color/chocolate"
+            tools:ignore="RtlHardcoded"/>
+    </LinearLayout>
+
+</LinearLayout>

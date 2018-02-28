@@ -105,6 +105,11 @@
             android:screenOrientation="portrait">
         </activity>
         <activity
+            android:name=".ui.activity.MeOrderListActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
             android:name=".ui.activity.MeFangAnActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait">

@@ -116,6 +116,9 @@ public interface MahServer {
     @POST("mall/order/l")
     Observable<MeOrderBean> getOrderListBean();
 
+    @POST("mall/order/l?")
+    Observable<MeOrderBean> getOrderListBean(@Query("status") String status);
+
     @POST("shoucang/cancel")
     Observable<BaseBean> getShouCangDel(@Query("fangan_id") String fangan_id);
 

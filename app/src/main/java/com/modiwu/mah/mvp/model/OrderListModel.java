@@ -1,14 +1,9 @@
 package com.modiwu.mah.mvp.model;
 
-import android.os.BaseBundle;
-import android.os.SystemClock;
-
 import com.modiwu.mah.mvp.MahServer;
 import com.modiwu.mah.mvp.model.bean.MeOrderBean;
 
 import io.reactivex.Observable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 import top.jplayer.baseprolibrary.mvp.model.bean.BaseBean;
 import top.jplayer.baseprolibrary.net.IoMainSchedule;
 import top.jplayer.baseprolibrary.net.RetrofitManager;
@@ -23,6 +18,13 @@ public class OrderListModel {
         return RetrofitManager.init()
                 .create(MahServer.class)
                 .getOrderListBean()
+                .compose(new IoMainSchedule<>());
+    }
+
+    public Observable<MeOrderBean> requestOrderBean(String status) {
+        return RetrofitManager.init()
+                .create(MahServer.class)
+                .getOrderListBean(status)
                 .compose(new IoMainSchedule<>());
     }
 
