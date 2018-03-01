@@ -19,6 +19,8 @@ import com.modiwu.mah.mvp.model.bean.MeInfoBean;
 import com.modiwu.mah.mvp.model.bean.VersionBean;
 import com.modiwu.mah.mvp.model.event.LoginSuccessEvent;
 import com.modiwu.mah.mvp.model.event.LogoutEvent;
+import com.modiwu.mah.mvp.model.event.ShareAllEvent;
+import com.modiwu.mah.mvp.model.event.ShareOneEvent;
 import com.modiwu.mah.mvp.model.event.UpAvatarEvent;
 import com.modiwu.mah.ui.activity.AboutMahActivity;
 import com.modiwu.mah.ui.activity.LocalListActivity;
@@ -29,6 +31,7 @@ import com.modiwu.mah.ui.activity.MeOrderListActivity;
 import com.modiwu.mah.ui.activity.MeShouCangActivity;
 import com.modiwu.mah.ui.activity.ShopCartActivity;
 import com.modiwu.mah.ui.dialog.ShareDialog;
+import com.modiwu.mah.wxapi.WXShare;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -78,6 +81,7 @@ public class MeFragment extends BaseFragment {
     @BindView(R.id.ivMeAvatar)
     ImageView ivMeAvatar;
     private MeInfoModel mModel;
+    private WXShare mWxShare;
 
     @Override
     public int initLayout() {
@@ -90,6 +94,7 @@ public class MeFragment extends BaseFragment {
         tvBarTitle.setText("我的");
         findView(rootView);
         EventBus.getDefault().register(this);
+        mWxShare = new WXShare(getContext());
     }
 
     private void findView(View rootView) {
@@ -117,6 +122,24 @@ public class MeFragment extends BaseFragment {
         tvShare.setOnClickListener(v -> new ShareDialog(getContext()).show());
         mModel = new MeInfoModel();
         isLogin();
+    }
+
+    @Subscribe
+    public void shareEvent(ShareOneEvent event) {
+        if (mWxShare.checkWX()) {
+            mWxShare.shareOne("整个家：https://www.baidu.com\n 好的家装，可以简单");
+        } else {
+            ToastUtils.init().showInfoToast(getContext(), "请先安装微信");
+        }
+    }
+
+    @Subscribe
+    public void shareEvent(ShareAllEvent event) {
+        if (mWxShare.checkWX()) {
+            mWxShare.shareAll("整个家：https://www.baidu.com\n 好的家装，可以简单");
+        } else {
+            ToastUtils.init().showInfoToast(getContext(), "请先安装微信");
+        }
     }
 
     private void isLogin() {

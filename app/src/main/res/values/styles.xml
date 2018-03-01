@@ -8,6 +8,9 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="WXThem" parent="OblAppTheme">
+    </style>
+
     <style name="textview_body_magin_10">
         <item name="android:lineSpacingExtra">@dimen/lineSpacingExtra_3</item>
         <item name="android:layout_marginLeft">@dimen/dp_10</item>
@@ -34,12 +37,12 @@
         <item name="android:adjustViewBounds">true</item>
         <item name="android:contentDescription">@string/app_name</item>
     </style>
+
     <style name="margin_30dp_1px_h_view">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">1px</item>
         <item name="android:background">#cecece</item>
     </style>
-
 
 
     <style name="AnimBottom">

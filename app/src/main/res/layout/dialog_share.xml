@@ -40,29 +40,32 @@
         android:gravity="center">
 
         <ImageView
-            android:layout_width="@dimen/dimen_40dp"
-            android:layout_height="@dimen/dimen_40dp"
+            android:id="@+id/tvOneShare"
+            android:layout_width="@dimen/dimen_50dp"
+            android:layout_height="@dimen/dimen_50dp"
             android:layout_marginRight="@dimen/dimen_20dp"
             android:src="@drawable/wechat"/>
 
         <ImageView
-            android:layout_width="@dimen/dimen_40dp"
-            android:layout_height="@dimen/dimen_40dp"
+            android:id="@+id/tvAllShare"
+            android:layout_width="@dimen/dimen_50dp"
+            android:layout_height="@dimen/dimen_50dp"
             android:layout_marginLeft="@dimen/dimen_20dp"
             android:src="@drawable/wx_fri"/>
     </LinearLayout>
 
     <TextView
+        android:id="@+id/tvClose"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_46dp"
         android:layout_marginBottom="@dimen/dp_20"
         android:layout_marginLeft="@dimen/dimen_15dp"
         android:layout_marginRight="@dimen/dimen_15dp"
         android:layout_marginTop="@dimen/dimen_50dp"
-        android:background="@drawable/selector_55gref_muti_press"
+        android:background="@color/black"
         android:gravity="center"
-        android:text="分享"
-        android:textColor="@drawable/selector_text_press"
+        android:text="关闭"
+        android:textColor="@color/chocolate"
         android:textSize="@dimen/dimen_14sp"/>
 
 </LinearLayout>

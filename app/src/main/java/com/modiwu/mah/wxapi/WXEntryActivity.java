@@ -1,20 +1,19 @@
 package com.modiwu.mah.wxapi;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
+import com.modiwu.mah.base.BaseApplication;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
-import com.tencent.mm.opensdk.modelmsg.SendAuth;
+import com.tencent.mm.opensdk.modelmsg.SendMessageToWX;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
 import top.jplayer.baseprolibrary.utils.ToastUtils;
-
-import static android.provider.UserDictionary.Words.APP_ID;
 
 
 /**
@@ -24,14 +23,21 @@ import static android.provider.UserDictionary.Words.APP_ID;
 
 public class WXEntryActivity extends AppCompatActivity implements IWXAPIEventHandler {
 
+    private IWXAPI mWxapi;
+
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
-        IWXAPI wxapi = WXAPIFactory.createWXAPI(this, APP_ID, false);
-        wxapi.handleIntent(getIntent(), this);
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mWxapi = WXAPIFactory.createWXAPI(this, BaseApplication.APP_ID, false);
+        mWxapi.handleIntent(getIntent(), this);
     }
 
-
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+        mWxapi.handleIntent(intent, this);
+    }
 
     @Override
     public void onReq(BaseReq baseReq) {
@@ -42,23 +48,29 @@ public class WXEntryActivity extends AppCompatActivity implements IWXAPIEventHan
     @Override
     public void onResp(BaseResp resp) {
         String result;
-//        WXLoginPresenter mPresenter = new WXLoginPresenter(this);
         switch (resp.errCode) {
             case BaseResp.ErrCode.ERR_OK:
-                String code = ((SendAuth.Resp) resp).code;
-//                mPresenter.wxLogin(code);
+                check(resp, "分享成功");
+                finish();
                 break;
             case BaseResp.ErrCode.ERR_USER_CANCEL:
+                check(resp, "用户取消");
                 finish();
                 break;
             case BaseResp.ErrCode.ERR_AUTH_DENIED:
                 finish();
                 break;
             default:
-                result = "认证失败，请用手机号注册";
+                result = "发送请求被拒绝";
                 ToastUtils.init().showInfoToast(this, result);
                 finish();
                 break;
+        }
+    }
+
+    private void check(BaseResp resp, String msg) {
+        if (resp instanceof SendMessageToWX.Resp) {
+            ToastUtils.init().showSuccessToast(this, msg);
         }
     }
 
