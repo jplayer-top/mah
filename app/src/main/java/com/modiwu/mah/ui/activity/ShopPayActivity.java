@@ -1,6 +1,8 @@
 package com.modiwu.mah.ui.activity;
 
+import android.view.View;
 import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.alipay.sdk.app.PayTask;
@@ -9,9 +11,16 @@ import com.modiwu.mah.base.BaseCommonActivity;
 import com.modiwu.mah.mvp.model.ShopDetailModel;
 import com.modiwu.mah.mvp.model.bean.AliPayInfoBean;
 import com.modiwu.mah.mvp.model.bean.WxPayInfoBean;
+import com.modiwu.mah.mvp.model.event.PayOKStateEvent;
+import com.modiwu.mah.wxapi.WXPayEntryActivity;
 import com.tencent.mm.opensdk.modelpay.PayReq;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,12 +39,16 @@ import top.jplayer.baseprolibrary.utils.ToastUtils;
 public class ShopPayActivity extends BaseCommonActivity {
     @BindView(R.id.tvPayMoney)
     TextView mTvPayMoney;
+    @BindView(R.id.tvOrderId)
+    TextView tvOrderId;
     @BindView(R.id.checkbox1)
     CheckBox mCheckbox1;
     @BindView(R.id.checkbox2)
     CheckBox mCheckbox2;
     @BindView(R.id.tv2Pay)
     TextView tv2Pay;
+    @BindView(R.id.llPayOk)
+    LinearLayout llPayOk;
     private Unbinder mUnbinder;
     private ShopDetailModel mModel;
 
@@ -47,9 +60,12 @@ public class ShopPayActivity extends BaseCommonActivity {
     @Override
     public void initBaseData() {
         mUnbinder = ButterKnife.bind(this, addRootView);
+        EventBus.getDefault().register(this);
         final String orderId = mBundle.getString("orderId");
         String totalPrice = mBundle.getString("totalPrice");
-        mTvPayMoney.setText(totalPrice);
+        llPayOk.setVisibility(View.GONE);
+        mTvPayMoney.setText(String.format(Locale.CHINA, "付款总额：%s", totalPrice));
+        tvOrderId.setText(String.format(Locale.CHINA, "订单编号：%s", orderId));
         mCheckbox1.setOnCheckedChangeListener((buttonView, isChecked) -> {
             mCheckbox1.setChecked(isChecked);
             mCheckbox2.setChecked(!isChecked);
@@ -151,7 +167,7 @@ public class ShopPayActivity extends BaseCommonActivity {
                 .subscribe(result -> {
                     if (result.get("resultStatus").equals("9000")) {
                         //支付成功
-                        orderPayOk();
+                        payAliOk();
                     } else if (result.get("resultStatus").equals("8000")) {
                         //支付处理中
                         ToastUtils.init().showErrorToast(mBaseActivity, "支付处理中，请稍后");
@@ -161,13 +177,25 @@ public class ShopPayActivity extends BaseCommonActivity {
                 });
     }
 
-    private void orderPayOk() {
+    private void payAliOk() {
+        next4PayOk();
+    }
 
+    private void next4PayOk() {
+        llPayOk.setVisibility(View.VISIBLE);
+        EventBus.getDefault().post(new PayOKStateEvent());
+    }
+
+    @Subscribe
+    public void payWxOk(WXPayEntryActivity.WxPayEvent event) {
+        next4PayOk();
     }
 
     @Override
+
     protected void onDestroy() {
         super.onDestroy();
         mUnbinder.unbind();
+        EventBus.getDefault().unregister(this);
     }
 }

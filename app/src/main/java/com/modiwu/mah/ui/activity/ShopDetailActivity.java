@@ -126,7 +126,7 @@ public class ShopDetailActivity extends BaseSpecialActivity implements ShopDetai
                 goods_attr_id = String.format(Locale.CHINA, "%d", spec.goods_attr_id);
             }
         }
-        ShopCartBean bean = new ShopCartBean(null, goods.goods_title, goods_attr_id, goods.goods_price_yuan, event.amount +
+        ShopCartBean bean = new ShopCartBean(null, goods.goods_title, goods_attr_id, event.price, event.amount +
                 "", goods.goods_thumb, goods_attr_id);
         if (typeClick) {
             Bundle bundle = new Bundle();

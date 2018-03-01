@@ -53,6 +53,5 @@ public class ShopCartPresenter extends BasePresenter<ShopCartActivity> implement
 
     public void updataBean(int position, ShopCartBean shopCartBean) {
         mDaoUtil.updatebean(shopCartBean);
-
     }
 }

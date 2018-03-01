@@ -15,6 +15,7 @@ import com.modiwu.mah.base.BaseCommonActivity;
 import com.modiwu.mah.mvp.model.bean.DefLocalBean;
 import com.modiwu.mah.mvp.model.bean.OrderCreateBean;
 import com.modiwu.mah.mvp.model.bean.ShopCartBean;
+import com.modiwu.mah.mvp.model.event.PayOKStateEvent;
 import com.modiwu.mah.mvp.presenter.ShopToBuyPresenter;
 import com.modiwu.mah.ui.adapter.OrderCreateInfoAdapter;
 
@@ -123,6 +124,11 @@ public class ShopToBuyAvtivity extends BaseCommonActivity {
     @Subscribe
     public void getLocalEvent(DefLocalBean.AddrBean addr) {
         setAddrBean(addr);
+    }
+
+    @Subscribe
+    public void getPayStatusEvent(PayOKStateEvent event) {
+        finish();
     }
 
 

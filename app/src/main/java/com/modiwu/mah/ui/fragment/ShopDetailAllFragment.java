@@ -13,10 +13,7 @@ import com.modiwu.mah.base.BaseFragment;
 import com.modiwu.mah.mvp.model.bean.ShopGoodsInfoBean;
 import com.modiwu.mah.ui.activity.ShopDetailActivity;
 import com.modiwu.mah.ui.adapter.ShopSpecAdapter;
-import com.modiwu.mah.ui.dialog.FsShopDetialDialog;
 import com.modiwu.mah.utils.StringUtils;
-
-import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -131,7 +128,7 @@ public class ShopDetailAllFragment extends BaseFragment implements View.OnClickL
                         attr_ids.append(",");
                     }
                     String string = attr_ids.toString();
-                    EventBus.getDefault().post(new FsShopDetialDialog.ShodeDetialOKEvent(string.substring(0, string.lastIndexOf(",")), parseInt));
+//                    EventBus.getDefault().post(new FsShopDetialDialog.ShodeDetialOKEvent(string.substring(0, string.lastIndexOf(",")), parseInt));
                     break;
                 }
 

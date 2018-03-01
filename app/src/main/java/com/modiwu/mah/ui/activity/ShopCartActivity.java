@@ -1,7 +1,6 @@
 package com.modiwu.mah.ui.activity;
 
 import android.os.Bundle;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -13,8 +12,12 @@ import com.modiwu.mah.R;
 import com.modiwu.mah.base.BaseCommonActivity;
 import com.modiwu.mah.mvp.constract.ShopCartContract;
 import com.modiwu.mah.mvp.model.bean.ShopCartBean;
+import com.modiwu.mah.mvp.model.event.PayOKStateEvent;
 import com.modiwu.mah.mvp.presenter.ShopCartPresenter;
 import com.modiwu.mah.ui.adapter.ShopCartAdapter;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,6 +65,7 @@ public class ShopCartActivity extends BaseCommonActivity implements ShopCartCont
     public void initBaseData() {
         findToolBarView(addRootView);
         mUnbinder = ButterKnife.bind(this, addRootView);
+        EventBus.getDefault().register(this);
         goods_attr_id = new StringBuilder("");
         sublimCartBeans = new ArrayList<>();
         mMultipleStatusView = addRootView.findViewById(R.id.multiplestatusview);
@@ -150,6 +154,13 @@ public class ShopCartActivity extends BaseCommonActivity implements ShopCartCont
         mLlEditToDel.setVisibility(View.GONE);
     }
 
+    @Subscribe
+    public void getPayStatusEvent(PayOKStateEvent event) {
+        if (sublimCartBeans != null && sublimCartBeans.size() > 0) {
+            mPresenter.delData(sublimCartBeans);
+        }
+    }
+
     private void countChange(int i, int position, int mov) {
         i = i + mov;
         ShopCartBean shopCartBean = shopCartBeans.get(position);
@@ -214,6 +225,7 @@ public class ShopCartActivity extends BaseCommonActivity implements ShopCartCont
     protected void onDestroy() {
         super.onDestroy();
         mUnbinder.unbind();
+        EventBus.getDefault().unregister(this);
     }
 
 }

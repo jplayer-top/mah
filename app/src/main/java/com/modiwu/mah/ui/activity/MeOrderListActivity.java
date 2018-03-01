@@ -6,8 +6,12 @@ import android.view.View;
 
 import com.modiwu.mah.R;
 import com.modiwu.mah.base.BaseSpecialActivity;
+import com.modiwu.mah.mvp.model.event.PayOKStateEvent;
 import com.modiwu.mah.ui.adapter.AdapterPagerOrderList;
 import com.modiwu.mah.ui.fragment.OrderBaseFragment;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +43,7 @@ public class MeOrderListActivity extends BaseSpecialActivity {
 
         findToolBarView(contentView);
         customBarLeft();
-
+        EventBus.getDefault().register(this);
         mViewPager = contentView.findViewById(R.id.viewPager);
         mTabLayout = contentView.findViewById(R.id.tabLayout);
         mTabLayout.setTabMode(TabLayout.MODE_FIXED);
@@ -59,12 +63,23 @@ public class MeOrderListActivity extends BaseSpecialActivity {
         Observable.timer(500, TimeUnit.MILLISECONDS).subscribe(aLong -> refreshDate(0));
     }
 
+    @Subscribe
+    public void getPayStatusEvent(PayOKStateEvent event) {
+        refreshDate(mViewPager.getCurrentItem());
+    }
+
     private void refreshDate(int position) {
         List<SuperBaseFragment> list = mAdpater.mFragmentList;
         if (list != null && list.size() > 0) {
             OrderBaseFragment baseFragment = (OrderBaseFragment) list.get(position);
             baseFragment.requestDate();
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 
     public void findToolBarView(View rootView) {

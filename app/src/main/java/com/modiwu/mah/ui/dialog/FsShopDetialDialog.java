@@ -100,7 +100,8 @@ public class FsShopDetialDialog extends BottomTopDialogFragment implements View.
                     break;
                 } else {
                     String string = getAttrId();
-                    EventBus.getDefault().post(new ShodeDetialOKEvent(string.substring(0, string.lastIndexOf(",")), parseInt));
+                    EventBus.getDefault().post(new ShodeDetialOKEvent(string.substring(0, string.lastIndexOf(",")),
+                            parseInt, tvOnePrice.getText().toString().replace("￥", "")));
                     onDismissWithAnim();
                     break;
                 }
@@ -171,10 +172,12 @@ public class FsShopDetialDialog extends BottomTopDialogFragment implements View.
         public String type;
         public int amount;
         public String attr_ids;
+        public String price;
 
-        public ShodeDetialOKEvent(String attr_ids, int amount) {
+        public ShodeDetialOKEvent(String attr_ids, int amount, String price) {
             this.attr_ids = attr_ids;
             this.amount = amount;
+            this.price = price;
         }
     }
 
