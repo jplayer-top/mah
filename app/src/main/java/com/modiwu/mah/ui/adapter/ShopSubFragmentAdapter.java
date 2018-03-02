@@ -36,7 +36,7 @@ public class ShopSubFragmentAdapter extends BaseQuickAdapter<ShopSubListBean.Rec
         View itemView = viewHolder.itemView;
         mIvBodyPic = itemView.findViewById(R.id.ivBodyPic);
         LinearLayout llTextView = itemView.findViewById(R.id.llTextView);
-        int i = ScreenUtils.getWidthOfScreen(mContext, 10, 2);
+        int i = ScreenUtils.getWidthOfScreen(mContext, 2, 2);
         mIvBodyPic.getLayoutParams().width = i;
         llTextView.getLayoutParams().width = i;
         mIvBodyPic.getLayoutParams().height = i;

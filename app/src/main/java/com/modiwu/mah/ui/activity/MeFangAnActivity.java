@@ -8,8 +8,12 @@ import android.support.v7.widget.RecyclerView;
 import com.modiwu.mah.R;
 import com.modiwu.mah.base.BaseCommonActivity;
 import com.modiwu.mah.mvp.model.bean.MeFangAnBean;
+import com.modiwu.mah.mvp.model.event.PayOKStateEvent;
 import com.modiwu.mah.mvp.presenter.MeFangAnPresenter;
 import com.modiwu.mah.ui.adapter.MeFanganAdapter;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -67,6 +71,19 @@ public class MeFangAnActivity extends BaseCommonActivity {
         });
         mRecyclerView.setAdapter(mAdapter);
         smartRefreshLayout.setOnRefreshListener(refresh -> mPresenter.requestFangAnData());
+        EventBus.getDefault().register(this);
+
+    }
+
+    @Subscribe
+    public void getPayStatusEvent(PayOKStateEvent event) {
+        mPresenter.requestFangAnData();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 
     public void setMeFangAn(MeFangAnBean bean) {
