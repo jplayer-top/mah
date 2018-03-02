@@ -36,6 +36,8 @@ import java.util.Map;
 
 import io.reactivex.Observable;
 import okhttp3.MultipartBody;
+import retrofit2.http.FieldMap;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
@@ -146,11 +148,13 @@ public interface MahServer {
     @POST("mall/addr/sd?")
     Observable<BaseBean> getLocalDefBean(@Query("rpid") String rpid, @Query("rp_default") String rp_default);
 
+    @FormUrlEncoded
     @POST("mall/order/create?")
-    Observable<OrderCreateBean> getOrderCreateBean(@QueryMap() Map<String, String> map);
+    Observable<OrderCreateBean> getOrderCreateBean(@FieldMap() Map<String, String> map);
 
+    @FormUrlEncoded
     @POST("fangan/order/submit?")
-    Observable<OrderCreateBean> getSchemeCreateBean(@QueryMap() Map<String, String> map);
+    Observable<OrderCreateBean> getSchemeCreateBean(@FieldMap() Map<String, String> map);
 
     @GET("ope//info")
     Observable<YBJBean> getYBJBean();
