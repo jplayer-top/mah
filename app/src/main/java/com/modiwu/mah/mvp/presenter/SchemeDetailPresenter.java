@@ -29,7 +29,7 @@ public class SchemeDetailPresenter extends BasePresenter<SchemeDetailActivity> i
     @Override
     public void requestSchemeDetialData(String fangan_id) {
         Disposable disposable = mModel.requestSchemeDetailBean(fangan_id)
-                .subscribe(schemeDetailBean -> mIView.setSchemeDetialData(schemeDetailBean));
+                .subscribe(schemeDetailBean -> mIView.setSchemeDetialData(schemeDetailBean),throwable -> {});
         addSubscription(disposable);
     }
 

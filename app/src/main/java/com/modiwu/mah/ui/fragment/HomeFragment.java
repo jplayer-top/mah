@@ -152,7 +152,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.HomeView 
          * 匠心
          */
         List<HomeBean.SjsBean> sjsBeans = homeBean.sjs;
-        if (fanganBeans != null && fanganBeans.size() > 0) {
+        if (sjsBeans != null && sjsBeans.size() > 0) {
             List<HomeBean.SjsBean> realSjsBeans = new ArrayList<>();
             Observable.fromIterable(sjsBeans).filter(sjsBean -> TextUtils.equals("sjs", sjsBean.navType)).subscribe(realSjsBeans::add);
             if (realSjsBeans.size() > 0) {

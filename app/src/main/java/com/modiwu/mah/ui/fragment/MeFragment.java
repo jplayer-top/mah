@@ -156,7 +156,7 @@ public class MeFragment extends BaseFragment {
                 Glide.with(getContext()).load(R.mipmap.ic_launcher).apply(RequestOptions.circleCropTransform()).into(ivMeAvatar);
                 tvName.setText("点击登录");
             }
-        });
+        },throwable -> {});
     }
 
     /**
