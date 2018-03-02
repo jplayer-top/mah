@@ -5,7 +5,35 @@
               android:layout_height="match_parent"
               android:orientation="vertical">
 
-    <include layout="@layout/layout_carpenter_toolbar"/>
+    <include layout="@layout/layout_title_toolbar"/>
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="@color/white">
+
+        <android.support.design.widget.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="匠"/>
+
+        <android.support.design.widget.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="器"/>
+    </android.support.design.widget.TabLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:contentDescription="@string/app_name"
+        android:scaleType="fitXY"
+        android:src="@drawable/toolbar_shadow"/>
+
+    <include
+        layout="@layout/layout_carpenter_toolbar"
+        android:visibility="gone"/>
 
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -27,8 +55,8 @@
         <top.jplayer.baseprolibrary.widgets.MultipleStatusView
             android:id="@+id/multiplestatusview"
             android:layout_width="match_parent"
-            android:animateLayoutChanges="true"
             android:layout_height="match_parent"
+            android:animateLayoutChanges="true"
             app:emptyView="@layout/layout_empty_view"
             app:errorView="@layout/layout_error_view"
             app:loadingView="@layout/layout_loading_view"

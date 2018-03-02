@@ -1,6 +1,7 @@
 package com.modiwu.mah.ui.fragment;
 
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -30,6 +31,7 @@ import top.jplayer.baseprolibrary.glide.GlideUtils;
 import top.jplayer.baseprolibrary.listener.NetNavigationBarListener;
 import top.jplayer.baseprolibrary.ui.WebFullScreenActivity;
 import top.jplayer.baseprolibrary.utils.ActivityUtils;
+import top.jplayer.baseprolibrary.utils.SizeUtils;
 
 /**
  * Created by Obl on 2018/1/19.
@@ -44,6 +46,7 @@ public class CarpenterFragment extends BaseFragment implements CarpenterContract
     private CarpenterAdapter mAdapter1;
     private DockerAdapter mAdapter2;
     private ImageView mIvHeard;
+    private TabLayout mTabLayout;
 
     @Override
     public int initLayout() {
@@ -52,19 +55,46 @@ public class CarpenterFragment extends BaseFragment implements CarpenterContract
 
     @Override
     protected void initData(View rootView) {
+        super.initData(rootView);
         mMultipleStatusView = rootView.findViewById(R.id.multiplestatusview);
         smartRefreshLayout = rootView.findViewById(R.id.smartRefreshLayout);
         mNavigationTabBar = rootView.findViewById(R.id.ntb);
         mRecyclerView1 = rootView.findViewById(R.id.recyclerView1);
+        mTabLayout = rootView.findViewById(R.id.tabLayout);
         mRecyclerView2 = rootView.findViewById(R.id.recyclerView2);
         bottomBar(mNavigationTabBar);
-
+        tvBarTitle.setText("匠器");
         initRecyclerView1(new ArrayList<>());
         initRecyclerView2(new ArrayList<>());
 
         mPresenter = new CarpenterPresenter(this);
         int type = ((MainActivity) getActivity()).carFragmentType;
         setShowTypeByClickMore(type);
+        mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                int position = tab.getPosition();
+                if (position == 0) {
+                    mRecyclerView1.setVisibility(View.VISIBLE);
+                    mRecyclerView2.setVisibility(View.GONE);
+                    click1();
+                } else {
+                    mRecyclerView1.setVisibility(View.GONE);
+                    mRecyclerView2.setVisibility(View.VISIBLE);
+                    click2();
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
     }
 
 
@@ -90,7 +120,7 @@ public class CarpenterFragment extends BaseFragment implements CarpenterContract
         mAdapter1 = new CarpenterAdapter(list);
         mAdapter1.setOnItemClickListener((adapter, view, position) -> {
             Bundle bundle = new Bundle();
-            List<CarpenterBean.RecordsBean> data = adapter.getData();
+            List<CarpenterBean.RecordsBean> data = mAdapter1.getData();
             bundle.putString("designer_id", String.format(Locale.CHINA, "%d", data.get(position).designer_id));
             String designer = StringUtils.getInstance().isNullable(data.get(position).designer_name, "设计师");
             ActivityUtils.init().start(getContext(), DesignerActivity.class, designer, bundle);
@@ -109,7 +139,7 @@ public class CarpenterFragment extends BaseFragment implements CarpenterContract
         for (int i = 0; i < titleArrs.length; i++) {
             models.add(new NavigationTabBar.Model.Builder(
                     getResources().getDrawable(drawArrs[i]),
-                    getResources().getColor(top.jplayer.baseprolibrary.R.color.black))
+                    getResources().getColor(top.jplayer.baseprolibrary.R.color.trans))
                     .title(titleArrs[i]).build());
         }
         navigationTabBar.setModels(models);
@@ -136,12 +166,7 @@ public class CarpenterFragment extends BaseFragment implements CarpenterContract
      */
     private void setShowTypeByClickMore(int type) {
         mNavigationTabBar.setModelIndex(type);
-//        if (type == 0) {
-//            click1();
-//        } else {
-//            click2();
-//        }
-
+        mTabLayout.setScrollPosition(type, SizeUtils.getMeasuredWidth(mTabLayout) / 2f, true);
     }
 
     private void click2() {
