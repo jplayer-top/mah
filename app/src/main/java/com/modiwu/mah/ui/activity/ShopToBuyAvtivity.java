@@ -52,6 +52,8 @@ public class ShopToBuyAvtivity extends BaseCommonActivity {
     EditText tvPhone;
     @BindView(R.id.editRemark)
     EditText editRemark;
+    @BindView(R.id.editEmail)
+    EditText editEmail;
     @BindView(R.id.tvCountPrice)
     TextView tvCountPrice;
     @BindView(R.id.recycleItem)
@@ -87,6 +89,7 @@ public class ShopToBuyAvtivity extends BaseCommonActivity {
         if (mFangan_id != null) {
             tvPhone.setVisibility(View.VISIBLE);
             tvName.setVisibility(View.VISIBLE);
+            editEmail.setVisibility(View.VISIBLE);
             mTvLocal.setVisibility(View.GONE);
             mMap.put("fangan_id", mFangan_id);
 
@@ -125,6 +128,11 @@ public class ShopToBuyAvtivity extends BaseCommonActivity {
                     return;
                 }
                 mMap.put("user_phone", tvPhone.getText().toString());
+                if (TextUtils.isEmpty(editEmail.getText())) {
+                    ToastUtils.init().showInfoToast(this, "请填写电子邮箱");
+                    return;
+                }
+                mMap.put("user_email", editEmail.getText().toString());
                 mPresenter.requestSchemeCreateData(mMap);
 
             } else {

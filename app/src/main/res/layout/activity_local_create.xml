@@ -133,6 +133,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_50dp"
         android:layout_marginBottom="@dimen/dimen_1dp"

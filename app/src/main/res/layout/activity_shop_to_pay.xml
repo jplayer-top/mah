@@ -107,6 +107,28 @@
                         android:layout_marginLeft="@dimen/dimen_15dp"
                         android:background="@color/whitesmoke"/>
 
+                    <EditText
+                        android:id="@+id/editEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/generalHeight"
+                        android:background="@null"
+                        android:drawableRight="@drawable/right_arrow"
+                        android:gravity="center_vertical"
+                        android:hint="添加电子邮箱"
+                        android:inputType="textEmailAddress"
+                        android:paddingLeft="@dimen/dimen_15dp"
+                        android:paddingRight="@dimen/dimen_15dp"
+                        android:textColor="@color/color999"
+                        android:textColorHint="@color/color999"
+                        android:textSize="@dimen/dimen_14sp"
+                        android:visibility="gone"/>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dimen_1dp"
+                        android:layout_marginLeft="@dimen/dimen_15dp"
+                        android:background="@color/whitesmoke"/>
+
                     <CheckBox
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/generalHeight"
