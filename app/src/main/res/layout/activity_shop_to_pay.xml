@@ -1,200 +1,236 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.scwang.smartrefresh.layout.SmartRefreshLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/smartRefreshLayout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorWhite"
-    app:srlAccentColor="@android:color/white"
-    app:srlEnablePureScrollMode="true"
-    app:srlPrimaryColor="@color/white"
-    tools:ignore="RtlHardcoded,RtlSymmetry">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent">
 
-    <top.jplayer.baseprolibrary.widgets.MultipleStatusView
-        android:id="@+id/multiplestatusview"
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/smartRefreshLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:emptyView="@layout/layout_empty_view"
-        app:errorView="@layout/layout_error_view"
-        app:loadingView="@layout/layout_loading_view"
-        app:noNetworkView="@layout/layout_network_view">
+        android:background="@color/colorWhite"
+        app:srlAccentColor="@android:color/white"
+        app:srlEnablePureScrollMode="true"
+        app:srlPrimaryColor="@color/white"
+        tools:ignore="RtlHardcoded,RtlSymmetry">
 
-        <android.support.v4.widget.NestedScrollView
+        <top.jplayer.baseprolibrary.widgets.MultipleStatusView
+            android:id="@+id/multiplestatusview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/white"
-            android:fitsSystemWindows="true">
+            app:emptyView="@layout/layout_empty_view"
+            app:errorView="@layout/layout_error_view"
+            app:loadingView="@layout/layout_loading_view"
+            app:noNetworkView="@layout/layout_network_view">
 
-            <LinearLayout
+            <android.support.v4.widget.NestedScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:orientation="vertical">
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_10"
-                    android:background="@color/whitesmoke"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/dp_10"
-                    android:text="您需要我们送到哪里？"
-                    android:textSize="@dimen/sp_18"
-                    android:textStyle="bold"/>
-
-
-                <TextView
-                    android:id="@+id/tvLocal"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/generalHeight"
-                    android:drawableRight="@drawable/right_arrow"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="@dimen/dimen_15dp"
-                    android:text="添加收货地址"
-                    android:visibility="visible"/>
-
-                <TextView
-                    android:id="@+id/tvName"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/generalHeight"
-                    android:drawableRight="@drawable/right_arrow"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="@dimen/dimen_15dp"
-                    android:text="添加姓名"
-                    android:visibility="gone"/>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dimen_1dp"
-                    android:layout_marginLeft="@dimen/dimen_15dp"
-                    android:background="@drawable/shape_divider"/>
-                <TextView
-                    android:id="@+id/tvPhone"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/generalHeight"
-                    android:drawableRight="@drawable/right_arrow"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="@dimen/dimen_15dp"
-                    android:text="添加手机号"
-                    android:visibility="gone"/>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dimen_1dp"
-                    android:layout_marginLeft="@dimen/dimen_15dp"
-                    android:background="@drawable/shape_divider"/>
-
-                <CheckBox
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/generalHeight"
-                    android:layout_marginLeft="@dimen/dimen_15dp"
-                    android:checked="true"
-                    android:text="我已阅读并同意《物流及售后协议》"/>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dimen_10dp"
-                    android:background="@color/whitesmoke"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/dp_10"
-                    android:text="如果还有别的需要，备注一句"
-                    android:textSize="@dimen/sp_18"
-                    android:textStyle="bold"/>
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/dimen_15dp"
-                    android:background="@drawable/border_bg"
-                    android:gravity="left"
-                    android:hint="在这里给我们捎些话"
-                    android:padding="@dimen/dimen_10dp"/>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_10"
-                    android:background="@color/whitesmoke"/>
-
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/dp_10"
-                    android:text="您是否需要发票？"
-                    android:textSize="@dimen/sp_18"
-                    android:textStyle="bold"/>
-
-                <CheckBox
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dimen_15dp"
-                    android:text="开发票"/>
+                android:background="@color/white"
+                android:fitsSystemWindows="true">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/whitesmoke"
-                    android:orientation="vertical"
-                    android:paddingBottom="@dimen/dimen_15dp">
+                    android:layout_height="match_parent"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:orientation="vertical">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_10"
+                        android:background="@color/whitesmoke"/>
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/dp_10"
-                        android:text="您的商品清单"
+                        android:text="您需要我们送到哪里？"
                         android:textSize="@dimen/sp_18"
                         android:textStyle="bold"/>
+
+
+                    <TextView
+                        android:id="@+id/tvLocal"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/generalHeight"
+                        android:drawableRight="@drawable/right_arrow"
+                        android:gravity="center_vertical"
+                        android:hint="添加收货地址"
+                        android:paddingLeft="@dimen/dimen_15dp"
+                        android:paddingRight="@dimen/dimen_15dp"
+                        android:textColor="@color/color999"
+                        android:textColorHint="@color/color999"
+                        android:visibility="visible"/>
+
+                    <EditText
+                        android:id="@+id/editName"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/generalHeight"
+                        android:background="@null"
+                        android:drawableRight="@drawable/right_arrow"
+                        android:gravity="center_vertical"
+                        android:hint="添加姓名"
+                        android:paddingLeft="@dimen/dimen_15dp"
+                        android:paddingRight="@dimen/dimen_15dp"
+                        android:textColor="@color/color999"
+                        android:textColorHint="@color/color999"
+                        android:textSize="@dimen/dimen_14sp"
+                        android:visibility="gone"/>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dimen_1dp"
+                        android:layout_marginLeft="@dimen/dimen_15dp"
+                        android:background="@color/whitesmoke"/>
+
+                    <EditText
+                        android:id="@+id/editPhone"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/generalHeight"
+                        android:background="@null"
+                        android:drawableRight="@drawable/right_arrow"
+                        android:gravity="center_vertical"
+                        android:hint="添加手机号"
+                        android:inputType="phone"
+                        android:paddingLeft="@dimen/dimen_15dp"
+                        android:paddingRight="@dimen/dimen_15dp"
+                        android:textColor="@color/color999"
+                        android:textColorHint="@color/color999"
+                        android:textSize="@dimen/dimen_14sp"
+                        android:visibility="gone"/>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dimen_1dp"
+                        android:layout_marginLeft="@dimen/dimen_15dp"
+                        android:background="@color/whitesmoke"/>
+
+                    <CheckBox
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/generalHeight"
+                        android:layout_marginLeft="@dimen/dimen_15dp"
+                        android:checked="true"
+                        android:text="我已阅读并同意《物流及售后协议》"/>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dimen_10dp"
+                        android:background="@color/whitesmoke"/>
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/dimen_15dp"
-                        android:layout_marginRight="@dimen/dimen_15dp"
-                        android:background="@color/white"
-                        android:padding="@dimen/dp_10"
-                        android:text="清单列表"/>
+                        android:layout_margin="@dimen/dp_10"
+                        android:text="如果还有别的需要，备注一句"
+                        android:textSize="@dimen/sp_18"
+                        android:textStyle="bold"/>
+
+                    <EditText
+                        android:id="@+id/editRemark"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dimen_100dp"
+                        android:layout_margin="@dimen/dimen_15dp"
+                        android:background="@drawable/border_bg"
+                        android:gravity="left"
+                        android:hint="在这里给我们捎些话"
+                        android:padding="@dimen/dimen_10dp"
+                        android:textColorHint="@color/color999"/>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_10"
+                        android:background="@color/whitesmoke"
+                        android:visibility="gone"/>
 
 
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/recycleItem"
+                    <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:overScrollMode="never"/>
+                        android:layout_margin="@dimen/dp_10"
+                        android:text="您是否需要发票？"
+                        android:textSize="@dimen/sp_18"
+                        android:textStyle="bold"
+                        android:visibility="gone"/>
+
+                    <CheckBox
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dimen_15dp"
+                        android:text="开发票"
+                        android:visibility="gone"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/generalHeight"
-                        android:layout_marginTop="@dimen/dimen_15dp"
-                        android:background="@color/white">
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="@dimen/dimen_50dp"
+                        android:background="@color/whitesmoke"
+                        android:orientation="vertical"
+                        android:paddingBottom="@dimen/dimen_15dp">
 
                         <TextView
-                            android:id="@+id/tvCountPrice"
-                            android:layout_width="0dp"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="15dp"
-                            android:layout_weight="1"
-                            android:text="￥0.00"
-                            android:textSize="@dimen/sp_18"/>
+                            android:layout_margin="@dimen/dp_10"
+                            android:text="您的商品清单"
+                            android:textSize="@dimen/sp_18"
+                            android:textStyle="bold"/>
 
-                        <Button
-                            android:id="@+id/btnSubmit"
-                            android:layout_width="@dimen/dimen_100dp"
-                            android:layout_height="match_parent"
-                            android:background="@drawable/selector_grey_muti_press"
-                            android:gravity="center"
-                            android:text="马上结算"
-                            android:textColor="@color/white"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/dimen_15dp"
+                            android:layout_marginRight="@dimen/dimen_15dp"
+                            android:background="@color/white"
+                            android:padding="@dimen/dp_10"
+                            android:text="清单列表"/>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/dimen_1px"
+                            android:layout_marginLeft="@dimen/dimen_15dp"
+                            android:layout_marginRight="@dimen/dimen_15dp"
+                            android:background="@color/whitesmoke"/>
+
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/recycleItem"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:overScrollMode="never"/>
+
                     </LinearLayout>
                 </LinearLayout>
-            </LinearLayout>
-        </android.support.v4.widget.NestedScrollView>
-    </top.jplayer.baseprolibrary.widgets.MultipleStatusView>
-</com.scwang.smartrefresh.layout.SmartRefreshLayout>
+            </android.support.v4.widget.NestedScrollView>
+        </top.jplayer.baseprolibrary.widgets.MultipleStatusView>
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+    <LinearLayout
+        android:id="@+id/llPay"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/generalHeight"
+        android:layout_gravity="bottom"
+        android:background="@color/white">
+
+        <TextView
+            android:id="@+id/tvCountPrice"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/black"
+            android:gravity="center_vertical"
+            android:paddingLeft="15dp"
+            android:text="￥0.00"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_18"/>
+
+        <Button
+            android:id="@+id/btnSubmit"
+            android:layout_width="@dimen/dimen_100dp"
+            android:layout_height="match_parent"
+            android:background="@color/chocolate"
+            android:gravity="center"
+            android:text="马上结算"
+            android:textColor="@color/black"/>
+    </LinearLayout>
+</FrameLayout>

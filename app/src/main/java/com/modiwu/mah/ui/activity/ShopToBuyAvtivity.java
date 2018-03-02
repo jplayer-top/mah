@@ -4,8 +4,11 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -33,6 +36,7 @@ import butterknife.Unbinder;
 import io.reactivex.Observable;
 import top.jplayer.baseprolibrary.utils.ActivityUtils;
 import top.jplayer.baseprolibrary.utils.MoneyUtils;
+import top.jplayer.baseprolibrary.utils.ToastUtils;
 
 /**
  * Created by Administrator on 2018/2/7.
@@ -42,17 +46,20 @@ import top.jplayer.baseprolibrary.utils.MoneyUtils;
 public class ShopToBuyAvtivity extends BaseCommonActivity {
     @BindView(R.id.tvLocal)
     TextView mTvLocal;
-    @BindView(R.id.tvName)
-    TextView tvName;
-    @BindView(R.id.tvPhone)
-    TextView tvPhone;
+    @BindView(R.id.editName)
+    EditText tvName;
+    @BindView(R.id.editPhone)
+    EditText tvPhone;
+    @BindView(R.id.editRemark)
+    EditText editRemark;
     @BindView(R.id.tvCountPrice)
     TextView tvCountPrice;
     @BindView(R.id.recycleItem)
     RecyclerView recycleItem;
     @BindView(R.id.btnSubmit)
     Button btnSubmit;
-
+    @BindView(R.id.llPay)
+    LinearLayout llPay;
     private Unbinder mUnbinder;
     DefLocalBean.AddrBean mAddrBean;
     ShopToBuyPresenter mPresenter;
@@ -84,7 +91,7 @@ public class ShopToBuyAvtivity extends BaseCommonActivity {
             mMap.put("fangan_id", mFangan_id);
 
         }
-
+        llPay.setEnabled(false);
         mMap.put("goods_num", goods_num);
         List<ShopCartBean> orderLists = new Gson().fromJson(mBundle.getString("json"), new TypeToken<List<ShopCartBean>>() {
         }.getType());
@@ -100,25 +107,49 @@ public class ShopToBuyAvtivity extends BaseCommonActivity {
         recycleItem.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         recycleItem.setAdapter(new OrderCreateInfoAdapter(orderLists));
         btnSubmit.setOnClickListener(v -> {
+            if (!TextUtils.isEmpty(editRemark.getText())) {
+                mMap.put("remark", editRemark.getText().toString());
+            } else {
+                if (mMap.containsKey("remark")) {
+                    mMap.remove("remark");
+                }
+            }
             if (mFangan_id != null) {
+                if (TextUtils.isEmpty(tvName.getText())) {
+                    ToastUtils.init().showInfoToast(this, "请填写姓名");
+                    return;
+                }
+                mMap.put("user_name", tvName.getText().toString());
+                if (TextUtils.isEmpty(tvPhone.getText())) {
+                    ToastUtils.init().showInfoToast(this, "请填写联系电话");
+                    return;
+                }
+                mMap.put("user_phone", tvPhone.getText().toString());
                 mPresenter.requestSchemeCreateData(mMap);
 
             } else {
+                if (TextUtils.isEmpty(mTvLocal.getText())) {
+                    ToastUtils.init().showInfoToast(this, "请选择收货地址");
+                    return;
+                }
+                mMap.put("rp_name", mAddrBean.rp_name);
+                mMap.put("rp_mobile", mAddrBean.rp_phone);
+                String local = String.format(Locale.CHINA, "%s%s%s%s", mAddrBean.rp_province, mAddrBean.rp_city, mAddrBean.rp_area,
+                        mAddrBean.rp_addr);
+                mMap.put("rp_addr", local);
                 mPresenter.requestOrderCreateData(mMap);
             }
         });
         tvCountPrice.setText(String.format(Locale.CHINA, "￥%.2f", countPrice / 100f));
 
-        tvName.setOnClickListener(toAddLocal());
         mTvLocal.setOnClickListener(toAddLocal());
-        tvPhone.setOnClickListener(toAddLocal());
+//        tvName.setOnClickListener(toAddLocal());
+//        tvPhone.setOnClickListener(toAddLocal());
     }
 
     @NonNull
     private View.OnClickListener toAddLocal() {
-        return v -> {
-            ActivityUtils.init().start(this, LocalListActivity.class, "地址列表");
-        };
+        return v -> ActivityUtils.init().start(this, LocalListActivity.class, "地址列表");
     }
 
     @Subscribe
@@ -147,21 +178,17 @@ public class ShopToBuyAvtivity extends BaseCommonActivity {
 
     public void setOrderLocal(DefLocalBean localBean) {
         setAddrBean(localBean.addr);
+        llPay.setEnabled(true);
     }
 
     private void setAddrBean(DefLocalBean.AddrBean addr) {
         mAddrBean = addr;
         if (mFangan_id != null) {
-            mMap.put("user_name", mAddrBean.rp_name);
-            mMap.put("user_phone", mAddrBean.rp_phone);
             tvName.setText(mAddrBean.rp_name);
             tvPhone.setText(mAddrBean.rp_phone);
         } else {
-            mMap.put("rp_name", mAddrBean.rp_name);
-            mMap.put("rp_mobile", mAddrBean.rp_phone);
             String local = String.format(Locale.CHINA, "%s%s%s%s", mAddrBean.rp_province, mAddrBean.rp_city, mAddrBean.rp_area,
                     mAddrBean.rp_addr);
-            mMap.put("rp_addr", local);
             mTvLocal.setText(local);
         }
     }

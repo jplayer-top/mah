@@ -4,14 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/dimen_2dp"
     android:layout_marginLeft="@dimen/dimen_15dp"
     android:layout_marginRight="@dimen/dimen_15dp"
     android:background="@color/white">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@drawable/shape_divider"/>
 
     <ImageView
         android:id="@+id/ivShopPic"

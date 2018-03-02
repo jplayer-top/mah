@@ -18,6 +18,7 @@ import io.rong.imkit.RongIM;
 import io.rong.imlib.RongIMClient;
 import top.jplayer.baseprolibrary.mvp.contract.BasePresenter;
 import top.jplayer.baseprolibrary.net.SampleShowDialogObserver;
+import top.jplayer.baseprolibrary.utils.SharePreUtil;
 
 import static com.modiwu.mah.base.BaseApplication.getCurProcessName;
 
@@ -40,7 +41,15 @@ public class LoginPresenter extends BasePresenter<LoginAnimActivity> implements 
         mModel.requestLogin(phone, password).subscribe(new SampleShowDialogObserver<LoginBean>(mIView) {
             @Override
             protected void onSuccess(LoginBean loginBean) throws Exception {
-                connect(loginBean.imtoken);
+                String imtoken = loginBean.imtoken;
+                if (imtoken == null) {
+                    String token = (String) SharePreUtil.getData(mIView, "token", "");
+                    if (token != null && !token.equals("")) {
+                        connect(token);
+                    }
+                } else {
+                    connect(imtoken);
+                }
                 mIView.login(loginBean);
             }
         });
