@@ -38,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="18dp"
                 android:text="@string/solagon"
-                android:textColor="@color/colorWhite"
+                android:textColor="@color/chocolate"
                 android:textSize="18sp"/>
         </LinearLayout>
 

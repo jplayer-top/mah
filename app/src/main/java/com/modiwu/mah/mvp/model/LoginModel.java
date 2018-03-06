@@ -37,6 +37,12 @@ public class LoginModel {
                 .compose(new IoMainSchedule<>());
     }
 
+    public Observable<LoginBean> requestWxToken(String token) {
+        return RetrofitManager.init().create(MahServer.class)
+                .getWxToken(token, "0")
+                .compose(new IoMainSchedule<>());
+    }
+
     public Observable<RegisterBean> requestRegister(Map<String, String> map) {
         return RetrofitManager.init().create(MahServer.class)
                 .register(map)
@@ -46,6 +52,12 @@ public class LoginModel {
     public Observable<RegisterBean> requestForget(Map<String, String> map) {
         return RetrofitManager.init().create(MahServer.class)
                 .forget(map)
+                .compose(new IoMainSchedule<>());
+    }
+
+    public Observable<LoginBean> requestWxTokenByLogin(String token, String phone, String smCode) {
+        return RetrofitManager.init().create(MahServer.class)
+                .getWxTokenByLogin(token, "1", smCode, phone)
                 .compose(new IoMainSchedule<>());
     }
 }

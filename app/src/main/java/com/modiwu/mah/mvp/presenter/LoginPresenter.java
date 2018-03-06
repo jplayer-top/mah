@@ -41,19 +41,23 @@ public class LoginPresenter extends BasePresenter<LoginAnimActivity> implements 
         mModel.requestLogin(phone, password).subscribe(new SampleShowDialogObserver<LoginBean>(mIView) {
             @Override
             protected void onSuccess(LoginBean loginBean) throws Exception {
-                String imtoken = loginBean.imtoken;
-                if (imtoken == null) {
-                    String token = (String) SharePreUtil.getData(mIView, "token", "");
-                    if (token != null && !token.equals("")) {
-                        connect(token);
-                    }
-                } else {
-                    connect(imtoken);
-                }
+                connectIm(loginBean);
                 mIView.login(loginBean);
             }
         });
 
+    }
+
+    private void connectIm(LoginBean loginBean) {
+        String imtoken = loginBean.imtoken;
+        if (imtoken == null) {
+            String token = (String) SharePreUtil.getData(mIView, "token", "");
+            if (token != null && !token.equals("")) {
+                connect(token);
+            }
+        } else {
+            connect(imtoken);
+        }
     }
 
     @Override
@@ -112,6 +116,14 @@ public class LoginPresenter extends BasePresenter<LoginAnimActivity> implements 
 
     @Override
     public void wxLogin(String token, String phone, String smCode) {
+        mModel.requestWxTokenByLogin(token, phone, smCode)
+                .subscribe(new SampleShowDialogObserver<LoginBean>(mIView) {
+                    @Override
+                    protected void onSuccess(LoginBean loginBean) throws Exception {
+                        connectIm(loginBean);
+                        mIView.login(loginBean);
+                    }
+                });
 
     }
 

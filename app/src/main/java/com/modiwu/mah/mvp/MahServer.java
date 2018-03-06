@@ -216,4 +216,14 @@ public interface MahServer {
 
     @GET("ver")
     Observable<VersionBean> getVersion();
+
+    @POST("user/wxlogin?")
+    Observable<LoginBean> getWxToken(@Query("token") String token, @Query("type") String type);
+
+    @POST("user/wxlogin?")
+    Observable<LoginBean> getWxTokenByLogin(
+            @Query("token") String token,
+            @Query("type") String type,
+            @Query("smCode")String smCode,
+            @Query("phone")String phone);
 }

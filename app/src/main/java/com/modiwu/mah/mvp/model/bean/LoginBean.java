@@ -14,4 +14,8 @@ public class LoginBean extends BaseBean {
     public int fid;
     public String fname;
 
+    public boolean isWxLoginFail() {
+        return "400".equals(code);
+    }
+
 }

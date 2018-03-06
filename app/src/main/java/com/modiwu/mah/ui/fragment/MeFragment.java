@@ -156,7 +156,8 @@ public class MeFragment extends BaseFragment {
                 Glide.with(getContext()).load(R.mipmap.ic_launcher).apply(RequestOptions.circleCropTransform()).into(ivMeAvatar);
                 tvName.setText("点击登录");
             }
-        },throwable -> {});
+        }, throwable -> {
+        });
     }
 
     /**
@@ -226,9 +227,14 @@ public class MeFragment extends BaseFragment {
     }
 
     private void bindInfo(MeInfoBean baseBean) {
-        Glide.with(getContext()).load(baseBean.profile.user_avatar)
-                .apply(GlideUtils.init().options())
-                .apply(RequestOptions.circleCropTransform()).into(ivMeAvatar);
+        if (baseBean.profile.user_avatar == null) {
+            Glide.with(getContext()).load(getResources().getDrawable(R.mipmap.ic_launcher)).into(ivMeAvatar);
+        } else {
+            Glide.with(getContext()).load(baseBean.profile.user_avatar)
+                    .apply(GlideUtils.init().options())
+                    .apply(RequestOptions.circleCropTransform()).into(ivMeAvatar);
+
+        }
         tvName.setText(baseBean.profile.user_name);
         llToLogin.setEnabled(false);
     }

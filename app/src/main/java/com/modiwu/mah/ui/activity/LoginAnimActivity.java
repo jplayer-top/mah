@@ -21,6 +21,7 @@ import com.modiwu.mah.mvp.model.bean.LoginBean;
 import com.modiwu.mah.mvp.model.bean.RegisterBean;
 import com.modiwu.mah.mvp.model.event.LoginSuccessEvent;
 import com.modiwu.mah.mvp.model.event.TokenEvent;
+import com.modiwu.mah.mvp.model.event.WXLoginSuccessEvent;
 import com.modiwu.mah.mvp.presenter.LoginPresenter;
 import com.modiwu.mah.utils.EditTextUtils;
 import com.modiwu.mah.utils.StringUtils;
@@ -143,9 +144,15 @@ public class LoginAnimActivity extends BaseSpecialActivity implements TextWatche
         mPresenter = new LoginPresenter(this);
         FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) mLlShowBack.getLayoutParams();
         params.topMargin = ScreenUtils.getStatusBar(this) + SizeUtils.dp2px(2);
-
+        EventBus.getDefault().register(this);
         mMap = new HashMap<>();
         mLlWxBindIssue.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 
     @Override
@@ -202,6 +209,11 @@ public class LoginAnimActivity extends BaseSpecialActivity implements TextWatche
     }
 
     public boolean isRegister = false;
+
+    @Subscribe
+    public void wxLogin(WXLoginSuccessEvent event) {
+        login(event.loginBean);
+    }
 
     @Override
     public void login(LoginBean loginBean) {

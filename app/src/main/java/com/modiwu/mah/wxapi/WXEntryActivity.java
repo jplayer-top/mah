@@ -4,14 +4,21 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 
 import com.modiwu.mah.base.BaseApplication;
+import com.modiwu.mah.mvp.model.LoginModel;
+import com.modiwu.mah.mvp.model.event.TokenEvent;
+import com.modiwu.mah.mvp.model.event.WXLoginSuccessEvent;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
+import com.tencent.mm.opensdk.modelmsg.SendAuth;
 import com.tencent.mm.opensdk.modelmsg.SendMessageToWX;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
+
+import org.greenrobot.eventbus.EventBus;
 
 import top.jplayer.baseprolibrary.utils.ToastUtils;
 
@@ -71,7 +78,32 @@ public class WXEntryActivity extends AppCompatActivity implements IWXAPIEventHan
     private void check(BaseResp resp, String msg) {
         if (resp instanceof SendMessageToWX.Resp) {
             ToastUtils.init().showSuccessToast(this, msg);
+        } else {
+            if (TextUtils.equals("分享成功", msg)) {
+                wxLogin((SendAuth.Resp) resp);
+            }
         }
     }
 
+    private void wxLogin(SendAuth.Resp resp) {
+        LoginModel model = new LoginModel();
+        String token = resp.code;
+        model.requestWxToken(token).subscribe(loginBean -> {
+            if (loginBean != null) {
+                if (loginBean.isWxLoginFail()) {
+                    ToastUtils.init().showInfoToast(this, loginBean.msg);
+                    EventBus.getDefault().post(new TokenEvent(loginBean.code, token));
+                } else {
+                    EventBus.getDefault().post(new WXLoginSuccessEvent(loginBean));
+                }
+            } else {
+                loginError();
+            }
+            this.finish();
+        }, throwable -> loginError());
+    }
+
+    private void loginError() {
+        ToastUtils.init().showErrorToast(this, "请求失败");
+    }
 }
