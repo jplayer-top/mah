@@ -15,6 +15,7 @@ import com.modiwu.mah.R;
 import com.modiwu.mah.mvp.model.bean.ShopGoodsInfoBean;
 import com.modiwu.mah.mvp.model.event.TouchAttrEvent;
 import com.modiwu.mah.ui.adapter.ShopSpecAdapter;
+import com.modiwu.mah.utils.StringUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -130,9 +131,9 @@ public class FsShopDetialDialog extends BottomTopDialogFragment implements View.
         Bundle bundle = getArguments();
         mDetialBean = bundle.getParcelable("type");
         tvOnePrice.setText(String.format(Locale.CHINA, "￥%s", bundle.getString("price")));
-        tvGoodNum.setText(String.format(Locale.CHINA, "库存：%s", bundle.getString("num")));
         if (mDetialBean != null) {
             Glide.with(getContext()).load(mDetialBean.goods.goods_thumb).apply(GlideUtils.init().options()).into(mIvTumb);
+            tvGoodNum.setText(StringUtils.getInstance().isNullable(mDetialBean.goods.goods_title, "整个家"));
             if (mDetialBean.attrs != null) {
                 attr_ids = new StringBuilder();
                 mAdapter = new ShopSpecAdapter(getContext(), mDetialBean.attrs);
@@ -154,7 +155,7 @@ public class FsShopDetialDialog extends BottomTopDialogFragment implements View.
                         .filter(specsBean -> attrId.equals(specsBean.attr_id + ","))
                         .subscribe(specsBean -> {
                             tvOnePrice.setText(String.format(Locale.CHINA, "￥%s", specsBean.goods_best_price_yuan));
-                            tvGoodNum.setText(String.format(Locale.CHINA, "库存：%d", specsBean.goods_stock));
+//                            tvGoodNum.setText(String.format(Locale.CHINA, "库存：%d", specsBean.goods_stock));
                         });
             }
         }

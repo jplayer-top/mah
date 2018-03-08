@@ -19,6 +19,7 @@ import com.modiwu.mah.mvp.presenter.HomePresenter;
 import com.modiwu.mah.ui.adapter.HomeAdvLayoutAdapter;
 import com.modiwu.mah.ui.adapter.HomeHeardLayoutAdapter;
 import com.modiwu.mah.ui.adapter.HomeRecommendLayoutAdapter;
+import com.modiwu.mah.ui.adapter.HomeSectionFooterLayoutAdapter;
 import com.modiwu.mah.ui.adapter.HomeSectionLayoutAdapter;
 import com.modiwu.mah.ui.adapter.HomeSingleVLayoutAdapter;
 import com.modiwu.mah.ui.adapter.HomeToShopLayoutAdapter;
@@ -123,6 +124,8 @@ public class HomeFragment extends BaseFragment implements HomeContract.HomeView 
             HomeRecommendLayoutAdapter recommendLayoutAdapter = getHomeRecommendLayoutAdapter(fanganBeans);
             recommendLayoutAdapter.setFangAn(fanganBeans);
             adapters.add(recommendLayoutAdapter);
+            adapters.add(getHomeSectionFooterLayoutAdapter("方案"));
+
         }
 
         /**
@@ -146,6 +149,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.HomeView 
             HomeSingleVLayoutAdapter singleVLayoutAdapter = new HomeSingleVLayoutAdapter(getContext(), gridLayoutHelper, goodBeans.size(), HomeBean.BODY_SINGLE);
             singleVLayoutAdapter.setGoods(goodBeans);
             adapters.add(singleVLayoutAdapter);
+            adapters.add(getHomeSectionFooterLayoutAdapter("颜值单品"));
         }
 
         /**
@@ -160,6 +164,8 @@ public class HomeFragment extends BaseFragment implements HomeContract.HomeView 
                 HomeRecommendLayoutAdapter recommendLayoutAdapter = getHomeRecommendLayoutAdapter(realSjsBeans);
                 recommendLayoutAdapter.setSjs(realSjsBeans);
                 adapters.add(recommendLayoutAdapter);
+                adapters.add(getHomeSectionFooterLayoutAdapter("匠心"));
+
             }
         }
 
@@ -201,6 +207,14 @@ public class HomeFragment extends BaseFragment implements HomeContract.HomeView 
         sectionLayoutAdapter.setTitle(title);
         return sectionLayoutAdapter;
     }
+
+    private HomeSectionFooterLayoutAdapter getHomeSectionFooterLayoutAdapter(String title) {
+        HomeSectionFooterLayoutAdapter sectionLayoutAdapter = new HomeSectionFooterLayoutAdapter(getContext(), new
+                LinearLayoutHelper(), 1, HomeBean.BODY_SECTION_FOOTER);
+        sectionLayoutAdapter.setTitle(title);
+        return sectionLayoutAdapter;
+    }
+
 
     @Override
     public void versionUpData() {

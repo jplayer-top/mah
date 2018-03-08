@@ -20,6 +20,7 @@ public class HomeBean extends BaseBean implements MultiItemEntity {
     public static final int BODY_SECTION = 4;
     public static final int BODY_HEARD = 5;
     public static final int BODY_NULL = 6;
+    public static final int BODY_SECTION_FOOTER = 7;
     public String type;
 
     public HomeBean(String type) {
@@ -40,6 +41,8 @@ public class HomeBean extends BaseBean implements MultiItemEntity {
             return BODY_SECTION;
         } else if (type.equals("BODY_HEARD")) {
             return BODY_HEARD;
+        } else if (type.equals("BODY_SECTION_FOOTER")) {
+            return BODY_SECTION_FOOTER;
         } else
             return BODY_NULL;
 

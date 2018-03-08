@@ -18,9 +18,9 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/beautiful_single"
-            android:textStyle="bold"
             android:textColor="@color/black"
-            android:textSize="@dimen/sp_18"/>
+            android:textSize="@dimen/sp_18"
+            android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/tvToMore"
@@ -34,6 +34,7 @@
             android:paddingRight="@dimen/dp_10"
             android:paddingStart="@dimen/dp_10"
             android:text="@string/more"
+            android:visibility="gone"
             tools:ignore="PrivateResource,RtlHardcoded"/>
     </RelativeLayout>
 

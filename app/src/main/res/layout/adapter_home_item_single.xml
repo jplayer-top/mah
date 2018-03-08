@@ -59,7 +59,7 @@
             android:layout_marginLeft="@dimen/dimen_15dp"
             android:lineSpacingExtra="@dimen/lineSpacingExtra_3"
             android:text="@string/home_item_price"
-            android:textColor="@color/black"
+            android:textColor="@color/money_color"
             android:textSize="@dimen/sp_14"/>
     </LinearLayout>
 

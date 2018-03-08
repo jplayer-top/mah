@@ -1,6 +1,7 @@
 package com.modiwu.mah.ui.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -33,8 +34,12 @@ public class HomeSectionFooterLayoutAdapter extends VLayoutAdapter<RecyclerView.
 
     @Override
     protected void onBindViewHolderWithOffset(RecyclerView.ViewHolder holder, int position, int offsetTotal) {
-        TextView tvTitle = holder.itemView.findViewById(R.id.tvTitle);
         TextView tvToMore = holder.itemView.findViewById(R.id.tvToMore);
+        if (mTitle.equals("颜值单品")) {
+            tvToMore.setBackgroundColor(Color.WHITE);
+        } else {
+            tvToMore.setBackgroundColor(Color.parseColor("#f5f5f5"));
+        }
         tvToMore.setOnClickListener(v -> {
             int clickMore;
             if (mTitle.equals("方案")) {
@@ -49,7 +54,6 @@ public class HomeSectionFooterLayoutAdapter extends VLayoutAdapter<RecyclerView.
             }
 
         });
-        tvTitle.setText(mTitle);
     }
 
     public void setTitle(String title) {
