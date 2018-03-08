@@ -87,9 +87,9 @@
             android:layout_width="wrap_content"
             android:layout_height="@dimen/dimen_40dp"
             android:layout_gravity="bottom"
-            android:background="@drawable/shape_black_glod"
+            android:background="@color/color999"
             android:text="@string/get_code"
-            android:textColor="@drawable/selector_text_33fff_press"
+            android:textColor="@color/white"
             android:textSize="@dimen/dimen_10sp"/>
     </LinearLayout>
 
@@ -133,7 +133,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimen_46dp"
             android:width="0dp"
-            android:background="@color/grey"
+            android:background="@color/chocolate"
             android:text="@string/next"
             android:textColor="@drawable/selector_text_press"/>
 

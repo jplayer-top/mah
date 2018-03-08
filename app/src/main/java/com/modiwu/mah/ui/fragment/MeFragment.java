@@ -32,13 +32,17 @@ import com.modiwu.mah.ui.activity.MeShouCangActivity;
 import com.modiwu.mah.ui.activity.ShopCartActivity;
 import com.modiwu.mah.ui.dialog.ShareDialog;
 import com.modiwu.mah.wxapi.WXShare;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
+import java.util.concurrent.TimeUnit;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import io.reactivex.Observable;
 import top.jplayer.baseprolibrary.glide.GlideUtils;
 import top.jplayer.baseprolibrary.net.SampleShowDialogObserver;
 import top.jplayer.baseprolibrary.net.download.DownloadByChrome;
@@ -80,6 +84,8 @@ public class MeFragment extends BaseFragment {
     TextView tvShare;
     @BindView(R.id.ivMeAvatar)
     ImageView ivMeAvatar;
+    @BindView(R.id.smartRefreshLayout)
+    SmartRefreshLayout mRefreshLayout;
     private MeInfoModel mModel;
     private WXShare mWxShare;
 
@@ -95,6 +101,13 @@ public class MeFragment extends BaseFragment {
         findView(rootView);
         EventBus.getDefault().register(this);
         mWxShare = new WXShare(getContext());
+        mRefreshLayout.setOnRefreshListener(refresh -> {
+            if (!"0".equals(uid)) {
+                refreshInfo(uid);
+            } else {
+                Observable.interval(500, TimeUnit.MILLISECONDS).subscribe(aLong -> mRefreshLayout.finishRefresh());
+            }
+        });
     }
 
     private void findView(View rootView) {
@@ -212,6 +225,7 @@ public class MeFragment extends BaseFragment {
                 bindInfo(baseBean);
                 String json = new Gson().toJson(baseBean);
                 SharePreUtil.saveData(getContext(), "info", json);
+                mRefreshLayout.finishRefresh();
             }
         });
     }

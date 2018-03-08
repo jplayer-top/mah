@@ -158,7 +158,8 @@
                         android:gravity="left"
                         android:hint="在这里给我们捎些话"
                         android:padding="@dimen/dimen_10dp"
-                        android:textColorHint="@color/color999"/>
+                        android:textColorHint="@color/color999"
+                        android:textSize="@dimen/dimen_13sp"/>
 
                     <View
                         android:layout_width="match_parent"

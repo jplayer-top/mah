@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -43,10 +44,14 @@ public class SchemeDetailActivity extends BaseSpecialActivity implements SchemeD
     ImageView mIvCirRed;
     @BindView(R.id.tvToBuy)
     TextView mTvToBuy;
+    @BindView(R.id.btn2YY)
+    Button btn2YY;
     @BindView(R.id.viewPager)
     ViewPager viewPager;
     @BindView(R.id.rlSchemeDetailBottom)
     LinearLayout llSchemeDetailBottom;
+    @BindView(R.id.llBottom)
+    LinearLayout llBottom;
     @BindView(R.id.multiplestatusview)
     MultipleStatusView mMultipleStatusView;
     @BindView(R.id.smartRefreshLayout)
@@ -87,8 +92,9 @@ public class SchemeDetailActivity extends BaseSpecialActivity implements SchemeD
         } else {
             mMultipleStatusView.showEmpty();
         }
-        ivBarSearch.setOnClickListener(view ->
-                mPresenter.requestHasCollection(mFangan_id));
+        mPresenter.requestHasCollection(mFangan_id);
+        ivBarSearch.setOnClickListener(view -> mPresenter.requestCollection(mFangan_id));
+
     }
 
     @Override
@@ -110,10 +116,19 @@ public class SchemeDetailActivity extends BaseSpecialActivity implements SchemeD
             public void onTabSelected(TabLayout.Tab tab) {
                 LogUtil.e("onTabSelected" + tab.getPosition());
                 if (tab.getPosition() == 3 || tab.getPosition() == 4) {
-                    llSchemeDetailBottom.setVisibility(View.GONE);
-                } else
                     llSchemeDetailBottom.setVisibility(View.VISIBLE);
+                    if (tab.getPosition() == 3) {
+                        btn2YY.setVisibility(View.VISIBLE);
+                        llBottom.setVisibility(View.GONE);
+                    } else {
+                        llSchemeDetailBottom.setVisibility(View.GONE);
+                    }
+                } else {
+                    llSchemeDetailBottom.setVisibility(View.VISIBLE);
+                    btn2YY.setVisibility(View.GONE);
+                    llBottom.setVisibility(View.VISIBLE);
 
+                }
             }
 
             @Override
@@ -167,5 +182,13 @@ public class SchemeDetailActivity extends BaseSpecialActivity implements SchemeD
 
     public void setSchemeCollectionData(BaseBean baseBean) {
         ToastUtils.init().showSuccessToast(this, baseBean.msg);
+    }
+
+    public void isCollection(boolean has) {
+        if (has) {
+            ivBarSearch.setImageDrawable(getResources().getDrawable(R.drawable.has_collection));
+        } else {
+            ivBarSearch.setImageDrawable(getResources().getDrawable(R.drawable.shop_collection));
+        }
     }
 }

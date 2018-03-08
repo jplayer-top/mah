@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:layout_marginBottom="@dimen/dp_10"
-              android:layout_marginEnd="@dimen/dp_10"
-              android:layout_marginLeft="@dimen/dp_10"
-              android:layout_marginRight="@dimen/dp_10"
-              android:layout_marginStart="@dimen/dp_10"
-              android:background="@color/whitesmoke"
-              android:orientation="vertical">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/llScheme_body"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:foreground="?android:selectableItemBackground"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/dp_10">
 
     <ImageView
         android:id="@+id/ivBodyPic"
-        style="@style/img_adjust_bounds"/>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"/>
 
     <TextView
         android:id="@+id/tvItemTitle"
@@ -29,6 +29,6 @@
         style="@style/textview_body_magin_10"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/dp_10"
+        android:textColor="@color/color999"
         android:text=""/>
 </LinearLayout>

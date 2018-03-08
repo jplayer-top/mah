@@ -10,7 +10,6 @@ import io.reactivex.disposables.Disposable;
 import top.jplayer.baseprolibrary.mvp.contract.BasePresenter;
 import top.jplayer.baseprolibrary.mvp.model.bean.BaseBean;
 import top.jplayer.baseprolibrary.net.SampleShowDialogObserver;
-import top.jplayer.baseprolibrary.utils.ToastUtils;
 
 /**
  * Created by Obl on 2018/1/25.
@@ -29,7 +28,8 @@ public class SchemeDetailPresenter extends BasePresenter<SchemeDetailActivity> i
     @Override
     public void requestSchemeDetialData(String fangan_id) {
         Disposable disposable = mModel.requestSchemeDetailBean(fangan_id)
-                .subscribe(schemeDetailBean -> mIView.setSchemeDetialData(schemeDetailBean),throwable -> {});
+                .subscribe(schemeDetailBean -> mIView.setSchemeDetialData(schemeDetailBean), throwable -> {
+                });
         addSubscription(disposable);
     }
 
@@ -65,12 +65,7 @@ public class SchemeDetailPresenter extends BasePresenter<SchemeDetailActivity> i
                 .subscribe(new SampleShowDialogObserver<CollectionHaseBean>(mIView) {
                     @Override
                     protected void onSuccess(CollectionHaseBean baseBean) throws Exception {
-
-                        if (baseBean.has) {
-                            ToastUtils.init().showInfoToast(mIView, "已经收藏过了");
-                        } else {
-                            requestCollection(fangan_id);
-                        }
+                        mIView.isCollection(baseBean.has);
                     }
                 });
     }

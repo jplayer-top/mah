@@ -162,9 +162,12 @@
         android:id="@+id/bgaBanner"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:paddingTop="@dimen/dp_10"
+        android:layout_marginBottom="?actionBarSize"
         android:background="@color/white"
+        android:paddingTop="@dimen/dp_10"
         android:scaleType="fitCenter"
         bga:banner_pointAutoPlayAble="false"
-        bga:banner_pointTopBottomMargin="@dimen/dp_20"/>
+        bga:banner_pointTopBottomMargin="@dimen/dp_20"
+        bga:banner_tipTextColor="@color/colorBlackGold"/>
+
 </LinearLayout>

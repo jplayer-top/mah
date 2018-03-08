@@ -20,7 +20,7 @@ import top.jplayer.baseprolibrary.glide.GlideUtils;
 
 public class SchemeAllAdapter extends BaseQuickAdapter<SchemeDetailBean.ZhengBean, BaseViewHolder> {
     public SchemeAllAdapter(List<SchemeDetailBean.ZhengBean> data) {
-        super(R.layout.adapter_scheme_body, data);
+        super(R.layout.adapter_scheme_body_detail, data);
     }
 
     @Override
@@ -28,7 +28,7 @@ public class SchemeAllAdapter extends BaseQuickAdapter<SchemeDetailBean.ZhengBea
         ImageView ivBodyPic = baseViewHolder.convertView.findViewById(R.id.ivBodyPic);
         Glide.with(mContext).load(bean.img).apply(GlideUtils.init().options()).into(ivBodyPic);
         baseViewHolder.addOnClickListener(R.id.llScheme_body)
-                .setText(R.id.tvItemTitle, StringUtils.getInstance().isNullable(bean.title, "整个家"))
-                .setText(R.id.tvItemBody, StringUtils.getInstance().isNullable(bean.subtitle, "整个家精心推荐"));
+                .setText(R.id.tvItemTitle, StringUtils.getInstance().isNullable(bean.title, ""))
+                .setText(R.id.tvItemBody, StringUtils.getInstance().isNullable(bean.subtitle, ""));
     }
 }

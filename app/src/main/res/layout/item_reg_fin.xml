@@ -128,7 +128,7 @@
             android:layout_height="@dimen/dimen_46dp"
             android:layout_marginBottom="@dimen/dimen_26dp"
             android:width="0dp"
-            android:background="@color/grey"
+            android:background="@color/chocolate"
             android:text="@string/register"
             android:textColor="@color/white"/>
     </LinearLayout>

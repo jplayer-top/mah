@@ -25,7 +25,7 @@
             android:layout_height="46dp"
             android:layout_marginLeft="40dp"
             android:layout_marginRight="40dp"
-            android:background="@drawable/selector_grey_muti_press"
+            android:background="@color/chocolate"
             android:text="@string/login"
             android:textColor="@color/white"
             android:textSize="15sp"/>
@@ -38,16 +38,17 @@
             android:layout_marginLeft="40dp"
             android:layout_marginRight="40dp"
             android:layout_marginTop="20dp"
+            android:layout_marginBottom="26dp"
             android:background="@drawable/selector_55grey_muti_press"
             android:text="@string/register"
             android:textColor="@color/white"
             android:textSize="15sp"/>
 
         <TextView
+            android:visibility="gone"
             android:id="@+id/tvDoNotLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="26dp"
             android:layout_marginTop="5dp"
             android:paddingBottom="10dp"
             android:paddingLeft="20dp"

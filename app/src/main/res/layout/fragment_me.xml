@@ -16,8 +16,13 @@
         android:layout_height="match_parent"
         android:background="@color/colorWhite"
         app:srlAccentColor="@android:color/white"
-        app:srlEnablePureScrollMode="true"
-        app:srlPrimaryColor="@color/white">
+        app:srlEnablePreviewInEditMode="true"
+        app:srlPrimaryColor="#444444"
+        tools:showIn="@layout/fragment_home">
+
+        <com.scwang.smartrefresh.header.BezierCircleHeader
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
         <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
@@ -133,9 +138,9 @@
                         android:id="@+id/tvShare"
                         android:layout_width="match_parent"
                         android:layout_height="?attr/actionBarSize"
+                        android:background="@drawable/selector_white_muti_press"
                         android:drawableLeft="@drawable/me_share"
                         android:drawablePadding="@dimen/dp_10"
-                        android:background="@drawable/selector_white_muti_press"
                         android:gravity="center_vertical"
                         android:text="@string/share_mah"
                         tools:ignore="RtlHardcoded"/>
@@ -175,5 +180,9 @@
                 </LinearLayout>
             </LinearLayout>
         </android.support.v4.widget.NestedScrollView>
+
+        <com.scwang.smartrefresh.layout.footer.FalsifyFooter
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 </LinearLayout>

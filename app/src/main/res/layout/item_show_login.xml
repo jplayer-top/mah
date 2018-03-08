@@ -79,7 +79,7 @@
             android:layout_gravity="bottom"
             android:layout_marginBottom="@dimen/dimen_110dp"
             android:layout_marginTop="@dimen/dimen_40dp"
-            android:background="@drawable/selector_grey_muti_press"
+            android:background="@color/chocolate"
             android:text="@string/login"
             android:textColor="@drawable/selector_text_press"/>
 

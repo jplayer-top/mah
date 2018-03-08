@@ -15,7 +15,17 @@
         android:scaleType="fitXY"
         android:src="@drawable/toolbar_shadow"/>
 
+    <Button
+        android:id="@+id/btn2YY"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black"
+        android:text="预约样板间"
+        android:textColor="@color/chocolate"
+        android:visibility="gone"/>
+
     <LinearLayout
+        android:id="@+id/llBottom"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
