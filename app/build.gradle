@@ -68,7 +68,7 @@ android {
 }
 
 greendao {
-    schemaVersion 2
+    schemaVersion 3
     daoPackage 'com.modiwu.mah.gen'
     targetGenDir 'src/main/java'
 }

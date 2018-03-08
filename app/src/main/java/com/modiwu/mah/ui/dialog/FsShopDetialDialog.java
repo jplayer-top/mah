@@ -101,8 +101,9 @@ public class FsShopDetialDialog extends BottomTopDialogFragment implements View.
                     break;
                 } else {
                     String string = getAttrId();
-                    EventBus.getDefault().post(new ShodeDetialOKEvent(string.substring(0, string.lastIndexOf(",")),
-                            parseInt, tvOnePrice.getText().toString().replace("￥", "")));
+                    ShodeDetialOKEvent event = new ShodeDetialOKEvent(string.substring(0, string.lastIndexOf(",")),
+                            parseInt, tvOnePrice.getText().toString().replace("￥", ""), attrs_values);
+                    EventBus.getDefault().post(event);
                     onDismissWithAnim();
                     break;
                 }
@@ -154,12 +155,15 @@ public class FsShopDetialDialog extends BottomTopDialogFragment implements View.
                 Observable.fromIterable(mDetialBean.specs)
                         .filter(specsBean -> attrId.equals(specsBean.attr_id + ","))
                         .subscribe(specsBean -> {
+                            attrs_values = specsBean.attr_values;
                             tvOnePrice.setText(String.format(Locale.CHINA, "￥%s", specsBean.goods_best_price_yuan));
 //                            tvGoodNum.setText(String.format(Locale.CHINA, "库存：%d", specsBean.goods_stock));
                         });
             }
         }
     }
+
+    private String attrs_values = "";
 
     @Override
     public void onDestroy() {
@@ -173,12 +177,14 @@ public class FsShopDetialDialog extends BottomTopDialogFragment implements View.
         public String type;
         public int amount;
         public String attr_ids;
+        public String attrs;
         public String price;
 
-        public ShodeDetialOKEvent(String attr_ids, int amount, String price) {
+        public ShodeDetialOKEvent(String attr_ids, int amount, String price, String attrs) {
             this.attr_ids = attr_ids;
             this.amount = amount;
             this.price = price;
+            this.attrs = attrs;
         }
     }
 

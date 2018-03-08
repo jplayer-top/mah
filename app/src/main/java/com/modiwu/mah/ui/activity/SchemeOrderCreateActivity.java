@@ -149,7 +149,7 @@ public class SchemeOrderCreateActivity extends BaseCommonActivity {
             countPrice += (sheBean.goods_price * sheBean.goods_num);
             ShopCartBean bean = new ShopCartBean(null, sheBean.goods_title, String.valueOf(sheBean.goods_num), sheBean
                     .goods_price_yuan, String.valueOf(sheBean.goods_num),
-                    sheBean.goods_thumb, String.valueOf(sheBean.goods_attr_id));
+                    sheBean.goods_thumb, sheBean.goods_title, String.valueOf(sheBean.goods_attr_id));
             mCartBeans.add(bean);
             goods_num.append(sheBean.goods_attr_id);
             goods_num.append(",");
@@ -161,7 +161,7 @@ public class SchemeOrderCreateActivity extends BaseCommonActivity {
                     countPrice += (ruanBean.goods_price * ruanBean.goods_num);
                     ShopCartBean bean = new ShopCartBean(null, ruanBean.goods_title, String.valueOf(ruanBean.goods_num), ruanBean
                             .goods_price_yuan,
-                            String.valueOf(ruanBean.goods_num), ruanBean.goods_thumb, String.valueOf(ruanBean.goods_attr_id));
+                            String.valueOf(ruanBean.goods_num), ruanBean.goods_thumb, ruanBean.goods_title, String.valueOf(ruanBean.goods_attr_id));
                     mCartBeans.add(bean);
                     goods_num.append(ruanBean.goods_attr_id);
                     goods_num.append(",");
@@ -172,7 +172,9 @@ public class SchemeOrderCreateActivity extends BaseCommonActivity {
                 .subscribe(yingBean -> {
                     countPrice += (yingBean.goods_price * yingBean.goods_num);
                     ShopCartBean bean = new ShopCartBean(null, yingBean.goods_title, String.valueOf(yingBean.goods_num), yingBean.goods_price_yuan,
-                            String.valueOf(yingBean.goods_num), yingBean.goods_thumb, String.valueOf(yingBean.goods_attr_id));
+                            String.valueOf(yingBean.goods_num), yingBean.goods_thumb, yingBean.goods_title, String
+                            .valueOf(yingBean
+                            .goods_attr_id));
                     mCartBeans.add(bean);
                     goods_num.append(yingBean.goods_attr_id);
                     goods_num.append(",");

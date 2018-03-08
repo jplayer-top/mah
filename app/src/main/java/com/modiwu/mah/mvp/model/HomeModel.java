@@ -5,6 +5,7 @@ import android.os.SystemClock;
 import com.modiwu.mah.mvp.MahServer;
 import com.modiwu.mah.mvp.model.bean.CityCodeBean;
 import com.modiwu.mah.mvp.model.bean.HomeBean;
+import com.modiwu.mah.mvp.model.bean.VersionBean;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -37,6 +38,13 @@ public class HomeModel {
                 .getCityCodeBean(city)
                 .compose(new IoMainSchedule<>());
 
+    }
+    public Observable<VersionBean> requestVersion() {
+        return RetrofitManager.init()
+                .create(MahServer.class)
+                .getVersion()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
     }
 
     public Observable<HomeBean> requestHomeBean(String city_code) {

@@ -1,6 +1,7 @@
 package com.modiwu.mah.mvp.constract;
 
 import com.modiwu.mah.mvp.model.bean.HomeBean;
+import com.modiwu.mah.mvp.model.bean.VersionBean;
 
 import top.jplayer.baseprolibrary.mvp.contract.IContract;
 
@@ -17,6 +18,6 @@ public interface HomeContract {
     interface HomeView extends IContract.IView {
         void setHomeData(HomeBean homeBean);
 
-        void versionUpData();
+        void versionUpData(VersionBean versionBean);
     }
 }

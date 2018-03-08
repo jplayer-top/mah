@@ -79,7 +79,7 @@ public class ShopCartActivity extends BaseCommonActivity implements ShopCartCont
         shopCartBeans = new ArrayList<>();
         mAdapter = new ShopCartAdapter(shopCartBeans);
         mRecyclerView.setAdapter(mAdapter);
-        ivBarSearch.setVisibility(View.VISIBLE);
+        ivBarSearch.setVisibility(View.GONE);
         ivBarSearch.setImageResource(R.drawable.shop_cart_edit);
 
         mAdapter.setOnItemChildClickListener((adapter, view, position) -> {
@@ -105,6 +105,9 @@ public class ShopCartActivity extends BaseCommonActivity implements ShopCartCont
                     shopCartBean.isCheck = !shopCartBean.isCheck;
                     moneyChange();
                     break;
+                case R.id.tv_delete:
+                    mPresenter.delData(mAdapter.getData().get(position));
+                    break;
             }
             return false;
         });
@@ -128,7 +131,11 @@ public class ShopCartActivity extends BaseCommonActivity implements ShopCartCont
             Observable.fromIterable(shopCartBeans)
                     .filter(shopCartBean -> shopCartBean.isCheck)
                     .subscribe(list::add);
-            mPresenter.delData(list);
+            if (list.size() > 0) {
+                mPresenter.delData(list);
+            } else {
+                ToastUtils.init().showInfoToast(this, "请先选择要删除的物品");
+            }
         });
         mTv2Collection.setOnClickListener(v -> {
             List<ShopCartBean> list = new ArrayList<>();

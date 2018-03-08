@@ -29,7 +29,7 @@ public class ShopCartPresenter extends BasePresenter<ShopCartActivity> implement
     @Override
     public void requestShopCartData() {
         List<ShopCartBean> shopCartBeans = mDaoUtil.queryAllbean();
-        Observable.timer(1, TimeUnit.SECONDS)
+        Observable.timer(0, TimeUnit.SECONDS)
                 .compose(new IoMainSchedule<>())
                 .map(aLong -> shopCartBeans)
                 .subscribe(beans -> {
@@ -44,11 +44,14 @@ public class ShopCartPresenter extends BasePresenter<ShopCartActivity> implement
     }
 
     public void delData(List<ShopCartBean> delList) {
+
         Observable.fromIterable(delList).subscribe(mDaoUtil::deleteShopCartBean, throwable -> {
-        }, () -> {
-            requestShopCartData();
-            mIView.delOneData();
-        });
+        }, () -> mIView.delOneData());
+    }
+
+    public void delData(ShopCartBean bean) {
+        Observable.just(bean).subscribe(mDaoUtil::deleteShopCartBean, throwable -> {
+        }, () -> mIView.delOneData());
     }
 
     public void updataBean(int position, ShopCartBean shopCartBean) {

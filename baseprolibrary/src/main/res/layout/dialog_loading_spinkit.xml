@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:padding="10dp"
-        app:SpinKit_Color="@color/grey"/>
+        app:SpinKit_Color="@color/color999"/>
 
     <TextView
         android:id="@+id/name"
@@ -28,7 +28,7 @@
         android:layout_gravity="bottom|center_horizontal"
         android:layout_marginTop="10dp"
         android:text="正在进行网络请求..."
-        android:textColor="@color/grey"
+        android:textColor="@color/color999"
         android:textSize="16sp"/>
 
 </LinearLayout>

@@ -1,7 +1,10 @@
 package com.modiwu.mah.ui.fragment;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
@@ -11,10 +14,12 @@ import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.VirtualLayoutManager;
 import com.alibaba.android.vlayout.layout.GridLayoutHelper;
 import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
+import com.modiwu.mah.BuildConfig;
 import com.modiwu.mah.R;
 import com.modiwu.mah.base.BaseFragment;
 import com.modiwu.mah.mvp.constract.HomeContract;
 import com.modiwu.mah.mvp.model.bean.HomeBean;
+import com.modiwu.mah.mvp.model.bean.VersionBean;
 import com.modiwu.mah.mvp.presenter.HomePresenter;
 import com.modiwu.mah.ui.adapter.HomeAdvLayoutAdapter;
 import com.modiwu.mah.ui.adapter.HomeHeardLayoutAdapter;
@@ -30,6 +35,7 @@ import java.util.List;
 
 import io.reactivex.Observable;
 import top.jplayer.baseprolibrary.BaseInitApplication;
+import top.jplayer.baseprolibrary.net.download.DownloadByChrome;
 import top.jplayer.baseprolibrary.ui.ContactActivity;
 import top.jplayer.baseprolibrary.utils.ActivityUtils;
 
@@ -71,6 +77,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.HomeView 
         mPresenter = new HomePresenter(this);
         showLoading();
         mPresenter.requestHomeData();
+        mPresenter.requestVersion();
         tvCurLocal.setVisibility(View.VISIBLE);
         tvCurLocal.setOnClickListener(v -> ActivityUtils.init().startFragmentForResult(this, ContactActivity.class,
                 "定位城市", RESULT_FIRST_USER));
@@ -217,8 +224,31 @@ public class HomeFragment extends BaseFragment implements HomeContract.HomeView 
 
 
     @Override
-    public void versionUpData() {
-
+    public void versionUpData(VersionBean versionBean) {
+        VersionBean.VerBean verBean = versionBean.ver;
+        int curVerCode = BuildConfig.VERSION_CODE;// 当前的版本号
+        int urlCode = verBean.build;
+        if (urlCode > curVerCode) {
+            showNoticeDialog(verBean);
+        }
     }
 
+    /**
+     * 显示更新对话框
+     */
+    private void showNoticeDialog(VersionBean.VerBean verBean) {
+        // 构造对话框
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("更新提示");
+        builder.setMessage(verBean.content);
+        // 更新
+        builder.setPositiveButton("立即更新", (dialog, which) -> {
+            dialog.dismiss();
+            DownloadByChrome.byChrome(getContext(), Uri.parse(verBean.file_url));
+        });
+        // 稍后更新
+        builder.setNegativeButton("以后更新", (dialog, which) -> dialog.dismiss());
+        Dialog noticeDialog = builder.create();
+        noticeDialog.show();
+    }
 }

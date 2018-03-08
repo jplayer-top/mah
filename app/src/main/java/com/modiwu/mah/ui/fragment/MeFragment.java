@@ -181,7 +181,7 @@ public class MeFragment extends BaseFragment {
         VersionBean.VerBean verBean = versionBean.ver;
         String version_info = verBean.content;
         int curVerCode = BuildConfig.VERSION_CODE;// 当前的版本号
-        int urlCode = verBean.versionCode;
+        int urlCode = verBean.build;
         if (urlCode > curVerCode) {
             showNoticeDialog(verBean);
         } else {

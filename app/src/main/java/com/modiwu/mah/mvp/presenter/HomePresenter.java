@@ -38,13 +38,19 @@ public class HomePresenter extends BasePresenter<HomeFragment> implements HomeCo
         addSubscription(disposable);
     }
 
-    public void requestHomeData(String city_code,String city) {
+    public void requestHomeData(String city_code, String city) {
         mHomeModel.requestHomeBean(city_code).subscribe(new SampleShowDialogObserver<HomeBean>(mIView.getContext()) {
             @Override
             protected void onSuccess(HomeBean homeBean) throws Exception {
-                mIView.setHomeData(homeBean,city);
+                mIView.setHomeData(homeBean, city);
             }
         });
+    }
+
+    public void requestVersion() {
+        Disposable disposable = mHomeModel.requestVersion().subscribe(versionBean -> mIView.versionUpData(versionBean), throwable -> {
+        });
+        addSubscription(disposable);
     }
 
     public void requestCityCode(String city) {

@@ -18,21 +18,23 @@ public class ShopCartBean {
     public String price;
     public String count;
     public String pic_url;
+    public String sel_type;
     public String goods_attr_id;
     @Transient
     public boolean isEdit;
     @Transient
     public boolean isCheck;
 
-    @Generated(hash = 68342908)
+    @Generated(hash = 1602347474)
     public ShopCartBean(Long _id, String title, String sub_title, String price,
-            String count, String pic_url, String goods_attr_id) {
+            String count, String pic_url, String sel_type, String goods_attr_id) {
         this._id = _id;
         this.title = title;
         this.sub_title = sub_title;
         this.price = price;
         this.count = count;
         this.pic_url = pic_url;
+        this.sel_type = sel_type;
         this.goods_attr_id = goods_attr_id;
     }
 
@@ -94,5 +96,13 @@ public class ShopCartBean {
 
     public void setGoods_attr_id(String goods_attr_id) {
         this.goods_attr_id = goods_attr_id;
+    }
+
+    public String getSel_type() {
+        return this.sel_type;
+    }
+
+    public void setSel_type(String sel_type) {
+        this.sel_type = sel_type;
     }
 }

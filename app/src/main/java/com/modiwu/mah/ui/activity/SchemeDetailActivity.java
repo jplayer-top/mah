@@ -182,6 +182,7 @@ public class SchemeDetailActivity extends BaseSpecialActivity implements SchemeD
 
     public void setSchemeCollectionData(BaseBean baseBean) {
         ToastUtils.init().showSuccessToast(this, baseBean.msg);
+        isCollection(true);
     }
 
     public void isCollection(boolean has) {

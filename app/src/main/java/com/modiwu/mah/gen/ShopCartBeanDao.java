@@ -30,7 +30,8 @@ public class ShopCartBeanDao extends AbstractDao<ShopCartBean, Long> {
         public final static Property Price = new Property(3, String.class, "price", false, "PRICE");
         public final static Property Count = new Property(4, String.class, "count", false, "COUNT");
         public final static Property Pic_url = new Property(5, String.class, "pic_url", false, "PIC_URL");
-        public final static Property Goods_attr_id = new Property(6, String.class, "goods_attr_id", false, "GOODS_ATTR_ID");
+        public final static Property Sel_type = new Property(6, String.class, "sel_type", false, "SEL_TYPE");
+        public final static Property Goods_attr_id = new Property(7, String.class, "goods_attr_id", false, "GOODS_ATTR_ID");
     }
 
 
@@ -52,7 +53,8 @@ public class ShopCartBeanDao extends AbstractDao<ShopCartBean, Long> {
                 "\"PRICE\" TEXT," + // 3: price
                 "\"COUNT\" TEXT," + // 4: count
                 "\"PIC_URL\" TEXT," + // 5: pic_url
-                "\"GOODS_ATTR_ID\" TEXT);"); // 6: goods_attr_id
+                "\"SEL_TYPE\" TEXT," + // 6: sel_type
+                "\"GOODS_ATTR_ID\" TEXT);"); // 7: goods_attr_id
     }
 
     /** Drops the underlying database table. */
@@ -95,9 +97,14 @@ public class ShopCartBeanDao extends AbstractDao<ShopCartBean, Long> {
             stmt.bindString(6, pic_url);
         }
  
+        String sel_type = entity.getSel_type();
+        if (sel_type != null) {
+            stmt.bindString(7, sel_type);
+        }
+ 
         String goods_attr_id = entity.getGoods_attr_id();
         if (goods_attr_id != null) {
-            stmt.bindString(7, goods_attr_id);
+            stmt.bindString(8, goods_attr_id);
         }
     }
 
@@ -135,9 +142,14 @@ public class ShopCartBeanDao extends AbstractDao<ShopCartBean, Long> {
             stmt.bindString(6, pic_url);
         }
  
+        String sel_type = entity.getSel_type();
+        if (sel_type != null) {
+            stmt.bindString(7, sel_type);
+        }
+ 
         String goods_attr_id = entity.getGoods_attr_id();
         if (goods_attr_id != null) {
-            stmt.bindString(7, goods_attr_id);
+            stmt.bindString(8, goods_attr_id);
         }
     }
 
@@ -155,7 +167,8 @@ public class ShopCartBeanDao extends AbstractDao<ShopCartBean, Long> {
             cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // price
             cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // count
             cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // pic_url
-            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6) // goods_attr_id
+            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // sel_type
+            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7) // goods_attr_id
         );
         return entity;
     }
@@ -168,7 +181,8 @@ public class ShopCartBeanDao extends AbstractDao<ShopCartBean, Long> {
         entity.setPrice(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
         entity.setCount(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
         entity.setPic_url(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
-        entity.setGoods_attr_id(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
+        entity.setSel_type(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
+        entity.setGoods_attr_id(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
      }
     
     @Override
