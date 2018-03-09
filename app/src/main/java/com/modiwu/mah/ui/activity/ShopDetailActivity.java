@@ -17,6 +17,7 @@ import com.modiwu.mah.mvp.model.bean.ShopGoodsInfoBean;
 import com.modiwu.mah.mvp.presenter.ShopDetailPresenter;
 import com.modiwu.mah.ui.adapter.AdapterPagerShopDetial;
 import com.modiwu.mah.ui.dialog.FsShopDetialDialog;
+import com.modiwu.mah.utils.StringUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
 import org.greenrobot.eventbus.EventBus;
@@ -82,19 +83,24 @@ public class ShopDetailActivity extends BaseSpecialActivity implements ShopDetai
         tvToCard.setOnClickListener(view -> {
 //            ActivityUtils.init().start(this, ShopCartActivity.class, "购物车");
 //            ivCirRed.setVisibility(View.GONE);
-            typeClick = false;
-            callListener();
+            if (StringUtils.getInstance().assert2Login(this)) {
+                typeClick = false;
+                callListener();
+            }
+
         });
         tvToBuy.setOnClickListener(view -> {
-            typeClick = true;
-            callListener();
+            if (StringUtils.getInstance().assert2Login(this)) {
+                typeClick = true;
+                callListener();
+            }
         });
         tvBarTitle.setMaxEms(6);
         tvBarTitle.setEllipsize(TextUtils.TruncateAt.END);
         tvBarTitle.setLines(1);
 
         tvToAdd.setOnClickListener(view -> {
-            {
+            if (StringUtils.getInstance().assert2Login(this)) {
                 typeClick = false;
                 callListener();
             }
@@ -156,8 +162,13 @@ public class ShopDetailActivity extends BaseSpecialActivity implements ShopDetai
         list.add("方案");
         mViewPager.setAdapter(new AdapterPagerShopDetial(getSupportFragmentManager(), list));
         mTabLayout.setupWithViewPager(mViewPager);
-        tvServer.setOnClickListener(v -> ActivityUtils.init().startConversion(this, ConversationOneActivity.class,
-                bean.kfuid));
+        tvServer.setOnClickListener(v -> {
+            if (StringUtils.getInstance().assert2Login(this)) {
+                ActivityUtils.init().startConversion(this, ConversationOneActivity.class,
+                        bean.kfuid);
+            }
+
+        });
     }
 
     @Override

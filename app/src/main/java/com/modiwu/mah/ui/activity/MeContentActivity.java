@@ -35,11 +35,11 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import top.jplayer.baseprolibrary.glide.GlideUtils;
 import top.jplayer.baseprolibrary.mvp.model.bean.BaseBean;
-import top.jplayer.baseprolibrary.ui.SuperBaseActivity;
 import top.jplayer.baseprolibrary.utils.ActivityUtils;
 import top.jplayer.baseprolibrary.utils.SharePreUtil;
 
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
+import static top.jplayer.baseprolibrary.utils.PermissionUtils.setPermission;
 
 /**
  * Created by Obl on 2018/2/6.
@@ -150,17 +150,7 @@ public class MeContentActivity extends BaseCommonActivity {
         }
     }
 
-    public static void setPermission(final SuperBaseActivity activity, int code, String... permissions) {
-        AndPermission.with(activity)
-                .requestCode(code)
-                .permission(permissions)
-                .rationale((requestCode, rationale) -> {
-                            // 此对话框可以自定义，调用rationale.resume()就可以继续申请。
-                            AndPermission.rationaleDialog(activity, rationale).show();
-                        }
-                )
-                .send();
-    }
+
 
     File mFile;
 
@@ -196,7 +186,7 @@ public class MeContentActivity extends BaseCommonActivity {
                 .apply(GlideUtils.init().options())
                 .apply(RequestOptions.circleCropTransform())
                 .into(ivMeAvatar);
-        tvArea.setText(String.format(Locale.CHINA, "%s m²", StringUtils.getInstance().isNullable(profile.user_mian,
+        tvArea.setText(String.format(Locale.CHINA, "%s", StringUtils.getInstance().isNullable(profile.user_mian,
                 "")));
         tvType.setText(String.format(Locale.CHINA, "%s", StringUtils.getInstance().isNullable(profile.user_huxing,
                 "")));
@@ -216,6 +206,7 @@ public class MeContentActivity extends BaseCommonActivity {
     }
 
     public void logout() {
+        SharePreUtil.saveData(this, "mark_login", "0");
         EventBus.getDefault().post(new LogoutEvent());
         finish();
     }

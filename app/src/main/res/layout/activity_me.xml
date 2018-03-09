@@ -53,9 +53,8 @@
                 android:gravity="center_vertical">
 
                 <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="?attr/actionBarSize"
-                    android:layout_weight="1"
                     android:background="@drawable/selector_white_muti_press"
                     android:drawablePadding="@dimen/dp_10"
                     android:gravity="center_vertical"
@@ -64,7 +63,8 @@
 
                 <TextView
                     android:id="@+id/tvName"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="?attr/actionBarSize"
                     android:background="@drawable/selector_white_muti_press"
                     android:drawablePadding="@dimen/dp_10"
@@ -81,9 +81,8 @@
                 android:gravity="center_vertical">
 
                 <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="?attr/actionBarSize"
-                    android:layout_weight="1"
                     android:background="@drawable/selector_white_muti_press"
                     android:drawablePadding="@dimen/dp_10"
                     android:gravity="center_vertical"
@@ -92,7 +91,8 @@
 
                 <TextView
                     android:id="@+id/tvPhone"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="?attr/actionBarSize"
                     android:background="@drawable/selector_white_muti_press"
                     android:drawablePadding="@dimen/dp_10"
@@ -109,9 +109,8 @@
                 android:gravity="center_vertical">
 
                 <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="?attr/actionBarSize"
-                    android:layout_weight="1"
                     android:background="@drawable/selector_white_muti_press"
                     android:drawablePadding="@dimen/dp_10"
                     android:gravity="center_vertical"
@@ -120,7 +119,8 @@
 
                 <TextView
                     android:id="@+id/tvEmail"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="?attr/actionBarSize"
                     android:background="@drawable/selector_white_muti_press"
                     android:drawablePadding="@dimen/dp_10"
@@ -137,9 +137,8 @@
                 android:gravity="center_vertical">
 
                 <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="?attr/actionBarSize"
-                    android:layout_weight="1"
                     android:background="@drawable/selector_white_muti_press"
                     android:drawablePadding="@dimen/dp_10"
                     android:gravity="center_vertical"
@@ -148,7 +147,8 @@
 
                 <TextView
                     android:id="@+id/tvFloor"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="?attr/actionBarSize"
                     android:background="@drawable/selector_white_muti_press"
                     android:drawablePadding="@dimen/dp_10"
@@ -165,9 +165,8 @@
                 android:gravity="center_vertical">
 
                 <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="?attr/actionBarSize"
-                    android:layout_weight="1"
                     android:background="@drawable/selector_white_muti_press"
                     android:drawablePadding="@dimen/dp_10"
                     android:gravity="center_vertical"
@@ -176,7 +175,8 @@
 
                 <TextView
                     android:id="@+id/tvType"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="?attr/actionBarSize"
                     android:background="@drawable/selector_white_muti_press"
                     android:drawablePadding="@dimen/dp_10"
@@ -193,9 +193,8 @@
                 android:gravity="center_vertical">
 
                 <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="?attr/actionBarSize"
-                    android:layout_weight="1"
                     android:background="@drawable/selector_white_muti_press"
                     android:drawablePadding="@dimen/dp_10"
                     android:gravity="center_vertical"
@@ -204,7 +203,8 @@
 
                 <TextView
                     android:id="@+id/tvArea"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="?attr/actionBarSize"
                     android:background="@drawable/selector_white_muti_press"
                     android:drawablePadding="@dimen/dp_10"

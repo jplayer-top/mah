@@ -1,10 +1,7 @@
 package com.modiwu.mah.ui.fragment;
 
-import android.app.Dialog;
 import android.content.Intent;
-import android.net.Uri;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
@@ -15,6 +12,7 @@ import com.alibaba.android.vlayout.VirtualLayoutManager;
 import com.alibaba.android.vlayout.layout.GridLayoutHelper;
 import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
 import com.modiwu.mah.BuildConfig;
+import com.modiwu.mah.MainActivity;
 import com.modiwu.mah.R;
 import com.modiwu.mah.base.BaseFragment;
 import com.modiwu.mah.mvp.constract.HomeContract;
@@ -35,7 +33,6 @@ import java.util.List;
 
 import io.reactivex.Observable;
 import top.jplayer.baseprolibrary.BaseInitApplication;
-import top.jplayer.baseprolibrary.net.download.DownloadByNotify;
 import top.jplayer.baseprolibrary.ui.ContactActivity;
 import top.jplayer.baseprolibrary.utils.ActivityUtils;
 
@@ -53,6 +50,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.HomeView 
     protected TextView tvCurLocal;
     private HomePresenter mPresenter;
     private DelegateAdapter mDelegateAdapter;
+    public MainActivity mMainActivity;
 
     @Override
     public int initLayout() {
@@ -65,7 +63,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.HomeView 
         smartRefreshLayout = rootView.findViewById(R.id.smartRefreshLayout);
         mRecyclerView = rootView.findViewById(R.id.recyclerView);
         tvCurLocal = rootView.findViewById(R.id.tvCurLocal);
-
+        mMainActivity = (MainActivity) getActivity();
         VirtualLayoutManager manager = new VirtualLayoutManager(getContext());
         mRecyclerView.setLayoutManager(manager);
         RecyclerView.RecycledViewPool pool = new RecyclerView.RecycledViewPool();
@@ -228,27 +226,10 @@ public class HomeFragment extends BaseFragment implements HomeContract.HomeView 
         VersionBean.VerBean verBean = versionBean.ver;
         int curVerCode = BuildConfig.VERSION_CODE;// 当前的版本号
         int urlCode = verBean.build;
-        if (urlCode > 1) {
-            showNoticeDialog(verBean);
+        if (urlCode > curVerCode) {
+            mMainActivity.showNoticeDialog(verBean);
         }
     }
 
-    /**
-     * 显示更新对话框
-     */
-    private void showNoticeDialog(VersionBean.VerBean verBean) {
-        // 构造对话框
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("更新提示");
-        builder.setMessage(verBean.content);
-        // 更新
-        builder.setPositiveButton("立即更新", (dialog, which) -> {
-            dialog.dismiss();
-            DownloadByNotify.byNotify(getContext(), Uri.parse(verBean.file_url));
-        });
-        // 稍后更新
-        builder.setNegativeButton("以后更新", (dialog, which) -> dialog.dismiss());
-        Dialog noticeDialog = builder.create();
-        noticeDialog.show();
-    }
+
 }

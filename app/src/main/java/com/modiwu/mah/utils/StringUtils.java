@@ -1,5 +1,6 @@
 package com.modiwu.mah.utils;
 
+import android.content.Context;
 import android.os.Handler;
 import android.os.SystemClock;
 import android.text.Spannable;
@@ -10,8 +11,14 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.modiwu.mah.ui.activity.LoginAnimActivity;
 
+import java.lang.ref.WeakReference;
 import java.util.Map;
+
+import top.jplayer.baseprolibrary.utils.ActivityUtils;
+import top.jplayer.baseprolibrary.utils.SharePreUtil;
+import top.jplayer.baseprolibrary.utils.ToastUtils;
 
 /**
  * Created by PEO on 2017/3/10.
@@ -36,6 +43,36 @@ public class StringUtils {
             return true;
         }
         return false;
+    }
+
+    public boolean assertNoLogin(Context context) {
+        context = new WeakReference<>(context).get();
+        String isLogin = (String) SharePreUtil.getData(context, "mark_login", "0");
+        if (!"1".equals(isLogin)) {
+            ToastUtils.init().showInfoToast(context, "请先登录");
+            return true;
+        }
+        return false;
+    }
+
+    public boolean assertNoTipLogin(Context context) {
+        context = new WeakReference<>(context).get();
+        String isLogin = (String) SharePreUtil.getData(context, "mark_login", "0");
+        if ("1".equals(isLogin)) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean assert2Login(Context context) {
+        context = new WeakReference<>(context).get();
+        String isLogin = (String) SharePreUtil.getData(context, "mark_login", "0");
+        if (!"1".equals(isLogin)) {
+            ActivityUtils.init().start(context, LoginAnimActivity.class);
+            return false;
+        } else {
+            return true;
+        }
     }
 
     public SpannableString addUnderLineSpan(String str) {

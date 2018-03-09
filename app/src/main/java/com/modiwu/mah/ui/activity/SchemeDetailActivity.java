@@ -13,9 +13,14 @@ import com.modiwu.mah.R;
 import com.modiwu.mah.base.BaseSpecialActivity;
 import com.modiwu.mah.mvp.constract.SchemeDetialContract;
 import com.modiwu.mah.mvp.model.bean.SchemeDetailBean;
+import com.modiwu.mah.mvp.model.event.LoginSuccessEvent;
 import com.modiwu.mah.mvp.presenter.SchemeDetailPresenter;
 import com.modiwu.mah.ui.adapter.AdapterPagerSchemeDetail;
+import com.modiwu.mah.utils.StringUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 
@@ -69,6 +74,7 @@ public class SchemeDetailActivity extends BaseSpecialActivity implements SchemeD
     @Override
     public void initBaseData() {
         mUnbinder = ButterKnife.bind(this, contentView);
+        EventBus.getDefault().register(this);
         findToolBarView(contentView);
         customBarLeft();
         ivBarSearch.setVisibility(View.VISIBLE);
@@ -92,15 +98,27 @@ public class SchemeDetailActivity extends BaseSpecialActivity implements SchemeD
         } else {
             mMultipleStatusView.showEmpty();
         }
-        mPresenter.requestHasCollection(mFangan_id);
-        ivBarSearch.setOnClickListener(view -> mPresenter.requestCollection(mFangan_id));
+        if (StringUtils.getInstance().assertNoTipLogin(this)) {
+            mPresenter.requestHasCollection(mFangan_id);
+        }
+        ivBarSearch.setOnClickListener(view -> {
+            if (StringUtils.getInstance().assert2Login(this)) {
+                mPresenter.requestCollection(mFangan_id);
+            }
+        });
 
+    }
+
+    @Subscribe
+    public void userInfo(LoginSuccessEvent event) {
+        mPresenter.requestHasCollection(mFangan_id);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         mUnbinder.unbind();
+        EventBus.getDefault().unregister(this);
     }
 
     public SchemeDetailBean mSchemeDetailBean;
@@ -111,6 +129,9 @@ public class SchemeDetailActivity extends BaseSpecialActivity implements SchemeD
         smartRefreshLayout.finishRefresh();
         this.mSchemeDetailBean = bean;
         viewPager.setAdapter(mAdapter);
+        btn2YY.setOnClickListener(v -> {
+            ActivityUtils.init().start(this, HouseSampleActivity.class, "预约方案");
+        });
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -142,14 +163,23 @@ public class SchemeDetailActivity extends BaseSpecialActivity implements SchemeD
                 LogUtil.e("onTabReselected" + tab.getPosition());
             }
         });
-        tvToCard.setOnClickListener(view -> ActivityUtils.init().start(this, ShopCartActivity.class, "购物车"));
+        tvToCard.setOnClickListener(view -> {
+            if (StringUtils.getInstance().assert2Login(this)) {
+                ActivityUtils.init().start(this, ShopCartActivity.class, "购物车");
+            }
+        });
         mTvToBuy.setOnClickListener(view -> {
-            Bundle bundle = new Bundle();
-            bundle.putString("fangan_id", mFangan_id);
-            ActivityUtils.init().start(mBaseActivity, SchemeOrderCreateActivity.class, "方案订单", bundle);
+            if (StringUtils.getInstance().assert2Login(this)) {
+                Bundle bundle = new Bundle();
+                bundle.putString("fangan_id", mFangan_id);
+                ActivityUtils.init().start(mBaseActivity, SchemeOrderCreateActivity.class, "方案订单", bundle);
+            }
+
         });
         tvServer.setOnClickListener(v -> {
-            ActivityUtils.init().startConversion(this, ConversationOneActivity.class, mSchemeDetailBean.kfuid);
+            if (StringUtils.getInstance().assert2Login(this)) {
+                ActivityUtils.init().startConversion(this, ConversationOneActivity.class, mSchemeDetailBean.kfuid);
+            }
         });
     }
 

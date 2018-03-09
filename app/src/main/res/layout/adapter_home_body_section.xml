@@ -12,10 +12,32 @@
         android:layout_margin="@dimen/dp_10"
         android:paddingTop="@dimen/dp_10">
 
+        <ImageView
+            android:layout_width="@dimen/dimen_5dp"
+            android:layout_height="@dimen/dimen_15dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="@dimen/dimen_10dp"
+            android:layout_marginTop="@dimen/dimen_5dp"
+            android:layout_toEndOf="@+id/tvTitle"
+            android:layout_toRightOf="@+id/tvTitle"
+            android:src="@color/chocolate"/>
+
+        <ImageView
+            android:layout_width="@dimen/dimen_5dp"
+            android:layout_height="@dimen/dimen_15dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginRight="@dimen/dimen_10dp"
+            android:layout_marginTop="@dimen/dimen_5dp"
+            android:layout_toStartOf="@+id/tvTitle"
+            android:layout_toLeftOf="@+id/tvTitle"
+            android:src="@color/chocolate"/>
+
         <TextView
+
             android:id="@+id/tvTitle"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
             android:gravity="center"
             android:text="@string/beautiful_single"
             android:textColor="@color/black"

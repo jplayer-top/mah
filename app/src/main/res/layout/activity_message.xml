@@ -9,6 +9,8 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/generalHeight"
         android:layout_margin="@dimen/dp_10"
+        android:background="@drawable/shape_border_grey"
+        android:inputType="text"
         android:padding="@dimen/dp_10"/>
 
     <Button

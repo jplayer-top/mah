@@ -1,6 +1,8 @@
 package com.modiwu.mah.ui.fragment;
 
 import android.app.Dialog;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
@@ -31,8 +33,10 @@ import com.modiwu.mah.ui.activity.MeOrderListActivity;
 import com.modiwu.mah.ui.activity.MeShouCangActivity;
 import com.modiwu.mah.ui.activity.ShopCartActivity;
 import com.modiwu.mah.ui.dialog.ShareDialog;
+import com.modiwu.mah.utils.StringUtils;
 import com.modiwu.mah.wxapi.WXShare;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.tencent.mm.opensdk.modelmsg.SendMessageToWX;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -45,7 +49,7 @@ import butterknife.Unbinder;
 import io.reactivex.Observable;
 import top.jplayer.baseprolibrary.glide.GlideUtils;
 import top.jplayer.baseprolibrary.net.SampleShowDialogObserver;
-import top.jplayer.baseprolibrary.net.download.DownloadByChrome;
+import top.jplayer.baseprolibrary.net.download.DownloadByNotify;
 import top.jplayer.baseprolibrary.utils.ActivityUtils;
 import top.jplayer.baseprolibrary.utils.SharePreUtil;
 import top.jplayer.baseprolibrary.utils.ToastUtils;
@@ -115,13 +119,39 @@ public class MeFragment extends BaseFragment {
         tvAbout.setOnClickListener(view -> ActivityUtils.init().start(getContext(), AboutMahActivity.class, "关于"));
         llToLogin.setOnClickListener(view -> ActivityUtils.init().start(getContext(), LoginAnimActivity.class));
         tvMe.setOnClickListener(view -> ActivityUtils.init().start(getContext(), MeContentActivity.class, "个人资料"));
-        tvOrder.setOnClickListener(view -> ActivityUtils.init().start(getContext(), MeOrderListActivity.class, "我的订单"));
-        tvLocal.setOnClickListener(view -> ActivityUtils.init().start(getContext(), LocalListActivity.class,
-                "收货地址"));
-        tvFangAn.setOnClickListener(view -> ActivityUtils.init().start(getContext(), MeFangAnActivity.class, "我的方案"));
-        tvShopCart.setOnClickListener(view -> ActivityUtils.init().start(getContext(), ShopCartActivity.class, "购物车"));
-        tvShouCang.setOnClickListener(view -> ActivityUtils.init().start(getContext(), MeShouCangActivity.class,
-                "我的收藏"));
+
+        tvOrder.setOnClickListener(view -> {
+            if (StringUtils.getInstance().assertNoLogin(getContext())) {
+                return;
+            }
+            ActivityUtils.init().start(getContext(), MeOrderListActivity.class, "我的订单");
+        });
+        tvLocal.setOnClickListener(view -> {
+            if (StringUtils.getInstance().assertNoLogin(getContext())) {
+                return;
+            }
+            ActivityUtils.init().start(getContext(), LocalListActivity.class,
+                    "收货地址");
+        });
+        tvFangAn.setOnClickListener(view -> {
+            if (StringUtils.getInstance().assertNoLogin(getContext())) {
+                return;
+            }
+            ActivityUtils.init().start(getContext(), MeFangAnActivity.class, "我的方案");
+        });
+        tvShopCart.setOnClickListener(view -> {
+            if (StringUtils.getInstance().assertNoLogin(getContext())) {
+                return;
+            }
+            ActivityUtils.init().start(getContext(), ShopCartActivity.class, "购物车");
+        });
+
+
+        tvShouCang.setOnClickListener(view -> {
+
+            if (StringUtils.getInstance().assertNoLogin(getContext())) return;
+            ActivityUtils.init().start(getContext(), MeShouCangActivity.class, "我的收藏");
+        });
         tvUpdate.setOnClickListener(view -> {
             mModel.requestVersion().subscribe(new SampleShowDialogObserver<VersionBean>(getContext()) {
                 @Override
@@ -137,10 +167,16 @@ public class MeFragment extends BaseFragment {
         isLogin();
     }
 
+
+
     @Subscribe
     public void shareEvent(ShareOneEvent event) {
         if (mWxShare.checkWX()) {
-            mWxShare.shareOne("整个家：https://www.baidu.com\n 好的家装，可以简单");
+
+            Bitmap thumb = BitmapFactory
+                    .decodeResource(getResources(), R.mipmap.ic_launcher);
+            mWxShare.shareUrl("https://app.modiwu.com/app/download",getString(R.string.app_name), thumb,
+                    getString(R.string.solagon), SendMessageToWX.Req.WXSceneSession);
         } else {
             ToastUtils.init().showInfoToast(getContext(), "请先安装微信");
         }
@@ -149,7 +185,10 @@ public class MeFragment extends BaseFragment {
     @Subscribe
     public void shareEvent(ShareAllEvent event) {
         if (mWxShare.checkWX()) {
-            mWxShare.shareAll("整个家：https://www.baidu.com\n 好的家装，可以简单");
+            Bitmap thumb = BitmapFactory
+                    .decodeResource(getResources(), R.mipmap.ic_launcher);
+            mWxShare.shareUrl("https://app.modiwu.com/app/download",getString(R.string.app_name), thumb,
+                    getString(R.string.solagon), SendMessageToWX.Req.WXSceneTimeline);
         } else {
             ToastUtils.init().showInfoToast(getContext(), "请先安装微信");
         }
@@ -200,7 +239,7 @@ public class MeFragment extends BaseFragment {
         // 更新
         builder.setPositiveButton("立即更新", (dialog, which) -> {
             dialog.dismiss();
-            DownloadByChrome.byChrome(getContext(), Uri.parse(verBean.file_url));
+            DownloadByNotify.byNotify(getContext(), Uri.parse(verBean.file_url));
         });
         // 稍后更新
         builder.setNegativeButton("以后更新", (dialog, which) -> dialog.dismiss());

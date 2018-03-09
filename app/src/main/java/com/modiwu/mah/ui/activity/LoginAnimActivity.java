@@ -217,6 +217,7 @@ public class LoginAnimActivity extends BaseSpecialActivity implements TextWatche
 
     @Override
     public void login(LoginBean loginBean) {
+        SharePreUtil.saveData(this, "mark_login", "1");
         SharePreUtil.saveData(this, "uid", loginBean.uid);
         String imtoken = loginBean.imtoken;
         if (imtoken != null) {
