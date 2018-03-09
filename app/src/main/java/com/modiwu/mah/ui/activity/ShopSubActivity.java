@@ -10,12 +10,13 @@ import com.modiwu.mah.mvp.model.bean.ShopSubListBean;
 import com.modiwu.mah.mvp.model.bean.SubTitleBean;
 import com.modiwu.mah.mvp.presenter.ShopSubPresenter;
 import com.modiwu.mah.ui.adapter.AdapterPagerShopSub;
+import com.modiwu.mah.ui.fragment.ShopSubFragment;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
-import top.jplayer.baseprolibrary.net.IoMainSchedule;
 import top.jplayer.baseprolibrary.widgets.MultipleStatusView;
 
 /**
@@ -30,6 +31,8 @@ public class ShopSubActivity extends BaseSpecialActivity implements SubShopContr
     private TabLayout mTabLayout;
     public MultipleStatusView mMultipleStatusView;
     public String mCat_id;
+    private List<String> mCat_ids;
+    private AdapterPagerShopSub mAdapter;
 
     @Override
     public int setBaseLayout() {
@@ -58,15 +61,29 @@ public class ShopSubActivity extends BaseSpecialActivity implements SubShopContr
     @Override
     public void setSubTitleData(SubTitleBean bean) {
         List<String> titleList = new ArrayList<>();
-        Observable.fromIterable(bean.records).map(recordsBean -> {
-            titleList.add(recordsBean.cat_name);
-            return titleList;
-        }).compose(new IoMainSchedule<>())
-                .subscribe(strings -> {
-                    mViewPager.setAdapter(new AdapterPagerShopSub(getSupportFragmentManager(), strings));
-                    mTabLayout.setupWithViewPager(mViewPager);
+        mCat_ids = new ArrayList<>();
+        Observable.fromIterable(bean.records)
+                .subscribe(recordsBean -> {
+                    titleList.add(recordsBean.cat_name);
+                    mCat_ids.add(recordsBean.cat_id);
                 });
+        mAdapter = new AdapterPagerShopSub(getSupportFragmentManager(), titleList);
+        mViewPager.setAdapter(mAdapter);
+        mTabLayout.setupWithViewPager(mViewPager);
+        mViewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+            @Override
+            public void onPageSelected(int position) {
+                refreshData(position);
+            }
+        });
+        Observable.timer(500, TimeUnit.MILLISECONDS).subscribe(aLong -> refreshData(0));
 
+    }
+
+    private void refreshData(int position) {
+        mCat_id = mCat_ids.get(position);
+        ShopSubFragment fragment = mAdapter.mFragmentList.get(position);
+        fragment.requestData(mCat_id);
     }
 
     @Override

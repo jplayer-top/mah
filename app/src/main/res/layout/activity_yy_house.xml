@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:ignore="RtlHardcoded,RtlSymmetry">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/generalHeight"
+        android:layout_marginTop="@dimen/dp_10"
+        android:paddingEnd="@dimen/dp_10"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_10"
+        android:paddingStart="@dimen/dp_10">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/your_name"
+            android:textSize="@dimen/sp_18"
+            android:textStyle="bold"/>
+
+        <EditText
+            android:id="@+id/editName"
+            style="@style/OblAppTheme.EditText"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@null"
+            android:hint="@string/input_name"
+            android:paddingLeft="@dimen/dp_10"
+            android:paddingStart="@dimen/dp_10"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/generalHeight"
+        android:layout_marginTop="@dimen/dp_10"
+        android:paddingEnd="@dimen/dp_10"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_10"
+        android:paddingStart="@dimen/dp_10">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/your_phone"
+            android:textSize="@dimen/sp_18"
+            android:textStyle="bold"/>
+
+        <EditText
+            android:id="@+id/editPhone"
+            style="@style/OblAppTheme.EditText"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@null"
+            android:hint="@string/input_name"
+            android:paddingLeft="@dimen/dp_10"
+            android:paddingStart="@dimen/dp_10"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/generalHeight"
+        android:layout_marginTop="@dimen/dp_10"
+        android:paddingEnd="@dimen/dp_10"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_10"
+        android:paddingStart="@dimen/dp_10">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="看房时间:"
+            android:textSize="@dimen/sp_18"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/tvTime"
+            style="@style/OblAppTheme.EditText"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@null"
+            android:hint="请选择看房时间"
+            android:paddingLeft="@dimen/dp_10"
+            android:paddingStart="@dimen/dp_10"/>
+    </LinearLayout>
+
+    <Button
+        android:layout_marginTop="@dimen/dp_20"
+        android:id="@+id/btnSublime"
+        style="@style/textview_body_magin_10"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/generalHeight"
+        android:layout_marginBottom="@dimen/dp_10"
+        android:background="@color/colorBlackGrey"
+        android:clickable="true"
+        android:foreground="?android:selectableItemBackground"
+        android:text="@string/sublime"
+        android:textColor="@color/chocolate"/>
+</LinearLayout>

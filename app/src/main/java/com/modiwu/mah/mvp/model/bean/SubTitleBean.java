@@ -19,5 +19,7 @@ public class SubTitleBean extends BaseBean {
          */
 
         public String cat_name;
+        public String cat_id;
+
     }
 }

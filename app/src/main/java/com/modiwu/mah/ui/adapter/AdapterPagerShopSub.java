@@ -8,7 +8,6 @@ import com.modiwu.mah.ui.fragment.ShopSubFragment;
 import java.util.ArrayList;
 import java.util.List;
 
-import top.jplayer.baseprolibrary.ui.Fragment.SuperBaseFragment;
 import top.jplayer.baseprolibrary.ui.adapter.BaseViewPagerFragmentAdapter;
 
 /**
@@ -28,7 +27,7 @@ public class AdapterPagerShopSub extends BaseViewPagerFragmentAdapter<String> {
         }
     }
 
-    private List<SuperBaseFragment> mFragmentList = null;
+    public List<ShopSubFragment> mFragmentList = null;
 
     @Override
 

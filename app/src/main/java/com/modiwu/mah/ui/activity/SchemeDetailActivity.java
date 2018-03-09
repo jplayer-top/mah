@@ -114,6 +114,14 @@ public class SchemeDetailActivity extends BaseSpecialActivity implements SchemeD
         mPresenter.requestHasCollection(mFangan_id);
     }
 
+
+    private SchemeDetailBean.LoupanhuxingBean selBean;
+
+    @Subscribe
+    public void bgaSelect(SchemeDetailBean.LoupanhuxingBean bean) {
+        selBean = bean;
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -130,7 +138,12 @@ public class SchemeDetailActivity extends BaseSpecialActivity implements SchemeD
         this.mSchemeDetailBean = bean;
         viewPager.setAdapter(mAdapter);
         btn2YY.setOnClickListener(v -> {
-            ActivityUtils.init().start(this, HouseSampleActivity.class, "预约方案");
+            Bundle bundle = new Bundle();
+            if (selBean != null) {
+                bundle.putString("building_id", selBean.building_id + "");
+                bundle.putString("huxing_type", selBean.huxing_type);
+                ActivityUtils.init().start(this, YYHouseActivity.class, "预约看房", bundle);
+            }
         });
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override

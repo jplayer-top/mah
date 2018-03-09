@@ -59,6 +59,11 @@
             android:screenOrientation="portrait">
         </activity>
         <activity
+            android:name=".ui.activity.YYHouseActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
             android:name=".ui.activity.SchemeSearchActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait">
@@ -154,8 +159,8 @@
         <!--微信-->
         <activity
             android:name=".wxapi.WXPayEntryActivity"
-            android:launchMode="singleTop"
             android:exported="true"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait">
         </activity>
 

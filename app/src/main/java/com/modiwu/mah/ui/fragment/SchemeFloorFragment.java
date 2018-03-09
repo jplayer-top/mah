@@ -1,5 +1,6 @@
 package com.modiwu.mah.ui.fragment;
 
+import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -8,8 +9,11 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.modiwu.mah.R;
 import com.modiwu.mah.mvp.model.bean.SchemeDetailBean;
+import com.modiwu.mah.mvp.model.event.BGAPagerSelectEvent;
 import com.modiwu.mah.ui.activity.SchemeDetailActivity;
 import com.modiwu.mah.utils.StringUtils;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -102,6 +106,12 @@ public class SchemeFloorFragment extends SuperBaseFragment {
             mTypeUrls.add(bean.huxing_type);
         }
         bgaBanner.setData(mImgUrls, mTypeUrls);
+        bgaBanner.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+            @Override
+            public void onPageSelected(int position) {
+                EventBus.getDefault().post(new BGAPagerSelectEvent(loupanhuxingBeans.get(position)));
+            }
+        });
     }
 
     @Override

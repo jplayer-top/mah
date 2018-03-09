@@ -38,7 +38,6 @@ public class ShopSubFragment extends BaseFragment implements SubShopContract.ISu
         mMultipleStatusView = rootView.findViewById(R.id.multiplestatusview);
         smartRefreshLayout = rootView.findViewById(R.id.smartRefreshLayout);
         mPresenter = new ShopSubFragmentPresenter(this);
-        mPresenter.requestSubListData("0", mActivity.mCat_id);
 
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
         mAdapter = new ShopSubFragmentAdapter(new ArrayList<>());
@@ -66,5 +65,9 @@ public class ShopSubFragment extends BaseFragment implements SubShopContract.ISu
     @Override
     public void setSubTitleData(SubTitleBean bean) {
 
+    }
+
+    public void requestData(String cat_id) {
+        mPresenter.requestSubListData("0", cat_id);
     }
 }
