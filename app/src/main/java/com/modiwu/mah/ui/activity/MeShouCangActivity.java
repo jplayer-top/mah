@@ -1,5 +1,6 @@
 package com.modiwu.mah.ui.activity;
 
+import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,8 +13,10 @@ import com.modiwu.mah.mvp.presenter.ShouCangPresenter;
 import com.modiwu.mah.ui.adapter.MeShouCangAdapter;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import top.jplayer.baseprolibrary.mvp.model.bean.BaseBean;
+import top.jplayer.baseprolibrary.utils.ActivityUtils;
 
 /**
  * Created by Obl on 2018/2/6.
@@ -50,10 +53,17 @@ public class MeShouCangActivity extends BaseCommonActivity implements ShouCangCo
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setOnItemChildClickListener((adapter, view, position) -> {
             MeShouCangBean.RowsBean rowsBean = (MeShouCangBean.RowsBean) adapter.getData().get(position);
-            mPresenter.requestShouCangDel(rowsBean.fangan_id,position);
+            mPresenter.requestShouCangDel(rowsBean.fangan_id, position);
             return false;
         });
-
+        mAdapter.setOnItemClickListener((adapter, view, position) ->
+        {
+            MeShouCangBean.RowsBean bean = mAdapter.getData().get(position);
+            Bundle bundle = new Bundle();
+            bundle.putString("fangan_id", String.format(Locale.CHINA, "%d", bean.fangan_id));
+            ActivityUtils.init().start(this, SchemeDetailActivity.class, bean.fangan_name,
+                    bundle);
+        });
         showLoading();
         mPresenter = new ShouCangPresenter(this);
         mPresenter.requestShouCangData();
@@ -66,7 +76,7 @@ public class MeShouCangActivity extends BaseCommonActivity implements ShouCangCo
     }
 
     @Override
-    public void setDelShouCang(BaseBean baseBean,int pos) {
+    public void setDelShouCang(BaseBean baseBean, int pos) {
         mPresenter.requestShouCangData(true);
     }
 }

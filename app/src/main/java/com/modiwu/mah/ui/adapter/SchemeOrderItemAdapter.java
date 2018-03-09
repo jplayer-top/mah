@@ -51,6 +51,7 @@ public class SchemeOrderItemAdapter extends VLayoutAdapter<RecyclerView.ViewHold
         TextView tvRemove = itemView.findViewById(R.id.tvRemove);
         TextView tvEditNum = itemView.findViewById(R.id.tvEditNum);
         TextView tvAdd = itemView.findViewById(R.id.tvAdd);
+        TextView tvAttrs = itemView.findViewById(R.id.tvAttrs);
         TextView tvNum = itemView.findViewById(R.id.tvNum);
         ImageView ivShopDel = itemView.findViewById(R.id.ivShopDel);
         TextView tvTitle = itemView.findViewById(R.id.tvTitle);
@@ -62,35 +63,44 @@ public class SchemeOrderItemAdapter extends VLayoutAdapter<RecyclerView.ViewHold
         if (type == SHE) {
             llEditNum.setVisibility(View.GONE);
 
-            checkHeard.setChecked(true);
-            checkHeard.setEnabled(false);
+            checkHeard.setOnClickListener(buttonView -> sheCheck());
+            checkbox.setOnClickListener(v -> {
+                mShe.get(position).isCheck = !mShe.get(position).isCheck;
+                this.notifyItemChanged(position);
+                EventBus.getDefault().post(new MoneyChangeEvent());
+            });
 
-            checkbox.setChecked(true);
-            checkbox.setEnabled(false);
+
             SchemeOrderCreateBean.SheBean sheBean = mShe.get(position);
+            checkbox.setChecked(sheBean.isCheck);
+
             tvNum.setText(String.format(Locale.CHINA, "x%d", sheBean.goods_num));
             tvTitle.setText(sheBean.goods_title);
+            tvAttrs.setText(sheBean.attr_name);
             tvSubTitle.setText(String.format(Locale.CHINA, "￥%s", sheBean.goods_price_yuan));
             Glide.with(context).load(sheBean.goods_thumb).apply(GlideUtils.init().options()).into(ivShopDel);
         } else if (type == YING) {
             llEditNum.setVisibility(View.GONE);
 
-            checkHeard.setChecked(true);
-            checkHeard.setEnabled(false);
-
-            checkbox.setChecked(true);
-            checkbox.setEnabled(false);
+            checkHeard.setOnClickListener(buttonView -> yingCheck());
+            checkbox.setOnClickListener(v -> {
+                mYing.get(position).isCheck = !mYing.get(position).isCheck;
+                this.notifyItemChanged(position);
+                EventBus.getDefault().post(new MoneyChangeEvent());
+            });
 
             SchemeOrderCreateBean.YingBean yingBean = mYing.get(position);
+            checkbox.setChecked(yingBean.isCheck);
             tvTitle.setText(yingBean.goods_title);
+            tvAttrs.setText(yingBean.attr_name);
+
             tvNum.setText(String.format(Locale.CHINA, "x%d", yingBean.goods_num));
             tvSubTitle.setText(String.format(Locale.CHINA, "￥%s", yingBean.goods_price_yuan));
             Glide.with(context).load(yingBean.goods_thumb).apply(GlideUtils.init().options()).into(ivShopDel);
         } else {
             llEditNum.setVisibility(View.VISIBLE);
-            checkHeard.setOnClickListener(buttonView -> {
-                ruanCheck();
-            });
+
+            checkHeard.setOnClickListener(buttonView -> ruanCheck());
             checkbox.setOnClickListener(v -> {
                 mRuan.get(position).isCheck = !mRuan.get(position).isCheck;
                 this.notifyItemChanged(position);
@@ -101,6 +111,7 @@ public class SchemeOrderItemAdapter extends VLayoutAdapter<RecyclerView.ViewHold
             checkHeard.setChecked(ruanBean.isHeardCheck);
             int goods_num = ruanBean.goods_num;
             tvEditNum.setText(String.valueOf(goods_num));
+
             tvAdd.setOnClickListener(v -> {
                 if (goods_num >= 999) {
                     ToastUtils.init().showInfoToast(context, "客官，分批买吧");
@@ -117,6 +128,7 @@ public class SchemeOrderItemAdapter extends VLayoutAdapter<RecyclerView.ViewHold
             });
             checkbox.setChecked(ruanBean.isCheck);
             tvTitle.setText(ruanBean.goods_title);
+            tvAttrs.setText(ruanBean.attr_name);
             tvSubTitle.setText(String.format(Locale.CHINA, "￥%s", ruanBean.goods_price_yuan));
             Glide.with(context).load(ruanBean.goods_thumb).apply(GlideUtils.init().options()).into(ivShopDel);
         }
@@ -133,6 +145,16 @@ public class SchemeOrderItemAdapter extends VLayoutAdapter<RecyclerView.ViewHold
     private void ruanCheck() {
         boolean isHeardCheck = mRuan.get(0).isHeardCheck;
         for (SchemeOrderCreateBean.RuanBean bean : mRuan) {
+            bean.isCheck = !isHeardCheck;
+            bean.isHeardCheck = !isHeardCheck;
+        }
+        notifyDataSetChanged();
+        EventBus.getDefault().post(new MoneyChangeEvent());
+    }
+
+    private void sheCheck() {
+        boolean isHeardCheck = mShe.get(0).isHeardCheck;
+        for (SchemeOrderCreateBean.SheBean bean : mShe) {
             bean.isCheck = !isHeardCheck;
             bean.isHeardCheck = !isHeardCheck;
         }

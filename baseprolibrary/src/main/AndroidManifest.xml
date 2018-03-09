@@ -24,7 +24,13 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait">
         </activity>
-
+        <receiver android:name=".net.download.DownloadByReceiver">
+            <intent-filter>
+                <!-- 配置 点击通知 和 下载完成 两个 action -->
+                <action android:name="android.intent.action.DOWNLOAD_NOTIFICATION_CLICKED"/>
+                <action android:name="android.intent.action.DOWNLOAD_COMPLETE"/>
+            </intent-filter>
+        </receiver>
         <!--<provider-->
             <!--android:name="android.support.v4.content.FileProvider"-->
             <!--android:authorities="top.jplayer.baseprolibrary.fileprovider"-->

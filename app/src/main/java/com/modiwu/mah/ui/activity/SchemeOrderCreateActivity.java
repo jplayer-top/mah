@@ -78,12 +78,16 @@ public class SchemeOrderCreateActivity extends BaseCommonActivity {
                 ToastUtils.init().showErrorToast(this, "订单创建错误，请稍后重试");
                 return;
             }
-            Bundle bundle = new Bundle();
-            String json = new Gson().toJson(mCartBeans);
-            bundle.putString("json", json);
-            bundle.putString("goods_num", goods_num.toString());
-            bundle.putString("fangan_id", fangan_id);
-            ActivityUtils.init().start(this, ShopToBuyAvtivity.class, "确认购买", bundle);
+            if (mCartBeans != null && mCartBeans.size() > 0) {
+                Bundle bundle = new Bundle();
+                String json = new Gson().toJson(mCartBeans);
+                bundle.putString("json", json);
+                bundle.putString("goods_num", goods_num.toString());
+                bundle.putString("fangan_id", fangan_id);
+                ActivityUtils.init().start(this, ShopToBuyAvtivity.class, "确认购买", bundle);
+            } else {
+                ToastUtils.init().showInfoToast(this, "请选择您要购买的方案");
+            }
         });
     }
 
@@ -93,7 +97,6 @@ public class SchemeOrderCreateActivity extends BaseCommonActivity {
          * 硬装
          */
         mBean = bean;
-        moneySet();
         List<SchemeOrderCreateBean.SheBean> sheBeans = mBean.she;
         if (sheBeans != null && sheBeans.size() > 0) {
 
@@ -125,7 +128,7 @@ public class SchemeOrderCreateActivity extends BaseCommonActivity {
         mDelegateAdapter.clear();
         mDelegateAdapter.setAdapters(adapters);
         mRecyclerView.setAdapter(mDelegateAdapter);
-
+        moneySet();
     }
 
     int countPrice = 0;
@@ -145,7 +148,7 @@ public class SchemeOrderCreateActivity extends BaseCommonActivity {
         }
         goods_num.delete(0, goods_num.length());
 
-        Observable.fromIterable(mBean.she).subscribe(sheBean -> {
+        Observable.fromIterable(mBean.she).filter(sheBean -> sheBean.isCheck).subscribe(sheBean -> {
             countPrice += (sheBean.goods_price * sheBean.goods_num);
             ShopCartBean bean = new ShopCartBean(null, sheBean.goods_title, String.valueOf(sheBean.goods_num), sheBean
                     .goods_price_yuan, String.valueOf(sheBean.goods_num),
@@ -168,21 +171,23 @@ public class SchemeOrderCreateActivity extends BaseCommonActivity {
                     goods_num.append(String.valueOf(ruanBean.goods_num));
                     goods_num.append("|");
                 });
-        Observable.fromIterable(mBean.ying)
+        Observable.fromIterable(mBean.ying).filter(yingBean -> yingBean.isCheck)
                 .subscribe(yingBean -> {
                     countPrice += (yingBean.goods_price * yingBean.goods_num);
                     ShopCartBean bean = new ShopCartBean(null, yingBean.goods_title, String.valueOf(yingBean.goods_num), yingBean.goods_price_yuan,
                             String.valueOf(yingBean.goods_num), yingBean.goods_thumb, yingBean.goods_title, String
                             .valueOf(yingBean
-                            .goods_attr_id));
+                                    .goods_attr_id));
                     mCartBeans.add(bean);
                     goods_num.append(yingBean.goods_attr_id);
                     goods_num.append(",");
                     goods_num.append(String.valueOf(yingBean.goods_num));
                     goods_num.append("|");
                 });
-        goods_num.deleteCharAt(goods_num.lastIndexOf("|"));
-        LogUtil.e(goods_num.toString());
+        if (goods_num.indexOf("|") > -1) {
+            goods_num.deleteCharAt(goods_num.lastIndexOf("|"));
+            LogUtil.e(goods_num.toString());
+        }
         tvMoney.setText(String.format(Locale.CHINA, "￥%.2f", (countPrice / 100f)));
     }
 

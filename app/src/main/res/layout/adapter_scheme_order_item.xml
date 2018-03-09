@@ -15,10 +15,10 @@
 
 
     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_100dp"
         android:layout_marginBottom="@dimen/dimen_1px"
         android:background="@color/backgroundgray"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
@@ -30,8 +30,8 @@
 
         <ImageView
             android:id="@+id/ivShopDel"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:padding="@dimen/dimen_5dp"
             android:scaleType="centerCrop"
             android:src="@drawable/placeholder"/>
@@ -51,23 +51,33 @@
                 tools:ignore="RtlHardcoded">
 
                 <TextView
-                    android:layout_marginTop="@dimen/dimen_5dp"
                     android:id="@+id/tvTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/dp_4"
-                    android:text=""/>
+                    android:layout_marginTop="@dimen/dimen_15dp"
+                    android:text="sssssd"/>
+
+                <TextView
+                    android:id="@+id/tvAttrs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvTitle"
+                    android:layout_marginBottom="@dimen/dp_4"
+                    android:text="sssssd"
+                    android:textColor="@color/color999"/>
 
                 <TextView
                     android:id="@+id/tvSubTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/tvTitle"
+                    android:layout_below="@+id/tvAttrs"
                     android:ellipsize="end"
                     android:lines="1"
                     android:paddingEnd="@dimen/magin_30"
                     android:paddingRight="@dimen/magin_30"
-                    android:text=""
+                    android:text="dssssss"
+                    android:textColor="@color/chocolate"
                     tools:ignore="RtlSymmetry"/>
 
                 <TextView

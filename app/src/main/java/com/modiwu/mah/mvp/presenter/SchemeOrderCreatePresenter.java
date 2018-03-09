@@ -10,6 +10,7 @@ import io.reactivex.disposables.Disposable;
 import top.jplayer.baseprolibrary.mvp.contract.BasePresenter;
 import top.jplayer.baseprolibrary.mvp.contract.IContract;
 import top.jplayer.baseprolibrary.net.SampleShowDialogObserver;
+import top.jplayer.baseprolibrary.utils.LogUtil;
 
 /**
  * Created by Obl on 2018/1/25.
@@ -34,7 +35,10 @@ public class SchemeOrderCreatePresenter extends BasePresenter<SchemeOrderCreateA
                 mIView.mMultipleStatusView.showContent();
                 mIView.setOrderCreateBean(bean);
             }
-        }, throwable -> mIView.showError());
+        }, throwable -> {
+            LogUtil.e(throwable.getMessage());
+            mIView.showError();
+        });
         addSubscription(disposable);
     }
 

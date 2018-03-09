@@ -35,7 +35,7 @@ import java.util.List;
 
 import io.reactivex.Observable;
 import top.jplayer.baseprolibrary.BaseInitApplication;
-import top.jplayer.baseprolibrary.net.download.DownloadByChrome;
+import top.jplayer.baseprolibrary.net.download.DownloadByNotify;
 import top.jplayer.baseprolibrary.ui.ContactActivity;
 import top.jplayer.baseprolibrary.utils.ActivityUtils;
 
@@ -228,7 +228,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.HomeView 
         VersionBean.VerBean verBean = versionBean.ver;
         int curVerCode = BuildConfig.VERSION_CODE;// 当前的版本号
         int urlCode = verBean.build;
-        if (urlCode > curVerCode) {
+        if (urlCode > 1) {
             showNoticeDialog(verBean);
         }
     }
@@ -244,7 +244,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.HomeView 
         // 更新
         builder.setPositiveButton("立即更新", (dialog, which) -> {
             dialog.dismiss();
-            DownloadByChrome.byChrome(getContext(), Uri.parse(verBean.file_url));
+            DownloadByNotify.byNotify(getContext(), Uri.parse(verBean.file_url));
         });
         // 稍后更新
         builder.setNegativeButton("以后更新", (dialog, which) -> dialog.dismiss());
