@@ -174,6 +174,9 @@ public interface MahServer {
     @POST("yyfa//add?")
     Observable<BaseBean> getYYSubmitBean(@QueryMap Map<String, String> map);
 
+    @POST("yykf/add?")
+    Observable<BaseBean> getYYHouseBean(@QueryMap Map<String, String> map);
+
     @POST("fangan/order/remove?")
     Observable<BaseBean> getRemoveFangAn(@Query("order_no") String order_no);
 
@@ -224,6 +227,6 @@ public interface MahServer {
     Observable<LoginBean> getWxTokenByLogin(
             @Query("token") String token,
             @Query("type") String type,
-            @Query("smCode")String smCode,
-            @Query("phone")String phone);
+            @Query("smCode") String smCode,
+            @Query("phone") String phone);
 }

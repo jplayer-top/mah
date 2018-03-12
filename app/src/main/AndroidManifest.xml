@@ -61,7 +61,8 @@
         <activity
             android:name=".ui.activity.YYHouseActivity"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateVisible">
         </activity>
         <activity
             android:name=".ui.activity.SchemeSearchActivity"

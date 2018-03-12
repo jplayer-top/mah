@@ -1,13 +1,10 @@
 package com.modiwu.mah.mvp.model;
 
 import com.modiwu.mah.mvp.MahServer;
-import com.modiwu.mah.mvp.model.bean.LocalBean;
-import com.modiwu.mah.mvp.model.bean.LocalListBean;
 import com.modiwu.mah.mvp.model.bean.YBJBean;
 
 import java.util.Map;
 
-import io.reactivex.Completable;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -29,7 +26,7 @@ public class YBJModel {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    public Observable<BaseBean> requestSubmitBean(Map<String,String> map) {
+    public Observable<BaseBean> requestSubmitBean(Map<String, String> map) {
         return RetrofitManager.init()
                 .create(MahServer.class)
                 .getYBJSubmitBean(map)
@@ -41,6 +38,13 @@ public class YBJModel {
         return RetrofitManager.init()
                 .create(MahServer.class)
                 .getYYSubmitBean(map)
+                .compose(new IoMainSchedule<>());
+    }
+
+    public Observable<BaseBean> requestYYHouseBean(Map<String, String> map) {
+        return RetrofitManager.init()
+                .create(MahServer.class)
+                .getYYHouseBean(map)
                 .compose(new IoMainSchedule<>());
     }
 }

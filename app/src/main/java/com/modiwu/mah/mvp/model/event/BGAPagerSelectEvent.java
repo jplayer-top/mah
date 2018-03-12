@@ -8,6 +8,9 @@ import com.modiwu.mah.mvp.model.bean.SchemeDetailBean;
  */
 
 public class BGAPagerSelectEvent {
+    public SchemeDetailBean.LoupanhuxingBean bean;
+
     public BGAPagerSelectEvent(SchemeDetailBean.LoupanhuxingBean bean) {
+        this.bean = bean;
     }
 }

@@ -13,6 +13,7 @@ import com.modiwu.mah.R;
 import com.modiwu.mah.base.BaseSpecialActivity;
 import com.modiwu.mah.mvp.constract.SchemeDetialContract;
 import com.modiwu.mah.mvp.model.bean.SchemeDetailBean;
+import com.modiwu.mah.mvp.model.event.BGAPagerSelectEvent;
 import com.modiwu.mah.mvp.model.event.LoginSuccessEvent;
 import com.modiwu.mah.mvp.presenter.SchemeDetailPresenter;
 import com.modiwu.mah.ui.adapter.AdapterPagerSchemeDetail;
@@ -118,8 +119,8 @@ public class SchemeDetailActivity extends BaseSpecialActivity implements SchemeD
     private SchemeDetailBean.LoupanhuxingBean selBean;
 
     @Subscribe
-    public void bgaSelect(SchemeDetailBean.LoupanhuxingBean bean) {
-        selBean = bean;
+    public void bgaSelect(BGAPagerSelectEvent event) {
+        selBean = event.bean;
     }
 
     @Override
@@ -140,10 +141,13 @@ public class SchemeDetailActivity extends BaseSpecialActivity implements SchemeD
         btn2YY.setOnClickListener(v -> {
             Bundle bundle = new Bundle();
             if (selBean != null) {
-                bundle.putString("building_id", selBean.building_id + "");
-                bundle.putString("huxing_type", selBean.huxing_type);
-                ActivityUtils.init().start(this, YYHouseActivity.class, "预约看房", bundle);
+            } else {
+                selBean = mSchemeDetailBean.loupanhuxing.get(0);
             }
+            bundle.putString("building_id", selBean.building_id + "");
+            bundle.putString("huxing_type", selBean.huxing_type);
+            bundle.putString("building_name", selBean.huxing_name);
+            ActivityUtils.init().start(this, YYHouseActivity.class, "预约看房", bundle);
         });
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
