@@ -1,7 +1,7 @@
 # mah
 mah
 
-[功能演示视频](http://file.jplayer.top/screencapture-1517453739627.mp4)
+[功能演示gif](http://file.jplayer.top/git_mah.gif)
 
 
 
