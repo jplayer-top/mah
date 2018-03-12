@@ -109,7 +109,7 @@ public class YYHouseActivity extends BaseCommonActivity {
         Calendar selectedDate = Calendar.getInstance();
         Calendar startDate = Calendar.getInstance();
         Calendar endDate = Calendar.getInstance();
-        endDate.set(2019, 12, 31);
+        endDate.set(2049, 12, 31);
         //时间选择器
         pvTime = new TimePickerView.Builder(this, (date, v) -> {//选中事件回调
             tvTime.setText(getTime(date));
