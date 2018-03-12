@@ -1,9 +1,10 @@
 # mah
 mah
 
-![阿里云 ](http://file.jplayer.top/git_mah.gif)
-![git ](http://https://github.com/oblivion0001/mah/blob/master/git_mah.gif)
+[阿里云 ](http://file.jplayer.top/git_mah.gif)
 
+![gif ](./git_mah.gif)
+![二维码下载 ](./q_code.JPG)
 
 BaseLibrary 开源框架：含有如下
 - Retrofit2
