@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
-            android:src="@drawable/pic_local"/>
+            android:src="@drawable/ic_launcher_round"/>
 
         <TextView
             android:id="@+id/tv_title"

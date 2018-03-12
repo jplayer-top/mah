@@ -13,6 +13,7 @@ import top.jplayer.baseprolibrary.widgets.loadding.SpinKitView;
 
 /**
  * Created by Administrator on 2017/3/16.
+ * 加载中
  */
 
 public class DialogLoading extends BaseCommonDialog {
@@ -49,7 +50,7 @@ public class DialogLoading extends BaseCommonDialog {
     private void initView(Context context) {
         mDialogContentView = LayoutInflater.from(context).inflate(R.layout.dialog_loading_spinkit, null);
         mLoadingView = mDialogContentView.findViewById(R.id.spin_kit);
-        mTextView =  mDialogContentView.findViewById(R.id.name);
+        mTextView = mDialogContentView.findViewById(R.id.name);
         setContentView(mDialogContentView);
     }
 

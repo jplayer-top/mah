@@ -27,7 +27,6 @@ public class DialogFlowSure extends BaseCommonDialog {
     }
 
 
-
     public ImageView getLogoView() {
         return mIvLogo;
     }
@@ -64,12 +63,12 @@ public class DialogFlowSure extends BaseCommonDialog {
     private void initView() {
         View dialogView = LayoutInflater.from(getContext()).inflate(R.layout.dialog_sure, null);
         iv_sure = dialogView.findViewById(R.id.iv_sure);
-        mTvTitle = (TextView) dialogView.findViewById(R.id.tv_title);
+        mTvTitle = dialogView.findViewById(R.id.tv_title);
         mTvTitle.setTextIsSelectable(true);
-        mTvContent = (TextView) dialogView.findViewById(R.id.tv_content);
+        mTvContent = dialogView.findViewById(R.id.tv_content);
         mTvContent.setMovementMethod(ScrollingMovementMethod.getInstance());
         mTvContent.setTextIsSelectable(true);
-        mIvLogo = (ImageView) dialogView.findViewById(R.id.iv_logo);
+        mIvLogo = dialogView.findViewById(R.id.iv_logo);
         setContentView(dialogView);
     }
 
