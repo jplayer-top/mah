@@ -1,4 +1,4 @@
-package com.modiwu.mah.ui.dialog;
+package top.jplayer.baseprolibrary.widgets.dialog;
 
 
 import android.app.Dialog;
@@ -10,8 +10,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 
-import com.modiwu.mah.R;
-
+import top.jplayer.baseprolibrary.R;
 import top.jplayer.baseprolibrary.utils.ScreenUtils;
 
 
@@ -20,16 +19,16 @@ import top.jplayer.baseprolibrary.utils.ScreenUtils;
  * d
  */
 
-public abstract class BaseBottomFsDialog extends Dialog {
+public abstract class BaseBottomDialog extends Dialog {
 
     public Context mContext;
 
-    public BaseBottomFsDialog(Context context) {
+    public BaseBottomDialog(Context context) {
         this(context, R.style.dialog_custom);
         mContext = context;
     }
 
-    public BaseBottomFsDialog(@NonNull Context context, @StyleRes int themeResId) {
+    public BaseBottomDialog(@NonNull Context context, @StyleRes int themeResId) {
         super(context, themeResId);
         View view = View.inflate(getContext(), initLayout(), null);
         initView(view);

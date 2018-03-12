@@ -11,13 +11,14 @@ import com.modiwu.mah.mvp.model.event.ShareOneEvent;
 import org.greenrobot.eventbus.EventBus;
 
 import top.jplayer.baseprolibrary.utils.ScreenUtils;
+import top.jplayer.baseprolibrary.widgets.dialog.BaseBottomDialog;
 
 /**
  * Created by PEO on 2017/2/24.
  * d
  */
 
-public class ShareDialog extends BaseBottomFsDialog {
+public class ShareDialog extends BaseBottomDialog {
 
 
     public ShareDialog(Context context) {

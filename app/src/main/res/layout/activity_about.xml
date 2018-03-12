@@ -17,8 +17,10 @@
         app:layout_constraintVertical_bias="0.2"/>
 
     <TextView
+        android:padding="@dimen/dp_10"
+        android:gravity="center"
         android:id="@+id/tvVersion"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="版本号：1.0"
         app:layout_constraintBottom_toBottomOf="parent"

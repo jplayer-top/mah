@@ -20,10 +20,16 @@
             android:screenOrientation="portrait">
         </activity>
         <activity
+            android:name=".ui.activity.ActivityDialog"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
             android:name=".ui.WebFullScreenActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait">
         </activity>
+
         <receiver android:name=".net.download.DownloadByReceiver">
             <intent-filter>
                 <!-- 配置 点击通知 和 下载完成 两个 action -->
@@ -32,19 +38,19 @@
             </intent-filter>
         </receiver>
         <!--<provider-->
-            <!--android:name="android.support.v4.content.FileProvider"-->
-            <!--android:authorities="top.jplayer.baseprolibrary.fileprovider"-->
-            <!--android:exported="false"-->
-            <!--android:grantUriPermissions="true">-->
-            <!--<meta-data-->
-                <!--android:name="android.support.FILE_PROVIDER_PATHS"-->
-                <!--android:resource="@xml/file_provider"/>-->
+        <!--android:name="android.support.v4.content.FileProvider"-->
+        <!--android:authorities="top.jplayer.baseprolibrary.fileprovider"-->
+        <!--android:exported="false"-->
+        <!--android:grantUriPermissions="true">-->
+        <!--<meta-data-->
+        <!--android:name="android.support.FILE_PROVIDER_PATHS"-->
+        <!--android:resource="@xml/file_provider"/>-->
         <!--</provider>-->
 
         <!--<meta-data-->
-            <!--android:name="RONG_CLOUD_APP_KEY"-->
-            <!--android:value="${RONG_KEY}"-->
-            <!--tools:replace="android:value"/>-->
+        <!--android:name="RONG_CLOUD_APP_KEY"-->
+        <!--android:value="${RONG_KEY}"-->
+        <!--tools:replace="android:value"/>-->
 
     </application>
 </manifest>
