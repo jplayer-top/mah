@@ -85,6 +85,7 @@
             tools:ignore="RtlHardcoded"/>
 
         <TextView
+            android:textColor="@color/money_color"
             android:id="@+id/tvOrderMoney"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

@@ -7,7 +7,7 @@
               android:layout_marginLeft="@dimen/dp_10"
               android:layout_marginRight="@dimen/dp_10"
               android:layout_marginStart="@dimen/dp_10"
-              android:background="@color/whitesmoke"
+              android:background="@color/white"
               android:orientation="vertical">
 
     <ImageView

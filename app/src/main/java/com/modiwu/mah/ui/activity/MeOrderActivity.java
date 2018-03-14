@@ -23,7 +23,7 @@ import top.jplayer.baseprolibrary.utils.ActivityUtils;
  * com.modiwu.mah.ui.activity
  */
 
-
+@Deprecated
 public class MeOrderActivity extends BaseCommonActivity implements OrderListContract.IOrderListView {
 
     private OrderListPresenter mPresenter;

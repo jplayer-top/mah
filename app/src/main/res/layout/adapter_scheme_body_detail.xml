@@ -6,8 +6,9 @@
     android:layout_height="wrap_content"
     android:foreground="?android:selectableItemBackground"
     android:orientation="vertical"
-    android:background="@color/whitesmoke"
+    android:background="@color/white"
     android:layout_marginBottom="@dimen/dp_10">
+
 
     <ImageView
         android:id="@+id/ivBodyPic"
@@ -30,6 +31,6 @@
         style="@style/textview_body_magin_10"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/color999"
+        android:textColor="@color/black"
         android:text=""/>
 </LinearLayout>
