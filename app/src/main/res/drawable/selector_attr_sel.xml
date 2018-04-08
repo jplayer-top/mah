@@ -4,5 +4,4 @@
     <item android:drawable="@drawable/shape_attr_uncheck" android:state_checked="true"/>
     <item android:drawable="@drawable/shape_bg_ccc"/>
 
-
 </selector>

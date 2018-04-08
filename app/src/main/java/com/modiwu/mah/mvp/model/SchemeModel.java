@@ -19,10 +19,10 @@ import top.jplayer.baseprolibrary.net.RetrofitManager;
  */
 
 public class SchemeModel {
-    public Observable<SchemeBean> requestSchemeBean() {
+    public Observable<SchemeBean> requestSchemeBean(String city_code) {
         return RetrofitManager.init()
                 .create(MahServer.class)
-                .getSchemeBean()
+                .getSchemeBean(city_code)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }

@@ -83,7 +83,7 @@ public interface MahServer {
     Observable<FloorBean> getFloorSelectBean(@Query("area_code") String area_code);
 
     @GET("fangan/list")
-    Observable<SchemeBean> getSchemeBean();
+    Observable<SchemeBean> getSchemeBean(@Query("city_code") String city_code);
 
     @GET("fangan/list?")
     Observable<SchemeBean> getSchemeBean(@QueryMap Map<String, String> map);

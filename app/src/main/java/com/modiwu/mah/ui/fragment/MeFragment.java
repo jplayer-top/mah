@@ -168,14 +168,13 @@ public class MeFragment extends BaseFragment {
     }
 
 
-
     @Subscribe
     public void shareEvent(ShareOneEvent event) {
         if (mWxShare.checkWX()) {
 
             Bitmap thumb = BitmapFactory
                     .decodeResource(getResources(), R.mipmap.ic_launcher);
-            mWxShare.shareUrl("https://app.modiwu.com/app/download",getString(R.string.app_name), thumb,
+            mWxShare.shareUrl("https://app.modiwu.com/app/download", getString(R.string.app_name), thumb,
                     getString(R.string.solagon), SendMessageToWX.Req.WXSceneSession);
         } else {
             ToastUtils.init().showInfoToast(getContext(), "请先安装微信");
@@ -187,7 +186,7 @@ public class MeFragment extends BaseFragment {
         if (mWxShare.checkWX()) {
             Bitmap thumb = BitmapFactory
                     .decodeResource(getResources(), R.mipmap.ic_launcher);
-            mWxShare.shareUrl("https://app.modiwu.com/app/download",getString(R.string.app_name), thumb,
+            mWxShare.shareUrl("https://app.modiwu.com/app/download", getString(R.string.app_name), thumb,
                     getString(R.string.solagon), SendMessageToWX.Req.WXSceneTimeline);
         } else {
             ToastUtils.init().showInfoToast(getContext(), "请先安装微信");
@@ -207,6 +206,7 @@ public class MeFragment extends BaseFragment {
                 llToLogin.setEnabled(true);
                 Glide.with(getContext()).load(R.mipmap.ic_launcher).apply(RequestOptions.circleCropTransform()).into(ivMeAvatar);
                 tvName.setText("点击登录");
+                SharePreUtil.saveData(getContext(), "mark_login", "0");
             }
         }, throwable -> {
         });

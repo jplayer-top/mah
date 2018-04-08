@@ -27,6 +27,7 @@ import java.util.Locale;
 import java.util.Map;
 
 import top.jplayer.baseprolibrary.utils.ActivityUtils;
+import top.jplayer.baseprolibrary.utils.SharePreUtil;
 
 /**
  * Created by Obl on 2018/1/19.
@@ -38,6 +39,7 @@ public class SchemeFragment extends BaseFragment implements SchemeContract.ISche
     protected RecyclerView mRecyclerView;
     private SchemePresenter mPresenter;
     private SchemeAdapter mAdapter;
+    private String mCity_code;
 
     @Override
     public int initLayout() {
@@ -54,14 +56,15 @@ public class SchemeFragment extends BaseFragment implements SchemeContract.ISche
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         mPresenter = new SchemePresenter(this);
         showLoading();
-        mPresenter.requestSchemeData();
-        smartRefreshLayout.setOnRefreshListener(refresh -> mPresenter.requestSchemeData());
+        mCity_code = (String) SharePreUtil.getData(getContext(), "sel_city_code", "");
+        mPresenter.requestSchemeData(mCity_code);
+        smartRefreshLayout.setOnRefreshListener(refresh -> mPresenter.requestSchemeData(mCity_code));
 
         ArrayList<SchemeBean.RecordsBean> recordsBeans = new ArrayList<>();
         mAdapter = new SchemeAdapter(recordsBeans);
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setOnItemChildClickListener((adapter1, view, position) -> {
-            List<SchemeBean.RecordsBean> recordsBean = adapter1.getData();
+            List<SchemeBean.RecordsBean> recordsBean = mAdapter.getData();
             Bundle bundle = new Bundle();
             bundle.putString("fangan_id", String.format(Locale.CHINA, "%d", recordsBean.get(position).fangan_id));
             ActivityUtils.init().start(getContext(), SchemeDetailActivity.class, recordsBean.get(position).fangan_name, bundle);

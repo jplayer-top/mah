@@ -9,6 +9,7 @@ import com.modiwu.mah.ui.fragment.HomeFragment;
 import io.reactivex.disposables.Disposable;
 import top.jplayer.baseprolibrary.mvp.contract.BasePresenter;
 import top.jplayer.baseprolibrary.net.SampleShowDialogObserver;
+import top.jplayer.baseprolibrary.utils.SharePreUtil;
 
 /**
  * Created by Obl on 2018/1/25.
@@ -57,7 +58,9 @@ public class HomePresenter extends BasePresenter<HomeFragment> implements HomeCo
         mHomeModel.requestCodeData(city).subscribe(new SampleShowDialogObserver<CityCodeBean>(mIView.getContext()) {
             @Override
             protected void onSuccess(CityCodeBean codeBean) throws Exception {
-                requestHomeData(codeBean.city_code, city);
+                String city_code = codeBean.city_code;
+                SharePreUtil.saveData(mIView.getContext(),"sel_city_code",city_code);
+                requestHomeData(city_code, city);
             }
         });
     }

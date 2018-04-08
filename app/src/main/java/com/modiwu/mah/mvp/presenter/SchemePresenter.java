@@ -25,8 +25,8 @@ public class SchemePresenter extends BasePresenter<SchemeFragment> implements Sc
 
 
     @Override
-    public void requestSchemeData() {
-        Disposable disposable = mModel.requestSchemeBean().subscribe(schemeBean -> {
+    public void requestSchemeData(String city_code) {
+        Disposable disposable = mModel.requestSchemeBean(city_code).subscribe(schemeBean -> {
             if (schemeBean == null || schemeBean.records == null || schemeBean.records.size() < 1) {
                 mIView.showEmpty();
             } else {

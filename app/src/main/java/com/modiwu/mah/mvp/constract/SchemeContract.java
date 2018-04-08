@@ -11,7 +11,7 @@ import top.jplayer.baseprolibrary.mvp.contract.IContract;
 
 public interface SchemeContract {
     interface ISchemePresenter extends IContract.IPresenter {
-        void requestSchemeData();
+        void requestSchemeData(String city_code);
     }
 
     interface ISchemeView extends IContract.IView {
