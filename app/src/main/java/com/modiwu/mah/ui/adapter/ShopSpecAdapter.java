@@ -1,7 +1,7 @@
 package com.modiwu.mah.ui.adapter;
 
 import android.content.Context;
-import android.support.v4.util.ArrayMap;
+import android.util.ArrayMap;
 import android.view.ViewGroup;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;

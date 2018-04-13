@@ -25,6 +25,7 @@ import butterknife.Unbinder;
 import cn.bingoogolapple.bgabanner.BGABanner;
 import top.jplayer.baseprolibrary.glide.GlideUtils;
 import top.jplayer.baseprolibrary.ui.Fragment.SuperBaseFragment;
+import top.jplayer.baseprolibrary.widgets.MultipleStatusView;
 
 /**
  * Created by Administrator on 2018/1/23.
@@ -70,48 +71,55 @@ public class SchemeFloorFragment extends SuperBaseFragment {
         mActivity = (SchemeDetailActivity) getActivity();
         mLoupanBeans = mActivity.mSchemeDetailBean.loupan;
         loupanhuxingBeans = mActivity.mSchemeDetailBean.loupanhuxing;
-        Glide.with(getContext()).load(mLoupanBeans.building_adv_img).apply(GlideUtils.init().options()).into(mBuildingAdvImg);
-        mTvName.setText(StringUtils.getInstance().isNullable(mLoupanBeans.building_name, getString(R.string.app_name)));
-        mTvPrice.setText(String.format(Locale.CHINA, "均价%d元/平米", mLoupanBeans.building_price));
-        mTvStatus.setText(String.format(Locale.CHINA, "开盘：%s",
-                StringUtils.getInstance().isNullable(mLoupanBeans.building_kaipan, "未知")));
-        mTvFloorLocal.setText(String.format(Locale.CHINA, "地址：%s",
-                StringUtils.getInstance().isNullable(mLoupanBeans.building_address, "未知")));
-        mTvSellLocal.setText(String.format(Locale.CHINA, "售楼地址：%s",
-                StringUtils.getInstance().isNullable(mLoupanBeans.building_sell_address, "未知")));
-        mTvPhone.setText(String.format(Locale.CHINA, "联系电话：%s",
-                StringUtils.getInstance().isNullable(mLoupanBeans.building_phone, "未知")));
-        mTvJFSJ.setText(String.format(Locale.CHINA, "交房时间：%s",
-                StringUtils.getInstance().isNullable(mLoupanBeans.building_ruzhu, "未知")));
-        mTvZLHX.setText(String.format(Locale.CHINA, "主力户型：%s",
-                StringUtils.getInstance().isNullable(mLoupanBeans.building_zlhx, "未知")));
-        mTvWYLX.setText(String.format(Locale.CHINA, "物业户型：%s",
-                StringUtils.getInstance().isNullable(mLoupanBeans.building_wylx, "未知")));
-        mTvCQNX.setText(String.format(Locale.CHINA, "产权年限：%s",
-                StringUtils.getInstance().isNullable(mLoupanBeans.building_cqnx, "未知")));
-        mTvXMJJ.setText(String.format(Locale.CHINA, "%s",
-                StringUtils.getInstance().isNullable(mLoupanBeans.building_xmjj, "未知")));
-        bgaBanner.setAdapter((banner, itemView, model, urlPosition) -> {
-            ImageView imageView = (ImageView) itemView;
-            imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
-            Glide.with(getContext()).load(model)
-                    .apply(GlideUtils.init().options())
-                    .transition(DrawableTransitionOptions.withCrossFade())
-                    .into(imageView);
-        });
-        List<String> mImgUrls = new ArrayList<>();
-        List<String> mTypeUrls = new ArrayList<>();
-        for (SchemeDetailBean.LoupanhuxingBean bean : loupanhuxingBeans) {
-            mImgUrls.add(bean.huxing_avatar);
-            mTypeUrls.add(bean.huxing_type);
-        }
-        bgaBanner.setData(mImgUrls, mTypeUrls);
-        bgaBanner.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
-            @Override
-            public void onPageSelected(int position) {
-                EventBus.getDefault().post(new BGAPagerSelectEvent(loupanhuxingBeans.get(position)));
+        MultipleStatusView multiplestatusview = rootView.findViewById(R.id.multiplestatusview);
+        if (loupanhuxingBeans != null && loupanhuxingBeans.size() > 0) {
+            multiplestatusview.showContent();
+            Glide.with(getContext()).load(mLoupanBeans.building_adv_img).apply(GlideUtils.init().options()).into(mBuildingAdvImg);
+            mTvName.setText(StringUtils.getInstance().isNullable(mLoupanBeans.building_name, getString(R.string.app_name)));
+            mTvPrice.setText(String.format(Locale.CHINA, "均价%d元/平米", mLoupanBeans.building_price));
+            mTvStatus.setText(String.format(Locale.CHINA, "开盘：%s",
+                    StringUtils.getInstance().isNullable(mLoupanBeans.building_kaipan, "未知")));
+            mTvFloorLocal.setText(String.format(Locale.CHINA, "地址：%s",
+                    StringUtils.getInstance().isNullable(mLoupanBeans.building_address, "未知")));
+            mTvSellLocal.setText(String.format(Locale.CHINA, "售楼地址：%s",
+                    StringUtils.getInstance().isNullable(mLoupanBeans.building_sell_address, "未知")));
+            mTvPhone.setText(String.format(Locale.CHINA, "联系电话：%s",
+                    StringUtils.getInstance().isNullable(mLoupanBeans.building_phone, "未知")));
+            mTvJFSJ.setText(String.format(Locale.CHINA, "交房时间：%s",
+                    StringUtils.getInstance().isNullable(mLoupanBeans.building_ruzhu, "未知")));
+            mTvZLHX.setText(String.format(Locale.CHINA, "主力户型：%s",
+                    StringUtils.getInstance().isNullable(mLoupanBeans.building_zlhx, "未知")));
+            mTvWYLX.setText(String.format(Locale.CHINA, "物业户型：%s",
+                    StringUtils.getInstance().isNullable(mLoupanBeans.building_wylx, "未知")));
+            mTvCQNX.setText(String.format(Locale.CHINA, "产权年限：%s",
+                    StringUtils.getInstance().isNullable(mLoupanBeans.building_cqnx, "未知")));
+            mTvXMJJ.setText(String.format(Locale.CHINA, "%s",
+                    StringUtils.getInstance().isNullable(mLoupanBeans.building_xmjj, "未知")));
+            bgaBanner.setAdapter((banner, itemView, model, urlPosition) -> {
+                ImageView imageView = (ImageView) itemView;
+                imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
+                Glide.with(getContext()).load(model)
+                        .apply(GlideUtils.init().options())
+                        .transition(DrawableTransitionOptions.withCrossFade())
+                        .into(imageView);
+            });
+            List<String> mImgUrls = new ArrayList<>();
+            List<String> mTypeUrls = new ArrayList<>();
+            for (SchemeDetailBean.LoupanhuxingBean bean : loupanhuxingBeans) {
+                mImgUrls.add(bean.huxing_avatar);
+                mTypeUrls.add(bean.huxing_type);
             }
-        });
+            bgaBanner.setData(mImgUrls, mTypeUrls);
+            bgaBanner.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+                @Override
+                public void onPageSelected(int position) {
+                    EventBus.getDefault().post(new BGAPagerSelectEvent(loupanhuxingBeans.get(position)));
+                }
+            });
+        } else {
+            multiplestatusview.showEmpty();
+        }
+
     }
 
     @Override

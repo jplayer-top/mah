@@ -41,6 +41,7 @@ public class FsShopDetialDialog extends BottomTopDialogFragment implements View.
     public TextView mTvCount;
     public TextView tvOnePrice;
     public TextView tvGoodNum;
+    public TextView tvOKSel;
     private RecyclerView mRecyclerView;
     private ShopSpecAdapter mAdapter;
     private int curItem = -1;
@@ -53,6 +54,7 @@ public class FsShopDetialDialog extends BottomTopDialogFragment implements View.
         EventBus.getDefault().register(this);
         viewGroup.getLayoutParams().height = ScreenUtils.getScreenHeight() / 5 * 4;
         tvOnePrice = (TextView) viewGroup.findViewById(R.id.tvOnePrice);
+        tvOKSel = (TextView) viewGroup.findViewById(R.id.tvOKSel);
         tvGoodNum = (TextView) viewGroup.findViewById(R.id.tvGoodNum);
         mRecyclerView = (RecyclerView) viewGroup.findViewById(R.id.recycleItem);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
@@ -132,12 +134,13 @@ public class FsShopDetialDialog extends BottomTopDialogFragment implements View.
         Bundle bundle = getArguments();
         mDetialBean = bundle.getParcelable("type");
         tvOnePrice.setText(String.format(Locale.CHINA, "￥%s", bundle.getString("price")));
+        tvOKSel.setText(bundle.getString("tip"));
         if (mDetialBean != null) {
             Glide.with(getContext()).load(mDetialBean.goods.goods_thumb).apply(GlideUtils.init().options()).into(mIvTumb);
             tvGoodNum.setText(StringUtils.getInstance().isNullable(mDetialBean.goods.goods_title, "整个家"));
             if (mDetialBean.attrs != null) {
                 attr_ids = new StringBuilder();
-                mAdapter = new ShopSpecAdapter(getContext(), mDetialBean.attrs);
+                mAdapter = new ShopSpecAdapter(getContext(),mDetialBean.attrs);
                 mRecyclerView.setAdapter(mAdapter);
             }
             mAdapter.addFooterView(viewFooter);

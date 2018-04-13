@@ -12,6 +12,7 @@ import com.modiwu.mah.ui.adapter.SchemeSoftAdapter;
 import java.util.List;
 
 import top.jplayer.baseprolibrary.ui.Fragment.SuperBaseFragment;
+import top.jplayer.baseprolibrary.widgets.MultipleStatusView;
 
 /**
  * Created by Administrator on 2018/1/23.
@@ -19,7 +20,6 @@ import top.jplayer.baseprolibrary.ui.Fragment.SuperBaseFragment;
  */
 
 public class SchemeSoftFragment extends SuperBaseFragment {
-
 
 
     SchemeDetailActivity mActivity;
@@ -32,7 +32,14 @@ public class SchemeSoftFragment extends SuperBaseFragment {
 
         RecyclerView recyclerView = rootView.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
-        recyclerView.setAdapter(new SchemeSoftAdapter(ruanList));
+        MultipleStatusView multiplestatusview = rootView.findViewById(R.id.multiplestatusview);
+
+        if (ruanList != null && ruanList.size() > 0) {
+            multiplestatusview.showContent();
+            recyclerView.setAdapter(new SchemeSoftAdapter(ruanList));
+        } else {
+            multiplestatusview.showEmpty();
+        }
     }
 
     @Override

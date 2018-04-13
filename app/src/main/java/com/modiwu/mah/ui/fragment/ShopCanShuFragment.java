@@ -11,6 +11,8 @@ import com.modiwu.mah.ui.activity.ShopDetailActivity;
 
 import java.util.List;
 
+import top.jplayer.baseprolibrary.widgets.MultipleStatusView;
+
 /**
  * Created by Obl on 2018/2/8.
  * com.modiwu.mah.ui.fragment
@@ -32,7 +34,9 @@ public class ShopCanShuFragment extends BaseFragment {
         activity = (ShopDetailActivity) getActivity();
         mArgs = activity.bean.args;
         LinearLayout llParent = rootView.findViewById(R.id.llParent);
-        if (mArgs != null) {
+        MultipleStatusView multiplestatusview = rootView.findViewById(R.id.multiplestatusview);
+        if (mArgs != null && mArgs.size() > 0) {
+            multiplestatusview.showContent();
             for (ShopGoodsInfoBean.ArgsBean arg : mArgs) {
                 View view = View.inflate(getContext(), R.layout.item_canshu_fragment, null);
                 TextView tv1 = view.findViewById(R.id.tv1);
@@ -41,6 +45,8 @@ public class ShopCanShuFragment extends BaseFragment {
                 tv2.setText(arg.arg_value);
                 llParent.addView(view);
             }
+        } else {
+            multiplestatusview.showEmpty();
         }
     }
 }

@@ -12,6 +12,7 @@ import com.modiwu.mah.ui.adapter.SchemeHardAdapter;
 import java.util.List;
 
 import top.jplayer.baseprolibrary.ui.Fragment.SuperBaseFragment;
+import top.jplayer.baseprolibrary.widgets.MultipleStatusView;
 
 /**
  * Created by Administrator on 2018/1/23.
@@ -27,10 +28,18 @@ public class SchemeHardFragment extends SuperBaseFragment {
     protected void initData(View rootView) {
         mActivity = (SchemeDetailActivity) getActivity();
         mYingList = mActivity.mSchemeDetailBean.ying;
+        MultipleStatusView multiplestatusview = rootView.findViewById(R.id.multiplestatusview);
 
         RecyclerView recyclerView = rootView.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
-        recyclerView.setAdapter(new SchemeHardAdapter(mYingList));
+
+        if (mYingList != null && mYingList.size() > 0) {
+            multiplestatusview.showContent();
+            recyclerView.setAdapter(new SchemeHardAdapter(mYingList));
+
+        } else {
+            multiplestatusview.showEmpty();
+        }
     }
 
     @Override

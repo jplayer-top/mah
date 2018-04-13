@@ -12,6 +12,7 @@ import com.modiwu.mah.ui.adapter.SchemeAllAdapter;
 import java.util.List;
 
 import top.jplayer.baseprolibrary.ui.Fragment.SuperBaseFragment;
+import top.jplayer.baseprolibrary.widgets.MultipleStatusView;
 
 /**
  * Created by Administrator on 2018/1/23.
@@ -29,8 +30,15 @@ public class SchemeAllFragment extends SuperBaseFragment {
         zhengList = mActivity.mSchemeDetailBean.zheng;
 
         RecyclerView recyclerView = rootView.findViewById(R.id.recyclerView);
+        MultipleStatusView multiplestatusview = rootView.findViewById(R.id.multiplestatusview);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
-        recyclerView.setAdapter(new SchemeAllAdapter(zhengList));
+
+        if (zhengList != null && zhengList.size() > 0) {
+            multiplestatusview.showContent();
+            recyclerView.setAdapter(new SchemeAllAdapter(zhengList));
+        } else {
+            multiplestatusview.showEmpty();
+        }
     }
 
     @Override

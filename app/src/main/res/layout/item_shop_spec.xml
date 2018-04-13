@@ -6,7 +6,10 @@
           android:layout_margin="5dp"
           android:background="@drawable/selector_attr_sel"
           android:gravity="center"
-          android:padding="@dimen/dimen_15dp"
+          android:paddingBottom="@dimen/dimen_2dp"
+          android:paddingEnd="@dimen/dp_10"
+          android:paddingStart="@dimen/dimen_10dp"
+          android:paddingTop="@dimen/dimen_2dp"
           android:text="标配"
           android:textColor="@drawable/text_color"
           android:textSize="@dimen/dimen_14sp">

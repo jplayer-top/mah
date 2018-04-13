@@ -11,14 +11,17 @@
         android:layout_height="@dimen/dimen_1px"
         android:layout_marginLeft="@dimen/dimen_15dp"
         android:layout_marginRight="@dimen/dimen_15dp"
-        android:layout_marginTop="@dimen/dimen_15dp"
+        android:layout_marginTop="@dimen/dimen_5dp"
         android:background="@drawable/shape_divider"/>
 
     <TextView
         android:id="@+id/tvFlowType"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/dimen_15dp"
+        android:layout_marginBottom="@dimen/dimen_2dp"
+        android:layout_marginEnd="@dimen/dimen_15dp"
+        android:layout_marginStart="@dimen/dimen_15dp"
+        android:layout_marginTop="5dp"
         android:text="型号"
         android:textColor="@color/color323232"
         android:textSize="15sp"/>

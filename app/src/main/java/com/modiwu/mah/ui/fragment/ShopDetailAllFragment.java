@@ -12,7 +12,7 @@ import com.modiwu.mah.R;
 import com.modiwu.mah.base.BaseFragment;
 import com.modiwu.mah.mvp.model.bean.ShopGoodsInfoBean;
 import com.modiwu.mah.ui.activity.ShopDetailActivity;
-import com.modiwu.mah.ui.adapter.ShopSpecAdapter;
+import com.modiwu.mah.ui.adapter.ShopSpec2Adapter;
 import com.modiwu.mah.utils.StringUtils;
 
 import java.util.ArrayList;
@@ -48,7 +48,7 @@ public class ShopDetailAllFragment extends BaseFragment implements View.OnClickL
     RecyclerView mRecyclerView;
     @BindView(R.id.flClickDialog)
     FrameLayout flClickDialog;
-    private ShopSpecAdapter mAdapter;
+    private ShopSpec2Adapter mAdapter;
     private int curItem = -1;
     private ImageView mIvTumb;
     private View viewFooter;
@@ -69,27 +69,39 @@ public class ShopDetailAllFragment extends BaseFragment implements View.OnClickL
     protected void initData(View rootView) {
         activity = (ShopDetailActivity) getActivity();
         ShopGoodsInfoBean infoBean = activity.bean;
-        ShopGoodsInfoBean.GoodsBean goods = infoBean.goods;
-        List<ShopGoodsInfoBean.SpecsBean> specs = infoBean.specs;
-        mUnbinder = ButterKnife.bind(this, rootView);
-        Glide.with(getContext()).load(goods.goods_thumb).apply(GlideUtils.init().options()).into(mIvShopPic);
-        mTvTitle.setText(StringUtils.getInstance().isNullable(goods.goods_title, "精选单品"));
-        mTvSubTitle.setText(String.format(Locale.CHINA, "库存：%d", goods.goods_stocks));
-        mTvMoney.setText(String.format(Locale.CHINA, "￥ %s", goods.goods_price_yuan));
-        mTvCount = viewFooter.findViewById(R.id.tvCount);
-        viewFooter.findViewById(R.id.ivAddGoods).setOnClickListener(this);
-        viewFooter.findViewById(R.id.ivDelGoods).setOnClickListener(this);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-        if (infoBean.attrs != null) {
-            attr_ids = new StringBuilder();
-            mAdapter = new ShopSpecAdapter(getContext(), infoBean.attrs);
-            mRecyclerView.setAdapter(mAdapter);
+        if (infoBean != null) {
+            ShopGoodsInfoBean.GoodsBean goods = infoBean.goods;
+            List<ShopGoodsInfoBean.SpecsBean> specs = infoBean.specs;
+            mUnbinder = ButterKnife.bind(this, rootView);
+            Glide.with(getContext()).load(goods.goods_thumb).apply(GlideUtils.init().options()).into(mIvShopPic);
+            mTvTitle.setText(StringUtils.getInstance().isNullable(goods.goods_title, "精选单品"));
+            mTvSubTitle.setText(String.format(Locale.CHINA, "库存：%d", goods.goods_stocks));
+            mTvMoney.setText(String.format(Locale.CHINA, "￥ %s", goods.goods_price_yuan));
+            mTvCount = viewFooter.findViewById(R.id.tvCount);
+            viewFooter.findViewById(R.id.ivAddGoods).setOnClickListener(this);
+
+            viewFooter.findViewById(R.id.ivDelGoods).setOnClickListener(this);
+            mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+            if (infoBean.attrs != null) {
+                attr_ids = new StringBuilder();
+                List<ShopGoodsInfoBean.DetailBean> details = infoBean.details;
+                List<ShopGoodsInfoBean.AttrsBean> attrs = new ArrayList<>();
+                attrs.addAll(infoBean.attrs);
+                if (details != null && details.size() > 0) {
+                    for (ShopGoodsInfoBean.DetailBean detail : details) {
+                        attrs.add(new ShopGoodsInfoBean.AttrsBean(ShopGoodsInfoBean.AttrsBean.DETAIL));
+                    }
+                }
+                mAdapter = new ShopSpec2Adapter(getContext(), attrs, details);
+                mRecyclerView.setAdapter(mAdapter);
+            }
+            mAdapter.addFooterView(viewFooter);
+            flClickDialog.setOnClickListener(view -> {
+            });
+            mTvCollection.setOnClickListener(v -> {
+            });
+
         }
-        mAdapter.addFooterView(viewFooter);
-        flClickDialog.setOnClickListener(view -> {
-        });
-        mTvCollection.setOnClickListener(v -> {
-        });
     }
 
     public StringBuilder attr_ids;

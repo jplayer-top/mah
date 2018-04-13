@@ -10,6 +10,7 @@
     app:srlAccentColor="@android:color/white"
     app:srlEnablePreviewInEditMode="true"
     app:srlPrimaryColor="#444444"
+    app:srlReboundDuration="100"
     tools:showIn="@layout/fragment_home">
 
     <com.scwang.smartrefresh.header.BezierCircleHeader

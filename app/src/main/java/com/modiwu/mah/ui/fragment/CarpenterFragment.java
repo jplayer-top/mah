@@ -95,6 +95,15 @@ public class CarpenterFragment extends BaseFragment implements CarpenterContract
 
             }
         });
+        smartRefreshLayout.setOnRefreshListener(refresh -> {
+            int position = mTabLayout.getSelectedTabPosition();
+            if (position == 0) {
+                mPresenter.requestCarpenterData();
+            } else {
+                mPresenter.requestDockerData();
+            }
+            refresh.finishRefresh();
+        });
     }
 
 

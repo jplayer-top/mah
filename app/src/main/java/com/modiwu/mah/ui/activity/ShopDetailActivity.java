@@ -118,6 +118,7 @@ public class ShopDetailActivity extends BaseSpecialActivity implements ShopDetai
         bundle.putParcelable("type", bean);
         bundle.putString("num", String.format(Locale.CHINA, "%d", bean.goods.goods_stocks));
         bundle.putString("price", bean.goods.goods_price_yuan);
+        bundle.putString("tip", typeClick ? "确认订单" : "加入购物车");
         fsShopDetialDialog.setArguments(bundle);
         fsShopDetialDialog.show(getSupportFragmentManager(), "fs");
     }

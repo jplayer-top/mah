@@ -15,6 +15,7 @@ import com.modiwu.mah.ui.adapter.ShopDetailAdpater;
 import java.util.List;
 
 import top.jplayer.baseprolibrary.utils.ActivityUtils;
+import top.jplayer.baseprolibrary.widgets.MultipleStatusView;
 
 /**
  * Created by Administrator on 2018/2/6.
@@ -36,9 +37,11 @@ public class ShopDetailFangAnFragment extends BaseFragment {
     protected void initData(View rootView) {
         activity = (ShopDetailActivity) getActivity();
         ShopGoodsInfoBean bean = activity.bean;
+        MultipleStatusView multipleStatusView = rootView.findViewById(R.id.multiplestatusview);
         if (bean != null && bean.fangans != null && bean.fangans.size() > 0) {
             List<ShopGoodsInfoBean.FangansBean> fangans = bean.fangans;
             RecyclerView recyclerView = rootView.findViewById(R.id.recyclerView);
+            multipleStatusView.showContent();
             recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
             mAdapter = new ShopDetailAdpater(fangans);
             recyclerView.setAdapter(mAdapter);
@@ -50,6 +53,8 @@ public class ShopDetailFangAnFragment extends BaseFragment {
                 ActivityUtils.init().start(getContext(), SchemeDetailActivity.class, fangansBean.fangan_name, bundle);
                 return false;
             });
+        } else {
+            multipleStatusView.showEmpty();
         }
     }
 }

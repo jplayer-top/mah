@@ -16,6 +16,7 @@ import java.util.Locale;
 
 import top.jplayer.baseprolibrary.ui.Fragment.SuperBaseFragment;
 import top.jplayer.baseprolibrary.utils.ActivityUtils;
+import top.jplayer.baseprolibrary.widgets.MultipleStatusView;
 
 /**
  * Created by Administrator on 2018/1/23.
@@ -33,15 +34,22 @@ public class SchemeSingleFragment extends SuperBaseFragment {
         mActivity = (SchemeDetailActivity) getActivity();
         mGoodsBeans = mActivity.mSchemeDetailBean.goods;
         RecyclerView recyclerView = rootView.findViewById(R.id.recyclerView);
+        MultipleStatusView multiplestatusview = rootView.findViewById(R.id.multiplestatusview);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
-        SchemeSingleAdapter adapter = new SchemeSingleAdapter(mGoodsBeans);
-        recyclerView.setAdapter(adapter);
-        adapter.setOnItemClickListener((adapter1, view, position) -> {
-            SchemeDetailBean.GoodsBean goodsBean = (SchemeDetailBean.GoodsBean) adapter1.getData().get(position);
-            Bundle bundle = new Bundle();
-            bundle.putString("goods_id", String.format(Locale.CHINA, "%d", goodsBean.goods_id));
-            ActivityUtils.init().start(getContext(), ShopDetailActivity.class, goodsBean.goods_title, bundle);
-        });
+
+        if (mGoodsBeans != null && mGoodsBeans.size() > 0) {
+            multiplestatusview.showContent();
+            SchemeSingleAdapter adapter = new SchemeSingleAdapter(mGoodsBeans);
+            recyclerView.setAdapter(adapter);
+            adapter.setOnItemClickListener((adapter1, view, position) -> {
+                SchemeDetailBean.GoodsBean goodsBean = (SchemeDetailBean.GoodsBean) adapter1.getData().get(position);
+                Bundle bundle = new Bundle();
+                bundle.putString("goods_id", String.format(Locale.CHINA, "%d", goodsBean.goods_id));
+                ActivityUtils.init().start(getContext(), ShopDetailActivity.class, goodsBean.goods_title, bundle);
+            });
+        } else {
+            multiplestatusview.showEmpty();
+        }
     }
 
     @Override

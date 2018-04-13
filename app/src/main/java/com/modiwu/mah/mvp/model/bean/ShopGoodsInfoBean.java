@@ -3,6 +3,8 @@ package com.modiwu.mah.mvp.model.bean;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.chad.library.adapter.base.entity.MultiItemEntity;
+
 import java.util.List;
 
 import top.jplayer.baseprolibrary.mvp.model.bean.BaseBean;
@@ -27,6 +29,7 @@ public class ShopGoodsInfoBean extends BaseBean implements Parcelable {
     public List<SpecsBean> specs;
     public List<ArgsBean> args;
     public List<FangansBean> fangans;
+    public List<DetailBean> details;
 
     protected ShopGoodsInfoBean(Parcel in) {
         attrs = in.createTypedArrayList(AttrsBean.CREATOR);
@@ -76,7 +79,7 @@ public class ShopGoodsInfoBean extends BaseBean implements Parcelable {
         public String goods_price_yuan;
     }
 
-    public static class AttrsBean implements Parcelable{
+    public static class AttrsBean implements Parcelable, MultiItemEntity {
         /**
          * type_name : 颜色
          * type_id : 5
@@ -85,11 +88,26 @@ public class ShopGoodsInfoBean extends BaseBean implements Parcelable {
 
         public String type_name;
         public int type_id;
+        public int type;
+        public static final int SPEC = 0;
+        public static final int DETAIL = 1;
+
         public List<AttrInfoBean> attrInfo;
+
+
+        public AttrsBean(int type) {
+            this.type = type;
+        }
+
+        public AttrsBean() {
+            this.type = 0;
+        }
+
 
         protected AttrsBean(Parcel in) {
             type_name = in.readString();
             type_id = in.readInt();
+            type = in.readInt();
             attrInfo = in.createTypedArrayList(AttrInfoBean.CREATOR);
         }
 
@@ -106,6 +124,11 @@ public class ShopGoodsInfoBean extends BaseBean implements Parcelable {
         };
 
         @Override
+        public int getItemType() {
+            return type == SPEC ? SPEC : DETAIL;
+        }
+
+        @Override
         public int describeContents() {
             return 0;
         }
@@ -114,10 +137,11 @@ public class ShopGoodsInfoBean extends BaseBean implements Parcelable {
         public void writeToParcel(Parcel dest, int flags) {
             dest.writeString(type_name);
             dest.writeInt(type_id);
+            dest.writeInt(type);
             dest.writeTypedList(attrInfo);
         }
 
-        public static class AttrInfoBean implements Parcelable{
+        public static class AttrInfoBean implements Parcelable {
             /**
              * attr_value : 黑色
              * attr_id : 9
@@ -242,5 +266,14 @@ public class ShopGoodsInfoBean extends BaseBean implements Parcelable {
         public int designer_id;
         public String fangan_flag;
         public String sort;
+    }
+
+    public static class DetailBean {
+        public int detail_id;
+        public int biz_id;
+        public String detail_type;
+        public String title;
+        public String subtitle;
+        public String img;
     }
 }
