@@ -78,8 +78,8 @@ public class ShopSpec2Adapter extends BaseMultiItemQuickAdapter<ShopGoodsInfoBea
             ShopGoodsInfoBean.DetailBean detailBean = mDetailBeans.get(curPos);
             Glide.with(mContext).load(detailBean.img).apply(GlideUtils.init().options()).into(ivBodyPic);
             helper.addOnClickListener(R.id.llScheme_body)
-                    .setText(R.id.tvItemTitle, StringUtils.getInstance().isNullable(detailBean.title, "整个家"))
-                    .setText(R.id.tvItemBody, StringUtils.getInstance().isNullable(detailBean.subtitle, "整个家精心推荐"));
+                    .setText(R.id.tvItemTitle, StringUtils.getInstance().isNullable(detailBean.title, ""))
+                    .setText(R.id.tvItemBody, StringUtils.getInstance().isNullable(detailBean.subtitle, ""));
         }
     }
 }

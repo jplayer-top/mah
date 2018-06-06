@@ -31,7 +31,7 @@ public class SchemeAdapter extends BaseQuickAdapter<SchemeBean.RecordsBean, Base
         ImageView ivBodyPic = baseViewHolder.convertView.findViewById(R.id.ivBodyPic);
         Glide.with(mContext).load(bean.fangan_avatar).apply(GlideUtils.init().options()).into(ivBodyPic);
         baseViewHolder.addOnClickListener(R.id.llScheme_body)
-                .setText(R.id.tvItemTitle, StringUtils.getInstance().isNullable(bean.fangan_name, "整个家"))
-                .setText(R.id.tvItemBody, StringUtils.getInstance().isNullable(bean.fangan_desc, "整个家精心推荐"));
+                .setText(R.id.tvItemTitle, StringUtils.getInstance().isNullable(bean.fangan_name, ""))
+                .setText(R.id.tvItemBody, StringUtils.getInstance().isNullable(bean.fangan_desc, ""));
     }
 }

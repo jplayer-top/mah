@@ -28,6 +28,6 @@ public class SchemeFloorAdapter extends BaseQuickAdapter<SchemeDetailBean.Loupan
         ImageView ivBodyPic = baseViewHolder.convertView.findViewById(R.id.ivBodyPic);
         Glide.with(mContext).load(bean.building_imgs).apply(GlideUtils.init().options()).into(ivBodyPic);
         baseViewHolder.addOnClickListener(R.id.llScheme_body)
-                .setText(R.id.tvItemTitle, StringUtils.getInstance().isNullable(bean.building_name, "整个家"));
+                .setText(R.id.tvItemTitle, StringUtils.getInstance().isNullable(bean.building_name, ""));
     }
 }

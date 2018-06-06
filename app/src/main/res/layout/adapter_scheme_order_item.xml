@@ -51,20 +51,25 @@
                 tools:ignore="RtlHardcoded">
 
                 <TextView
+                    android:lines="1"
+                    android:ellipsize="end"
                     android:id="@+id/tvTitle"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/dp_4"
                     android:layout_marginTop="@dimen/dimen_15dp"
-                    android:text="sssssd"/>
+                    android:layout_marginEnd="@dimen/dimen_15dp"
+                    android:text=""/>
 
                 <TextView
                     android:id="@+id/tvAttrs"
-                    android:layout_width="wrap_content"
+                    android:layout_width="@dimen/dimen_150dp"
                     android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:lines="1"
                     android:layout_below="@+id/tvTitle"
                     android:layout_marginBottom="@dimen/dp_4"
-                    android:text="sssssd"
+                    android:text=""
                     android:textColor="@color/color999"/>
 
                 <TextView
@@ -81,6 +86,7 @@
                     tools:ignore="RtlSymmetry"/>
 
                 <TextView
+                    android:visibility="invisible"
                     android:id="@+id/tvNum"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -96,14 +102,14 @@
                     android:id="@+id/llEditNum"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:gravity="center|right|end"
+                    android:gravity="center|right|end|bottom"
                     android:visibility="visible"
                     tools:ignore="RtlHardcoded">
 
                     <TextView
                         android:id="@+id/tvRemove"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:background="@color/whitesmoke"
                         android:gravity="center"
                         android:text="—"
@@ -111,7 +117,7 @@
 
                     <TextView
                         android:id="@+id/tvEditNum"
-                        android:layout_width="50dp"
+                        android:layout_width="40dp"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:padding="@dimen/dp_10"
@@ -119,8 +125,8 @@
 
                     <TextView
                         android:id="@+id/tvAdd"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:layout_marginEnd="@dimen/dp_10"
                         android:layout_marginRight="@dimen/dp_10"
                         android:background="@color/whitesmoke"

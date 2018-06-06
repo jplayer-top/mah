@@ -50,8 +50,8 @@ public class SchemeSingleAdapter extends BaseQuickAdapter<SchemeDetailBean.Goods
         Glide.with(mContext).load(item.goods_thumb)
                 .apply(GlideUtils.init().options())
                 .into(mIvBodyPic);
-        helper.setText(R.id.tvTitle, StringUtils.getInstance().isNullable(item.goods_title, "整个家"))
+        helper.setText(R.id.tvTitle, StringUtils.getInstance().isNullable(item.goods_title, ""))
                 .setText(R.id.tvPrice, String.format(Locale.CHINA, "￥%s", item.goods_price_yuan))
-                .setText(R.id.tvSubTitle, StringUtils.getInstance().isNullable(item.goods_subtitle, "精心推荐"));
+                .setText(R.id.tvSubTitle, StringUtils.getInstance().isNullable(item.goods_subtitle, ""));
     }
 }

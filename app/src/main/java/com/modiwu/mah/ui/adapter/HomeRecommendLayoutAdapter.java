@@ -53,9 +53,9 @@ public class HomeRecommendLayoutAdapter extends VLayoutAdapter<RecyclerView.View
             bundle.putString("designer_id", mSjs.get(position).navValue);
             HomeBean.SjsBean sjsBean = mSjs.get(position);
             Glide.with(context).load(sjsBean.imgUrl).apply(GlideUtils.init().options()).into(ivBodyPic);
-            String designer = StringUtils.getInstance().isNullable(sjsBean.title, "设计师");
+            String designer = StringUtils.getInstance().isNullable(sjsBean.title, "");
             tvItemTitle.setText(designer);
-            tvItemBody.setText(StringUtils.getInstance().isNullable(sjsBean.subtitle, "设计师精心推荐"));
+            tvItemBody.setText(StringUtils.getInstance().isNullable(sjsBean.subtitle, ""));
             itemView.setOnClickListener(v -> ActivityUtils.init().start(context, DesignerActivity.class, designer, bundle));
         } else {
             Bundle bundle = new Bundle();
@@ -65,8 +65,8 @@ public class HomeRecommendLayoutAdapter extends VLayoutAdapter<RecyclerView.View
                     bundle));
             HomeBean.FanganBean fanganBean = mFangAn.get(position);
             Glide.with(context).load(fanganBean.imgUrl).apply(GlideUtils.init().options()).into(ivBodyPic);
-            tvItemTitle.setText(StringUtils.getInstance().isNullable(fanganBean.title, "整个家"));
-            tvItemBody.setText(StringUtils.getInstance().isNullable(fanganBean.subtitle, "整个家精心推荐"));
+            tvItemTitle.setText(StringUtils.getInstance().isNullable(fanganBean.title, ""));
+            tvItemBody.setText(StringUtils.getInstance().isNullable(fanganBean.subtitle, ""));
         }
     }
 

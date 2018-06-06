@@ -63,8 +63,8 @@ public class HomeSingleVLayoutAdapter extends VLayoutAdapter<RecyclerView.ViewHo
             bundle.putString("goods_id", String.format(Locale.CHINA, "%s", goodBean.navValue));
             ActivityUtils.init().start(context, ShopDetailActivity.class, goodBean.title, bundle);
         });
-        mTvTitle.setText(StringUtils.getInstance().isNullable(goodBean.title, "整个家"));
-        mTvSubTitle.setText(StringUtils.getInstance().isNullable(goodBean.subtitle, "整个家精心推荐"));
+        mTvTitle.setText(StringUtils.getInstance().isNullable(goodBean.title, ""));
+        mTvSubTitle.setText(StringUtils.getInstance().isNullable(goodBean.subtitle, ""));
         mTvPrice.setText(String.format(Locale.CHINA, "￥%s", StringUtils.getInstance().isNullable(goodBean.price,
                 "0.00")));
 

@@ -45,11 +45,12 @@ public class ShopSubFragmentAdapter extends BaseQuickAdapter<ShopSubListBean.Rec
 
     @Override
     protected void convert(BaseViewHolder helper, ShopSubListBean.RecordsBean item) {
+        ImageView ivBodyPic = helper.itemView.findViewById(R.id.ivBodyPic);
         Glide.with(mContext).load(item.goods_thumb)
                 .apply(GlideUtils.init().options())
-                .into(mIvBodyPic);
-        helper.setText(R.id.tvTitle, StringUtils.getInstance().isNullable(item.goods_title, "整个家"))
+                .into(ivBodyPic);
+        helper.setText(R.id.tvTitle, StringUtils.getInstance().isNullable(item.goods_title, ""))
                 .setText(R.id.tvPrice, String.format(Locale.CHINA, "￥%s", item.goods_price_yuan))
-                .setText(R.id.tvSubTitle, StringUtils.getInstance().isNullable(item.goods_subtitle, "精心推荐"));
+                .setText(R.id.tvSubTitle, StringUtils.getInstance().isNullable(item.goods_subtitle, ""));
     }
 }

@@ -137,7 +137,7 @@ public class FsShopDetialDialog extends BottomTopDialogFragment implements View.
         tvOKSel.setText(bundle.getString("tip"));
         if (mDetialBean != null) {
             Glide.with(getContext()).load(mDetialBean.goods.goods_thumb).apply(GlideUtils.init().options()).into(mIvTumb);
-            tvGoodNum.setText(StringUtils.getInstance().isNullable(mDetialBean.goods.goods_title, "整个家"));
+            tvGoodNum.setText(StringUtils.getInstance().isNullable(mDetialBean.goods.goods_title, ""));
             if (mDetialBean.attrs != null) {
                 attr_ids = new StringBuilder();
                 mAdapter = new ShopSpecAdapter(getContext(),mDetialBean.attrs);

@@ -55,8 +55,8 @@ public class DesignerFangAnAdapter extends VLayoutAdapter<RecyclerView.ViewHolde
                 bundle));
 
         Glide.with(context).load(fanganBean.fangan_avatar).apply(GlideUtils.init().options()).into(ivBodyPic);
-        tvItemTitle.setText(StringUtils.getInstance().isNullable(fanganBean.fangan_name, "设计师方案"));
-        tvItemBody.setText(StringUtils.getInstance().isNullable(fanganBean.fangan_desc, "设计师精心方案"));
+        tvItemTitle.setText(StringUtils.getInstance().isNullable(fanganBean.fangan_name, ""));
+        tvItemBody.setText(StringUtils.getInstance().isNullable(fanganBean.fangan_desc, ""));
     }
 
     public void setFangAn(List<DesignBean.FanganBean> fangAn) {

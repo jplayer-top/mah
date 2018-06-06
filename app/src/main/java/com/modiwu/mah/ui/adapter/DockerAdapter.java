@@ -50,7 +50,7 @@ public class DockerAdapter extends BaseQuickAdapter<DockerBean.RecordsBean, Base
         Glide.with(mContext).load(item.cat_icon)
                 .apply(GlideUtils.init().options())
                 .into(imageView);
-        helper.setText(R.id.tvTitle, StringUtils.getInstance().isNullable(item.cat_name, "整个家"))
+        helper.setText(R.id.tvTitle, StringUtils.getInstance().isNullable(item.cat_name, ""))
                 .setVisible(R.id.tvPrice, false)
                 .setVisible(R.id.tvSubTitle, false);
     }

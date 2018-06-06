@@ -27,7 +27,7 @@ public class MeShouCangAdapter extends BaseQuickAdapter<MeShouCangBean.RowsBean,
     protected void convert(BaseViewHolder helper, MeShouCangBean.RowsBean item) {
         ImageView ivPic = helper.itemView.findViewById(R.id.ivFangAnPic);
         Glide.with(mContext).load(item.fangan_avatar).apply(GlideUtils.init().options()).into(ivPic);
-        helper.setText(R.id.tvFangAnName, StringUtils.getInstance().isNullable(item.fangan_name, "整个家"))
+        helper.setText(R.id.tvFangAnName, StringUtils.getInstance().isNullable(item.fangan_name, ""))
                 .addOnClickListener(R.id.tvFangAnDel);
     }
 }

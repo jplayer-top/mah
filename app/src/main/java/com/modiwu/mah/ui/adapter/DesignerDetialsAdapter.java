@@ -46,8 +46,8 @@ public class DesignerDetialsAdapter extends VLayoutAdapter<RecyclerView.ViewHold
         DesignBean.DetailsBean detailsBean = mDetailsBeans.get(position);
 
         Glide.with(context).load(detailsBean.img).apply(GlideUtils.init().options()).into(ivBodyPic);
-        tvItemTitle.setText(StringUtils.getInstance().isNullable(detailsBean.title, "设计师"));
-        tvItemBody.setText(StringUtils.getInstance().isNullable(detailsBean.subtitle, "设计师精心设计"));
+        tvItemTitle.setText(StringUtils.getInstance().isNullable(detailsBean.title, ""));
+        tvItemBody.setText(StringUtils.getInstance().isNullable(detailsBean.subtitle, ""));
     }
 
     public void setDetials(List<DesignBean.DetailsBean> fangAn) {
