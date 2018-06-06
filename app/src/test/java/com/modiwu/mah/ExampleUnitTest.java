@@ -10,12 +10,10 @@ import org.junit.Test;
 public class ExampleUnitTest {
     @Test
     public void addition_isCorrect() throws Exception {
-        int sum = 0;
-        int a = 0;
-        for (int i = 100; sum <= 2017; i--) {
-            a = i;
-            sum += i;
+        String a = "1,2,33,";
+        int i = a.lastIndexOf(",");
+        if (i == a.length() - 1) {
+            System.out.println(i + "");
         }
-        System.out.println(a);
     }
 }

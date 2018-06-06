@@ -21,7 +21,6 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -122,7 +121,7 @@ public class FsShopDetialDialog extends BottomTopDialogFragment implements View.
         for (Map.Entry<Integer, Integer> entry : mAdapter.mSelAttrMap.entrySet()) {
             list.add(entry.getValue());
         }
-        Collections.sort(list);
+//        Collections.sort(list);
         for (Integer integer : list) {
             attr_ids.append(integer);
             attr_ids.append(",");
@@ -140,7 +139,7 @@ public class FsShopDetialDialog extends BottomTopDialogFragment implements View.
             tvGoodNum.setText(StringUtils.getInstance().isNullable(mDetialBean.goods.goods_title, ""));
             if (mDetialBean.attrs != null) {
                 attr_ids = new StringBuilder();
-                mAdapter = new ShopSpecAdapter(getContext(),mDetialBean.attrs);
+                mAdapter = new ShopSpecAdapter(getContext(), mDetialBean.attrs);
                 mRecyclerView.setAdapter(mAdapter);
             }
             mAdapter.addFooterView(viewFooter);
