@@ -7,6 +7,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.modiwu.mah.R;
 import com.modiwu.mah.mvp.model.bean.ShopCartBean;
+import com.modiwu.mah.utils.StringUtils;
 
 import java.util.List;
 import java.util.Locale;
@@ -28,7 +29,8 @@ public class OrderCreateInfoAdapter extends BaseQuickAdapter<ShopCartBean, BaseV
         ImageView ivPic = helper.itemView.findViewById(R.id.ivShopPic);
         Glide.with(mContext).load(item.pic_url).apply(GlideUtils.init().options()).into(ivPic);
         helper.setText(R.id.tvTitle, item.title)
-                .setText(R.id.tvMoney, String.format(Locale.CHINA, "￥%s", item.price))
+                .setText(R.id.tvMoney, String.format(Locale.CHINA, "￥%s", StringUtils.getInstance().isNullable(item
+                        .price, "0")))
                 .setText(R.id.tvSubTitle, String.format(Locale.CHINA, "X %s", item.count));
     }
 }

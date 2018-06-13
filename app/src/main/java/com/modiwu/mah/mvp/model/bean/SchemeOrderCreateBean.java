@@ -33,7 +33,7 @@ public class SchemeOrderCreateBean extends BaseBean {
          * goods_num : 1
          * goods_price : 980
          */
-        public boolean isCheck = false;
+        public boolean isCheck = true;
         public boolean isHeardCheck;
 
         public int fangan_id;
@@ -58,7 +58,7 @@ public class SchemeOrderCreateBean extends BaseBean {
          * goods_num : 2
          * goods_price : 9900
          */
-        public boolean isCheck = false;
+        public boolean isCheck = true;
         public boolean isHeardCheck;
 
         public int fangan_id;
@@ -84,8 +84,8 @@ public class SchemeOrderCreateBean extends BaseBean {
          * goods_num : 1
          * goods_price : 77700
          */
-        public boolean isCheck;
-        public boolean isHeardCheck;
+        public boolean isCheck = true;
+        public boolean isHeardCheck = true;
         public int fangan_id;
         public int goods_id;
         public String goods_title;

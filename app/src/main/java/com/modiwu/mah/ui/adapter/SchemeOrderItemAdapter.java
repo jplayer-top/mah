@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide;
 import com.modiwu.mah.R;
 import com.modiwu.mah.mvp.model.bean.SchemeOrderCreateBean;
 import com.modiwu.mah.mvp.model.event.MoneyChangeEvent;
+import com.modiwu.mah.utils.StringUtils;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -77,7 +78,8 @@ public class SchemeOrderItemAdapter extends VLayoutAdapter<RecyclerView.ViewHold
             tvNum.setText(String.format(Locale.CHINA, "x%d", sheBean.goods_num));
             tvTitle.setText(sheBean.goods_title);
             tvAttrs.setText(sheBean.attr_name);
-            tvSubTitle.setText(String.format(Locale.CHINA, "￥%s", sheBean.goods_price_yuan));
+            tvSubTitle.setText(String.format(Locale.CHINA, "￥%s", StringUtils.getInstance().isNullable(sheBean
+                    .goods_price_yuan, "0")));
             Glide.with(context).load(sheBean.goods_thumb).apply(GlideUtils.init().options()).into(ivShopDel);
         } else if (type == YING) {
             llEditNum.setVisibility(View.GONE);
@@ -95,11 +97,13 @@ public class SchemeOrderItemAdapter extends VLayoutAdapter<RecyclerView.ViewHold
             tvAttrs.setText(yingBean.attr_name);
 
             tvNum.setText(String.format(Locale.CHINA, "x%d", yingBean.goods_num));
-            tvSubTitle.setText(String.format(Locale.CHINA, "￥%s", yingBean.goods_price_yuan));
+            tvSubTitle.setText(String.format(Locale.CHINA, "￥%s", StringUtils.getInstance().isNullable(yingBean
+                    .goods_price_yuan, "0")));
             Glide.with(context).load(yingBean.goods_thumb).apply(GlideUtils.init().options()).into(ivShopDel);
         } else {
             llEditNum.setVisibility(View.VISIBLE);
-
+            checkHeard.setEnabled(false);
+            checkbox.setEnabled(false);
             checkHeard.setOnClickListener(buttonView -> ruanCheck());
             checkbox.setOnClickListener(v -> {
                 mRuan.get(position).isCheck = !mRuan.get(position).isCheck;
@@ -129,7 +133,8 @@ public class SchemeOrderItemAdapter extends VLayoutAdapter<RecyclerView.ViewHold
             checkbox.setChecked(ruanBean.isCheck);
             tvTitle.setText(ruanBean.goods_title);
             tvAttrs.setText(ruanBean.attr_name);
-            tvSubTitle.setText(String.format(Locale.CHINA, "￥%s", ruanBean.goods_price_yuan));
+            tvSubTitle.setText(String.format(Locale.CHINA, "￥%s", StringUtils.getInstance().isNullable(ruanBean
+                    .goods_price_yuan, "0")));
             Glide.with(context).load(ruanBean.goods_thumb).apply(GlideUtils.init().options()).into(ivShopDel);
         }
     }
