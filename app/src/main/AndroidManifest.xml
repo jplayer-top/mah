@@ -146,11 +146,24 @@
             android:screenOrientation="portrait">
         </activity>
         <activity
+            android:name=".ui.activity.ManagerActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.activity.ManagerClient2Activity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"/>
+
+        <activity
             android:name=".ui.activity.LocalCreateActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateVisible">
         </activity>
+        <activity
+            android:name=".ui.activity.ManagerClientActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.activity.MessageChangeActivity"
             android:launchMode="singleTop"
@@ -204,6 +217,8 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize">
         </activity>
+
+
         <!--7.0 -->
         <provider
             android:name="android.support.v4.content.FileProvider"

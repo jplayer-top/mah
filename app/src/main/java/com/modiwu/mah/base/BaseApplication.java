@@ -11,6 +11,7 @@ import com.modiwu.mah.BuildConfig;
 import com.tencent.bugly.Bugly;
 import com.tencent.bugly.beta.Beta;
 import com.tencent.bugly.beta.interfaces.BetaPatchListener;
+import com.uuzuche.lib_zxing.activity.ZXingLibrary;
 
 import java.util.Locale;
 
@@ -42,6 +43,7 @@ public class BaseApplication extends MultiDexApplication {
         super.onCreate();
         AppContext = getApplicationContext();
         Utils.init(this);
+        zxing();
         //主线程的Handler
         mMainThreadHandler = new Handler();
         BaseInitApplication.init(AppContext);
@@ -50,6 +52,13 @@ public class BaseApplication extends MultiDexApplication {
             Bugly.init(this, "d764308e59", false);
             openBugly();
         }
+    }
+
+    /**
+     * 初始化zxing
+     */
+    public void zxing() {
+        ZXingLibrary.initDisplayOpinion(this);
     }
 
     @Override
@@ -83,6 +92,7 @@ public class BaseApplication extends MultiDexApplication {
         }
         return null;
     }
+
     private void openBugly() {
         // 补丁回调接口
         if (BuildConfig.DEBUG) {

@@ -18,8 +18,8 @@ ext {
     ]
     url = [
 //            "debug"  : "http://modiwu.com/app1/",
-            "debug"  : "https://app.modiwu.com/app/",
-            "release": "https://app.modiwu.com/app/",
+"debug"  : "https://app.modiwu.com/app/",
+"release": "https://app.modiwu.com/app/",
     ]
     supportDeps = [
             //--------  support  -------
@@ -68,7 +68,8 @@ ext {
     pickerview = 'com.contrarywind:Android-PickerView:3.2.7'
     //权限申请
     permission = 'com.yanzhenjie:permission:1.0.5'
-
+    //二维码
+    qcode = 'cn.yipianfengye.android:zxing-library:2.1'
     glide = "com.github.bumptech.glide:glide:$dependVersion.glideSdkVersion"
     glideCompiler = "com.github.bumptech.glide:compiler:$dependVersion.glideSdkVersion"
     glideOkhttp = "com.github.bumptech.glide:okhttp3-integration:$dependVersion.glideSdkVersion"
@@ -77,7 +78,8 @@ ext {
     supportLibs = supportDeps.values()
     networkLibs = retrofit.values()
     rxJavaLibs = rxJava.values()
-    otherLibs = [barlibrary, glide, smartrefresh, smartrefresh_heard, viewanimator, toasty, pickerview, flowlayout,permission]
+    otherLibs = [barlibrary, glide, smartrefresh, smartrefresh_heard, viewanimator, toasty, pickerview, flowlayout,
+                 permission, qcode]
     annotationProcessorLibs = [glideCompiler]
 
 }

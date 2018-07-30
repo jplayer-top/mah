@@ -27,6 +27,7 @@ import com.modiwu.mah.mvp.model.event.UpAvatarEvent;
 import com.modiwu.mah.ui.activity.AboutMahActivity;
 import com.modiwu.mah.ui.activity.LocalListActivity;
 import com.modiwu.mah.ui.activity.LoginAnimActivity;
+import com.modiwu.mah.ui.activity.ManagerActivity;
 import com.modiwu.mah.ui.activity.MeContentActivity;
 import com.modiwu.mah.ui.activity.MeFangAnActivity;
 import com.modiwu.mah.ui.activity.MeOrderListActivity;
@@ -80,6 +81,8 @@ public class MeFragment extends BaseFragment {
     TextView tvShouCang;
     @BindView(R.id.tvShopCart)
     TextView tvShopCart;
+    @BindView(R.id.tvManager)
+    TextView tvManager;
     @BindView(R.id.tvLocal)
     TextView tvLocal;
     @BindView(R.id.tvName)
@@ -146,7 +149,12 @@ public class MeFragment extends BaseFragment {
             ActivityUtils.init().start(getContext(), ShopCartActivity.class, "购物车");
         });
 
-
+        tvManager.setOnClickListener(v -> {
+            if (StringUtils.getInstance().assertNoLogin(getContext())) {
+                return;
+            }
+            ActivityUtils.init().start(getContext(), ManagerActivity.class, "全民经纪人");
+        });
         tvShouCang.setOnClickListener(view -> {
 
             if (StringUtils.getInstance().assertNoLogin(getContext())) return;
