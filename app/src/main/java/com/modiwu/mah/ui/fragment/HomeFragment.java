@@ -16,10 +16,10 @@ import com.modiwu.mah.MainActivity;
 import com.modiwu.mah.R;
 import com.modiwu.mah.base.BaseFragment;
 import com.modiwu.mah.mvp.constract.HomeContract;
+import com.modiwu.mah.mvp.model.bean.CameraBean;
 import com.modiwu.mah.mvp.model.bean.HomeBean;
 import com.modiwu.mah.mvp.model.bean.VersionBean;
 import com.modiwu.mah.mvp.presenter.HomePresenter;
-import com.modiwu.mah.ui.activity.ActivityCustomCapture;
 import com.modiwu.mah.ui.adapter.HomeAdvLayoutAdapter;
 import com.modiwu.mah.ui.adapter.HomeHeardLayoutAdapter;
 import com.modiwu.mah.ui.adapter.HomeRecommendLayoutAdapter;
@@ -27,6 +27,8 @@ import com.modiwu.mah.ui.adapter.HomeSectionFooterLayoutAdapter;
 import com.modiwu.mah.ui.adapter.HomeSectionLayoutAdapter;
 import com.modiwu.mah.ui.adapter.HomeSingleVLayoutAdapter;
 import com.modiwu.mah.ui.adapter.HomeToShopLayoutAdapter;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -67,7 +69,9 @@ public class HomeFragment extends BaseFragment implements HomeContract.HomeView 
         ivBarSearch = rootView.findViewById(R.id.ivBarSearch);
         ivBarSearch.setImageResource(R.drawable.qcode);
         ivBarSearch.setVisibility(View.VISIBLE);
-        ivBarSearch.setOnClickListener(v -> ActivityUtils.init().start(getContext(), ActivityCustomCapture.class));
+        ivBarSearch.setOnClickListener(v -> {
+            EventBus.getDefault().post(new CameraBean());
+        });
         mMainActivity = (MainActivity) getActivity();
         VirtualLayoutManager manager = new VirtualLayoutManager(getContext());
         mRecyclerView.setLayoutManager(manager);

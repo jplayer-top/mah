@@ -9,8 +9,10 @@ import android.widget.FrameLayout;
 
 import com.modiwu.mah.base.BaseSpecialActivity;
 import com.modiwu.mah.base.FragmentFactory;
+import com.modiwu.mah.mvp.model.bean.CameraBean;
 import com.modiwu.mah.mvp.model.bean.VersionBean;
 import com.modiwu.mah.mvp.model.event.HomeTypeModeEvent;
+import com.modiwu.mah.ui.activity.ActivityCustomCapture;
 import com.yanzhenjie.permission.AndPermission;
 import com.yanzhenjie.permission.PermissionNo;
 import com.yanzhenjie.permission.PermissionYes;
@@ -27,8 +29,10 @@ import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import top.jplayer.baseprolibrary.listener.NetNavigationBarListener;
 import top.jplayer.baseprolibrary.net.download.DownloadByNotify;
+import top.jplayer.baseprolibrary.utils.ActivityUtils;
 import top.jplayer.baseprolibrary.utils.ToastUtils;
 
+import static android.Manifest.permission.CAMERA;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 import static top.jplayer.baseprolibrary.utils.PermissionUtils.setPermission;
 
@@ -36,6 +40,7 @@ public class MainActivity extends BaseSpecialActivity {
 
     public FrameLayout mFlFragment;
     public NavigationTabBar mNavigationTabBar;
+    private boolean isCameraClick = false;
 
     @Override
     public int setBaseLayout() {
@@ -104,7 +109,6 @@ public class MainActivity extends BaseSpecialActivity {
      * @param event 1.方案 2. 匠 3.器
      */
     @Subscribe
-
     public void moreClick(HomeTypeModeEvent event) {
         switch (event.clickMore) {
             case 1://方案
@@ -121,6 +125,11 @@ public class MainActivity extends BaseSpecialActivity {
         }
     }
 
+    @Subscribe
+    public void cameraClick(CameraBean event) {
+        isCameraClick = true;
+        setPermission(this, 100, WRITE_EXTERNAL_STORAGE, CAMERA);
+    }
 
     private int back = 0;
 
@@ -140,9 +149,12 @@ public class MainActivity extends BaseSpecialActivity {
 
     @PermissionYes(100)
     protected void getLocationYes(List<String> grantedPermissions) {
-        if (verBean != null) {
-            DownloadByNotify.byNotify(this, Uri.parse(verBean.file_url));
-
+        if (isCameraClick) {
+            ActivityUtils.init().start(this, ActivityCustomCapture.class);
+        } else {
+            if (verBean != null) {
+                DownloadByNotify.byNotify(this, Uri.parse(verBean.file_url));
+            }
         }
     }
 
@@ -174,7 +186,8 @@ public class MainActivity extends BaseSpecialActivity {
         builder.setPositiveButton("立即更新", (dialog, which) -> {
             this.verBean = verBean;
             dialog.dismiss();
-            setPermission(this, 100, WRITE_EXTERNAL_STORAGE);
+            isCameraClick = false;
+            setPermission(this, 100, WRITE_EXTERNAL_STORAGE, CAMERA);
         });
         // 稍后更新
         builder.setNegativeButton("以后更新", (dialog, which) -> dialog.dismiss());
