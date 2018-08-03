@@ -2,17 +2,16 @@ package com.modiwu.mah.ui.activity;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.TextView;
 
 import com.modiwu.mah.R;
 import com.modiwu.mah.base.BaseCommonActivity;
-import com.modiwu.mah.ui.adapter.ManagerClientAdapter;
-
-import java.util.ArrayList;
+import com.modiwu.mah.mvp.model.ManagerModel;
+import com.modiwu.mah.ui.adapter.ManagerClient2Adapter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import top.jplayer.baseprolibrary.utils.ActivityUtils;
 
 /**
  * Created by Obl on 2018/7/30.
@@ -26,8 +25,11 @@ public class ManagerClient2Activity extends BaseCommonActivity {
 
     @BindView(R.id.recyclerView)
     RecyclerView mRecyclerView;
+    @BindView(R.id.tvCount1)
+    TextView mTvCount1;
     private Unbinder mUnbinder;
-    private ManagerClientAdapter mAdapter;
+    private ManagerClient2Adapter mAdapter;
+    private ManagerModel mModel;
 
     @Override
     public int setBaseLayout() {
@@ -38,12 +40,13 @@ public class ManagerClient2Activity extends BaseCommonActivity {
     public void initBaseData() {
         mUnbinder = ButterKnife.bind(this, addRootView);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        ArrayList<String> list = new ArrayList<>();
-        list.add("1");
-        list.add("1");
-        list.add("1");
-        list.add("1");
-        mAdapter = new ManagerClientAdapter(list);
+        mAdapter = new ManagerClient2Adapter(null);
+        mModel = new ManagerModel();
+        mModel.requestManager(mBundle.getString("uid")).subscribe(bean -> {
+            mTvCount1.setText(String.valueOf(bean.lv1));
+            mAdapter.setNewData(bean.profiles);
+        }, throwable -> {
+        });
         mRecyclerView.setAdapter(mAdapter);
     }
 
@@ -52,4 +55,5 @@ public class ManagerClient2Activity extends BaseCommonActivity {
         super.onDestroy();
         mUnbinder.unbind();
     }
+
 }

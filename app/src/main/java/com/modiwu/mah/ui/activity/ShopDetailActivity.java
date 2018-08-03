@@ -30,6 +30,8 @@ import java.util.Locale;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import io.rong.imkit.RongIM;
+import io.rong.imlib.model.Conversation;
 import top.jplayer.baseprolibrary.utils.ActivityUtils;
 import top.jplayer.baseprolibrary.utils.ToastUtils;
 import top.jplayer.baseprolibrary.widgets.MultipleStatusView;
@@ -165,8 +167,8 @@ public class ShopDetailActivity extends BaseSpecialActivity implements ShopDetai
         mTabLayout.setupWithViewPager(mViewPager);
         tvServer.setOnClickListener(v -> {
             if (StringUtils.getInstance().assert2Login(this)) {
-                ActivityUtils.init().startConversion(this, ConversationOneActivity.class,
-                        bean.kfuid);
+                RongIM.getInstance().startConversation(this, Conversation.ConversationType.PRIVATE, bean
+                        .kfuid, "客服");
             }
 
         });

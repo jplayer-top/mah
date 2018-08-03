@@ -1,14 +1,15 @@
 package com.modiwu.mah.ui.activity;
 
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
 import com.modiwu.mah.R;
 import com.modiwu.mah.base.BaseCommonActivity;
+import com.modiwu.mah.mvp.model.ManagerModel;
+import com.modiwu.mah.mvp.model.bean.ManagerClientBean;
 import com.modiwu.mah.ui.adapter.ManagerClientAdapter;
-
-import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -33,6 +34,7 @@ public class ManagerClientActivity extends BaseCommonActivity {
     RecyclerView mRecyclerView;
     private Unbinder mUnbinder;
     private ManagerClientAdapter mAdapter;
+    private ManagerModel mModel;
 
     @Override
     public int setBaseLayout() {
@@ -42,16 +44,23 @@ public class ManagerClientActivity extends BaseCommonActivity {
     @Override
     public void initBaseData() {
         mUnbinder = ButterKnife.bind(this, addRootView);
+        mModel = new ManagerModel();
+        mModel.requestManager().subscribe(bean -> {
+            mTvCount1.setText(String.valueOf(bean.lv1));
+            mTvCount2.setText(String.valueOf(bean.lv2));
+            mAdapter.setNewData(bean.profiles);
+        }, throwable -> {
+        });
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        ArrayList<String> list = new ArrayList<>();
-        list.add("1");
-        list.add("1");
-        list.add("1");
-        list.add("1");
-        mAdapter = new ManagerClientAdapter(list);
+        mAdapter = new ManagerClientAdapter(null);
         mRecyclerView.setAdapter(mAdapter);
-        mAdapter.setOnItemClickListener((adapter, view, position) -> ActivityUtils.init().start(this, ManagerClient2Activity.class, "小明的客户"));
-
+        mAdapter.setOnItemClickListener((adapter, view, position) -> {
+            Bundle bundle = new Bundle();
+            ManagerClientBean.ProfileBean bean = mAdapter.getData().get(position);
+            bundle.putString("uid", bean.user_id + "");
+            ActivityUtils.init().start(this,
+                    ManagerClient2Activity.class, bean.user_name + "的客户", bundle);
+        });
     }
 
     @Override

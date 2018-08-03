@@ -6,7 +6,7 @@
     android:layout_height="60dp">
 
     <ImageView
-        android:id="@+id/ivSrc"
+        android:id="@+id/ivAvatar"
         android:layout_width="@dimen/dimen_40dp"
         android:layout_height="@dimen/dimen_40dp"
         android:layout_marginStart="@dimen/dimen_15dp"
@@ -21,27 +21,29 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dimen_10dp"
         android:layout_marginTop="@dimen/dimen_5dp"
-        android:text="用户昵称"
+        android:text=""
         android:textSize="@dimen/dimen_15sp"
-        app:layout_constraintStart_toEndOf="@+id/ivSrc"
+        app:layout_constraintStart_toEndOf="@+id/ivAvatar"
         app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
+        android:id="@+id/tvPhone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/dimen_10dp"
         android:layout_marginStart="@dimen/dimen_10dp"
         android:layout_marginTop="@dimen/dimen_10dp"
-        android:text="2018-09-01"
+        android:text=""
         android:textColor="@color/color999"
         android:textSize="@dimen/dimen_12sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/ivSrc"/>
+        app:layout_constraintStart_toEndOf="@+id/ivAvatar"/>
 
     <TextView
+        android:id="@+id/tvOther"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TA的客户（7）"
+        android:text="TA的客户"
         android:textColor="@color/chocolate"
         android:textSize="@dimen/sp_14"
         app:layout_constraintBottom_toBottomOf="parent"

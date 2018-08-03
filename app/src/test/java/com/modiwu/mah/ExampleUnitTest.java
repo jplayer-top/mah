@@ -15,5 +15,9 @@ public class ExampleUnitTest {
         if (i == a.length() - 1) {
             System.out.println(i + "");
         }
+        String cc = "https://cli.im/text?424c2ded535";
+        int indexOf = cc.indexOf("?") + 1;
+        String substring = cc.substring(indexOf);
+        System.out.println(substring);
     }
 }

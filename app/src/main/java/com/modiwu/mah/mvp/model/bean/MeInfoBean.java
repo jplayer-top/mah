@@ -14,6 +14,7 @@ public class MeInfoBean extends BaseBean {
      */
 
     public ProfileBean profile;
+    public int iskf;
 
     public static class ProfileBean {
         /**
@@ -36,5 +37,7 @@ public class MeInfoBean extends BaseBean {
         public String user_mian;
         public String user_avatar;
         public int user_points;
+        public int lv1;
+        public int lv2;
     }
 }

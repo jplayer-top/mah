@@ -19,6 +19,7 @@ import com.modiwu.mah.mvp.constract.HomeContract;
 import com.modiwu.mah.mvp.model.bean.HomeBean;
 import com.modiwu.mah.mvp.model.bean.VersionBean;
 import com.modiwu.mah.mvp.presenter.HomePresenter;
+import com.modiwu.mah.ui.activity.ActivityCustomCapture;
 import com.modiwu.mah.ui.adapter.HomeAdvLayoutAdapter;
 import com.modiwu.mah.ui.adapter.HomeHeardLayoutAdapter;
 import com.modiwu.mah.ui.adapter.HomeRecommendLayoutAdapter;
@@ -63,6 +64,10 @@ public class HomeFragment extends BaseFragment implements HomeContract.HomeView 
         smartRefreshLayout = rootView.findViewById(R.id.smartRefreshLayout);
         mRecyclerView = rootView.findViewById(R.id.recyclerView);
         tvCurLocal = rootView.findViewById(R.id.tvCurLocal);
+        ivBarSearch = rootView.findViewById(R.id.ivBarSearch);
+        ivBarSearch.setImageResource(R.drawable.qcode);
+        ivBarSearch.setVisibility(View.VISIBLE);
+        ivBarSearch.setOnClickListener(v -> ActivityUtils.init().start(getContext(), ActivityCustomCapture.class));
         mMainActivity = (MainActivity) getActivity();
         VirtualLayoutManager manager = new VirtualLayoutManager(getContext());
         mRecyclerView.setLayoutManager(manager);
@@ -70,7 +75,6 @@ public class HomeFragment extends BaseFragment implements HomeContract.HomeView 
         pool.setMaxRecycledViews(0, 10);
         mRecyclerView.setRecycledViewPool(pool);
         mDelegateAdapter = new DelegateAdapter(manager, true);
-
         smartRefreshLayout.setOnRefreshListener(refresh -> mPresenter.requestHomeData());
         mPresenter = new HomePresenter(this);
         showLoading();
@@ -79,6 +83,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.HomeView 
         tvCurLocal.setVisibility(View.VISIBLE);
         tvCurLocal.setOnClickListener(v -> ActivityUtils.init().startFragmentForResult(this, ContactActivity.class,
                 "定位城市", RESULT_FIRST_USER));
+
     }
 
     @Override

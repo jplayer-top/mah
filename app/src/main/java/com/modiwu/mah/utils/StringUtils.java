@@ -1,8 +1,14 @@
 package com.modiwu.mah.utils;
 
+import android.content.ContentResolver;
+import android.content.ContentUris;
 import android.content.Context;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Handler;
 import android.os.SystemClock;
+import android.provider.DocumentsContract;
+import android.provider.MediaStore;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
@@ -268,6 +274,49 @@ public class StringUtils {
                 }
             }
         }).start();
+    }
+
+    /**
+     * uri转path
+     */
+    public static String getRealFilePath(final Context context, final Uri uri) {
+        if (null == uri) return null;
+        final String scheme = uri.getScheme();
+        String data = null;
+        if (scheme == null) {
+            data = uri.getPath();
+        } else if (DocumentsContract.isDocumentUri(context, uri)) {
+            //如果是document类型的Uri,则通过document id处理
+            String docId = DocumentsContract.getDocumentId(uri);
+            if ("com.android.providers.media.documents".equals(uri.getAuthority())) {
+                String id = docId.split(":")[1];//解析出数字格式的id
+                String selection = MediaStore.Images.Media._ID + "=" + id;
+                data = getStringByCursor(context, MediaStore.Images.Media.EXTERNAL_CONTENT_URI, selection);
+            } else if ("com.android.providers.downloads.documents".equals(uri.getAuthority())) {
+                Uri contentUri = ContentUris.withAppendedId(Uri.parse("content://downloads/public_downloads"), Long.valueOf(docId));
+                data = getStringByCursor(context, contentUri, null);
+            }
+        } else if (ContentResolver.SCHEME_FILE.equals(scheme)) {
+            data = uri.getPath();
+        } else if (ContentResolver.SCHEME_CONTENT.equals(scheme)) {
+            data = getStringByCursor(context, uri, null);
+        }
+        return data;
+    }
+
+    private static String getStringByCursor(Context context, Uri uri, String selection) {
+        String data = "";
+        Cursor cursor = context.getContentResolver().query(uri, new String[]{MediaStore.Images.ImageColumns.DATA}, selection, null, null);
+        if (null != cursor) {
+            if (cursor.moveToFirst()) {
+                int index = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+                if (index > -1) {
+                    data = cursor.getString(index);
+                }
+            }
+            cursor.close();
+        }
+        return data;
     }
 
 //    public boolean assesMessageType(Message message) {

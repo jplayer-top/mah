@@ -130,7 +130,7 @@
                         android:id="@+id/tvManager"
                         android:layout_width="match_parent"
                         android:layout_height="?attr/actionBarSize"
-                        android:drawableLeft="@drawable/me_local"
+                        android:drawableLeft="@drawable/me_manager"
                         android:drawablePadding="@dimen/dp_10"
                         android:gravity="center_vertical"
                         android:text="@string/me_manager"

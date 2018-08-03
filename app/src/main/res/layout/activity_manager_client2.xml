@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/dimen_15dp"
             android:layout_marginStart="@dimen/dimen_15dp"
-            android:text="9"
+            android:text="0"
             android:textColor="@color/chocolate"
             android:textSize="@dimen/dimen_35sp"/>
 

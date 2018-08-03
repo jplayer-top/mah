@@ -4,7 +4,9 @@ import android.app.Dialog;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.util.ArrayMap;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -42,12 +44,15 @@ import com.tencent.mm.opensdk.modelmsg.SendMessageToWX;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import io.reactivex.Observable;
+import io.rong.imkit.RongIM;
+import io.rong.imlib.model.Conversation;
 import top.jplayer.baseprolibrary.glide.GlideUtils;
 import top.jplayer.baseprolibrary.net.SampleShowDialogObserver;
 import top.jplayer.baseprolibrary.net.download.DownloadByNotify;
@@ -153,7 +158,20 @@ public class MeFragment extends BaseFragment {
             if (StringUtils.getInstance().assertNoLogin(getContext())) {
                 return;
             }
-            ActivityUtils.init().start(getContext(), ManagerActivity.class, "全民经纪人");
+            String infoJson = (String) SharePreUtil.getData(getContext(), "info", "");
+            MeInfoBean meInfoBean = new Gson().fromJson(infoJson, MeInfoBean.class);
+            Bundle bundle = new Bundle();
+            MeInfoBean.ProfileBean profile = meInfoBean.profile;
+            if (profile != null) {
+                bundle.putInt("uid", profile.user_id);
+                bundle.putString("avatar", profile.user_avatar);
+                bundle.putString("name", profile.user_name);
+                bundle.putInt("lv1", profile.lv1);
+                bundle.putInt("lv2", profile.lv2);
+                ActivityUtils.init().start(getContext(), ManagerActivity.class, "全民经纪人", bundle);
+            } else {
+                ToastUtils.init().showErrorToast(getContext(), "用户数据信息错误");
+            }
         });
         tvShouCang.setOnClickListener(view -> {
 
@@ -171,6 +189,11 @@ public class MeFragment extends BaseFragment {
             });
         });
         tvShare.setOnClickListener(v -> new ShareDialog(getContext()).show());
+        tvSet.setOnClickListener(v -> {
+            Map<String, Boolean> map = new ArrayMap<>();
+            map.put(Conversation.ConversationType.PRIVATE.getName(), false);
+            RongIM.getInstance().startConversationList(getContext(), map);
+        });
         mModel = new MeInfoModel();
         isLogin();
     }
@@ -298,6 +321,7 @@ public class MeFragment extends BaseFragment {
         }
         tvName.setText(baseBean.profile.user_name);
         llToLogin.setEnabled(false);
+        tvSet.setVisibility(baseBean.iskf == 1 ? View.VISIBLE : View.GONE);
     }
 
     @Override

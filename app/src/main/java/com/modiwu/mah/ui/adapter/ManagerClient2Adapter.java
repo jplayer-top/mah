@@ -19,15 +19,17 @@ import top.jplayer.baseprolibrary.glide.GlideUtils;
  * github : https://github.com/oblivion0001
  */
 
-public class ManagerClientAdapter extends BaseQuickAdapter<ManagerClientBean.ProfileBean, BaseViewHolder> {
-    public ManagerClientAdapter(ArrayList<ManagerClientBean.ProfileBean> list) {
+public class ManagerClient2Adapter extends BaseQuickAdapter<ManagerClientBean.ProfileBean, BaseViewHolder> {
+    public ManagerClient2Adapter(ArrayList<ManagerClientBean.ProfileBean> list) {
         super(R.layout.adapter_manager_client, list);
     }
 
     @Override
     protected void convert(BaseViewHolder helper, ManagerClientBean.ProfileBean item) {
         helper.setText(R.id.tvName, item.user_name)
-                .setText(R.id.tvPhone, item.user_phone);
+                .setText(R.id.tvPhone, item.user_phone)
+                .setVisible(R.id.tvOther, false)
+                .setVisible(R.id.ivRight, false);
         ImageView ivAvatar = helper.itemView.findViewById(R.id.ivAvatar);
         Glide.with(mContext).load(item.user_avatar).apply(GlideUtils.init().options(R.drawable.ic_launcher_round)).into(ivAvatar);
     }

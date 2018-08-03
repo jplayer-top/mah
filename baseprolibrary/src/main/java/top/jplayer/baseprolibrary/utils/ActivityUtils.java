@@ -3,7 +3,6 @@ package top.jplayer.baseprolibrary.utils;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.MotionEvent;
 
@@ -46,14 +45,15 @@ public class ActivityUtils {
     }
 
     public void startConversion(Context context, Class clazz, String uid) {
-        WeakReference<Context> weakReference = new WeakReference<>(context);
-        Intent intent = new Intent(weakReference.get(), clazz);
-        intent.putExtra("title", "客服");
-        intent.putExtra("uid", uid);
-        intent.setAction("android.groupIntent.action.VIEW");
-        intent.addCategory(Intent.CATEGORY_DEFAULT);
-        intent.setData(Uri.parse("rong://com.ilanchuang.xiaoi/conversation/private/?targetId=" + uid));
-        weakReference.get().startActivity(intent);
+//        WeakReference<Context> weakReference = new WeakReference<>(context);
+//        Intent intent = new Intent(weakReference.get(), clazz);
+//        intent.putExtra("title", "客服");
+//        intent.putExtra("uid", uid);
+//        intent.setAction("android.groupIntent.action.VIEW");
+//        intent.addCategory(Intent.CATEGORY_DEFAULT);
+//        intent.setData(Uri.parse("rong://com.modiwu.mah/conversation/private?targetId=" + uid));
+//        weakReference.get().startActivity(intent);
+
     }
 
     public void start(Context context, Class tClass) {

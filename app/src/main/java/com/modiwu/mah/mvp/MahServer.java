@@ -14,6 +14,7 @@ import com.modiwu.mah.mvp.model.bean.LocalBean;
 import com.modiwu.mah.mvp.model.bean.LocalListBean;
 import com.modiwu.mah.mvp.model.bean.LoginBean;
 import com.modiwu.mah.mvp.model.bean.LoginStatusbean;
+import com.modiwu.mah.mvp.model.bean.ManagerClientBean;
 import com.modiwu.mah.mvp.model.bean.MeFangAnBean;
 import com.modiwu.mah.mvp.model.bean.MeInfoBean;
 import com.modiwu.mah.mvp.model.bean.MeOrderBean;
@@ -126,6 +127,12 @@ public interface MahServer {
 
     @GET("area")
     Observable<LocalBean> getLocalBean();
+
+    @GET("profile/khs")
+    Observable<ManagerClientBean> getKHSBean();
+
+    @GET("profile/khs2")
+    Observable<ManagerClientBean> getKHSBean(@Query("uid") String uid);
 
     @GET("mall/addr/l")
     Observable<LocalListBean> getLocalListBean();

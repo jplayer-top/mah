@@ -1,14 +1,20 @@
 package com.modiwu.mah.ui.activity;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.modiwu.mah.R;
 import com.modiwu.mah.base.BaseCommonActivity;
 import com.uuzuche.lib_zxing.activity.CodeUtils;
 
+import java.util.Locale;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import top.jplayer.baseprolibrary.utils.ActivityUtils;
 import top.jplayer.baseprolibrary.utils.SizeUtils;
 
@@ -21,9 +27,16 @@ import top.jplayer.baseprolibrary.utils.SizeUtils;
 
 public class ManagerActivity extends BaseCommonActivity {
 
+    @BindView(R.id.tvName)
+    TextView mTvName;
+    @BindView(R.id.ivQc)
+    ImageView mIvQc;
+    @BindView(R.id.ivAvatar)
+    ImageView mIvAvatar;
+    @BindView(R.id.btnNext)
+    Button mBtnNext;
     private Bitmap mBitmap;
-    private ImageView mIvQc;
-    private Button btnNext;
+    private Unbinder mUnbinder;
 
     @Override
     public int setBaseLayout() {
@@ -32,13 +45,14 @@ public class ManagerActivity extends BaseCommonActivity {
 
     @Override
     public void initBaseData() {
-        mIvQc = addRootView.findViewById(R.id.ivQc);
-        btnNext = addRootView.findViewById(R.id.btnNext);
-        int screen = SizeUtils.dp2px(200);
-        mBitmap = CodeUtils.createImage("111", screen, screen, BitmapFactory.decodeResource(getResources(), R.mipmap
-                .ic_launcher));
+        mUnbinder = ButterKnife.bind(this, addRootView);
+        int screen = SizeUtils.dp2px(150);
+        int uid = mBundle.getInt("uid");
+        mTvName.setText(String.format(Locale.CHINA, "用户： %s", mBundle.getString("name")));
+        mBitmap = CodeUtils.createImage("https://app.modiwu.com/app/download?" + uid, screen, screen, null);
         mIvQc.setImageBitmap(mBitmap);
-        btnNext.setOnClickListener(v -> {
+        Glide.with(this).load(mBundle.getString("avatar")).into(mIvAvatar);
+        mBtnNext.setOnClickListener(v -> {
             ActivityUtils.init().start(this, ManagerClientActivity.class, "我的客户");
         });
     }
@@ -50,6 +64,7 @@ public class ManagerActivity extends BaseCommonActivity {
             mBitmap.recycle();
             mBitmap = null;
         }
+        mUnbinder.unbind();
     }
 
 }

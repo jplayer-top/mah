@@ -417,6 +417,10 @@ public class LoginAnimActivity extends BaseSpecialActivity implements TextWatche
                     mPresenter.forget(mMap);
                     break;
                 }
+                String qcode = (String) SharePreUtil.getData(this, "qcode", "0");
+                if (qcode != null && !"0".equals(qcode)) {
+                    mMap.put("inviter", qcode);
+                }
                 mPresenter.register(mMap);
                 break;
             case R.id.llAgreement:
