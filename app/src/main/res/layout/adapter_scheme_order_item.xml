@@ -23,6 +23,7 @@
         android:orientation="horizontal">
 
         <CheckBox
+            android:enabled="false"
             android:id="@+id/checkbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

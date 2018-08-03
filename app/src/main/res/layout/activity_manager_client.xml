@@ -9,7 +9,7 @@
     <android.support.constraint.ConstraintLayout
         android:id="@+id/ll1"
         android:layout_width="0dp"
-        android:layout_height="@dimen/dimen_120dp"
+        android:layout_height="@dimen/dimen_180dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toStartOf="@+id/viewLine"
         app:layout_constraintStart_toStartOf="parent">
@@ -17,11 +17,12 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dimen_30dp"
             android:lines="2"
             android:maxEms="4"
             android:text="一级客户"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.3"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 
@@ -34,7 +35,7 @@
             android:layout_marginStart="@dimen/dp_20"
             android:text="0"
             android:textColor="@color/chocolate"
-            android:textSize="@dimen/dimen_35sp"
+            android:textSize="@dimen/dimen_50sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
@@ -43,7 +44,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dimen_5dp"
-            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dimen_20dp"
             android:text="人"
             app:layout_constraintBottom_toBottomOf="@+id/tvCount1"
             app:layout_constraintStart_toEndOf="@+id/tvCount1"
@@ -54,7 +55,7 @@
     <android.support.constraint.ConstraintLayout
         android:id="@+id/ll2"
         android:layout_width="0dp"
-        android:layout_height="@dimen/dimen_120dp"
+        android:layout_height="@dimen/dimen_180dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/viewLine">
@@ -62,11 +63,12 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dimen_30dp"
             android:lines="2"
             android:maxEms="4"
             android:text="二级客户"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.3"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 
@@ -79,7 +81,7 @@
             android:layout_marginStart="@dimen/dp_20"
             android:text="0"
             android:textColor="@color/chocolate"
-            android:textSize="@dimen/dimen_35sp"
+            android:textSize="@dimen/dimen_50sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
@@ -88,7 +90,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dimen_5dp"
-            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dimen_20dp"
             android:text="人"
             app:layout_constraintBottom_toBottomOf="@+id/tvCount2"
             app:layout_constraintStart_toEndOf="@+id/tvCount2"

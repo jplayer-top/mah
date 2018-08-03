@@ -3,14 +3,13 @@ package com.modiwu.mah.ui.adapter;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.modiwu.mah.R;
 import com.modiwu.mah.mvp.model.bean.ManagerClientBean;
 
 import java.util.ArrayList;
-
-import top.jplayer.baseprolibrary.glide.GlideUtils;
 
 /**
  * Created by Obl on 2018/7/30.
@@ -26,9 +25,11 @@ public class ManagerClientAdapter extends BaseQuickAdapter<ManagerClientBean.Pro
 
     @Override
     protected void convert(BaseViewHolder helper, ManagerClientBean.ProfileBean item) {
+        boolean b = item.lv2 == 0;
         helper.setText(R.id.tvName, item.user_name)
-                .setText(R.id.tvPhone, item.user_phone);
+                .setText(R.id.tvPhone, item.user_phone)
+                .setTextColor(R.id.tvOther, b ? R.color.chocolate : R.color.color999);
         ImageView ivAvatar = helper.itemView.findViewById(R.id.ivAvatar);
-        Glide.with(mContext).load(item.user_avatar).apply(GlideUtils.init().options(R.drawable.ic_launcher_round)).into(ivAvatar);
+        Glide.with(mContext).load(item.user_avatar).apply(RequestOptions.circleCropTransform()).into(ivAvatar);
     }
 }
