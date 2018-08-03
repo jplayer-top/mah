@@ -32,6 +32,7 @@ android {
             storePassword "lj011200"
         }
 
+
         debug {
             keyAlias "obl"
             keyPassword "lj011200"

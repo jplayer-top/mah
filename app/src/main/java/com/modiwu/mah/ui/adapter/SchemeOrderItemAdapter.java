@@ -59,8 +59,10 @@ public class SchemeOrderItemAdapter extends VLayoutAdapter<RecyclerView.ViewHold
         TextView tvSubTitle = itemView.findViewById(R.id.tvSubTitle);
         CheckBox checkbox = itemView.findViewById(R.id.checkbox);
         CheckBox checkHeard = itemView.findViewById(R.id.checkHeard);
-        checkHeard.setVisibility(position == 0 ? View.VISIBLE : View.GONE);
-        checkHeard.setText(mTitle);
+        LinearLayout llHeard = itemView.findViewById(R.id.llHeard);
+        TextView tvHeardText = itemView.findViewById(R.id.tvHeardText);
+        llHeard.setVisibility(position == 0 ? View.VISIBLE : View.GONE);
+        tvHeardText.setText(mTitle);
         if (type == SHE) {
             llEditNum.setVisibility(View.GONE);
 

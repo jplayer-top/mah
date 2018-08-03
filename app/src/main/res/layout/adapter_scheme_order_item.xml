@@ -11,7 +11,7 @@
               android:orientation="vertical">
 
 
-    <include layout="@layout/adapter_scheme_order_heard"/>
+    <include  layout="@layout/adapter_scheme_order_heard"/>
 
 
     <LinearLayout
