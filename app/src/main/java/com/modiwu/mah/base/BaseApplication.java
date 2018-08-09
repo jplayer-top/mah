@@ -2,7 +2,9 @@ package com.modiwu.mah.base;
 
 import android.app.ActivityManager;
 import android.content.Context;
+import android.os.Build;
 import android.os.Handler;
+import android.os.StrictMode;
 import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
 import android.widget.Toast;
@@ -44,6 +46,7 @@ public class BaseApplication extends MultiDexApplication {
         AppContext = getApplicationContext();
         Utils.init(this);
         zxing();
+        fixFileProvide();
         //主线程的Handler
         mMainThreadHandler = new Handler();
         BaseInitApplication.init(AppContext);
@@ -61,7 +64,13 @@ public class BaseApplication extends MultiDexApplication {
         ZXingLibrary.initDisplayOpinion(this);
     }
 
-    @Override
+    public void fixFileProvide() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+            StrictMode.setVmPolicy(builder.build());
+        }
+    }
+
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
         // you must install multiDex whatever tinker is installed!

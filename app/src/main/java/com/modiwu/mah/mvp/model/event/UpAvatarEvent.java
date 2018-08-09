@@ -6,4 +6,5 @@ package com.modiwu.mah.mvp.model.event;
  */
 
 public class UpAvatarEvent {
+    public int uid;
 }

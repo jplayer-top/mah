@@ -51,6 +51,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import io.reactivex.Observable;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 import io.rong.imkit.RongIM;
 import io.rong.imlib.model.Conversation;
 import top.jplayer.baseprolibrary.glide.GlideUtils;
@@ -115,9 +117,13 @@ public class MeFragment extends BaseFragment {
         mWxShare = new WXShare(getContext());
         mRefreshLayout.setOnRefreshListener(refresh -> {
             if (!"0".equals(uid)) {
-                refreshInfo(uid);
+                refresh(uid);
             } else {
-                Observable.interval(500, TimeUnit.MILLISECONDS).subscribe(aLong -> mRefreshLayout.finishRefresh());
+                Observable.interval(500, TimeUnit.MILLISECONDS).subscribe(aLong -> {
+                    if (mRefreshLayout != null) {
+                        mRefreshLayout.finishRefresh();
+                    }
+                });
             }
         });
     }
@@ -300,6 +306,37 @@ public class MeFragment extends BaseFragment {
         });
     }
 
+    private void refresh(String uid) {
+        mModel.requestGetInfo(uid).subscribe(new Observer<MeInfoBean>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(MeInfoBean meInfoBean) {
+                bindInfo(meInfoBean);
+                String json = new Gson().toJson(meInfoBean);
+                SharePreUtil.saveData(getContext(), "info", json);
+                if (mRefreshLayout != null) {
+                    mRefreshLayout.finishRefresh();
+                }
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                if (mRefreshLayout != null) {
+                    mRefreshLayout.finishRefresh();
+                }
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
+    }
+
     @Subscribe
     public void logout(LogoutEvent logoutEvent) {
         isLogin();
@@ -307,19 +344,24 @@ public class MeFragment extends BaseFragment {
 
     @Subscribe
     public void upAvatar(UpAvatarEvent event) {
-        refreshInfo(uid);
+        refreshInfo(event.uid + "");
     }
 
     private void bindInfo(MeInfoBean baseBean) {
-        if (baseBean.profile.user_avatar == null) {
+        MeInfoBean.ProfileBean profile = baseBean.profile;
+        if (profile == null) {
+            return;
+        }
+        this.uid = baseBean.profile.user_id + "";
+        if (profile.user_avatar == null) {
             Glide.with(getContext()).load(getResources().getDrawable(R.mipmap.ic_launcher)).into(ivMeAvatar);
         } else {
-            Glide.with(getContext()).load(baseBean.profile.user_avatar)
+            Glide.with(getContext()).load(profile.user_avatar)
                     .apply(GlideUtils.init().options())
                     .apply(RequestOptions.circleCropTransform()).into(ivMeAvatar);
 
         }
-        tvName.setText(baseBean.profile.user_name);
+        tvName.setText(profile.user_name);
         llToLogin.setEnabled(false);
         tvSet.setVisibility(baseBean.iskf == 1 ? View.VISIBLE : View.GONE);
     }

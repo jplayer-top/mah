@@ -70,6 +70,7 @@ public class MeContentActivity extends BaseCommonActivity {
     Button btnLogout;
     private Unbinder bind;
     private MeInfoPresenter presenter;
+    private int mUid;
 
     @Override
     public int setBaseLayout() {
@@ -90,8 +91,8 @@ public class MeContentActivity extends BaseCommonActivity {
             setPermission(this, 100, WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA);
 
         });
-        int uid = (int) SharePreUtil.getData(this, "uid", 0);
-        presenter.getMeInfo(uid + "");
+        mUid = (int) SharePreUtil.getData(this, "uid", 0);
+        presenter.getMeInfo(mUid + "");
         btnLogout.setOnClickListener(v -> presenter.requestLogout());
     }
 
@@ -151,7 +152,6 @@ public class MeContentActivity extends BaseCommonActivity {
     }
 
 
-
     File mFile;
 
     @Override
@@ -201,7 +201,9 @@ public class MeContentActivity extends BaseCommonActivity {
     }
 
     public void successAvatar(BaseBean baseBean) {
-        EventBus.getDefault().post(new UpAvatarEvent());
+        UpAvatarEvent event = new UpAvatarEvent();
+        event.uid = mUid;
+        EventBus.getDefault().post(event);
         Glide.with(this).load(mFile).apply(GlideUtils.init().options()).apply(RequestOptions.circleCropTransform()).into(ivMeAvatar);
     }
 
