@@ -11,6 +11,7 @@ import com.modiwu.mah.base.BaseFragment;
 import com.modiwu.mah.ui.activity.DecorateAllProjectActivity;
 import com.modiwu.mah.ui.activity.MessageActivity;
 import com.modiwu.mah.ui.adapter.DecorateAdapter;
+import com.modiwu.mah.ui.dialog.DialogChangeMan;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
 import java.util.ArrayList;
@@ -77,6 +78,7 @@ public class DecorateFragment extends BaseFragment {
             ActivityUtils.init().start(this.getContext(), DecorateAllProjectActivity.class, "所有项目");
         });
         header.findViewById(R.id.tvChangeMan).setOnClickListener(v -> {
+            new DialogChangeMan(this.getContext()).show();
         });
     }
 
