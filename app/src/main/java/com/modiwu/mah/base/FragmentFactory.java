@@ -3,6 +3,7 @@ package com.modiwu.mah.base;
 import android.support.v4.util.ArrayMap;
 
 import com.modiwu.mah.ui.fragment.CarpenterFragment;
+import com.modiwu.mah.ui.fragment.DecorateFragment;
 import com.modiwu.mah.ui.fragment.HomeFragment;
 import com.modiwu.mah.ui.fragment.MeFragment;
 import com.modiwu.mah.ui.fragment.SchemeFragment;
@@ -48,6 +49,9 @@ public class FragmentFactory {
                 fragment = new SchemeFragment();
                 break;
             case 2:
+                fragment = new DecorateFragment();
+                break;
+            case 3:
                 fragment = new CarpenterFragment();
                 break;
             default:

@@ -95,5 +95,4 @@ dependencies {
         exclude group: 'glide-parent'
     }
     annotationProcessor rootProject.ext.annotationProcessorLibs
-
 }

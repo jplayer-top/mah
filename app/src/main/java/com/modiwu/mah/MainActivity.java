@@ -62,18 +62,25 @@ public class MainActivity extends BaseSpecialActivity {
     private void bottomBar(NavigationTabBar navigationTabBar) {
 
         final ArrayList<NavigationTabBar.Model> models = new ArrayList<>();
-        String[] titleArrs = new String[]{"首页", "方案", "匠·器", "我的"};
-        int[] drawArrs = new int[]{R.drawable.main_home, R.drawable.main_scheme, R.drawable.main_charpenter, R.drawable.main_me};
+        String[] titleArrs = new String[]{"首页", "方案", "我的家装", "匠·器", "我的"};
+        int[] drawArrs = new int[]{R.drawable.main_home, R.drawable.main_scheme, R.drawable.main_decorate, R.drawable
+                .main_charpenter, R
+                .drawable.main_me};
         for (int i = 0; i < titleArrs.length; i++) {
-            models.add(new NavigationTabBar.Model.Builder(
-                    getResources().getDrawable(drawArrs[i]),
-                    getResources().getColor(top.jplayer.baseprolibrary.R.color.trans))
-                    .title(titleArrs[i]).build());
+            models.add(new NavigationTabBar.Model.Builder(getResources().getDrawable(drawArrs[i]), getResources().getColor(top.jplayer.baseprolibrary.R.color.trans))
+                    .title(titleArrs[i])
+                    .build()
+            );
         }
         navigationTabBar.setModels(models);
         navigationTabBar.setOnTabBarSelectedIndexListener(new NetNavigationBarListener() {
             @Override
             public void onceSelected(NavigationTabBar.Model model, int index) {
+                if (index == 2) {
+                    navigationTabBar.setActiveColor(getResources().getColor(R.color.chocolate));
+                } else {
+                    navigationTabBar.setActiveColor(R.color.colorBlackGold);
+                }
                 FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                 Fragment fragment = getSupportFragmentManager().findFragmentByTag(index + "");
                 if (fragment == null) {
