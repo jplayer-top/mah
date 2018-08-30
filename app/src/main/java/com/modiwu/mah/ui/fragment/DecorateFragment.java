@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.modiwu.mah.R;
 import com.modiwu.mah.base.BaseFragment;
+import com.modiwu.mah.ui.activity.DecorateAllProjectActivity;
 import com.modiwu.mah.ui.activity.MessageActivity;
 import com.modiwu.mah.ui.adapter.DecorateAdapter;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -41,6 +42,7 @@ public class DecorateFragment extends BaseFragment {
     @BindView(R.id.smartRefreshLayout)
     SmartRefreshLayout mSmartRefreshLayout;
     private Unbinder mUnbinder;
+    private DecorateAdapter mAdapter;
 
     @Override
     public int initLayout() {
@@ -57,12 +59,24 @@ public class DecorateFragment extends BaseFragment {
         mIvGoBack.setImageDrawable(getResources().getDrawable(R.drawable.decorate_yezhu));
         mIvBarSearch.setImageDrawable(getResources().getDrawable(R.drawable.decorate_notification));
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
-        mRecyclerView.setAdapter(new DecorateAdapter(new ArrayList<>()));
+        mAdapter = new DecorateAdapter(new ArrayList<>());
+        mRecyclerView.setAdapter(mAdapter);
         mIvGoBack.setOnClickListener(v -> {
 
         });
         mIvBarSearch.setOnClickListener(v -> {
             ActivityUtils.init().start(this.getContext(), MessageActivity.class, "消息通知");
+        });
+        View header = View.inflate(this.getContext(), R.layout.layout_header_decorate, null);
+        initHeader(header);
+        mAdapter.addHeaderView(header);
+    }
+
+    private void initHeader(View header) {
+        header.findViewById(R.id.tvAllPro).setOnClickListener(v -> {
+            ActivityUtils.init().start(this.getContext(), DecorateAllProjectActivity.class, "所有项目");
+        });
+        header.findViewById(R.id.tvChangeMan).setOnClickListener(v -> {
         });
     }
 

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dimen_200dp">
+
+    <ImageView
+        android:id="@+id/ivBgSrc"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/colorBlackGold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/llAllCart"/>
+
+    <LinearLayout
+        android:id="@+id/llAllCart"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_100dp"
+        android:divider="@drawable/shape_divider"
+        android:dividerPadding="@dimen/dimen_10dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:showDividers="middle">
+
+        <TextView
+            android:id="@+id/tvAllPro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dimen_20dp"
+            android:drawablePadding="@dimen/dimen_5dp"
+            android:drawableTop="@drawable/decorate_all_pro"
+            android:gravity="center"
+            android:text="所有项目"
+            android:textSize="@dimen/dimen_10sp"/>
+
+        <TextView
+            android:id="@+id/tvAddPro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dimen_20dp"
+            android:drawablePadding="@dimen/dimen_5dp"
+            android:drawableTop="@drawable/decorate_add_pro"
+            android:gravity="center"
+            android:text="加入现有项目"
+            android:textSize="@dimen/dimen_10sp"/>
+
+        <TextView
+            android:id="@+id/tvCreatePro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dimen_20dp"
+            android:drawablePadding="@dimen/dimen_5dp"
+            android:drawableTop="@drawable/decorate_create_pro"
+            android:gravity="center"
+            android:text="添加新项目"
+            android:textSize="@dimen/dimen_10sp"/>
+
+        <TextView
+            android:id="@+id/tvChangeMan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dimen_20dp"
+            android:drawablePadding="@dimen/dimen_5dp"
+            android:drawableTop="@drawable/decorate_change_man"
+            android:gravity="center"
+            android:text="切换工种"
+            android:textSize="@dimen/dimen_10sp"/>
+
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvProjectName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="中海国际社区19-2-103"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/llIntroduction"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/ivBgSrc"/>
+
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_border_white"
+        android:paddingBottom="@dimen/dimen_3dp"
+        android:paddingEnd="@dimen/dimen_10dp"
+        android:paddingStart="@dimen/dimen_10dp"
+        android:paddingTop="@dimen/dimen_3dp"
+        android:text="项目介绍 >"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvProjectName"/>
+
+    <LinearLayout
+        android:id="@+id/llIntroduction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvProjectName">
+
+        <View
+            android:layout_width="@dimen/dimen_65dp"
+            android:layout_height="@dimen/dimen_5dp"
+            android:background="@color/white"/>
+
+        <TextView
+            android:layout_width="@dimen/dimen_65dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="个人介绍"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/ivBgSrc"/>
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

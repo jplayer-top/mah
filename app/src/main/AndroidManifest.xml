@@ -161,6 +161,11 @@
             android:windowSoftInputMode="adjustResize|stateVisible">
         </activity>
         <activity
+            android:name=".ui.activity.DecorateAllProjectActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"/>
+
+        <activity
             android:name=".ui.activity.ManagerClientActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
