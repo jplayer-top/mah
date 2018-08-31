@@ -34,19 +34,11 @@ public class DialogChangeMan extends BaseCustomDialog {
 
     @Override
     protected void initView(View view) {
-        String[] filterName = new String[]{"原图", "夏日", "沐晴", "流年", "晨光", "碧波", "精灵", "白露", "冷调", "马提尼", "经典"};
+        String[] filterName = new String[]{"拆除\n施工", "安装\n施工", "添加"};
         int[] filterPng = new int[]{
-                R.color.navajowhite,
-                R.color.navajowhite,
-                R.color.navajowhite,
-                R.color.navajowhite,
-                R.color.navajowhite,
-                R.color.navajowhite,
-                R.color.navajowhite,
-                R.color.navajowhite,
-                R.color.navajowhite,
-                R.color.navajowhite,
-                R.color.navajowhite};
+                R.color.white,
+                R.color.white,
+                R.color.white};
         mBeans = new ArrayList<>();
         for (int i = 0; i < filterName.length; i++) {
             mBeans.add(new FilterBean(filterName[i], filterPng[i], i == 0));
