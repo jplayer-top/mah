@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tvTip01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_40dp"
+        android:gravity="center"
+        android:lineSpacingExtra="@dimen/dimen_5dp"
+        android:text="@string/shigong_register"
+        android:textColor="@color/color666"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/tvTipBind"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_30dp"
+        android:gravity="center"
+        android:lineSpacingExtra="@dimen/dimen_5dp"
+        android:text="绑定手机号："
+        android:textColor="@color/color999"
+        app:layout_constraintStart_toStartOf="@+id/tvTip01"
+        app:layout_constraintTop_toBottomOf="@+id/tvTip01"/>
+
+    <TextView
+        android:id="@+id/tvPhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="183000000"
+        android:textColor="@color/color999"
+        app:layout_constraintStart_toStartOf="@+id/tvTipBind"
+        app:layout_constraintTop_toBottomOf="@+id/tvTipBind"/>
+
+    <TextView
+        android:id="@+id/tvTipCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_15dp"
+        android:gravity="center"
+        android:text="验证码："
+        android:textColor="@color/color323232"
+        app:layout_constraintStart_toStartOf="@+id/tvPhone"
+        app:layout_constraintTop_toBottomOf="@+id/tvPhone"/>
+
+    <EditText
+        android:id="@+id/tvEditCode"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dimen_40dp"
+        android:layout_marginTop="@dimen/dimen_15dp"
+        android:background="@color/white"
+        android:gravity="center"
+        android:textColor="@color/color666"
+        app:layout_constraintEnd_toEndOf="@+id/tvTip01"
+        app:layout_constraintStart_toStartOf="@+id/tvTipCode"
+        app:layout_constraintTop_toBottomOf="@+id/tvTipCode"/>
+
+    <View
+        android:layout_width="@dimen/dimen_0dp"
+        android:layout_height="@dimen/dimen_1dp"
+        android:background="@color/color666"
+        app:layout_constraintEnd_toEndOf="@+id/tvTip01"
+        app:layout_constraintStart_toStartOf="@+id/tvEditCode"
+        app:layout_constraintTop_toBottomOf="@+id/tvEditCode"/>
+
+    <Button
+        android:id="@+id/btnSendCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_10dp"
+        android:background="@drawable/shape_border_theme"
+        android:text="发送验证码"
+        android:textColor="@color/chocolate"
+        app:layout_constraintStart_toStartOf="@+id/tvEditCode"
+        app:layout_constraintTop_toBottomOf="@+id/tvEditCode"/>
+
+    <Button
+        android:id="@+id/btnSure"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_60dp"
+        android:background="@drawable/shape_button_theme"
+        android:text="确认开启"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="@+id/tvTip01"
+        app:layout_constraintStart_toStartOf="@+id/btnSendCode"
+        app:layout_constraintTop_toBottomOf="@+id/btnSendCode"/>
+</android.support.constraint.ConstraintLayout>

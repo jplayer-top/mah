@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="3.5">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardYeZhu"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/dimen_15dp"
+        android:layout_weight="1">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:drawablePadding="@dimen/dimen_5dp"
+            android:drawableTop="@drawable/decorate_yezhu_sel"
+            android:gravity="center"
+            android:text="我是业主"
+            android:textColor="@color/colorBlackGold"
+            android:textSize="@dimen/dimen_17sp"/>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardJianLi"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/dimen_15dp"
+        android:layout_weight="1">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:drawablePadding="@dimen/dimen_5dp"
+            android:drawableTop="@drawable/decorate_jianli_sel"
+            android:gravity="center"
+            android:text="我是监理"
+            android:textColor="@color/colorBlackGold"
+            android:textSize="@dimen/dimen_17sp"/>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardShiGong"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/dimen_15dp"
+        android:layout_weight="1">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:drawablePadding="@dimen/dimen_5dp"
+            android:drawableTop="@drawable/decorate_shigong_sel"
+            android:gravity="center"
+            android:text="我是施工"
+            android:textColor="@color/colorBlackGold"
+            android:textSize="@dimen/dimen_17sp"/>
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

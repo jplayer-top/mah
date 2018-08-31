@@ -164,6 +164,10 @@
             android:name=".ui.activity.DecorateAllProjectActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.activity.DecorateSelectActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"/>
 
         <activity
             android:name=".ui.activity.ManagerClientActivity"
@@ -175,6 +179,19 @@
             android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.activity.MessageDetailActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.activity.DecorateShiGongRegisterActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".ui.activity.DecorateAddProjectActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.activity.DecorateShiGongActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
 

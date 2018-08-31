@@ -68,4 +68,5 @@
     <string name="select_type">户型选择</string>
     <string name="select_style">风格选择</string>
     <string name="me_manager">全民经纪人</string>
+    <string name="shigong_register">您还没有开启监理人员功能\n确认开启请发送验证码验证</string>
 </resources>

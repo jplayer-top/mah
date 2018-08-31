@@ -8,7 +8,9 @@ import android.widget.TextView;
 
 import com.modiwu.mah.R;
 import com.modiwu.mah.base.BaseFragment;
+import com.modiwu.mah.ui.activity.DecorateAddProjectActivity;
 import com.modiwu.mah.ui.activity.DecorateAllProjectActivity;
+import com.modiwu.mah.ui.activity.DecorateSelectActivity;
 import com.modiwu.mah.ui.activity.MessageActivity;
 import com.modiwu.mah.ui.adapter.DecorateAdapter;
 import com.modiwu.mah.ui.dialog.DialogChangeMan;
@@ -63,7 +65,7 @@ public class DecorateFragment extends BaseFragment {
         mAdapter = new DecorateAdapter(new ArrayList<>());
         mRecyclerView.setAdapter(mAdapter);
         mIvGoBack.setOnClickListener(v -> {
-
+            ActivityUtils.init().start(this.getContext(), DecorateSelectActivity.class, "身份选择");
         });
         mIvBarSearch.setOnClickListener(v -> {
             ActivityUtils.init().start(this.getContext(), MessageActivity.class, "消息通知");
@@ -76,6 +78,9 @@ public class DecorateFragment extends BaseFragment {
     private void initHeader(View header) {
         header.findViewById(R.id.tvAllPro).setOnClickListener(v -> {
             ActivityUtils.init().start(this.getContext(), DecorateAllProjectActivity.class, "所有项目");
+        });
+        header.findViewById(R.id.tvAddPro).setOnClickListener(v -> {
+            ActivityUtils.init().start(this.getContext(), DecorateAddProjectActivity.class, "加入项目");
         });
         header.findViewById(R.id.tvChangeMan).setOnClickListener(v -> {
             new DialogChangeMan(this.getContext()).show();
