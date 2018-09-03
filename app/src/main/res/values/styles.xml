@@ -59,5 +59,8 @@
         <item name="android:colorBackgroundCacheHint">@null</item>
         <item name="android:backgroundDimEnabled">false</item> <!--背景是否模糊显示-->
     </style>
-
+    <style name="RatingBar" parent="Widget.AppCompat.RatingBar.Small">
+        <item name="colorControlNormal">@color/color999</item>
+        <item name="colorControlActivated">@color/chocolate</item>
+    </style>
 </resources>

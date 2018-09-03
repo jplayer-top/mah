@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="@dimen/dimen_120dp"
+    android:layout_height="@dimen/dimen_95dp"
+    android:gravity="center_vertical">
+
+    <View
+        android:layout_width="@dimen/dimen_20dp"
+        android:layout_height="@dimen/dimen_1dp"
+        android:background="@color/color999"/>
+
+    <android.support.constraint.ConstraintLayout
+
+        android:layout_width="@dimen/dimen_80dp"
+        android:layout_height="@dimen/dimen_95dp">
+
+        <com.kingja.magicmirror.MagicMirrorView
+            android:id="@+id/ivItemSrc"
+            android:layout_width="@dimen/dimen_40dp"
+            android:layout_height="@dimen/dimen_40dp"
+            android:src="@drawable/decorate_diannuan"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.3"
+            app:mirrorBorderColor="@color/color323232"
+            app:mirrorBorderWidth="1px"
+            app:mirrorShape="circle"/>
+
+        <TextView
+            android:id="@+id/tvStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_35dp"
+            android:background="@drawable/shape_button_theme"
+            android:padding="@dimen/dimen_1dp"
+            android:text="已完成"
+            android:textColor="@color/grey"
+            android:textSize="@dimen/dimen_10sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/ivItemSrc"/>
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:lines="1"
+            android:text="5水电暖施工"
+            android:textColor="@color/color323232"
+            android:textSize="@dimen/dimen_12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvStatus"/>
+    </android.support.constraint.ConstraintLayout>
+
+    <View
+        android:layout_width="@dimen/dimen_20dp"
+        android:layout_height="@dimen/dimen_1dp"
+        android:background="@color/color999"/>
+</LinearLayout>
+

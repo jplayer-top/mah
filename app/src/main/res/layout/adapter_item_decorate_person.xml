@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="@dimen/dimen_100dp"
+    android:layout_height="@dimen/dimen_50dp"
+    android:layout_marginEnd="@dimen/dimen_10dp"
+    android:background="@color/color999">
+
+    <TextView
+        android:id="@+id/tvFirst"
+        android:layout_width="@dimen/dimen_25dp"
+        android:layout_height="@dimen/dimen_25dp"
+        android:layout_marginStart="@dimen/dimen_20dp"
+        android:background="@drawable/shape_cir_theme"
+        android:gravity="center"
+        android:text="王"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_5dp"
+        android:text="王师傅"
+        android:textSize="@dimen/dimen_10sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/tvFirst"
+        app:layout_constraintTop_toTopOf="@+id/tvFirst"/>
+
+    <TextView
+        android:id="@+id/tvTip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_5dp"
+        android:text="施工人员"
+        android:textSize="@dimen/dimen_9sp"
+        app:layout_constraintStart_toEndOf="@+id/tvFirst"
+        app:layout_constraintTop_toBottomOf="@+id/tvName"/>
+</android.support.constraint.ConstraintLayout>
