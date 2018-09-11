@@ -36,4 +36,79 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/llTipProgress"/>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_marginStart="@dimen/dimen_15dp"
+        android:layout_marginEnd="@dimen/dimen_15dp"
+        android:layout_marginTop="@dimen/dimen_15dp"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_55dp"
+        android:background="@color/chocolate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerViewHeader">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dimen_10dp"
+            android:text="该环节已完工，请确认"
+            android:textColor="@color/white"
+            android:textSize="@dimen/dimen_13sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/tvTipRating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dimen_10dp"
+            android:text="本环节施工满意度评分："
+            android:textColor="@color/white"
+            android:textSize="@dimen/dimen_10sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <android.support.v7.widget.AppCompatRatingBar
+            android:id="@+id/ratingBar"
+            style="@style/Widget.AppCompat.RatingBar.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_10dp"
+            android:isIndicator="false"
+            android:numStars="5"
+            android:rating="4"
+            android:theme="@style/RatingBar.White"
+            app:layout_constraintBottom_toBottomOf="@+id/tvTipRating"
+            app:layout_constraintStart_toEndOf="@+id/tvTipRating"
+            app:layout_constraintTop_toTopOf="@+id/tvTipRating"/>
+
+        <TextView
+            android:id="@+id/tvRatingNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_15dp"
+            android:text="5.0"
+            android:textColor="@color/white"
+            android:textSize="@dimen/dimen_30sp"
+            android:textStyle="italic"
+            app:layout_constraintBottom_toBottomOf="@+id/ratingBar"
+            app:layout_constraintStart_toEndOf="@+id/ratingBar"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_15dp"
+            android:background="@drawable/shape_border_white"
+            android:paddingBottom="@dimen/dimen_3dp"
+            android:paddingEnd="@dimen/dimen_5dp"
+            android:paddingStart="@dimen/dimen_5dp"
+            android:paddingTop="@dimen/dimen_3dp"
+            android:text="确认"
+            android:textColor="@color/white"
+            android:textSize="@dimen/dimen_10sp"
+            app:layout_constraintBottom_toBottomOf="@+id/ratingBar"
+            app:layout_constraintStart_toEndOf="@+id/tvRatingNum"/>
+    </android.support.constraint.ConstraintLayout>
 </android.support.constraint.ConstraintLayout>

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bga="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <cn.bingoogolapple.bgabanner.BGABanner
+            android:id="@+id/bgaBanner"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            bga:banner_indicatorGravity="bottom"
+            bga:banner_pointAutoPlayAble="true"
+            bga:banner_pointContainerBackground="@color/trans"
+            bga:banner_pointDrawable="@drawable/selector_banner_unequal"/>
+
+        <TextView
+            android:id="@+id/tvTipNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_15dp"
+            android:layout_marginTop="@dimen/dimen_15dp"
+            android:text="项目编号"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/bgaBanner"
+            app:layout_constraintTop_toBottomOf="@+id/bgaBanner"/>
+
+        <LinearLayout
+            android:id="@+id/llProNum"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dimen_30dp"
+            android:layout_marginTop="@dimen/dimen_5dp"
+            android:background="@color/whitesmoke"
+            android:gravity="center"
+            android:paddingEnd="@dimen/dimen_30dp"
+            android:paddingStart="@dimen/dimen_15dp"
+            app:layout_constraintStart_toStartOf="@+id/tvTipNum"
+            app:layout_constraintTop_toBottomOf="@+id/tvTipNum">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="201806071203"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_5dp"
+                android:text="复制"
+                android:textColor="@color/chocolate"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvTipOwner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_15dp"
+            android:text="业主"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/llProNum"
+            app:layout_constraintTop_toBottomOf="@+id/llProNum"/>
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerViewOwner"
+            android:layout_width="@dimen/dimen_0dp"
+            android:layout_height="@dimen/dimen_90dp"
+            android:layout_marginEnd="@dimen/dimen_15dp"
+            android:layout_marginStart="@dimen/dimen_15dp"
+            android:layout_marginTop="@dimen/dimen_10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTipOwner"/>
+
+
+        <TextView
+            android:id="@+id/tvTipVisor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_15dp"
+            android:text="项目监理人员"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/recyclerViewOwner"
+            app:layout_constraintTop_toBottomOf="@+id/recyclerViewOwner"/>
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerViewVisor"
+            android:layout_width="@dimen/dimen_0dp"
+            android:layout_height="@dimen/dimen_90dp"
+            android:layout_marginEnd="@dimen/dimen_15dp"
+            android:layout_marginStart="@dimen/dimen_15dp"
+            android:layout_marginTop="@dimen/dimen_10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTipVisor"/>
+
+        <TextView
+            android:id="@+id/tvTipConst"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_15dp"
+            android:text="项目施工人员"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/recyclerViewVisor"
+            app:layout_constraintTop_toBottomOf="@+id/recyclerViewVisor"/>
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerViewConst"
+            android:layout_width="@dimen/dimen_0dp"
+            android:layout_height="@dimen/dimen_90dp"
+            android:layout_marginBottom="@dimen/dimen_15dp"
+            android:layout_marginEnd="@dimen/dimen_15dp"
+            android:layout_marginStart="@dimen/dimen_15dp"
+            android:layout_marginTop="@dimen/dimen_10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTipConst"/>
+    </android.support.constraint.ConstraintLayout>
+</android.support.v4.widget.NestedScrollView>

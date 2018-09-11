@@ -212,6 +212,10 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait">
         </activity>
+        <activity
+            android:name=".ui.activity.DecorateProDetailActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"/>
 
         <receiver
             android:name=".wxapi.AppRegister"

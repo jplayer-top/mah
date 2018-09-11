@@ -11,6 +11,7 @@ import com.modiwu.mah.base.BaseFragment;
 import com.modiwu.mah.ui.activity.DecorateAddProjectActivity;
 import com.modiwu.mah.ui.activity.DecorateAllProjectActivity;
 import com.modiwu.mah.ui.activity.DecorateCreateProActivity;
+import com.modiwu.mah.ui.activity.DecorateProDetailActivity;
 import com.modiwu.mah.ui.activity.DecorateSelectActivity;
 import com.modiwu.mah.ui.activity.MessageActivity;
 import com.modiwu.mah.ui.adapter.DecorateAdapter;
@@ -108,6 +109,9 @@ public class DecorateFragment extends BaseFragment {
         });
         header.findViewById(R.id.tvChangeMan).setOnClickListener(v -> {
             new DialogChangeMan(this.getContext()).show();
+        });header.findViewById(R.id.tvProDetail).setOnClickListener(v -> {
+            ActivityUtils.init().start(getContext(), DecorateProDetailActivity.class, "项目介绍");
+
         });
         header.findViewById(R.id.tvCreatePro).setOnClickListener(v -> {
             ActivityUtils.init().start(getContext(), DecorateCreateProActivity.class, "创建项目");
