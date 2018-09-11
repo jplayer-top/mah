@@ -154,4 +154,5 @@
     <color name="color999">#999</color><!--中粉紫色 -->
     <color name="colorTran666">#55666666</color>
     <color name="color55grey">#ff424242</color>
+    <color name="colorCCC">#cccccc</color>
 </resources>

@@ -168,6 +168,10 @@
             android:name=".ui.activity.DecorateSelectActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.activity.DecorateCreateProActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"/>
 
         <activity
             android:name=".ui.activity.ManagerClientActivity"
