@@ -7,7 +7,9 @@
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
 
         <TextView
             android:id="@+id/tvTipLocal"
@@ -27,6 +29,13 @@
             android:layout_marginEnd="@dimen/dimen_10dp"
             android:layout_marginStart="@dimen/dimen_15dp"
             android:layout_marginTop="@dimen/dimen_10dp"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:lines="1"
+            android:paddingEnd="@dimen/dp_10"
+            android:paddingStart="@dimen/dp_10"
+            android:textColor="@color/color666"
+            android:textSize="@dimen/dimen_12sp"
             app:layout_constraintEnd_toStartOf="@+id/viewLine"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvTipLocal"/>
@@ -58,13 +67,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/tvInputCity"/>
 
-        <TextView
+        <EditText
             android:id="@+id/tvInputLocal"
             android:layout_width="0dp"
             android:layout_height="@dimen/dimen_40dp"
             android:layout_marginEnd="@dimen/dimen_10dp"
             android:layout_marginStart="@dimen/dimen_15dp"
             android:layout_marginTop="@dimen/dimen_10dp"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:textColor="@color/color666"
+            android:textSize="@dimen/dimen_12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/viewLine"
             app:layout_constraintTop_toBottomOf="@+id/tvTipLocal"/>
@@ -127,35 +140,47 @@
             app:layout_constraintStart_toEndOf="@+id/viewLineFloor"
             app:layout_constraintTop_toTopOf="@id/tvInputUnitNum"/>
 
-        <TextView
+        <EditText
             android:id="@+id/tvInputFloorNum"
             android:layout_width="0dp"
             android:layout_height="@dimen/dimen_40dp"
             android:layout_marginEnd="@dimen/dimen_5dp"
             android:layout_marginStart="@dimen/dimen_15dp"
             android:layout_marginTop="@dimen/dimen_10dp"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:textColor="@color/color666"
+            android:textSize="@dimen/dimen_12sp"
             app:layout_constraintEnd_toStartOf="@+id/viewLineFloor"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvTipHouse"/>
 
-        <TextView
+        <EditText
             android:id="@+id/tvInputUnitNum"
             android:layout_width="@dimen/dimen_0dp"
             android:layout_height="@dimen/dimen_40dp"
             android:layout_marginEnd="@dimen/dimen_5dp"
             android:layout_marginStart="@dimen/dimen_15dp"
             android:layout_marginTop="@dimen/dimen_10dp"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:textColor="@color/color666"
+            android:textSize="@dimen/dimen_12sp"
             app:layout_constraintEnd_toStartOf="@+id/viewLineUnit"
             app:layout_constraintStart_toEndOf="@+id/viewLineFloor"
             app:layout_constraintTop_toBottomOf="@+id/tvTipHouse"/>
 
-        <TextView
+        <EditText
             android:id="@+id/tvInputDoorNum"
             android:layout_width="@dimen/dimen_0dp"
             android:layout_height="@dimen/dimen_40dp"
             android:layout_marginEnd="@dimen/dimen_15dp"
             android:layout_marginStart="@dimen/dimen_10dp"
             android:layout_marginTop="@dimen/dimen_10dp"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:textColor="@color/color666"
+            android:textSize="@dimen/dimen_12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/viewLineUnit"
             app:layout_constraintTop_toBottomOf="@+id/tvTipHouse"/>
