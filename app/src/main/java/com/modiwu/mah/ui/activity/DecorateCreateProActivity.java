@@ -1,24 +1,46 @@
 package com.modiwu.mah.ui.activity;
 
+import android.Manifest;
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.TextView;
 
 import com.bigkoo.pickerview.OptionsPickerView;
+import com.jaiky.imagespickers.ImageSelectorActivity;
 import com.modiwu.mah.R;
 import com.modiwu.mah.base.BaseCommonActivity;
 import com.modiwu.mah.mvp.model.bean.LocalBean;
 import com.modiwu.mah.mvp.model.bean.PostLocalBean;
 import com.modiwu.mah.mvp.presenter.DecorateCreateProPresenter;
-import com.modiwu.mah.ui.adapter.DecorateItemCommonAdapter;
 import com.modiwu.mah.ui.adapter.DecorateItemPicAdapter;
+import com.modiwu.mah.utils.CameraUtils;
+import com.modiwu.mah.utils.StringUtils;
+import com.yanzhenjie.permission.AndPermission;
+import com.yanzhenjie.permission.PermissionNo;
+import com.yanzhenjie.permission.PermissionYes;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import io.reactivex.Observable;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import top.jplayer.baseprolibrary.net.IoMainSchedule;
+import top.jplayer.baseprolibrary.utils.BitmapUtil;
+import top.jplayer.baseprolibrary.utils.KeyBoardUtils;
+import top.jplayer.baseprolibrary.utils.ToastUtils;
+import top.jplayer.baseprolibrary.widgets.dialog.DialogLoading;
+
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
+import static top.jplayer.baseprolibrary.utils.PermissionUtils.setPermission;
 
 /**
  * Created by Obl on 2018/9/10.
@@ -46,8 +68,15 @@ public class DecorateCreateProActivity extends BaseCommonActivity {
     RecyclerView mRecyclerViewVisor;
     @BindView(R.id.recyclerViewConst)
     RecyclerView mRecyclerViewConst;
+    @BindView(R.id.tvPicNum)
+    TextView tvPicNum;
     private Unbinder mUnbinder;
     private DecorateCreateProPresenter mPresenter;
+    private DecorateItemPicAdapter mAdapter;
+    private ArrayList<File> mArrayList;
+    private String mCity_code;
+    private String mArea_code;
+    private DialogLoading mLoading;
 
     @Override
     public int setBaseLayout() {
@@ -57,19 +86,6 @@ public class DecorateCreateProActivity extends BaseCommonActivity {
     @Override
     public void initBaseData() {
         mUnbinder = ButterKnife.bind(this, mFlRootView);
-        ArrayList<String> data = new ArrayList<>();
-        data.add("1");
-        data.add("1");
-        data.add("1");
-        data.add("1");
-        mRecyclerViewOwner.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        mRecyclerViewOwner.setAdapter(new DecorateItemCommonAdapter(data));
-        mRecyclerViewVisor.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        mRecyclerViewVisor.setAdapter(new DecorateItemCommonAdapter(data));
-        mRecyclerViewConst.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        mRecyclerViewConst.setAdapter(new DecorateItemCommonAdapter(data));
-        mRecyclerViewPic.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        mRecyclerViewPic.setAdapter(new DecorateItemPicAdapter(data));
         mPresenter = new DecorateCreateProPresenter(this);
         initPicker();
         mTvInputCity.setOnClickListener(v -> {
@@ -78,6 +94,57 @@ public class DecorateCreateProActivity extends BaseCommonActivity {
             } else {
                 mPresenter.requestLocalBean();
             }
+        });
+        mRecyclerViewPic.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        mArrayList = new ArrayList<>();
+        mAdapter = new DecorateItemPicAdapter(mArrayList);
+        mRecyclerViewPic.setAdapter(mAdapter);
+        View view = View.inflate(this, R.layout.adapter_footer_create_pro_pic, null);
+        view.findViewById(R.id.ivPicUpload).setOnClickListener(v -> {
+            setPermission(this, 100, WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA);
+        });
+        mAdapter.addFooterView(view);
+        tvBarRight.setVisibility(View.VISIBLE);
+        tvBarRight.setOnClickListener(v -> {
+
+            if (mCity_code == null || mArea_code == null) {
+                ToastUtils.init().showQuickToast(mBaseActivity, "请选择城市地区");
+                return;
+            }
+            if (StringUtils.getInstance().isNullObj(mTvInputLocal.toString())) {
+                ToastUtils.init().showQuickToast(mBaseActivity, "请输入小区名称");
+                return;
+            }
+            if (StringUtils.getInstance().isNullObj(mTvInputFloorNum.toString())) {
+                ToastUtils.init().showQuickToast(mBaseActivity, "请输入楼号");
+                return;
+            }
+            if (StringUtils.getInstance().isNullObj(mTvInputUnitNum.toString())) {
+                ToastUtils.init().showQuickToast(mBaseActivity, "请输入单元门");
+                return;
+            }
+            if (StringUtils.getInstance().isNullObj(mTvInputDoorNum.toString())) {
+                ToastUtils.init().showQuickToast(mBaseActivity, "请输入门牌号");
+                return;
+            }
+            if (!isZiped) {
+                ToastUtils.init().showQuickToast(mBaseActivity, "图片压缩中，请稍后");
+                return;
+            }
+            String local_detail = mTvInputLocal.getText().toString();
+            String build = mTvInputFloorNum.getText().toString();
+            String unit = mTvInputUnitNum.getText().toString();
+            String door = mTvInputDoorNum.getText().toString();
+            MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM)
+                    .addFormDataPart("city_code", mCity_code)
+                    .addFormDataPart("area_code", mArea_code)
+                    .addFormDataPart("building_name", local_detail)
+                    .addFormDataPart("building_no", build)
+                    .addFormDataPart("unit_no", unit)
+                    .addFormDataPart("house_no", door);
+            Observable.fromIterable(mArrayList).subscribe(file -> builder.addFormDataPart("imgs", file.getName(), RequestBody.create(MediaType.parse("image/*"), file)));
+            RequestBody requestBody = builder.build();
+            mPresenter.requestCreatePro(requestBody);
         });
     }
 
@@ -137,8 +204,12 @@ public class DecorateCreateProActivity extends BaseCommonActivity {
         //地区
         mLocalPickerView = new OptionsPickerView.Builder(this, (options1, option2, options3, v) -> {
             mProvince_name = optionsLocalSItems.get(options1).name + "";
-            mCity_name = (optionsLocalXItems.get(options1).get(option2).name) == null ? "" : (optionsLocalXItems.get(options1).get(option2).name + "");
-            mArea_name = (optionsQItems.get(options1).get(option2).get(options3).name) == null ? "" : optionsQItems.get(options1).get(option2).get(options3).name + "";
+            PostLocalBean localBean = optionsLocalXItems.get(options1).get(option2);
+            mCity_name = (localBean.name) == null ? "" : (localBean.name + "");
+            mCity_code = localBean.code;
+            PostLocalBean areaBean = optionsQItems.get(options1).get(option2).get(options3);
+            mArea_code = areaBean.code;
+            mArea_name = (areaBean.name) == null ? "" : areaBean.name + "";
             mTvInputCity.setText(String.format(Locale.CHINA, "%s%s%s", mProvince_name, mCity_name, mArea_name));
         }).setSubmitText("确定")//确定按钮文字
                 .setCancelText("取消")//取消按钮文字
@@ -152,9 +223,56 @@ public class DecorateCreateProActivity extends BaseCommonActivity {
                 .build();
     }
 
+    @PermissionYes(100)
+    protected void getLocationYes(List<String> grantedPermissions) {
+        int size = mAdapter.getData().size();
+        CameraUtils.getInstance().openSize(this, 8 - size);
+
+    }
+
+    @PermissionNo(100)
+    protected void getLocationNo(List<String> deniedPermissions) {
+        if (AndPermission.hasAlwaysDeniedPermission(this, deniedPermissions)) {
+            AndPermission.defaultSettingDialog(this, 100).show();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1 && resultCode == RESULT_OK && data != null) {
+            if (mLoading == null) {
+                mLoading = new DialogLoading(this);
+            }
+            mLoading.setLoadingText("图片上传中...");
+            mLoading.show();
+            isZiped = false;
+            List<String> pathList = data.getStringArrayListExtra(ImageSelectorActivity.EXTRA_RESULT);
+            Observable.just(pathList).map(strings -> {
+                for (String path : strings) {
+                    mArrayList.add(BitmapUtil.compressImage(new File(path)));
+                }
+                return mArrayList;
+            }).compose(new IoMainSchedule<>()).subscribe(files -> {
+                if (mAdapter.getData().size() >= 8) {
+                    mAdapter.removeAllFooterView();
+                }
+                mAdapter.setNewData(files);
+                tvPicNum.setText(String.format(Locale.CHINA, "%d/8", files.size()));
+                if (mLoading != null && mLoading.isShowing()) {
+                    mLoading.dismiss();
+                }
+                isZiped = true;
+            });
+        }
+    }
+
+    public boolean isZiped = true;
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        KeyBoardUtils.closeInput(this, mFlRootView);
         mUnbinder.unbind();
     }
 }

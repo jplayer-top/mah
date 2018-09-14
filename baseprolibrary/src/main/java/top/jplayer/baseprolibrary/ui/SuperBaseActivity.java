@@ -34,6 +34,7 @@ public abstract class SuperBaseActivity extends AppCompatActivity {
     protected Toolbar mToolBar;
     protected ImageView mIvGoBack;
     protected TextView tvBarTitle;
+    protected TextView tvBarRight;
     protected ImageView ivBarSearch;
     protected FrameLayout mFlRootView;
     public SuperBaseActivity mBaseActivity;
@@ -77,6 +78,7 @@ public abstract class SuperBaseActivity extends AppCompatActivity {
     public void findToolBarView(View rootView) {
         mIvGoBack = contentView.findViewById(R.id.ivGoBack);
         tvBarTitle = contentView.findViewById(R.id.tvBarTitle);
+        tvBarRight = contentView.findViewById(R.id.tvBarRight);
         tvBarTitle.setText(getIntent().getStringExtra("title"));
         ivBarSearch = contentView.findViewById(R.id.ivBarSearch);
     }

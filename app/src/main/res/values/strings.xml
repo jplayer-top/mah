@@ -68,7 +68,7 @@
     <string name="select_type">户型选择</string>
     <string name="select_style">风格选择</string>
     <string name="me_manager">全民经纪人</string>
-    <string name="shigong_register">您还没有开启监理人员功能\n确认开启请发送验证码验证</string>
+    <string name="shigong_register">您还没有开启监理人员功能,确认开启请发送验证码验证</string>
     <string name="_1_45_2_3_50cm_4_5">1、线管转角为45°折弯\n2、强弱电搭接处进行了信号的屏蔽处理\n3、强弱电同向管线间距50cm\n4、地面同类同向多根线管采用成品排卡固定
         5、施工与公司要求标准相符</string>
 </resources>

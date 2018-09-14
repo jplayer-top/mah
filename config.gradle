@@ -18,7 +18,7 @@ ext {
     ]
     url = [
 //            "debug"  : "http://modiwu.com/app1/",
-"debug"  : "https://app.modiwu.com/app/",
+"debug"  : "http://192.168.0.163:8080/mah-app/",
 "release": "https://app.modiwu.com/app/",
     ]
     supportDeps = [

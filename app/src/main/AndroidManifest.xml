@@ -189,6 +189,12 @@
             android:name=".ui.activity.DecorateShiGongRegisterActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.jaiky.imagespickers.ImageSelectorActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/OblAppTheme"
+            tools:replace="android:theme"/>
 
         <activity
             android:name=".ui.activity.DecorateAddProjectActivity"

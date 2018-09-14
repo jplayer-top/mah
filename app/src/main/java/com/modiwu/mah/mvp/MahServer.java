@@ -5,6 +5,8 @@ import com.modiwu.mah.mvp.model.bean.AliPayInfoBean;
 import com.modiwu.mah.mvp.model.bean.CarpenterBean;
 import com.modiwu.mah.mvp.model.bean.CityCodeBean;
 import com.modiwu.mah.mvp.model.bean.CollectionHaseBean;
+import com.modiwu.mah.mvp.model.bean.DecorateManBean;
+import com.modiwu.mah.mvp.model.bean.DecorateWorkerBean;
 import com.modiwu.mah.mvp.model.bean.DefLocalBean;
 import com.modiwu.mah.mvp.model.bean.DesignBean;
 import com.modiwu.mah.mvp.model.bean.DockerBean;
@@ -26,6 +28,7 @@ import com.modiwu.mah.mvp.model.bean.SchemeDetailBean;
 import com.modiwu.mah.mvp.model.bean.SchemeOrderCreateBean;
 import com.modiwu.mah.mvp.model.bean.SelectBean;
 import com.modiwu.mah.mvp.model.bean.SelectLocalBean;
+import com.modiwu.mah.mvp.model.bean.SelectWorkerTypeBean;
 import com.modiwu.mah.mvp.model.bean.ShopGoodsInfoBean;
 import com.modiwu.mah.mvp.model.bean.ShopSubListBean;
 import com.modiwu.mah.mvp.model.bean.SubTitleBean;
@@ -37,12 +40,15 @@ import java.util.Map;
 
 import io.reactivex.Observable;
 import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import retrofit2.http.Body;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
+import retrofit2.http.PartMap;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 import top.jplayer.baseprolibrary.mvp.model.bean.BaseBean;
@@ -236,4 +242,32 @@ public interface MahServer {
             @Query("type") String type,
             @Query("smCode") String smCode,
             @Query("phone") String phone);
+
+    @POST("dma/project/create?")
+    Observable<BaseBean> createPro(@Body RequestBody Body);
+
+    @Multipart
+    @POST("dma/project/create?")
+    Observable<BaseBean> createPro(@PartMap Map<String, RequestBody> map);
+
+    @GET("dma/index/on")
+    Observable<DecorateManBean> manProInfo();
+
+    @GET("dma/index/wm")
+    Observable<DecorateWorkerBean> workerProInfo();
+
+    @POST("ide/smcode?")
+    Observable<BaseBean> getIdeSmsCode(@Query("phone") String phone);
+
+    @POST("ide/regworker?")
+    Observable<BaseBean> regWorker(@QueryMap Map<String, String> map);
+
+    @GET("select/worktype?")
+    Observable<SelectWorkerTypeBean> selectWorkerType();
+
+    @POST("ide/regsv?")
+    Observable<BaseBean> regSuperView(@QueryMap Map<String, String> map);
+
+    @POST("ide/verfiysmcode?")
+    Observable<BaseBean> verIdeSmsCode(@Query("phone") String phone, @Query("smCode") String smCode);
 }

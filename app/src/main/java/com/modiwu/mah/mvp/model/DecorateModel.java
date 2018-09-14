@@ -1,11 +1,18 @@
 package com.modiwu.mah.mvp.model;
 
 import com.modiwu.mah.mvp.MahServer;
+import com.modiwu.mah.mvp.model.bean.DecorateManBean;
+import com.modiwu.mah.mvp.model.bean.DecorateWorkerBean;
 import com.modiwu.mah.mvp.model.bean.LocalBean;
+import com.modiwu.mah.mvp.model.bean.SelectWorkerTypeBean;
+
+import java.util.Map;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+import okhttp3.RequestBody;
+import top.jplayer.baseprolibrary.mvp.model.bean.BaseBean;
 import top.jplayer.baseprolibrary.net.RetrofitManager;
 
 /**
@@ -20,6 +27,70 @@ public class DecorateModel {
         return RetrofitManager.init()
                 .create(MahServer.class)
                 .getLocalBean()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Observable<BaseBean> requestCreatePro(RequestBody body) {
+        return RetrofitManager.init()
+                .create(MahServer.class)
+                .createPro(body)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Observable<DecorateManBean> requestManPro() {
+        return RetrofitManager.init()
+                .create(MahServer.class)
+                .manProInfo()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Observable<DecorateWorkerBean> requestWorkerPro() {
+        return RetrofitManager.init()
+                .create(MahServer.class)
+                .workerProInfo()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Observable<BaseBean> getIdeSmsCode(String phone) {
+        return RetrofitManager.init()
+                .create(MahServer.class)
+                .getIdeSmsCode(phone)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Observable<BaseBean> regWorker(Map<String, String> map) {
+        return RetrofitManager.init()
+                .create(MahServer.class)
+                .regWorker(map)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Observable<SelectWorkerTypeBean> selectWorkerType() {
+        return RetrofitManager.init()
+                .create(MahServer.class)
+                .selectWorkerType()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Observable<BaseBean> regSuperView(Map<String, String> map) {
+        return RetrofitManager.init()
+                .create(MahServer.class)
+                .regSuperView(map)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Observable<BaseBean> verIdeSmsCode(String phone, String smCode) {
+        return RetrofitManager.init()
+                .create(MahServer.class)
+                .verIdeSmsCode(phone, smCode)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }

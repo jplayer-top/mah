@@ -51,15 +51,15 @@ public class CameraUtils {
     /**
      * 打开图库选择照片
      */
-    public void openCamer(Activity activity) {
+    public void openSize(Activity activity, int size) {
         ImageConfig imageConfig
                 = new ImageConfig.Builder((ImageLoader) (context, path, imageView) -> Glide.with(context).load(path).apply(GlideUtils.init().options()).into(imageView))
-                .steepToolBarColor(activity.getResources().getColor(R.color.blue))
-                .titleBgColor(activity.getResources().getColor(R.color.blue))
+                .steepToolBarColor(activity.getResources().getColor(R.color.colorBlackGold))
+                .titleBgColor(activity.getResources().getColor(R.color.colorBlackGold))
                 .titleSubmitTextColor(activity.getResources().getColor(R.color.white))
                 .titleTextColor(activity.getResources().getColor(R.color.white))
                 .mutiSelect()
-                .mutiSelectMaxSize(9)
+                .mutiSelectMaxSize(size)
                 .showCamera()
                 .filePath("/ImageSelector/Pictures")
                 .requestCode(1)

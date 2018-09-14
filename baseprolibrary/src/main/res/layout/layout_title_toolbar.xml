@@ -79,6 +79,16 @@
             android:src="@drawable/bar_search"
             android:visibility="gone"
             tools:ignore="PrivateResource,RtlHardcoded"/>
+
+        <TextView
+            android:id="@+id/tvBarRight"
+            android:layout_width="?attr/actionBarSize"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:text="确认"
+            android:visibility="gone"/>
     </RelativeLayout>
 
 </android.support.v7.widget.Toolbar>

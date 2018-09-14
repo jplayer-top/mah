@@ -4,8 +4,11 @@ import com.modiwu.mah.mvp.model.DecorateModel;
 import com.modiwu.mah.mvp.model.bean.LocalBean;
 import com.modiwu.mah.ui.activity.DecorateCreateProActivity;
 
+import okhttp3.RequestBody;
 import top.jplayer.baseprolibrary.mvp.contract.BasePresenter;
+import top.jplayer.baseprolibrary.mvp.model.bean.BaseBean;
 import top.jplayer.baseprolibrary.net.SampleShowDialogObserver;
+import top.jplayer.baseprolibrary.utils.ToastUtils;
 
 /**
  * Created by Obl on 2018/9/12.
@@ -22,12 +25,23 @@ public class DecorateCreateProPresenter extends BasePresenter<DecorateCreateProA
         super(iView);
         mModel = new DecorateModel();
     }
+
     public void requestLocalBean() {
         mModel.requestLocalBean()
                 .subscribe(new SampleShowDialogObserver<LocalBean>(mIView) {
                     @Override
                     protected void onSuccess(LocalBean baseBean) throws Exception {
                         mIView.setLocalBean(baseBean);
+                    }
+                });
+    }
+
+    public void requestCreatePro(RequestBody body) {
+        mModel.requestCreatePro(body)
+                .subscribe(new SampleShowDialogObserver<BaseBean>(mIView) {
+                    @Override
+                    protected void onSuccess(BaseBean baseBean) throws Exception {
+                        ToastUtils.init().showSuccessToast(mIView,baseBean.msg);
                     }
                 });
     }

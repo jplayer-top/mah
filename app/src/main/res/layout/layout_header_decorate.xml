@@ -34,7 +34,8 @@
             android:drawableTop="@drawable/decorate_all_pro"
             android:gravity="center"
             android:text="所有项目"
-            android:textSize="@dimen/dimen_10sp"/>
+            android:textSize="@dimen/dimen_10sp"
+            android:visibility="gone"/>
 
         <TextView
             android:id="@+id/tvAddPro"
@@ -45,7 +46,8 @@
             android:drawableTop="@drawable/decorate_add_pro"
             android:gravity="center"
             android:text="加入现有项目"
-            android:textSize="@dimen/dimen_10sp"/>
+            android:textSize="@dimen/dimen_10sp"
+            android:visibility="gone"/>
 
         <TextView
             android:id="@+id/tvCreatePro"
@@ -67,7 +69,8 @@
             android:drawableTop="@drawable/decorate_change_man"
             android:gravity="center"
             android:text="切换工种"
-            android:textSize="@dimen/dimen_10sp"/>
+            android:textSize="@dimen/dimen_10sp"
+            android:visibility="gone"/>
 
 
     </LinearLayout>
@@ -94,6 +97,7 @@
         android:paddingTop="@dimen/dimen_3dp"
         android:text="项目介绍 >"
         android:textColor="@color/white"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/ivBgSrc"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -104,15 +108,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:visibility="invisible"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="@+id/ivBgSrc"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvProjectName">
 
         <View
-            android:layout_width="@dimen/dimen_65dp"
+            android:layout_width="@dimen/dimen_55dp"
             android:layout_height="@dimen/dimen_5dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/dimen_10dp"
             android:background="@color/white"/>
 
         <TextView

@@ -14,14 +14,19 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 import top.jplayer.baseprolibrary.BaseInitApplication;
 
@@ -243,6 +248,92 @@ public class BitmapUtil {
         return bytes;
     }
 
+    public static Bitmap adjustBitmap(String absolutePath) {
+        Bitmap bm;
+        BitmapFactory.Options opt = new BitmapFactory.Options();
+        // 这个isjustdecodebounds很重要
+        opt.inJustDecodeBounds = true;
+        BitmapFactory.decodeFile(absolutePath, opt);
+
+        // 获取到这个图片的原始宽度和高度
+        int picWidth = opt.outWidth;
+        int picHeight = opt.outHeight;
+
+        // 获取屏的宽度和高度
+
+        int screenWidth = ScreenUtils.getWidthOfScreen(BaseInitApplication.mWeakReference.get(), 60, 1);
+        int screenHeight = screenWidth * 2;
+
+        // isSampleSize是表示对图片的缩放程度，比如值为2图片的宽度和高度都变为以前的1/2
+        opt.inSampleSize = 1;
+        int size = 1;
+        // 根据屏的大小和图片大小计算出缩放比例
+        if (picWidth > picHeight) {
+            if (picWidth > screenWidth) {
+                size = picWidth / screenWidth;
+            } else {
+                size = 1;
+            }
+            opt.inSampleSize = size;
+        } else {
+            if (picHeight > screenHeight) {
+                size = picHeight / screenHeight;
+            } else {
+                size = 1;
+            }
+            opt.inSampleSize = size;
+        }
+        // 这次再真正地生成一个有像素的，经过缩放了的bitmap
+        opt.inJustDecodeBounds = false;
+        opt.inPreferredConfig = Bitmap.Config.RGB_565;
+        bm = BitmapFactory.decodeFile(absolutePath, opt);
+        return bm;
+    }  //ab
+
+    /**
+     * 压缩图片（质量压缩）
+     */
+    public static File compressImage(File filePre) {
+        Bitmap bitmap = BitmapUtil.adjustBitmap(filePre.getAbsolutePath());
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);//质量压缩方法，这里100表示不压缩，把压缩后的数据存放到baos中
+        int options = 100;
+        while (baos.toByteArray().length / 1024 > 500) {  //循环判断如果压缩后图片是否大于500kb,大于继续压缩
+            baos.reset();//重置baos即清空baos
+            options -= 10;//每次都减少10
+            bitmap.compress(Bitmap.CompressFormat.JPEG, options, baos);//这里压缩options%，把压缩后的数据存放到baos中
+            long length = baos.toByteArray().length;
+        }
+        SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss", Locale.CHINA);
+        Date date = new Date(System.currentTimeMillis());
+        String filename = format.format(date);
+        File file = new File(Environment.getExternalStorageDirectory(), filename + ".png");
+        try {
+            FileOutputStream fos = new FileOutputStream(file);
+            try {
+                fos.write(baos.toByteArray());
+                fos.flush();
+                fos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        recycleBitmap(bitmap);
+        return file;
+    }
+
+    public static void recycleBitmap(Bitmap... bitmaps) {
+        if (bitmaps == null) {
+            return;
+        }
+        for (Bitmap bm : bitmaps) {
+            if (null != bm && !bm.isRecycled()) {
+                bm.recycle();
+            }
+        }
+    }
 
     public static int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
         int h = options.outHeight;
@@ -293,6 +384,7 @@ public class BitmapUtil {
     public byte[] compressBitmapQuiklySmallTo(String filePath, int maxLenth) {
         return compressBitmapSmallTo(filePath, 480, 800, maxLenth);
     }
+
     /**
      * 将本地图片文件转换成可解码二维码的 Bitmap。为了避免图片太大，这里对图片进行了压缩。感谢 https://github.com/devilsen 提的 PR
      *

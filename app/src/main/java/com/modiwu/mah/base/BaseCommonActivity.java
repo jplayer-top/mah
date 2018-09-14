@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 
+import com.modiwu.mah.mvp.constract.DecorateContract;
+import com.modiwu.mah.mvp.model.bean.SelectWorkerTypeBean;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
 import top.jplayer.baseprolibrary.mvp.contract.IContract;
@@ -19,7 +21,7 @@ import top.jplayer.baseprolibrary.widgets.MultipleStatusView;
  */
 
 @SuppressLint("Registered")
-public abstract class BaseCommonActivity extends SuperBaseActivity implements IContract.IView {
+public abstract class BaseCommonActivity extends SuperBaseActivity implements IContract.IView, DecorateContract.IDecorateView {
     public View addRootView;
     public MultipleStatusView mMultipleStatusView;
     public SmartRefreshLayout smartRefreshLayout;
@@ -67,5 +69,29 @@ public abstract class BaseCommonActivity extends SuperBaseActivity implements IC
         if (smartRefreshLayout != null && smartRefreshLayout.isRefreshing()) {
             smartRefreshLayout.finishRefresh();
         }
+    }
+
+    @Override
+    public void sendCode() {
+
+    }
+
+    @Override
+    public void verCode() {
+    }
+
+    @Override
+    public void regSuperView() {
+
+    }
+
+    @Override
+    public void regWorker() {
+
+    }
+
+    @Override
+    public void selectWorkerType(SelectWorkerTypeBean bean) {
+
     }
 }

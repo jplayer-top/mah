@@ -25,6 +25,10 @@
         android:layout_marginStart="@dimen/dimen_15dp"
         android:layout_marginTop="@dimen/dimen_5dp"
         android:background="@drawable/shape_border_grey"
+        android:paddingEnd="@dimen/dimen_5dp"
+        android:paddingStart="@dimen/dimen_5dp"
+        android:textColor="@color/color666"
+        android:textSize="@dimen/dimen_14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvTipName"/>
@@ -41,4 +45,191 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editName"/>
 
+    <TextView
+        android:id="@+id/tvTipSex"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="性别："
+        android:textColor="@color/colorBlackGold"
+        android:textSize="@dimen/dimen_16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/editSex"
+        app:layout_constraintTop_toBottomOf="@+id/editName"
+        app:layout_constraintTop_toTopOf="@+id/tvTipBirthday"/>
+
+    <TextView
+        android:id="@+id/editBirth"
+        android:layout_width="@dimen/dimen_0dp"
+        android:layout_height="@dimen/dimen_45dp"
+        android:layout_marginEnd="@dimen/dimen_15dp"
+        android:layout_marginStart="@dimen/dimen_15dp"
+        android:layout_marginTop="@dimen/dimen_5dp"
+        android:background="@drawable/shape_border_grey"
+        android:gravity="center_vertical"
+        android:paddingEnd="@dimen/dimen_5dp"
+        android:paddingStart="@dimen/dimen_5dp"
+        android:textColor="@color/color666"
+        android:textSize="@dimen/dimen_14sp"
+        app:layout_constraintEnd_toStartOf="@id/editSex"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTipBirthday"/>
+
+    <TextView
+        android:id="@+id/editSex"
+        android:layout_width="@dimen/dimen_80dp"
+        android:layout_height="@dimen/dimen_45dp"
+        android:layout_marginEnd="@dimen/dimen_15dp"
+        android:layout_marginStart="@dimen/dimen_15dp"
+        android:layout_marginTop="@dimen/dimen_5dp"
+        android:background="@drawable/shape_border_grey"
+        android:gravity="center_vertical"
+        android:paddingEnd="@dimen/dimen_5dp"
+        android:paddingStart="@dimen/dimen_5dp"
+        android:textColor="@color/color666"
+        android:textSize="@dimen/dimen_14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTipBirthday"/>
+
+    <TextView
+        android:id="@+id/tvTipId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dimen_15dp"
+        android:text="身份证号："
+        android:textColor="@color/colorBlackGold"
+        android:textSize="@dimen/dimen_16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editSex"/>
+
+    <EditText
+        android:id="@+id/editId"
+        android:layout_width="@dimen/dimen_0dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="@dimen/dimen_15dp"
+        android:layout_marginStart="@dimen/dimen_15dp"
+        android:layout_marginTop="@dimen/dimen_5dp"
+        android:background="@drawable/shape_border_grey"
+        android:digits="0123456789xX"
+        android:inputType="text"
+        android:paddingEnd="@dimen/dimen_5dp"
+        android:paddingStart="@dimen/dimen_5dp"
+        android:textColor="@color/color666"
+        android:textSize="@dimen/dimen_14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTipId"/>
+
+    <TextView
+        android:id="@+id/tvTipType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dimen_15dp"
+        android:text="工种选择："
+        android:textColor="@color/colorBlackGold"
+        android:textSize="@dimen/dimen_16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editId"/>
+
+    <TextView
+        android:id="@+id/tvTipAge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="工龄："
+        android:textColor="@color/colorBlackGold"
+        android:textSize="@dimen/dimen_16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/editSex"
+        app:layout_constraintTop_toBottomOf="@+id/editName"
+        app:layout_constraintTop_toTopOf="@+id/tvTipType"/>
+
+    <TextView
+        android:id="@+id/editType"
+        android:layout_width="@dimen/dimen_0dp"
+        android:layout_height="@dimen/dimen_45dp"
+        android:layout_marginEnd="@dimen/dimen_15dp"
+        android:layout_marginStart="@dimen/dimen_15dp"
+        android:layout_marginTop="@dimen/dimen_5dp"
+        android:background="@drawable/shape_border_grey"
+        android:gravity="center_vertical"
+        android:paddingEnd="@dimen/dimen_5dp"
+        android:paddingStart="@dimen/dimen_5dp"
+        android:textColor="@color/color666"
+        android:textSize="@dimen/dimen_14sp"
+        app:layout_constraintEnd_toStartOf="@id/editSex"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTipType"/>
+
+    <EditText
+        android:id="@+id/editAge"
+        android:layout_width="@dimen/dimen_80dp"
+        android:layout_height="@dimen/dimen_45dp"
+        android:layout_marginEnd="@dimen/dimen_15dp"
+        android:layout_marginStart="@dimen/dimen_15dp"
+        android:layout_marginTop="@dimen/dimen_5dp"
+        android:background="@drawable/shape_border_grey"
+        android:inputType="phone"
+        android:paddingEnd="@dimen/dimen_5dp"
+        android:paddingStart="@dimen/dimen_5dp"
+        android:textColor="@color/color666"
+        android:textSize="@dimen/dimen_14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTipType"/>
+
+    <TextView
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_15dp"
+        android:layout_marginTop="@dimen/dimen_15dp"
+        android:gravity="center_vertical"
+        android:text="注意：所有项为必填项，每个身份证号仅可成功注册一次"
+        android:textColor="@color/color666"
+        android:textSize="@dimen/dimen_13sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editAge"/>
+
+    <Button
+        android:id="@+id/btnSure"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dimen_44dp"
+        android:layout_marginEnd="@dimen/dimen_15dp"
+        android:layout_marginStart="@dimen/dimen_15dp"
+        android:layout_marginTop="@dimen/dimen_60dp"
+        android:background="@drawable/shape_button_theme"
+        android:text="确认注册"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editAge"/>
+
+    <LinearLayout
+        android:id="@+id/llRegOk"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/white"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableTop="@drawable/decorate_reg_ok_worker"
+            android:text="注册成功"
+            android:textColor="@color/chocolate"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_5dp"
+            android:text="正在跳转"
+            android:textColor="@color/color666"
+            android:textSize="@dimen/dimen_10sp"/>
+    </LinearLayout>
 </android.support.constraint.ConstraintLayout>

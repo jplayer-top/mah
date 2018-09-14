@@ -8,10 +8,10 @@
 
     <TextView
         android:id="@+id/tvTip01"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/dimen_200dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dimen_40dp"
-        android:gravity="center"
+        android:gravity="center_vertical"
         android:lineSpacingExtra="@dimen/dimen_5dp"
         android:text="@string/shigong_register"
         android:textColor="@color/color666"
@@ -57,8 +57,8 @@
         android:layout_width="0dp"
         android:layout_height="@dimen/dimen_40dp"
         android:layout_marginTop="@dimen/dimen_15dp"
-        android:background="@color/white"
-        android:gravity="center"
+        android:background="@null"
+        android:gravity="center_vertical"
         android:textColor="@color/color666"
         app:layout_constraintEnd_toEndOf="@+id/tvTip01"
         app:layout_constraintStart_toStartOf="@+id/tvTipCode"
@@ -75,7 +75,7 @@
     <Button
         android:id="@+id/btnSendCode"
         android:layout_width="@dimen/dimen_80dp"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/dimen_32dp"
         android:layout_marginTop="@dimen/dimen_10dp"
         android:background="@drawable/shape_border_theme"
         android:text="发送验证码"
@@ -86,7 +86,7 @@
     <Button
         android:id="@+id/btnSure"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/dimen_44dp"
         android:layout_marginTop="@dimen/dimen_60dp"
         android:background="@drawable/shape_button_theme"
         android:text="确认开启"

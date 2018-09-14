@@ -42,6 +42,7 @@ public class LoginPresenter extends BasePresenter<LoginAnimActivity> implements 
             @Override
             protected void onSuccess(LoginBean loginBean) throws Exception {
                 connectIm(loginBean);
+                SharePreUtil.saveData(mIView, "login_phone", phone);
                 mIView.login(loginBean);
             }
         });
@@ -121,6 +122,7 @@ public class LoginPresenter extends BasePresenter<LoginAnimActivity> implements 
                     @Override
                     protected void onSuccess(LoginBean loginBean) throws Exception {
                         connectIm(loginBean);
+                        SharePreUtil.saveData(mIView, "login_phone", phone);
                         mIView.login(loginBean);
                     }
                 });

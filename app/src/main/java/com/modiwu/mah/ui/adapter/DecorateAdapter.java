@@ -27,12 +27,7 @@ public class DecorateAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
         RecyclerView recyclerViewPerson = helper.itemView.findViewById(R.id.recyclerViewItemPerson);
         recyclerViewPic.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false));
         recyclerViewPerson.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false));
-        ArrayList<String> data = new ArrayList<>();
-        data.add("1");
-        data.add("1");
-        data.add("1");
-        data.add("1");
-        recyclerViewPic.setAdapter(new DecorateItemPicAdapter(data));
+        recyclerViewPic.setAdapter(new DecorateItemPicAdapter(null));
         ArrayList<String> dataPerson = new ArrayList<>();
         dataPerson.add("1");
         dataPerson.add("1");
