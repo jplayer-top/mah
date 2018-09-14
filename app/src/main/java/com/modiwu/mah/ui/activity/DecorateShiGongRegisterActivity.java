@@ -4,6 +4,7 @@ import android.util.ArrayMap;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -53,11 +54,18 @@ public class DecorateShiGongRegisterActivity extends BaseCommonActivity {
     Button mBtnSure;
     @BindView(R.id.llRegOk)
     LinearLayout llRegOk;
+    @BindView(R.id.tvTipType)
+    TextView tvTipType;
+    @BindView(R.id.tvTipAge)
+    TextView tvTipAge;
+    @BindView(R.id.ivRegOkSrc)
+    ImageView ivRegOkSrc;
     private Unbinder mBind;
     private PickerUtils mPickerUtils;
     private ArrayList<String> optionsItems = new ArrayList<>();
     private ArrayMap<String, String> mMap;
     private DecorateBasePresenter mPresenter;
+    private boolean mIsSV;
 
     @Override
     public int setBaseLayout() {
@@ -66,6 +74,7 @@ public class DecorateShiGongRegisterActivity extends BaseCommonActivity {
 
     @Override
     public void initBaseData() {
+        mIsSV = tvBarTitle.getText().toString().contains("监理");
         mBind = ButterKnife.bind(this, mFlRootView);
         mPickerUtils = new PickerUtils();
         mPresenter = new DecorateBasePresenter(this);
@@ -101,13 +110,24 @@ public class DecorateShiGongRegisterActivity extends BaseCommonActivity {
             putText("请选择性别", "sex", mEditSex);
             putText("请选择出生日期", "birthday", mEditBirth);
             putText("请输入身份信息", "id_card", mEditId);
-            putText("请选择工种类型", "work_type", mEditType);
-            putText("请输入工龄", "work_years", mEditAge);
+            if (!mIsSV) {
+                putText("请选择工种类型", "work_type", mEditType);
+                putText("请输入工龄", "work_years", mEditAge);
+            }
             mMap.put("user_phone", (String) SharePreUtil.getData(this, "login_phone", "0"));
-            if (mMap.size() >= 7) {
+            if (!mIsSV && mMap.size() >= 7) {
                 mPresenter.regWorker(mMap);
             }
+            if (mIsSV && mMap.size() >= 5) {
+                mPresenter.regSuperView(mMap);
+            }
         });
+        if (mIsSV) {
+            mEditType.setVisibility(View.GONE);
+            mEditAge.setVisibility(View.GONE);
+            tvTipAge.setVisibility(View.GONE);
+            tvTipType.setVisibility(View.GONE);
+        }
     }
 
     SelectWorkerTypeBean bean;
@@ -137,6 +157,18 @@ public class DecorateShiGongRegisterActivity extends BaseCommonActivity {
         EventBus.getDefault().post(new RegDecorateEvent("施工"));
         SharePreUtil.saveData(this, "decorate_select", "施工");
         SharePreUtil.saveData(this, "decorate_worker", "1");
+        Observable.timer(500, TimeUnit.MILLISECONDS).compose(new IoMainSchedule<>()).subscribe(
+                aLong -> finish()
+        );
+    }
+
+    @Override
+    public void regSuperView() {
+        llRegOk.setVisibility(View.VISIBLE);
+        ivRegOkSrc.setImageResource(R.drawable.decorate_reg_ok_super);
+        EventBus.getDefault().post(new RegDecorateEvent("监理"));
+        SharePreUtil.saveData(this, "decorate_select", "监理");
+        SharePreUtil.saveData(this, "decorate_super", "1");
         Observable.timer(500, TimeUnit.MILLISECONDS).compose(new IoMainSchedule<>()).subscribe(
                 aLong -> finish()
         );

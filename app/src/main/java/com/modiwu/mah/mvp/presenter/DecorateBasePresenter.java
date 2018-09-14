@@ -65,4 +65,14 @@ public class DecorateBasePresenter extends BasePresenter<BaseCommonActivity> {
                     }
                 });
     }
+
+    public void regSuperView(ArrayMap<String, String> map) {
+        mModel.regSuperView(map)
+                .subscribe(new SampleShowDialogObserver<BaseBean>(mIView) {
+                    @Override
+                    protected void onSuccess(BaseBean baseBean) throws Exception {
+                        mIView.regSuperView();
+                    }
+                });
+    }
 }

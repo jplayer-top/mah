@@ -80,6 +80,7 @@ public class DecorateFragment extends BaseFragment {
     private RatingBar mRatingBar;
     private View mTvAllPro;
     private View mTvAddPro;
+    private View mTvCreatePro;
 
     @Override
     public int initLayout() {
@@ -150,7 +151,8 @@ public class DecorateFragment extends BaseFragment {
             ActivityUtils.init().start(getContext(), DecorateProDetailActivity.class, "项目介绍");
 
         });
-        header.findViewById(R.id.tvCreatePro).setOnClickListener(v -> {
+        mTvCreatePro = header.findViewById(R.id.tvCreatePro);
+        mTvCreatePro.setOnClickListener(v -> {
             ActivityUtils.init().start(getContext(), DecorateCreateProActivity.class, "创建项目");
         });
         mTvTitleHeader = header.findViewById(R.id.tvProjectName);
@@ -200,7 +202,7 @@ public class DecorateFragment extends BaseFragment {
         mTvTitleHeader.setText(baseBean.project.project_name);
         mLlIntroduction.setVisibility(View.INVISIBLE);
         mTvProDetail.setVisibility(View.VISIBLE);
-        mTvAddPro.setVisibility(View.VISIBLE);
+        mTvCreatePro.setVisibility(View.VISIBLE);
         mTvAllPro.setVisibility(View.GONE);
     }
 
@@ -214,7 +216,7 @@ public class DecorateFragment extends BaseFragment {
         mLlIntroduction.setVisibility(View.VISIBLE);
         mTvProDetail.setVisibility(View.INVISIBLE);
         mTvAllPro.setVisibility(View.VISIBLE);
-        mTvAddPro.setVisibility(View.GONE);
+        mTvCreatePro.setVisibility(View.GONE);
 
         mTvWorkerFirstName.setText(infoBean.user_name.substring(0, 1));
         int appraise = baseBean.appraise;

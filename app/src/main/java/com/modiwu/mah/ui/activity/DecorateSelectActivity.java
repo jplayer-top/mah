@@ -57,6 +57,14 @@ public class DecorateSelectActivity extends BaseCommonActivity {
         mCardYeZhu.setOnClickListener(v -> {
             changeSelect("业主");
         });
+        mCardJianLi.setOnClickListener(v -> {
+            String isWorker = (String) SharePreUtil.getData(this, "decorate_super", "0");
+            if ("1".equals(isWorker)) {
+                changeSelect("监理");
+            } else {
+                ActivityUtils.init().start(this, DecorateShiGongActivity.class, "我是监理人员");
+            }
+        });
     }
 
     private void changeSelect(String select) {

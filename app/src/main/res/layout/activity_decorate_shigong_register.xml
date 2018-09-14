@@ -205,22 +205,27 @@
         app:layout_constraintTop_toBottomOf="@+id/editAge"/>
 
     <LinearLayout
+        android:visibility="gone"
         android:id="@+id/llRegOk"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@color/white"
         android:gravity="center"
         android:orientation="vertical"
-        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <ImageView
+            android:id="@+id/ivRegOkSrc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/decorate_reg_ok_worker"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableTop="@drawable/decorate_reg_ok_worker"
             android:text="注册成功"
             android:textColor="@color/chocolate"/>
 

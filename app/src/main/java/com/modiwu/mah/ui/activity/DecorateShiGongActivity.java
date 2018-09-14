@@ -30,6 +30,8 @@ import top.jplayer.baseprolibrary.utils.ToastUtils;
 public class DecorateShiGongActivity extends BaseCommonActivity {
     @BindView(R.id.tvPhone)
     TextView mTvPhone;
+    @BindView(R.id.tvTip01)
+    TextView tvTip01;
     @BindView(R.id.tvEditCode)
     EditText mTvEditCode;
     @BindView(R.id.btnSendCode)
@@ -39,6 +41,7 @@ public class DecorateShiGongActivity extends BaseCommonActivity {
     private Unbinder mUnbinder;
     private DecorateBasePresenter mPresenter;
     private String mLoginPhone;
+    private boolean mIsSV;
 
     @Override
     public int setBaseLayout() {
@@ -65,6 +68,10 @@ public class DecorateShiGongActivity extends BaseCommonActivity {
         mBtnSendCode.setOnClickListener(v -> {
             mPresenter.sendSmCode(mLoginPhone);
         });
+        mIsSV = tvBarTitle.getText().toString().contains("监理");
+        if (mIsSV) {
+            tvTip01.setText("您还没有开启监理人员功能,确认开启请发送验证码验证");
+        }
     }
 
     @Override
@@ -81,7 +88,11 @@ public class DecorateShiGongActivity extends BaseCommonActivity {
     @Override
     public void verCode() {
         super.verCode();
-        ActivityUtils.init().start(this, DecorateShiGongRegisterActivity.class, "注册施工人员");
+        if (mIsSV) {
+            ActivityUtils.init().start(this, DecorateShiGongRegisterActivity.class, "注册监理人员");
+        } else {
+            ActivityUtils.init().start(this, DecorateShiGongRegisterActivity.class, "注册施工人员");
+        }
         Observable.timer(1, TimeUnit.SECONDS).compose(new IoMainSchedule<>()).subscribe(aLong -> finish());
     }
 }
