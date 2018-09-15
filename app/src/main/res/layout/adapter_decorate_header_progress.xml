@@ -2,19 +2,20 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="@dimen/dimen_120dp"
-    android:layout_height="@dimen/dimen_95dp"
+    android:layout_width="@dimen/dimen_105dp"
+    android:layout_height="@dimen/dimen_90dp"
     android:gravity="center_vertical">
 
     <View
-        android:layout_width="@dimen/dimen_20dp"
+        android:layout_width="@dimen/dimen_15dp"
         android:layout_height="@dimen/dimen_1dp"
         android:background="@color/color999"/>
 
     <android.support.constraint.ConstraintLayout
-
+        android:id="@+id/clBgSel"
         android:layout_width="@dimen/dimen_80dp"
-        android:layout_height="@dimen/dimen_95dp">
+        android:layout_height="@dimen/dimen_90dp"
+        android:background="#D9CBB0">
 
         <com.kingja.magicmirror.MagicMirrorView
             android:id="@+id/ivItemSrc"
@@ -36,9 +37,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dimen_35dp"
             android:background="@drawable/shape_button_theme"
-            android:padding="@dimen/dimen_1dp"
+            android:padding="@dimen/dimen_2dp"
             android:text="已完成"
-            android:textColor="@color/grey"
+            android:textColor="@color/colorBlackGold"
             android:textSize="@dimen/dimen_10sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -52,7 +53,7 @@
             android:lines="1"
             android:text="5水电暖施工"
             android:textColor="@color/color323232"
-            android:textSize="@dimen/dimen_12sp"
+            android:textSize="@dimen/dimen_10sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -60,7 +61,7 @@
     </android.support.constraint.ConstraintLayout>
 
     <View
-        android:layout_width="@dimen/dimen_20dp"
+        android:layout_width="@dimen/dimen_10dp"
         android:layout_height="@dimen/dimen_1dp"
         android:background="@color/color999"/>
 </LinearLayout>

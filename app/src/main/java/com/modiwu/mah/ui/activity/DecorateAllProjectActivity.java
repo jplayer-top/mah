@@ -5,9 +5,15 @@ import android.support.v7.widget.RecyclerView;
 
 import com.modiwu.mah.R;
 import com.modiwu.mah.base.BaseCommonActivity;
+import com.modiwu.mah.mvp.model.bean.DecorateAllProBean;
+import com.modiwu.mah.mvp.model.event.SelProIdDecorateEvent;
+import com.modiwu.mah.mvp.presenter.DecorateBasePresenter;
+import com.modiwu.mah.ui.adapter.AddProjectAdapter;
 import com.modiwu.mah.ui.adapter.AllProjectAdapter;
 
-import java.util.ArrayList;
+import org.greenrobot.eventbus.EventBus;
+
+import top.jplayer.baseprolibrary.utils.SharePreUtil;
 
 /**
  * Created by Obl on 2018/8/30.
@@ -18,7 +24,11 @@ import java.util.ArrayList;
 
 public class DecorateAllProjectActivity extends BaseCommonActivity {
     private RecyclerView mRecyclerView;
-    private AllProjectAdapter mAdapter;
+    private AllProjectAdapter mWorkerAdapter;
+    private AddProjectAdapter mSvAdapter;
+    private DecorateBasePresenter mPresenter;
+    private String mSelect;
+    private boolean mEquals;
 
     @Override
     public int setBaseLayout() {
@@ -27,15 +37,39 @@ public class DecorateAllProjectActivity extends BaseCommonActivity {
 
     @Override
     public void initBaseData() {
+        mMultipleStatusView = addRootView.findViewById(R.id.multiplestatusview);
+        smartRefreshLayout = addRootView.findViewById(R.id.smartRefreshLayout);
         mRecyclerView = mFlRootView.findViewById(R.id.recyclerView);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        ArrayList<String> strings = new ArrayList<>();
-        strings.add("1");
-        strings.add("1");
-        strings.add("1");
-        mAdapter = new AllProjectAdapter(strings);
-        mRecyclerView.setAdapter(mAdapter);
-        mAdapter.setOnItemClickListener((adapter, view, position) -> {
-        });
+        mSelect = (String) SharePreUtil.getData(this, "decorate_select", "监理");
+        mEquals = "监理".equals(mSelect);
+        if (mEquals) {
+            mSvAdapter = new AddProjectAdapter(null);
+            mRecyclerView.setAdapter(mSvAdapter);
+            mSvAdapter.setOnItemClickListener((adapter, view, position) -> {
+                EventBus.getDefault().post(new SelProIdDecorateEvent(mSvAdapter.getData().get(position).project_id, "监理"));
+                finish();
+            });
+        } else {
+            mWorkerAdapter = new AllProjectAdapter(null);
+            mRecyclerView.setAdapter(mWorkerAdapter);
+            mWorkerAdapter.setOnItemClickListener((adapter, view, position) -> {
+                EventBus.getDefault().post(new SelProIdDecorateEvent(mWorkerAdapter.getData().get(position)
+                        .project_id, "施工"));
+                finish();
+            });
+        }
+        mPresenter = new DecorateBasePresenter(this);
+        mPresenter.getAllProList();
+        showLoading();
+        smartRefreshLayout.setOnRefreshListener(refresh -> mPresenter.getAllProList());
+    }
+
+    @Override
+    public void getAllProList(DecorateAllProBean bean) {
+        super.getAllProList(bean);
+        smartRefreshLayout.finishRefresh();
+        mMultipleStatusView.showContent();
+        mSvAdapter.setNewData(bean.projects);
     }
 }

@@ -3,6 +3,7 @@ package com.modiwu.mah.ui.adapter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.modiwu.mah.R;
+import com.modiwu.mah.mvp.model.bean.DecorateAllProBean;
 
 import java.util.ArrayList;
 
@@ -13,13 +14,13 @@ import java.util.ArrayList;
  * github : https://github.com/oblivion0001
  */
 
-public class AllProjectAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
-    public AllProjectAdapter(ArrayList<String> strings) {
+public class AllProjectAdapter extends BaseQuickAdapter<DecorateAllProBean.ProjectsBean, BaseViewHolder> {
+    public AllProjectAdapter(ArrayList<DecorateAllProBean.ProjectsBean> strings) {
         super(R.layout.adapter_app_project, strings);
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, String item) {
+    protected void convert(BaseViewHolder helper, DecorateAllProBean.ProjectsBean item) {
 
     }
 }

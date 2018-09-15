@@ -9,18 +9,23 @@ import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.modiwu.mah.R;
 import com.modiwu.mah.base.BaseFragment;
 import com.modiwu.mah.mvp.model.bean.DecorateManBean;
+import com.modiwu.mah.mvp.model.bean.DecorateSvBean;
 import com.modiwu.mah.mvp.model.bean.DecorateWorkerBean;
+import com.modiwu.mah.mvp.model.event.SelProIdDecorateEvent;
 import com.modiwu.mah.mvp.model.event.SelectDecorateEvent;
 import com.modiwu.mah.mvp.presenter.DecorateProInfoPresenter;
 import com.modiwu.mah.ui.activity.DecorateAddProjectActivity;
 import com.modiwu.mah.ui.activity.DecorateAllProjectActivity;
 import com.modiwu.mah.ui.activity.DecorateCreateProActivity;
+import com.modiwu.mah.ui.activity.DecorateMessageHasActivity;
 import com.modiwu.mah.ui.activity.DecorateProDetailActivity;
 import com.modiwu.mah.ui.activity.DecorateSelectActivity;
-import com.modiwu.mah.ui.activity.MessageActivity;
+import com.modiwu.mah.ui.activity.DecorateShiGongActivity;
 import com.modiwu.mah.ui.adapter.DecorateAdapter;
 import com.modiwu.mah.ui.adapter.DecorateProgressAdapter;
 import com.modiwu.mah.ui.dialog.DialogChangeMan;
@@ -32,6 +37,7 @@ import org.greenrobot.eventbus.Subscribe;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import butterknife.BindView;
@@ -39,6 +45,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import top.jplayer.baseprolibrary.utils.ActivityUtils;
 import top.jplayer.baseprolibrary.utils.DateUtils;
+import top.jplayer.baseprolibrary.utils.SharePreUtil;
 import top.jplayer.baseprolibrary.widgets.MultipleStatusView;
 
 /**
@@ -83,6 +90,8 @@ public class DecorateFragment extends BaseFragment {
     private View mTvAddPro;
     private View mTvCreatePro;
     private String mProId;
+    private DecorateProgressAdapter mProgressAdapter;
+    private String mSelectData;
 
     @Override
     public int initLayout() {
@@ -93,6 +102,7 @@ public class DecorateFragment extends BaseFragment {
     protected void initData(View rootView) {
         super.initData(rootView);
         EventBus.getDefault().register(this);
+        mProId = (String) SharePreUtil.getData(this.getContext(), "decorate_pro_id", "0");
         mMultipleStatusView = rootView.findViewById(R.id.multiplestatusview);
         smartRefreshLayout = rootView.findViewById(R.id.smartRefreshLayout);
         mUnbinder = ButterKnife.bind(this, rootView);
@@ -108,7 +118,7 @@ public class DecorateFragment extends BaseFragment {
             ActivityUtils.init().start(this.getContext(), DecorateSelectActivity.class, "身份选择");
         });
         mIvBarSearch.setOnClickListener(v -> {
-            ActivityUtils.init().start(this.getContext(), MessageActivity.class, "消息通知");
+            ActivityUtils.init().start(this.getContext(), DecorateMessageHasActivity.class, "消息通知");
         });
         View header = View.inflate(this.getContext(), R.layout.layout_header_decorate, null);
         initHeader(header);
@@ -122,9 +132,10 @@ public class DecorateFragment extends BaseFragment {
 
         showLoading();
         mPresenter = new DecorateProInfoPresenter(this);
-        mPresenter.requestManPro();
+        mSelectData = (String) SharePreUtil.getData(this.getContext(), "decorate_select", "业主");
+        requestInfoByText(mSelectData);
         smartRefreshLayout.setOnRefreshListener(refresh -> {
-            mPresenter.requestManPro();
+            requestInfoByText((String) SharePreUtil.getData(this.getContext(), "decorate_select", "业主"));
         });
 
     }
@@ -134,7 +145,8 @@ public class DecorateFragment extends BaseFragment {
         mRecyclerViewProgress = header_progress.findViewById(R.id.recyclerViewHeader);
         mRecyclerViewProgress.setLayoutManager(new LinearLayoutManager(this.getContext(), LinearLayoutManager
                 .HORIZONTAL, false));
-        mRecyclerViewProgress.setAdapter(new DecorateProgressAdapter(null));
+        mProgressAdapter = new DecorateProgressAdapter(null);
+        mRecyclerViewProgress.setAdapter(mProgressAdapter);
     }
 
     private void initHeader(View header) {
@@ -149,12 +161,7 @@ public class DecorateFragment extends BaseFragment {
         header.findViewById(R.id.tvChangeMan).setOnClickListener(v -> {
             new DialogChangeMan(this.getContext()).show();
         });
-        header.findViewById(R.id.tvProDetail).setOnClickListener(v -> {
-            Bundle bundle = new Bundle();
-            bundle.putString("pro_id", mProId);
-            ActivityUtils.init().start(getContext(), DecorateProDetailActivity.class, "项目介绍", bundle);
 
-        });
         mTvCreatePro = header.findViewById(R.id.tvCreatePro);
         mTvCreatePro.setOnClickListener(v -> {
             ActivityUtils.init().start(getContext(), DecorateCreateProActivity.class, "创建项目");
@@ -179,12 +186,24 @@ public class DecorateFragment extends BaseFragment {
 
     @Subscribe
     public void onEvnet(SelectDecorateEvent event) {
+        requestInfoByText(event.type);
+    }
+
+    @Subscribe
+    public void onEvnet(SelProIdDecorateEvent event) {
+        this.mProId = event.pro_id;
+        SharePreUtil.saveData(getContext(), "decorate_pro_id", mProId);
+        requestInfoByText(event.type);
+    }
+
+    private void requestInfoByText(String type) {
         int des = R.drawable.decorate_yezhu;
-        if ("施工".equals(event.type)) {
+        if ("施工".equals(type)) {
             des = R.drawable.decorate_shigong;
-            mPresenter.requestWorkerPro();
-        } else if ("监理".equals(event.type)) {
+            mPresenter.requestWorkerPro(mProId);
+        } else if ("监理".equals(type)) {
             des = R.drawable.decorate_jianli;
+            mPresenter.requestSVPro(mProId);
         } else {
             mPresenter.requestManPro();
         }
@@ -201,28 +220,90 @@ public class DecorateFragment extends BaseFragment {
     public void responseMan(DecorateManBean baseBean) {
         smartRefreshLayout.finishRefresh(true);
         mMultipleStatusView.showContent();
-        mProId = baseBean.project.project_id;
-        mAdapter.removeHeaderView(mHeaderWorker);
-        mAdapter.addHeaderView(mHeaderProgress, 1);
-        mTvTitleHeader.setText(baseBean.project.project_name);
-        mLlIntroduction.setVisibility(View.INVISIBLE);
-        mTvProDetail.setVisibility(View.VISIBLE);
+
         mTvCreatePro.setVisibility(View.VISIBLE);
         mTvAllPro.setVisibility(View.GONE);
+        mLlIntroduction.setVisibility(View.INVISIBLE);
+        mTvProDetail.setVisibility(View.VISIBLE);
+
+        if ("0".equals(baseBean.haspj)) {
+            mTvTitleHeader.setText("尊敬的用户，您暂时没有装修项目");
+            mTvProDetail.setText("赶紧创建一个吧");
+        } else {
+            mProId = baseBean.project.project_id;
+            mAdapter.removeHeaderView(mHeaderWorker);
+            mAdapter.addHeaderView(mHeaderProgress, 1);
+            mTvTitleHeader.setText(baseBean.project.project_name);
+            mProgressAdapter.setNewData(baseBean.tasks);
+            mTvProDetail.setText("项目介绍 >");
+            mTvProDetail.setOnClickListener(v -> {
+                if (!"0".equals(baseBean.haspj)) {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("pro_id", mProId);
+                    ActivityUtils.init().start(getContext(), DecorateProDetailActivity.class, "项目介绍", bundle);
+                }
+
+            });
+        }
+
+    }
+
+    public void responseSv(DecorateSvBean baseBean) {
+        smartRefreshLayout.finishRefresh(true);
+        mMultipleStatusView.showContent();
+
+        mTvCreatePro.setVisibility(View.GONE);
+        mTvAllPro.setVisibility(View.VISIBLE);
+
+        mLlIntroduction.setVisibility(View.INVISIBLE);
+        mTvProDetail.setVisibility(View.VISIBLE);
+
+        if ("0".equals(baseBean.issv)) {
+            ActivityUtils.init().start(getContext(), DecorateShiGongActivity.class, "我是监理人员");
+            return;
+        }
+        if ("0".equals(baseBean.haspj)) {
+            mTvTitleHeader.setText("尊敬的监理，您暂时没有装修项目");
+            mTvProDetail.setText("赶紧加入一个吧");
+        } else {
+            mProId = baseBean.project.project_id;
+            mAdapter.removeHeaderView(mHeaderWorker);
+            mAdapter.addHeaderView(mHeaderProgress, 1);
+            mTvTitleHeader.setText(baseBean.project.project_name);
+            Gson gson = new Gson();
+            String json = gson.toJson(baseBean.tasks);
+            List<DecorateManBean.TasksBean> list = gson.fromJson(json, new
+                    TypeToken<List<DecorateManBean.TasksBean>>() {
+                    }.getType());
+            mProgressAdapter.setNewData(list);
+            mTvProDetail.setText("项目介绍 >");
+            mTvProDetail.setOnClickListener(v -> {
+                if (!"0".equals(baseBean.haspj)) {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("pro_id", mProId);
+                    ActivityUtils.init().start(getContext(), DecorateProDetailActivity.class, "项目介绍", bundle);
+                }
+
+            });
+        }
     }
 
     public void responseWorker(DecorateWorkerBean baseBean) {
         smartRefreshLayout.finishRefresh(true);
         mMultipleStatusView.showContent();
+        mTvAllPro.setVisibility(View.VISIBLE);
+        mTvCreatePro.setVisibility(View.GONE);
+        mLlIntroduction.setVisibility(View.VISIBLE);
+        mTvProDetail.setVisibility(View.INVISIBLE);
+        if ("0".equals(baseBean.iswm)) {
+            ActivityUtils.init().start(getContext(), DecorateShiGongActivity.class, "我是施工人员");
+            return;
+        }
+
         mAdapter.removeHeaderView(mHeaderProgress);
         mAdapter.addHeaderView(mHeaderWorker, 1);
         DecorateWorkerBean.InfoBean infoBean = baseBean.info;
         mTvTitleHeader.setText(String.format(Locale.CHINA, "%s施工人员", infoBean.work_type));
-        mLlIntroduction.setVisibility(View.VISIBLE);
-        mTvProDetail.setVisibility(View.INVISIBLE);
-        mTvAllPro.setVisibility(View.VISIBLE);
-        mTvCreatePro.setVisibility(View.GONE);
-
         mTvWorkerFirstName.setText(infoBean.user_name.substring(0, 1));
         int appraise = baseBean.appraise;
         mRatingBar.setRating(appraise);

@@ -5,7 +5,9 @@ import com.modiwu.mah.mvp.model.bean.AliPayInfoBean;
 import com.modiwu.mah.mvp.model.bean.CarpenterBean;
 import com.modiwu.mah.mvp.model.bean.CityCodeBean;
 import com.modiwu.mah.mvp.model.bean.CollectionHaseBean;
+import com.modiwu.mah.mvp.model.bean.DecorateAllProBean;
 import com.modiwu.mah.mvp.model.bean.DecorateManBean;
+import com.modiwu.mah.mvp.model.bean.DecorateSvBean;
 import com.modiwu.mah.mvp.model.bean.DecorateWorkerBean;
 import com.modiwu.mah.mvp.model.bean.DefLocalBean;
 import com.modiwu.mah.mvp.model.bean.DesignBean;
@@ -22,6 +24,7 @@ import com.modiwu.mah.mvp.model.bean.MeInfoBean;
 import com.modiwu.mah.mvp.model.bean.MeOrderBean;
 import com.modiwu.mah.mvp.model.bean.MeShouCangBean;
 import com.modiwu.mah.mvp.model.bean.MsgHasBean;
+import com.modiwu.mah.mvp.model.bean.MsgListBean;
 import com.modiwu.mah.mvp.model.bean.OrderCreateBean;
 import com.modiwu.mah.mvp.model.bean.ProInfoBean;
 import com.modiwu.mah.mvp.model.bean.RegisterBean;
@@ -255,8 +258,14 @@ public interface MahServer {
     @GET("dma/index/on")
     Observable<DecorateManBean> manProInfo();
 
+    @GET("dma/index/pj")
+    Observable<DecorateAllProBean> getAllProList();
+
     @GET("dma/index/wm")
-    Observable<DecorateWorkerBean> workerProInfo();
+    Observable<DecorateWorkerBean> workerProInfo(@Query("project_id") String id);
+
+    @GET("dma/index/sv")
+    Observable<DecorateSvBean> svProInfo(@Query("project_id") String id);
 
     @POST("ide/smcode?")
     Observable<BaseBean> getIdeSmsCode(@Query("phone") String phone);
@@ -276,8 +285,17 @@ public interface MahServer {
     @GET("dma/msg/info?")
     Observable<MsgHasBean> getMsgHasInfo();
 
+    @GET("dma/msg/invts?")
+    Observable<MsgListBean> getMsgList();
+
     @POST("dma/project/addon?")
     Observable<BaseBean> addMan(@Query("user_phone") String phone, @Query("project_id") String project_id);
+
+    @POST("dma/msg/agree?")
+    Observable<BaseBean> invAgree(@Query("invite_id") String id);
+
+    @POST("dma/msg/reject?")
+    Observable<BaseBean> invCancel(@Query("invite_id") String id);
 
     @POST("dma/project/addsv?")
     Observable<BaseBean> addSuperView(@Query("user_phone") String phone, @Query("project_id") String project_id);

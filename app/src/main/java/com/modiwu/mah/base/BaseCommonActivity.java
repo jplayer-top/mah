@@ -7,7 +7,9 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import com.modiwu.mah.mvp.constract.DecorateContract;
+import com.modiwu.mah.mvp.model.bean.DecorateAllProBean;
 import com.modiwu.mah.mvp.model.bean.MsgHasBean;
+import com.modiwu.mah.mvp.model.bean.MsgListBean;
 import com.modiwu.mah.mvp.model.bean.ProInfoBean;
 import com.modiwu.mah.mvp.model.bean.SelectWorkerTypeBean;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -114,6 +116,26 @@ public abstract class BaseCommonActivity extends SuperBaseActivity implements IC
 
     @Override
     public void getMsgHasInfo(MsgHasBean bean) {
+
+    }
+
+    @Override
+    public void getMsgList(MsgListBean bean) {
+
+    }
+
+    @Override
+    public void invAgree() {
+
+    }
+
+    @Override
+    public void invCancel() {
+
+    }
+
+    @Override
+    public void getAllProList(DecorateAllProBean bean) {
 
     }
 

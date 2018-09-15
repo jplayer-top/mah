@@ -63,6 +63,22 @@ public class DecorateBasePresenter extends BasePresenter<BaseCommonActivity> {
                 });
     }
 
+    public void getMsgList() {
+        mModel.getMsgList()
+                .subscribe(bean -> {
+                    mIView.getMsgList(bean);
+                }, throwable -> {
+                });
+    }
+
+    public void getAllProList() {
+        mModel.getAllProList()
+                .subscribe(bean -> {
+                    mIView.getAllProList(bean);
+                }, throwable -> {
+                });
+    }
+
     public void regWorker(ArrayMap<String, String> map) {
         mModel.regWorker(map)
                 .subscribe(new SampleShowDialogObserver<BaseBean>(mIView) {
@@ -80,6 +96,26 @@ public class DecorateBasePresenter extends BasePresenter<BaseCommonActivity> {
                     protected void onSuccess(BaseBean baseBean) throws Exception {
                         ToastUtils.init().showSuccessToast(mIView, baseBean.msg);
                         mIView.addMan();
+                    }
+                });
+    }
+
+    public void invAgree(String id) {
+        mModel.invAgree(id)
+                .subscribe(new SampleShowDialogObserver<BaseBean>(mIView) {
+                    @Override
+                    protected void onSuccess(BaseBean baseBean) throws Exception {
+                        mIView.invAgree();
+                    }
+                });
+    }
+
+    public void invCancel(String id) {
+        mModel.invCancel(id)
+                .subscribe(new SampleShowDialogObserver<BaseBean>(mIView) {
+                    @Override
+                    protected void onSuccess(BaseBean baseBean) throws Exception {
+                        mIView.invCancel();
                     }
                 });
     }

@@ -15,6 +15,7 @@
         android:textSize="@dimen/dimen_13sp"/>
 
     <TextView
+        android:id="@+id/tvProName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dimen_10dp"
@@ -28,6 +29,7 @@
         android:text="——  项目负责人  ——"/>
 
     <TextView
+        android:id="@+id/tvName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dimen_10dp"
@@ -35,6 +37,7 @@
         android:textSize="22sp"/>
 
     <TextView
+        android:id="@+id/tvPhone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dimen_10dp"
@@ -45,6 +48,7 @@
         android:textSize="18sp"/>
 
     <Button
+        android:id="@+id/btnSure"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_50dp"
         android:layout_marginEnd="@dimen/dimen_50dp"
@@ -55,6 +59,7 @@
         android:textColor="@color/white"/>
 
     <Button
+        android:id="@+id/btnCancel"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_50dp"
         android:layout_marginEnd="@dimen/dimen_50dp"

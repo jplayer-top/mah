@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.modiwu.mah.R;
 import com.modiwu.mah.base.BaseCommonActivity;
 import com.modiwu.mah.mvp.model.bean.SelectWorkerTypeBean;
-import com.modiwu.mah.mvp.model.event.RegDecorateEvent;
+import com.modiwu.mah.mvp.model.event.SelectDecorateEvent;
 import com.modiwu.mah.mvp.presenter.DecorateBasePresenter;
 import com.modiwu.mah.utils.PickerUtils;
 import com.modiwu.mah.utils.StringUtils;
@@ -154,9 +154,7 @@ public class DecorateShiGongRegisterActivity extends BaseCommonActivity {
     public void regWorker() {
         super.regWorker();
         llRegOk.setVisibility(View.VISIBLE);
-        EventBus.getDefault().post(new RegDecorateEvent("施工"));
-        SharePreUtil.saveData(this, "decorate_select", "施工");
-        SharePreUtil.saveData(this, "decorate_worker", "1");
+        EventBus.getDefault().post(new SelectDecorateEvent("施工"));
         Observable.timer(500, TimeUnit.MILLISECONDS).compose(new IoMainSchedule<>()).subscribe(
                 aLong -> finish()
         );
@@ -166,9 +164,7 @@ public class DecorateShiGongRegisterActivity extends BaseCommonActivity {
     public void regSuperView() {
         llRegOk.setVisibility(View.VISIBLE);
         ivRegOkSrc.setImageResource(R.drawable.decorate_reg_ok_super);
-        EventBus.getDefault().post(new RegDecorateEvent("监理"));
-        SharePreUtil.saveData(this, "decorate_select", "监理");
-        SharePreUtil.saveData(this, "decorate_super", "1");
+        EventBus.getDefault().post(new SelectDecorateEvent("监理"));
         Observable.timer(500, TimeUnit.MILLISECONDS).compose(new IoMainSchedule<>()).subscribe(
                 aLong -> finish()
         );

@@ -51,6 +51,8 @@ public class DecorateProDetailActivity extends BaseCommonActivity {
     private DecorateBasePresenter mPresenter;
     private DecorateItemCommonAdapter mManAdapter;
     private List<ProInfoBean.CommonBean> mCommonManBeans;
+    private List<ProInfoBean.CommonBean> mCommonSvsBeans;
+    private List<ProInfoBean.CommonBean> mCommonWorkerBeans;
     private DecorateItemCommonAdapter mSuperViewAdapter;
     private DecorateItemCommonAdapter mWorkerAdapter;
     private String mProId;
@@ -115,7 +117,11 @@ public class DecorateProDetailActivity extends BaseCommonActivity {
             boolean isEdit = "编辑".equals(tvBarRight.getText().toString());
             tvBarRight.setText(isEdit ? "保存" : "编辑");
             Observable.fromIterable(mCommonManBeans).subscribe(commonBean -> commonBean.isEdit = isEdit);
+            Observable.fromIterable(mCommonSvsBeans).subscribe(commonBean -> commonBean.isEdit = isEdit);
+            Observable.fromIterable(mCommonWorkerBeans).subscribe(commonBean -> commonBean.isEdit = isEdit);
             mManAdapter.notifyDataSetChanged();
+            mSuperViewAdapter.notifyDataSetChanged();
+            mWorkerAdapter.notifyDataSetChanged();
         });
     }
 
@@ -151,12 +157,18 @@ public class DecorateProDetailActivity extends BaseCommonActivity {
         mBGABanner.setData(imgsurl, null);
         tvProName.setText(project.project_name);
         tvProIdNum.setText(project.project_id);
-        List<ProInfoBean.OwnersBean> owners = bean.owners;
         Gson gson = new Gson();
-        String json = gson.toJson(owners);
-        mCommonManBeans = gson.fromJson(json, new TypeToken<List<ProInfoBean.CommonBean>>() {
+        mCommonManBeans = gson.fromJson(gson.toJson(bean.owners), new TypeToken<List<ProInfoBean.CommonBean>>() {
         }.getType());
         mManAdapter.setNewData(mCommonManBeans);
+
+        mCommonSvsBeans = gson.fromJson(gson.toJson(bean.svs), new TypeToken<List<ProInfoBean.CommonBean>>() {
+        }.getType());
+        mSuperViewAdapter.setNewData(mCommonSvsBeans);
+
+        mCommonWorkerBeans = gson.fromJson(gson.toJson(bean.wokers), new TypeToken<List<ProInfoBean.CommonBean>>() {
+        }.getType());
+        mWorkerAdapter.setNewData(mCommonWorkerBeans);
     }
 
     @Override

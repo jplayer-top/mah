@@ -7,10 +7,12 @@ package com.modiwu.mah.mvp.model.event;
  * github : https://github.com/oblivion0001
  */
 
-public class RegDecorateEvent {
+public class SelProIdDecorateEvent {
+    public String pro_id;
     public String type;
 
-    public RegDecorateEvent(String type) {
+    public SelProIdDecorateEvent(String pro_id, String type) {
+        this.pro_id = pro_id;
         this.type = type;
     }
 }

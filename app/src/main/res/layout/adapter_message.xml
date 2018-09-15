@@ -11,6 +11,7 @@
         android:layout_height="@dimen/dimen_50dp"
         android:layout_marginStart="@dimen/dimen_15dp"
         android:src="@drawable/decorate_message"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
@@ -20,8 +21,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dimen_15dp"
-        android:text="您有新的邀请消息"
-        android:textSize="@dimen/dimen_16sp"
+        android:text="邀请你加入XXX"
+        android:textSize="@dimen/dimen_14sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/tvSubTitle"
         app:layout_constraintStart_toEndOf="@+id/ivMessage"
@@ -32,7 +33,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dimen_15dp"
-        android:text="邀请您加入xx项目"
+        android:text="点击产看详情 →"
+        android:textColor="@color/color666"
+        android:textSize="@dimen/dimen_10sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/ivMessage"
         app:layout_constraintTop_toBottomOf="@+id/tvTitle"/>
@@ -41,17 +44,29 @@
         android:id="@+id/tvTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/dimen_20dp"
+        android:layout_marginEnd="@dimen/dimen_5dp"
         android:text="09:00"
+        android:textSize="@dimen/dimen_10sp"
+        android:layout_marginBottom="@dimen/dimen_15dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintEnd_toStartOf="@+id/ivRedTip"
+        app:layout_goneMarginEnd="@dimen/dimen_15dp"/>
 
     <ImageView
         android:id="@+id/ivRedTip"
         android:layout_width="@dimen/dimen_10dp"
         android:layout_height="@dimen/dimen_10dp"
-        android:src="@drawable/shape_cir_red"
-        app:layout_constraintStart_toEndOf="@+id/tvTime"
+        android:layout_marginEnd="@dimen/dimen_15dp"
+        android:src="@drawable/shape_cir_red_f66"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/tvTime"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tvTime"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_1dp"
+        android:layout_marginEnd="@dimen/dimen_15dp"
+        android:layout_marginStart="@dimen/dimen_15dp"
+        android:background="@color/colorCCC"/>
 </android.support.constraint.ConstraintLayout>

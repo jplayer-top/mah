@@ -22,8 +22,8 @@ public class ProInfoBean extends BaseBean {
 
     public ProjectBean project;
     public List<OwnersBean> owners;
-    public List<?> svs;
-    public List<?> wokers;
+    public List<SvsBean> svs;
+    public List<WorkerBean> wokers;
     public List<CommonBean> commonBeans;
 
     public static class ProjectBean {
@@ -61,6 +61,30 @@ public class ProInfoBean extends BaseBean {
     }
 
     public static class OwnersBean {
+        /**
+         * user_id : 10005
+         * user_name : fjnndff
+         * user_phone : 17667936541
+         */
+
+        public int user_id;
+        public String user_name;
+        public String user_phone;
+    }
+
+    public static class SvsBean {
+        /**
+         * user_id : 10005
+         * user_name : fjnndff
+         * user_phone : 17667936541
+         */
+
+        public int user_id;
+        public String user_name;
+        public String user_phone;
+    }
+
+    public static class WorkerBean {
         /**
          * user_id : 10005
          * user_name : fjnndff

@@ -32,7 +32,6 @@ public class DecorateAddProjectActivity extends BaseCommonActivity {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         ArrayList<String> strings = new ArrayList<>();
         strings.add("1");
-        mAdapter = new AddProjectAdapter(strings);
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.addHeaderView(View.inflate(this, R.layout.layout_header_add_pro, null));
         mAdapter.setOnItemClickListener((adapter, view, position) -> {

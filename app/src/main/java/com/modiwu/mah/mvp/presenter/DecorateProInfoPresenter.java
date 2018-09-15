@@ -21,10 +21,18 @@ public class DecorateProInfoPresenter extends BasePresenter<DecorateFragment> {
         mModel = new DecorateModel();
     }
 
-    public void requestWorkerPro() {
-        mModel.requestWorkerPro()
+    public void requestWorkerPro(String id) {
+        mModel.requestWorkerPro(id)
                 .subscribe(bean -> {
                     mIView.responseWorker(bean);
+                }, throwable -> {
+                });
+    }
+
+    public void requestSVPro(String id) {
+        mModel.requestSVPro(id)
+                .subscribe(bean -> {
+                    mIView.responseSv(bean);
                 }, throwable -> {
                 });
     }

@@ -33,7 +33,7 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:launchMode="singleInstance"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/OblAppTheme.Main"
             android:windowSoftInputMode="stateHidden|adjustResize">
@@ -178,7 +178,7 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".ui.activity.MessageActivity"
+            android:name=".ui.activity.DecorateMessageListActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
         <activity
@@ -195,6 +195,10 @@
             android:screenOrientation="portrait"
             android:theme="@style/OblAppTheme"
             tools:replace="android:theme"/>
+        <activity
+            android:name=".ui.activity.DecorateMessageHasActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"/>
 
         <activity
             android:name=".ui.activity.DecorateAddProjectActivity"

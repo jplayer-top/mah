@@ -29,6 +29,7 @@
     <color name="silver">#c0c0c0</color><!--银色 -->
 
     <color name="red">#ff0000</color><!--红色 -->
+    <color name="redff66">#ff6666</color><!--红色 -->
     <color name="darkred">#8b0000</color><!--暗红色 -->
     <color name="crimson">#dc143c</color><!--暗深红色 -->
     <color name="darkmagenta">#8b008b</color><!--暗洋红 -->
