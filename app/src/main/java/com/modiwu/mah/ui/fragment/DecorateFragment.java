@@ -1,5 +1,6 @@
 package com.modiwu.mah.ui.fragment;
 
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -81,6 +82,7 @@ public class DecorateFragment extends BaseFragment {
     private View mTvAllPro;
     private View mTvAddPro;
     private View mTvCreatePro;
+    private String mProId;
 
     @Override
     public int initLayout() {
@@ -148,7 +150,9 @@ public class DecorateFragment extends BaseFragment {
             new DialogChangeMan(this.getContext()).show();
         });
         header.findViewById(R.id.tvProDetail).setOnClickListener(v -> {
-            ActivityUtils.init().start(getContext(), DecorateProDetailActivity.class, "项目介绍");
+            Bundle bundle = new Bundle();
+            bundle.putString("pro_id", mProId);
+            ActivityUtils.init().start(getContext(), DecorateProDetailActivity.class, "项目介绍", bundle);
 
         });
         mTvCreatePro = header.findViewById(R.id.tvCreatePro);
@@ -197,6 +201,7 @@ public class DecorateFragment extends BaseFragment {
     public void responseMan(DecorateManBean baseBean) {
         smartRefreshLayout.finishRefresh(true);
         mMultipleStatusView.showContent();
+        mProId = baseBean.project.project_id;
         mAdapter.removeHeaderView(mHeaderWorker);
         mAdapter.addHeaderView(mHeaderProgress, 1);
         mTvTitleHeader.setText(baseBean.project.project_name);

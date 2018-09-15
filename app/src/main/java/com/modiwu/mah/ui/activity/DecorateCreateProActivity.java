@@ -74,6 +74,7 @@ public class DecorateCreateProActivity extends BaseCommonActivity {
     private DecorateCreateProPresenter mPresenter;
     private DecorateItemPicAdapter mAdapter;
     private ArrayList<File> mArrayList;
+    private String mProvince_code;
     private String mCity_code;
     private String mArea_code;
     private DialogLoading mLoading;
@@ -136,6 +137,7 @@ public class DecorateCreateProActivity extends BaseCommonActivity {
             String unit = mTvInputUnitNum.getText().toString();
             String door = mTvInputDoorNum.getText().toString();
             MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM)
+                    .addFormDataPart("province_code", mProvince_code)
                     .addFormDataPart("city_code", mCity_code)
                     .addFormDataPart("area_code", mArea_code)
                     .addFormDataPart("building_name", local_detail)
@@ -204,6 +206,7 @@ public class DecorateCreateProActivity extends BaseCommonActivity {
         //地区
         mLocalPickerView = new OptionsPickerView.Builder(this, (options1, option2, options3, v) -> {
             mProvince_name = optionsLocalSItems.get(options1).name + "";
+            mProvince_code = optionsLocalSItems.get(options1).code;
             PostLocalBean localBean = optionsLocalXItems.get(options1).get(option2);
             mCity_name = (localBean.name) == null ? "" : (localBean.name + "");
             mCity_code = localBean.code;

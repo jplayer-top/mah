@@ -21,7 +21,9 @@ import com.modiwu.mah.mvp.model.bean.MeFangAnBean;
 import com.modiwu.mah.mvp.model.bean.MeInfoBean;
 import com.modiwu.mah.mvp.model.bean.MeOrderBean;
 import com.modiwu.mah.mvp.model.bean.MeShouCangBean;
+import com.modiwu.mah.mvp.model.bean.MsgHasBean;
 import com.modiwu.mah.mvp.model.bean.OrderCreateBean;
+import com.modiwu.mah.mvp.model.bean.ProInfoBean;
 import com.modiwu.mah.mvp.model.bean.RegisterBean;
 import com.modiwu.mah.mvp.model.bean.SchemeBean;
 import com.modiwu.mah.mvp.model.bean.SchemeDetailBean;
@@ -267,6 +269,21 @@ public interface MahServer {
 
     @POST("ide/regsv?")
     Observable<BaseBean> regSuperView(@QueryMap Map<String, String> map);
+
+    @GET("dma/project/info?")
+    Observable<ProInfoBean> getProInfo(@Query("project_id") String pro_id);
+
+    @GET("dma/msg/info?")
+    Observable<MsgHasBean> getMsgHasInfo();
+
+    @POST("dma/project/addon?")
+    Observable<BaseBean> addMan(@Query("user_phone") String phone, @Query("project_id") String project_id);
+
+    @POST("dma/project/addsv?")
+    Observable<BaseBean> addSuperView(@Query("user_phone") String phone, @Query("project_id") String project_id);
+
+    @POST("dma/project/addwm?")
+    Observable<BaseBean> addWorker(@Query("user_phone") String phone, @Query("project_id") String project_id);
 
     @POST("ide/verfiysmcode?")
     Observable<BaseBean> verIdeSmsCode(@Query("phone") String phone, @Query("smCode") String smCode);

@@ -10,18 +10,29 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
         <cn.bingoogolapple.bgabanner.BGABanner
             android:id="@+id/bgaBanner"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="250dp"
+            bga:banner_indicatorGravity="bottom|end"
+            bga:banner_pointAutoPlayAble="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            bga:banner_indicatorGravity="bottom"
-            bga:banner_pointAutoPlayAble="true"
             bga:banner_pointContainerBackground="@color/trans"
             bga:banner_pointDrawable="@drawable/selector_banner_unequal"/>
+
+        <TextView
+            android:id="@+id/tvProName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dimen_20dp"
+            android:layout_marginStart="@dimen/dimen_15dp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/dimen_16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/bgaBanner"
+            app:layout_constraintStart_toStartOf="parent"/>
 
         <TextView
             android:id="@+id/tvTipNum"
@@ -47,6 +58,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tvTipNum">
 
             <TextView
+                android:id="@+id/tvProIdNum"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="201806071203"/>
@@ -73,7 +85,7 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerViewOwner"
             android:layout_width="@dimen/dimen_0dp"
-            android:layout_height="@dimen/dimen_90dp"
+            android:layout_height="@dimen/dimen_100dp"
             android:layout_marginEnd="@dimen/dimen_15dp"
             android:layout_marginStart="@dimen/dimen_15dp"
             android:layout_marginTop="@dimen/dimen_10dp"
@@ -96,7 +108,7 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerViewVisor"
             android:layout_width="@dimen/dimen_0dp"
-            android:layout_height="@dimen/dimen_90dp"
+            android:layout_height="@dimen/dimen_100dp"
             android:layout_marginEnd="@dimen/dimen_15dp"
             android:layout_marginStart="@dimen/dimen_15dp"
             android:layout_marginTop="@dimen/dimen_10dp"
@@ -118,7 +130,7 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerViewConst"
             android:layout_width="@dimen/dimen_0dp"
-            android:layout_height="@dimen/dimen_90dp"
+            android:layout_height="@dimen/dimen_100dp"
             android:layout_marginBottom="@dimen/dimen_15dp"
             android:layout_marginEnd="@dimen/dimen_15dp"
             android:layout_marginStart="@dimen/dimen_15dp"

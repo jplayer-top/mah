@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dimen_100dp"
+    android:background="@color/white">
+
+    <TextView
+        android:id="@+id/tvTipPhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dimen_15dp"
+        android:text="请输入业主手机号："
+        android:textSize="@dimen/dimen_13sp"
+        android:textStyle="bold"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <EditText
+        android:id="@+id/editPhone"
+        android:layout_width="@dimen/dimen_0dp"
+        android:layout_height="@dimen/dimen_40dp"
+        android:layout_marginStart="@dimen/dimen_15dp"
+        android:layout_marginTop="@dimen/dimen_5dp"
+        android:background="@null"
+        android:inputType="phone"
+        app:layout_constraintEnd_toStartOf="@+id/tvFindPhone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTipPhone"/>
+
+    <TextView
+        android:id="@+id/tvFindPhone"
+        android:layout_width="@dimen/dimen_60dp"
+        android:layout_height="@dimen/dimen_40dp"
+        android:layout_marginEnd="@dimen/dimen_15dp"
+        android:gravity="center"
+        android:text="添加"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/editPhone"
+        app:layout_constraintTop_toTopOf="@+id/editPhone"/>
+
+    <View
+        android:layout_width="@dimen/dimen_0dp"
+        android:layout_height="@dimen/dimen_1dp"
+        android:background="@color/colorCCC"
+        app:layout_constraintEnd_toEndOf="@+id/tvFindPhone"
+        app:layout_constraintStart_toStartOf="@+id/editPhone"
+        app:layout_constraintTop_toBottomOf="@+id/editPhone"/>
+
+    <LinearLayout
+        android:id="@+id/llPersonInfo"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dimen_50dp"
+        android:layout_marginEnd="@dimen/dimen_15dp"
+        android:layout_marginStart="@dimen/dimen_15dp"
+        android:layout_marginTop="@dimen/dimen_10dp"
+        android:background="@color/colorEEE"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editPhone">
+
+        <TextView
+            android:id="@+id/tvFirstName"
+            android:layout_width="@dimen/dimen_40dp"
+            android:layout_height="@dimen/dimen_40dp"
+            android:layout_marginStart="@dimen/dimen_15dp"
+            android:background="@drawable/shape_cir_theme"
+            android:gravity="center"
+            android:text="姓"
+            android:textColor="@color/white"/>
+
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_10dp"
+            android:text="姓名"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dimen_15dp"
+            android:layout_marginStart="@dimen/dimen_10dp"
+            android:gravity="end"
+            android:text="邀请加入"
+            android:textColor="@color/chocolate"
+            android:textSize="@dimen/dimen_13sp"
+            />
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

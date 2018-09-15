@@ -35,7 +35,6 @@ public class MessageActivity extends BaseCommonActivity {
         ArrayList<String> strings = new ArrayList<>();
         strings.add("1");
         strings.add("1");
-        strings.add("1");
         mAdapter = new MessageAdapter(strings);
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setOnItemClickListener((adapter, view, position) -> {

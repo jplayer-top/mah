@@ -1,5 +1,7 @@
 package com.modiwu.mah.mvp.constract;
 
+import com.modiwu.mah.mvp.model.bean.MsgHasBean;
+import com.modiwu.mah.mvp.model.bean.ProInfoBean;
 import com.modiwu.mah.mvp.model.bean.SelectWorkerTypeBean;
 
 import top.jplayer.baseprolibrary.mvp.contract.IContract;
@@ -20,6 +22,16 @@ public interface DecorateContract {
         void regWorker();
 
         void regSuperView();
+
+        void addMan();
+
+        void addSuperView();
+
+        void addWorker();
+
+        void getProInfo(ProInfoBean bean);
+
+        void getMsgHasInfo(MsgHasBean bean);
 
         void selectWorkerType(SelectWorkerTypeBean bean);
     }

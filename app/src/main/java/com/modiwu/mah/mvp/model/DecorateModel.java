@@ -4,6 +4,8 @@ import com.modiwu.mah.mvp.MahServer;
 import com.modiwu.mah.mvp.model.bean.DecorateManBean;
 import com.modiwu.mah.mvp.model.bean.DecorateWorkerBean;
 import com.modiwu.mah.mvp.model.bean.LocalBean;
+import com.modiwu.mah.mvp.model.bean.MsgHasBean;
+import com.modiwu.mah.mvp.model.bean.ProInfoBean;
 import com.modiwu.mah.mvp.model.bean.SelectWorkerTypeBean;
 
 import java.util.Map;
@@ -83,6 +85,45 @@ public class DecorateModel {
         return RetrofitManager.init()
                 .create(MahServer.class)
                 .regSuperView(map)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Observable<BaseBean> addMan(String phone, String id) {
+        return RetrofitManager.init()
+                .create(MahServer.class)
+                .addMan(phone, id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Observable<BaseBean> addSuperView(String phone, String id) {
+        return RetrofitManager.init()
+                .create(MahServer.class)
+                .addSuperView(phone, id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+    public Observable<BaseBean> addWorker(String phone, String id) {
+        return RetrofitManager.init()
+                .create(MahServer.class)
+                .addWorker(phone, id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Observable<ProInfoBean> getProInfo(String pro_id) {
+        return RetrofitManager.init()
+                .create(MahServer.class)
+                .getProInfo(pro_id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Observable<MsgHasBean> getMsgHasInfo() {
+        return RetrofitManager.init()
+                .create(MahServer.class)
+                .getMsgHasInfo()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }

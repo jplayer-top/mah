@@ -9,6 +9,7 @@ import com.modiwu.mah.mvp.model.bean.SelectWorkerTypeBean;
 import top.jplayer.baseprolibrary.mvp.contract.BasePresenter;
 import top.jplayer.baseprolibrary.mvp.model.bean.BaseBean;
 import top.jplayer.baseprolibrary.net.SampleShowDialogObserver;
+import top.jplayer.baseprolibrary.utils.ToastUtils;
 
 /**
  * Created by Obl on 2018/9/14.
@@ -46,12 +47,61 @@ public class DecorateBasePresenter extends BasePresenter<BaseCommonActivity> {
                 });
     }
 
+    public void getProInfo(String id) {
+        mModel.getProInfo(id)
+                .subscribe(proInfoBean -> {
+                    mIView.getProInfo(proInfoBean);
+                }, throwable -> {
+                });
+    }
+
+    public void getMsgHasInfo() {
+        mModel.getMsgHasInfo()
+                .subscribe(bean -> {
+                    mIView.getMsgHasInfo(bean);
+                }, throwable -> {
+                });
+    }
+
     public void regWorker(ArrayMap<String, String> map) {
         mModel.regWorker(map)
                 .subscribe(new SampleShowDialogObserver<BaseBean>(mIView) {
                     @Override
                     protected void onSuccess(BaseBean baseBean) throws Exception {
                         mIView.regWorker();
+                    }
+                });
+    }
+
+    public void addMan(String phone, String id) {
+        mModel.addMan(phone, id)
+                .subscribe(new SampleShowDialogObserver<BaseBean>(mIView) {
+                    @Override
+                    protected void onSuccess(BaseBean baseBean) throws Exception {
+                        ToastUtils.init().showSuccessToast(mIView, baseBean.msg);
+                        mIView.addMan();
+                    }
+                });
+    }
+
+    public void addSuperView(String phone, String id) {
+        mModel.addSuperView(phone, id)
+                .subscribe(new SampleShowDialogObserver<BaseBean>(mIView) {
+                    @Override
+                    protected void onSuccess(BaseBean baseBean) throws Exception {
+                        ToastUtils.init().showSuccessToast(mIView, baseBean.msg);
+                        mIView.addSuperView();
+                    }
+                });
+    }
+
+    public void addWorker(String phone, String id) {
+        mModel.addWorker(phone, id)
+                .subscribe(new SampleShowDialogObserver<BaseBean>(mIView) {
+                    @Override
+                    protected void onSuccess(BaseBean baseBean) throws Exception {
+                        ToastUtils.init().showSuccessToast(mIView, baseBean.msg);
+                        mIView.addWorker();
                     }
                 });
     }
