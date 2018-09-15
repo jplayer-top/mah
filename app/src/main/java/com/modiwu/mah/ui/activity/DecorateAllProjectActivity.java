@@ -43,9 +43,11 @@ public class DecorateAllProjectActivity extends BaseCommonActivity {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mSelect = (String) SharePreUtil.getData(this, "decorate_select", "监理");
         mEquals = "监理".equals(mSelect);
+        mPresenter = new DecorateBasePresenter(this);
         if (mEquals) {
             mSvAdapter = new AddProjectAdapter(null);
             mRecyclerView.setAdapter(mSvAdapter);
+            mPresenter.getAllProList();
             mSvAdapter.setOnItemClickListener((adapter, view, position) -> {
                 EventBus.getDefault().post(new SelProIdDecorateEvent(mSvAdapter.getData().get(position).project_id, "监理"));
                 finish();
@@ -59,10 +61,14 @@ public class DecorateAllProjectActivity extends BaseCommonActivity {
                 finish();
             });
         }
-        mPresenter = new DecorateBasePresenter(this);
-        mPresenter.getAllProList();
         showLoading();
-        smartRefreshLayout.setOnRefreshListener(refresh -> mPresenter.getAllProList());
+        smartRefreshLayout.setOnRefreshListener(refresh -> {
+            if (mEquals) {
+                mPresenter.getAllProList();
+            } else {
+                mPresenter.getWorkerAllProList();
+            }
+        });
     }
 
     @Override

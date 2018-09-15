@@ -39,6 +39,8 @@ public interface DecorateContract {
 
         void getAllProList(DecorateAllProBean bean);
 
+        void getWorkerAllProList(DecorateAllProBean bean);
+
         void getMsgHasInfo(MsgHasBean bean);
 
         void getMsgList(MsgListBean bean);

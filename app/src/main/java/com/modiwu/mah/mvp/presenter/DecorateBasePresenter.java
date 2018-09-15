@@ -79,6 +79,14 @@ public class DecorateBasePresenter extends BasePresenter<BaseCommonActivity> {
                 });
     }
 
+    public void getWorkerAllProList() {
+        mModel.getWorkerAllProList()
+                .subscribe(bean -> {
+                    mIView.getAllProList(bean);
+                }, throwable -> {
+                });
+    }
+
     public void regWorker(ArrayMap<String, String> map) {
         mModel.regWorker(map)
                 .subscribe(new SampleShowDialogObserver<BaseBean>(mIView) {

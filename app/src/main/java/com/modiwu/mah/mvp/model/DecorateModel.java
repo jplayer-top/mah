@@ -60,6 +60,14 @@ public class DecorateModel {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
+    public Observable<DecorateAllProBean> getWorkerAllProList() {
+        return RetrofitManager.init()
+                .create(MahServer.class)
+                .getWorkerAllProList()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
     public Observable<DecorateWorkerBean> requestWorkerPro(String id) {
         return RetrofitManager.init()
                 .create(MahServer.class)

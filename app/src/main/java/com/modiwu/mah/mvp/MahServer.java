@@ -261,6 +261,9 @@ public interface MahServer {
     @GET("dma/index/pj")
     Observable<DecorateAllProBean> getAllProList();
 
+    @GET("dma/index/wmp")
+    Observable<DecorateAllProBean> getWorkerAllProList();
+
     @GET("dma/index/wm")
     Observable<DecorateWorkerBean> workerProInfo(@Query("project_id") String id);
 
