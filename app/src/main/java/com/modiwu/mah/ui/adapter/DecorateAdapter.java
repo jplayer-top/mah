@@ -2,12 +2,16 @@ package com.modiwu.mah.ui.adapter;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.RatingBar;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.modiwu.mah.R;
+import com.modiwu.mah.mvp.model.bean.DecorateManBean;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Obl on 2018/8/29.
@@ -16,23 +20,41 @@ import java.util.ArrayList;
  * github : https://github.com/oblivion0001
  */
 
-public class DecorateAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
-    public DecorateAdapter(ArrayList<String> strings) {
+public class DecorateAdapter extends BaseQuickAdapter<DecorateManBean.TasksBean.WorksBeanX, BaseViewHolder> {
+    public DecorateAdapter(ArrayList<DecorateManBean.TasksBean.WorksBeanX> strings) {
         super(R.layout.adapter_decorate, strings);
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, String item) {
-        RecyclerView recyclerViewPic = helper.itemView.findViewById(R.id.recyclerViewItem);
+    protected void convert(BaseViewHolder helper, DecorateManBean.TasksBean.WorksBeanX item) {
+        List<DecorateManBean.TasksBean.WorksBeanX.WorksBean> works = item.works;
         RecyclerView recyclerViewPerson = helper.itemView.findViewById(R.id.recyclerViewItemPerson);
-        recyclerViewPic.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false));
-        recyclerViewPerson.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false));
-        recyclerViewPic.setAdapter(new DecorateItemPicAdapter(null));
-        ArrayList<String> dataPerson = new ArrayList<>();
-        dataPerson.add("1");
-        dataPerson.add("1");
-        dataPerson.add("1");
-        dataPerson.add("1");
-        recyclerViewPerson.setAdapter(new DecorateItemPersonAdapter(dataPerson));
+        if (works.size() > 0) {
+            recyclerViewPerson.setVisibility(View.VISIBLE);
+            recyclerViewPerson.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false));
+            recyclerViewPerson.setAdapter(new DecorateItemPersonAdapter(works));
+        } else {
+            recyclerViewPerson.setVisibility(View.GONE);
+        }
+
+        List<String> imgsurl = item.imgsurl;
+        RecyclerView recyclerViewPic = helper.itemView.findViewById(R.id.recyclerViewItem);
+        if (imgsurl.size() > 0) {
+            recyclerViewPic.setVisibility(View.VISIBLE);
+            recyclerViewPic.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false));
+            recyclerViewPic.setAdapter(new DecorateItemPicBigAdapter(imgsurl));
+        } else {
+            recyclerViewPic.setVisibility(View.GONE);
+        }
+        RatingBar ratingBar = helper.itemView.findViewById(R.id.ratingBar);
+        boolean isIndicator = "1".equals(item.flag);
+        ratingBar.setIsIndicator(isIndicator);
+        helper.setText(R.id.tvContent, item.work_content)
+                .setText(R.id.tvContentStd, item.flow_std)
+                .setText(R.id.tvTime, " | " + item.ct)
+                .setText(R.id.tvProName, item.flow_name)
+                .setVisible(R.id.tvSure, !isIndicator)
+                .addOnClickListener(R.id.tvSure)
+                .addOnClickListener(R.id.ivPushDel);
     }
 }

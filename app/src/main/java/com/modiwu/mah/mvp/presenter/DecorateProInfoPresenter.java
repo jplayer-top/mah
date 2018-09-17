@@ -4,6 +4,8 @@ import com.modiwu.mah.mvp.model.DecorateModel;
 import com.modiwu.mah.ui.fragment.DecorateFragment;
 
 import top.jplayer.baseprolibrary.mvp.contract.BasePresenter;
+import top.jplayer.baseprolibrary.mvp.model.bean.BaseBean;
+import top.jplayer.baseprolibrary.net.SampleShowDialogObserver;
 
 /**
  * Created by Obl on 2018/9/12.
@@ -40,6 +42,16 @@ public class DecorateProInfoPresenter extends BasePresenter<DecorateFragment> {
     public void requestManPro() {
         mModel.requestManPro()
                 .subscribe(decorateBean -> mIView.responseMan(decorateBean), throwable -> {
+                });
+    }
+
+    public void requestDelPush(String proId, String taskId) {
+        mModel.requestDelPush(proId, taskId)
+                .subscribe(new SampleShowDialogObserver<BaseBean>(mIView.getContext()) {
+                    @Override
+                    protected void onSuccess(BaseBean bean) throws Exception {
+                        mIView.reponseDelPush();
+                    }
                 });
     }
 

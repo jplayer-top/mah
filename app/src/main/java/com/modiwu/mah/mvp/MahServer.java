@@ -7,12 +7,12 @@ import com.modiwu.mah.mvp.model.bean.CityCodeBean;
 import com.modiwu.mah.mvp.model.bean.CollectionHaseBean;
 import com.modiwu.mah.mvp.model.bean.DecorateAllProBean;
 import com.modiwu.mah.mvp.model.bean.DecorateManBean;
-import com.modiwu.mah.mvp.model.bean.DecorateSvBean;
 import com.modiwu.mah.mvp.model.bean.DecorateWorkerBean;
 import com.modiwu.mah.mvp.model.bean.DefLocalBean;
 import com.modiwu.mah.mvp.model.bean.DesignBean;
 import com.modiwu.mah.mvp.model.bean.DockerBean;
 import com.modiwu.mah.mvp.model.bean.FloorBean;
+import com.modiwu.mah.mvp.model.bean.FlowSelBean;
 import com.modiwu.mah.mvp.model.bean.HomeBean;
 import com.modiwu.mah.mvp.model.bean.LocalBean;
 import com.modiwu.mah.mvp.model.bean.LocalListBean;
@@ -31,6 +31,7 @@ import com.modiwu.mah.mvp.model.bean.RegisterBean;
 import com.modiwu.mah.mvp.model.bean.SchemeBean;
 import com.modiwu.mah.mvp.model.bean.SchemeDetailBean;
 import com.modiwu.mah.mvp.model.bean.SchemeOrderCreateBean;
+import com.modiwu.mah.mvp.model.bean.SelWorkerBean;
 import com.modiwu.mah.mvp.model.bean.SelectBean;
 import com.modiwu.mah.mvp.model.bean.SelectLocalBean;
 import com.modiwu.mah.mvp.model.bean.SelectWorkerTypeBean;
@@ -268,10 +269,13 @@ public interface MahServer {
     Observable<DecorateWorkerBean> workerProInfo(@Query("project_id") String id);
 
     @GET("dma/index/sv")
-    Observable<DecorateSvBean> svProInfo(@Query("project_id") String id);
+    Observable<DecorateManBean> svProInfo(@Query("project_id") String id);
 
     @POST("ide/smcode?")
     Observable<BaseBean> getIdeSmsCode(@Query("phone") String phone);
+
+    @POST("dma/task/rmwork")
+    Observable<BaseBean> requestPushDel(@Query("project_id") String project_id,@Query("work_id") String task_id);
 
     @POST("ide/regworker?")
     Observable<BaseBean> regWorker(@QueryMap Map<String, String> map);
@@ -285,11 +289,20 @@ public interface MahServer {
     @GET("dma/project/info?")
     Observable<ProInfoBean> getProInfo(@Query("project_id") String pro_id);
 
+    @GET("select/flow")
+    Observable<FlowSelBean> getFlowSel(@Query("task_id") String task_id);
+
     @GET("dma/msg/info?")
     Observable<MsgHasBean> getMsgHasInfo();
 
     @GET("dma/msg/invts?")
     Observable<MsgListBean> getMsgList();
+
+    @GET("select/worker?")
+    Observable<SelWorkerBean> getSelWorker(@Query("project_id") String id);
+
+    @POST("dma/task/pushwork")
+    Observable<BaseBean> sendPush(@Body RequestBody body);
 
     @POST("dma/project/addon?")
     Observable<BaseBean> addMan(@Query("user_phone") String phone, @Query("project_id") String project_id);

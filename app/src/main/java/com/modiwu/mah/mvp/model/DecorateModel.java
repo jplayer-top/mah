@@ -3,12 +3,13 @@ package com.modiwu.mah.mvp.model;
 import com.modiwu.mah.mvp.MahServer;
 import com.modiwu.mah.mvp.model.bean.DecorateAllProBean;
 import com.modiwu.mah.mvp.model.bean.DecorateManBean;
-import com.modiwu.mah.mvp.model.bean.DecorateSvBean;
 import com.modiwu.mah.mvp.model.bean.DecorateWorkerBean;
+import com.modiwu.mah.mvp.model.bean.FlowSelBean;
 import com.modiwu.mah.mvp.model.bean.LocalBean;
 import com.modiwu.mah.mvp.model.bean.MsgHasBean;
 import com.modiwu.mah.mvp.model.bean.MsgListBean;
 import com.modiwu.mah.mvp.model.bean.ProInfoBean;
+import com.modiwu.mah.mvp.model.bean.SelWorkerBean;
 import com.modiwu.mah.mvp.model.bean.SelectWorkerTypeBean;
 
 import java.util.Map;
@@ -52,6 +53,14 @@ public class DecorateModel {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
+    public Observable<BaseBean> requestDelPush(String proId, String taskId) {
+        return RetrofitManager.init()
+                .create(MahServer.class)
+                .requestPushDel(proId, taskId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
     public Observable<DecorateAllProBean> getAllProList() {
         return RetrofitManager.init()
                 .create(MahServer.class)
@@ -76,7 +85,7 @@ public class DecorateModel {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    public Observable<DecorateSvBean> requestSVPro(String id) {
+    public Observable<DecorateManBean> requestSVPro(String id) {
         return RetrofitManager.init()
                 .create(MahServer.class)
                 .svProInfo(id)
@@ -164,10 +173,34 @@ public class DecorateModel {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
+    public Observable<FlowSelBean> getFlowSel(String taskId) {
+        return RetrofitManager.init()
+                .create(MahServer.class)
+                .getFlowSel(taskId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Observable<SelWorkerBean> getSelWorker(String id) {
+        return RetrofitManager.init()
+                .create(MahServer.class)
+                .getSelWorker(id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
     public Observable<MsgHasBean> getMsgHasInfo() {
         return RetrofitManager.init()
                 .create(MahServer.class)
                 .getMsgHasInfo()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Observable<BaseBean> sendPush(RequestBody body) {
+        return RetrofitManager.init()
+                .create(MahServer.class)
+                .sendPush(body)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }

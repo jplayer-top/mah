@@ -7,7 +7,6 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.modiwu.mah.R;
 
-import java.io.File;
 import java.util.List;
 
 import top.jplayer.baseprolibrary.glide.GlideUtils;
@@ -19,14 +18,14 @@ import top.jplayer.baseprolibrary.glide.GlideUtils;
  * github : https://github.com/oblivion0001
  */
 
-public class DecorateItemPicAdapter extends BaseQuickAdapter<File, BaseViewHolder> {
+public class DecorateItemPicBigAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
 
-    public DecorateItemPicAdapter(List<File> data) {
-        super(R.layout.adapter_item_decorate_pic, data);
+    public DecorateItemPicBigAdapter(List<String> data) {
+        super(R.layout.adapter_item_decorate_pic_big, data);
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, File item) {
+    protected void convert(BaseViewHolder helper, String item) {
 
         ImageView ivItemSrc = helper.itemView.findViewById(R.id.ivItemSrc);
         Glide.with(mContext).load(item).apply(GlideUtils.init().options(R.drawable.placeholder)).into(ivItemSrc);

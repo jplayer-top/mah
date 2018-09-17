@@ -208,6 +208,10 @@
             android:name=".ui.activity.DecorateShiGongActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.activity.DecorateSendPushActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"/>
 
         <activity
             android:name=".ui.activity.MessageChangeActivity"

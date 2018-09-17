@@ -55,6 +55,7 @@ public class DecorateAllProjectActivity extends BaseCommonActivity {
         } else {
             mWorkerAdapter = new AllProjectAdapter(null);
             mRecyclerView.setAdapter(mWorkerAdapter);
+            mPresenter.getWorkerAllProList();
             mWorkerAdapter.setOnItemClickListener((adapter, view, position) -> {
                 EventBus.getDefault().post(new SelProIdDecorateEvent(mWorkerAdapter.getData().get(position)
                         .project_id, "施工"));
@@ -69,6 +70,13 @@ public class DecorateAllProjectActivity extends BaseCommonActivity {
                 mPresenter.getWorkerAllProList();
             }
         });
+    }
+
+    @Override
+    public void getWorkerAllProList(DecorateAllProBean bean) {
+        smartRefreshLayout.finishRefresh();
+        mMultipleStatusView.showContent();
+        mWorkerAdapter.setNewData(bean.projects);
     }
 
     @Override

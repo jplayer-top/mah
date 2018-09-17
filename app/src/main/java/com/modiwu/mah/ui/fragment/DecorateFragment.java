@@ -1,6 +1,7 @@
 package com.modiwu.mah.ui.fragment;
 
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -14,7 +15,6 @@ import com.google.gson.reflect.TypeToken;
 import com.modiwu.mah.R;
 import com.modiwu.mah.base.BaseFragment;
 import com.modiwu.mah.mvp.model.bean.DecorateManBean;
-import com.modiwu.mah.mvp.model.bean.DecorateSvBean;
 import com.modiwu.mah.mvp.model.bean.DecorateWorkerBean;
 import com.modiwu.mah.mvp.model.event.SelProIdDecorateEvent;
 import com.modiwu.mah.mvp.model.event.SelectDecorateEvent;
@@ -25,6 +25,7 @@ import com.modiwu.mah.ui.activity.DecorateCreateProActivity;
 import com.modiwu.mah.ui.activity.DecorateMessageHasActivity;
 import com.modiwu.mah.ui.activity.DecorateProDetailActivity;
 import com.modiwu.mah.ui.activity.DecorateSelectActivity;
+import com.modiwu.mah.ui.activity.DecorateSendPushActivity;
 import com.modiwu.mah.ui.activity.DecorateShiGongActivity;
 import com.modiwu.mah.ui.adapter.DecorateAdapter;
 import com.modiwu.mah.ui.adapter.DecorateProgressAdapter;
@@ -92,6 +93,8 @@ public class DecorateFragment extends BaseFragment {
     private String mProId;
     private DecorateProgressAdapter mProgressAdapter;
     private String mSelectData;
+    private TextView mTvSendPush;
+    private ConstraintLayout mConManSure;
 
     @Override
     public int initLayout() {
@@ -143,6 +146,8 @@ public class DecorateFragment extends BaseFragment {
 
     private void initHeaderProgress(View header_progress) {
         mRecyclerViewProgress = header_progress.findViewById(R.id.recyclerViewHeader);
+        mConManSure = header_progress.findViewById(R.id.conManSure);
+        mTvSendPush = header_progress.findViewById(R.id.tvSendPush);
         mRecyclerViewProgress.setLayoutManager(new LinearLayoutManager(this.getContext(), LinearLayoutManager
                 .HORIZONTAL, false));
         mProgressAdapter = new DecorateProgressAdapter(null);
@@ -248,12 +253,14 @@ public class DecorateFragment extends BaseFragment {
 
     }
 
-    public void responseSv(DecorateSvBean baseBean) {
+    public void responseSv(DecorateManBean baseBean) {
         smartRefreshLayout.finishRefresh(true);
         mMultipleStatusView.showContent();
 
         mTvCreatePro.setVisibility(View.GONE);
         mTvAllPro.setVisibility(View.VISIBLE);
+
+        mTvSendPush.setVisibility(View.VISIBLE);
 
         mLlIntroduction.setVisibility(View.INVISIBLE);
         mTvProDetail.setVisibility(View.VISIBLE);
@@ -269,6 +276,13 @@ public class DecorateFragment extends BaseFragment {
             mProId = baseBean.project.project_id;
             mAdapter.removeHeaderView(mHeaderWorker);
             mAdapter.addHeaderView(mHeaderProgress, 1);
+            mAdapter.setNewData(baseBean.tasks.get(0).works);
+            mAdapter.setOnItemChildClickListener((adapter, view, position) -> {
+                if (view.getId() == R.id.ivPushDel) {
+                    mPresenter.requestDelPush(mProId, mAdapter.getData().get(position).work_id + "");
+                }
+                return false;
+            });
             mTvTitleHeader.setText(baseBean.project.project_name);
             Gson gson = new Gson();
             String json = gson.toJson(baseBean.tasks);
@@ -284,6 +298,17 @@ public class DecorateFragment extends BaseFragment {
                     ActivityUtils.init().start(getContext(), DecorateProDetailActivity.class, "项目介绍", bundle);
                 }
 
+            });
+            mProgressAdapter.setOnItemClickListener((adapter, view, position) -> {
+
+            });
+            mTvSendPush.setEnabled(true);
+            mTvSendPush.setOnClickListener(v -> {
+                Bundle bundle = new Bundle();
+                DecorateManBean.TasksBean tasksBean = mProgressAdapter.getData().get(0);
+                bundle.putString("project_id", tasksBean.project_id);
+                bundle.putString("task_id", tasksBean.task_id + "");
+                ActivityUtils.init().start(getContext(), DecorateSendPushActivity.class, "添加新推送", bundle);
             });
         }
     }
@@ -321,5 +346,9 @@ public class DecorateFragment extends BaseFragment {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+    }
+
+    public void reponseDelPush() {
+        requestInfoByText((String) SharePreUtil.getData(this.getContext(), "decorate_select", "业主"));
     }
 }

@@ -31,19 +31,21 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerViewHeader"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_90dp"
+        android:layout_height="@dimen/dimen_100dp"
         android:layout_marginTop="@dimen/dimen_10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/llTipProgress"/>
 
     <android.support.constraint.ConstraintLayout
-        android:layout_marginStart="@dimen/dimen_15dp"
-        android:layout_marginEnd="@dimen/dimen_15dp"
-        android:layout_marginTop="@dimen/dimen_15dp"
+        android:id="@+id/conManSure"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_55dp"
+        android:layout_marginEnd="@dimen/dimen_15dp"
+        android:layout_marginStart="@dimen/dimen_15dp"
+        android:layout_marginTop="@dimen/dimen_15dp"
         android:background="@color/chocolate"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/recyclerViewHeader">
@@ -111,4 +113,21 @@
             app:layout_constraintBottom_toBottomOf="@+id/ratingBar"
             app:layout_constraintStart_toEndOf="@+id/tvRatingNum"/>
     </android.support.constraint.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/tvSendPush"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_50dp"
+        android:layout_marginEnd="@dimen/dimen_15dp"
+        android:layout_marginStart="@dimen/dimen_15dp"
+        android:layout_marginTop="@dimen/dimen_15dp"
+        android:background="@drawable/select_send_push"
+        android:enabled="false"
+        android:gravity="center"
+        android:text="添加一条新推送"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/conManSure"/>
 </android.support.constraint.ConstraintLayout>

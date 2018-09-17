@@ -94,6 +94,7 @@ public class ProInfoBean extends BaseBean {
         public int user_id;
         public String user_name;
         public String user_phone;
+        public String work_type;
     }
 
     public static class CommonBean {
@@ -107,6 +108,6 @@ public class ProInfoBean extends BaseBean {
         public String user_name;
         public String user_phone;
         public boolean isEdit = false;
-        public String user_tip = "业主";
+        public String work_type = "业主";
     }
 }

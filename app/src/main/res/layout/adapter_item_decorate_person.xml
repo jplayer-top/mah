@@ -5,7 +5,7 @@
     android:layout_width="@dimen/dimen_100dp"
     android:layout_height="@dimen/dimen_50dp"
     android:layout_marginEnd="@dimen/dimen_10dp"
-    android:background="@color/color999">
+    android:background="@color/colorEEE">
 
     <TextView
         android:id="@+id/tvFirst"

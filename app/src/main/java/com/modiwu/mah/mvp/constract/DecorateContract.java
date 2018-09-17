@@ -1,9 +1,11 @@
 package com.modiwu.mah.mvp.constract;
 
 import com.modiwu.mah.mvp.model.bean.DecorateAllProBean;
+import com.modiwu.mah.mvp.model.bean.FlowSelBean;
 import com.modiwu.mah.mvp.model.bean.MsgHasBean;
 import com.modiwu.mah.mvp.model.bean.MsgListBean;
 import com.modiwu.mah.mvp.model.bean.ProInfoBean;
+import com.modiwu.mah.mvp.model.bean.SelWorkerBean;
 import com.modiwu.mah.mvp.model.bean.SelectWorkerTypeBean;
 
 import top.jplayer.baseprolibrary.mvp.contract.IContract;
@@ -43,8 +45,14 @@ public interface DecorateContract {
 
         void getMsgHasInfo(MsgHasBean bean);
 
+        void sendPush();
+
         void getMsgList(MsgListBean bean);
 
         void selectWorkerType(SelectWorkerTypeBean bean);
+
+        void getFlowSel(FlowSelBean bean);
+
+        void getSelWorker(SelWorkerBean bean);
     }
 }

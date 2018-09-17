@@ -22,7 +22,7 @@ public class DecorateItemCommonAdapter extends BaseQuickAdapter<ProInfoBean.Comm
     @Override
     protected void convert(BaseViewHolder helper, ProInfoBean.CommonBean item) {
         helper.setText(R.id.ivItemSrc, item.user_name.substring(0, 1))
-                .setText(R.id.tvTip, item.user_tip)
+                .setText(R.id.tvTip, item.work_type)
                 .setVisible(R.id.tvIsEdit, item.isEdit)
                 .setText(R.id.tvName, item.user_name);
     }

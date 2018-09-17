@@ -4,8 +4,11 @@ import android.util.ArrayMap;
 
 import com.modiwu.mah.base.BaseCommonActivity;
 import com.modiwu.mah.mvp.model.DecorateModel;
+import com.modiwu.mah.mvp.model.bean.FlowSelBean;
+import com.modiwu.mah.mvp.model.bean.SelWorkerBean;
 import com.modiwu.mah.mvp.model.bean.SelectWorkerTypeBean;
 
+import okhttp3.RequestBody;
 import top.jplayer.baseprolibrary.mvp.contract.BasePresenter;
 import top.jplayer.baseprolibrary.mvp.model.bean.BaseBean;
 import top.jplayer.baseprolibrary.net.SampleShowDialogObserver;
@@ -55,6 +58,26 @@ public class DecorateBasePresenter extends BasePresenter<BaseCommonActivity> {
                 });
     }
 
+    public void getFlowSelBean(String id) {
+        mModel.getFlowSel(id)
+                .subscribe(new SampleShowDialogObserver<FlowSelBean>(mIView) {
+                    @Override
+                    protected void onSuccess(FlowSelBean bean) throws Exception {
+                        mIView.getFlowSel(bean);
+                    }
+                });
+    }
+
+    public void getSelWorker(String id) {
+        mModel.getSelWorker(id)
+                .subscribe(new SampleShowDialogObserver<SelWorkerBean>(mIView) {
+                    @Override
+                    protected void onSuccess(SelWorkerBean bean) throws Exception {
+                        mIView.getSelWorker(bean);
+                    }
+                });
+    }
+
     public void getMsgHasInfo() {
         mModel.getMsgHasInfo()
                 .subscribe(bean -> {
@@ -93,6 +116,17 @@ public class DecorateBasePresenter extends BasePresenter<BaseCommonActivity> {
                     @Override
                     protected void onSuccess(BaseBean baseBean) throws Exception {
                         mIView.regWorker();
+                    }
+                });
+    }
+
+    public void sendPush(RequestBody body) {
+        mModel.sendPush(body)
+                .subscribe(new SampleShowDialogObserver<BaseBean>(mIView) {
+                    @Override
+                    protected void onSuccess(BaseBean baseBean) throws Exception {
+                        ToastUtils.init().showSuccessToast(mIView, baseBean.msg);
+                        mIView.sendPush();
                     }
                 });
     }

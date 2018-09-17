@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/dimen_165dp"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/ivItemSrc"
+        android:layout_width="@dimen/dimen_160dp"
+        android:layout_height="@dimen/dimen_120dp"
+        android:layout_marginEnd="@dimen/dimen_5dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/placeholder"/>
+</android.support.constraint.ConstraintLayout>

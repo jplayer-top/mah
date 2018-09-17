@@ -8,9 +8,11 @@ import android.widget.FrameLayout;
 
 import com.modiwu.mah.mvp.constract.DecorateContract;
 import com.modiwu.mah.mvp.model.bean.DecorateAllProBean;
+import com.modiwu.mah.mvp.model.bean.FlowSelBean;
 import com.modiwu.mah.mvp.model.bean.MsgHasBean;
 import com.modiwu.mah.mvp.model.bean.MsgListBean;
 import com.modiwu.mah.mvp.model.bean.ProInfoBean;
+import com.modiwu.mah.mvp.model.bean.SelWorkerBean;
 import com.modiwu.mah.mvp.model.bean.SelectWorkerTypeBean;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
@@ -100,6 +102,11 @@ public abstract class BaseCommonActivity extends SuperBaseActivity implements IC
     }
 
     @Override
+    public void sendPush() {
+
+    }
+
+    @Override
     public void addMan() {
 
     }
@@ -136,6 +143,21 @@ public abstract class BaseCommonActivity extends SuperBaseActivity implements IC
 
     @Override
     public void getAllProList(DecorateAllProBean bean) {
+
+    }
+
+    @Override
+    public void getWorkerAllProList(DecorateAllProBean bean) {
+
+    }
+
+    @Override
+    public void getFlowSel(FlowSelBean bean) {
+
+    }
+
+    @Override
+    public void getSelWorker(SelWorkerBean bean) {
 
     }
 

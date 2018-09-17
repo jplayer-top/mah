@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+
+        <TextView
+            android:id="@+id/tvSelFlow"
+            android:layout_width="@dimen/dimen_0dp"
+            android:layout_height="@dimen/dimen_50dp"
+            android:layout_marginEnd="@dimen/dimen_15dp"
+            android:layout_marginStart="@dimen/dimen_15dp"
+            android:layout_marginTop="@dimen/dimen_15dp"
+            android:background="@color/colorEEE"
+            android:gravity="center_vertical"
+            android:hint="选择施工类型"
+            android:paddingEnd="@dimen/dimen_10dp"
+            android:paddingStart="@dimen/dimen_10dp"
+            android:textColorHint="@color/color666"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dimen_10dp"
+            android:rotation="90"
+            android:src="@drawable/right_arrow"
+            app:layout_constraintBottom_toBottomOf="@+id/tvSelFlow"
+            app:layout_constraintEnd_toEndOf="@+id/tvSelFlow"
+            app:layout_constraintTop_toTopOf="@+id/tvSelFlow"/>
+
+        <EditText
+            android:id="@+id/editInputText"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dimen_150dp"
+            android:layout_marginEnd="@dimen/dimen_15dp"
+            android:layout_marginStart="@dimen/dimen_15dp"
+            android:layout_marginTop="@dimen/dimen_5dp"
+            android:background="@color/colorEEE"
+            android:gravity="start"
+            android:hint="在此输入施工信息"
+            android:inputType="textMultiLine"
+            android:lineSpacingExtra="@dimen/lineSpacingExtra_3"
+            android:padding="@dimen/dimen_5dp"
+            android:textColor="@color/color666"
+            android:textColorHint="@color/color666"
+            android:textSize="@dimen/dimen_12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvSelFlow"/>
+
+        <TextView
+            android:id="@+id/tvTipPic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_15dp"
+            android:text="方案图片上传"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/editInputText"
+            app:layout_constraintTop_toBottomOf="@+id/editInputText"/>
+
+        <TextView
+            android:id="@+id/tvPicNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_5dp"
+            android:text="0/8"
+            android:textColor="@color/color999"
+            app:layout_constraintStart_toEndOf="@+id/tvTipPic"
+            app:layout_constraintTop_toTopOf="@+id/tvTipPic"/>
+
+        <android.support.v7.widget.RecyclerView
+
+            android:id="@+id/recyclerViewPic"
+            android:layout_width="@dimen/dimen_0dp"
+            android:layout_height="@dimen/dimen_100dp"
+            android:layout_marginEnd="@dimen/dimen_15dp"
+            android:layout_marginStart="@dimen/dimen_15dp"
+            android:layout_marginTop="@dimen/dimen_10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTipPic"/>
+
+        <TextView
+            android:id="@+id/tvTipConst"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_15dp"
+            android:text="项目参与人员"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/recyclerViewPic"
+            app:layout_constraintTop_toBottomOf="@+id/recyclerViewPic"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_5dp"
+            android:text="（可不填）"
+            android:textColor="@color/color999"
+            app:layout_constraintStart_toEndOf="@+id/tvTipConst"
+            app:layout_constraintTop_toTopOf="@+id/tvTipConst"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerViewConst"
+            android:layout_width="@dimen/dimen_0dp"
+            android:layout_height="@dimen/dimen_100dp"
+            android:layout_marginBottom="@dimen/dimen_15dp"
+            android:layout_marginEnd="@dimen/dimen_15dp"
+            android:layout_marginStart="@dimen/dimen_15dp"
+            android:layout_marginTop="@dimen/dimen_10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTipConst"/>
+    </android.support.constraint.ConstraintLayout>
+</android.support.v4.widget.NestedScrollView>

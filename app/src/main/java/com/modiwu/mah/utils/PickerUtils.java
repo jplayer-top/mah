@@ -6,6 +6,9 @@ import android.widget.TextView;
 
 import com.bigkoo.pickerview.OptionsPickerView;
 import com.bigkoo.pickerview.TimePickerView;
+import com.modiwu.mah.mvp.model.event.PickerItemSel;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -23,6 +26,7 @@ import java.util.Locale;
 public class PickerUtils {
     public TimePickerView pvTime;
     public OptionsPickerView mPickerView;
+
 
     public void initTimePicker(Context context) {
         //控制时间范围(如果不设置范围，则使用默认时间1900-2100年，此段代码可注释)
@@ -73,6 +77,27 @@ public class PickerUtils {
                 .setDividerColor(Color.DKGRAY)
                 .setCyclic(false, false, false)//循环与否
                 .setSelectOptions(position)  //设置默认选中项
+                .setOutSideCancelable(false)//点击外部dismiss default true
+                .build();
+        mPickerView.setPicker(optionsItems);//添加数据源
+    }
+
+    public void initStringPicker(final ArrayList<String> optionsItems, Context context, String type) {
+        mPickerView = new OptionsPickerView.Builder(context, (options1, options2, options3, v) -> {
+            String value = optionsItems.get(options1);
+            EventBus.getDefault().post(new PickerItemSel(options1, value, type));
+            if (v != null) {
+                TextView textView = (TextView) v;
+                textView.setText(value);
+            }
+        })
+                .setSubmitText("确定")//确定按钮文字
+                .setCancelText("取消")//取消按钮文字
+                .setSubCalSize(18)//确定和取消文字大小
+                .setContentTextSize(21)//滚轮文字大小
+                .setDividerColor(Color.DKGRAY)
+                .setCyclic(false, false, false)//循环与否
+                .setSelectOptions(0)  //设置默认选中项
                 .setOutSideCancelable(false)//点击外部dismiss default true
                 .build();
         mPickerView.setPicker(optionsItems);//添加数据源
