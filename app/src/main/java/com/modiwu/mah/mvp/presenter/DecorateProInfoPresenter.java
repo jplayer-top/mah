@@ -6,6 +6,7 @@ import com.modiwu.mah.ui.fragment.DecorateFragment;
 import top.jplayer.baseprolibrary.mvp.contract.BasePresenter;
 import top.jplayer.baseprolibrary.mvp.model.bean.BaseBean;
 import top.jplayer.baseprolibrary.net.SampleShowDialogObserver;
+import top.jplayer.baseprolibrary.utils.ToastUtils;
 
 /**
  * Created by Obl on 2018/9/12.
@@ -55,4 +56,46 @@ public class DecorateProInfoPresenter extends BasePresenter<DecorateFragment> {
                 });
     }
 
+    public void ratingWork(String proId, String workId, String rating) {
+        mModel.ratingWork(proId, workId, rating)
+                .subscribe(new SampleShowDialogObserver<BaseBean>(mIView.getContext()) {
+                    @Override
+                    protected void onSuccess(BaseBean bean) throws Exception {
+                        ToastUtils.init().showSuccessToast(mIView.getContext(), bean.msg);
+                        mIView.ratingWorkFinish();
+                    }
+                });
+    }
+
+    public void taskRatingFinish(String proId, String workId, String rating) {
+        mModel.taskRatingFinish(proId, workId, rating)
+                .subscribe(new SampleShowDialogObserver<BaseBean>(mIView.getContext()) {
+                    @Override
+                    protected void onSuccess(BaseBean bean) throws Exception {
+                        ToastUtils.init().showSuccessToast(mIView.getContext(), bean.msg);
+                        mIView.ratingWorkFinish();
+                    }
+                });
+    }
+
+    public void workIng(String proId, String taskId) {
+        mModel.workIng(proId, taskId)
+                .subscribe(new SampleShowDialogObserver<BaseBean>(mIView.getContext()) {
+                    @Override
+                    protected void onSuccess(BaseBean bean) throws Exception {
+                        mIView.workIng(1);
+                    }
+                });
+    }
+
+    public void workEnd(String proId, String taskId) {
+        mModel.workEnd(proId, taskId)
+                .subscribe(new SampleShowDialogObserver<BaseBean>(mIView.getContext()) {
+                    @Override
+                    protected void onSuccess(BaseBean bean) throws Exception {
+                        ToastUtils.init().showSuccessToast(mIView.getContext(), bean.msg);
+                        mIView.workEnd(2);
+                    }
+                });
+    }
 }

@@ -13,6 +13,8 @@ import com.modiwu.mah.mvp.model.bean.DecorateManBean;
 import java.util.ArrayList;
 import java.util.List;
 
+import top.jplayer.baseprolibrary.utils.SharePreUtil;
+
 /**
  * Created by Obl on 2018/8/29.
  * com.modiwu.mah.ui.adapter
@@ -47,13 +49,16 @@ public class DecorateAdapter extends BaseQuickAdapter<DecorateManBean.TasksBean.
             recyclerViewPic.setVisibility(View.GONE);
         }
         RatingBar ratingBar = helper.itemView.findViewById(R.id.ratingBar);
-        boolean isIndicator = "1".equals(item.flag);
-        ratingBar.setIsIndicator(isIndicator);
+        String who = (String) SharePreUtil.getData(mContext, "decorate_select", "业主");
+        boolean isIndicator = "0".equals(item.flag) && "业主".equals(who);
+        ratingBar.setIsIndicator(!isIndicator);
+        ratingBar.setRating(item.appraise);
         helper.setText(R.id.tvContent, item.work_content)
                 .setText(R.id.tvContentStd, item.flow_std)
                 .setText(R.id.tvTime, " | " + item.ct)
                 .setText(R.id.tvProName, item.flow_name)
-                .setVisible(R.id.tvSure, !isIndicator)
+                .setVisible(R.id.tvSure, isIndicator)
+                .setVisible(R.id.ivPushDel, "监理".equals(who))
                 .addOnClickListener(R.id.tvSure)
                 .addOnClickListener(R.id.ivPushDel);
     }

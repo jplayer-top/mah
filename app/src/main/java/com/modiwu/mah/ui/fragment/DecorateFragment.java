@@ -1,6 +1,7 @@
 package com.modiwu.mah.ui.fragment;
 
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -13,6 +14,7 @@ import com.modiwu.mah.R;
 import com.modiwu.mah.base.BaseFragment;
 import com.modiwu.mah.mvp.model.bean.DecorateManBean;
 import com.modiwu.mah.mvp.model.bean.DecorateWorkerBean;
+import com.modiwu.mah.mvp.model.event.DialogSelStatusEvent;
 import com.modiwu.mah.mvp.model.event.SelProIdDecorateEvent;
 import com.modiwu.mah.mvp.model.event.SelectDecorateEvent;
 import com.modiwu.mah.mvp.presenter.DecorateProInfoPresenter;
@@ -27,6 +29,7 @@ import com.modiwu.mah.ui.activity.DecorateShiGongActivity;
 import com.modiwu.mah.ui.adapter.DecorateAdapter;
 import com.modiwu.mah.ui.adapter.DecorateProgressAdapter;
 import com.modiwu.mah.ui.dialog.DialogChangeMan;
+import com.modiwu.mah.ui.dialog.DialogSelectStatus;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
 import org.greenrobot.eventbus.EventBus;
@@ -92,6 +95,11 @@ public class DecorateFragment extends BaseFragment {
     private DecorateProgressAdapter mProgressAdapter;
     private String mSelectData;
     private TextView mTvSendPush;
+    private DialogSelectStatus mStatus;
+    private ConstraintLayout mConManSure;
+    private TextView mTvSureRating;
+    private TextView mTvRatingNum;
+    private RatingBar mTaskRatingBar;
 
     @Override
     public int initLayout() {
@@ -144,6 +152,13 @@ public class DecorateFragment extends BaseFragment {
     private void initHeaderProgress(View header_progress) {
         mRecyclerViewProgress = header_progress.findViewById(R.id.recyclerViewHeader);
         mTvSendPush = header_progress.findViewById(R.id.tvSendPush);
+        mConManSure = header_progress.findViewById(R.id.conManSure);
+        mTvSureRating = header_progress.findViewById(R.id.tvSureRating);
+        mTvRatingNum = header_progress.findViewById(R.id.tvRatingNum);
+        mTaskRatingBar = header_progress.findViewById(R.id.ratingBar);
+        mTaskRatingBar.setOnRatingBarChangeListener((ratingBar, rating, fromUser) -> {
+            mTvRatingNum.setText(String.valueOf(rating));
+        });
         mRecyclerViewProgress.setLayoutManager(new LinearLayoutManager(this.getContext(), LinearLayoutManager
                 .HORIZONTAL, false));
         mProgressAdapter = new DecorateProgressAdapter(null);
@@ -191,6 +206,25 @@ public class DecorateFragment extends BaseFragment {
     }
 
     @Subscribe
+    public void onEvent(DialogSelStatusEvent event) {
+
+        if (mStatus != null && mStatus.isShowing()) {
+            if (event.status == 0) {
+                mStatus.dismiss();
+                return;
+            }
+            mStatus.setBg(event.status);
+        }
+        DecorateManBean.TasksBean tasksBean = mProgressAdapter.getData().get(curTask);
+        if (event.status == 1) {
+            mPresenter.workIng(tasksBean.project_id, tasksBean.task_id + "");
+        } else {
+            mPresenter.workEnd(tasksBean.project_id, tasksBean.task_id + "");
+        }
+
+    }
+
+    @Subscribe
     public void onEvnet(SelProIdDecorateEvent event) {
         this.mProId = event.pro_id;
         SharePreUtil.saveData(getContext(), "decorate_pro_id", mProId);
@@ -211,6 +245,8 @@ public class DecorateFragment extends BaseFragment {
         mIvGoBack.setImageDrawable(getResources().getDrawable(des));
     }
 
+    private int curTask = 0;
+
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -226,6 +262,8 @@ public class DecorateFragment extends BaseFragment {
         mTvAllPro.setVisibility(View.GONE);
         mLlIntroduction.setVisibility(View.INVISIBLE);
         mTvProDetail.setVisibility(View.VISIBLE);
+        mTvSendPush.setVisibility(View.GONE);
+        mConManSure.setVisibility(View.VISIBLE);
 
         if ("0".equals(baseBean.haspj)) {
             mTvTitleHeader.setText("尊敬的用户，您暂时没有装修项目");
@@ -235,6 +273,20 @@ public class DecorateFragment extends BaseFragment {
             mAdapter.removeHeaderView(mHeaderWorker);
             mAdapter.removeHeaderView(mHeaderProgress);
             mAdapter.addHeaderView(mHeaderProgress, 1);
+            List<DecorateManBean.TasksBean> tasks = baseBean.tasks;
+            tasks.get(0).isSel = true;
+            mAdapter.setNewData(tasks.get(0).works);
+            mAdapter.setOnItemChildClickListener((adapter, view, position) -> {
+                if (view.getId() == R.id.tvSure) {
+                    mPresenter.ratingWork(mProId, mAdapter.getData().get(position).work_id + "", (int) mRatingBar.getRating() + "");
+                }
+                return false;
+            });
+            mTvSureRating.setOnClickListener(v -> {
+                mPresenter.taskRatingFinish(mProId, mProgressAdapter.getData().get(curTask).task_id + "", (int)
+                        mTaskRatingBar.getRating() + "");
+            });
+            mConManSure.setVisibility(baseBean.tasks.get(0).appraise != null ? View.VISIBLE : View.GONE);
             mTvTitleHeader.setText(baseBean.project.project_name);
             mProgressAdapter.setNewData(baseBean.tasks);
             mTvProDetail.setText("项目介绍 >");
@@ -245,6 +297,24 @@ public class DecorateFragment extends BaseFragment {
                     ActivityUtils.init().start(getContext(), DecorateProDetailActivity.class, "项目介绍", bundle);
                 }
 
+            });
+
+            mProgressAdapter.setOnItemChildClickListener((adapter, view, position) -> {
+                curTask = position;
+                List<DecorateManBean.TasksBean> mProgressAdapterData = mProgressAdapter.getData();
+                Observable.fromIterable(mProgressAdapterData).subscribe(tasksBean -> {
+                    tasksBean.isSel = false;
+                    if (position == mProgressAdapter.getData().indexOf(tasksBean)) {
+                        tasksBean.isSel = true;
+                    }
+                });
+                DecorateManBean.TasksBean tasksBean = mProgressAdapterData.get(position);
+                List<DecorateManBean.TasksBean.WorksBeanX> works = tasksBean.works;
+                mTvSendPush.setEnabled(!"2".equals(tasksBean.status));
+                mAdapter.setNewData(works);
+                mProgressAdapter.notifyDataSetChanged();
+                mConManSure.setVisibility(tasksBean.appraise != null ? View.VISIBLE : View.GONE);
+                return false;
             });
         }
 
@@ -258,7 +328,7 @@ public class DecorateFragment extends BaseFragment {
         mTvAllPro.setVisibility(View.VISIBLE);
 
         mTvSendPush.setVisibility(View.VISIBLE);
-
+        mConManSure.setVisibility(View.GONE);
         mLlIntroduction.setVisibility(View.INVISIBLE);
         mTvProDetail.setVisibility(View.VISIBLE);
 
@@ -296,18 +366,35 @@ public class DecorateFragment extends BaseFragment {
                 }
 
             });
-            mProgressAdapter.setOnItemClickListener((adapter, view, position) -> {
-                List<DecorateManBean.TasksBean> mProgressAdapterData = mProgressAdapter.getData();
-                Observable.fromIterable(mProgressAdapterData).subscribe(tasksBean -> {
-                    tasksBean.isSel = false;
-                    if (position == mProgressAdapter.getData().indexOf(tasksBean)) {
-                        tasksBean.isSel = true;
+
+
+            mProgressAdapter.setOnItemChildClickListener((adapter, view, position) -> {
+                if (view.getId() == R.id.ivChangeStatus) {
+                    if (mStatus == null) {
+                        mStatus = new DialogSelectStatus(getContext());
                     }
-                });
-                mAdapter.setNewData(mProgressAdapterData.get(position).works);
-                mProgressAdapter.notifyDataSetChanged();
+                    mStatus.setBg(Integer.valueOf(mProgressAdapter.getData().get(position).status));
+                    mStatus.show();
+                } else {
+                    curTask = position;
+                    List<DecorateManBean.TasksBean> mProgressAdapterData = mProgressAdapter.getData();
+                    Observable.fromIterable(mProgressAdapterData).subscribe(tasksBean -> {
+                        tasksBean.isSel = false;
+                        if (position == mProgressAdapter.getData().indexOf(tasksBean)) {
+                            tasksBean.isSel = true;
+                        }
+                    });
+                    DecorateManBean.TasksBean tasksBean = mProgressAdapterData.get(position);
+                    List<DecorateManBean.TasksBean.WorksBeanX> works = tasksBean.works;
+                    mTvSendPush.setEnabled(!"2".equals(tasksBean.status));
+                    mAdapter.setNewData(works);
+                    mProgressAdapter.notifyDataSetChanged();
+
+                }
+                return false;
             });
             mTvSendPush.setEnabled(true);
+
             mTvSendPush.setOnClickListener(v -> {
                 Bundle bundle = new Bundle();
                 DecorateManBean.TasksBean tasksBean = null;
@@ -364,5 +451,23 @@ public class DecorateFragment extends BaseFragment {
 
     public void reponseDelPush() {
         requestInfoByText((String) SharePreUtil.getData(this.getContext(), "decorate_select", "业主"));
+    }
+
+    public void workIng(int status) {
+        if (mStatus != null && mStatus.isShowing()) {
+            mStatus.dismiss();
+        }
+        reponseDelPush();
+    }
+
+    public void workEnd(int status) {
+        if (mStatus != null && mStatus.isShowing()) {
+            mStatus.dismiss();
+        }
+        reponseDelPush();
+    }
+
+    public void ratingWorkFinish() {
+        reponseDelPush();
     }
 }

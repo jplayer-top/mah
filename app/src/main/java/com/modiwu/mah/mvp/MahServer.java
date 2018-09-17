@@ -277,6 +277,20 @@ public interface MahServer {
     @POST("dma/task/rmwork")
     Observable<BaseBean> requestPushDel(@Query("project_id") String project_id, @Query("work_id") String task_id);
 
+    @POST("dma/task/apwork")
+    Observable<BaseBean> ratingWork(@Query("project_id") String project_id, @Query("work_id") String task_id, @Query
+            ("appraise") String appraise);
+
+    @POST("dma/task/apwork")
+    Observable<BaseBean> taskRatingFinish(@Query("project_id") String project_id, @Query("work_id") String task_id,
+                                          @Query("appraise") String appraise);
+
+    @POST("dma/task/changework")
+    Observable<BaseBean> workIng(@Query("project_id") String project_id, @Query("task_id") String task_id);
+
+    @POST("dma/task/finishconfirm")
+    Observable<BaseBean> workEnd(@Query("project_id") String project_id, @Query("task_id") String task_id);
+
     @POST("ide/regworker?")
     Observable<BaseBean> regWorker(@QueryMap Map<String, String> map);
 

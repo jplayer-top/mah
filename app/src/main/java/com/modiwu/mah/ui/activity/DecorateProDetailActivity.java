@@ -113,7 +113,7 @@ public class DecorateProDetailActivity extends BaseCommonActivity {
                         .load(model)
                         .apply(GlideUtils.init().options(R.drawable.placeholder))
                         .into((ImageView) itemView));
-        tvBarRight.setVisibility(View.VISIBLE);
+        tvBarRight.setVisibility("业主".equals(isMan) ? View.VISIBLE : View.INVISIBLE);
         tvBarRight.setText("编辑");
         tvBarRight.setOnClickListener(v -> {
             boolean isEdit = "编辑".equals(tvBarRight.getText().toString());
@@ -166,6 +166,7 @@ public class DecorateProDetailActivity extends BaseCommonActivity {
 
         mCommonSvsBeans = gson.fromJson(gson.toJson(bean.svs), new TypeToken<List<ProInfoBean.CommonBean>>() {
         }.getType());
+        Observable.fromIterable(mCommonSvsBeans).subscribe(commonBean -> commonBean.work_type = "监理");
         mSuperViewAdapter.setNewData(mCommonSvsBeans);
 
         mCommonWorkerBeans = gson.fromJson(gson.toJson(bean.wokers), new TypeToken<List<ProInfoBean.CommonBean>>() {

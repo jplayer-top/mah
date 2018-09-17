@@ -12,6 +12,7 @@ import com.modiwu.mah.mvp.model.bean.DecorateManBean;
 import java.util.List;
 
 import top.jplayer.baseprolibrary.glide.GlideUtils;
+import top.jplayer.baseprolibrary.utils.SharePreUtil;
 
 /**
  * Created by Obl on 2018/9/3.
@@ -27,8 +28,12 @@ public class DecorateProgressAdapter extends BaseQuickAdapter<DecorateManBean.Ta
 
     @Override
     protected void convert(BaseViewHolder helper, DecorateManBean.TasksBean item) {
+        String who = (String) SharePreUtil.getData(mContext, "decorate_select", "业主");
         helper.setText(R.id.tvTitle, item.seg_name)
-                .setText(R.id.tvStatus, "0".equals(item.status) ? "未开始" : ("1".equals(item.status) ? "进行中" : "已完成"));
+                .setText(R.id.tvStatus, "0".equals(item.status) ? "未开始" : ("1".equals(item.status) ? "进行中" : "已完成"))
+                .setVisible(R.id.ivChangeStatus, "监理".equals(who))
+                .addOnClickListener(R.id.clBgSel)
+                .addOnClickListener(R.id.ivChangeStatus);
         ImageView ivStc = helper.itemView.findViewById(R.id.ivItemSrc);
         View clBgSel = helper.itemView.findViewById(R.id.clBgSel);
         if (item.isSel) {

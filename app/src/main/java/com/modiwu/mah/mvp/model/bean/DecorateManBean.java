@@ -77,8 +77,18 @@ public class DecorateManBean extends BaseBean {
         public String seg_name;
         public String seg_icon;
         public String status;
+        public AppraiseBean appraise;
         public boolean isSel = false;
         public List<WorksBeanX> works;
+
+        public static class AppraiseBean {
+            public int task_id;
+            public int user_id;
+            public String project_id;
+            public int appraise;
+            public String flag;
+            public String ct;
+        }
 
         public static class WorksBeanX {
             /**

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="@dimen/dimen_250dp"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:paddingEnd="@dimen/dp_20"
+    android:paddingStart="@dimen/dp_20">
+
+    <TextView
+        android:id="@+id/tvChangeStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_15dp"
+        android:text="切换当前施工状态"
+        android:textColor="@color/color323232"
+        android:textSize="@dimen/dimen_12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_85dp"
+        android:layout_marginTop="@dimen/dimen_15dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/tvChangeStatus">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvPre"
+                android:layout_width="@dimen/dimen_50dp"
+                android:layout_height="@dimen/dimen_50dp"
+                android:background="@drawable/shape_cir_gray"
+                android:gravity="center"
+                android:text="未开始"
+                android:textColor="@color/white"
+                android:textSize="@dimen/dimen_12sp"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/decorate_change_status_tan"
+                android:visibility="gone"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvIng"
+                android:layout_width="@dimen/dimen_50dp"
+                android:layout_height="@dimen/dimen_50dp"
+                android:background="@drawable/shape_cir_theme"
+                android:gravity="center"
+                android:text="进行中"
+                android:textColor="@color/white"
+                android:textSize="@dimen/dimen_12sp"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/decorate_change_status_tan"
+                android:visibility="gone"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvEnd"
+                android:layout_width="@dimen/dimen_50dp"
+                android:layout_height="@dimen/dimen_50dp"
+                android:background="@drawable/shape_cir_gray"
+                android:gravity="center"
+                android:text="已完成"
+                android:textColor="@color/white"
+                android:textSize="@dimen/dimen_12sp"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/decorate_change_status_tan"
+                android:visibility="gone"/>
+        </LinearLayout>
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

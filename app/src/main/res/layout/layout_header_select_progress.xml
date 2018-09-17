@@ -99,6 +99,7 @@
             app:layout_constraintStart_toEndOf="@+id/ratingBar"/>
 
         <TextView
+            android:id="@+id/tvSureRating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dimen_15dp"

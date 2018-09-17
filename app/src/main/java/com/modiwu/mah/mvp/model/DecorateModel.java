@@ -53,10 +53,42 @@ public class DecorateModel {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
+    public Observable<BaseBean> ratingWork(String proId, String workId, String rating) {
+        return RetrofitManager.init()
+                .create(MahServer.class)
+                .ratingWork(proId, workId, rating)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Observable<BaseBean> taskRatingFinish(String proId, String workId, String rating) {
+        return RetrofitManager.init()
+                .create(MahServer.class)
+                .taskRatingFinish(proId, workId, rating)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
     public Observable<BaseBean> requestDelPush(String proId, String taskId) {
         return RetrofitManager.init()
                 .create(MahServer.class)
                 .requestPushDel(proId, taskId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Observable<BaseBean> workIng(String proId, String taskId) {
+        return RetrofitManager.init()
+                .create(MahServer.class)
+                .workIng(proId, taskId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Observable<BaseBean> workEnd(String proId, String taskId) {
+        return RetrofitManager.init()
+                .create(MahServer.class)
+                .workEnd(proId, taskId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
