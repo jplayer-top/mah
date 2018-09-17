@@ -24,6 +24,7 @@ import butterknife.Unbinder;
 import cn.bingoogolapple.bgabanner.BGABanner;
 import io.reactivex.Observable;
 import top.jplayer.baseprolibrary.glide.GlideUtils;
+import top.jplayer.baseprolibrary.utils.SharePreUtil;
 
 /**
  * Created by Obl on 2018/9/11.
@@ -69,6 +70,7 @@ public class DecorateProDetailActivity extends BaseCommonActivity {
         mPresenter = new DecorateBasePresenter(this);
         mProId = mBundle.getString("pro_id");
         mPresenter.getProInfo(mProId);
+        String isMan = (String) SharePreUtil.getData(this, "decorate_select", "业主");
         mSelectOtherMan = new DialogSelectOtherMan(this);
         mRecyclerViewOwner.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         mManAdapter = new DecorateItemCommonAdapter(null);

@@ -1,7 +1,6 @@
 package com.modiwu.mah.ui.fragment;
 
 import android.os.Bundle;
-import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -10,8 +9,6 @@ import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.modiwu.mah.R;
 import com.modiwu.mah.base.BaseFragment;
 import com.modiwu.mah.mvp.model.bean.DecorateManBean;
@@ -44,6 +41,7 @@ import java.util.Locale;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import io.reactivex.Observable;
 import top.jplayer.baseprolibrary.utils.ActivityUtils;
 import top.jplayer.baseprolibrary.utils.DateUtils;
 import top.jplayer.baseprolibrary.utils.SharePreUtil;
@@ -94,7 +92,6 @@ public class DecorateFragment extends BaseFragment {
     private DecorateProgressAdapter mProgressAdapter;
     private String mSelectData;
     private TextView mTvSendPush;
-    private ConstraintLayout mConManSure;
 
     @Override
     public int initLayout() {
@@ -146,7 +143,6 @@ public class DecorateFragment extends BaseFragment {
 
     private void initHeaderProgress(View header_progress) {
         mRecyclerViewProgress = header_progress.findViewById(R.id.recyclerViewHeader);
-        mConManSure = header_progress.findViewById(R.id.conManSure);
         mTvSendPush = header_progress.findViewById(R.id.tvSendPush);
         mRecyclerViewProgress.setLayoutManager(new LinearLayoutManager(this.getContext(), LinearLayoutManager
                 .HORIZONTAL, false));
@@ -237,6 +233,7 @@ public class DecorateFragment extends BaseFragment {
         } else {
             mProId = baseBean.project.project_id;
             mAdapter.removeHeaderView(mHeaderWorker);
+            mAdapter.removeHeaderView(mHeaderProgress);
             mAdapter.addHeaderView(mHeaderProgress, 1);
             mTvTitleHeader.setText(baseBean.project.project_name);
             mProgressAdapter.setNewData(baseBean.tasks);
@@ -275,8 +272,11 @@ public class DecorateFragment extends BaseFragment {
         } else {
             mProId = baseBean.project.project_id;
             mAdapter.removeHeaderView(mHeaderWorker);
+            mAdapter.removeHeaderView(mHeaderProgress);
             mAdapter.addHeaderView(mHeaderProgress, 1);
-            mAdapter.setNewData(baseBean.tasks.get(0).works);
+            List<DecorateManBean.TasksBean> tasks = baseBean.tasks;
+            tasks.get(0).isSel = true;
+            mAdapter.setNewData(tasks.get(0).works);
             mAdapter.setOnItemChildClickListener((adapter, view, position) -> {
                 if (view.getId() == R.id.ivPushDel) {
                     mPresenter.requestDelPush(mProId, mAdapter.getData().get(position).work_id + "");
@@ -284,12 +284,9 @@ public class DecorateFragment extends BaseFragment {
                 return false;
             });
             mTvTitleHeader.setText(baseBean.project.project_name);
-            Gson gson = new Gson();
-            String json = gson.toJson(baseBean.tasks);
-            List<DecorateManBean.TasksBean> list = gson.fromJson(json, new
-                    TypeToken<List<DecorateManBean.TasksBean>>() {
-                    }.getType());
-            mProgressAdapter.setNewData(list);
+
+            mProgressAdapter.setNewData(tasks);
+
             mTvProDetail.setText("项目介绍 >");
             mTvProDetail.setOnClickListener(v -> {
                 if (!"0".equals(baseBean.haspj)) {
@@ -300,15 +297,31 @@ public class DecorateFragment extends BaseFragment {
 
             });
             mProgressAdapter.setOnItemClickListener((adapter, view, position) -> {
-
+                List<DecorateManBean.TasksBean> mProgressAdapterData = mProgressAdapter.getData();
+                Observable.fromIterable(mProgressAdapterData).subscribe(tasksBean -> {
+                    tasksBean.isSel = false;
+                    if (position == mProgressAdapter.getData().indexOf(tasksBean)) {
+                        tasksBean.isSel = true;
+                    }
+                });
+                mAdapter.setNewData(mProgressAdapterData.get(position).works);
+                mProgressAdapter.notifyDataSetChanged();
             });
             mTvSendPush.setEnabled(true);
             mTvSendPush.setOnClickListener(v -> {
                 Bundle bundle = new Bundle();
-                DecorateManBean.TasksBean tasksBean = mProgressAdapter.getData().get(0);
-                bundle.putString("project_id", tasksBean.project_id);
-                bundle.putString("task_id", tasksBean.task_id + "");
-                ActivityUtils.init().start(getContext(), DecorateSendPushActivity.class, "添加新推送", bundle);
+                DecorateManBean.TasksBean tasksBean = null;
+                for (DecorateManBean.TasksBean bean : mProgressAdapter.getData()) {
+                    if (bean.isSel) {
+                        tasksBean = bean;
+                        break;
+                    }
+                }
+                if (tasksBean != null) {
+                    bundle.putString("project_id", tasksBean.project_id);
+                    bundle.putString("task_id", tasksBean.task_id + "");
+                    ActivityUtils.init().start(getContext(), DecorateSendPushActivity.class, "添加新推送", bundle);
+                }
             });
         }
     }
@@ -326,6 +339,7 @@ public class DecorateFragment extends BaseFragment {
         }
 
         mAdapter.removeHeaderView(mHeaderProgress);
+        mAdapter.removeHeaderView(mHeaderWorker);
         mAdapter.addHeaderView(mHeaderWorker, 1);
         DecorateWorkerBean.InfoBean infoBean = baseBean.info;
         mTvTitleHeader.setText(String.format(Locale.CHINA, "%s施工人员", infoBean.work_type));

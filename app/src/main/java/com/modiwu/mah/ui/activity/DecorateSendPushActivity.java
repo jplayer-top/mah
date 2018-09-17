@@ -17,6 +17,7 @@ import com.modiwu.mah.mvp.model.bean.FlowSelBean;
 import com.modiwu.mah.mvp.model.bean.ProInfoBean;
 import com.modiwu.mah.mvp.model.bean.SelWorkerBean;
 import com.modiwu.mah.mvp.model.event.PickerItemSel;
+import com.modiwu.mah.mvp.model.event.SelectDecorateEvent;
 import com.modiwu.mah.mvp.presenter.DecorateBasePresenter;
 import com.modiwu.mah.ui.adapter.DecorateItemCommonAdapter;
 import com.modiwu.mah.ui.adapter.DecorateItemPicAdapter;
@@ -222,7 +223,7 @@ public class DecorateSendPushActivity extends BaseCommonActivity {
     @Override
     public void sendPush() {
         super.sendPush();
-
+        EventBus.getDefault().post(new SelectDecorateEvent("监理"));
     }
 
     @PermissionNo(100)

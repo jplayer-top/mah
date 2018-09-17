@@ -275,7 +275,7 @@ public interface MahServer {
     Observable<BaseBean> getIdeSmsCode(@Query("phone") String phone);
 
     @POST("dma/task/rmwork")
-    Observable<BaseBean> requestPushDel(@Query("project_id") String project_id,@Query("work_id") String task_id);
+    Observable<BaseBean> requestPushDel(@Query("project_id") String project_id, @Query("work_id") String task_id);
 
     @POST("ide/regworker?")
     Observable<BaseBean> regWorker(@QueryMap Map<String, String> map);

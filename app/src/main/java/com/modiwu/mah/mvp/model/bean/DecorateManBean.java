@@ -77,6 +77,7 @@ public class DecorateManBean extends BaseBean {
         public String seg_name;
         public String seg_icon;
         public String status;
+        public boolean isSel = false;
         public List<WorksBeanX> works;
 
         public static class WorksBeanX {
