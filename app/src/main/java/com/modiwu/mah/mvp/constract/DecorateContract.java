@@ -54,5 +54,11 @@ public interface DecorateContract {
         void getFlowSel(FlowSelBean bean);
 
         void getSelWorker(SelWorkerBean bean);
+
+        void delWorker();
+
+        void delSv();
+
+        void delMan();
     }
 }

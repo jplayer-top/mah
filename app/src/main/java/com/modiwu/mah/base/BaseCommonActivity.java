@@ -162,6 +162,20 @@ public abstract class BaseCommonActivity extends SuperBaseActivity implements IC
     }
 
     @Override
+    public void delWorker() {
+
+    }
+
+    @Override
+    public void delSv() {
+    }
+
+    @Override
+    public void delMan() {
+
+    }
+
+    @Override
     public void selectWorkerType(SelectWorkerTypeBean bean) {
 
     }

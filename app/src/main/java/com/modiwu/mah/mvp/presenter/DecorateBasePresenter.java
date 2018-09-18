@@ -203,4 +203,37 @@ public class DecorateBasePresenter extends BasePresenter<BaseCommonActivity> {
                     }
                 });
     }
+
+    public void delWorker(String proId, String userId) {
+        mModel.delWorker(proId, userId)
+                .subscribe(new SampleShowDialogObserver<BaseBean>(mIView) {
+                    @Override
+                    protected void onSuccess(BaseBean baseBean) throws Exception {
+                        ToastUtils.init().showSuccessToast(mIView, baseBean.msg);
+                        mIView.delWorker();
+                    }
+                });
+    }
+
+    public void delSV(String proId, String userId) {
+        mModel.delSv(proId, userId)
+                .subscribe(new SampleShowDialogObserver<BaseBean>(mIView) {
+                    @Override
+                    protected void onSuccess(BaseBean baseBean) throws Exception {
+                        ToastUtils.init().showSuccessToast(mIView, baseBean.msg);
+                        mIView.delWorker();
+                    }
+                });
+    }
+
+    public void delMan(String proId, String userId) {
+        mModel.delMan(proId, userId)
+                .subscribe(new SampleShowDialogObserver<BaseBean>(mIView) {
+                    @Override
+                    protected void onSuccess(BaseBean baseBean) throws Exception {
+                        ToastUtils.init().showSuccessToast(mIView, baseBean.msg);
+                        mIView.delWorker();
+                    }
+                });
+    }
 }

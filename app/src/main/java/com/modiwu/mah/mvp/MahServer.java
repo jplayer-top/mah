@@ -281,8 +281,8 @@ public interface MahServer {
     Observable<BaseBean> ratingWork(@Query("project_id") String project_id, @Query("work_id") String task_id, @Query
             ("appraise") String appraise);
 
-    @POST("dma/task/apwork")
-    Observable<BaseBean> taskRatingFinish(@Query("project_id") String project_id, @Query("work_id") String task_id,
+    @POST("dma/task/finish")
+    Observable<BaseBean> taskRatingFinish(@Query("project_id") String project_id, @Query("task_id") String task_id,
                                           @Query("appraise") String appraise);
 
     @POST("dma/task/changework")
@@ -335,4 +335,13 @@ public interface MahServer {
 
     @POST("ide/verfiysmcode?")
     Observable<BaseBean> verIdeSmsCode(@Query("phone") String phone, @Query("smCode") String smCode);
+
+    @POST("dma/project/rmwm")
+    Observable<BaseBean> delWorker(@Query("project_id") String proId, @Query("user_id") String userId);
+
+    @POST("dma/project/rmsv")
+    Observable<BaseBean> delSv(@Query("project_id") String proId, @Query("user_id") String userId);
+
+    @POST("dma/project/rmon")
+    Observable<BaseBean> delMan(@Query("project_id") String proId, @Query("user_id") String userId);
 }

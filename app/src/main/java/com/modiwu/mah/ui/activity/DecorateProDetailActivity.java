@@ -108,6 +108,7 @@ public class DecorateProDetailActivity extends BaseCommonActivity {
                         }).show();
             }
         });
+
         mBGABanner.setAdapter((banner, itemView, model, position) ->
                 Glide.with(mBaseActivity)
                         .load(model)
@@ -118,13 +119,56 @@ public class DecorateProDetailActivity extends BaseCommonActivity {
         tvBarRight.setOnClickListener(v -> {
             boolean isEdit = "编辑".equals(tvBarRight.getText().toString());
             tvBarRight.setText(isEdit ? "保存" : "编辑");
-            Observable.fromIterable(mCommonManBeans).subscribe(commonBean -> commonBean.isEdit = isEdit);
-            Observable.fromIterable(mCommonSvsBeans).subscribe(commonBean -> commonBean.isEdit = isEdit);
-            Observable.fromIterable(mCommonWorkerBeans).subscribe(commonBean -> commonBean.isEdit = isEdit);
-            mManAdapter.notifyDataSetChanged();
-            mSuperViewAdapter.notifyDataSetChanged();
-            mWorkerAdapter.notifyDataSetChanged();
+            delOne(isEdit);
         });
+        mWorkerAdapter.setOnItemClickListener((adapter, view, position) -> {
+            boolean isEdit = "编辑".equals(tvBarRight.getText().toString());
+            if (!isEdit) {
+                mPresenter.delWorker(mProId, mWorkerAdapter.getData().get(position).user_id + "");
+            }
+        });
+        mSuperViewAdapter.setOnItemClickListener((adapter, view, position) -> {
+            boolean isEdit = "编辑".equals(tvBarRight.getText().toString());
+            if (!isEdit) {
+                mPresenter.delSV(mProId, mSuperViewAdapter.getData().get(position).user_id + "");
+            }
+        });
+        mManAdapter.setOnItemClickListener((adapter, view, position) -> {
+            boolean isEdit = "编辑".equals(tvBarRight.getText().toString());
+            if (!isEdit) {
+                mPresenter.delMan(mProId, mManAdapter.getData().get(position).user_id + "");
+            }
+        });
+    }
+
+    private void delOne(boolean isEdit) {
+        Observable.fromIterable(mCommonManBeans).subscribe(commonBean -> commonBean.isEdit = isEdit);
+        Observable.fromIterable(mCommonSvsBeans).subscribe(commonBean -> commonBean.isEdit = isEdit);
+        Observable.fromIterable(mCommonWorkerBeans).subscribe(commonBean -> commonBean.isEdit = isEdit);
+        mManAdapter.notifyDataSetChanged();
+        mSuperViewAdapter.notifyDataSetChanged();
+        mWorkerAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void delWorker() {
+        super.delWorker();
+        mPresenter.getProInfo(mProId);
+        tvBarRight.setText("编辑");
+    }
+
+    @Override
+    public void delMan() {
+        super.delMan();
+        mPresenter.getProInfo(mProId);
+        tvBarRight.setText("编辑");
+    }
+
+    @Override
+    public void delSv() {
+        super.delSv();
+        mPresenter.getProInfo(mProId);
+        tvBarRight.setText("编辑");
     }
 
     @Override

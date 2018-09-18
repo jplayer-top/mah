@@ -67,8 +67,8 @@ public class DecorateProInfoPresenter extends BasePresenter<DecorateFragment> {
                 });
     }
 
-    public void taskRatingFinish(String proId, String workId, String rating) {
-        mModel.taskRatingFinish(proId, workId, rating)
+    public void taskRatingFinish(String proId, String taskid, String rating) {
+        mModel.taskRatingFinish(proId, taskid, rating)
                 .subscribe(new SampleShowDialogObserver<BaseBean>(mIView.getContext()) {
                     @Override
                     protected void onSuccess(BaseBean bean) throws Exception {

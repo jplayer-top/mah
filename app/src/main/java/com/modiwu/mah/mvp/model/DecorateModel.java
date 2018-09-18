@@ -61,10 +61,10 @@ public class DecorateModel {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    public Observable<BaseBean> taskRatingFinish(String proId, String workId, String rating) {
+    public Observable<BaseBean> taskRatingFinish(String proId, String taskid, String rating) {
         return RetrofitManager.init()
                 .create(MahServer.class)
-                .taskRatingFinish(proId, workId, rating)
+                .taskRatingFinish(proId, taskid, rating)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
@@ -237,6 +237,30 @@ public class DecorateModel {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
+    public Observable<BaseBean> delWorker(String proId, String userId) {
+        return RetrofitManager.init()
+                .create(MahServer.class)
+                .delWorker(proId, userId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Observable<BaseBean> delSv(String proId, String userId) {
+        return RetrofitManager.init()
+                .create(MahServer.class)
+                .delSv(proId, userId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Observable<BaseBean> delMan(String proId, String userId) {
+        return RetrofitManager.init()
+                .create(MahServer.class)
+                .delMan(proId, userId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
     public Observable<MsgListBean> getMsgList() {
         return RetrofitManager.init()
                 .create(MahServer.class)
@@ -252,4 +276,5 @@ public class DecorateModel {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
+
 }
