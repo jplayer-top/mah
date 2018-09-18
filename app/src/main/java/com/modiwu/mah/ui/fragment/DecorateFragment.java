@@ -29,6 +29,7 @@ import com.modiwu.mah.ui.activity.DecorateShiGongActivity;
 import com.modiwu.mah.ui.adapter.DecorateAdapter;
 import com.modiwu.mah.ui.adapter.DecorateProgressAdapter;
 import com.modiwu.mah.ui.dialog.DialogChangeMan;
+import com.modiwu.mah.ui.dialog.DialogPushDel;
 import com.modiwu.mah.ui.dialog.DialogSelectStatus;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
@@ -349,7 +350,8 @@ public class DecorateFragment extends BaseFragment {
             mAdapter.setNewData(tasks.get(0).works);
             mAdapter.setOnItemChildClickListener((adapter, view, position) -> {
                 if (view.getId() == R.id.ivPushDel) {
-                    mPresenter.requestDelPush(mProId, mAdapter.getData().get(position).work_id + "");
+                    new DialogPushDel(getContext()).show(R.id.tvSure, view1 ->
+                            mPresenter.requestDelPush(mProId, mAdapter.getData().get(position).work_id + ""));
                 }
                 return false;
             });
@@ -366,7 +368,6 @@ public class DecorateFragment extends BaseFragment {
                 }
 
             });
-
 
             mProgressAdapter.setOnItemChildClickListener((adapter, view, position) -> {
                 if (view.getId() == R.id.ivChangeStatus) {

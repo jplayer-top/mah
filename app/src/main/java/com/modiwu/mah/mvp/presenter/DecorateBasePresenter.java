@@ -105,7 +105,7 @@ public class DecorateBasePresenter extends BasePresenter<BaseCommonActivity> {
     public void getWorkerAllProList() {
         mModel.getWorkerAllProList()
                 .subscribe(bean -> {
-                    mIView.getAllProList(bean);
+                    mIView.getWorkerAllProList(bean);
                 }, throwable -> {
                 });
     }

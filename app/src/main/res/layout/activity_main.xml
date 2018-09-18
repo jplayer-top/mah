@@ -12,27 +12,148 @@
         android:layout_height="0dp"
         android:layout_weight="1"/>
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:contentDescription="@string/app_name"
-        android:scaleType="fitXY"
-        android:src="@drawable/toolbar_shadow"/>
 
-    <devlight.io.library.ntb.NavigationTabBar
-        android:id="@+id/ntb"
+    <LinearLayout
+        android:background="@color/colorEEE"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/mainNavigationBarHeight"
-        app:ntb_active_color="@color/colorBlackGold"
-        app:ntb_animation_duration="0"
-        app:ntb_bg_color="@color/colorWhite"
-        app:ntb_icon_size_fraction="0.4"
-        app:ntb_inactive_color="@color/color666"
-        app:ntb_scaled="true"
-        app:ntb_swiped="true"
-        app:ntb_tinted="true"
-        app:ntb_title_mode="all"
-        app:ntb_title_size="10sp"
-        app:ntb_titled="true"/>
+        android:layout_height="55dp">
+
+        <LinearLayout
+            android:id="@+id/llHome"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/ivHome"
+                android:layout_width="@dimen/dimen_20dp"
+                android:layout_height="@dimen/dimen_20dp"
+                android:layout_marginTop="@dimen/dimen_6dp"
+                android:src="@drawable/select_main_home"/>
+
+            <TextView
+                android:id="@+id/tvHome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="首页"
+                android:textColor="@drawable/selector_text_333_theme"
+                android:textSize="@dimen/dimen_10sp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llScheme"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/ivScheme"
+                android:layout_width="@dimen/dimen_20dp"
+                android:layout_height="@dimen/dimen_20dp"
+                android:layout_marginTop="@dimen/dimen_6dp"
+                android:src="@drawable/select_main_scheme"/>
+
+            <TextView
+                android:id="@+id/tvScheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="方案"
+                android:textColor="@drawable/selector_text_333_theme"
+                android:textSize="@dimen/dimen_10sp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llDecorate"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/ivDecorate"
+                android:layout_width="@dimen/dimen_20dp"
+                android:layout_height="@dimen/dimen_20dp"
+                android:layout_marginTop="@dimen/dimen_6dp"
+                android:src="@drawable/select_main_decorate"/>
+
+            <TextView
+                android:id="@+id/tvDecorate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="我的家装"
+                android:textColor="@drawable/selector_text_333_theme"
+                android:textSize="@dimen/dimen_10sp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llDesign"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/ivDesign"
+                android:layout_width="@dimen/dimen_20dp"
+                android:layout_height="@dimen/dimen_20dp"
+                android:layout_marginTop="@dimen/dimen_6dp"
+                android:src="@drawable/select_main_charpenter"/>
+
+            <TextView
+                android:id="@+id/tvDesign"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="匠·器"
+                android:textColor="@drawable/selector_text_333_theme"
+                android:textSize="@dimen/dimen_10sp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llMe"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/ivMe"
+                android:layout_width="@dimen/dimen_20dp"
+                android:layout_height="@dimen/dimen_20dp"
+                android:layout_marginTop="@dimen/dimen_6dp"
+                android:src="@drawable/select_main_me"/>
+
+            <TextView
+                android:id="@+id/tvMe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="我的"
+                android:textColor="@drawable/selector_text_333_theme"
+                android:textSize="@dimen/dimen_10sp"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <!--<devlight.io.library.ntb.NavigationTabBar-->
+    <!--android:id="@+id/ntb"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="@dimen/mainNavigationBarHeight"-->
+    <!--android:background="@color/colorEEE"-->
+    <!--app:ntb_active_color="@color/chocolate"-->
+    <!--app:ntb_animation_duration="0"-->
+    <!--app:ntb_bg_color="@color/colorWhite"-->
+    <!--app:ntb_icon_size_fraction="0.4"-->
+    <!--app:ntb_inactive_color="@color/color323232"-->
+    <!--app:ntb_scaled="false"-->
+    <!--app:ntb_swiped="true"-->
+    <!--app:ntb_tinted="true"-->
+    <!--app:ntb_title_mode="all"-->
+    <!--app:ntb_title_size="10sp"-->
+    <!--app:ntb_titled="true"/>-->
 
 </LinearLayout>

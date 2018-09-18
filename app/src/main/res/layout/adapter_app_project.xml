@@ -12,6 +12,7 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/tvProId"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dimen_10dp"
@@ -19,6 +20,7 @@
             android:text="项目编号：201806071203"/>
 
         <TextView
+            android:id="@+id/tvProName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dimen_10dp"
@@ -28,6 +30,7 @@
             android:textStyle="bold"/>
 
         <TextView
+            android:id="@+id/tvNamePhone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dimen_10dp"
@@ -35,6 +38,7 @@
             android:text="负责人：某某某 18300000000"/>
 
         <TextView
+            android:id="@+id/tvTask"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dimen_10dp"
@@ -51,12 +55,13 @@
         android:textSize="@dimen/dimen_12sp"/>
 
     <TextView
+        android:id="@+id/tvRating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical|end"
         android:layout_marginEnd="@dimen/dimen_20dp"
         android:layout_marginTop="@dimen/dimen_30dp"
-        android:text="5.0"
+        android:text="5"
         android:textColor="@color/chocolate"
         android:textSize="@dimen/dimen_30sp"
         android:textStyle="italic"/>

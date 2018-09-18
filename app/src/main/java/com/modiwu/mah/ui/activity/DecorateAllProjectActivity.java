@@ -43,6 +43,7 @@ public class DecorateAllProjectActivity extends BaseCommonActivity {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mSelect = (String) SharePreUtil.getData(this, "decorate_select", "监理");
         mEquals = "监理".equals(mSelect);
+        mIvGoBack.setImageDrawable(getResources().getDrawable(R.drawable.decorate_back));
         mPresenter = new DecorateBasePresenter(this);
         if (mEquals) {
             mSvAdapter = new AddProjectAdapter(null);

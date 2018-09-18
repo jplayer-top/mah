@@ -41,12 +41,12 @@
                 android:contentDescription="@string/app_name"
                 android:drawableEnd="@drawable/home_local_sel"
                 android:drawablePadding="@dimen/dp_4"
-                android:drawableRight="@drawable/home_local_sel"
                 android:gravity="center"
                 android:paddingLeft="10dp"
                 android:paddingStart="10dp"
                 android:scaleType="center"
                 android:text="烟台"
+                android:textStyle="bold"
                 android:visibility="gone"
                 tools:ignore="PrivateResource,RtlHardcoded,RtlSymmetry"/>
 

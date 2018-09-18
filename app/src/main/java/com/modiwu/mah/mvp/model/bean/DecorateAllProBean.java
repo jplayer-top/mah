@@ -27,5 +27,7 @@ public class DecorateAllProBean extends BaseBean{
         public String project_name;
         public String user_name;
         public String user_phone;
+        public String flow_name;
+        public int appraise;
     }
 }

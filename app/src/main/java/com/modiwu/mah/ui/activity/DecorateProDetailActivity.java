@@ -14,6 +14,7 @@ import com.modiwu.mah.base.BaseCommonActivity;
 import com.modiwu.mah.mvp.model.bean.ProInfoBean;
 import com.modiwu.mah.mvp.presenter.DecorateBasePresenter;
 import com.modiwu.mah.ui.adapter.DecorateItemCommonAdapter;
+import com.modiwu.mah.ui.dialog.DialogPushDel;
 import com.modiwu.mah.ui.dialog.DialogSelectOtherMan;
 
 import java.util.List;
@@ -124,19 +125,25 @@ public class DecorateProDetailActivity extends BaseCommonActivity {
         mWorkerAdapter.setOnItemClickListener((adapter, view, position) -> {
             boolean isEdit = "编辑".equals(tvBarRight.getText().toString());
             if (!isEdit) {
-                mPresenter.delWorker(mProId, mWorkerAdapter.getData().get(position).user_id + "");
+                new DialogPushDel(this).show(R.id.tvSure, view1 -> {
+                    mPresenter.delWorker(mProId, mWorkerAdapter.getData().get(position).user_id + "");
+                });
             }
         });
         mSuperViewAdapter.setOnItemClickListener((adapter, view, position) -> {
             boolean isEdit = "编辑".equals(tvBarRight.getText().toString());
             if (!isEdit) {
-                mPresenter.delSV(mProId, mSuperViewAdapter.getData().get(position).user_id + "");
+                new DialogPushDel(this).show(R.id.tvSure, view1 -> {
+                    mPresenter.delSV(mProId, mSuperViewAdapter.getData().get(position).user_id + "");
+                });
             }
         });
         mManAdapter.setOnItemClickListener((adapter, view, position) -> {
             boolean isEdit = "编辑".equals(tvBarRight.getText().toString());
             if (!isEdit) {
-                mPresenter.delMan(mProId, mManAdapter.getData().get(position).user_id + "");
+                new DialogPushDel(this).show(R.id.tvSure, view1 -> {
+                    mPresenter.delMan(mProId, mManAdapter.getData().get(position).user_id + "");
+                });
             }
         });
     }

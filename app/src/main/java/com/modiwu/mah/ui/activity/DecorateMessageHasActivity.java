@@ -65,11 +65,19 @@ public class DecorateMessageHasActivity extends BaseCommonActivity {
     @Override
     public void getMsgHasInfo(MsgHasBean bean) {
         super.getMsgHasInfo(bean);
-        mClInv.setVisibility("1".equals(bean.hasinv) ? View.VISIBLE : View.GONE);
-        mClPro.setVisibility("1".equals(bean.hasmsg) ? View.VISIBLE : View.GONE);
+        boolean hasInv = "1".equals(bean.hasinv);
+        mClInv.setVisibility(hasInv ? View.VISIBLE : View.GONE);
+        boolean hasMsg = "1".equals(bean.hasmsg);
+        mClPro.setVisibility(hasMsg ? View.VISIBLE : View.GONE);
         mIvRedTip.setVisibility("1".equals(bean.hastip) ? View.VISIBLE : View.GONE);
-        mTvTime.setText(bean.inv.ct);
-        mTvSubTitle.setText(String.format(Locale.CHINA, "%s邀您加入%s", bean.inv.invu_name, bean.inv.project_name));
+        if (hasInv) {
+            mTvTime.setText(bean.inv.ct);
+            mTvSubTitle.setText(String.format(Locale.CHINA, "%s邀您加入%s", bean.inv.invu_name, bean.inv.project_name));
+        }
+        if (hasMsg) {
+            mTvTimePro.setText(bean.wmsg.ct);
+            mTvSubTitlePro.setText(bean.wmsg.subtitle);
+        }
     }
 
     @Subscribe

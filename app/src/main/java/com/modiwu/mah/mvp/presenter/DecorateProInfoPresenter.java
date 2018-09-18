@@ -29,6 +29,11 @@ public class DecorateProInfoPresenter extends BasePresenter<DecorateFragment> {
                 .subscribe(bean -> {
                     mIView.responseWorker(bean);
                 }, throwable -> {
+                    if (throwable.getMessage().contains("401")) {
+                        ToastUtils.init().showErrorToast(mIView.getContext(), "请先登录");
+                    }
+                    mIView.smartRefreshLayout.finishRefresh(true);
+                    mIView.mMultipleStatusView.showError();
                 });
     }
 
@@ -37,13 +42,24 @@ public class DecorateProInfoPresenter extends BasePresenter<DecorateFragment> {
                 .subscribe(bean -> {
                     mIView.responseSv(bean);
                 }, throwable -> {
+                    if (throwable.getMessage().contains("401")) {
+                        ToastUtils.init().showErrorToast(mIView.getContext(), "请先登录");
+                    }
+                    mIView.smartRefreshLayout.finishRefresh(true);
+                    mIView.mMultipleStatusView.showError();
                 });
     }
 
     public void requestManPro() {
         mModel.requestManPro()
-                .subscribe(decorateBean -> mIView.responseMan(decorateBean), throwable -> {
-                });
+                .subscribe(decorateBean -> mIView.responseMan(decorateBean)
+                        , throwable -> {
+                            if (throwable.getMessage().contains("401")) {
+                                ToastUtils.init().showErrorToast(mIView.getContext(), "请先登录");
+                            }
+                            mIView.smartRefreshLayout.finishRefresh(true);
+                            mIView.mMultipleStatusView.showError();
+                        });
     }
 
     public void requestDelPush(String proId, String taskId) {
