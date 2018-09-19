@@ -2,6 +2,7 @@ package com.modiwu.mah.ui.activity;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.modiwu.mah.R;
 import com.modiwu.mah.base.BaseCommonActivity;
@@ -12,6 +13,8 @@ import com.modiwu.mah.ui.adapter.AddProjectAdapter;
 import com.modiwu.mah.ui.adapter.AllProjectAdapter;
 
 import org.greenrobot.eventbus.EventBus;
+
+import java.util.List;
 
 import top.jplayer.baseprolibrary.utils.SharePreUtil;
 
@@ -29,6 +32,7 @@ public class DecorateAllProjectActivity extends BaseCommonActivity {
     private DecorateBasePresenter mPresenter;
     private String mSelect;
     private boolean mEquals;
+    private View mEmptyView;
 
     @Override
     public int setBaseLayout() {
@@ -40,6 +44,8 @@ public class DecorateAllProjectActivity extends BaseCommonActivity {
         mMultipleStatusView = addRootView.findViewById(R.id.multiplestatusview);
         smartRefreshLayout = addRootView.findViewById(R.id.smartRefreshLayout);
         mRecyclerView = mFlRootView.findViewById(R.id.recyclerView);
+        mEmptyView = mFlRootView.findViewById(R.id.empty_view);
+        mEmptyView.setVisibility(View.GONE);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mSelect = (String) SharePreUtil.getData(this, "decorate_select", "监理");
         mEquals = "监理".equals(mSelect);
@@ -77,7 +83,12 @@ public class DecorateAllProjectActivity extends BaseCommonActivity {
     public void getWorkerAllProList(DecorateAllProBean bean) {
         smartRefreshLayout.finishRefresh();
         mMultipleStatusView.showContent();
-        mWorkerAdapter.setNewData(bean.projects);
+        List<DecorateAllProBean.ProjectsBean> projects = bean.projects;
+        if (projects.size() < 1) {
+            mEmptyView.setVisibility(View.VISIBLE);
+        } else {
+            mWorkerAdapter.setNewData(projects);
+        }
     }
 
     @Override
@@ -85,6 +96,11 @@ public class DecorateAllProjectActivity extends BaseCommonActivity {
         super.getAllProList(bean);
         smartRefreshLayout.finishRefresh();
         mMultipleStatusView.showContent();
-        mSvAdapter.setNewData(bean.projects);
+        List<DecorateAllProBean.ProjectsBean> projects = bean.projects;
+        if (projects.size() < 1) {
+            mEmptyView.setVisibility(View.VISIBLE);
+        } else {
+            mSvAdapter.setNewData(projects);
+        }
     }
 }

@@ -39,9 +39,7 @@ public class DecorateProInfoPresenter extends BasePresenter<DecorateFragment> {
 
     public void requestSVPro(String id) {
         mModel.requestSVPro(id)
-                .subscribe(bean -> {
-                    mIView.responseSv(bean);
-                }, throwable -> {
+                .subscribe(bean -> mIView.responseSv(bean), throwable -> {
                     if (throwable.getMessage().contains("401")) {
                         ToastUtils.init().showErrorToast(mIView.getContext(), "请先登录");
                     }

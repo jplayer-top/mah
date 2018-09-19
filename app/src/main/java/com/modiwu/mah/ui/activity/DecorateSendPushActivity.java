@@ -110,26 +110,27 @@ public class DecorateSendPushActivity extends BaseCommonActivity {
                 ToastUtils.init().showInfoToast(this, "请选择施工类型");
                 return;
             }
-            if (mRowsBeans.size() < 1) {
-                ToastUtils.init().showInfoToast(this, "请选择参与人员");
-                return;
-            }
+
             if (StringUtils.getInstance().isNullObj(mEditInputText)) {
                 ToastUtils.init().showInfoToast(this, "请输入施工信息");
                 return;
             }
 
-            StringBuilder stringBuilder = new StringBuilder();
-            Observable.fromIterable(mRowsBeans).subscribe(rowsBean -> {
-                stringBuilder.append(rowsBean.user_id);
-                stringBuilder.append(",");
-            });
+
             MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM)
                     .addFormDataPart("project_id", mProject_id)
                     .addFormDataPart("task_id", mTask_id)
                     .addFormDataPart("flow_id", flow_id)
-                    .addFormDataPart("work_content", mEditInputText.getText().toString())
-                    .addFormDataPart("workers", stringBuilder.toString());
+                    .addFormDataPart("work_content", mEditInputText.getText().toString());
+            if (mRowsBeans.size() > 0) {
+                StringBuilder stringBuilder = new StringBuilder();
+                Observable.fromIterable(mRowsBeans).subscribe(rowsBean -> {
+                    stringBuilder.append(rowsBean.user_id);
+                    stringBuilder.append(",");
+                });
+                builder.addFormDataPart("workers", stringBuilder.toString());
+            }
+
             Observable.fromIterable(mArrayList).subscribe(file -> builder.addFormDataPart("imgs", file.getName(), RequestBody.create(MediaType.parse("image/*"), file)));
             RequestBody requestBody = builder.build();
             mPresenter.sendPush(requestBody);
@@ -170,7 +171,6 @@ public class DecorateSendPushActivity extends BaseCommonActivity {
     protected void getLocationYes(List<String> grantedPermissions) {
         int size = mAdapter.getData().size();
         CameraUtils.getInstance().openSize(this, 8 - size);
-
     }
 
     @Subscribe
@@ -224,6 +224,7 @@ public class DecorateSendPushActivity extends BaseCommonActivity {
     public void sendPush() {
         super.sendPush();
         EventBus.getDefault().post(new SelectDecorateEvent("监理"));
+        finish();
     }
 
     @PermissionNo(100)

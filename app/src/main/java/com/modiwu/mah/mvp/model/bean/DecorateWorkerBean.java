@@ -9,7 +9,7 @@ import top.jplayer.baseprolibrary.mvp.model.bean.BaseBean;
  * github : https://github.com/oblivion0001
  */
 
-public class DecorateWorkerBean extends BaseBean{
+public class DecorateWorkerBean extends BaseBean {
 
     /**
      * iswm : 1
@@ -20,7 +20,7 @@ public class DecorateWorkerBean extends BaseBean{
      */
 
     public String iswm;
-    public int appraise;
+    public float appraise;
     public int ing;
     public int ed;
     public InfoBean info;

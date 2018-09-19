@@ -13,6 +13,7 @@ import com.modiwu.mah.R;
 import com.modiwu.mah.base.BaseCommonActivity;
 import com.modiwu.mah.mvp.model.bean.LocalBean;
 import com.modiwu.mah.mvp.model.bean.PostLocalBean;
+import com.modiwu.mah.mvp.model.event.SelectDecorateEvent;
 import com.modiwu.mah.mvp.presenter.DecorateCreateProPresenter;
 import com.modiwu.mah.ui.adapter.DecorateItemPicAdapter;
 import com.modiwu.mah.utils.CameraUtils;
@@ -20,6 +21,8 @@ import com.modiwu.mah.utils.StringUtils;
 import com.yanzhenjie.permission.AndPermission;
 import com.yanzhenjie.permission.PermissionNo;
 import com.yanzhenjie.permission.PermissionYes;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -277,5 +280,10 @@ public class DecorateCreateProActivity extends BaseCommonActivity {
         super.onDestroy();
         KeyBoardUtils.closeInput(this, mFlRootView);
         mUnbinder.unbind();
+    }
+
+    public void createProSuccess() {
+        EventBus.getDefault().post(new SelectDecorateEvent("业主"));
+        finish();
     }
 }

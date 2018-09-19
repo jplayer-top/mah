@@ -41,6 +41,7 @@ public class DecorateCreateProPresenter extends BasePresenter<DecorateCreateProA
                 .subscribe(new SampleShowDialogObserver<BaseBean>(mIView) {
                     @Override
                     protected void onSuccess(BaseBean baseBean) throws Exception {
+                        mIView.createProSuccess();
                         ToastUtils.init().showSuccessToast(mIView,baseBean.msg);
                     }
                 });

@@ -42,7 +42,7 @@ public class DecorateProgressAdapter extends BaseQuickAdapter<DecorateManBean.Ta
             clBgSel.setBackgroundColor(mContext.getResources().getColor(R.color.white));
         }
         Glide.with(mContext)
-                .load(item.seg_icon)
+                .load(item.seg_icon_url)
                 .apply(GlideUtils.init().options(R.drawable.decorate_diannuan))
                 .into(ivStc);
     }

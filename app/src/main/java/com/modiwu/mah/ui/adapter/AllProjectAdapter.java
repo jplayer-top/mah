@@ -25,7 +25,7 @@ public class AllProjectAdapter extends BaseQuickAdapter<DecorateAllProBean.Proje
         helper.setText(R.id.tvProId, String.format(Locale.CHINA, "项目编号：%s", item.project_id))
                 .setText(R.id.tvNamePhone, String.format(Locale.CHINA, "负责人：%s %s", item.user_name, item.user_phone))
                 .setText(R.id.tvTask, String.format(Locale.CHINA, "参与项目环节：%s", item.flow_name))
-                .setText(R.id.tvRating, String.format(Locale.CHINA, "%d", item.appraise))
+                .setText(R.id.tvRating, String.format(Locale.CHINA, "%2.1f", item.appraise))
                 .setText(R.id.tvProName, String.format(Locale.CHINA, "%s", item.project_name));
     }
 }

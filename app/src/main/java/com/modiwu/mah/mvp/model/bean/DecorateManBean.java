@@ -75,7 +75,7 @@ public class DecorateManBean extends BaseBean {
         public String project_id;
         public String seg_id;
         public String seg_name;
-        public String seg_icon;
+        public String seg_icon_url;
         public String status;
         public AppraiseBean appraise;
         public boolean isSel = false;
@@ -85,7 +85,7 @@ public class DecorateManBean extends BaseBean {
             public int task_id;
             public int user_id;
             public String project_id;
-            public int appraise;
+            public float appraise;
             public String flag;
             public String ct;
         }
@@ -131,7 +131,7 @@ public class DecorateManBean extends BaseBean {
             public String work_content;
             public String work_imgs;
             public String flag;
-            public int appraise;
+            public float appraise;
             public String ct;
             public List<WorksBean> works;
             public List<String> imgsurl;
