@@ -80,7 +80,7 @@
             android:layout_marginStart="@dimen/dimen_10dp"
             android:isIndicator="false"
             android:numStars="5"
-            android:rating="4"
+            android:rating="5"
             android:theme="@style/RatingBar.White"
             app:layout_constraintBottom_toBottomOf="@+id/tvTipRating"
             app:layout_constraintStart_toEndOf="@+id/tvTipRating"

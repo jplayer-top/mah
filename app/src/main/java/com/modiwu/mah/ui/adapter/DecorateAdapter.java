@@ -9,6 +9,9 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.modiwu.mah.R;
 import com.modiwu.mah.mvp.model.bean.DecorateManBean;
+import com.modiwu.mah.mvp.model.event.RatingBarItemWorkEvent;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,6 +59,7 @@ public class DecorateAdapter extends BaseQuickAdapter<DecorateManBean.TasksBean.
         boolean isIndicator = "0".equals(item.flag);
         ratingBar.setIsIndicator(!(isMan && isIndicator));
         ratingBar.setRating(item.appraise);
+        ratingBar.setOnRatingBarChangeListener((ratingBar1, rating, fromUser) -> EventBus.getDefault().post(new RatingBarItemWorkEvent(rating)));
         helper.setText(R.id.tvContent, item.work_content)
                 .setText(R.id.tvContentStd, item.flow_std)
                 .setText(R.id.tvTime, " | " + item.ct)

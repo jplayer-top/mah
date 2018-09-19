@@ -15,6 +15,7 @@ import com.modiwu.mah.base.BaseFragment;
 import com.modiwu.mah.mvp.model.bean.DecorateManBean;
 import com.modiwu.mah.mvp.model.bean.DecorateWorkerBean;
 import com.modiwu.mah.mvp.model.event.DialogSelStatusEvent;
+import com.modiwu.mah.mvp.model.event.RatingBarItemWorkEvent;
 import com.modiwu.mah.mvp.model.event.SelProIdDecorateEvent;
 import com.modiwu.mah.mvp.model.event.SelectDecorateEvent;
 import com.modiwu.mah.mvp.presenter.DecorateProInfoPresenter;
@@ -231,6 +232,13 @@ public class DecorateFragment extends BaseFragment {
         requestInfoByText(event.type);
     }
 
+    public float ratingBarItemWork = 5.0f;
+
+    @Subscribe
+    public void onEvnet(RatingBarItemWorkEvent event) {
+        this.ratingBarItemWork = event.rating;
+    }
+
     private void requestInfoByText(String type) {
         int des = R.drawable.decorate_yezhu;
         if ("施工".equals(type)) {
@@ -288,15 +296,26 @@ public class DecorateFragment extends BaseFragment {
             mAdapter.setNewData(tasks.get(0).works);
             mAdapter.setOnItemChildClickListener((adapter, view, position) -> {
                 if (view.getId() == R.id.tvSure) {
-                    mPresenter.ratingWork(mProId, mAdapter.getData().get(position).work_id + "", (int) mRatingBar.getRating() + "");
+                    mPresenter.ratingWork(mProId, mAdapter.getData().get(position).work_id + "", ratingBarItemWork + "");
                 }
                 return false;
             });
-            mTvSureRating.setOnClickListener(v -> {
-                mPresenter.taskRatingFinish(mProId, mProgressAdapter.getData().get(curTask).task_id + "", (int)
-                        mTaskRatingBar.getRating() + "");
-            });
-            mConManSure.setVisibility(baseBean.tasks.get(0).appraise != null ? View.VISIBLE : View.GONE);
+            DecorateManBean.TasksBean.AppraiseBean appraise = baseBean.tasks.get(0).appraise;
+            mConManSure.setVisibility(appraise != null ? View.VISIBLE : View.GONE);
+            if (appraise != null) {
+                if ("0".equals(appraise.flag)) {
+                    mTvSureRating.setVisibility(View.VISIBLE);
+                    mTvSureRating.setOnClickListener(v -> {
+                        mPresenter.taskRatingFinish(mProId, mProgressAdapter.getData().get(curTask).task_id + "",
+                                mTvRatingNum.getText().toString());
+                    });
+                    mTaskRatingBar.setIsIndicator(false);
+                } else {
+                    mTvSureRating.setVisibility(View.INVISIBLE);
+                    mTaskRatingBar.setRating(appraise.appraise);
+                    mTaskRatingBar.setIsIndicator(true);
+                }
+            }
             mTvTitleHeader.setText(baseBean.project.project_name);
             mProgressAdapter.setNewData(baseBean.tasks);
             mTvProDetail.setText("项目介绍 >");
@@ -324,6 +343,20 @@ public class DecorateFragment extends BaseFragment {
                 mAdapter.setNewData(works);
                 mProgressAdapter.notifyDataSetChanged();
                 mConManSure.setVisibility(tasksBean.appraise != null ? View.VISIBLE : View.GONE);
+                if (tasksBean.appraise != null) {
+                    if ("0".equals(tasksBean.appraise.flag)) {
+                        mTvSureRating.setVisibility(View.VISIBLE);
+                        mTvSureRating.setOnClickListener(v -> {
+                            mPresenter.taskRatingFinish(mProId, mProgressAdapter.getData().get(curTask).task_id + "",
+                                    mTvRatingNum.getText().toString());
+                        });
+                        mTaskRatingBar.setIsIndicator(false);
+                    } else {
+                        mTvSureRating.setVisibility(View.INVISIBLE);
+                        mTaskRatingBar.setRating(tasksBean.appraise.appraise);
+                        mTaskRatingBar.setIsIndicator(true);
+                    }
+                }
                 return false;
             });
         }
@@ -407,8 +440,7 @@ public class DecorateFragment extends BaseFragment {
                 }
                 return false;
             });
-            mTvSendPush.setEnabled(true);
-
+            mTvSendPush.setEnabled(!"2".equals(baseBean.tasks.get(0).status));
             mTvSendPush.setOnClickListener(v -> {
                 Bundle bundle = new Bundle();
                 DecorateManBean.TasksBean tasksBean = null;
