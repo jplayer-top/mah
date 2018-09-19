@@ -35,8 +35,10 @@ public class DecorateAdapter extends BaseQuickAdapter<DecorateManBean.TasksBean.
             recyclerViewPerson.setVisibility(View.VISIBLE);
             recyclerViewPerson.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false));
             recyclerViewPerson.setAdapter(new DecorateItemPersonAdapter(works));
+            helper.setVisible(R.id.tvPerson, true);
         } else {
             recyclerViewPerson.setVisibility(View.GONE);
+            helper.setVisible(R.id.tvPerson, false);
         }
 
         List<String> imgsurl = item.imgsurl;
@@ -50,15 +52,16 @@ public class DecorateAdapter extends BaseQuickAdapter<DecorateManBean.TasksBean.
         }
         RatingBar ratingBar = helper.itemView.findViewById(R.id.ratingBar);
         String who = (String) SharePreUtil.getData(mContext, "decorate_select", "业主");
-        boolean isIndicator = "0".equals(item.flag) && "业主".equals(who);
-        ratingBar.setIsIndicator(!isIndicator);
+        boolean isMan = "业主".equals(who);
+        boolean isIndicator = "0".equals(item.flag);
+        ratingBar.setIsIndicator(!(isMan && isIndicator));
         ratingBar.setRating(item.appraise);
         helper.setText(R.id.tvContent, item.work_content)
                 .setText(R.id.tvContentStd, item.flow_std)
                 .setText(R.id.tvTime, " | " + item.ct)
                 .setText(R.id.tvProName, item.flow_name)
-                .setVisible(R.id.tvSure, isIndicator)
-                .setVisible(R.id.ivPushDel, "监理".equals(who))
+                .setText(R.id.tvSure, isIndicator ? (isMan ? "确认" : "待评价") : "已评价")
+                .setVisible(R.id.ivPushDel, !isMan)
                 .addOnClickListener(R.id.tvSure)
                 .addOnClickListener(R.id.ivPushDel);
     }

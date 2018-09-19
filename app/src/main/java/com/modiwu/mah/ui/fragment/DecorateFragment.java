@@ -208,7 +208,6 @@ public class DecorateFragment extends BaseFragment {
 
     @Subscribe
     public void onEvent(DialogSelStatusEvent event) {
-
         if (mStatus != null && mStatus.isShowing()) {
             if (event.status == 0) {
                 mStatus.dismiss();
@@ -216,7 +215,7 @@ public class DecorateFragment extends BaseFragment {
             }
             mStatus.setBg(event.status);
         }
-        DecorateManBean.TasksBean tasksBean = mProgressAdapter.getData().get(curTask);
+        DecorateManBean.TasksBean tasksBean = mProgressAdapter.getData().get(curDialogSelchange);
         if (event.status == 1) {
             mPresenter.workIng(tasksBean.project_id, tasksBean.task_id + "");
         } else {
@@ -247,6 +246,7 @@ public class DecorateFragment extends BaseFragment {
     }
 
     private int curTask = 0;
+    private int curDialogSelchange = 0;
 
     @Override
     public void onDestroy() {
@@ -278,6 +278,7 @@ public class DecorateFragment extends BaseFragment {
             mTvTitleHeader.setText("尊敬的用户，您暂时没有装修项目");
             mTvProDetail.setText("赶紧创建一个吧");
             mTvProDetail.setEnabled(false);
+            mAdapter.setNewData(null);
         } else {
             mTvProDetail.setEnabled(true);
             mProId = baseBean.project.project_id;
@@ -386,6 +387,7 @@ public class DecorateFragment extends BaseFragment {
                         mStatus = new DialogSelectStatus(getContext());
                     }
                     mStatus.setBg(Integer.valueOf(mProgressAdapter.getData().get(position).status));
+                    curDialogSelchange = position;
                     mStatus.show();
                 } else {
                     curTask = position;
@@ -439,7 +441,6 @@ public class DecorateFragment extends BaseFragment {
             ActivityUtils.init().start(getContext(), DecorateShiGongActivity.class, "我是施工人员");
             return;
         }
-
         mAdapter.addHeaderView(mHeaderWorker, 1);
         DecorateWorkerBean.InfoBean infoBean = baseBean.info;
         mTvTitleHeader.setText(String.format(Locale.CHINA, "%s施工人员", infoBean.work_type));

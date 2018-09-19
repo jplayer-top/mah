@@ -155,7 +155,9 @@ public class DecorateShiGongRegisterActivity extends BaseCommonActivity {
         super.regWorker();
         llRegOk.setVisibility(View.VISIBLE);
         EventBus.getDefault().post(new SelectDecorateEvent("施工"));
-        Observable.timer(500, TimeUnit.MILLISECONDS).compose(new IoMainSchedule<>()).subscribe(
+        ToastUtils.init().showSuccessToast(this, "已您切换为施工身份");
+        SharePreUtil.saveData(this, "decorate_select", "施工");
+        Observable.timer(1, TimeUnit.SECONDS).compose(new IoMainSchedule<>()).subscribe(
                 aLong -> finish()
         );
     }
@@ -164,8 +166,10 @@ public class DecorateShiGongRegisterActivity extends BaseCommonActivity {
     public void regSuperView() {
         llRegOk.setVisibility(View.VISIBLE);
         ivRegOkSrc.setImageResource(R.drawable.decorate_reg_ok_super);
+        ToastUtils.init().showSuccessToast(this, "已您切换为监理身份");
+        SharePreUtil.saveData(this, "decorate_select", "监理");
         EventBus.getDefault().post(new SelectDecorateEvent("监理"));
-        Observable.timer(500, TimeUnit.MILLISECONDS).compose(new IoMainSchedule<>()).subscribe(
+        Observable.timer(1, TimeUnit.SECONDS).compose(new IoMainSchedule<>()).subscribe(
                 aLong -> finish()
         );
     }
