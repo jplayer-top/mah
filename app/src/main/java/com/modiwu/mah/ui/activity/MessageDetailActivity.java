@@ -1,5 +1,7 @@
 package com.modiwu.mah.ui.activity;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -29,6 +31,7 @@ public class MessageDetailActivity extends BaseCommonActivity {
     TextView mTvProName;
     @BindView(R.id.tvName)
     TextView mTvName;
+
     @BindView(R.id.tvPhone)
     TextView mTvPhone;
     @BindView(R.id.btnSure)
@@ -55,7 +58,20 @@ public class MessageDetailActivity extends BaseCommonActivity {
             mTvProName.setText(mBean.project_name);
             mBtnSure.setOnClickListener(v -> mBasePresenter.invAgree(mBean.invite_id + ""));
             mBtnCancel.setOnClickListener(v -> mBasePresenter.invCancel(mBean.invite_id + ""));
+            mTvPhone.setOnClickListener(v -> diallPhone(mTvPhone.getText().toString()));
         }
+    }
+
+    /**
+     * 拨打电话（跳转到拨号界面，用户手动点击拨打）
+     *
+     * @param phoneNum 电话号码
+     */
+    public void diallPhone(String phoneNum) {
+        Intent intent = new Intent(Intent.ACTION_DIAL);
+        Uri data = Uri.parse("tel:" + phoneNum);
+        intent.setData(data);
+        startActivity(intent);
     }
 
     @Override

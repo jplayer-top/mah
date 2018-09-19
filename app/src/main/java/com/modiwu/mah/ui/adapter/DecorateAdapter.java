@@ -74,7 +74,7 @@ public class DecorateAdapter extends BaseQuickAdapter<DecorateManBean.TasksBean.
                 .setText(R.id.tvTime, " | " + item.ct)
                 .setText(R.id.tvProName, item.flow_name)
                 .setText(R.id.tvSure, isIndicator ? (isMan ? "确认" : "待评价") : "已评价")
-                .setVisible(R.id.ivPushDel, !isMan)
+                .setVisible(R.id.ivPushDel, !isMan && isIndicator)
                 .addOnClickListener(R.id.tvSure)
                 .addOnClickListener(R.id.recyclerViewItem)
                 .addOnClickListener(R.id.ivPushDel);

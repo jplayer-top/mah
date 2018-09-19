@@ -294,15 +294,15 @@ public class DecorateFragment extends BaseFragment {
             mProId = baseBean.project.project_id;
             mAdapter.addHeaderView(mHeaderProgress, 1);
             List<DecorateManBean.TasksBean> tasks = baseBean.tasks;
-            tasks.get(0).isSel = true;
-            mAdapter.setNewData(tasks.get(0).works);
+            tasks.get(curTask).isSel = true;
+            mAdapter.setNewData(tasks.get(curTask).works);
             mAdapter.setOnItemChildClickListener((adapter, view, position) -> {
                 if (view.getId() == R.id.tvSure) {
                     mPresenter.ratingWork(mProId, mAdapter.getData().get(position).work_id + "", ratingBarItemWork + "");
                 }
                 return false;
             });
-            DecorateManBean.TasksBean.AppraiseBean appraise = baseBean.tasks.get(0).appraise;
+            DecorateManBean.TasksBean.AppraiseBean appraise = baseBean.tasks.get(curTask).appraise;
             mConManSure.setVisibility(appraise != null ? View.VISIBLE : View.GONE);
             if (appraise != null) {
                 if ("0".equals(appraise.flag)) {
@@ -395,8 +395,8 @@ public class DecorateFragment extends BaseFragment {
             mProId = baseBean.project.project_id;
             mAdapter.addHeaderView(mHeaderProgress, 1);
             List<DecorateManBean.TasksBean> tasks = baseBean.tasks;
-            tasks.get(0).isSel = true;
-            mAdapter.setNewData(tasks.get(0).works);
+            tasks.get(curTask).isSel = true;
+            mAdapter.setNewData(tasks.get(curTask).works);
             mAdapter.setOnItemChildClickListener((adapter, view, position) -> {
                 if (view.getId() == R.id.ivPushDel) {
                     mPushDel = new DialogPushDel(getContext());
@@ -454,12 +454,12 @@ public class DecorateFragment extends BaseFragment {
                 return false;
             });
 
-            boolean isFinishTask = "2".equals(baseBean.tasks.get(0).status);
+            boolean isFinishTask = "2".equals(baseBean.tasks.get(curTask).status);
             mConManSure.setVisibility(isFinishTask ? View.VISIBLE : View.GONE);
             mTvSendPush.setVisibility(!isFinishTask ? View.VISIBLE : View.GONE);
-            if (baseBean.tasks.get(0).appraise != null) {
+            if (baseBean.tasks.get(curTask).appraise != null) {
                 mTvSureRating.setVisibility(View.INVISIBLE);
-                mTaskRatingBar.setRating(baseBean.tasks.get(0).appraise.appraise);
+                mTaskRatingBar.setRating(baseBean.tasks.get(curTask).appraise.appraise);
                 mTaskRatingBar.setIsIndicator(true);
                 mTvSureRatingTip.setText("该环节已确认完工");
             }
