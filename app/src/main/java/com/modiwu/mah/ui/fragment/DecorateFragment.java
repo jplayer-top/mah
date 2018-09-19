@@ -104,6 +104,7 @@ public class DecorateFragment extends BaseFragment {
     private TextView mTvRatingNum;
     private RatingBar mTaskRatingBar;
     private DialogPushDel mPushDel;
+    private TextView mTvSureRatingTip;
 
     @Override
     public int initLayout() {
@@ -159,6 +160,7 @@ public class DecorateFragment extends BaseFragment {
         mConManSure = header_progress.findViewById(R.id.conManSure);
         mTvSureRating = header_progress.findViewById(R.id.tvSureRating);
         mTvRatingNum = header_progress.findViewById(R.id.tvRatingNum);
+        mTvSureRatingTip = header_progress.findViewById(R.id.tvSureRatingTip);
         mTaskRatingBar = header_progress.findViewById(R.id.ratingBar);
         mTaskRatingBar.setOnRatingBarChangeListener((ratingBar, rating, fromUser) -> {
             mTvRatingNum.setText(String.valueOf(rating));
@@ -310,6 +312,7 @@ public class DecorateFragment extends BaseFragment {
                                 mTvRatingNum.getText().toString());
                     });
                     mTaskRatingBar.setIsIndicator(false);
+                    mTvSureRatingTip.setText("该环节已完工，请确认");
                 } else {
                     mTvSureRating.setVisibility(View.INVISIBLE);
                     mTaskRatingBar.setRating(appraise.appraise);
@@ -351,10 +354,12 @@ public class DecorateFragment extends BaseFragment {
                                     mTvRatingNum.getText().toString());
                         });
                         mTaskRatingBar.setIsIndicator(false);
+                        mTvSureRatingTip.setText("该环节已完工，请确认");
                     } else {
                         mTvSureRating.setVisibility(View.INVISIBLE);
                         mTaskRatingBar.setRating(tasksBean.appraise.appraise);
                         mTaskRatingBar.setIsIndicator(true);
+                        mTvSureRatingTip.setText("该环节已确认完工");
                     }
                 }
                 return false;
@@ -433,14 +438,32 @@ public class DecorateFragment extends BaseFragment {
                     });
                     DecorateManBean.TasksBean tasksBean = mProgressAdapterData.get(position);
                     List<DecorateManBean.TasksBean.WorksBeanX> works = tasksBean.works;
-                    mTvSendPush.setEnabled(!"2".equals(tasksBean.status));
                     mAdapter.setNewData(works);
                     mProgressAdapter.notifyDataSetChanged();
-
+                    boolean isFinishTask = "2".equals(tasksBean.status);
+                    mConManSure.setVisibility(isFinishTask ? View.VISIBLE : View.GONE);
+                    mTvSendPush.setVisibility(!isFinishTask ? View.VISIBLE : View.GONE);
+                    mTvSendPush.setEnabled(!"2".equals(tasksBean.status));
+                    if (tasksBean.appraise != null) {
+                        mTvSureRating.setVisibility(View.INVISIBLE);
+                        mTaskRatingBar.setRating(tasksBean.appraise.appraise);
+                        mTaskRatingBar.setIsIndicator(true);
+                        mTvSureRatingTip.setText("该环节已确认完工");
+                    }
                 }
                 return false;
             });
-            mTvSendPush.setEnabled(!"2".equals(baseBean.tasks.get(0).status));
+
+            boolean isFinishTask = "2".equals(baseBean.tasks.get(0).status);
+            mConManSure.setVisibility(isFinishTask ? View.VISIBLE : View.GONE);
+            mTvSendPush.setVisibility(!isFinishTask ? View.VISIBLE : View.GONE);
+            if (baseBean.tasks.get(0).appraise != null) {
+                mTvSureRating.setVisibility(View.INVISIBLE);
+                mTaskRatingBar.setRating(baseBean.tasks.get(0).appraise.appraise);
+                mTaskRatingBar.setIsIndicator(true);
+                mTvSureRatingTip.setText("该环节已确认完工");
+            }
+            mTvSendPush.setEnabled(!isFinishTask);
             mTvSendPush.setOnClickListener(v -> {
                 Bundle bundle = new Bundle();
                 DecorateManBean.TasksBean tasksBean = null;

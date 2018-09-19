@@ -1,5 +1,6 @@
 package com.modiwu.mah.ui.adapter;
 
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -10,12 +11,14 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.modiwu.mah.R;
 import com.modiwu.mah.mvp.model.bean.DecorateManBean;
 import com.modiwu.mah.mvp.model.event.RatingBarItemWorkEvent;
+import com.modiwu.mah.ui.activity.PicViewPagerActivity;
 
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import top.jplayer.baseprolibrary.utils.ActivityUtils;
 import top.jplayer.baseprolibrary.utils.SharePreUtil;
 
 /**
@@ -49,7 +52,13 @@ public class DecorateAdapter extends BaseQuickAdapter<DecorateManBean.TasksBean.
         if (imgsurl.size() > 0) {
             recyclerViewPic.setVisibility(View.VISIBLE);
             recyclerViewPic.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false));
-            recyclerViewPic.setAdapter(new DecorateItemPicBigAdapter(imgsurl));
+            DecorateItemPicBigAdapter adapter = new DecorateItemPicBigAdapter(imgsurl);
+            recyclerViewPic.setAdapter(adapter);
+            adapter.setOnItemClickListener((adapter1, view, position) -> {
+                Bundle bundle = new Bundle();
+                bundle.putStringArrayList("pics", (ArrayList<String>) adapter.getData());
+                ActivityUtils.init().start(view.getContext(), PicViewPagerActivity.class, "图片查看", bundle);
+            });
         } else {
             recyclerViewPic.setVisibility(View.GONE);
         }
@@ -67,6 +76,7 @@ public class DecorateAdapter extends BaseQuickAdapter<DecorateManBean.TasksBean.
                 .setText(R.id.tvSure, isIndicator ? (isMan ? "确认" : "待评价") : "已评价")
                 .setVisible(R.id.ivPushDel, !isMan)
                 .addOnClickListener(R.id.tvSure)
+                .addOnClickListener(R.id.recyclerViewItem)
                 .addOnClickListener(R.id.ivPushDel);
     }
 }

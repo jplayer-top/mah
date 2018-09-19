@@ -212,6 +212,10 @@
             android:name=".ui.activity.DecorateSendPushActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.activity.PicViewPagerActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"/>
 
         <activity
             android:name=".ui.activity.MessageChangeActivity"
