@@ -277,7 +277,9 @@ public class DecorateFragment extends BaseFragment {
         if ("0".equals(baseBean.haspj)) {
             mTvTitleHeader.setText("尊敬的用户，您暂时没有装修项目");
             mTvProDetail.setText("赶紧创建一个吧");
+            mTvProDetail.setEnabled(false);
         } else {
+            mTvProDetail.setEnabled(true);
             mProId = baseBean.project.project_id;
             mAdapter.addHeaderView(mHeaderProgress, 1);
             List<DecorateManBean.TasksBean> tasks = baseBean.tasks;
@@ -348,7 +350,9 @@ public class DecorateFragment extends BaseFragment {
         if ("0".equals(baseBean.haspj)) {
             mTvTitleHeader.setText("尊敬的监理，您暂时没有装修项目");
             mTvProDetail.setText("赶紧加入一个吧");
+            mTvProDetail.setEnabled(false);
         } else {
+            mTvProDetail.setEnabled(true);
             mProId = baseBean.project.project_id;
             mAdapter.addHeaderView(mHeaderProgress, 1);
             List<DecorateManBean.TasksBean> tasks = baseBean.tasks;

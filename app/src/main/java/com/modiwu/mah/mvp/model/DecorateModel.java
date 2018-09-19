@@ -7,6 +7,7 @@ import com.modiwu.mah.mvp.model.bean.DecorateWorkerBean;
 import com.modiwu.mah.mvp.model.bean.FlowSelBean;
 import com.modiwu.mah.mvp.model.bean.LocalBean;
 import com.modiwu.mah.mvp.model.bean.MsgHasBean;
+import com.modiwu.mah.mvp.model.bean.InvListBean;
 import com.modiwu.mah.mvp.model.bean.MsgListBean;
 import com.modiwu.mah.mvp.model.bean.ProInfoBean;
 import com.modiwu.mah.mvp.model.bean.SelWorkerBean;
@@ -272,6 +273,13 @@ public class DecorateModel {
         return RetrofitManager.init()
                 .create(MahServer.class)
                 .getMsgList()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+  public Observable<InvListBean> getInvList() {
+        return RetrofitManager.init()
+                .create(MahServer.class)
+                .getInvList()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }

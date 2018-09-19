@@ -86,7 +86,9 @@ public class DecorateProDetailActivity extends BaseCommonActivity {
         mRecyclerViewOwner.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         mManAdapter = new DecorateItemCommonAdapter(null);
         mRecyclerViewOwner.setAdapter(mManAdapter);
-        mManAdapter.addFooterView(View.inflate(this, R.layout.adapter_footer_edit_pro_item, null));
+        if ("业主".equals(mIsMan)) {
+            mManAdapter.addFooterView(View.inflate(this, R.layout.adapter_footer_edit_pro_item, null));
+        }
         mManAdapter.getFooterLayout().setOnClickListener(v -> {
             if (mSelectOtherMan != null && !mSelectOtherMan.isShowing()) {
                 mSelectOtherMan.setTip("业主")
@@ -98,7 +100,9 @@ public class DecorateProDetailActivity extends BaseCommonActivity {
         mRecyclerViewVisor.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         mSuperViewAdapter = new DecorateItemCommonAdapter(null);
         mRecyclerViewVisor.setAdapter(mSuperViewAdapter);
-        mSuperViewAdapter.addFooterView(View.inflate(this, R.layout.adapter_footer_edit_pro_item, null));
+        if ("业主".equals(mIsMan)) {
+            mSuperViewAdapter.addFooterView(View.inflate(this, R.layout.adapter_footer_edit_pro_item, null));
+        }
         mSuperViewAdapter.getFooterLayout().setOnClickListener(v -> {
             if (mSelectOtherMan != null && !mSelectOtherMan.isShowing()) {
                 mSelectOtherMan.setTip("负责人")
@@ -110,7 +114,9 @@ public class DecorateProDetailActivity extends BaseCommonActivity {
         mRecyclerViewConst.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         mWorkerAdapter = new DecorateItemCommonAdapter(null);
         mRecyclerViewConst.setAdapter(mWorkerAdapter);
-        mWorkerAdapter.addFooterView(View.inflate(this, R.layout.adapter_footer_edit_pro_item, null));
+        if ("业主".equals(mIsMan)) {
+            mWorkerAdapter.addFooterView(View.inflate(this, R.layout.adapter_footer_edit_pro_item, null));
+        }
         mWorkerAdapter.getFooterLayout().setOnClickListener(v -> {
             if (mSelectOtherMan != null && !mSelectOtherMan.isShowing()) {
                 mSelectOtherMan.setTip("施工人员")

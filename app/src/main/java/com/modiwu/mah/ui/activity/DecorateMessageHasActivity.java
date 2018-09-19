@@ -76,7 +76,6 @@ public class DecorateMessageHasActivity extends BaseCommonActivity {
         boolean hasMsg = "1".equals(bean.hasmsg);
         mClInv.setVisibility(View.VISIBLE);
         mClPro.setVisibility(View.VISIBLE);
-        mIvRedTip.setVisibility("1".equals(bean.hastip) ? View.VISIBLE : View.GONE);
         if (hasInv) {
             mTvTime.setText(bean.inv.ct);
             mTvSubTitle.setText(String.format(Locale.CHINA, "%s邀您加入%s", bean.inv.invu_name, bean.inv.project_name));
@@ -89,7 +88,6 @@ public class DecorateMessageHasActivity extends BaseCommonActivity {
             mTvTimePro.setText(bean.wmsg.ct);
             mTvSubTitlePro.setText(bean.wmsg.subtitle);
         } else {
-            mTvTitlePro.setText("暂无项目进度消息");
             mTvTimePro.setText("00:00");
             mTvSubTitlePro.setText("暂无项目进度消息");
         }

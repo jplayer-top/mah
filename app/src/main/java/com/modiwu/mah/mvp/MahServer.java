@@ -24,6 +24,7 @@ import com.modiwu.mah.mvp.model.bean.MeInfoBean;
 import com.modiwu.mah.mvp.model.bean.MeOrderBean;
 import com.modiwu.mah.mvp.model.bean.MeShouCangBean;
 import com.modiwu.mah.mvp.model.bean.MsgHasBean;
+import com.modiwu.mah.mvp.model.bean.InvListBean;
 import com.modiwu.mah.mvp.model.bean.MsgListBean;
 import com.modiwu.mah.mvp.model.bean.OrderCreateBean;
 import com.modiwu.mah.mvp.model.bean.ProInfoBean;
@@ -309,8 +310,11 @@ public interface MahServer {
     @GET("dma/msg/info?")
     Observable<MsgHasBean> getMsgHasInfo();
 
-    @GET("dma/msg/invts?")
+    @GET("dma/msg/bushs?")
     Observable<MsgListBean> getMsgList();
+
+    @GET("dma/msg/invts?")
+    Observable<InvListBean> getInvList();
 
     @GET("select/worker?")
     Observable<SelWorkerBean> getSelWorker(@Query("project_id") String id);

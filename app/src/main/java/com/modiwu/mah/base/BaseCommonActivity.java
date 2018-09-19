@@ -10,6 +10,7 @@ import com.modiwu.mah.mvp.constract.DecorateContract;
 import com.modiwu.mah.mvp.model.bean.DecorateAllProBean;
 import com.modiwu.mah.mvp.model.bean.FlowSelBean;
 import com.modiwu.mah.mvp.model.bean.MsgHasBean;
+import com.modiwu.mah.mvp.model.bean.InvListBean;
 import com.modiwu.mah.mvp.model.bean.MsgListBean;
 import com.modiwu.mah.mvp.model.bean.ProInfoBean;
 import com.modiwu.mah.mvp.model.bean.SelWorkerBean;
@@ -129,6 +130,10 @@ public abstract class BaseCommonActivity extends SuperBaseActivity implements IC
 
     @Override
     public void getMsgList(MsgListBean bean) {
+
+    }
+
+    public void getInvList(InvListBean bean) {
 
     }
 

@@ -103,6 +103,13 @@ public class DecorateBasePresenter extends BasePresenter<BaseCommonActivity> {
                 }, throwable -> {
                 });
     }
+   public void getInvList() {
+        mModel.getInvList()
+                .subscribe(bean -> {
+                    mIView.getInvList(bean);
+                }, throwable -> {
+                });
+    }
 
     public void getAllProList() {
         mModel.getAllProList()

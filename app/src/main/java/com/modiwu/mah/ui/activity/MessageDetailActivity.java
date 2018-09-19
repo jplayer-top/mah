@@ -5,7 +5,7 @@ import android.widget.TextView;
 
 import com.modiwu.mah.R;
 import com.modiwu.mah.base.BaseCommonActivity;
-import com.modiwu.mah.mvp.model.bean.MsgListBean;
+import com.modiwu.mah.mvp.model.bean.InvListBean;
 import com.modiwu.mah.mvp.model.event.DecorateMessageSelEvent;
 import com.modiwu.mah.mvp.presenter.DecorateBasePresenter;
 
@@ -37,7 +37,7 @@ public class MessageDetailActivity extends BaseCommonActivity {
     Button mBtnCancel;
     private Unbinder mBind;
     private DecorateBasePresenter mBasePresenter;
-    private MsgListBean.InvtsBean mBean;
+    private InvListBean.InvtsBean mBean;
 
     @Override
     public int setBaseLayout() {
