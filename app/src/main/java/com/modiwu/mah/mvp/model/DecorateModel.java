@@ -204,6 +204,13 @@ public class DecorateModel {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
+    public Observable<BaseBean> delPro(String pro_id) {
+        return RetrofitManager.init()
+                .create(MahServer.class)
+                .delPro(pro_id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
 
     public Observable<FlowSelBean> getFlowSel(String taskId) {
         return RetrofitManager.init()

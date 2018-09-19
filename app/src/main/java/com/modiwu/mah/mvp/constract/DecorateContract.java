@@ -9,6 +9,7 @@ import com.modiwu.mah.mvp.model.bean.SelWorkerBean;
 import com.modiwu.mah.mvp.model.bean.SelectWorkerTypeBean;
 
 import top.jplayer.baseprolibrary.mvp.contract.IContract;
+import top.jplayer.baseprolibrary.mvp.model.bean.BaseBean;
 
 /**
  * Created by Obl on 2018/9/14.
@@ -60,5 +61,7 @@ public interface DecorateContract {
         void delSv();
 
         void delMan();
+
+        void delPro(BaseBean bean);
     }
 }

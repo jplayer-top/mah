@@ -28,7 +28,7 @@ public class DialogSelectOtherMan extends BaseCustomDialog {
     private TextView mTvFindPhone;
     private TextView mTvFirstName;
     private TextView mTvName;
-    private EditText mEditPhone;
+    public EditText mEditPhone;
 
     public DialogSelectOtherMan(Context context) {
         super(context);
@@ -73,6 +73,13 @@ public class DialogSelectOtherMan extends BaseCustomDialog {
 
     public interface FindListener {
         void onFindListener(String phone);
+    }
+
+    @Override
+    public void dismiss() {
+        mEditPhone.setText("");
+        super.dismiss();
+
     }
 
     @Override

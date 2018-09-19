@@ -14,11 +14,11 @@
             android:id="@+id/bgaBanner"
             android:layout_width="match_parent"
             android:layout_height="250dp"
-            bga:banner_indicatorGravity="bottom|end"
-            bga:banner_pointAutoPlayAble="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            bga:banner_indicatorGravity="bottom|end"
+            bga:banner_pointAutoPlayAble="true"
             bga:banner_pointContainerBackground="@color/trans"
             bga:banner_pointDrawable="@drawable/selector_banner_unequal"/>
 
@@ -64,12 +64,12 @@
                 android:text="201806071203"/>
 
             <TextView
-                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dimen_5dp"
                 android:text="复制"
-                android:textColor="@color/chocolate"/>
+                android:textColor="@color/chocolate"
+                android:visibility="gone"/>
         </LinearLayout>
 
         <TextView
@@ -132,13 +132,28 @@
             android:id="@+id/recyclerViewConst"
             android:layout_width="@dimen/dimen_0dp"
             android:layout_height="@dimen/dimen_100dp"
-            android:layout_marginBottom="@dimen/dimen_15dp"
+
             android:layout_marginEnd="@dimen/dimen_15dp"
             android:layout_marginStart="@dimen/dimen_15dp"
             android:layout_marginTop="@dimen/dimen_10dp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvTipConst"/>
+
+        <Button
+            android:id="@+id/btnDelPro"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dimen_50dp"
+            android:layout_marginBottom="@dimen/dimen_15dp"
+            android:layout_marginEnd="@dimen/dimen_15dp"
+            android:layout_marginStart="@dimen/dimen_15dp"
+            android:layout_marginTop="@dimen/dimen_20dp"
+            android:background="@color/redff66"
+            android:text="删除项目"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/recyclerViewConst"/>
     </android.support.constraint.ConstraintLayout>
 </android.support.v4.widget.NestedScrollView>

@@ -3,6 +3,7 @@ package com.modiwu.mah.ui.activity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -12,10 +13,13 @@ import com.google.gson.reflect.TypeToken;
 import com.modiwu.mah.R;
 import com.modiwu.mah.base.BaseCommonActivity;
 import com.modiwu.mah.mvp.model.bean.ProInfoBean;
+import com.modiwu.mah.mvp.model.event.SelectDecorateEvent;
 import com.modiwu.mah.mvp.presenter.DecorateBasePresenter;
 import com.modiwu.mah.ui.adapter.DecorateItemCommonAdapter;
 import com.modiwu.mah.ui.dialog.DialogPushDel;
 import com.modiwu.mah.ui.dialog.DialogSelectOtherMan;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -25,7 +29,9 @@ import butterknife.Unbinder;
 import cn.bingoogolapple.bgabanner.BGABanner;
 import io.reactivex.Observable;
 import top.jplayer.baseprolibrary.glide.GlideUtils;
+import top.jplayer.baseprolibrary.mvp.model.bean.BaseBean;
 import top.jplayer.baseprolibrary.utils.SharePreUtil;
+import top.jplayer.baseprolibrary.utils.ToastUtils;
 
 /**
  * Created by Obl on 2018/9/11.
@@ -49,6 +55,8 @@ public class DecorateProDetailActivity extends BaseCommonActivity {
     RecyclerView mRecyclerViewVisor;
     @BindView(R.id.recyclerViewConst)
     RecyclerView mRecyclerViewConst;
+    @BindView(R.id.btnDelPro)
+    Button btnDelPro;
     private Unbinder mUnbinder;
     private DecorateBasePresenter mPresenter;
     private DecorateItemCommonAdapter mManAdapter;
@@ -59,6 +67,7 @@ public class DecorateProDetailActivity extends BaseCommonActivity {
     private DecorateItemCommonAdapter mWorkerAdapter;
     private String mProId;
     private DialogSelectOtherMan mSelectOtherMan;
+    private String mIsMan;
 
     @Override
     public int setBaseLayout() {
@@ -71,7 +80,8 @@ public class DecorateProDetailActivity extends BaseCommonActivity {
         mPresenter = new DecorateBasePresenter(this);
         mProId = mBundle.getString("pro_id");
         mPresenter.getProInfo(mProId);
-        String isMan = (String) SharePreUtil.getData(this, "decorate_select", "业主");
+        btnDelPro.setVisibility(View.GONE);
+        mIsMan = (String) SharePreUtil.getData(this, "decorate_select", "业主");
         mSelectOtherMan = new DialogSelectOtherMan(this);
         mRecyclerViewOwner.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         mManAdapter = new DecorateItemCommonAdapter(null);
@@ -115,12 +125,14 @@ public class DecorateProDetailActivity extends BaseCommonActivity {
                         .load(model)
                         .apply(GlideUtils.init().options(R.drawable.placeholder))
                         .into((ImageView) itemView));
-        tvBarRight.setVisibility("业主".equals(isMan) ? View.VISIBLE : View.INVISIBLE);
+        tvBarRight.setVisibility("业主".equals(mIsMan) ? View.VISIBLE : View.INVISIBLE);
+
         tvBarRight.setText("编辑");
         tvBarRight.setOnClickListener(v -> {
             boolean isEdit = "编辑".equals(tvBarRight.getText().toString());
             tvBarRight.setText(isEdit ? "保存" : "编辑");
             delOne(isEdit);
+            btnDelPro.setVisibility("业主".equals(mIsMan) ? View.VISIBLE : View.INVISIBLE);
         });
         mWorkerAdapter.setOnItemClickListener((adapter, view, position) -> {
             boolean isEdit = "编辑".equals(tvBarRight.getText().toString());
@@ -146,6 +158,9 @@ public class DecorateProDetailActivity extends BaseCommonActivity {
                 });
             }
         });
+        btnDelPro.setOnClickListener(v -> {
+            mPresenter.delPro(mProId);
+        });
     }
 
     private void delOne(boolean isEdit) {
@@ -162,6 +177,7 @@ public class DecorateProDetailActivity extends BaseCommonActivity {
         super.delWorker();
         mPresenter.getProInfo(mProId);
         tvBarRight.setText("编辑");
+        btnDelPro.setVisibility("业主".equals(mIsMan) ? View.VISIBLE : View.INVISIBLE);
     }
 
     @Override
@@ -169,6 +185,7 @@ public class DecorateProDetailActivity extends BaseCommonActivity {
         super.delMan();
         mPresenter.getProInfo(mProId);
         tvBarRight.setText("编辑");
+        btnDelPro.setVisibility("业主".equals(mIsMan) ? View.VISIBLE : View.INVISIBLE);
     }
 
     @Override
@@ -176,6 +193,7 @@ public class DecorateProDetailActivity extends BaseCommonActivity {
         super.delSv();
         mPresenter.getProInfo(mProId);
         tvBarRight.setText("编辑");
+        btnDelPro.setVisibility("业主".equals(mIsMan) ? View.VISIBLE : View.INVISIBLE);
     }
 
     @Override
@@ -188,6 +206,14 @@ public class DecorateProDetailActivity extends BaseCommonActivity {
         if (mSelectOtherMan != null && mSelectOtherMan.isShowing()) {
             mSelectOtherMan.dismiss();
         }
+    }
+
+    @Override
+    public void delPro(BaseBean bean) {
+        super.delPro(bean);
+        ToastUtils.init().showSuccessToast(this, bean.msg);
+        EventBus.getDefault().post(new SelectDecorateEvent("业主"));
+        finish();
     }
 
     @Override

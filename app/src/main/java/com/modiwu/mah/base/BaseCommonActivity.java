@@ -17,6 +17,7 @@ import com.modiwu.mah.mvp.model.bean.SelectWorkerTypeBean;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
 import top.jplayer.baseprolibrary.mvp.contract.IContract;
+import top.jplayer.baseprolibrary.mvp.model.bean.BaseBean;
 import top.jplayer.baseprolibrary.ui.SuperBaseActivity;
 import top.jplayer.baseprolibrary.widgets.MultipleStatusView;
 
@@ -133,6 +134,11 @@ public abstract class BaseCommonActivity extends SuperBaseActivity implements IC
 
     @Override
     public void invAgree() {
+
+    }
+
+    @Override
+    public void delPro(BaseBean bean) {
 
     }
 

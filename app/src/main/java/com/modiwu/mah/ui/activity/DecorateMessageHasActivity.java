@@ -31,6 +31,10 @@ import top.jplayer.baseprolibrary.utils.ActivityUtils;
 public class DecorateMessageHasActivity extends BaseCommonActivity {
     @BindView(R.id.tvSubTitle)
     TextView mTvSubTitle;
+    @BindView(R.id.tvTitle)
+    TextView mTvTitle;
+    @BindView(R.id.tvTitlePro)
+    TextView mTvTitlePro;
     @BindView(R.id.tvTime)
     TextView mTvTime;
     @BindView(R.id.ivRedTip)
@@ -44,7 +48,7 @@ public class DecorateMessageHasActivity extends BaseCommonActivity {
     @BindView(R.id.clPro)
     ConstraintLayout mClPro;
     private Unbinder mUnbinder;
-    private DecorateBasePresenter mPresenter;
+    DecorateBasePresenter mPresenter;
 
     @Override
     public int setBaseLayout() {
@@ -60,23 +64,34 @@ public class DecorateMessageHasActivity extends BaseCommonActivity {
         mClInv.setOnClickListener(v -> {
             ActivityUtils.init().start(this, DecorateMessageListActivity.class, "邀请详情");
         });
+        mClPro.setOnClickListener(v -> {
+            ActivityUtils.init().start(this, DecorateMessageListActivity.class, "进度更新");
+        });
     }
 
     @Override
     public void getMsgHasInfo(MsgHasBean bean) {
         super.getMsgHasInfo(bean);
         boolean hasInv = "1".equals(bean.hasinv);
-        mClInv.setVisibility(hasInv ? View.VISIBLE : View.GONE);
         boolean hasMsg = "1".equals(bean.hasmsg);
-        mClPro.setVisibility(hasMsg ? View.VISIBLE : View.GONE);
+        mClInv.setVisibility(View.VISIBLE);
+        mClPro.setVisibility(View.VISIBLE);
         mIvRedTip.setVisibility("1".equals(bean.hastip) ? View.VISIBLE : View.GONE);
         if (hasInv) {
             mTvTime.setText(bean.inv.ct);
             mTvSubTitle.setText(String.format(Locale.CHINA, "%s邀您加入%s", bean.inv.invu_name, bean.inv.project_name));
+        } else {
+            mTvTitle.setText("暂无邀请消息");
+            mTvTime.setText("00:00");
+            mTvSubTitle.setText("暂无邀请消息");
         }
         if (hasMsg) {
             mTvTimePro.setText(bean.wmsg.ct);
             mTvSubTitlePro.setText(bean.wmsg.subtitle);
+        } else {
+            mTvTitlePro.setText("暂无项目进度消息");
+            mTvTimePro.setText("00:00");
+            mTvSubTitlePro.setText("暂无项目进度消息");
         }
     }
 

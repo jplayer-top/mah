@@ -315,6 +315,9 @@ public interface MahServer {
     @GET("select/worker?")
     Observable<SelWorkerBean> getSelWorker(@Query("project_id") String id);
 
+    @POST("dma/project/rmproject?")
+    Observable<BaseBean> delPro(@Query("project_id") String id);
+
     @POST("dma/task/pushwork")
     Observable<BaseBean> sendPush(@Body RequestBody body);
 

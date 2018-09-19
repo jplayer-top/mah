@@ -58,6 +58,16 @@ public class DecorateBasePresenter extends BasePresenter<BaseCommonActivity> {
                 });
     }
 
+    public void delPro(String id) {
+        mModel.delPro(id)
+                .subscribe(new SampleShowDialogObserver<BaseBean>(mIView) {
+                    @Override
+                    protected void onSuccess(BaseBean bean) throws Exception {
+                        mIView.delPro(bean);
+                    }
+                });
+    }
+
     public void getFlowSelBean(String id) {
         mModel.getFlowSel(id)
                 .subscribe(new SampleShowDialogObserver<FlowSelBean>(mIView) {
