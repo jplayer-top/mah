@@ -88,43 +88,43 @@ public class DecorateProDetailActivity extends BaseCommonActivity {
         mRecyclerViewOwner.setAdapter(mManAdapter);
         if ("业主".equals(mIsMan)) {
             mManAdapter.addFooterView(View.inflate(this, R.layout.adapter_footer_edit_pro_item, null));
+            mManAdapter.getFooterLayout().setOnClickListener(v -> {
+                if (mSelectOtherMan != null && !mSelectOtherMan.isShowing()) {
+                    mSelectOtherMan.setTip("业主")
+                            .setOnFindListener(phone -> {
+                                mPresenter.addMan(phone, mProId);
+                            }).show();
+                }
+            });
         }
-        mManAdapter.getFooterLayout().setOnClickListener(v -> {
-            if (mSelectOtherMan != null && !mSelectOtherMan.isShowing()) {
-                mSelectOtherMan.setTip("业主")
-                        .setOnFindListener(phone -> {
-                            mPresenter.addMan(phone, mProId);
-                        }).show();
-            }
-        });
         mRecyclerViewVisor.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         mSuperViewAdapter = new DecorateItemCommonAdapter(null);
         mRecyclerViewVisor.setAdapter(mSuperViewAdapter);
         if ("业主".equals(mIsMan)) {
             mSuperViewAdapter.addFooterView(View.inflate(this, R.layout.adapter_footer_edit_pro_item, null));
+            mSuperViewAdapter.getFooterLayout().setOnClickListener(v -> {
+                if (mSelectOtherMan != null && !mSelectOtherMan.isShowing()) {
+                    mSelectOtherMan.setTip("负责人")
+                            .setOnFindListener(phone -> {
+                                mPresenter.addSuperView(phone, mProId);
+                            }).show();
+                }
+            });
         }
-        mSuperViewAdapter.getFooterLayout().setOnClickListener(v -> {
-            if (mSelectOtherMan != null && !mSelectOtherMan.isShowing()) {
-                mSelectOtherMan.setTip("负责人")
-                        .setOnFindListener(phone -> {
-                            mPresenter.addSuperView(phone, mProId);
-                        }).show();
-            }
-        });
         mRecyclerViewConst.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         mWorkerAdapter = new DecorateItemCommonAdapter(null);
         mRecyclerViewConst.setAdapter(mWorkerAdapter);
         if ("业主".equals(mIsMan)) {
             mWorkerAdapter.addFooterView(View.inflate(this, R.layout.adapter_footer_edit_pro_item, null));
+            mWorkerAdapter.getFooterLayout().setOnClickListener(v -> {
+                if (mSelectOtherMan != null && !mSelectOtherMan.isShowing()) {
+                    mSelectOtherMan.setTip("施工人员")
+                            .setOnFindListener(phone -> {
+                                mPresenter.addWorker(phone, mProId);
+                            }).show();
+                }
+            });
         }
-        mWorkerAdapter.getFooterLayout().setOnClickListener(v -> {
-            if (mSelectOtherMan != null && !mSelectOtherMan.isShowing()) {
-                mSelectOtherMan.setTip("施工人员")
-                        .setOnFindListener(phone -> {
-                            mPresenter.addWorker(phone, mProId);
-                        }).show();
-            }
-        });
 
         mBGABanner.setAdapter((banner, itemView, model, position) ->
                 Glide.with(mBaseActivity)
