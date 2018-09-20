@@ -77,19 +77,22 @@ public class DecorateMessageHasActivity extends BaseCommonActivity {
         mClInv.setVisibility(View.VISIBLE);
         mClPro.setVisibility(View.VISIBLE);
         if (hasInv) {
+            mTvTitle.setText("您有新的邀请消息~");
             mTvTime.setText(bean.inv.ct);
             mTvSubTitle.setText(String.format(Locale.CHINA, "%s邀您加入%s", bean.inv.invu_name, bean.inv.project_name));
         } else {
             mTvTitle.setText("暂无邀请消息");
             mTvTime.setText("00:00");
-            mTvSubTitle.setText("暂无邀请消息");
+            mTvSubTitle.setText("暂无");
         }
         if (hasMsg) {
             mTvTimePro.setText(bean.wmsg.ct);
             mTvSubTitlePro.setText(bean.wmsg.subtitle);
+            mTvTitlePro.setText("您的项目进度更新了~");
         } else {
+            mTvTitlePro.setText("暂无项目进度");
             mTvTimePro.setText("00:00");
-            mTvSubTitlePro.setText("暂无项目进度消息");
+            mTvSubTitlePro.setText("暂无");
         }
     }
 

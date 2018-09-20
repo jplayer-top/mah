@@ -33,10 +33,11 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
-import top.jplayer.baseprolibrary.net.IoMainSchedule;
 import top.jplayer.baseprolibrary.utils.BitmapUtil;
 import top.jplayer.baseprolibrary.utils.KeyBoardUtils;
 import top.jplayer.baseprolibrary.utils.ToastUtils;
@@ -254,12 +255,10 @@ public class DecorateCreateProActivity extends BaseCommonActivity {
             mLoading.show();
             isZiped = false;
             List<String> pathList = data.getStringArrayListExtra(ImageSelectorActivity.EXTRA_RESULT);
-            Observable.just(pathList).map(strings -> {
-                for (String path : strings) {
-                    mArrayList.add(BitmapUtil.compressImage(new File(path)));
-                }
+            Observable.just(pathList).subscribeOn(Schedulers.io()).map(strings -> {
+                Observable.fromIterable(strings).subscribe(s -> mArrayList.add(BitmapUtil.compressImage(new File(s))));
                 return mArrayList;
-            }).compose(new IoMainSchedule<>()).subscribe(files -> {
+            }).observeOn(AndroidSchedulers.mainThread()).subscribe(files -> {
                 if (mAdapter.getData().size() >= 8) {
                     mAdapter.removeAllFooterView();
                 }

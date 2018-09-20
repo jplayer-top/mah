@@ -24,9 +24,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
 
 import top.jplayer.baseprolibrary.BaseInitApplication;
 
@@ -304,9 +301,7 @@ public class BitmapUtil {
             bitmap.compress(Bitmap.CompressFormat.JPEG, options, baos);//这里压缩options%，把压缩后的数据存放到baos中
             long length = baos.toByteArray().length;
         }
-        SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss", Locale.CHINA);
-        Date date = new Date(System.currentTimeMillis());
-        String filename = format.format(date);
+        String filename = String.valueOf(System.currentTimeMillis());
         File file = new File(Environment.getExternalStorageDirectory(), filename + ".png");
         try {
             FileOutputStream fos = new FileOutputStream(file);

@@ -2,6 +2,7 @@ package com.modiwu.mah.ui.adapter;
 
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -34,6 +35,8 @@ public class DecorateProgressAdapter extends BaseQuickAdapter<DecorateManBean.Ta
                 .setVisible(R.id.ivChangeStatus, "监理".equals(who))
                 .addOnClickListener(R.id.clBgSel)
                 .addOnClickListener(R.id.ivChangeStatus);
+        TextView tvStatus = helper.itemView.findViewById(R.id.tvStatus);
+        tvStatus.setEnabled("0".equals(item.status));
         ImageView ivStc = helper.itemView.findViewById(R.id.ivItemSrc);
         View clBgSel = helper.itemView.findViewById(R.id.clBgSel);
         if (item.isSel) {
