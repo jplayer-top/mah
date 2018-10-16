@@ -74,11 +74,15 @@ public class MainActivity extends BaseSpecialActivity {
         LinearLayout llMe = contentView.findViewById(R.id.llMe);
         mViewList.add(llMe);
         llMe.setOnClickListener(v -> onTabClick((LinearLayout) v, 4));
-        onTabClick( mViewList.get(0), 0);
+        onTabClick(mViewList.get(0), 0);
     }
 
-    private void onTabClick(LinearLayout view, int index) {
+    private int curIndex = -1;
 
+    private void onTabClick(LinearLayout view, int index) {
+        if (curIndex == index) {
+            return;
+        }
         for (LinearLayout linearLayout : mViewList) {
             linearLayout.getChildAt(0).setSelected(false);
             linearLayout.getChildAt(1).setSelected(false);
@@ -93,13 +97,13 @@ public class MainActivity extends BaseSpecialActivity {
         }
         for (Fragment fragmentItem : getSupportFragmentManager().getFragments()) {
             if (!fragmentItem.isHidden()) {
-
                 transaction.hide(fragmentItem);
             }
         }
         if (fragment.isHidden()) {
             transaction.show(fragment);
         }
+        curIndex = index;
         transaction.commitAllowingStateLoss();
     }
 

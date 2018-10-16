@@ -85,7 +85,7 @@
                 android:id="@+id/tvDecorate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="家装宝"
+                android:text="装家宝"
                 android:textColor="@drawable/selector_text_333_theme"
                 android:textSize="@dimen/dimen_10sp"/>
         </LinearLayout>
