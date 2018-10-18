@@ -28,8 +28,8 @@
 
             <ImageView
                 android:id="@+id/ivHome"
-                android:layout_width="@dimen/dimen_20dp"
-                android:layout_height="@dimen/dimen_20dp"
+                android:layout_width="@dimen/dimen_23dp"
+                android:layout_height="@dimen/dimen_23dp"
                 android:layout_marginTop="@dimen/dimen_6dp"
                 android:src="@drawable/select_main_home"/>
 
@@ -39,7 +39,7 @@
                 android:layout_height="wrap_content"
                 android:text="首页"
                 android:textColor="@drawable/selector_text_333_theme"
-                android:textSize="@dimen/dimen_10sp"/>
+                android:textSize="@dimen/dimen_11sp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -52,8 +52,8 @@
 
             <ImageView
                 android:id="@+id/ivScheme"
-                android:layout_width="@dimen/dimen_20dp"
-                android:layout_height="@dimen/dimen_20dp"
+                android:layout_width="@dimen/dimen_23dp"
+                android:layout_height="@dimen/dimen_23dp"
                 android:layout_marginTop="@dimen/dimen_6dp"
                 android:src="@drawable/select_main_scheme"/>
 
@@ -63,7 +63,7 @@
                 android:layout_height="wrap_content"
                 android:text="方案"
                 android:textColor="@drawable/selector_text_333_theme"
-                android:textSize="@dimen/dimen_10sp"/>
+                android:textSize="@dimen/dimen_11sp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -76,8 +76,8 @@
 
             <ImageView
                 android:id="@+id/ivDecorate"
-                android:layout_width="@dimen/dimen_20dp"
-                android:layout_height="@dimen/dimen_20dp"
+                android:layout_width="@dimen/dimen_23dp"
+                android:layout_height="@dimen/dimen_23dp"
                 android:layout_marginTop="@dimen/dimen_6dp"
                 android:src="@drawable/select_main_decorate"/>
 
@@ -87,7 +87,7 @@
                 android:layout_height="wrap_content"
                 android:text="装家宝"
                 android:textColor="@drawable/selector_text_333_theme"
-                android:textSize="@dimen/dimen_10sp"/>
+                android:textSize="@dimen/dimen_11sp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -100,8 +100,8 @@
 
             <ImageView
                 android:id="@+id/ivDesign"
-                android:layout_width="@dimen/dimen_20dp"
-                android:layout_height="@dimen/dimen_20dp"
+                android:layout_width="@dimen/dimen_23dp"
+                android:layout_height="@dimen/dimen_23dp"
                 android:layout_marginTop="@dimen/dimen_6dp"
                 android:src="@drawable/select_main_charpenter"/>
 
@@ -111,7 +111,7 @@
                 android:layout_height="wrap_content"
                 android:text="匠·器"
                 android:textColor="@drawable/selector_text_333_theme"
-                android:textSize="@dimen/dimen_10sp"/>
+                android:textSize="@dimen/dimen_11sp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -124,8 +124,8 @@
 
             <ImageView
                 android:id="@+id/ivMe"
-                android:layout_width="@dimen/dimen_20dp"
-                android:layout_height="@dimen/dimen_20dp"
+                android:layout_width="@dimen/dimen_23dp"
+                android:layout_height="@dimen/dimen_23dp"
                 android:layout_marginTop="@dimen/dimen_6dp"
                 android:src="@drawable/select_main_me"/>
 
@@ -135,7 +135,7 @@
                 android:layout_height="wrap_content"
                 android:text="我的"
                 android:textColor="@drawable/selector_text_333_theme"
-                android:textSize="@dimen/dimen_10sp"/>
+                android:textSize="@dimen/dimen_11sp"/>
         </LinearLayout>
     </LinearLayout>
 

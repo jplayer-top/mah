@@ -1,7 +1,5 @@
 package com.modiwu.mah.mvp.model.bean;
 
-import com.google.gson.annotations.SerializedName;
-
 import java.util.List;
 
 import top.jplayer.baseprolibrary.mvp.model.bean.BaseBean;
@@ -89,6 +87,7 @@ public class SchemeDetailBean extends BaseBean {
         public String title;
         public String subtitle;
         public String img;
+        public String link_url;
         public String sort;
     }
 
@@ -107,6 +106,7 @@ public class SchemeDetailBean extends BaseBean {
         public int biz_id;
         public String title;
         public String subtitle;
+        public String link_url;
         public String img;
     }
 
@@ -125,6 +125,7 @@ public class SchemeDetailBean extends BaseBean {
         public int biz_id;
         public String title;
         public String subtitle;
+        public String link_url;
         public String img;
     }
 

@@ -85,3 +85,24 @@ ext {
     annotationProcessorLibs = [glideCompiler]
 
 }
+tasks {
+    task delTask{
+        doLast{
+            //读取文件，并装进List。
+            def list = []
+            new File('del.file').withReader('UTF-8') { reader ->
+                reader.eachLine {
+                    if (it.contains("path")) {
+                        def pre = it.indexOf("'") +1
+                        def aft = it.lastIndexOf("'")
+                        list.add(it.substring(pre , aft))
+                    }
+                }
+                File fileDel = new File(list.get(0))
+                println(">>>>>> 要删除的文件夹路径："+fileDel.getAbsolutePath())
+                def isDel = fileDel.deleteDir()
+                println(">>>>>> 文件夹是否删除："+isDel)
+            }
+        }
+    }
+}

@@ -27,7 +27,7 @@ public class SchemeAllAdapter extends BaseQuickAdapter<SchemeDetailBean.ZhengBea
     protected void convert(BaseViewHolder baseViewHolder, SchemeDetailBean.ZhengBean bean) {
         ImageView ivBodyPic = baseViewHolder.convertView.findViewById(R.id.ivBodyPic);
         Glide.with(mContext).load(bean.img).apply(GlideUtils.init().options()).into(ivBodyPic);
-        baseViewHolder.addOnClickListener(R.id.llScheme_body)
+        baseViewHolder.addOnClickListener(R.id.ivBodyPic)
                 .setText(R.id.tvItemTitle, StringUtils.getInstance().isNullable(bean.title, ""))
                 .setText(R.id.tvItemBody, StringUtils.getInstance().isNullable(bean.subtitle, ""));
     }
