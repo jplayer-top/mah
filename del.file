@@ -1,2 +1,2 @@
-Error:Execution failed for task ':app:transformClassesWithDesugarForDebug'.
-> com.android.build.api.transform.TransformException: java.io.IOException: Could not delete path 'C:\Users\newone\Desktop\work\mah\app\build\intermediates\transforms\desugar\debug\3\top\jplayer'.
+Error:Execution failed for task ':baseprolibrary:processReleaseResources'.
+> java.io.IOException: Could not delete path 'C:\Users\newone\Desktop\work\mah\baseprolibrary\build\generated\source\r\release\com\zhy\view'.

@@ -284,11 +284,49 @@ public class DecorateFragment extends BaseFragment {
                 ToastUtils.init().showInfoToast(getContext(), "只能创建一个项目");
             }
         });
+
+
         if ("0".equals(baseBean.haspj)) {
             mTvTitleHeader.setText("尊敬的用户，您暂时没有装修项目");
             mTvProDetail.setText("赶紧创建一个吧");
             mTvProDetail.setEnabled(false);
             mAdapter.setNewData(null);
+            if ("0".equals(baseBean.login)) {
+                mAdapter.addHeaderView(mHeaderProgress, 1);
+                List<DecorateManBean.TasksBean> tasks = baseBean.tasks;
+                tasks.get(curTask).isSel = true;
+                mAdapter.setNewData(tasks.get(curTask).works);
+                mProgressAdapter.setNewData(baseBean.tasks);
+                mProgressAdapter.setOnItemChildClickListener((adapter, view, position) -> {
+                    curTask = position;
+                    List<DecorateManBean.TasksBean> mProgressAdapterData = mProgressAdapter.getData();
+                    Observable.fromIterable(mProgressAdapterData).subscribe(tasksBean -> {
+                        tasksBean.isSel = false;
+                        if (position == mProgressAdapter.getData().indexOf(tasksBean)) {
+                            tasksBean.isSel = true;
+                        }
+                    });
+                    DecorateManBean.TasksBean tasksBean = mProgressAdapterData.get(position);
+                    List<DecorateManBean.TasksBean.WorksBeanX> works = tasksBean.works;
+                    mTvSendPush.setEnabled(!"2".equals(tasksBean.status));
+                    mAdapter.setNewData(works);
+                    mProgressAdapter.notifyDataSetChanged();
+                    mConManSure.setVisibility(tasksBean.appraise != null ? View.VISIBLE : View.GONE);
+                    if (tasksBean.appraise != null) {
+                        if ("0".equals(tasksBean.appraise.flag)) {
+                            mTvSureRating.setVisibility(View.VISIBLE);
+                            mTaskRatingBar.setIsIndicator(false);
+                            mTvSureRatingTip.setText("该环节已完工，请确认");
+                        } else {
+                            mTvSureRating.setVisibility(View.INVISIBLE);
+                            mTaskRatingBar.setRating(tasksBean.appraise.appraise);
+                            mTaskRatingBar.setIsIndicator(true);
+                            mTvSureRatingTip.setText("该环节已确认完工");
+                        }
+                    }
+                    return false;
+                });
+            }
         } else {
             mTvProDetail.setEnabled(true);
             mProId = baseBean.project.project_id;
@@ -330,7 +368,6 @@ public class DecorateFragment extends BaseFragment {
                 }
 
             });
-
             mProgressAdapter.setOnItemChildClickListener((adapter, view, position) -> {
                 curTask = position;
                 List<DecorateManBean.TasksBean> mProgressAdapterData = mProgressAdapter.getData();
@@ -381,7 +418,7 @@ public class DecorateFragment extends BaseFragment {
         mTvProDetail.setVisibility(View.VISIBLE);
         mAdapter.removeHeaderView(mHeaderWorker);
         mAdapter.removeHeaderView(mHeaderProgress);
-
+        mAdapter.setNewData(null);
         if ("0".equals(baseBean.issv)) {
             ActivityUtils.init().start(getContext(), DecorateShiGongActivity.class, "我是监理人员");
             return;

@@ -12,6 +12,7 @@ import com.modiwu.mah.R;
 import com.modiwu.mah.mvp.model.bean.DecorateManBean;
 import com.modiwu.mah.mvp.model.event.RatingBarItemWorkEvent;
 import com.modiwu.mah.ui.activity.PicViewPagerActivity;
+import com.modiwu.mah.utils.StringUtils;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -37,7 +38,7 @@ public class DecorateAdapter extends BaseQuickAdapter<DecorateManBean.TasksBean.
     protected void convert(BaseViewHolder helper, DecorateManBean.TasksBean.WorksBeanX item) {
         List<DecorateManBean.TasksBean.WorksBeanX.WorksBean> works = item.works;
         RecyclerView recyclerViewPerson = helper.itemView.findViewById(R.id.recyclerViewItemPerson);
-        if (works.size() > 0) {
+        if (works != null && works.size() > 0) {
             recyclerViewPerson.setVisibility(View.VISIBLE);
             recyclerViewPerson.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false));
             recyclerViewPerson.setAdapter(new DecorateItemPersonAdapter(works));
@@ -49,7 +50,7 @@ public class DecorateAdapter extends BaseQuickAdapter<DecorateManBean.TasksBean.
 
         List<String> imgsurl = item.imgsurl;
         RecyclerView recyclerViewPic = helper.itemView.findViewById(R.id.recyclerViewItem);
-        if (imgsurl.size() > 0) {
+        if (imgsurl != null && imgsurl.size() > 0) {
             recyclerViewPic.setVisibility(View.VISIBLE);
             recyclerViewPic.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false));
             DecorateItemPicBigAdapter adapter = new DecorateItemPicBigAdapter(imgsurl);
@@ -69,14 +70,14 @@ public class DecorateAdapter extends BaseQuickAdapter<DecorateManBean.TasksBean.
         ratingBar.setIsIndicator(!(isMan && isIndicator));
         ratingBar.setRating(item.appraise);
         ratingBar.setOnRatingBarChangeListener((ratingBar1, rating, fromUser) -> EventBus.getDefault().post(new RatingBarItemWorkEvent(rating)));
-        helper.setText(R.id.tvContent, item.work_content)
+        helper.setText(R.id.tvContent, StringUtils.getInstance().isNullable(item.work_content, "无"))
                 .setText(R.id.tvContentStd, item.flow_std)
-                .setText(R.id.tvTime, " | " + item.ct)
-                .setText(R.id.tvProName, item.flow_name)
-                .setText(R.id.tvSure, isIndicator ? (isMan ? "确认" : "待评价") : "已评价")
-                .setVisible(R.id.ivPushDel, !isMan && isIndicator)
-                .addOnClickListener(R.id.tvSure)
-                .addOnClickListener(R.id.recyclerViewItem)
-                .addOnClickListener(R.id.ivPushDel);
+                .setText(R.id.tvTime, " | " + StringUtils.getInstance().isNullable(item.ct, ""))
+                        .setText(R.id.tvProName, item.flow_name)
+                        .setText(R.id.tvSure, isIndicator ? (isMan ? "确认" : "待评价") : "已评价")
+                        .setVisible(R.id.ivPushDel, !isMan && isIndicator)
+                        .addOnClickListener(R.id.tvSure)
+                        .addOnClickListener(R.id.recyclerViewItem)
+                        .addOnClickListener(R.id.ivPushDel);
     }
 }
