@@ -6,10 +6,12 @@ import android.graphics.PixelFormat;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.FrameLayout;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.tencent.smtt.sdk.WebChromeClient;
@@ -20,7 +22,7 @@ import com.tencent.smtt.sdk.WebViewClient;
 import top.jplayer.baseprolibrary.R;
 import top.jplayer.baseprolibrary.utils.LogUtil;
 
-public class WebViewActivity extends SuperBaseActivity {
+public class WebViewActivity extends AppCompatActivity {
 
     private static final int TIME_INTERVAL = 2000; // # milliseconds, desired time passed between two back presses.
     ProgressBar pbWebBase;
@@ -29,24 +31,24 @@ public class WebViewActivity extends SuperBaseActivity {
     private long mBackPressed;
 
     @Override
-    public void initSuperData(FrameLayout mFlRootView) {
-        mFlRootView.addView(View.inflate(this, R.layout.activity_web, null));
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         getWindow().setFormat(PixelFormat.TRANSLUCENT);
-        pbWebBase = mFlRootView.findViewById(R.id.pb_web_base);
-        webBase = mFlRootView.findViewById(R.id.web_base);
-        webPath = mBundle.getString("url");
+        setContentView(R.layout.activity_web);
+        findViewById(R.id.ivGoBack).setOnClickListener(v -> {
+            if (webBase.canGoBack()) {
+                webBase.goBack();
+            } else {
+                finish();
+            }
+        });
+        pbWebBase = findViewById(R.id.pb_web_base);
+        webBase = findViewById(R.id.web_base);
+        webPath = getIntent().getBundleExtra("bundle").getString("url");
         initData();// 初始化控件的数据及监听事件
     }
 
-    @Override
-    public void customBarLeft() {
-        if (webBase.canGoBack()) {
-            webBase.goBack();
-        } else {
-            finish();
-        }
-    }
 
     private void initData() {
         pbWebBase.setMax(100);//设置加载进度最大值
@@ -65,11 +67,11 @@ public class WebViewActivity extends SuperBaseActivity {
         } else {
             webSettings.setLoadsImagesAutomatically(false);//图片自动缩放 关闭
         }
-//
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-//            webBase.setLayerType(View.LAYER_TYPE_SOFTWARE, null);//软件解码
-//        }
-//        webBase.setLayerType(View.LAYER_TYPE_HARDWARE, null);//硬件解码
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            webBase.setLayerType(View.LAYER_TYPE_SOFTWARE, null);//软件解码
+        }
+        webBase.setLayerType(View.LAYER_TYPE_HARDWARE, null);//硬件解码
 
 //        webSettings.setAllowContentAccess(true);
 //        webSettings.setAllowFileAccessFromFileURLs(true);
@@ -104,6 +106,7 @@ public class WebViewActivity extends SuperBaseActivity {
             @Override
             public void onReceivedTitle(WebView view, String title) {
                 super.onReceivedTitle(view, title);
+                TextView tvBarTitle = findViewById(R.id.tvBarTitle);
                 tvBarTitle.setText(title);
             }
 

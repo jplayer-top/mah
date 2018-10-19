@@ -6,7 +6,7 @@
               android:background="@color/white"
               android:gravity="center"
               android:orientation="vertical">
-
+    <include layout="@layout/layout_title_toolbar"/>
     <ProgressBar
         android:id="@+id/pb_web_base"
         style="?android:attr/progressBarStyleHorizontal"
