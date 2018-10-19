@@ -36,7 +36,9 @@ public class WebViewActivity extends AppCompatActivity {
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         getWindow().setFormat(PixelFormat.TRANSLUCENT);
         setContentView(R.layout.activity_web);
-        findViewById(R.id.ivGoBack).setOnClickListener(v -> {
+        View vGoBack = findViewById(R.id.ivGoBack);
+        vGoBack.setVisibility(View.VISIBLE);
+        vGoBack.setOnClickListener(v -> {
             if (webBase.canGoBack()) {
                 webBase.goBack();
             } else {
