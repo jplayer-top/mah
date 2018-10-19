@@ -119,7 +119,7 @@ public class DecorateFragment extends BaseFragment {
         mMultipleStatusView = rootView.findViewById(R.id.multiplestatusview);
         smartRefreshLayout = rootView.findViewById(R.id.smartRefreshLayout);
         mUnbinder = ButterKnife.bind(this, rootView);
-        mTvBarTitle.setText("我的家装");
+        mTvBarTitle.setText("装家宝");
         mIvGoBack.setVisibility(View.VISIBLE);
         mIvBarSearch.setVisibility(View.VISIBLE);
         mIvGoBack.setImageDrawable(getResources().getDrawable(R.drawable.decorate_yezhu));

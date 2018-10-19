@@ -14,7 +14,7 @@ import com.modiwu.mah.mvp.model.bean.HomeBean;
 import java.util.List;
 
 import top.jplayer.baseprolibrary.glide.GlideUtils;
-import top.jplayer.baseprolibrary.ui.WebFullScreenActivity;
+import top.jplayer.baseprolibrary.ui.WebViewActivity;
 import top.jplayer.baseprolibrary.ui.adapter.VLayoutAdapter;
 import top.jplayer.baseprolibrary.utils.ActivityUtils;
 
@@ -42,7 +42,7 @@ public class HomeAdvLayoutAdapter extends VLayoutAdapter<RecyclerView.ViewHolder
         ivShouHou.setOnClickListener(v -> {
             Bundle bundle = new Bundle();
             bundle.putString("url", mShouHou.get(position).navValue);
-            ActivityUtils.init().start(context, WebFullScreenActivity.class, context.getString(R.string
+            ActivityUtils.init().start(context, WebViewActivity.class, context.getString(R.string
                             .app_name),
                     bundle);
         });

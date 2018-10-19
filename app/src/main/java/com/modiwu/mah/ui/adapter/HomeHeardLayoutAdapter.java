@@ -26,7 +26,7 @@ import java.util.Locale;
 import cn.bingoogolapple.bgabanner.BGABanner;
 import io.reactivex.Observable;
 import top.jplayer.baseprolibrary.glide.GlideUtils;
-import top.jplayer.baseprolibrary.ui.WebFullScreenActivity;
+import top.jplayer.baseprolibrary.ui.WebViewActivity;
 import top.jplayer.baseprolibrary.ui.adapter.VLayoutAdapter;
 import top.jplayer.baseprolibrary.utils.ActivityUtils;
 
@@ -95,7 +95,7 @@ public class HomeHeardLayoutAdapter extends VLayoutAdapter<RecyclerView.ViewHold
                 } else {
                     Bundle bundle = new Bundle();
                     bundle.putString("url", bannerBean.navValue);
-                    ActivityUtils.init().start(context, WebFullScreenActivity.class, context.getString(R.string
+                    ActivityUtils.init().start(context, WebViewActivity.class, context.getString(R.string
                                     .app_name),
                             bundle);
                 }

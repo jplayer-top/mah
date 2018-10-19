@@ -69,13 +69,11 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
-
     implementation rootProject.ext.supportLibs
     //网络请求
     api rootProject.ext.networkLibs
     //RX
     api rootProject.ext.rxJavaLibs
-
     //RecyclerView Help
     api rootProject.ext.baserecyclerviewadapterhelper
     //辅助库(包含：刷新，glide,沉浸式bar,动画库,Toast,PickerView,权限)
@@ -95,4 +93,6 @@ dependencies {
         exclude group: 'glide-parent'
     }
     annotationProcessor rootProject.ext.annotationProcessorLibs
+
+    api files('libs/tbs.jar')
 }

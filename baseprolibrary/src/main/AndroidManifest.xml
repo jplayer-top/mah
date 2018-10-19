@@ -20,15 +20,17 @@
             android:screenOrientation="portrait">
         </activity>
         <activity
+            android:name=".ui.WebViewActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="stateHidden|adjustResize">
+        </activity>
+        <activity
             android:name=".ui.activity.ActivityDialog"
             android:launchMode="singleTop"
             android:screenOrientation="portrait">
         </activity>
-        <activity
-            android:name=".ui.WebFullScreenActivity"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait">
-        </activity>
+
 
         <receiver android:name=".net.download.DownloadByReceiver">
             <intent-filter>

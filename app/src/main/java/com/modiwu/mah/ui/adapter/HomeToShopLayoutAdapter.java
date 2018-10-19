@@ -14,7 +14,7 @@ import com.modiwu.mah.mvp.model.bean.HomeBean;
 import java.util.List;
 
 import top.jplayer.baseprolibrary.glide.GlideUtils;
-import top.jplayer.baseprolibrary.ui.WebFullScreenActivity;
+import top.jplayer.baseprolibrary.ui.WebViewActivity;
 import top.jplayer.baseprolibrary.ui.adapter.VLayoutAdapter;
 import top.jplayer.baseprolibrary.utils.ActivityUtils;
 
@@ -46,7 +46,7 @@ public class HomeToShopLayoutAdapter extends VLayoutAdapter<RecyclerView.ViewHol
             imageView.setOnClickListener(v -> {
                 Bundle bundle = new Bundle();
                 bundle.putString("url", mShiDian.get(position).navValue);
-                ActivityUtils.init().start(context, WebFullScreenActivity.class, context.getString(R.string
+                ActivityUtils.init().start(context, WebViewActivity.class, context.getString(R.string
                                 .app_name),
                         bundle);
             });
@@ -56,7 +56,7 @@ public class HomeToShopLayoutAdapter extends VLayoutAdapter<RecyclerView.ViewHol
             imageView.setOnClickListener(v -> {
                 Bundle bundle = new Bundle();
                 bundle.putString("url", shiGongBean.navValue);
-                ActivityUtils.init().start(context, WebFullScreenActivity.class, context.getString(R.string
+                ActivityUtils.init().start(context, WebViewActivity.class, context.getString(R.string
                                 .app_name),
                         bundle);
             });

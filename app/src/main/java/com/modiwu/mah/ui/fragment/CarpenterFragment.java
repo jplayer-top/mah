@@ -29,7 +29,7 @@ import java.util.Locale;
 import devlight.io.library.ntb.NavigationTabBar;
 import top.jplayer.baseprolibrary.glide.GlideUtils;
 import top.jplayer.baseprolibrary.listener.NetNavigationBarListener;
-import top.jplayer.baseprolibrary.ui.WebFullScreenActivity;
+import top.jplayer.baseprolibrary.ui.WebViewActivity;
 import top.jplayer.baseprolibrary.utils.ActivityUtils;
 import top.jplayer.baseprolibrary.utils.SizeUtils;
 
@@ -225,7 +225,7 @@ public class CarpenterFragment extends BaseFragment implements CarpenterContract
             Bundle bundle = new Bundle();
             if ("url".equals(bean.top.navType)) {
                 bundle.putString("url", bean.top.navValue);
-                ActivityUtils.init().start(getContext(), WebFullScreenActivity.class, getString(R.string.app_name), bundle);
+                ActivityUtils.init().start(getContext(), WebViewActivity.class, getString(R.string.app_name), bundle);
             }
         });
     }

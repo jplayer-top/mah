@@ -13,7 +13,7 @@ import com.modiwu.mah.ui.adapter.SchemeHardAdapter;
 import java.util.List;
 
 import top.jplayer.baseprolibrary.ui.Fragment.SuperBaseFragment;
-import top.jplayer.baseprolibrary.ui.WebFullScreenActivity;
+import top.jplayer.baseprolibrary.ui.WebViewActivity;
 import top.jplayer.baseprolibrary.utils.ActivityUtils;
 import top.jplayer.baseprolibrary.widgets.MultipleStatusView;
 
@@ -45,7 +45,7 @@ public class SchemeHardFragment extends SuperBaseFragment {
                 if (bean.link_url != null && !"".equals(bean.link_url)) {
                     Bundle bundle = new Bundle();
                     bundle.putString("url", bean.link_url);
-                    ActivityUtils.init().start(this.mActivity, WebFullScreenActivity.class, "整个家", bundle);
+                    ActivityUtils.init().start(this.mActivity, WebViewActivity.class, "整个家", bundle);
                 }
                 return false;
             });
