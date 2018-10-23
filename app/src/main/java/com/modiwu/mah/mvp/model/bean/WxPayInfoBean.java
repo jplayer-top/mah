@@ -22,9 +22,13 @@ public class WxPayInfoBean extends BaseBean {
     public static class OrderStrBean {
         /**
          * appid : wx71dafeac9c6868f8
+         *         wx2afd95f49d8dd6be
          * noncestr : s3qclvjmouhbop0if2frfbqchl
+         *            3482O93OwAnvTISD
          * package : Sign=WXPay
          * partnerid : 1381611602
+         *             1516506511
+         *        EBCEBDA273C55E4C465C45FD629C42B3
          * sign : E0FE8788BB1D2274C87F0B0D2CC150B8
          * timestamp : 1499930442
          */
