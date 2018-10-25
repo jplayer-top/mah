@@ -32,6 +32,7 @@ import com.modiwu.mah.ui.adapter.DecorateProgressAdapter;
 import com.modiwu.mah.ui.dialog.DialogChangeMan;
 import com.modiwu.mah.ui.dialog.DialogPushDel;
 import com.modiwu.mah.ui.dialog.DialogSelectStatus;
+import com.modiwu.mah.utils.StringUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
 import org.greenrobot.eventbus.EventBus;
@@ -292,9 +293,19 @@ public class DecorateFragment extends BaseFragment {
             mTvProDetail.setEnabled(false);
             mAdapter.setNewData(null);
             if ("0".equals(baseBean.login)) {
+                mTvTitleHeader.setText("尊敬的用户，您还没有登录");
+                mTvProDetail.setText("请先登录吧");
+                mTvProDetail.setEnabled(true);
+                mTvProDetail.setOnClickListener(v -> {
+                    if ("0".equals(baseBean.login)) {
+                        StringUtils.getInstance().assert2Login(getContext());
+                    }
+
+                });
                 mAdapter.addHeaderView(mHeaderProgress, 1);
                 List<DecorateManBean.TasksBean> tasks = baseBean.tasks;
                 tasks.get(curTask).isSel = true;
+                mConManSure.setVisibility(View.GONE);
                 mAdapter.setNewData(tasks.get(curTask).works);
                 mProgressAdapter.setNewData(baseBean.tasks);
                 mProgressAdapter.setOnItemChildClickListener((adapter, view, position) -> {
@@ -326,6 +337,10 @@ public class DecorateFragment extends BaseFragment {
                     }
                     return false;
                 });
+            } else {
+                mTvProDetail.setEnabled(false);
+                mTvTitleHeader.setText("尊敬的用户，您暂时没有装修项目");
+                mTvProDetail.setText("赶紧创建一个吧");
             }
         } else {
             mTvProDetail.setEnabled(true);

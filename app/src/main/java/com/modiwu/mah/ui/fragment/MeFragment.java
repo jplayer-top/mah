@@ -45,12 +45,10 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 import io.rong.imkit.RongIM;
@@ -116,15 +114,7 @@ public class MeFragment extends BaseFragment {
         EventBus.getDefault().register(this);
         mWxShare = new WXShare(getContext());
         mRefreshLayout.setOnRefreshListener(refresh -> {
-            if (!"0".equals(uid)) {
-                refresh(uid);
-            } else {
-                Observable.interval(500, TimeUnit.MILLISECONDS).subscribe(aLong -> {
-                    if (mRefreshLayout != null) {
-                        mRefreshLayout.finishRefresh();
-                    }
-                });
-            }
+            refresh(uid);
         });
     }
 

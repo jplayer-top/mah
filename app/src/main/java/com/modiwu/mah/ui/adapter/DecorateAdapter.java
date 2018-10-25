@@ -70,14 +70,21 @@ public class DecorateAdapter extends BaseQuickAdapter<DecorateManBean.TasksBean.
         ratingBar.setIsIndicator(!(isMan && isIndicator));
         ratingBar.setRating(item.appraise);
         ratingBar.setOnRatingBarChangeListener((ratingBar1, rating, fromUser) -> EventBus.getDefault().post(new RatingBarItemWorkEvent(rating)));
+        boolean noWork = item.work_id == 0;
+        int textColor = noWork ? mContext.getResources().getColor(R.color.color999) : mContext
+                .getResources().getColor(R.color.colorBlackGold);
         helper.setText(R.id.tvContent, StringUtils.getInstance().isNullable(item.work_content, "无"))
                 .setText(R.id.tvContentStd, item.flow_std)
                 .setText(R.id.tvTime, " | " + StringUtils.getInstance().isNullable(item.ct, ""))
-                        .setText(R.id.tvProName, item.flow_name)
-                        .setText(R.id.tvSure, isIndicator ? (isMan ? "确认" : "待评价") : "已评价")
-                        .setVisible(R.id.ivPushDel, !isMan && isIndicator)
-                        .addOnClickListener(R.id.tvSure)
-                        .addOnClickListener(R.id.recyclerViewItem)
-                        .addOnClickListener(R.id.ivPushDel);
+                .setText(R.id.tvProName, item.flow_name)
+                .setTextColor(R.id.tvProName, textColor)
+                .setTextColor(R.id.tvTitle, textColor)
+                .setTextColor(R.id.tvTitleStd, textColor)
+                .setText(R.id.tvSure, isIndicator ? (isMan ? "确认" : "待评价") : "已评价")
+                .setVisible(R.id.ivPushDel, !isMan && isIndicator)
+                .addOnClickListener(R.id.tvSure)
+                .addOnClickListener(R.id.recyclerViewItem)
+                .addOnClickListener(R.id.ivPushDel)
+                .setVisible(R.id.llRating, !noWork);
     }
 }
