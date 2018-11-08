@@ -15,6 +15,7 @@ import com.modiwu.mah.base.BaseFragment;
 import com.modiwu.mah.mvp.model.bean.DecorateManBean;
 import com.modiwu.mah.mvp.model.bean.DecorateWorkerBean;
 import com.modiwu.mah.mvp.model.event.DialogSelStatusEvent;
+import com.modiwu.mah.mvp.model.event.LoginSuccessEvent;
 import com.modiwu.mah.mvp.model.event.RatingBarItemWorkEvent;
 import com.modiwu.mah.mvp.model.event.SelProIdDecorateEvent;
 import com.modiwu.mah.mvp.model.event.SelectDecorateEvent;
@@ -229,6 +230,11 @@ public class DecorateFragment extends BaseFragment {
     }
 
     @Subscribe
+    public void onEvnet(LoginSuccessEvent event) {
+        requestInfoByText(mSelectData);
+    }
+
+    @Subscribe
     public void onEvnet(SelProIdDecorateEvent event) {
         this.mProId = event.pro_id;
         SharePreUtil.saveData(getContext(), "decorate_pro_id", mProId);
@@ -341,6 +347,41 @@ public class DecorateFragment extends BaseFragment {
                 mTvProDetail.setEnabled(false);
                 mTvTitleHeader.setText("尊敬的用户，您暂时没有装修项目");
                 mTvProDetail.setText("赶紧创建一个吧");
+                mAdapter.addHeaderView(mHeaderProgress, 1);
+                List<DecorateManBean.TasksBean> tasks = baseBean.tasks;
+                tasks.get(curTask).isSel = true;
+                mConManSure.setVisibility(View.GONE);
+                mAdapter.setNewData(tasks.get(curTask).works);
+                mProgressAdapter.setNewData(baseBean.tasks);
+                mProgressAdapter.setOnItemChildClickListener((adapter, view, position) -> {
+                    curTask = position;
+                    List<DecorateManBean.TasksBean> mProgressAdapterData = mProgressAdapter.getData();
+                    Observable.fromIterable(mProgressAdapterData).subscribe(tasksBean -> {
+                        tasksBean.isSel = false;
+                        if (position == mProgressAdapter.getData().indexOf(tasksBean)) {
+                            tasksBean.isSel = true;
+                        }
+                    });
+                    DecorateManBean.TasksBean tasksBean = mProgressAdapterData.get(position);
+                    List<DecorateManBean.TasksBean.WorksBeanX> works = tasksBean.works;
+                    mTvSendPush.setEnabled(!"2".equals(tasksBean.status));
+                    mAdapter.setNewData(works);
+                    mProgressAdapter.notifyDataSetChanged();
+                    mConManSure.setVisibility(tasksBean.appraise != null ? View.VISIBLE : View.GONE);
+                    if (tasksBean.appraise != null) {
+                        if ("0".equals(tasksBean.appraise.flag)) {
+                            mTvSureRating.setVisibility(View.VISIBLE);
+                            mTaskRatingBar.setIsIndicator(false);
+                            mTvSureRatingTip.setText("该环节已完工，请确认");
+                        } else {
+                            mTvSureRating.setVisibility(View.INVISIBLE);
+                            mTaskRatingBar.setRating(tasksBean.appraise.appraise);
+                            mTaskRatingBar.setIsIndicator(true);
+                            mTvSureRatingTip.setText("该环节已确认完工");
+                        }
+                    }
+                    return false;
+                });
             }
         } else {
             mTvProDetail.setEnabled(true);
