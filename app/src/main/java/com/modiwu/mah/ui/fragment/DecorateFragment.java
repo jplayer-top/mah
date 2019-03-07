@@ -295,7 +295,7 @@ public class DecorateFragment extends BaseFragment {
 
         if ("0".equals(baseBean.haspj)) {
             mTvTitleHeader.setText("尊敬的用户，您暂时没有装修项目");
-            mTvProDetail.setText("赶紧创建一个吧");
+            mTvProDetail.setText("赶紧添加一个吧");
             mTvProDetail.setEnabled(false);
             mAdapter.setNewData(null);
             if ("0".equals(baseBean.login)) {
@@ -346,7 +346,7 @@ public class DecorateFragment extends BaseFragment {
             } else {
                 mTvProDetail.setEnabled(false);
                 mTvTitleHeader.setText("尊敬的用户，您暂时没有装修项目");
-                mTvProDetail.setText("赶紧创建一个吧");
+                mTvProDetail.setText("赶紧添加一个吧");
                 mAdapter.addHeaderView(mHeaderProgress, 1);
                 List<DecorateManBean.TasksBean> tasks = baseBean.tasks;
                 tasks.get(curTask).isSel = true;
