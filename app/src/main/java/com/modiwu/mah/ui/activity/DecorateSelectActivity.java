@@ -1,6 +1,10 @@
 package com.modiwu.mah.ui.activity;
 
+import android.graphics.Color;
+import android.os.Bundle;
 import android.support.v7.widget.CardView;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.modiwu.mah.R;
 import com.modiwu.mah.base.BaseCommonActivity;
@@ -36,6 +40,24 @@ public class DecorateSelectActivity extends BaseCommonActivity {
     CardView mCardJianLi;
     @BindView(R.id.cardShiGong)
     CardView mCardShiGong;
+    @BindView(R.id.tvOW)
+    TextView tvOW;
+    @BindView(R.id.tvSV)
+    TextView tvSV;
+    @BindView(R.id.tvPM)
+    TextView tvPM;
+    @BindView(R.id.cardProJL)
+    CardView cardProJL;
+    @BindView(R.id.tvWM)
+    TextView tvWM;
+    @BindView(R.id.ivOW)
+    ImageView ivOW;
+    @BindView(R.id.ivSV)
+    ImageView ivSV;
+    @BindView(R.id.ivPM)
+    ImageView ivPM;
+    @BindView(R.id.ivWM)
+    ImageView ivWM;
     private Unbinder mUnbinder;
     private DecorateModel mModel;
 
@@ -47,6 +69,15 @@ public class DecorateSelectActivity extends BaseCommonActivity {
     @Override
     public void initBaseData() {
         mModel = new DecorateModel();
+
+        mModel.getDecorateStatus().subscribe(bean -> {
+            setColor("1".equals(bean.isow), tvOW, ivOW);
+            setColor("1".equals(bean.issv), tvSV, ivSV);
+            setColor("1".equals(bean.ispm), tvPM, ivPM);
+            setColor("1".equals(bean.iswm), tvWM, ivWM);
+        }, throwable -> {
+        });
+
         mUnbinder = ButterKnife.bind(this, mFlRootView);
         mCardShiGong.setOnClickListener(v -> {
             requestWorkerPro("");
@@ -59,6 +90,12 @@ public class DecorateSelectActivity extends BaseCommonActivity {
             requestSVPro("");
 
         });
+    }
+
+    public void setColor(boolean is, TextView view, ImageView iv) {
+        iv.setImageResource(is ? R.drawable.decorate_isreg : R.drawable.decorate_isnoreg);
+        view.setText(is ? "已注册" : "未注册");
+        view.setTextColor(is ? Color.parseColor("#C9A672") : Color.parseColor("#999999"));
     }
 
     private void changeSelect(String select) {
@@ -118,4 +155,5 @@ public class DecorateSelectActivity extends BaseCommonActivity {
         super.onDestroy();
         mUnbinder.unbind();
     }
+
 }

@@ -3,6 +3,7 @@ package com.modiwu.mah.mvp.model;
 import com.modiwu.mah.mvp.MahServer;
 import com.modiwu.mah.mvp.model.bean.DecorateAllProBean;
 import com.modiwu.mah.mvp.model.bean.DecorateManBean;
+import com.modiwu.mah.mvp.model.bean.DecorateStatusBean;
 import com.modiwu.mah.mvp.model.bean.DecorateWorkerBean;
 import com.modiwu.mah.mvp.model.bean.FlowSelBean;
 import com.modiwu.mah.mvp.model.bean.LocalBean;
@@ -42,6 +43,14 @@ public class DecorateModel {
         return RetrofitManager.init()
                 .create(MahServer.class)
                 .createPro(body)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Observable<DecorateStatusBean> getDecorateStatus() {
+        return RetrofitManager.init()
+                .create(MahServer.class)
+                .getDecorateStatus()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
@@ -205,6 +214,7 @@ public class DecorateModel {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
+
     public Observable<BaseBean> delPro(String pro_id) {
         return RetrofitManager.init()
                 .create(MahServer.class)
@@ -276,7 +286,8 @@ public class DecorateModel {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
-  public Observable<InvListBean> getInvList() {
+
+    public Observable<InvListBean> getInvList() {
         return RetrofitManager.init()
                 .create(MahServer.class)
                 .getInvList()

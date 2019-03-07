@@ -33,13 +33,30 @@
                     android:text="我是业主"
                     android:textColor="@color/colorBlackGold"
                     android:textSize="@dimen/dimen_17sp"/>
-                <TextView
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom|center"
                     android:layout_marginBottom="@dimen/dimen_15dp"
-                    android:layout_marginTop="@dimen/dimen_5dp"
-                    android:text="已注册"/>
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/ivOW"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/dimen_5dp"
+                        android:src="@drawable/decorate_isreg"/>
+
+                    <TextView
+                        android:id="@+id/tvOW"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="已注册"
+                        android:textColor="#C9A672"/>
+                </LinearLayout>
+
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
@@ -60,13 +77,30 @@
                     android:text="我是监理"
                     android:textColor="@color/colorBlackGold"
                     android:textSize="@dimen/dimen_17sp"/>
-                <TextView
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom|center"
                     android:layout_marginBottom="@dimen/dimen_15dp"
-                    android:layout_marginTop="@dimen/dimen_5dp"
-                    android:text="已注册"/>
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/ivSV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/dimen_5dp"
+                        android:src="@drawable/decorate_isreg"/>
+
+                    <TextView
+                        android:id="@+id/tvSV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="已注册"
+                        android:textColor="#C9A672"/>
+                </LinearLayout>
+
             </android.support.v7.widget.CardView>
 
         </LinearLayout>
@@ -89,19 +123,35 @@
                     android:layout_gravity="center|top"
                     android:layout_marginTop="@dimen/dimen_15dp"
                     android:drawablePadding="@dimen/dimen_5dp"
-                    android:drawableTop="@drawable/decorate_shigong_sel"
+                    android:drawableTop="@drawable/decorate_projl"
                     android:gravity="center"
                     android:text="我是项目经理"
                     android:textColor="@color/colorBlackGold"
                     android:textSize="@dimen/dimen_17sp"/>
 
-                <TextView
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom|center"
                     android:layout_marginBottom="@dimen/dimen_15dp"
-                    android:layout_marginTop="@dimen/dimen_5dp"
-                    android:text="已注册"/>
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/ivPM"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/dimen_5dp"
+                        android:src="@drawable/decorate_isreg"/>
+
+                    <TextView
+                        android:id="@+id/tvPM"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="已注册"
+                        android:textColor="#C9A672"/>
+                </LinearLayout>
+
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
@@ -123,13 +173,30 @@
                     android:textColor="@color/colorBlackGold"
                     android:textSize="@dimen/dimen_17sp"/>
 
-                <TextView
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom|center"
                     android:layout_marginBottom="@dimen/dimen_15dp"
-                    android:layout_marginTop="@dimen/dimen_5dp"
-                    android:text="已注册"/>
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/ivWM"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/dimen_5dp"
+                        android:src="@drawable/decorate_isreg"/>
+
+                    <TextView
+                        android:id="@+id/tvWM"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="已注册"
+                        android:textColor="#C9A672"/>
+                </LinearLayout>
+
+
             </android.support.v7.widget.CardView>
 
         </LinearLayout>

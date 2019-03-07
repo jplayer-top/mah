@@ -7,6 +7,7 @@ import com.modiwu.mah.mvp.model.bean.CityCodeBean;
 import com.modiwu.mah.mvp.model.bean.CollectionHaseBean;
 import com.modiwu.mah.mvp.model.bean.DecorateAllProBean;
 import com.modiwu.mah.mvp.model.bean.DecorateManBean;
+import com.modiwu.mah.mvp.model.bean.DecorateStatusBean;
 import com.modiwu.mah.mvp.model.bean.DecorateWorkerBean;
 import com.modiwu.mah.mvp.model.bean.DefLocalBean;
 import com.modiwu.mah.mvp.model.bean.DesignBean;
@@ -274,6 +275,9 @@ public interface MahServer {
 
     @POST("ide/smcode?")
     Observable<BaseBean> getIdeSmsCode(@Query("phone") String phone);
+
+    @POST("ide/ide?")
+    Observable<DecorateStatusBean> getDecorateStatus();
 
     @POST("dma/task/rmwork")
     Observable<BaseBean> requestPushDel(@Query("project_id") String project_id, @Query("work_id") String task_id);
