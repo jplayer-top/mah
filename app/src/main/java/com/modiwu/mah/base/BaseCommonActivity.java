@@ -118,6 +118,10 @@ public abstract class BaseCommonActivity extends SuperBaseActivity implements IC
 
     }
 
+    public void addPM() {
+
+    }
+
     @Override
     public void addWorker() {
 
@@ -194,4 +198,9 @@ public abstract class BaseCommonActivity extends SuperBaseActivity implements IC
     public void regPm() {
 
     }
+
+    public void delPm() {
+    }
+
+    ;
 }

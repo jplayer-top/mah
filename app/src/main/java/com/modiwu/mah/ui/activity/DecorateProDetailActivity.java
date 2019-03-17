@@ -55,6 +55,8 @@ public class DecorateProDetailActivity extends BaseCommonActivity {
     RecyclerView mRecyclerViewVisor;
     @BindView(R.id.recyclerViewConst)
     RecyclerView mRecyclerViewConst;
+    @BindView(R.id.recyclerViewPM)
+    RecyclerView mRecyclerViewPM;
     @BindView(R.id.btnDelPro)
     Button btnDelPro;
     private Unbinder mUnbinder;
@@ -62,12 +64,15 @@ public class DecorateProDetailActivity extends BaseCommonActivity {
     private DecorateItemCommonAdapter mManAdapter;
     private List<ProInfoBean.CommonBean> mCommonManBeans;
     private List<ProInfoBean.CommonBean> mCommonSvsBeans;
+    private List<ProInfoBean.CommonBean> mCommonPmsBeans;
     private List<ProInfoBean.CommonBean> mCommonWorkerBeans;
     private DecorateItemCommonAdapter mSuperViewAdapter;
+    private DecorateItemCommonAdapter mPmAdapter;
     private DecorateItemCommonAdapter mWorkerAdapter;
     private String mProId;
     private DialogSelectOtherMan mSelectOtherMan;
     private String mIsMan;
+    private DialogPushDel dialogPushDel;
 
     @Override
     public int setBaseLayout() {
@@ -111,6 +116,22 @@ public class DecorateProDetailActivity extends BaseCommonActivity {
                 }
             });
         }
+
+        mRecyclerViewPM.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        mPmAdapter = new DecorateItemCommonAdapter(null);
+        mRecyclerViewPM.setAdapter(mPmAdapter);
+        if ("业主".equals(mIsMan)) {
+            mPmAdapter.addFooterView(View.inflate(this, R.layout.adapter_footer_edit_pro_item, null));
+            mPmAdapter.getFooterLayout().setOnClickListener(v -> {
+                if (mSelectOtherMan != null && !mSelectOtherMan.isShowing()) {
+                    mSelectOtherMan.setTip("项目经理")
+                            .setOnFindListener(phone -> {
+                                mPresenter.addPM(phone, mProId);
+                            }).show();
+                }
+            });
+        }
+
         mRecyclerViewConst.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         mWorkerAdapter = new DecorateItemCommonAdapter(null);
         mRecyclerViewConst.setAdapter(mWorkerAdapter);
@@ -143,7 +164,8 @@ public class DecorateProDetailActivity extends BaseCommonActivity {
         mWorkerAdapter.setOnItemClickListener((adapter, view, position) -> {
             boolean isEdit = "编辑".equals(tvBarRight.getText().toString());
             if (!isEdit) {
-                new DialogPushDel(this).show(R.id.tvSure, view1 -> {
+                dialogPushDel = new DialogPushDel(this);
+                dialogPushDel.setTvTip("确定删除该施工人员吗").show(R.id.tvSure, view1 -> {
                     mPresenter.delWorker(mProId, mWorkerAdapter.getData().get(position).user_id + "");
                 });
             }
@@ -151,15 +173,26 @@ public class DecorateProDetailActivity extends BaseCommonActivity {
         mSuperViewAdapter.setOnItemClickListener((adapter, view, position) -> {
             boolean isEdit = "编辑".equals(tvBarRight.getText().toString());
             if (!isEdit) {
-                new DialogPushDel(this).show(R.id.tvSure, view1 -> {
+                dialogPushDel = new DialogPushDel(this);
+                dialogPushDel.setTvTip("确定删除该项目监理吗").show(R.id.tvSure, view1 -> {
                     mPresenter.delSV(mProId, mSuperViewAdapter.getData().get(position).user_id + "");
+                });
+            }
+        });
+        mPmAdapter.setOnItemClickListener((adapter, view, position) -> {
+            boolean isEdit = "编辑".equals(tvBarRight.getText().toString());
+            if (!isEdit) {
+                dialogPushDel = new DialogPushDel(this);
+                dialogPushDel.setTvTip("确定删除该项目经理吗").show(R.id.tvSure, view1 -> {
+                    mPresenter.delPM(mProId, mPmAdapter.getData().get(position).user_id + "");
                 });
             }
         });
         mManAdapter.setOnItemClickListener((adapter, view, position) -> {
             boolean isEdit = "编辑".equals(tvBarRight.getText().toString());
             if (!isEdit) {
-                new DialogPushDel(this).show(R.id.tvSure, view1 -> {
+                dialogPushDel = new DialogPushDel(this);
+                dialogPushDel.setTvTip("确定删除该业主吗").show(R.id.tvSure, view1 -> {
                     mPresenter.delMan(mProId, mManAdapter.getData().get(position).user_id + "");
                 });
             }
@@ -172,15 +205,20 @@ public class DecorateProDetailActivity extends BaseCommonActivity {
     private void delOne(boolean isEdit) {
         Observable.fromIterable(mCommonManBeans).subscribe(commonBean -> commonBean.isEdit = isEdit);
         Observable.fromIterable(mCommonSvsBeans).subscribe(commonBean -> commonBean.isEdit = isEdit);
+        Observable.fromIterable(mCommonPmsBeans).subscribe(commonBean -> commonBean.isEdit = isEdit);
         Observable.fromIterable(mCommonWorkerBeans).subscribe(commonBean -> commonBean.isEdit = isEdit);
         mManAdapter.notifyDataSetChanged();
         mSuperViewAdapter.notifyDataSetChanged();
+        mPmAdapter.notifyDataSetChanged();
         mWorkerAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void delWorker() {
         super.delWorker();
+        if (dialogPushDel != null && dialogPushDel.isShowing()) {
+            dialogPushDel.dismiss();
+        }
         mPresenter.getProInfo(mProId);
         tvBarRight.setText("编辑");
         btnDelPro.setVisibility("业主".equals(mIsMan) ? View.VISIBLE : View.INVISIBLE);
@@ -189,6 +227,9 @@ public class DecorateProDetailActivity extends BaseCommonActivity {
     @Override
     public void delMan() {
         super.delMan();
+        if (dialogPushDel != null && dialogPushDel.isShowing()) {
+            dialogPushDel.dismiss();
+        }
         mPresenter.getProInfo(mProId);
         tvBarRight.setText("编辑");
         btnDelPro.setVisibility("业主".equals(mIsMan) ? View.VISIBLE : View.INVISIBLE);
@@ -197,6 +238,20 @@ public class DecorateProDetailActivity extends BaseCommonActivity {
     @Override
     public void delSv() {
         super.delSv();
+        if (dialogPushDel != null && dialogPushDel.isShowing()) {
+            dialogPushDel.dismiss();
+        }
+        mPresenter.getProInfo(mProId);
+        tvBarRight.setText("编辑");
+        btnDelPro.setVisibility("业主".equals(mIsMan) ? View.VISIBLE : View.INVISIBLE);
+    }
+
+    @Override
+    public void delPm() {
+        super.delPm();
+        if (dialogPushDel != null && dialogPushDel.isShowing()) {
+            dialogPushDel.dismiss();
+        }
         mPresenter.getProInfo(mProId);
         tvBarRight.setText("编辑");
         btnDelPro.setVisibility("业主".equals(mIsMan) ? View.VISIBLE : View.INVISIBLE);
@@ -229,6 +284,12 @@ public class DecorateProDetailActivity extends BaseCommonActivity {
     }
 
     @Override
+    public void addPM() {
+        super.addSuperView();
+        addSendOk();
+    }
+
+    @Override
     public void addWorker() {
         super.addWorker();
         addSendOk();
@@ -251,6 +312,11 @@ public class DecorateProDetailActivity extends BaseCommonActivity {
         }.getType());
         Observable.fromIterable(mCommonSvsBeans).subscribe(commonBean -> commonBean.work_type = "监理");
         mSuperViewAdapter.setNewData(mCommonSvsBeans);
+
+        mCommonPmsBeans = gson.fromJson(gson.toJson(bean.pms), new TypeToken<List<ProInfoBean.CommonBean>>() {
+        }.getType());
+        Observable.fromIterable(mCommonPmsBeans).subscribe(commonBean -> commonBean.work_type = "经理");
+        mPmAdapter.setNewData(mCommonPmsBeans);
 
         mCommonWorkerBeans = gson.fromJson(gson.toJson(bean.wokers), new TypeToken<List<ProInfoBean.CommonBean>>() {
         }.getType());

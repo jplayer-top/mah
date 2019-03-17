@@ -23,6 +23,7 @@ public class ProInfoBean extends BaseBean {
     public ProjectBean project;
     public List<OwnersBean> owners;
     public List<SvsBean> svs;
+    public List<PmsBean> pms;
     public List<WorkerBean> wokers;
     public List<CommonBean> commonBeans;
 
@@ -70,6 +71,7 @@ public class ProInfoBean extends BaseBean {
         public int user_id;
         public String user_name;
         public String user_phone;
+        public String user_avatar;
     }
 
     public static class SvsBean {
@@ -82,6 +84,20 @@ public class ProInfoBean extends BaseBean {
         public int user_id;
         public String user_name;
         public String user_phone;
+        public String user_avatar;
+    }
+
+    public static class PmsBean {
+        /**
+         * user_id : 10005
+         * user_name : fjnndff
+         * user_phone : 17667936541
+         */
+
+        public int user_id;
+        public String user_name;
+        public String user_phone;
+        public String user_avatar;
     }
 
     public static class WorkerBean {
@@ -95,6 +111,7 @@ public class ProInfoBean extends BaseBean {
         public String user_name;
         public String user_phone;
         public String work_type;
+        public String user_avatar;
     }
 
     public static class CommonBean {
@@ -107,6 +124,7 @@ public class ProInfoBean extends BaseBean {
         public int user_id;
         public String user_name;
         public String user_phone;
+        public String user_avatar;
         public boolean isEdit = false;
         public String work_type = "业主";
     }

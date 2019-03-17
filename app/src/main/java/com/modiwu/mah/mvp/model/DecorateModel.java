@@ -215,6 +215,14 @@ public class DecorateModel {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
+    public Observable<BaseBean> addPM(String phone, String id) {
+        return RetrofitManager.init()
+                .create(MahServer.class)
+                .addPM(phone, id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
     public Observable<BaseBean> addWorker(String phone, String id) {
         return RetrofitManager.init()
                 .create(MahServer.class)
@@ -283,6 +291,14 @@ public class DecorateModel {
         return RetrofitManager.init()
                 .create(MahServer.class)
                 .delSv(proId, userId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Observable<BaseBean> delPM(String proId, String userId) {
+        return RetrofitManager.init()
+                .create(MahServer.class)
+                .delPM(proId, userId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }

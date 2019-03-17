@@ -118,14 +118,36 @@
             app:layout_constraintTop_toBottomOf="@+id/tvTipVisor"/>
 
         <TextView
+            android:id="@+id/tvTipPM"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_15dp"
+            android:text="项目经理人员"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/recyclerViewVisor"
+            app:layout_constraintTop_toBottomOf="@+id/recyclerViewVisor"/>
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerViewPM"
+            android:layout_width="@dimen/dimen_0dp"
+            android:layout_height="@dimen/dimen_100dp"
+            android:layout_marginEnd="@dimen/dimen_15dp"
+            android:layout_marginStart="@dimen/dimen_15dp"
+            android:layout_marginTop="@dimen/dimen_10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTipPM"/>
+
+        <TextView
             android:id="@+id/tvTipConst"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dimen_15dp"
             android:text="项目施工人员"
             android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@+id/recyclerViewVisor"
-            app:layout_constraintTop_toBottomOf="@+id/recyclerViewVisor"/>
+            app:layout_constraintStart_toStartOf="@+id/recyclerViewPM"
+            app:layout_constraintTop_toBottomOf="@+id/recyclerViewPM"/>
 
 
         <android.support.v7.widget.RecyclerView

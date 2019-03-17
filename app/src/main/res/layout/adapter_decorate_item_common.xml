@@ -14,6 +14,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <TextView
+            android:visibility="gone"
             android:id="@+id/ivItemSrc"
             android:layout_width="@dimen/dimen_40dp"
             android:layout_height="@dimen/dimen_40dp"
@@ -23,6 +24,14 @@
             android:text="姓"
             android:textColor="@color/white"
             android:textStyle="bold"/>
+
+        <ImageView
+            android:id="@+id/ivItemAvatar"
+            android:scaleType="centerCrop"
+            android:src="@drawable/placeholder"
+            android:layout_width="@dimen/dimen_40dp"
+            android:layout_height="@dimen/dimen_40dp"
+            android:layout_marginTop="@dimen/dimen_5dp"/>
         <!--<com.kingja.magicmirror.MagicMirrorView-->
         <!--android:id="@+id/ivItemSrc"-->
         <!--android:layout_width="@dimen/dimen_40dp"-->

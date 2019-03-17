@@ -347,6 +347,9 @@ public interface MahServer {
     @POST("dma/project/addsv?")
     Observable<BaseBean> addSuperView(@Query("user_phone") String phone, @Query("project_id") String project_id);
 
+    @POST("dma/project/addpm?")
+    Observable<BaseBean> addPM(@Query("user_phone") String phone, @Query("project_id") String project_id);
+
     @POST("dma/project/addwm?")
     Observable<BaseBean> addWorker(@Query("user_phone") String phone, @Query("project_id") String project_id);
 
@@ -358,6 +361,9 @@ public interface MahServer {
 
     @POST("dma/project/rmsv")
     Observable<BaseBean> delSv(@Query("project_id") String proId, @Query("user_id") String userId);
+
+    @POST("dma/project/rmpm")
+    Observable<BaseBean> delPM(@Query("project_id") String proId, @Query("user_id") String userId);
 
     @POST("dma/project/rmon")
     Observable<BaseBean> delMan(@Query("project_id") String proId, @Query("user_id") String userId);

@@ -32,8 +32,9 @@ public class DialogPushDel extends BaseCustomDialog {
         mTvTip = view.findViewById(R.id.tvTipPushDel);
     }
 
-    public void setTvTip(String tip) {
+    public DialogPushDel setTvTip(String tip) {
         mTvTip.setText(tip);
+        return this;
     }
 
     @Override

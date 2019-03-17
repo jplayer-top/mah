@@ -191,6 +191,17 @@ public class DecorateBasePresenter extends BasePresenter<BaseCommonActivity> {
                 });
     }
 
+    public void addPM(String phone, String id) {
+        mModel.addPM(phone, id)
+                .subscribe(new SampleShowDialogObserver<BaseBean>(mIView) {
+                    @Override
+                    protected void onSuccess(BaseBean baseBean) throws Exception {
+                        ToastUtils.init().showSuccessToast(mIView, baseBean.msg);
+                        mIView.addPM();
+                    }
+                });
+    }
+
     public void addWorker(String phone, String id) {
         mModel.addWorker(phone, id)
                 .subscribe(new SampleShowDialogObserver<BaseBean>(mIView) {
@@ -249,7 +260,18 @@ public class DecorateBasePresenter extends BasePresenter<BaseCommonActivity> {
                     @Override
                     protected void onSuccess(BaseBean baseBean) throws Exception {
                         ToastUtils.init().showSuccessToast(mIView, baseBean.msg);
-                        mIView.delWorker();
+                        mIView.delSv();
+                    }
+                });
+    }
+
+    public void delPM(String proId, String userId) {
+        mModel.delPM(proId, userId)
+                .subscribe(new SampleShowDialogObserver<BaseBean>(mIView) {
+                    @Override
+                    protected void onSuccess(BaseBean baseBean) throws Exception {
+                        ToastUtils.init().showSuccessToast(mIView, baseBean.msg);
+                        mIView.delPm();
                     }
                 });
     }

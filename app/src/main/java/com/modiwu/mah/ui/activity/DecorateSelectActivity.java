@@ -133,7 +133,7 @@ public class DecorateSelectActivity extends BaseCommonActivity {
     }
 
     private void responsePm(DecorateManBean bean) {
-        if ("1".equals(bean.issv)) {
+        if ("1".equals(bean.ispm)) {
             changeSelect("经理");
         } else {
             ActivityUtils.init().start(this, DecorateShiGongActivity.class, "我是项目经理");
