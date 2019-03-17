@@ -42,6 +42,7 @@ public class DecorateShiGongActivity extends BaseCommonActivity {
     private DecorateBasePresenter mPresenter;
     private String mLoginPhone;
     private boolean mIsSV;
+    private boolean mIsPm;
 
     @Override
     public int setBaseLayout() {
@@ -69,8 +70,11 @@ public class DecorateShiGongActivity extends BaseCommonActivity {
             mPresenter.sendSmCode(mLoginPhone);
         });
         mIsSV = tvBarTitle.getText().toString().contains("监理");
+        mIsPm = tvBarTitle.getText().toString().contains("项目经理");
         if (mIsSV) {
             tvTip01.setText("您还没有开启监理人员功能,确认开启请发送验证码验证");
+        } else if (mIsPm) {
+            tvTip01.setText("您还没有开启项目经理功能,确认开启请发送验证码验证");
         }
     }
 
@@ -90,6 +94,8 @@ public class DecorateShiGongActivity extends BaseCommonActivity {
         super.verCode();
         if (mIsSV) {
             ActivityUtils.init().start(this, DecorateShiGongRegisterActivity.class, "注册监理人员");
+        } else if (mIsPm) {
+            ActivityUtils.init().start(this, DecorateShiGongRegisterActivity.class, "注册项目经理");
         } else {
             ActivityUtils.init().start(this, DecorateShiGongRegisterActivity.class, "注册施工人员");
         }

@@ -135,6 +135,14 @@ public class DecorateModel {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
+    public Observable<DecorateManBean> requestPmPro(String id) {
+        return RetrofitManager.init()
+                .create(MahServer.class)
+                .pmProInfo(id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
     public Observable<BaseBean> getIdeSmsCode(String phone) {
         return RetrofitManager.init()
                 .create(MahServer.class)
@@ -163,6 +171,14 @@ public class DecorateModel {
         return RetrofitManager.init()
                 .create(MahServer.class)
                 .regSuperView(map)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Observable<BaseBean> regPm(Map<String, String> map) {
+        return RetrofitManager.init()
+                .create(MahServer.class)
+                .regPm(map)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }

@@ -22,6 +22,7 @@ public class DecorateManBean extends BaseBean {
      */
 
     public String issv;
+    public String ispm;
     public String haspj;
     public String login;
     public ProjectBean project;

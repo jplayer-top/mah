@@ -190,4 +190,8 @@ public abstract class BaseCommonActivity extends SuperBaseActivity implements IC
     public void selectWorkerType(SelectWorkerTypeBean bean) {
 
     }
+
+    public void regPm() {
+
+    }
 }

@@ -47,5 +47,6 @@ public class DecorateWorkerBean extends BaseBean {
         public String work_type;
         public int work_years;
         public String ct;
+        public String avatar;
     }
 }

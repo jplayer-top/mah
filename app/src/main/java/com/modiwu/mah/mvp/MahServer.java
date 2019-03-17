@@ -273,6 +273,9 @@ public interface MahServer {
     @GET("dma/index/sv")
     Observable<DecorateManBean> svProInfo(@Query("project_id") String id);
 
+    @GET("dma/index/pm")
+    Observable<DecorateManBean> pmProInfo(@Query("project_id") String id);
+
     @POST("ide/smcode?")
     Observable<BaseBean> getIdeSmsCode(@Query("phone") String phone);
 
@@ -304,6 +307,9 @@ public interface MahServer {
 
     @POST("ide/regsv?")
     Observable<BaseBean> regSuperView(@QueryMap Map<String, String> map);
+
+    @POST("ide/regpm?")
+    Observable<BaseBean> regPm(@QueryMap Map<String, String> map);
 
     @GET("dma/project/info?")
     Observable<ProInfoBean> getProInfo(@Query("project_id") String pro_id);

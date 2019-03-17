@@ -48,6 +48,17 @@ public class DecorateProInfoPresenter extends BasePresenter<DecorateFragment> {
                 });
     }
 
+    public void requestPmPro(String id) {
+        mModel.requestPmPro(id)
+                .subscribe(bean -> mIView.responsePm(bean), throwable -> {
+                    if (throwable.getMessage().contains("401")) {
+                        ToastUtils.init().showErrorToast(mIView.getContext(), "请先登录");
+                    }
+                    mIView.smartRefreshLayout.finishRefresh(true);
+                    mIView.mMultipleStatusView.showError();
+                });
+    }
+
     public void requestManPro() {
         mModel.requestManPro()
                 .subscribe(decorateBean -> mIView.responseMan(decorateBean)

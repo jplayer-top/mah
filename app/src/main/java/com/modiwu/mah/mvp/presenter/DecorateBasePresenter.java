@@ -103,7 +103,8 @@ public class DecorateBasePresenter extends BasePresenter<BaseCommonActivity> {
                 }, throwable -> {
                 });
     }
-   public void getInvList() {
+
+    public void getInvList() {
         mModel.getInvList()
                 .subscribe(bean -> {
                     mIView.getInvList(bean);
@@ -217,6 +218,16 @@ public class DecorateBasePresenter extends BasePresenter<BaseCommonActivity> {
                     @Override
                     protected void onSuccess(BaseBean baseBean) throws Exception {
                         mIView.regSuperView();
+                    }
+                });
+    }
+
+    public void regPm(ArrayMap<String, String> map) {
+        mModel.regPm(map)
+                .subscribe(new SampleShowDialogObserver<BaseBean>(mIView) {
+                    @Override
+                    protected void onSuccess(BaseBean baseBean) throws Exception {
+                        mIView.regPm();
                     }
                 });
     }

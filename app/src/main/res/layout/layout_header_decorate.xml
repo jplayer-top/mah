@@ -1,20 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
-    <ImageView
-        android:id="@+id/ivBgSrc"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:background="@drawable/decorate_bg_src"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/llAllCart"/>
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
     <LinearLayout
+        android:visibility="gone"
         android:id="@+id/llAllCart"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_100dp"
@@ -75,61 +68,82 @@
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/tvProjectName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/llIntroduction"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/ivBgSrc"/>
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/tvProDetail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/shape_border_white"
-        android:paddingBottom="@dimen/dimen_3dp"
-        android:paddingEnd="@dimen/dimen_10dp"
-        android:paddingStart="@dimen/dimen_10dp"
-        android:paddingTop="@dimen/dimen_3dp"
-        android:text="项目介绍 >"
-        android:textColor="@color/white"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/ivBgSrc"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvProjectName"/>
-
-    <LinearLayout
-        android:id="@+id/llIntroduction"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="@+id/ivBgSrc"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvProjectName">
+        <ImageView
+            android:id="@+id/ivBgSrc"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@drawable/decorate_bg_src"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/viewPlad"/>
 
         <View
-            android:layout_width="@dimen/dimen_55dp"
-            android:layout_height="@dimen/dimen_5dp"
-            android:layout_gravity="center"
-            android:layout_marginBottom="@dimen/dimen_10dp"
-            android:background="@color/white"/>
+            android:id="@+id/viewPlad"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="@+id/ivBgSrc"
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <TextView
-            android:layout_width="@dimen/dimen_65dp"
+            android:id="@+id/tvProjectName"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="个人介绍"
             android:textColor="@color/white"
+            app:layout_constraintBottom_toTopOf="@+id/llIntroduction"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/ivBgSrc"/>
-    </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvProDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_border_white"
+            android:paddingBottom="@dimen/dimen_3dp"
+            android:paddingEnd="@dimen/dimen_10dp"
+            android:paddingStart="@dimen/dimen_10dp"
+            android:paddingTop="@dimen/dimen_3dp"
+            android:text="项目介绍 >"
+            android:textColor="@color/white"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/ivBgSrc"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvProjectName"/>
+
+        <LinearLayout
+            android:id="@+id/llIntroduction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/ivBgSrc"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvProjectName">
+
+            <View
+                android:layout_width="@dimen/dimen_55dp"
+                android:layout_height="@dimen/dimen_5dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="@dimen/dimen_10dp"
+                android:background="@color/white"/>
+
+            <TextView
+                android:layout_width="@dimen/dimen_65dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="个人介绍"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/ivBgSrc"/>
+        </LinearLayout>
 
 
-</android.support.constraint.ConstraintLayout>
+    </android.support.constraint.ConstraintLayout>
+</LinearLayout>

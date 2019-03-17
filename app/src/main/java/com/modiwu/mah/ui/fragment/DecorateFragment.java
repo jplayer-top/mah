@@ -10,7 +10,11 @@ import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+import com.kingja.magicmirror.MagicMirrorView;
 import com.modiwu.mah.R;
+import com.modiwu.mah.base.BaseApplication;
 import com.modiwu.mah.base.BaseFragment;
 import com.modiwu.mah.mvp.model.bean.DecorateManBean;
 import com.modiwu.mah.mvp.model.bean.DecorateWorkerBean;
@@ -49,6 +53,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import io.reactivex.Observable;
+import top.jplayer.baseprolibrary.glide.GlideOptions;
+import top.jplayer.baseprolibrary.glide.GlideUtils;
 import top.jplayer.baseprolibrary.utils.ActivityUtils;
 import top.jplayer.baseprolibrary.utils.DateUtils;
 import top.jplayer.baseprolibrary.utils.SharePreUtil;
@@ -75,6 +81,7 @@ public class DecorateFragment extends BaseFragment {
     MultipleStatusView mMultiplestatusview;
     @BindView(R.id.smartRefreshLayout)
     SmartRefreshLayout mSmartRefreshLayout;
+    private LinearLayout llAllCart;
     private Unbinder mUnbinder;
     private DecorateAdapter mAdapter;
     private RecyclerView mRecyclerViewProgress;
@@ -107,6 +114,8 @@ public class DecorateFragment extends BaseFragment {
     private RatingBar mTaskRatingBar;
     private DialogPushDel mPushDel;
     private TextView mTvSureRatingTip;
+    private View header0;
+    private ImageView cirAvatar;
 
     @Override
     public int initLayout() {
@@ -130,14 +139,18 @@ public class DecorateFragment extends BaseFragment {
         mAdapter = new DecorateAdapter(null);
         mRecyclerView.setAdapter(mAdapter);
         mIvGoBack.setOnClickListener(v -> {
+            if (StringUtils.getInstance().assertNoLogin(getContext())) {
+                return;
+            }
             ActivityUtils.init().start(this.getContext(), DecorateSelectActivity.class, "身份选择");
         });
         mIvBarSearch.setOnClickListener(v -> {
             ActivityUtils.init().start(this.getContext(), DecorateMessageHasActivity.class, "消息通知");
         });
-        View header = View.inflate(this.getContext(), R.layout.layout_header_decorate, null);
-        initHeader(header);
-        mAdapter.addHeaderView(header, 0);
+        header0 = View.inflate(this.getContext(), R.layout.layout_header_decorate, null);
+        initHeader(header0);
+        llAllCart = header0.findViewById(R.id.llAllCart);
+        mAdapter.addHeaderView(header0, 0);
 
         mHeaderProgress = View.inflate(this.getContext(), R.layout.layout_header_select_progress, null);
         initHeaderProgress(mHeaderProgress);
@@ -199,6 +212,7 @@ public class DecorateFragment extends BaseFragment {
         mTvWorkerName = header.findViewById(R.id.tvName);
         mTvWorkerSex = header.findViewById(R.id.tvWorkerSex);
         mTvWorkerAge = header.findViewById(R.id.tvWorkerAge);
+        cirAvatar = header.findViewById(R.id.cirAvatar);
         mTvWorkerYear = header.findViewById(R.id.tvWorkerYear);
         mTvWorkerType = header.findViewById(R.id.tvWorkerType);
         mTvWorkerIngEd = header.findViewById(R.id.tvWorkerIngEd);
@@ -256,6 +270,9 @@ public class DecorateFragment extends BaseFragment {
         } else if ("监理".equals(type)) {
             des = R.drawable.decorate_jianli;
             mPresenter.requestSVPro(mProId);
+        } else if ("经理".equals(type)) {
+            des = R.drawable.decorate_pm;
+            mPresenter.requestPmPro(mProId);
         } else {
             mPresenter.requestManPro();
         }
@@ -275,7 +292,8 @@ public class DecorateFragment extends BaseFragment {
     public void responseMan(DecorateManBean baseBean) {
         smartRefreshLayout.finishRefresh(true);
         mMultipleStatusView.showContent();
-
+//        mAdapter.removeHeaderView(header0);
+        llAllCart.setVisibility(View.GONE);
         mTvCreatePro.setVisibility(View.VISIBLE);
         mTvAllPro.setVisibility(View.GONE);
         mLlIntroduction.setVisibility(View.INVISIBLE);
@@ -284,7 +302,7 @@ public class DecorateFragment extends BaseFragment {
         mConManSure.setVisibility(View.VISIBLE);
         mAdapter.removeHeaderView(mHeaderWorker);
         mAdapter.removeHeaderView(mHeaderProgress);
-        mTvCreatePro.setOnClickListener(v -> {
+        mTvProDetail.setOnClickListener(v -> {
             if ("0".equals(baseBean.haspj)) {
                 ActivityUtils.init().start(getContext(), DecorateCreateProActivity.class, "创建项目");
             } else {
@@ -294,12 +312,12 @@ public class DecorateFragment extends BaseFragment {
 
 
         if ("0".equals(baseBean.haspj)) {
-            mTvTitleHeader.setText("尊敬的用户，您暂时没有装修项目");
+            mTvTitleHeader.setText("亲爱的的用户，您暂时没有装修项目");
             mTvProDetail.setText("赶紧添加一个吧");
-            mTvProDetail.setEnabled(false);
+            mTvProDetail.setEnabled(true);
             mAdapter.setNewData(null);
             if ("0".equals(baseBean.login)) {
-                mTvTitleHeader.setText("尊敬的用户，您还没有登录");
+                mTvTitleHeader.setText("亲爱的的用户，您还没有登录");
                 mTvProDetail.setText("请先登录吧");
                 mTvProDetail.setEnabled(true);
                 mTvProDetail.setOnClickListener(v -> {
@@ -344,9 +362,16 @@ public class DecorateFragment extends BaseFragment {
                     return false;
                 });
             } else {
-                mTvProDetail.setEnabled(false);
-                mTvTitleHeader.setText("尊敬的用户，您暂时没有装修项目");
+                mTvProDetail.setEnabled(true);
+                mTvTitleHeader.setText("亲爱的的用户，您暂时没有装修项目");
                 mTvProDetail.setText("赶紧添加一个吧");
+                mTvProDetail.setOnClickListener(v -> {
+                    if ("0".equals(baseBean.haspj)) {
+                        ActivityUtils.init().start(getContext(), DecorateCreateProActivity.class, "创建项目");
+                    } else {
+                        ToastUtils.init().showInfoToast(getContext(), "只能创建一个项目");
+                    }
+                });
                 mAdapter.addHeaderView(mHeaderProgress, 1);
                 List<DecorateManBean.TasksBean> tasks = baseBean.tasks;
                 tasks.get(curTask).isSel = true;
@@ -461,10 +486,124 @@ public class DecorateFragment extends BaseFragment {
 
     }
 
+    public void responsePm(DecorateManBean baseBean) {
+        smartRefreshLayout.finishRefresh(true);
+        mMultipleStatusView.showContent();
+        llAllCart.setVisibility(View.VISIBLE);
+        mTvCreatePro.setVisibility(View.GONE);
+        mTvAllPro.setVisibility(View.VISIBLE);
+
+        mTvSendPush.setVisibility(View.VISIBLE);
+        mConManSure.setVisibility(View.GONE);
+        mLlIntroduction.setVisibility(View.INVISIBLE);
+        mTvProDetail.setVisibility(View.VISIBLE);
+        mAdapter.removeHeaderView(mHeaderWorker);
+        mAdapter.removeHeaderView(mHeaderProgress);
+        mAdapter.setNewData(null);
+        if ("0".equals(baseBean.ispm)) {
+            ActivityUtils.init().start(getContext(), DecorateShiGongActivity.class, "我是项目经理");
+            return;
+        }
+        if ("0".equals(baseBean.haspj)) {
+            mTvTitleHeader.setText("亲爱的项目经理，您暂时没有装修项目");
+            mTvProDetail.setText("赶紧加入一个吧");
+            mTvProDetail.setEnabled(false);
+        } else {
+            mTvProDetail.setEnabled(true);
+            mProId = baseBean.project.project_id;
+            mAdapter.addHeaderView(mHeaderProgress, 1);
+            List<DecorateManBean.TasksBean> tasks = baseBean.tasks;
+            tasks.get(curTask).isSel = true;
+            mAdapter.setNewData(tasks.get(curTask).works);
+            mAdapter.setOnItemChildClickListener((adapter, view, position) -> {
+                if (view.getId() == R.id.ivPushDel) {
+                    mPushDel = new DialogPushDel(getContext());
+                    mPushDel.show(R.id.tvSure, view1 ->
+                            mPresenter.requestDelPush(mProId, mAdapter.getData().get(position).work_id + ""));
+                }
+                return false;
+            });
+            mTvTitleHeader.setText(baseBean.project.project_name);
+
+            mProgressAdapter.setNewData(tasks);
+
+            mTvProDetail.setText("项目介绍 >");
+            mTvProDetail.setOnClickListener(v -> {
+                if (!"0".equals(baseBean.haspj)) {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("pro_id", mProId);
+                    ActivityUtils.init().start(getContext(), DecorateProDetailActivity.class, "项目介绍", bundle);
+                }
+
+            });
+
+            mProgressAdapter.setOnItemChildClickListener((adapter, view, position) -> {
+                if (view.getId() == R.id.ivChangeStatus) {
+                    if (mStatus == null) {
+                        mStatus = new DialogSelectStatus(getContext());
+                    }
+                    mStatus.setBg(Integer.valueOf(mProgressAdapter.getData().get(position).status));
+                    curDialogSelchange = position;
+                    mStatus.show();
+                } else {
+                    curTask = position;
+                    List<DecorateManBean.TasksBean> mProgressAdapterData = mProgressAdapter.getData();
+                    Observable.fromIterable(mProgressAdapterData).subscribe(tasksBean -> {
+                        tasksBean.isSel = false;
+                        if (position == mProgressAdapter.getData().indexOf(tasksBean)) {
+                            tasksBean.isSel = true;
+                        }
+                    });
+                    DecorateManBean.TasksBean tasksBean = mProgressAdapterData.get(position);
+                    List<DecorateManBean.TasksBean.WorksBeanX> works = tasksBean.works;
+                    mAdapter.setNewData(works);
+                    mProgressAdapter.notifyDataSetChanged();
+                    boolean isFinishTask = "2".equals(tasksBean.status);
+                    mConManSure.setVisibility(isFinishTask ? View.VISIBLE : View.GONE);
+                    mTvSendPush.setVisibility(!isFinishTask ? View.VISIBLE : View.GONE);
+                    mTvSendPush.setEnabled(!"2".equals(tasksBean.status));
+                    if (tasksBean.appraise != null) {
+                        mTvSureRating.setVisibility(View.INVISIBLE);
+                        mTaskRatingBar.setRating(tasksBean.appraise.appraise);
+                        mTaskRatingBar.setIsIndicator(true);
+                        mTvSureRatingTip.setText("该环节已确认完工");
+                    }
+                }
+                return false;
+            });
+
+            boolean isFinishTask = "2".equals(baseBean.tasks.get(curTask).status);
+            mConManSure.setVisibility(isFinishTask ? View.VISIBLE : View.GONE);
+            mTvSendPush.setVisibility(!isFinishTask ? View.VISIBLE : View.GONE);
+            if (baseBean.tasks.get(curTask).appraise != null) {
+                mTvSureRating.setVisibility(View.INVISIBLE);
+                mTaskRatingBar.setRating(baseBean.tasks.get(curTask).appraise.appraise);
+                mTaskRatingBar.setIsIndicator(true);
+                mTvSureRatingTip.setText("该环节已确认完工");
+            }
+            mTvSendPush.setEnabled(!isFinishTask);
+            mTvSendPush.setOnClickListener(v -> {
+                Bundle bundle = new Bundle();
+                DecorateManBean.TasksBean tasksBean = null;
+                for (DecorateManBean.TasksBean bean : mProgressAdapter.getData()) {
+                    if (bean.isSel) {
+                        tasksBean = bean;
+                        break;
+                    }
+                }
+                if (tasksBean != null) {
+                    bundle.putString("project_id", tasksBean.project_id);
+                    bundle.putString("task_id", tasksBean.task_id + "");
+                    ActivityUtils.init().start(getContext(), DecorateSendPushActivity.class, "添加新推送", bundle);
+                }
+            });
+        }
+    }
+
     public void responseSv(DecorateManBean baseBean) {
         smartRefreshLayout.finishRefresh(true);
         mMultipleStatusView.showContent();
-
+        llAllCart.setVisibility(View.VISIBLE);
         mTvCreatePro.setVisibility(View.GONE);
         mTvAllPro.setVisibility(View.VISIBLE);
 
@@ -576,6 +715,7 @@ public class DecorateFragment extends BaseFragment {
     }
 
     public void responseWorker(DecorateWorkerBean baseBean) {
+        llAllCart.setVisibility(View.VISIBLE);
         smartRefreshLayout.finishRefresh(true);
         mMultipleStatusView.showContent();
         mTvAllPro.setVisibility(View.VISIBLE);
@@ -591,6 +731,11 @@ public class DecorateFragment extends BaseFragment {
         }
         mAdapter.addHeaderView(mHeaderWorker, 1);
         DecorateWorkerBean.InfoBean infoBean = baseBean.info;
+        if (infoBean.avatar != null) {
+            Glide.with(getActivity()).load(infoBean.avatar).apply(RequestOptions.circleCropTransform()).into(cirAvatar);
+        } else {
+            Glide.with(getActivity()).load(R.mipmap.ic_launcher).apply(RequestOptions.circleCropTransform()).into(cirAvatar);
+        }
         mTvTitleHeader.setText(String.format(Locale.CHINA, "%s施工人员", infoBean.work_type));
         mTvWorkerFirstName.setText(infoBean.user_name.substring(0, 1));
         float appraise = baseBean.appraise;
@@ -635,4 +780,5 @@ public class DecorateFragment extends BaseFragment {
     public void ratingWorkFinish() {
         reponseDelPush();
     }
+
 }

@@ -66,6 +66,7 @@ public class DecorateShiGongRegisterActivity extends BaseCommonActivity {
     private ArrayMap<String, String> mMap;
     private DecorateBasePresenter mPresenter;
     private boolean mIsSV;
+    private boolean mIsPm;
 
     @Override
     public int setBaseLayout() {
@@ -75,6 +76,7 @@ public class DecorateShiGongRegisterActivity extends BaseCommonActivity {
     @Override
     public void initBaseData() {
         mIsSV = tvBarTitle.getText().toString().contains("监理");
+        mIsPm = tvBarTitle.getText().toString().contains("项目经理");
         mBind = ButterKnife.bind(this, mFlRootView);
         mPickerUtils = new PickerUtils();
         mPresenter = new DecorateBasePresenter(this);
@@ -110,19 +112,22 @@ public class DecorateShiGongRegisterActivity extends BaseCommonActivity {
             putText("请选择性别", "sex", mEditSex);
             putText("请选择出生日期", "birthday", mEditBirth);
             putText("请输入身份信息", "id_card", mEditId);
-            if (!mIsSV) {
+            if (!mIsSV && !mIsPm) {
                 putText("请选择工种类型", "work_type", mEditType);
                 putText("请输入工龄", "work_years", mEditAge);
             }
             mMap.put("user_phone", (String) SharePreUtil.getData(this, "login_phone", "0"));
-            if (!mIsSV && mMap.size() >= 7) {
+            if (!mIsPm && !mIsSV && mMap.size() >= 7) {
                 mPresenter.regWorker(mMap);
             }
             if (mIsSV && mMap.size() >= 5) {
                 mPresenter.regSuperView(mMap);
             }
+            if (mIsPm && mMap.size() >= 5) {
+                mPresenter.regPm(mMap);
+            }
         });
-        if (mIsSV) {
+        if (mIsSV || mIsPm) {
             mEditType.setVisibility(View.GONE);
             mEditAge.setVisibility(View.GONE);
             tvTipAge.setVisibility(View.GONE);
@@ -157,6 +162,18 @@ public class DecorateShiGongRegisterActivity extends BaseCommonActivity {
         EventBus.getDefault().post(new SelectDecorateEvent("施工"));
         ToastUtils.init().showSuccessToast(this, "已您切换为施工身份");
         SharePreUtil.saveData(this, "decorate_select", "施工");
+        Observable.timer(1, TimeUnit.SECONDS).compose(new IoMainSchedule<>()).subscribe(
+                aLong -> finish()
+        );
+    }
+
+    @Override
+    public void regPm() {
+        llRegOk.setVisibility(View.VISIBLE);
+        ivRegOkSrc.setImageResource(R.drawable.decorate_reg_ok_super);
+        ToastUtils.init().showSuccessToast(this, "已您切换为经理身份");
+        SharePreUtil.saveData(this, "decorate_select", "经理");
+        EventBus.getDefault().post(new SelectDecorateEvent("经理"));
         Observable.timer(1, TimeUnit.SECONDS).compose(new IoMainSchedule<>()).subscribe(
                 aLong -> finish()
         );

@@ -90,6 +90,9 @@ public class DecorateSelectActivity extends BaseCommonActivity {
             requestSVPro("");
 
         });
+        cardProJL.setOnClickListener(view -> {
+            requestPmPro("");
+        });
     }
 
     public void setColor(boolean is, TextView view, ImageView iv) {
@@ -129,6 +132,17 @@ public class DecorateSelectActivity extends BaseCommonActivity {
         }
     }
 
+    private void responsePm(DecorateManBean bean) {
+        if ("1".equals(bean.issv)) {
+            changeSelect("经理");
+        } else {
+            ActivityUtils.init().start(this, DecorateShiGongActivity.class, "我是项目经理");
+            Observable.timer(500, TimeUnit.MILLISECONDS).compose(new IoMainSchedule<>()).subscribe(
+                    aLong -> finish()
+            );
+        }
+    }
+
 
     public void requestWorkerPro(String id) {
         mModel.requestWorkerPro(id)
@@ -143,6 +157,16 @@ public class DecorateSelectActivity extends BaseCommonActivity {
     public void requestSVPro(String id) {
         mModel.requestSVPro(id)
                 .subscribe(this::responseSv, throwable -> {
+                    if (throwable.getMessage().contains("401")) {
+                        ToastUtils.init().showErrorToast(this, "请先登录");
+                    }
+
+                });
+    }
+
+    public void requestPmPro(String id) {
+        mModel.requestPmPro(id)
+                .subscribe(this::responsePm, throwable -> {
                     if (throwable.getMessage().contains("401")) {
                         ToastUtils.init().showErrorToast(this, "请先登录");
                     }
