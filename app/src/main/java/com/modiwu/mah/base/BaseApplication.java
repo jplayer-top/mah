@@ -11,6 +11,9 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.modiwu.mah.BuildConfig;
+import com.modiwu.mah.message.CustomizeBPMessage;
+import com.modiwu.mah.message.CustomizeBPMessageItemProvide;
+import com.modiwu.mah.message.CustomizeBPMessageItemProvider;
 import com.tencent.bugly.Bugly;
 import com.tencent.bugly.beta.Beta;
 import com.tencent.bugly.beta.interfaces.BetaPatchListener;
@@ -56,6 +59,8 @@ public class BaseApplication extends MultiDexApplication {
             RongIM.init(this);
             Bugly.init(this, "d764308e59", false);
             openBugly();
+            RongIM.registerMessageType(CustomizeBPMessage.class);
+            RongIM.registerMessageTemplate(new CustomizeBPMessageItemProvide());
         }
         QbSdk.PreInitCallback cb = new QbSdk.PreInitCallback() {
 

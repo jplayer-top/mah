@@ -41,16 +41,16 @@ public class AdapterPagerSchemeDetail extends BaseViewPagerFragmentAdapter<Strin
          */
         SchemeSoftFragment softFragment = new SchemeSoftFragment();
         mFragmentList.add(softFragment);
-        /**
-         * 楼盘
-         */
-        SchemeFloorFragment floorFragment = new SchemeFloorFragment();
-        mFragmentList.add(floorFragment);
-        /**
-         * 单品
-         */
-        SchemeSingleFragment singleFragment = new SchemeSingleFragment();
-        mFragmentList.add(singleFragment);
+//        /**
+//         * 楼盘
+//         */
+//        SchemeFloorFragment floorFragment = new SchemeFloorFragment();
+//        mFragmentList.add(floorFragment);
+//        /**
+//         * 单品
+//         */
+//        SchemeSingleFragment singleFragment = new SchemeSingleFragment();
+//        mFragmentList.add(singleFragment);
     }
 
     private List<SuperBaseFragment> mFragmentList = null;

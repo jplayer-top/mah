@@ -1,5 +1,6 @@
 package com.modiwu.mah.ui.fragment;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -16,6 +17,7 @@ import com.modiwu.mah.MainActivity;
 import com.modiwu.mah.R;
 import com.modiwu.mah.base.BaseFragment;
 import com.modiwu.mah.mvp.constract.HomeContract;
+import com.modiwu.mah.mvp.model.bean.AdvBean;
 import com.modiwu.mah.mvp.model.bean.CameraBean;
 import com.modiwu.mah.mvp.model.bean.HomeBean;
 import com.modiwu.mah.mvp.model.bean.VersionBean;
@@ -27,6 +29,7 @@ import com.modiwu.mah.ui.adapter.HomeSectionFooterLayoutAdapter;
 import com.modiwu.mah.ui.adapter.HomeSectionLayoutAdapter;
 import com.modiwu.mah.ui.adapter.HomeSingleVLayoutAdapter;
 import com.modiwu.mah.ui.adapter.HomeToShopLayoutAdapter;
+import com.modiwu.mah.ui.dialog.AdvDialog;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -87,7 +90,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.HomeView 
         tvCurLocal.setVisibility(View.VISIBLE);
         tvCurLocal.setOnClickListener(v -> ActivityUtils.init().startFragmentForResult(this, ContactActivity.class,
                 "定位城市", RESULT_FIRST_USER));
-
+        mPresenter.requestAdvBean();
     }
 
     @Override
@@ -240,4 +243,12 @@ public class HomeFragment extends BaseFragment implements HomeContract.HomeView 
     }
 
 
+    public void setAdvBean(AdvBean bean) {
+        if (bean != null && bean.banner != null && bean.banner.banner_img != null) {
+            AdvDialog advDialog = new AdvDialog(mMainActivity);
+            advDialog.setBean(bean).show(R.id.ivDel, view -> {
+                advDialog.dismiss();
+            });
+        }
+    }
 }

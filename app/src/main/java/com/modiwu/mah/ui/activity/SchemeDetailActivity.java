@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.modiwu.mah.R;
 import com.modiwu.mah.base.BaseSpecialActivity;
+import com.modiwu.mah.message.CustomizeBPMessage;
 import com.modiwu.mah.mvp.constract.SchemeDetialContract;
 import com.modiwu.mah.mvp.model.bean.SchemeDetailBean;
 import com.modiwu.mah.mvp.model.event.BGAPagerSelectEvent;
@@ -29,7 +30,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import io.rong.imkit.RongIM;
+import io.rong.imlib.IRongCallback;
+import io.rong.imlib.RongIMClient;
 import io.rong.imlib.model.Conversation;
+import io.rong.imlib.model.Message;
 import top.jplayer.baseprolibrary.mvp.model.bean.BaseBean;
 import top.jplayer.baseprolibrary.utils.ActivityUtils;
 import top.jplayer.baseprolibrary.utils.LogUtil;
@@ -88,8 +92,8 @@ public class SchemeDetailActivity extends BaseSpecialActivity implements SchemeD
         strings.add("整装");
         strings.add("硬装");
         strings.add("软装");
-        strings.add("楼盘");
-        strings.add("单品");
+//        strings.add("楼盘");
+//        strings.add("单品");
         mAdapter = new AdapterPagerSchemeDetail(getSupportFragmentManager(), strings);
         mPresenter = new SchemeDetailPresenter(this);
         mFangan_id = mBundle.getString("fangan_id");
@@ -197,6 +201,34 @@ public class SchemeDetailActivity extends BaseSpecialActivity implements SchemeD
         });
         tvServer.setOnClickListener(v -> {
             if (StringUtils.getInstance().assert2Login(this)) {
+                RongIM.getInstance().sendMessage(Message.obtain(mSchemeDetailBean.kfuid,
+                        Conversation.ConversationType.PRIVATE,
+                        new CustomizeBPMessage("1111")), "", "", new IRongCallback.ISendMediaMessageCallback() {
+                    @Override
+                    public void onProgress(Message message, int i) {
+
+                    }
+
+                    @Override
+                    public void onCanceled(Message message) {
+
+                    }
+
+                    @Override
+                    public void onAttached(Message message) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(Message message) {
+
+                    }
+
+                    @Override
+                    public void onError(Message message, RongIMClient.ErrorCode errorCode) {
+
+                    }
+                });
 //                ActivityUtils.init().startConversion(this, ConversationOneActivity.class, mSchemeDetailBean.kfuid);
                 RongIM.getInstance().startConversation(this, Conversation.ConversationType.PRIVATE, mSchemeDetailBean
                         .kfuid, "客服");

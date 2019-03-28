@@ -1,6 +1,7 @@
 package com.modiwu.mah.mvp;
 
 
+import com.modiwu.mah.mvp.model.bean.AdvBean;
 import com.modiwu.mah.mvp.model.bean.AliPayInfoBean;
 import com.modiwu.mah.mvp.model.bean.CarpenterBean;
 import com.modiwu.mah.mvp.model.bean.CityCodeBean;
@@ -70,6 +71,12 @@ public interface MahServer {
     @GET("home")
     Observable<HomeBean> getHomeBean();
 
+    @GET("adv")
+    Observable<AdvBean> getAdvBean();
+
+    @POST("sjfa/add")
+    Observable<BaseBean> sjFA(@QueryMap() Map<String, String> map);
+
     @GET("home?")
     Observable<HomeBean> getHomeBean(@Query("city_code") String city_code);
 
@@ -97,11 +104,18 @@ public interface MahServer {
     @GET("select/building?")
     Observable<FloorBean> getFloorSelectBean(@Query("area_code") String area_code);
 
-    @GET("fangan/list")
+    @GET("fangan/pdlist")
     Observable<SchemeBean> getSchemeBean(@Query("city_code") String city_code);
 
-    @GET("fangan/list?")
+
+    @GET("fangan/pdlist?")
     Observable<SchemeBean> getSchemeBean(@QueryMap Map<String, String> map);
+
+    @GET("fangan/allist")
+    Observable<SchemeBean> getAnLiBean(@Query("city_code") String city_code);
+
+    @GET("fangan/allist")
+    Observable<SchemeBean> getAnLiBean(@QueryMap Map<String, String> map);
 
     @GET("designer/list")
     Observable<CarpenterBean> getCarpenterBean();

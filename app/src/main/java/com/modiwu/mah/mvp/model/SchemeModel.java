@@ -27,10 +27,26 @@ public class SchemeModel {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    public Observable<SchemeBean> requestSchemeBean(Map<String,String> map) {
+    public Observable<SchemeBean> requestAnLiBean(String city_code) {
+        return RetrofitManager.init()
+                .create(MahServer.class)
+                .getAnLiBean(city_code)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Observable<SchemeBean> requestSchemeBean(Map<String, String> map) {
         return RetrofitManager.init()
                 .create(MahServer.class)
                 .getSchemeBean(map)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Observable<SchemeBean> requestAnLiBean(Map<String, String> map) {
+        return RetrofitManager.init()
+                .create(MahServer.class)
+                .getAnLiBean(map)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }

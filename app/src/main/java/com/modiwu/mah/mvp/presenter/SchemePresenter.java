@@ -38,7 +38,20 @@ public class SchemePresenter extends BasePresenter<SchemeFragment> implements Sc
         addSubscription(disposable);
     }
 
-    public void requestSchemeData(Map<String,String> map) {
+    public void requestAnLiData(String city_code) {
+        Disposable disposable = mModel.requestAnLiBean(city_code).subscribe(schemeBean -> {
+            if (schemeBean == null || schemeBean.records == null || schemeBean.records.size() < 1) {
+                mIView.showEmpty();
+            } else {
+                mIView.smartRefreshLayout.finishRefresh(true);
+                mIView.mMultipleStatusView.showContent();
+                mIView.setAnLiData(schemeBean);
+            }
+        }, throwable -> mIView.showError());
+        addSubscription(disposable);
+    }
+
+    public void requestSchemeData(Map<String, String> map) {
         Disposable disposable = mModel.requestSchemeBean(map).subscribe(schemeBean -> {
             if (schemeBean == null || schemeBean.records == null || schemeBean.records.size() < 1) {
                 mIView.showEmpty();
@@ -46,6 +59,19 @@ public class SchemePresenter extends BasePresenter<SchemeFragment> implements Sc
                 mIView.smartRefreshLayout.finishRefresh(true);
                 mIView.mMultipleStatusView.showContent();
                 mIView.setSchemeData(schemeBean);
+            }
+        }, throwable -> mIView.showError());
+        addSubscription(disposable);
+    }
+
+    public void requestAnLiData(Map<String, String> map) {
+        Disposable disposable = mModel.requestAnLiBean(map).subscribe(schemeBean -> {
+            if (schemeBean == null || schemeBean.records == null || schemeBean.records.size() < 1) {
+                mIView.showEmpty();
+            } else {
+                mIView.smartRefreshLayout.finishRefresh(true);
+                mIView.mMultipleStatusView.showContent();
+                mIView.setAnLiData(schemeBean);
             }
         }, throwable -> mIView.showError());
         addSubscription(disposable);

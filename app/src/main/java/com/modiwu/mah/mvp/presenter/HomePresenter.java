@@ -39,6 +39,13 @@ public class HomePresenter extends BasePresenter<HomeFragment> implements HomeCo
         addSubscription(disposable);
     }
 
+    public void requestAdvBean() {
+        Disposable disposable = mHomeModel.requestAdvBean().subscribe(bean -> {
+           mIView.setAdvBean(bean);
+        }, throwable -> mIView.showError());
+        addSubscription(disposable);
+    }
+
     public void requestHomeData(String city_code, String city) {
         mHomeModel.requestHomeBean(city_code).subscribe(new SampleShowDialogObserver<HomeBean>(mIView.getContext()) {
             @Override
@@ -59,7 +66,7 @@ public class HomePresenter extends BasePresenter<HomeFragment> implements HomeCo
             @Override
             protected void onSuccess(CityCodeBean codeBean) throws Exception {
                 String city_code = codeBean.city_code;
-                SharePreUtil.saveData(mIView.getContext(),"sel_city_code",city_code);
+                SharePreUtil.saveData(mIView.getContext(), "sel_city_code", city_code);
                 requestHomeData(city_code, city);
             }
         });
