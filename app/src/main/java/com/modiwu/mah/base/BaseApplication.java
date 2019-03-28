@@ -13,7 +13,6 @@ import android.widget.Toast;
 import com.modiwu.mah.BuildConfig;
 import com.modiwu.mah.message.CustomizeBPMessage;
 import com.modiwu.mah.message.CustomizeBPMessageItemProvide;
-import com.modiwu.mah.message.CustomizeBPMessageItemProvider;
 import com.tencent.bugly.Bugly;
 import com.tencent.bugly.beta.Beta;
 import com.tencent.bugly.beta.interfaces.BetaPatchListener;
