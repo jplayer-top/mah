@@ -55,5 +55,5 @@
             android:layout_height="wrap_content"/>
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
-    <include layout="@layout/shop_bottom"/>
+    <include layout="@layout/scheme_bottom"/>
 </android.support.design.widget.CoordinatorLayout>
