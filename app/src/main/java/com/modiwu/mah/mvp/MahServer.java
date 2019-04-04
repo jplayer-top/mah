@@ -147,6 +147,16 @@ public interface MahServer {
     @POST("mall/order/l")
     Observable<MeOrderBean> getOrderListBean();
 
+    @POST("sjfa/add")
+    Observable<BaseBean> sjfaAdd(@Query("fangan_name") String fangan_name,
+                                 @Query("user_name") String user_name,
+                                 @Query("user_phone") String user_phone,
+                                 @Query("xiaoqu_name") String xiaoqu_name,
+                                 @Query("zhxsj") String zhxsj,
+                                 @Query("fwzk") String fwzk,
+                                 @Query("remark") String remark,
+                                 @Query("fangan_id") String fangan_id);
+
     @POST("mall/order/l?")
     Observable<MeOrderBean> getOrderListBean(@Query("status") String status);
 

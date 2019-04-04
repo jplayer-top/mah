@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
+
+    <LinearLayout
+        android:id="@+id/lll"
+        android:layout_width="0dp"
+        android:layout_height="85dp"
+        android:background="#FF6000"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dimen_5dp"
+            android:drawableStart="@drawable/okay"
+            android:text="申请成功"
+            android:textColor="@color/white"
+            android:textSize="@dimen/dimen_28sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="请完善以下信息以便预约设计师"
+            android:textColor="@color/white"/>
+    </LinearLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lll">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#fd9d13"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical"
+            android:paddingEnd="@dimen/dimen_15dp"
+            android:paddingStart="@dimen/dimen_15dp"
+            android:paddingTop="@dimen/dimen_15dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1.您准备什么时候开始装修？"
+                android:textColor="@color/white"/>
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_5dp"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+                <RadioButton
+                    android:id="@+id/time1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:buttonTint="@color/white"
+                    android:checked="true"
+                    android:text="一个月内"
+                    android:textColor="@color/white"/>
+
+                <RadioButton
+                    android:id="@+id/time2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:buttonTint="@color/white"
+                    android:text="两个月内"
+                    android:textColor="@color/white"/>
+
+                <RadioButton
+                    android:id="@+id/time3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:buttonTint="@color/white"
+                    android:text="两个月以上"
+                    android:textColor="@color/white"/>
+            </RadioGroup>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_15dp"
+                android:text="2.您家的房屋状况是？"
+                android:textColor="@color/white"/>
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_5dp"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+                <RadioButton
+                    android:id="@+id/status1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:buttonTint="@color/white"
+                    android:checked="true"
+                    android:text="毛坯房"
+                    android:textColor="@color/white"/>
+
+                <RadioButton
+                    android:id="@+id/status2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:buttonTint="@color/white"
+                    android:text="旧房翻新"
+                    android:textColor="@color/white"/>
+
+                <RadioButton
+                    android:id="@+id/status3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:buttonTint="@color/white"
+                    android:text="局部改造"
+                    android:textColor="@color/white"/>
+            </RadioGroup>
+
+            <EditText
+                android:id="@+id/editFWZK"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="@dimen/dimen_15dp"
+                android:background="@drawable/shape_bg_ccc"
+                android:hint="备注说明"
+                android:paddingStart="@dimen/dimen_15dp"
+                android:textColorHint="@color/color999"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_15dp"
+                android:text="3.您家的楼盘小区名称与房屋面积是？"
+                android:textColor="@color/white"/>
+
+            <EditText
+                android:id="@+id/editLocalName"
+
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="@dimen/dimen_15dp"
+                android:background="@drawable/shape_bg_ccc"
+                android:hint="请输入小区名称"
+                android:inputType="text"
+                android:lines="1"
+                android:paddingStart="@dimen/dimen_15dp"
+                android:textColorHint="@color/color999"/>
+
+            <EditText
+                android:id="@+id/editArea"
+
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="@dimen/dimen_15dp"
+                android:background="@drawable/shape_bg_ccc"
+                android:hint="请输入小区面积(m2)"
+                android:inputType="number"
+                android:paddingStart="@dimen/dimen_15dp"
+                android:textColorHint="@color/color999"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_15dp"
+                android:text="4.备注说明"
+                android:textColor="@color/white"/>
+
+            <EditText
+                android:id="@+id/editRemark"
+
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginTop="@dimen/dimen_15dp"
+                android:background="@drawable/shape_bg_ccc"
+                android:gravity="start"
+                android:hint="您可以留言说明您的意向装修风格、对设计的相 关要求等等"
+                android:paddingEnd="@dimen/dimen_15dp"
+                android:paddingStart="@dimen/dimen_15dp"
+                android:paddingTop="@dimen/dimen_5dp"
+                android:textColorHint="@color/color999"
+                android:textSize="@dimen/dimen_14sp"/>
+
+            <Button
+                android:id="@+id/btnAdd"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="@dimen/dimen_15dp"
+                android:layout_marginTop="@dimen/dimen_15dp"
+                android:background="#FF3600"
+                android:text="确认提交"
+                android:textColor="@color/white"/>
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+</android.support.constraint.ConstraintLayout>

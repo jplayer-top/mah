@@ -19,7 +19,8 @@ public class SchemeDetailBean extends BaseBean {
      * ruan : [{"detail_id":10003,"detail_type":"fangan","biz_id":7,"title":"a3","subtitle":"adf","img":"2"}]
      * goods : [{"goods_id":10017,"cat_id":16,"goods_sn":"","goods_title":"小椅盒子","goods_subtitle":"","goods_img":"shop/77efa3e8cbc54bffb3ff85a1b440d9a6.jpg,shop/de1701aaab624400b3477f29ed248a9b.jpg","goods_price":77700,"goods_stocks":180,"keywords":"","is_on":1,"goods_ct":"2017-07-11 19:40:57","goods_ut":"2017-07-13 15:05:45","goods_bt":"2017-07-13 15:05:48","goods_rt":"2017-07-20 09:51:02","is_real":1,"is_delete":1,"is_preheat":0,"goods_remark":"测试"}]
      */
-
+    public String fangan_name;
+    public String fangan_id;
     public LoupanBean loupan;
     public List<ZhengBean> zheng;
     public List<YingBean> ying;
@@ -44,9 +45,9 @@ public class SchemeDetailBean extends BaseBean {
          * building_wylx : 普通住宅
          * building_cqnx : 1000年
          * building_xmjj :        转身繁华，出入优雅，拥三山两湖天赋之优越，成喧闹之中绝佳养生领域，是您一生的无悔臻选。
-         89-109㎡全明通透多层，4万抵7万，10月开盘 ，额满在即。怡景苑独创一楼赠送地上一层复式结构，并给业主预留近60平米的院子。
-
-
+         * 89-109㎡全明通透多层，4万抵7万，10月开盘 ，额满在即。怡景苑独创一楼赠送地上一层复式结构，并给业主预留近60平米的院子。
+         * <p>
+         * <p>
          * building_imgs : /upload/lp/433acb2aebdf734290d9ba8b083ddb99.png
          * building_flag : 1
          */

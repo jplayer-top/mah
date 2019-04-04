@@ -4,6 +4,7 @@ import com.modiwu.mah.mvp.MahServer;
 import com.modiwu.mah.mvp.model.bean.MeOrderBean;
 
 import io.reactivex.Observable;
+import retrofit2.http.Query;
 import top.jplayer.baseprolibrary.mvp.model.bean.BaseBean;
 import top.jplayer.baseprolibrary.net.IoMainSchedule;
 import top.jplayer.baseprolibrary.net.RetrofitManager;
@@ -25,6 +26,20 @@ public class OrderListModel {
         return RetrofitManager.init()
                 .create(MahServer.class)
                 .getOrderListBean(status)
+                .compose(new IoMainSchedule<>());
+    }
+
+    public Observable<BaseBean> sjfaAdd(String fangan_name,
+                                        String user_name,
+                                        String user_phone,
+                                        String xiaoqu_name,
+                                        String zhxsj,
+                                        String fwzk,
+                                        String remark,
+                                        String fangan_id) {
+        return RetrofitManager.init()
+                .create(MahServer.class)
+                .sjfaAdd(fangan_name, user_name, user_phone, xiaoqu_name, zhxsj, fwzk, remark, fangan_id)
                 .compose(new IoMainSchedule<>());
     }
 

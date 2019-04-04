@@ -72,6 +72,7 @@ public class SchemeDetailActivity extends BaseSpecialActivity implements SchemeD
     public SchemeDetailPresenter mPresenter;
     private AdapterPagerSchemeDetail mAdapter;
     private String mFangan_id;
+    public boolean ttype;
 
     @Override
     public int setBaseLayout() {
@@ -89,12 +90,21 @@ public class SchemeDetailActivity extends BaseSpecialActivity implements SchemeD
         tabLayout.setTabMode(TabLayout.MODE_FIXED);
         tabLayout.setupWithViewPager(viewPager);
         ArrayList<String> strings = new ArrayList<>();
-        strings.add("整装");
-        strings.add("硬装");
-        strings.add("软装");
-//        strings.add("楼盘");
-//        strings.add("单品");
-        mAdapter = new AdapterPagerSchemeDetail(getSupportFragmentManager(), strings);
+        if (mBundle != null) {
+            ttype = mBundle.getBoolean("ttype");
+            if (ttype) {
+                strings.add("整装");
+                strings.add("硬装");
+                strings.add("定制");
+            } else {
+                strings.add("整装");
+                strings.add("楼盘");
+                strings.add("单品");
+            }
+
+        }
+
+        mAdapter = new AdapterPagerSchemeDetail(getSupportFragmentManager(), strings, this);
         mPresenter = new SchemeDetailPresenter(this);
         mFangan_id = mBundle.getString("fangan_id");
         tvBarTitle.setText(getIntent().getStringExtra("title"));
@@ -195,40 +205,41 @@ public class SchemeDetailActivity extends BaseSpecialActivity implements SchemeD
             if (StringUtils.getInstance().assert2Login(this)) {
                 Bundle bundle = new Bundle();
                 bundle.putString("fangan_id", mFangan_id);
-                ActivityUtils.init().start(mBaseActivity, SchemeOrderCreateActivity.class, "方案订单", bundle);
+                bundle.putString("fangan_name", mSchemeDetailBean.fangan_name);
+                ActivityUtils.init().start(mBaseActivity, ToGetProActivity.class, "", bundle);
             }
 
         });
         tvServer.setOnClickListener(v -> {
             if (StringUtils.getInstance().assert2Login(this)) {
-                RongIM.getInstance().sendMessage(Message.obtain(mSchemeDetailBean.kfuid,
-                        Conversation.ConversationType.PRIVATE,
-                        new CustomizeBPMessage("1111")), "", "", new IRongCallback.ISendMediaMessageCallback() {
-                    @Override
-                    public void onProgress(Message message, int i) {
-
-                    }
-
-                    @Override
-                    public void onCanceled(Message message) {
-
-                    }
-
-                    @Override
-                    public void onAttached(Message message) {
-
-                    }
-
-                    @Override
-                    public void onSuccess(Message message) {
-
-                    }
-
-                    @Override
-                    public void onError(Message message, RongIMClient.ErrorCode errorCode) {
-
-                    }
-                });
+//                RongIM.getInstance().sendMessage(Message.obtain(mSchemeDetailBean.kfuid,
+//                        Conversation.ConversationType.PRIVATE,
+//                        new CustomizeBPMessage("1111")), "", "", new IRongCallback.ISendMediaMessageCallback() {
+//                    @Override
+//                    public void onProgress(Message message, int i) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onCanceled(Message message) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onAttached(Message message) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onSuccess(Message message) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onError(Message message, RongIMClient.ErrorCode errorCode) {
+//
+//                    }
+//                });
 //                ActivityUtils.init().startConversion(this, ConversationOneActivity.class, mSchemeDetailBean.kfuid);
                 RongIM.getInstance().startConversation(this, Conversation.ConversationType.PRIVATE, mSchemeDetailBean
                         .kfuid, "客服");

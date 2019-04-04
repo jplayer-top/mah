@@ -85,6 +85,7 @@ public class SchemeFragment extends BaseFragment implements SchemeContract.ISche
             List<SchemeBean.RecordsBean> recordsBean = mAdapter.getData();
             Bundle bundle = new Bundle();
             bundle.putString("fangan_id", String.format(Locale.CHINA, "%d", recordsBean.get(position).fangan_id));
+            bundle.putBoolean("ttype",false);//产品
             ActivityUtils.init().start(getContext(), SchemeDetailActivity.class, recordsBean.get(position).fangan_name, bundle);
             return false;
         });
@@ -92,6 +93,7 @@ public class SchemeFragment extends BaseFragment implements SchemeContract.ISche
             List<SchemeBean.RecordsBean> recordsBean = mAdapter1.getData();
             Bundle bundle = new Bundle();
             bundle.putString("fangan_id", String.format(Locale.CHINA, "%d", recordsBean.get(position).fangan_id));
+            bundle.putBoolean("ttype",true);//案例
             ActivityUtils.init().start(getContext(), SchemeDetailActivity.class, recordsBean.get(position).fangan_name, bundle);
             return false;
         });

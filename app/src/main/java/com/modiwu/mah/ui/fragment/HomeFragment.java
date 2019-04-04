@@ -90,7 +90,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.HomeView 
         tvCurLocal.setVisibility(View.VISIBLE);
         tvCurLocal.setOnClickListener(v -> ActivityUtils.init().startFragmentForResult(this, ContactActivity.class,
                 "定位城市", RESULT_FIRST_USER));
-        mPresenter.requestAdvBean();
+//        mPresenter.requestAdvBean();
     }
 
     @Override
