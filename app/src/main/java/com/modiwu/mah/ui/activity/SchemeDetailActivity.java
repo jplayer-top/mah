@@ -25,6 +25,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -92,10 +93,11 @@ public class SchemeDetailActivity extends BaseSpecialActivity implements SchemeD
         ArrayList<String> strings = new ArrayList<>();
         if (mBundle != null) {
             ttype = mBundle.getBoolean("ttype");
-            if (ttype) {
+            if (!ttype) {
                 strings.add("整装");
-                strings.add("硬装");
-                strings.add("定制");
+                strings.add("主材");
+                strings.add("软装");
+                strings.add("单品");
             } else {
                 strings.add("整装");
                 strings.add("楼盘");
@@ -169,20 +171,20 @@ public class SchemeDetailActivity extends BaseSpecialActivity implements SchemeD
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 LogUtil.e("onTabSelected" + tab.getPosition());
-                if (tab.getPosition() == 3 || tab.getPosition() == 4) {
-                    llSchemeDetailBottom.setVisibility(View.VISIBLE);
-                    if (tab.getPosition() == 3) {
-                        btn2YY.setVisibility(View.VISIBLE);
-                        llBottom.setVisibility(View.GONE);
-                    } else {
-                        llSchemeDetailBottom.setVisibility(View.GONE);
-                    }
-                } else {
-                    llSchemeDetailBottom.setVisibility(View.VISIBLE);
-                    btn2YY.setVisibility(View.GONE);
-                    llBottom.setVisibility(View.VISIBLE);
-
-                }
+//                if (tab.getPosition() == 3 || tab.getPosition() == 4) {
+//                    llSchemeDetailBottom.setVisibility(View.VISIBLE);
+//                    if (tab.getPosition() == 3) {
+//                        btn2YY.setVisibility(View.VISIBLE);
+//                        llBottom.setVisibility(View.GONE);
+//                    } else {
+//                        llSchemeDetailBottom.setVisibility(View.GONE);
+//                    }
+//                } else {
+//                    llSchemeDetailBottom.setVisibility(View.VISIBLE);
+//                    btn2YY.setVisibility(View.GONE);
+//                    llBottom.setVisibility(View.VISIBLE);
+//
+//                }
             }
 
             @Override
@@ -212,34 +214,21 @@ public class SchemeDetailActivity extends BaseSpecialActivity implements SchemeD
         });
         tvServer.setOnClickListener(v -> {
             if (StringUtils.getInstance().assert2Login(this)) {
-//                RongIM.getInstance().sendMessage(Message.obtain(mSchemeDetailBean.kfuid,
-//                        Conversation.ConversationType.PRIVATE,
-//                        new CustomizeBPMessage("1111")), "", "", new IRongCallback.ISendMediaMessageCallback() {
-//                    @Override
-//                    public void onProgress(Message message, int i) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onCanceled(Message message) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onAttached(Message message) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onSuccess(Message message) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onError(Message message, RongIMClient.ErrorCode errorCode) {
-//
-//                    }
-//                });
+                String rname = tvBarTitle.getText().toString();
+
+                RongIM.getInstance().sendMessage(Message.obtain(mSchemeDetailBean.kfuid,
+                        Conversation.ConversationType.PRIVATE,
+                        new CustomizeBPMessage(String.format(Locale.CHINA,"可能喜欢\n【%s】",rname))), "", "", new RongIMClient.SendMessageCallback() {
+                    @Override
+                    public void onSuccess(Integer integer) {
+
+                    }
+
+                    @Override
+                    public void onError(Integer integer, RongIMClient.ErrorCode errorCode) {
+
+                    }
+                });
 //                ActivityUtils.init().startConversion(this, ConversationOneActivity.class, mSchemeDetailBean.kfuid);
                 RongIM.getInstance().startConversation(this, Conversation.ConversationType.PRIVATE, mSchemeDetailBean
                         .kfuid, "客服");

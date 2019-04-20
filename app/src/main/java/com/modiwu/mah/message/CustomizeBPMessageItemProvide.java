@@ -42,7 +42,7 @@ public class CustomizeBPMessageItemProvide extends IContainerItemProvider.Messag
     @Override
     public void bindView(View view, int position, CustomizeBPMessage content, UIMessage message) {
         ViewHolder holder = (ViewHolder) view.getTag();
-        String strName = content.getName() + "通知";
+        String strName = content.getName();
         holder.rname.setText(strName);
 
 

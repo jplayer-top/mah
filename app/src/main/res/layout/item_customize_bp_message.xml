@@ -3,12 +3,16 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="@dimen/dimen_60dp"
-    android:background="@color/color999">
+    android:background="@drawable/shape_bg_999">
 
     <TextView
+        android:layout_marginEnd="@dimen/dimen_15dp"
         android:id="@+id/tvName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:lines="2"
+        android:ellipsize="end"
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_60dp"
         android:layout_gravity="center_vertical"
         android:layout_marginStart="@dimen/dimen_15dp"
         android:lineSpacingExtra="@dimen/dimen_5dp"

@@ -59,7 +59,7 @@ android {
         debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            manifestPlaceholders = [RONG_KEY: "x18ywvqfxndcc", CHANNEL_NAME: "dev", UMENG_APPKEY_VALUE: "58eed55ef43e48045d001e7e", UMENG_APPKEY_SERVER_VALUE: "957ecef7056612e73699ba147d70ec2b"]
+            manifestPlaceholders = [RONG_KEY: "x4vkb1qpx26zk", CHANNEL_NAME: "dev", UMENG_APPKEY_VALUE: "58eed55ef43e48045d001e7e", UMENG_APPKEY_SERVER_VALUE: "957ecef7056612e73699ba147d70ec2b"]
             signingConfig signingConfigs.config
         }
     }

@@ -32,7 +32,7 @@ public class AdapterPagerSchemeDetail extends BaseViewPagerFragmentAdapter<Strin
          */
         SchemeAllFragment allFragment = new SchemeAllFragment();
         mFragmentList.add(allFragment);
-        if (activity.ttype) {
+        if (!activity.ttype) {
 
             /**
              * 硬装
@@ -44,8 +44,12 @@ public class AdapterPagerSchemeDetail extends BaseViewPagerFragmentAdapter<Strin
              */
             SchemeSoftFragment softFragment = new SchemeSoftFragment();
             mFragmentList.add(softFragment);
-
-        }else {
+            /**
+             * 单品
+             */
+            SchemeSingleFragment singleFragment = new SchemeSingleFragment();
+            mFragmentList.add(singleFragment);
+        } else {
             /**
              * 楼盘
              */
