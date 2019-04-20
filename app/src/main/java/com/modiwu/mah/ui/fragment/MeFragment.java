@@ -94,6 +94,8 @@ public class MeFragment extends BaseFragment {
     TextView tvName;
     @BindView(R.id.tvShare)
     TextView tvShare;
+    @BindView(R.id.tvServer)
+    TextView tvServer;
     @BindView(R.id.ivMeAvatar)
     ImageView ivMeAvatar;
     @BindView(R.id.smartRefreshLayout)
@@ -173,6 +175,10 @@ public class MeFragment extends BaseFragment {
 
             if (StringUtils.getInstance().assertNoLogin(getContext())) return;
             ActivityUtils.init().start(getContext(), MeShouCangActivity.class, "我的收藏");
+        });
+        tvServer.setOnClickListener(view -> {
+            if (StringUtils.getInstance().assertNoLogin(getContext())) return;
+            RongIM.getInstance().startConversation(getContext(), Conversation.ConversationType.PRIVATE, "", "客服");
         });
         tvUpdate.setOnClickListener(view -> {
             mModel.requestVersion().subscribe(new SampleShowDialogObserver<VersionBean>(getContext()) {

@@ -2,6 +2,7 @@ package com.modiwu.mah.ui.fragment;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -22,6 +23,7 @@ import com.modiwu.mah.mvp.model.bean.CameraBean;
 import com.modiwu.mah.mvp.model.bean.HomeBean;
 import com.modiwu.mah.mvp.model.bean.VersionBean;
 import com.modiwu.mah.mvp.presenter.HomePresenter;
+import com.modiwu.mah.ui.activity.ToGetProActivity;
 import com.modiwu.mah.ui.adapter.HomeAdvLayoutAdapter;
 import com.modiwu.mah.ui.adapter.HomeHeardLayoutAdapter;
 import com.modiwu.mah.ui.adapter.HomeRecommendLayoutAdapter;
@@ -90,7 +92,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.HomeView 
         tvCurLocal.setVisibility(View.VISIBLE);
         tvCurLocal.setOnClickListener(v -> ActivityUtils.init().startFragmentForResult(this, ContactActivity.class,
                 "定位城市", RESULT_FIRST_USER));
-//        mPresenter.requestAdvBean();
+        mPresenter.requestAdvBean();
     }
 
     @Override
@@ -245,8 +247,16 @@ public class HomeFragment extends BaseFragment implements HomeContract.HomeView 
 
     public void setAdvBean(AdvBean bean) {
         if (bean != null && bean.banner != null && bean.banner.banner_img != null) {
+            AdvBean.BannerBean banner = bean.banner;
             AdvDialog advDialog = new AdvDialog(mMainActivity);
-            advDialog.setBean(bean).show(R.id.ivDel, view -> {
+            advDialog.setBean(bean);
+            advDialog.setIvListener(() -> {
+                Bundle bundle = new Bundle();
+                bundle.putString("fangan_id", banner.banner_id + "");
+                bundle.putString("fangan_name", banner.banner_title);
+                ActivityUtils.init().start(mMainActivity, ToGetProActivity.class, "", bundle);
+            });
+            advDialog.show(R.id.ivDel, view -> {
                 advDialog.dismiss();
             });
         }

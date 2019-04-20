@@ -40,7 +40,22 @@ public class AdvDialog extends BaseCustomDialog {
     @Override
     protected void initView(View view) {
         ivView = view.findViewById(R.id.ivView);
+        ivView.setOnClickListener(view1 -> {
+            if (listener != null) {
+                listener.onIvClick();
+            }
+        });
         ivDel = view.findViewById(R.id.ivDel);
+    }
+
+    private IvListener listener;
+
+    public interface IvListener {
+        void onIvClick();
+    }
+
+    public void setIvListener(IvListener listener) {
+        this.listener = listener;
     }
 
     @Override

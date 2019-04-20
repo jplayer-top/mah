@@ -177,6 +177,18 @@
                         tools:ignore="RtlHardcoded"/>
 
                     <TextView
+                        android:visibility="gone"
+                        android:id="@+id/tvServer"
+                        android:layout_width="match_parent"
+                        android:layout_height="?attr/actionBarSize"
+                        android:background="?selectableItemBackground"
+                        android:drawableLeft="@drawable/me_me"
+                        android:drawablePadding="@dimen/dp_10"
+                        android:gravity="center_vertical"
+                        android:text="我的专属客服"
+                        tools:ignore="RtlHardcoded"/>
+
+                    <TextView
                         android:id="@+id/tvSet"
                         android:layout_width="match_parent"
                         android:layout_height="?attr/actionBarSize"
