@@ -15,6 +15,7 @@ public class MeInfoBean extends BaseBean {
 
     public ProfileBean profile;
     public int iskf;
+    public int kfid;
 
     public static class ProfileBean {
         /**

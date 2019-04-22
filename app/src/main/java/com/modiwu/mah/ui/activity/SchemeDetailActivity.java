@@ -9,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import com.modiwu.mah.R;
 import com.modiwu.mah.base.BaseSpecialActivity;
 import com.modiwu.mah.message.CustomizeBPMessage;
@@ -97,11 +99,12 @@ public class SchemeDetailActivity extends BaseSpecialActivity implements SchemeD
                 strings.add("整装");
                 strings.add("主材");
                 strings.add("软装");
-                strings.add("单品");
+                strings.add("案例");
             } else {
                 strings.add("整装");
                 strings.add("楼盘");
                 strings.add("单品");
+                strings.add("产品");
             }
 
         }
@@ -162,6 +165,18 @@ public class SchemeDetailActivity extends BaseSpecialActivity implements SchemeD
 
     @Override
     public void setSchemeDetialData(SchemeDetailBean bean) {
+        if (bean != null && bean.proudct != null) {
+            try {
+                Gson gson = new Gson();
+                String s = gson.toJson(bean.proudct);
+                SchemeDetailBean.FanganBean fanganBean1 = gson.fromJson(s, SchemeDetailBean.FanganBean.class);
+                bean.fangans = new ArrayList<>();
+                bean.fangans.add(fanganBean1);
+            } catch (JsonSyntaxException e) {
+                LogUtil.e(e.toString());
+                e.printStackTrace();
+            }
+        }
         mMultipleStatusView.showContent();
         smartRefreshLayout.finishRefresh();
         this.mSchemeDetailBean = bean;

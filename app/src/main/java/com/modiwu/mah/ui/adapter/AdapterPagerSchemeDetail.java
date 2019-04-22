@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentManager;
 
 import com.modiwu.mah.ui.activity.SchemeDetailActivity;
 import com.modiwu.mah.ui.fragment.SchemeAllFragment;
+import com.modiwu.mah.ui.fragment.SchemeAnLiFragment;
 import com.modiwu.mah.ui.fragment.SchemeFloorFragment;
 import com.modiwu.mah.ui.fragment.SchemeHardFragment;
 import com.modiwu.mah.ui.fragment.SchemeSingleFragment;
@@ -45,10 +46,10 @@ public class AdapterPagerSchemeDetail extends BaseViewPagerFragmentAdapter<Strin
             SchemeSoftFragment softFragment = new SchemeSoftFragment();
             mFragmentList.add(softFragment);
             /**
-             * 单品
+             * 案例
              */
-            SchemeSingleFragment singleFragment = new SchemeSingleFragment();
-            mFragmentList.add(singleFragment);
+            SchemeAnLiFragment anLiFragment = new SchemeAnLiFragment();
+            mFragmentList.add(anLiFragment);
         } else {
             /**
              * 楼盘
@@ -60,6 +61,12 @@ public class AdapterPagerSchemeDetail extends BaseViewPagerFragmentAdapter<Strin
              */
             SchemeSingleFragment singleFragment = new SchemeSingleFragment();
             mFragmentList.add(singleFragment);
+
+            /**
+             * 产品
+             */
+            SchemeAnLiFragment anLiFragment = new SchemeAnLiFragment();
+            mFragmentList.add(anLiFragment);
 
         }
     }

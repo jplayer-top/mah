@@ -228,7 +228,8 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateVisible">
-        </activity> <activity
+        </activity>
+        <activity
             android:name=".ui.activity.FinishZHActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"

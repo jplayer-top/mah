@@ -176,10 +176,7 @@ public class MeFragment extends BaseFragment {
             if (StringUtils.getInstance().assertNoLogin(getContext())) return;
             ActivityUtils.init().start(getContext(), MeShouCangActivity.class, "我的收藏");
         });
-        tvServer.setOnClickListener(view -> {
-            if (StringUtils.getInstance().assertNoLogin(getContext())) return;
-            RongIM.getInstance().startConversation(getContext(), Conversation.ConversationType.PRIVATE, "", "客服");
-        });
+
         tvUpdate.setOnClickListener(view -> {
             mModel.requestVersion().subscribe(new SampleShowDialogObserver<VersionBean>(getContext()) {
                 @Override
@@ -235,12 +232,20 @@ public class MeFragment extends BaseFragment {
                     bindInfo(meInfoBean);
                 }
                 llToLogin.setEnabled(false);
+                tvServer.setOnClickListener(view -> {
+                    if (StringUtils.getInstance().assertNoLogin(getContext())) return;
+                    if (0 != baseBean.kfid) {
+                        RongIM.getInstance().startConversation(getContext(), Conversation.ConversationType.PRIVATE, baseBean.kfid + "", "客服");
+                    }
+                });
             } else {
                 llToLogin.setEnabled(true);
                 Glide.with(getContext()).load(R.mipmap.ic_launcher).apply(RequestOptions.circleCropTransform()).into(ivMeAvatar);
                 tvName.setText("点击登录");
                 SharePreUtil.saveData(getContext(), "mark_login", "0");
             }
+
+
         }, throwable -> {
         });
     }
@@ -360,6 +365,7 @@ public class MeFragment extends BaseFragment {
         tvName.setText(profile.user_name);
         llToLogin.setEnabled(false);
         tvSet.setVisibility(baseBean.iskf == 1 ? View.VISIBLE : View.GONE);
+
     }
 
     @Override

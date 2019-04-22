@@ -9,4 +9,5 @@ import top.jplayer.baseprolibrary.mvp.model.bean.BaseBean;
 
 public class LoginStatusbean extends BaseBean {
     public String login = "0";
+    public int kfid = 0;
 }
