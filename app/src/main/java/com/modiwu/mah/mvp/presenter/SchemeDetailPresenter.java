@@ -33,6 +33,13 @@ public class SchemeDetailPresenter extends BasePresenter<SchemeDetailActivity> i
         addSubscription(disposable);
     }
 
+    public void requestSchemePDDetialData(String fangan_id) {
+        Disposable disposable = mModel.requestSchemePDDetailBean(fangan_id)
+                .subscribe(schemeDetailBean -> mIView.setSchemeDetialData(schemeDetailBean), throwable -> {
+                });
+        addSubscription(disposable);
+    }
+
     public void requestUpSchemeDetialData(String fangan_id) {
         mModel.requestSchemeDetailBean(fangan_id)
                 .subscribe(new SampleShowDialogObserver<SchemeDetailBean>(mIView) {

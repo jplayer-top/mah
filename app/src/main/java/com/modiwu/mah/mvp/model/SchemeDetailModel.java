@@ -28,6 +28,13 @@ public class SchemeDetailModel {
                 .compose(new IoMainSchedule<>());
     }
 
+    public Observable<SchemeDetailBean> requestSchemePDDetailBean(String fangan_id) {
+        return RetrofitManager.init()
+                .create(MahServer.class)
+                .getSchemePDDetailBean(fangan_id)
+                .compose(new IoMainSchedule<>());
+    }
+
     public Observable<SchemeOrderCreateBean> requestSchemeOrderCreateBean(String fangan_id) {
         return RetrofitManager.init()
                 .create(MahServer.class)

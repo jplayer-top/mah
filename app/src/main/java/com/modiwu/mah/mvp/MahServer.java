@@ -123,8 +123,11 @@ public interface MahServer {
     @GET("mall/goods/home")
     Observable<DockerBean> getDockerBean();
 
-    @GET("fangan/detail?")
+    @GET("fangan/aldetail?")
     Observable<SchemeDetailBean> getSchemeDetailBean(@Query("fangan_id") String fangan_id);
+
+    @GET("fangan/pddetail?")
+    Observable<SchemeDetailBean> getSchemePDDetailBean(@Query("fangan_id") String fangan_id);
 
     @GET("fangan/goods?")
     Observable<SchemeOrderCreateBean> getSchemeOrderCreateBean(@Query("fangan_id") String fangan_id);

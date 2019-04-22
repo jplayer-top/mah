@@ -26,7 +26,54 @@ public class SchemeDetailBean extends BaseBean {
     public List<YingBean> ying;
     public List<RuanBean> ruan;
     public List<GoodsBean> goods;
+    public List<FanganBean> fangans;
     public List<LoupanhuxingBean> loupanhuxing;
+    public ProductBean proudct;
+
+    public static class ProductBean {
+
+        /**
+         * fangan_id : 10003
+         * building_id : 10001
+         * building_name : 目简
+         * huxing_id : 10000
+         * huxing_type : 三室一厅
+         * huxing_size : 160
+         * fangan_name : tesadf
+         * fangan_desc : aasdfasd
+         * fangan_avatar : https://mah.oss-cn-beijing.aliyuncs.com/fangan/616deb1b1e734eefafba7486a239df0b.jpg
+         * fangan_style : 地中海
+         * fangan_city_code : 370600
+         * fangan_area_code : 370613
+         * fangan_type : 设计
+         * fangan_top_id : 10002
+         * designer_id : 10000
+         * fangan_flag : 1
+         * sort :
+         * product_id : 10392
+         * type : 1
+         */
+
+        public int fangan_id;
+        public int building_id;
+        public String building_name;
+        public int huxing_id;
+        public String huxing_type;
+        public int huxing_size;
+        public String fangan_name;
+        public String fangan_desc;
+        public String fangan_avatar;
+        public String fangan_style;
+        public String fangan_city_code;
+        public String fangan_area_code;
+        public String fangan_type;
+        public int fangan_top_id;
+        public int designer_id;
+        public String fangan_flag;
+        public String sort;
+        public int product_id;
+        public String type;
+    }
 
     public static class LoupanBean {
         /**
@@ -130,6 +177,48 @@ public class SchemeDetailBean extends BaseBean {
         public String img;
     }
 
+    public static class FanganBean {
+
+        /**
+         * fangan_id : 10014
+         * building_id : 10004
+         * building_name : 安德利花园
+         * huxing_id : 10001
+         * huxing_type : 三室一厅
+         * huxing_size : 144
+         * fangan_name : 安德利迎海花园 | 2室2厅1厨1卫 | 96㎡
+         * fangan_desc : 黑白灰为基调搭配原木色，兼具情感与理性，找到人与自然共生的平衡，对功能性的要求不仅是实用，更是舒适。
+         * fangan_avatar : https://mah.oss-cn-beijing.aliyuncs.com/fangan/7fe1b3ba0aab4d0ca5f4420c28a6a95d.jpg
+         * fangan_style : 极简主义
+         * fangan_city_code : 370600
+         * fangan_area_code : 370612
+         * fangan_type : 整装
+         * fangan_top_id : 0
+         * fangan_flag : 0
+         * sort : 1
+         * product_id : 10392
+         * type : 1
+         */
+
+        public int fangan_id;
+        public int building_id;
+        public String building_name;
+        public int huxing_id;
+        public String huxing_type;
+        public int huxing_size;
+        public String fangan_name;
+        public String fangan_desc;
+        public String fangan_avatar;
+        public String fangan_style;
+        public String fangan_city_code;
+        public String fangan_area_code;
+        public String fangan_type;
+        public int fangan_top_id;
+        public String fangan_flag;
+        public String sort;
+        public int product_id;
+        public String type;
+    }
 
     public static class LoupanhuxingBean {
         /**

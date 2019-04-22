@@ -112,8 +112,18 @@ public class SchemeDetailActivity extends BaseSpecialActivity implements SchemeD
         tvBarTitle.setText(getIntent().getStringExtra("title"));
         if (mFangan_id != null) {
             mMultipleStatusView.showLoading();
-            mPresenter.requestSchemeDetialData(mFangan_id);
-            smartRefreshLayout.setOnRefreshListener(refresh -> mPresenter.requestSchemeDetialData(mFangan_id));
+            if (!ttype) {
+                mPresenter.requestSchemePDDetialData(mFangan_id);
+            } else {
+                mPresenter.requestSchemeDetialData(mFangan_id);
+            }
+            smartRefreshLayout.setOnRefreshListener(refresh -> {
+                if (!ttype) {
+                    mPresenter.requestSchemePDDetialData(mFangan_id);
+                } else {
+                    mPresenter.requestSchemeDetialData(mFangan_id);
+                }
+            });
         } else {
             mMultipleStatusView.showEmpty();
         }
@@ -218,7 +228,7 @@ public class SchemeDetailActivity extends BaseSpecialActivity implements SchemeD
 
                 RongIM.getInstance().sendMessage(Message.obtain(mSchemeDetailBean.kfuid,
                         Conversation.ConversationType.PRIVATE,
-                        new CustomizeBPMessage(String.format(Locale.CHINA,"可能喜欢\n【%s】",rname))), "", "", new RongIMClient.SendMessageCallback() {
+                        new CustomizeBPMessage(String.format(Locale.CHINA, "可能喜欢\n【%s】", rname))), "", "", new RongIMClient.SendMessageCallback() {
                     @Override
                     public void onSuccess(Integer integer) {
 
@@ -230,6 +240,7 @@ public class SchemeDetailActivity extends BaseSpecialActivity implements SchemeD
                     }
                 });
 //                ActivityUtils.init().startConversion(this, ConversationOneActivity.class, mSchemeDetailBean.kfuid);
+                LogUtil.e(mSchemeDetailBean.kfuid);
                 RongIM.getInstance().startConversation(this, Conversation.ConversationType.PRIVATE, mSchemeDetailBean
                         .kfuid, "客服");
             }
