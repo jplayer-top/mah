@@ -42,10 +42,12 @@ public class SchemeAnLiFragment extends SuperBaseFragment {
             multiplestatusview.showContent();
             mAdapter = new SchemeAnLiAdapter(fanganBeanList);
             mAdapter.setOnItemChildClickListener((adapter, view, position) -> {
-                SchemeDetailBean.FanganBean fanganBean = mAdapter.getData().get(position);
-                Bundle bundle = new Bundle();
-                bundle.putString("fangan_id", fanganBean.fangan_id+"");
-                ActivityUtils.init().start(mActivity, SchemeDetailActivity.class, fanganBean.fangan_name, bundle);
+                if (view.getId() == R.id.ivBodyPic) {
+                    SchemeDetailBean.FanganBean fanganBean = mAdapter.getData().get(position);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("fangan_id", fanganBean.fangan_id + "");
+                    ActivityUtils.init().start(mActivity, SchemeDetailActivity.class, fanganBean.fangan_name, bundle);
+                }
                 return false;
             });
             recyclerView.setAdapter(mAdapter);

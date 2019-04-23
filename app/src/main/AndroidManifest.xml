@@ -40,7 +40,6 @@
         </activity>
         <activity
             android:name=".ui.activity.SchemeDetailActivity"
-            android:launchMode="singleTop"
             android:screenOrientation="portrait">
         </activity>
         <activity
@@ -227,7 +226,7 @@
             android:name=".ui.activity.ToGetProActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize|stateVisible">
+            android:windowSoftInputMode="adjustPan|stateVisible">
         </activity>
         <activity
             android:name=".ui.activity.FinishZHActivity"
