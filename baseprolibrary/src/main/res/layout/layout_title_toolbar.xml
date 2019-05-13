@@ -77,8 +77,17 @@
             android:foreground="?attr/controlBackground"
             android:scaleType="center"
             android:src="@drawable/bar_search"
-            android:visibility="gone"
+            android:visibility="invisible"
             tools:ignore="PrivateResource,RtlHardcoded"/>
+
+        <ImageView
+            android:visibility="invisible"
+            android:id="@+id/ivShare"
+            android:layout_width="?attr/actionBarSize"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_toStartOf="@+id/ivBarSearch"
+            android:padding="15dp"
+            android:src="@drawable/me_share"/>
 
         <TextView
             android:id="@+id/tvBarRight"
