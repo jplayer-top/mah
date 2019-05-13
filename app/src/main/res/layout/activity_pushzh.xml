@@ -189,7 +189,6 @@
 
             <EditText
                 android:id="@+id/editRemark"
-
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
                 android:layout_marginTop="@dimen/dimen_15dp"

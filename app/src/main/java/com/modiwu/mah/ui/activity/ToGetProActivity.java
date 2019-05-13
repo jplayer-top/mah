@@ -44,17 +44,18 @@ public class ToGetProActivity extends BaseCommonActivity {
         EventBus.getDefault().register(this);
         btnAdd.setOnClickListener(view -> {
             if (StringUtils.getInstance().isNullObj(editName)) {
-                ToastUtils.init().showInfoToast(mBaseActivity,"请输入您的称呼");
+                ToastUtils.init().showInfoToast(mBaseActivity, "请输入您的称呼");
                 return;
-            } if (StringUtils.getInstance().isNullObj(editPhone)) {
-                ToastUtils.init().showInfoToast(mBaseActivity,"请输入您的联系方式");
+            }
+            if (StringUtils.getInstance().isNullObj(editPhone)) {
+                ToastUtils.init().showInfoToast(mBaseActivity, "请输入您的联系方式");
                 return;
             }
             Bundle bundle = new Bundle();
             bundle.putString("fangan_name", mBundle.getString("fangan_name"));
             bundle.putString("fangan_id", mBundle.getString("fangan_id"));
-            bundle.putString("user_name", mBundle.getString("user_name"));
-            bundle.putString("user_phone", mBundle.getString("user_phone"));
+            bundle.putString("user_name", editName.getText().toString());
+            bundle.putString("user_phone", editPhone.getText().toString());
             ActivityUtils.init().start(mBaseActivity, FinishZHActivity.class, "", bundle);
         });
     }

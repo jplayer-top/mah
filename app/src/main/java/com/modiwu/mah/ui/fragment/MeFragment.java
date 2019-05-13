@@ -234,9 +234,7 @@ public class MeFragment extends BaseFragment {
                 llToLogin.setEnabled(false);
                 tvServer.setOnClickListener(view -> {
                     if (StringUtils.getInstance().assertNoLogin(getContext())) return;
-                    if (0 != baseBean.kfid) {
-                        RongIM.getInstance().startConversation(getContext(), Conversation.ConversationType.PRIVATE, baseBean.kfid + "", "客服");
-                    }
+                    RongIM.getInstance().startConversation(getContext(), Conversation.ConversationType.PRIVATE, "10020", "客服");
                 });
             } else {
                 llToLogin.setEnabled(true);
