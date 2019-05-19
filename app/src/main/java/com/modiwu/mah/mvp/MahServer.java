@@ -158,6 +158,7 @@ public interface MahServer {
                                  @Query("zhxsj") String zhxsj,
                                  @Query("fwzk") String fwzk,
                                  @Query("remark") String remark,
+                                 @Query("mianji") String area,
                                  @Query("fangan_id") String fangan_id);
 
     @POST("mall/order/l?")

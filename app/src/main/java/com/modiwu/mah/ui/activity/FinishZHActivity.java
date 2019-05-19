@@ -70,7 +70,9 @@ public class FinishZHActivity extends BaseCommonActivity {
             String zhxsj = time1.isChecked() ? "一个月内" : (time2.isChecked() ? "两个月内" : "两个月以上");
             String fwzk = status1.isChecked() ? "毛坯房" : (status2.isChecked() ? "旧房翻新" : "局部改造");
             String remark = StringUtils.getInstance().trim(editRemark);
-            new OrderListModel().sjfaAdd(fangan_name, user_name, user_phone, xiaoqu_name, zhxsj, fwzk, remark, fangan_id).subscribe(new SampleShowDialogObserver<BaseBean>(this) {
+            String area = StringUtils.getInstance().trim(editArea);
+            new OrderListModel().sjfaAdd(fangan_name, user_name, user_phone, xiaoqu_name, zhxsj, fwzk, remark, area,fangan_id)
+                    .subscribe(new SampleShowDialogObserver<BaseBean>(this) {
                 @Override
                 protected void onSuccess(BaseBean baseBean) throws Exception {
                     EventBus.getDefault().post(new FinishAddEvent());

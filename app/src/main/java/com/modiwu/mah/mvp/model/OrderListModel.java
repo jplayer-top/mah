@@ -36,10 +36,11 @@ public class OrderListModel {
                                         String zhxsj,
                                         String fwzk,
                                         String remark,
+                                        String area,
                                         String fangan_id) {
         return RetrofitManager.init()
                 .create(MahServer.class)
-                .sjfaAdd(fangan_name, user_name, user_phone, xiaoqu_name, zhxsj, fwzk, remark, fangan_id)
+                .sjfaAdd(fangan_name, user_name, user_phone, xiaoqu_name, zhxsj, fwzk, remark,area, fangan_id)
                 .compose(new IoMainSchedule<>());
     }
 
