@@ -23,6 +23,7 @@
             android:name=".ui.WebViewActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTop"
+            android:screenOrientation="unspecified"
             android:windowSoftInputMode="stateHidden|adjustResize">
         </activity>
         <activity
