@@ -19,8 +19,6 @@ import com.modiwu.mah.ui.adapter.DecorateItemPicAdapter;
 import com.modiwu.mah.utils.CameraUtils;
 import com.modiwu.mah.utils.StringUtils;
 import com.yanzhenjie.permission.AndPermission;
-import com.yanzhenjie.permission.PermissionNo;
-import com.yanzhenjie.permission.PermissionYes;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -230,19 +228,19 @@ public class DecorateCreateProActivity extends BaseCommonActivity {
                 .build();
     }
 
-    @PermissionYes(100)
+//    @PermissionYes(100)
     protected void getLocationYes(List<String> grantedPermissions) {
         int size = mAdapter.getData().size();
         CameraUtils.getInstance().openSize(this, 8 - size);
 
     }
 
-    @PermissionNo(100)
-    protected void getLocationNo(List<String> deniedPermissions) {
-        if (AndPermission.hasAlwaysDeniedPermission(this, deniedPermissions)) {
-            AndPermission.defaultSettingDialog(this, 100).show();
-        }
-    }
+//    @PermissionNo(100)
+//    protected void getLocationNo(List<String> deniedPermissions) {
+//        if (AndPermission.hasAlwaysDeniedPermission(this, deniedPermissions)) {
+//            AndPermission.defaultSettingDialog(this, 100).show();
+//        }
+//    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

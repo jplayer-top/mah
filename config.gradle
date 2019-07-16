@@ -1,16 +1,16 @@
 ext {
 
     android = [
-            compileSdkVersion: 26,
-            buildToolsVersion: "26.0.2",
+            compileSdkVersion: 28,
+            buildToolsVersion: "28.0.3",
             minSdkVersion    : 19,
-            targetSdkVersion : 26,
-            versionCode      : 24,
-            versionName      : "1.11.4"
+            targetSdkVersion : 28,
+            versionCode      : 25,
+            versionName      : "2.0.0"
     ]
 
     dependVersion = [
-            androidSupportSdkVersion: "26.0.2",
+            androidSupportSdkVersion: "28.0.0",
             retrofitSdkVersion      : "2.3.0",
             glideSdkVersion         : "4.0.0",
             rxJava                  : "2.1.5",
@@ -67,7 +67,7 @@ ext {
     //PickerView
     pickerview = 'com.contrarywind:Android-PickerView:3.2.7'
     //权限申请
-    permission = 'com.yanzhenjie:permission:1.0.5'
+    permission = 'com.yanzhenjie:permission:2.0.0-rc4'
     //多边形图+图片滤镜
     polygon = 'com.kingja.magicmirror:magicmirror:1.2.0'
     //二维码

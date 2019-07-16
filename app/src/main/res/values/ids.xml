@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <item name="tvBarTitle" type="id">tvBarTitle</item>
+    <item name="tvBarTitle" type="id"/>
 </resources>

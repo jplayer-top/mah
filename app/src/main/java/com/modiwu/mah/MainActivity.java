@@ -14,9 +14,6 @@ import com.modiwu.mah.mvp.model.bean.CameraBean;
 import com.modiwu.mah.mvp.model.bean.VersionBean;
 import com.modiwu.mah.mvp.model.event.HomeTypeModeEvent;
 import com.modiwu.mah.ui.activity.ActivityCustomCapture;
-import com.yanzhenjie.permission.AndPermission;
-import com.yanzhenjie.permission.PermissionNo;
-import com.yanzhenjie.permission.PermissionYes;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -202,7 +199,7 @@ public class MainActivity extends BaseSpecialActivity {
 
     }
 
-    @PermissionYes(100)
+//    @PermissionYes(100)
     protected void getLocationYes(List<String> grantedPermissions) {
         if (isCameraClick) {
             ActivityUtils.init().start(this, ActivityCustomCapture.class);
@@ -213,12 +210,12 @@ public class MainActivity extends BaseSpecialActivity {
         }
     }
 
-    @PermissionNo(100)
-    protected void getLocationNo(List<String> deniedPermissions) {
-        if (AndPermission.hasAlwaysDeniedPermission(this, deniedPermissions)) {
-            AndPermission.defaultSettingDialog(this, 100).show();
-        }
-    }
+//    @PermissionNo(100)
+//    protected void getLocationNo(List<String> deniedPermissions) {
+//        if (AndPermission.hasAlwaysDeniedPermission(this, deniedPermissions)) {
+//            AndPermission.defaultSettingDialog(this, 100).show();
+//        }
+//    }
 
     @Override
     protected void onDestroy() {

@@ -20,8 +20,6 @@ import com.modiwu.mah.mvp.presenter.MeInfoPresenter;
 import com.modiwu.mah.utils.CameraUtils;
 import com.modiwu.mah.utils.StringUtils;
 import com.yanzhenjie.permission.AndPermission;
-import com.yanzhenjie.permission.PermissionNo;
-import com.yanzhenjie.permission.PermissionYes;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -168,17 +166,17 @@ public class MeContentActivity extends BaseCommonActivity {
         }
     }
 
-    @PermissionYes(100)
+//    @PermissionYes(100)
     protected void getLocationYes(List<String> grantedPermissions) {
         CameraUtils.getInstance().openSingalCamer(this);
     }
 
-    @PermissionNo(100)
-    protected void getLocationNo(List<String> deniedPermissions) {
-        if (AndPermission.hasAlwaysDeniedPermission(this, deniedPermissions)) {
-            AndPermission.defaultSettingDialog(this, 100).show();
-        }
-    }
+//    @PermissionNo(100)
+//    protected void getLocationNo(List<String> deniedPermissions) {
+//        if (AndPermission.hasAlwaysDeniedPermission(this, deniedPermissions)) {
+//            AndPermission.defaultSettingDialog(this, 100).show();
+//        }
+//    }
 
     public void successGet(MeInfoBean baseBean) {
         MeInfoBean.ProfileBean profile = baseBean.profile;
